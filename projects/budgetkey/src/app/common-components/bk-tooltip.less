@@ -1,0 +1,83 @@
+.bk-tooltip-anchor {
+    position: relative;
+    display: inline;
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 2px;
+
+    span.bk-tooltip {
+        position: absolute;
+        display: none;
+        width: 300px;
+        color: #FFFFFF;
+        background: #434343;
+        line-height: 18px;
+        text-align: center;
+        visibility: hidden;
+        border-radius: 3px;
+        font-size: 14px;
+        font-weight: 300;
+        padding: 10px;
+        text-align: justify;
+        font-family: "Abraham TRIAL", "Alef Hebrew", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+
+        @media only screen and (max-width: 600px)  {
+            width: 150px;
+            font-size: 10px;
+            line-height: 12px;
+            padding: 5px;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 95%;
+            margin-left: -5px;
+            width: 0; height: 0;
+            border-bottom: 5px solid #434343;
+            border-right: 5px solid transparent;
+            border-left: 5px solid transparent;
+
+            @media only screen and (max-width: 600px)  {
+                left: 50%;
+            }
+        }
+        
+        &.bk-align-left {        
+            &:after {
+                left: 5%;
+            }
+        }
+
+    }
+
+    &:hover .bk-tooltip {
+        visibility: visible;
+        display: inherit;
+        top: ~"calc(100% + 5px)";
+        left: 50%;
+        margin-left: -280px;
+        z-index: 999;    
+
+        @media only screen and (max-width: 600px)  {
+            margin-left: -75px;
+        }
+
+        &.bk-align-left {        
+            margin-left: -10px;
+        }
+    }
+
+    img {
+        display: inline-block;
+        height: 0.75em;
+        top: -0.25em;
+        position: relative;
+    }
+    
+    &.img:hover .bk-tooltip {
+        top: ~"calc(100% + 0.75em)";
+        left: ~"calc(50% - 0.32em)";
+    }
+}

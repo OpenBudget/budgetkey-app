@@ -1,0 +1,111 @@
+<app-container [showHeader]="true" [showSearchBar]="false" [showLanguages]="true">
+    <ng-container *ngIf='translationsLoaded'>
+        <div class='ad' [class.active]='adVisible'>
+            <a href='https://act.obudget.org' target='_blank'>
+                <span>נפתח מחזור חדש לקורס </span>
+                <span class='budgetism'>תקציביזם</span>
+                <span>!</span>
+            </a>
+        </div>
+        <div class='header'>
+            <div class='bubbles'>
+                <app-speech-bubble [kind]='"question"'>
+                    {{ __('הי, מה זה האתר הזה?') }}
+                </app-speech-bubble>
+                <app-speech-bubble [kind]='"answer"'>
+                    {{ __('אספנו והנגשנו ב') }}
+                    <strong>{{ __('״מפתח התקציב״') }}</strong>
+                    {{ __('את כל המידע על תקציב המדינה ועל הוצאות הממשלה') }} &ndash;<br/>
+                    {{ __('כדי שנוכל לדעת מה עושים עם הכסף שלנו&hellip;') }}
+                </app-speech-bubble>
+                <app-speech-bubble [kind]='"answer"'>
+                    {{ __('מחפשים משהו מסוים? גשו ישר ל') }}
+                    <a href='/s/'>{{ __('חיפוש') }} 
+                        <span style='font-size:65%'><i class='glyphicon glyphicon-search'></i></span></a><br/>
+                    <app-bk-search-bar [searchTerm]='""'
+                            (navigate)="onNavigate($event)"
+                            [allowSubscribe]="false"
+                    ></app-bk-search-bar>
+                </app-speech-bubble>
+                <app-speech-bubble kind='answer'>
+                    {{ __('רוצים להבין את הכנסות המדינה - מיסים, גירעון, ענפי משק ועוד?') }}<br/>
+                    {{ __('מוזמנים לצלול ל') }}<span class='budgetism'><a href='income/'>{{ __('מקור הכסף') }}!</a></span>
+                </app-speech-bubble>
+                <app-speech-bubble kind='answer'>
+                    {{ __('רוצים ללמוד לעומק איך עובד תקציב המדינה?') }}<br/>
+                    {{ __('הרשמו לקורס המקוון שלנו - ') }}
+                    <a href='https://act.obudget.org' target='_blank'><span class='budgetism'>{{ __('תקציביזם') }}</span></a>
+                </app-speech-bubble>
+                <app-speech-bubble kind='answer'>
+                    {{ __('אחרת מומלץ להמשיך לגלול') }} <span style='font-size:65%'><i class='glyphicon glyphicon-hand-down'></i></span><br/>
+                </app-speech-bubble>
+            </div>
+            <main-page-summary [amount]="totalAmount" [year]="year"
+                [proposalAmount]="proposalAmount" [prevProposalAmount]="prevProposalAmount"
+            ></main-page-summary>
+            <div class="category-visualizations">
+                <category-visualization *ngFor="let category of funcCategories"
+                        [category]="category" kind="func">                      
+                </category-visualization>               
+            </div>
+        </div>
+        <div class="course">
+            <div>
+                {{__('אבל איך בעצם בנוי תקציב המדינה?')}}
+            </div>
+            <div style="font-size: 50%">
+                {{__('(כל מה שרציתם לדעת על התקציב ב-5 דקות!)')}}
+            </div>
+            <div class="scroll-down">
+                <svg width="30" viewBox="0 0 18 28">
+                    <path d="M16.797 13.5c0 0.125-0.063 0.266-0.156 0.359l-7.281 7.281c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-7.281-7.281c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l0.781-0.781c0.094-0.094 0.219-0.156 0.359-0.156 0.125 0 0.266 0.063 0.359 0.156l6.141 6.141 6.141-6.141c0.094-0.0940.234-0.156 0.359-0.156s0.266 0.063 0.359 0.156l0.781 0.781c0.094 0.094 0.156 0.234 0.156 0.359zM16.797 7.5c0 0.125-0.063 0.266-0.156 0.359l-7.281 7.281c-0.094 0.094-0.234 0.156-0.359 0.156s-0.266-0.063-0.359-0.156l-7.281-7.281c-0.094-0.094-0.156-0.234-0.156-0.359s0.063-0.266 0.156-0.359l0.781-0.781c0.094-0.094 0.219-0.156 0.359-0.156 0.125 0 0.266 0.063 0.359 0.156l6.141 6.141 6.141-6.141c0.094-0.094 0.234-0.156 0.359-0.156s0.266 0.063 0.359 0.156l0.781 0.781c0.094 0.094 0.156 0.234 0.156 0.359z"></path>
+                </svg>                                        
+            </div>
+        </div>
+        <app-hero></app-hero>           
+        <div class="footer">
+            <app-speech-bubble [kind]='"question"'>
+                {{ __('אם יש לי עדיין שאלות, למי לפנות?') }}
+            </app-speech-bubble>
+            <app-speech-bubble [kind]='"answer"'>
+                <a href="mailto:adam@obudget.org"
+                target="_blank">
+                    {{ __('אם זו שאלה כללית שקשורה לתקציב נשמח לעזור') }}
+                </a>
+            </app-speech-bubble>
+            <app-speech-bubble [kind]='"answer"'>
+                <a href="http://www.hasadna.org.il/about-us/"
+                target="_blank">
+                    {{ __('אם זו שאלה שקשורה לסדנא לידע ציבורי') }}
+                </a>
+            </app-speech-bubble>
+            <app-speech-bubble [kind]='"answer"'>
+                <a href="http://www.hasadna.org.il/%D7%A6%D7%95%D7%A8-%D7%A7%D7%A9%D7%A8/"
+                target="_blank">
+                    {{ __('אם את/ה עיתונאי/ת') }}
+                </a>
+            </app-speech-bubble>
+            <app-speech-bubble [kind]='"question"'>
+                {{ __('איך אפשר לעזור לכם?') }}
+            </app-speech-bubble>
+            <app-speech-bubble [kind]='"answer"'>
+                <a href="http://www.hasadna.org.il/%D7%AA%D7%A8%D7%95%D7%9E%D7%94-2/"
+                target="_blank">
+                {{ __('אפשר לתרום לנו...') }}
+                </a>
+            </app-speech-bubble>
+            <app-speech-bubble [kind]='"answer"'>
+                <a href="http://www.hasadna.org.il/%D7%94%D7%AA%D7%A0%D7%93%D7%91%D7%95%D7%AA/"
+                target="_blank">
+                {{ __('או לבוא להתנדב') }}
+                </a>
+            </app-speech-bubble>
+            <app-speech-bubble [kind]='"answer"'>
+                <a href="https://github.com/OpenBudget/BudgetKey"
+                target="_blank">
+                {{ __('או לשחק עם הקוד של האתר') }}
+                </a>
+            </app-speech-bubble>
+        </div>    
+    </ng-container>
+</app-container>

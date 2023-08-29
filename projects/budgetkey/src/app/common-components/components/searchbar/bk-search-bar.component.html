@@ -1,0 +1,63 @@
+<div class="search-box input-group input-group-lg">
+    <div #btnSearchMenu class="input-group-addon outer-right-side roundCorners-border-right-side"
+         (click)="dropdownOpen = !dropdownOpen">
+         <div class="inner-right-side roundCorners-border-right-side"
+         [ngClass]="{'has-text-all-tab': isSearchBarHasText && selectedSearchType.main,
+                     'has-text-not-all-tab': isSearchBarHasText && !selectedSearchType.main,
+                     'inner-without-text-with-focus': !isSearchBarHasText && isSearchBarHasFocus,
+                     'inner-without-text-without-focus': !isSearchBarHasText && !isSearchBarHasFocus}">
+            <div class="right-side-symbols">
+                <img [src]="glassIcon()"
+                    *ngIf="!isSearching"
+                    class="search-icon search-icon-margin"/>
+                <i *ngIf="isSearching" class="fa fa-circle-o-notch fa-spin search-icon-margin"></i>
+                <span *ngIf="isSearchBarHasText || !selectedSearchType.main"
+                    class="type-text-in-search-bar-right">
+                    {{selectedSearchType.name}}
+                    <span *ngIf="isNumeric(selectedSearchType.amount)">
+                        ({{selectedSearchType.amount.toLocaleString()}})
+                    </span>
+                </span>
+                <span id="drop-down-caret" class="drop-down-caret">
+                    <i [ngClass]="{'down-arrow-red':  !isSearchBarHasText || selectedSearchType.main,
+                                    'down-arrow-white': isSearchBarHasText && !selectedSearchType.main}"> </i>
+                </span>
+            </div>
+
+            <div class="dropdown-content"
+                [ngClass]="{show: dropdownOpen}">
+                <a *ngFor="let tab of searchTypes" href="#"
+                (click)="dropdownOpen = false; switchTab($event, tab);">
+                {{tab.name}}
+                    <span *ngIf="isNumeric(tab.amount)">
+                        ({{ tab.amount.toLocaleString() }})
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <input #searchBox
+          class="form-control roundCorners-border-left-side left-side-search"
+          type="text"
+          [placeholder]="forcedPlaceholder || selectedSearchType.placeholder || globalSettings.theme.searchPlaceholder"
+          [autofocus]='!disableAutofocus'
+          (keyup)="doSearch(searchBox.value)"
+          (keyup.backspace)="doSearch(searchBox.value)"
+          (keyup.enter)="doNavigate(searchBox.value)"
+          [value]="searchTerm"
+          (focus)="isSearchBarHasFocus = true"
+          (focusout)="isSearchBarHasFocus = false"
+    />
+
+    <div class='subscribe-button' *ngIf='showSubscribe'>
+        <app-bk-subscription-manager [externalUrl]='externalUrl'
+                                     [externalTitle]='externalTitle'
+                                     [externalProperties]='externalProperties'
+                                     [docType]='selectedSearchType'
+                                     [term]="searchTerm"
+                                     [newWindow]="newWindow"
+        ></app-bk-subscription-manager>
+    </div>
+
+</div>

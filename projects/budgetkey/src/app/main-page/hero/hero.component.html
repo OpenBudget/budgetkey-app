@@ -1,0 +1,26 @@
+<div class="hero" #hero>
+    <div class="hero-wrapper">
+        <div #mushonkeyWrapper
+            class="chart"
+            [style.opacity]="chartOpacity">
+            <mushonkey #mushonkey [chart]="chart" *ngIf="chart">
+            </mushonkey>
+        </div>
+        <div class="subtitles"
+            [style.opacity]="textOpacity">
+            <div class="subtitles-wrapper">
+                <div class="inner-subtitles-wrapper"
+                    [style.bottom]="dialogOfs + 'px'">
+                    <ng-container *ngFor="let text of dialogLines">
+                        <app-speech-bubble
+                            [kind]='text.direction'
+                            [content]="text.content || ''"
+                            [enter]="text.last"
+                            [style.display]="text.content ? 'inherit' : 'none'"
+                        ></app-speech-bubble>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

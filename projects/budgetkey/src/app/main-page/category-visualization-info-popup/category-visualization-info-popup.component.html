@@ -1,0 +1,15 @@
+  <div [class]='"category-info-popup text-right step " + color' 
+        id="category-visualisation">
+    <h3>{{ __(bubble.name) }}</h3>
+    <div class="brief">
+      <span>{{ formatAmount(bubble.value) }} ₪</span>
+      <span>( {{ formatPercents(bubble.percent) }} )</span>
+    </div>
+    <div class="contents" *ngIf="currentTab == 0" [innerHtml]="__(bubble.explanation)">
+    </div>
+    <div class="contents" *ngIf="currentTab == 1">
+    </div>
+    <div class="contents" *ngIf="currentTab == 2">
+    </div>
+    <div class="pointer"></div>
+  </div>

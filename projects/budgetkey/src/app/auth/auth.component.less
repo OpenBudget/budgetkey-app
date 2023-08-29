@@ -1,0 +1,65 @@
+.widget {
+    position: relative;
+    min-width: 50px;
+    height: 40px;
+    font-weight: 300;
+}
+     
+.login {
+    color: #BDBDBD;	
+    font-family: "Abraham TRIAL";	
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.top-line {
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    height: 100%;
+ }
+
+ .top-line svg {
+     margin-right: 4px;
+ }
+
+.profile { 
+    width: 30px;
+    height: 30px;
+    border: 1px solid #FF5A5F;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.menu {
+    position: absolute;
+    top: 40px;
+    right: -50px;
+    flex-flow: column;
+    align-items: flex-start;
+    width: 130px;
+    border: 1px solid #EEEEEE;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.1);
+    display: none;
+    z-index: 10;
+}
+
+.widget:hover .menu {
+    display: flex;
+}
+
+.menu-line {
+    cursor: pointer;
+    padding: 6px 10px;
+    width: 100%;
+    color: #7D7D7D;
+    font-family: "Abraham TRIAL";	
+    font-size: 14px;
+}
+
+.menu-line:hover {
+    color: #FF5A5F;	
+    background-color: #FCEBEC;
+}

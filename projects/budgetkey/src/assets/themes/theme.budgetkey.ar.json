@@ -1,0 +1,574 @@
+{
+  "BUDGETKEY_APP_GENERIC_ITEM_THEME": {
+    "siteName": "مفتاح الميزاينة"
+  },
+  "BUDGETKEY_NG2_COMPONENTS_THEME": {
+    "footerLinks": [
+      {
+        "href": "/about",
+        "title": "عن"
+      },
+      {
+        "href": "/about#team",
+        "title": "الطاقم"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey/blob/master/documentation/UsingTheAPI.md",
+        "title": "API"
+      },
+      {
+        "href": "https://next.obudget.org/datapackages/sitemaps/sitemap.html",
+        "title": "خريطة الموقع"
+      },
+      {
+        "href": "http://www.hasadna.org.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
+        "title": "اتصلوا بنا"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey/issues/new",
+        "title": "الابلاغ عن الخطأ"
+      },
+      {
+        "href": "/about#privacy",
+        "title": "سياسة الخصوصية"
+      },
+      {
+        "href": "https://www.jgive.com/new/he/ils/donation-targets/3268#donation-modal",
+        "title": "تبرّعوا لنا"
+      },
+      {
+        "href": "https://socialmap.org.il",
+        "title": "الخارطة الاجتماعية"
+      },
+      {
+        "href": "https://next.obudget.org/govbuy/",
+        "title": "مشتريات مفتوحة"
+      }
+    ],
+    "headerLinks": [
+      {
+        "href": "/about/",
+        "title": "من نحن"
+      },
+      {
+        "href": "http://www.hasadna.org.il/%D7%9E%D7%A4%D7%AA%D7%97-%D7%94%D7%AA%D7%A7%D7%A6%D7%99%D7%91/",
+        "title": "الورشة"
+      },
+      {
+        "href": "https://www.jgive.com/new/he/ils/donation-targets/3268#donation-modal",
+        "title": "تبرّعوا لنا"
+      }
+    ],
+    "searchBarConfig": [
+      {
+        "id": "all",
+        "main": true,
+        "name": "الكل",
+        "placeholder": "ابحثوا عن كل شيء.. بند في الميزانية, منظمة, شخص, او كل شيء اخر يدور في خلدك",
+        "types": [
+          "all"
+        ]
+      },
+      {
+        "defaultTerm": "وزارة",
+        "description": "بنود النفقات التي تعرض في ميزاينة الدولة من سنة 1997 وحتّى الميزانية الاخيرة",
+        "filterMenu": [
+          {
+            "display": "نوع البند",
+            "id": "kind",
+            "options": [
+              {
+                "display": "كل مستويات الميزانية",
+                "id": "all"
+              },
+              {
+                "display": "קופסאות הקורונה",
+                "filters": {
+                  "covid19_expenses_revised__gt": 0,
+                  "depth": 4
+                },
+                "id": "covid19"
+              },
+              {
+                "display": "وزارات حكومية",
+                "filters": {
+                  "depth": 1
+                },
+                "id": "ministries"
+              },
+              {
+                "display": "مواضيع مرتّبة حسب التصنيف",
+                "filters": {
+                  "depth__lt": 0
+                },
+                "id": "func"
+              },
+              {
+                "display": "برامج تتعلق بالميزانية",
+                "filters": {
+                  "depth": 3
+                },
+                "id": "programs"
+              },
+              {
+                "display": "فقط اوامر تتعلق بالموازنة",
+                "filters": {
+                  "depth": 4
+                },
+                "id": "regulations"
+              }
+            ]
+          },
+          {
+            "display": "سنة الميزانية",
+            "id": "fiscal-year",
+            "options": [
+              {
+                "display": "كل سنوات الميزانية",
+                "id": "all"
+              },
+              {
+                "display": "سنة الميزانية الحالية",
+                "filters": {
+                  "year": 2024
+                },
+                "id": "latest"
+              }
+            ]
+          }
+        ],
+        "filters": {
+          "func_cls_title_1__not": "הכנסות"
+        },
+        "id": "budget",
+        "name": "بنود في الميزانية",
+        "placeholder": "ابحثوا عن اسماء بنود واوامر تتعلق بالموازنة",
+        "types": [
+          "budget"
+        ]
+      },
+      {
+        "description": "بنود الدخل كما يتمّ عرضها في ميزاينة الدولة",
+        "filters": {
+          "func_cls_title_1": "הכנסות"
+        },
+        "id": "revenues",
+        "name": "دخل الدولة",
+        "placeholder": "ابحثوا عن اسماء بنود الدخل",
+        "types": [
+          "budget"
+        ]
+      },
+      {
+        "description": "جمعيات خيريّة, شركات خاصّة ومنظمات اخرى التي تقوم بعلاقات مالية مع الحكومة",
+        "filterMenu": [
+          {
+            "display": "نوع المنظمة",
+            "id": "entity_kind",
+            "options": [
+              {
+                "display": "كل انواع المنظمات",
+                "id": "all"
+              },
+              {
+                "display": "شركات",
+                "filters": {
+                  "kind": "company"
+                },
+                "id": "companies"
+              },
+              {
+                "display": "جمعيات خيرية وشركات ذات نفع عام",
+                "filters": {
+                  "kind": "association"
+                },
+                "id": "associations"
+              },
+              {
+                "display": "سلطات محلية",
+                "filters": {
+                  "kind": "municipality"
+                },
+                "id": "municipalities"
+              },
+              {
+                "display": "منظمات اخرى",
+                "filters": {
+                  "kind__not": [
+                    "company",
+                    "association",
+                    "municipality"
+                  ]
+                },
+                "id": "other"
+              }
+            ]
+          },
+          {
+            "display": "اموال الدولة",
+            "id": "public_funds",
+            "options": [
+              {
+                "display": "بلا قيود",
+                "id": "all"
+              },
+              {
+                "display": "استلموا دعم حكومي",
+                "filters": {
+                  "received_amount_supports__gt": 0
+                },
+                "id": "supported"
+              },
+              {
+                "display": "وفّروا خدمات للحكومة",
+                "filters": {
+                  "received_amount_contracts__gt": 0
+                },
+                "id": "contracted"
+              },
+              {
+                "display": "كلاهما",
+                "filters": {
+                  "received_amount_contracts__gt": 0,
+                  "received_amount_supports__gt": 0
+                },
+                "id": "both"
+              }
+            ]
+          }
+        ],
+        "id": "entities",
+        "name": "منظمات",
+        "placeholder": "ابحثوا معلومات عن شركات, جمعيات خيرية ومنظمات اخرى",
+        "types": [
+          "entities"
+        ]
+      },
+      {
+        "description": "تغييرات في ميزانية الدولة تحدث خلال السنة",
+        "filterMenu": [
+          {
+            "display": "בשנת התקציב",
+            "id": "fiscal-year",
+            "options": [
+              {
+                "display": "كل سنوات الميزانية",
+                "id": "all"
+              },
+              {
+                "display": "2023",
+                "filters": {
+                  "year": 2023
+                },
+                "id": "2023"
+              },
+              {
+                "display": "2022",
+                "filters": {
+                  "year": 2022
+                },
+                "id": "2022"
+              },
+              {
+                "display": "2021",
+                "filters": {
+                  "year": 2021
+                },
+                "id": "2021"
+              },
+              {
+                "display": "2020",
+                "filters": {
+                  "year": 2020
+                },
+                "id": "2020"
+              },
+              {
+                "display": "2019",
+                "filters": {
+                  "year": 2019
+                },
+                "id": "2019"
+              },
+              {
+                "display": "2018",
+                "filters": {
+                  "year": 2018
+                },
+                "id": "2018"
+              },
+              {
+                "display": "2017",
+                "filters": {
+                  "year": 2017
+                },
+                "id": "2017"
+              },
+              {
+                "display": "2016",
+                "filters": {
+                  "year": 2016
+                },
+                "id": "2016"
+              },
+              {
+                "display": "2015",
+                "filters": {
+                  "year": 2015
+                },
+                "id": "2015"
+              },
+              {
+                "display": "2014",
+                "filters": {
+                  "year": 2014
+                },
+                "id": "2014"
+              },
+              {
+                "display": "2013",
+                "filters": {
+                  "year": 2013
+                },
+                "id": "2013"
+              },
+              {
+                "display": "2012",
+                "filters": {
+                  "year": 2012
+                },
+                "id": "2012"
+              },
+              {
+                "display": "2011",
+                "filters": {
+                  "year": 2011
+                },
+                "id": "2011"
+              }
+            ]
+          }
+        ],
+        "id": "national-budget-changes",
+        "name": "שינויים תקציביים",
+        "placeholder": "חפשו פרטים על שינויים תקציביים...",
+        "types": [
+          "national-budget-changes"
+        ]
+      },
+      {
+        "description": "רכש ותמיכות מן המדינה לעמותות, ספקים, רשויות מקומיות וגופים נוספים.",
+        "filterMenu": [
+          {
+            "display": "סוג ההוצאה",
+            "id": "kind",
+            "options": [
+              {
+                "display": "الكل",
+                "id": "all"
+              },
+              {
+                "display": "תמיכות תקציביות",
+                "filters": {
+                  "_type": "supports"
+                },
+                "id": "supports"
+              },
+              {
+                "display": "התקשרויות רכש",
+                "filters": {
+                  "_type": "contract-spending"
+                },
+                "id": "contract"
+              }
+            ]
+          }
+        ],
+        "id": "expenses",
+        "name": "הוצאות",
+        "placeholder": "חפשו פרטים על הוצאות...",
+        "types": [
+          "supports",
+          "contract-spending"
+        ]
+      },
+      {
+        "description": "מבחנים וקריטריונים לתמיכה של המדינה בגופים",
+        "id": "support_criteria",
+        "name": "מבחני תמיכה",
+        "placeholder": "חפשו פרטים על מבחני תמיכה...",
+        "types": [
+          "support_criteria"
+        ]
+      },
+      {
+        "description": "מכרזים שהמדינה עורכת לקניית סחורות ושירותים וקולות קוראים לתמיכות ומיזמים..",
+        "filterMenu": [
+          {
+            "display": "نوع المرحلة",
+            "id": "tender_type",
+            "options": [
+              {
+                "display": "الكل",
+                "id": "all"
+              },
+              {
+                "display": "مناقصات",
+                "filters": {
+                  "_type": "tenders",
+                  "tender_type": [
+                    "office",
+                    "central"
+                  ]
+                },
+                "id": "tenders"
+              },
+              {
+                "display": "طلبات لاعفاء من المناقصة",
+                "filters": {
+                  "_type": "tenders",
+                  "tender_type": [
+                    "exemptions"
+                  ]
+                },
+                "id": "exemptions"
+              },
+              {
+                "display": "קולות קוראים",
+                "filters": {
+                  "_type": "calls_for_bids"
+                },
+                "id": "calls_for_bids"
+              },
+              {
+                "display": "מכרזים מוניציפליים",
+                "filters": {
+                  "_type": "muni_tenders"
+                },
+                "id": "municipal"
+              }
+            ]
+          },
+          {
+            "display": "סטטוס",
+            "id": "status",
+            "options": [
+              {
+                "display": "الكل",
+                "id": "all"
+              },
+              {
+                "display": "פתוח להגשת הצעות",
+                "filters": [
+                  {
+                    "_type": "tenders",
+                    "claim_date__gte": "now",
+                    "tender_type__not": "exemptions"
+                  },
+                  {
+                    "_type": "tenders",
+                    "simple_decision": "פתוח",
+                    "tender_type__not": "exemptions"
+                  },
+                  {
+                    "_type": "calls_for_bids",
+                    "decision": "פתוח"
+                  },
+                  {
+                    "_type": "calls_for_bids",
+                    "claim_date__gte": "now"
+                  },
+                  {
+                    "_type": "muni_tenders",
+                    "claim_date__gte": "now"
+                  }
+                ],
+                "id": "open"
+              }
+            ]
+          }
+        ],
+        "id": "procurement",
+        "name": "מכרזים וקולות קוראים",
+        "placeholder": "חפשו פרטים על מכרזים, פטורים ממכרז וקולות קוראים...",
+        "types": [
+          "tenders",
+          "calls_for_bids",
+          "muni_tenders"
+        ]
+      },
+      {
+        "description": "اسماء اشخاص وانظمة تمّ جمعها من مصادرنا المعلومتية المختلفة",
+        "id": "people",
+        "name": "اسماء",
+        "placeholder": "ابحثوا عن اسماء اشخاص في قائمة بياناتنا",
+        "types": [
+          "people"
+        ]
+      },
+      {
+        "description": "قرارات الحكومة, وثائق سياسة ومنشورات اضافية",
+        "id": "gov_decisions",
+        "name": "قرارات الحكومة",
+        "placeholder": "ابحثوا عن قرارات ومنشورات الحكومة",
+        "types": [
+          "gov_decisions"
+        ]
+      },
+      {
+        "description": "פעילויות המבוצעות על ידי המדינה.",
+        "filterMenu": [
+          {
+            "display": "משרד ממשלתי",
+            "id": "publisher",
+            "options": [
+              {
+                "display": "כולם",
+                "id": "all"
+              },
+              {
+                "display": "משרד הבריאות",
+                "filters": {
+                  "publisher_name": "משרד הבריאות"
+                },
+                "id": "health"
+              },
+              {
+                "display": "وزارة التربية",
+                "filters": {
+                  "publisher_name": "משרד החינוך"
+                },
+                "id": "education"
+              },
+              {
+                "display": "משרד הרווחה",
+                "filters": {
+                  "publisher_name": "משרד הרווחה"
+                },
+                "id": "welfare"
+              },
+              {
+                "display": "משרד העליה והקליטה",
+                "filters": {
+                  "publisher_name": "משרד העליה והקליטה"
+                },
+                "id": "immigration"
+              }
+            ]
+          }
+        ],
+        "id": "activities",
+        "name": "שירותים ופרויקטים",
+        "placeholder": "חפשו שמות של שירותים חברתיים או פרויקטים...",
+        "types": [
+          "activities"
+        ]
+      }
+    ],
+    "searchPlaceholder": "ابحثوا عن كل شيء.. بند في الميزانية, منظمة, شخص, او كل شيء اخر يدور في خلدك",
+    "siteLogo": "budgetkey.svg",
+    "siteName": "مفتاح الميزاينة",
+    "siteUrl": "https://next.obudget.org",
+    "themeId": "budgetkey"
+  }
+}

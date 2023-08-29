@@ -1,0 +1,26 @@
+@import '../../common.less';
+
+:host {
+  
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  
+  budgetkey-header {
+    flex: 0 0 auto;
+  }
+  
+  .app {
+    flex: 1 0 auto;    
+    direction: rtl;
+    min-height: ~"calc(100vh - 333px - 64px)";
+    margin-top: 9px; //calc(9 - @headerHeight);
+    margin-bottom: 6px;  
+    width: 100%;
+  }  
+  
+  budgetkey-footer {
+    margin-top: auto;
+    flex: 1 0 auto;
+  }  
+}

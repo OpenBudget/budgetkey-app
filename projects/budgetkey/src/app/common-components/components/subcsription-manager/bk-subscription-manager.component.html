@@ -1,0 +1,20 @@
+<app-bk-sub-star *ngIf='term'
+    [enabled]='isLoggedIn'
+    [active]='isSubscribed()'
+    (clicked)='starClicked()'
+></app-bk-sub-star>
+<app-modal [title]='""'
+    *ngIf='loginModal'
+    (close)='loginModal=false'
+>
+    <div class='subscription-modal-contents'>
+        <img src='assets/common/img/star-active.svg' height='90px'>
+        <div class='title'>הרשמה לעדכונים</div>
+        <a [href]='loginUrl' [target]='newWindow ? "budgetkey-auth" : "_self"'><img src='assets/common/img/google_login.svg'></a>
+        <span class='connect'>התחברות עם גוגל</span>
+        <p>
+            פעם בשבוע נשלח לכם דואר אלקטרוני ובו עדכונים בכל הנוגע ל<strong>{{term}}</strong>
+            תוכלו להוסיף ערכים נוספים למייל העדכונים השבועי בלחיצה על כפתור הכוכב
+        </p>
+    </div>
+</app-modal>

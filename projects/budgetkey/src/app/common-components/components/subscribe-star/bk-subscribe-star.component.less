@@ -1,0 +1,18 @@
+:host {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    span {
+        color: #FF5A5F;
+        margin-left: 10px;
+    }
+    &.faded {
+        opacity: 0.7;
+    }
+    &:hover {
+        span, img {
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+}

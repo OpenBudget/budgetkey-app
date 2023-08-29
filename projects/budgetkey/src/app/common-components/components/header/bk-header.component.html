@@ -1,0 +1,33 @@
+<header>
+    <div class="logo">
+      <a [href]="globalSettings.theme.siteUrl"  aria-label='homepage' [style.background-image]='"url(assets/common/img/" + globalSettings.theme.siteLogo + ")"'>
+      </a>
+    </div>
+    <div *ngIf="showSearchBar" class="search-div">
+      <app-bk-search-bar (navigate)="doSearch($event)" [disableAutofocus]='true' [allowSubscribe]="true"></app-bk-search-bar>
+    </div>
+    <div class="menu-links">
+      <ng-container *ngFor="let link of globalSettings.theme.headerLinks">
+        <a [href]="link.href" [innerHtml]='link.title' target='_blank'></a>
+      </ng-container>
+      <ng-container *ngIf='showLanguages'>
+        <a (click)='switchLang("en")'>En</a>
+        <a (click)='switchLang("ar")'>عر</a>
+        <a (click)='switchLang("he")'>עב</a>
+      </ng-container>
+    </div>
+    <div *ngIf="showSearchBar" class="collapsed-search" (click)='doSearch()'>
+      <img class="search-icon" src="assets/common/img/search-glass-white.svg">
+    </div>
+    <div class="collapsed-menu" [ngClass]="{'with-search': showSearchBar}">
+      <i class="glyphicon glyphicon-menu-hamburger"></i>
+      <div class='menu'>
+        <ng-container *ngFor="let link of globalSettings.theme.headerLinks">
+          <span class='menu-line' (click)="doNavigate(link.href)" [innerHtml]='link.title'></span>
+        </ng-container>
+      </div>
+    </div>
+    <div class="auth-widget">
+      <app-auth [theme]='globalSettings.theme' *ngIf='showAuth'></app-auth>
+    </div>
+  </header>

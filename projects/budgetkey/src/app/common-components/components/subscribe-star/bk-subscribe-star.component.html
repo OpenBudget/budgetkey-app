@@ -1,0 +1,14 @@
+<ng-container *ngIf='enabled && active'>
+    <img src='assets/common/img/star-active.svg'
+        (click)='click($event)'
+    />
+</ng-container>
+<ng-container *ngIf='!active || !enabled'>
+    <span [class.faded]='!enabled'
+          (click)='click($event)'
+    >הרשמו לעדכונים</span>
+    <img src='assets/common/img/star-inactive.svg'
+        [class.faded]='!enabled'
+        (click)='click($event)'
+    />
+</ng-container>
