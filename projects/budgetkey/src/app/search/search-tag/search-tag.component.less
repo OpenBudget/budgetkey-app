@@ -1,0 +1,82 @@
+.search-tag {
+    font-family: 'Abraham TRIAL';
+    font-size: 16px;
+    font-weight: normal;
+    color: #7d7d7d;
+    display: flex;
+    flex-flow: row;
+    margin: 4px 0;
+
+    div {
+        padding: 0 2px;
+        margin: 0 5px;
+        border: 2px solid #edeef0;
+
+        &.selected {
+            border-color: #ff5a5f;
+        }
+    }
+
+    div.search-tag-name {
+        background-color: #edeef0;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        margin-left: 0;
+        white-space: nowrap;
+        cursor: pointer;
+
+        &.selected {
+            background-color: #ff5a5f;
+            color: #fff;
+        }
+
+        &.main {
+            text-decoration: underline;
+        }
+
+        &.main.selected {
+            text-decoration: none;
+        }
+    }
+
+    div.search-tag-amount {
+        margin-right: -2px;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+
+        &.selected {
+            background-color: #fcebec;
+            color: #ff5a5f;
+        }
+    }
+
+    &.bare {
+        font-weight: normal;
+        line-height: 22px;
+        color: #000000;
+        margin: 0 0 0 24px;
+        @media only screen and (max-width: 600px) {
+            margin-left: 16px;
+        }
+
+        div {
+            padding: 0;
+
+            &.search-tag-name {
+                border: none;
+                background-color: inherit;
+                border-bottom: 3px solid transparent;
+                border-radius: 0;
+                &.selected {
+                    background-color: inherit;
+                    color: #54364C;
+                    border-color: #54364C;
+                }
+            }
+            &.search-tag-amount {
+                display: none;
+            }
+        }
+    }
+
+}

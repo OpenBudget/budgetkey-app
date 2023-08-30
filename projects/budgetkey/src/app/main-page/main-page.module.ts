@@ -10,6 +10,8 @@ import { HeroComponent } from './hero/hero.component';
 import { CategoryVisualizationComponent } from './category-visualization/category-visualization.component';
 import { CategoryVisualizationInfoPopupComponent } from './category-visualization-info-popup/category-visualization-info-popup.component';
 import { MushonkeyModule } from 'mushonkey';
+import { HttpClientModule } from '@angular/common/http';
+import { UtilsService } from './utils.service';
 
 
 @NgModule({
@@ -26,7 +28,10 @@ import { MushonkeyModule } from 'mushonkey';
     CommonComponentsModule,
     AuthModule,
     MainPageRoutingModule,
-    MushonkeyModule
+    MushonkeyModule,
+  ],
+  providers: [
+    UtilsService
   ]
 })
 export class MainPageModule { }

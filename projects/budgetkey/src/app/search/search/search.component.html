@@ -1,0 +1,83 @@
+<ng-container *ngIf='bare'>
+  <div class='bare-header'>
+    <div class='bare-count-tags'>
+      <ng-container *ngFor='let docType of docTypes'>
+        <search-tag [name]='docType.name' [amount]='docType.amount' 
+                    [selected]='searchState.docType===docType'
+                    [bare]='bare'
+                    (click)='onDocTypeSelected(docType)'
+        ></search-tag>
+      </ng-container>
+    </div>
+    <div class='bare-info'>
+      <div class='bare-found-results' i18n>נמצאו {{docTypes[0].amount | number}} תוצאות</div>
+      <a class='bare-more-results-link' href='https://next.obudget.org/s' target='_blank' i18n>הרחיבו את החיפוש באתר מפתח התקציב</a>  
+    </div>
+  </div>
+  <div class='bare-search-controls'>
+    <div class='bare-search-control'>
+      <label i18n>סינון התוצאות</label>
+      <app-bare-search-bar
+            [term]='searchState.term'
+            [config]='searchState.docType'
+            (search)="onTermChanged($event )"
+      ></app-bare-search-bar>
+    </div>
+    <search-filter-menu-bar 
+        *ngIf='searchState.docType.id!=="all"'
+        [menus]="searchState.docType.filterMenu || []" 
+        [bare]='bare'
+        (selected)="onSearchFilterMenuChange()" 
+    >
+    </search-filter-menu-bar>
+  </div>
+</ng-container>
+
+<ng-container *ngIf='!bare'>
+  <app-bk-search-bar [searchTerm]="searchState.term"
+                      [selectedSearchType]="searchState.docType"
+                      [isSearching]="isSearching"
+                      [allowSubscribe]="true"
+                      [externalTitle]="searchState.term"
+                      [externalUrlParams]="subscriptionUrlParams"
+                      [externalProperties]="subscriptionProperties"
+                      (search)="onTermChanged($event)"
+                      (selected)="onDocTypeSelected($event)"
+  ></app-bk-search-bar>
+  <ng-container *ngIf='!isSearching'>
+    <div class='count-tags'>
+        <div>
+          <ng-container *ngFor='let docType of docTypes'>
+            <search-tag *ngIf='docType.id === "all"'
+                        [name]='docType.name' [amount]='docType.amount' 
+                        [selected]='searchState.docType===docType'
+                        [main]='true'
+                        (click)='onDocTypeSelected(docType)'
+            ></search-tag>
+          </ng-container>
+        </div>
+        <div>
+          <ng-container *ngFor='let docType of docTypes'>
+            <search-tag *ngIf='docType.id !== "all"'
+                        [name]='docType.name' [amount]='docType.amount' 
+                        [selected]='searchState.docType===docType'
+                        [main]='true'
+                        (click)='onDocTypeSelected(docType)'
+            ></search-tag>
+          </ng-container>
+        </div>
+    </div>
+  </ng-container>
+  <search-filter-menu-bar 
+    *ngIf='searchState.docType.id!=="all"'
+    [menus]="searchState.docType.filterMenu || []" 
+    (selected)="onSearchFilterMenuChange()" 
+  >
+  </search-filter-menu-bar>
+</ng-container>
+
+<search-mode-selector
+  [bare]='bare'
+  [state]='searchState'
+  (searching)='isSearching = $event'>
+</search-mode-selector>

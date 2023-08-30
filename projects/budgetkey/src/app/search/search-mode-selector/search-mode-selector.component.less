@@ -1,0 +1,36 @@
+:host {
+    display: block;
+    width: 100%;
+    
+    > div {
+        width: 100%;
+
+        &.bare {
+            ::ng-deep {
+                .bottom-line {
+                    display: none;
+                }
+                .body.dashing {
+                    border: none;
+                }
+                horizontal-results {
+                    .filtered {
+                        display: none;
+                    }
+                    search-result {
+                        .card {
+                            .body {
+                                height: 100%;
+                                min-height: 102px;
+                                flex: 1 1 auto;
+                                .main-content .parties {
+                                    margin: 8px 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

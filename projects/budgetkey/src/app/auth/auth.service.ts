@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, ReplaySubject, tap } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
+import { AuthModule } from './auth.module';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
     private authServerUrl: string;
     private jwtLocalStorageKey: string;

@@ -1,0 +1,109 @@
+:host {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 100%;
+
+    .count-tags {
+        display: flex;
+        flex-flow: row;
+        margin: 0;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        max-width: 800px;
+    
+        > div {
+            display: flex;
+            flex-flow: row;
+            flex-wrap: wrap;
+            margin: 0 10px;
+            justify-content: flex-start;
+            align-items: center;
+    
+            @media only screen and (max-width: 600px) {
+                justify-content: center;
+            }
+        }
+        search-tag {
+            cursor: pointer;
+        }
+    
+        @media only screen and (max-width: 600px) {
+            flex-flow: column;
+        }
+    }
+    
+    app-bk-search-bar {
+        width: 100%;
+        max-width: 800px;
+    }
+    
+    .bare-header {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        font-family: "Abraham TRIAL";
+    
+        .bare-count-tags {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            flex: 1000 1 auto;
+            margin-bottom: 8px;
+        }
+
+        .bare-info {
+            margin-right: auto;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-between;
+            flex: 1 1 auto;
+            border-bottom: 3px solid transparent;
+
+            .bare-found-results {
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 22px;
+                color: #787878;
+                margin-left: 16px;
+                margin-bottom: 8px;
+            }
+            .bare-more-results-link {
+                font-weight: normal;
+                font-size: 18px;
+                line-height: 25px;        
+                text-decoration: underline !important;
+                color: #FF5A5F;
+                white-space: nowrap;
+                margin-bottom: 8px;
+            }
+        }
+    }
+    
+    .bare-search-controls {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        margin: 28px 0 16px 0;
+        width: 100%;
+    
+        .bare-search-control {
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+            flex: 100 1 400px;
+            margin-bottom: 12px;
+
+            label {
+                font-style: normal;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 19px;
+                margin-bottom: 4px;
+            }
+        }
+    }
+}

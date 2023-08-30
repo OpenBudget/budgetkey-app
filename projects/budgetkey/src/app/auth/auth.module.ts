@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { AuthComponent } from './auth.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { AuthService } from './auth.service';
+// import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -9,6 +11,9 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     HttpClientModule,
   ],
-  exports: [AuthComponent]
+  exports: [AuthComponent],
+  providers: [
+    AuthService,
+  ]
 })
 export class AuthModule { }

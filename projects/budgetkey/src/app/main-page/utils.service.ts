@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { VALUE_SCALE, DEFAULT_LOCALE } from './constants';
+import { MainPageModule } from './main-page.module';
 
 const suffixes = Object.keys(VALUE_SCALE)
   .map((key: string) => {
@@ -13,9 +14,7 @@ const suffixes = Object.keys(VALUE_SCALE)
   });
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UtilsService {
 
   constructor() { }

@@ -1,0 +1,61 @@
+@import '../search-page/search-page.component.less';
+
+:host {
+    display: block;
+    padding: 40px 40px 100px 40px;
+    @media only screen and (max-width: 600px) {
+        padding: 24px 24px 100px 24px;
+    }
+
+    .footer {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 40px;
+        @media only screen and (max-width: 600px) {
+            padding: 16px 24px;
+            justify-content: center;
+        }
+        background: #f9f9f9;
+        box-shadow: 0 0px 10px 5px rgba(0,0,0,0.4);
+
+        .signup {
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 25px;
+            text-decoration: underline;
+            cursor: pointer;
+            // color: #FFFFFF;
+            padding: 8px 16px;
+            // background: #ED6665;
+            border-radius: 8px;
+
+            img {
+                margin-left: 14px;
+            }
+        }
+        .credits {
+            text-align: center;
+            span {
+                font-weight: normal;
+                font-size: 18px;
+                line-height: 25px;
+                color: #787878;
+                
+                a, a:hover, a:visited {
+                    text-decoration: underline !important;
+                    color: #FF5A5F;
+                    white-space: nowrap;
+                }
+            }
+            img {
+                margin-left: 12px;
+            }
+        }
+    }
+}

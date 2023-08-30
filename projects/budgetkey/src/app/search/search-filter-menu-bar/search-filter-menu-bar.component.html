@@ -1,0 +1,6 @@
+<div class='search-filter-bar' [class.bare]='bare'>
+  <ng-container *ngFor="let menu of menus">
+    <search-filter-menu [menu]="menu" (selected)="onSelected($event)"
+    ></search-filter-menu>
+  </ng-container>
+</div>
