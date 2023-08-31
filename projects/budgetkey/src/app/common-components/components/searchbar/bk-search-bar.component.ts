@@ -132,9 +132,8 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
     }
     
     ngAfterViewInit() {
-      timer(0).subscribe(() => {
+      timer(100).subscribe(() => {
         if (this.searchBox.nativeElement.offsetWidth < 500) {
-          console.log('XXX', this.searchBox.nativeElement, this.searchBox.nativeElement.offsetWidth);
           this.forcedPlaceholder = 'בואו נחפש';
         }
       });

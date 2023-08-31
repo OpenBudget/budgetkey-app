@@ -1,6 +1,7 @@
 import { ReplaySubject } from 'rxjs';
 import { SearchParams } from '../model';
 import { SearchBarType } from '../../common-components/components/searchbar/bk-search-bar.component';
+import { some } from 'd3-array';
 
 export function mergeFilters(...filters: any[]) {
     const arrays = [];
@@ -50,13 +51,13 @@ export class SearchState {
     _term: string;
     _docType: SearchBarType;
     _filters: any;
-    _period: any;
+    // _period: any;
     searchContext: string | null;
 
     private enabled = false;
 
     constructor(private docTypes: SearchBarType[]) {
-        this._docType = docTypes[0];
+        this._docType = this.docTypes[0];
     }
 
     set term(term: string) {
@@ -97,16 +98,16 @@ export class SearchState {
         return this._filters;
     }
 
-    set period(period: any) {
-        if (period !== this._period) {
-            this._period = period;
-            this.initiateSearch();
-        }
-    }
+    // set period(period: any) {
+    //     if (period !== this._period) {
+    //         this._period = period;
+    //         this.initiateSearch();
+    //     }
+    // }
 
-    get period() {
-        return this._period;
-    }
+    // get period() {
+    //     return this._period;
+    // }
 
     setSearchContext(context: string) {
         this.searchContext = Array.isArray(context) ? context.join(' ') : null;
@@ -118,7 +119,7 @@ export class SearchState {
         }
         const sp = new SearchParams();
         sp.term = this._term;
-        sp.period = this._period;
+        // sp.period = this._period;
         sp.docType = this._docType;
         sp.offset = 0;
         sp.pageSize = 10;
@@ -136,7 +137,7 @@ export class SearchState {
         if (!this._term) {
             sp.ordering = sp.docType.ordering;
         }
-        this.searchQueue.next(sp);
+    this.searchQueue.next(sp);
     }
 
     start() {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GlobalSettingsService } from '../../common-components/global-settings.service';
 
 @Component({
   selector: 'app-search-page',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class SearchPageComponent {
 
+  init = false;
+
+  constructor(private globalSettings: GlobalSettingsService) {
+    globalSettings.ready.subscribe(() => {
+      this.init = true;
+    });
+  }
 }

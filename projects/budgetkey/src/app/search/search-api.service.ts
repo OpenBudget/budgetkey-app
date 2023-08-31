@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 // import { URL } from './config';
 import { SearchResults, SearchParams } from './model';
@@ -22,48 +22,46 @@ export class SearchApiService {
     // const startTime: Date = new Date(); // update time-stamp
     const joinedKinds = sp.docType.types.join(',');
 
-    let url = `${this.URL}/${joinedKinds}`;
-    url += `?size=${sp.pageSize}&offset=${sp.offset}`;
+    const url = `${this.URL}/${joinedKinds}`;
+    const queryParams: any = {
+      size: sp.pageSize,
+      offset: sp.offset,
+    };
     if (sp.term) {
-      url += `&q=${encodeURIComponent(sp.term)}`;
-    }
-    if (sp.period) {
-      url += `&from_date=${sp.period.start}&to_date=${sp.period.end}`;
+      queryParams.q = sp.term;
     }
     if (sp.filters) {
       const filters = JSON.stringify(sp.filters);
-      url += '&filter=' + encodeURIComponent(filters);
+      queryParams.filter = filters;
     }
     if (sp.ordering) {
-      url += `&order=${sp.ordering}`;
+      queryParams.order = sp.ordering;
     }
     if (sp.context) {
-      url += `&context=${sp.context}`;
+      queryParams.context = sp.context;
     }
 
-    if (this.cache[url]) {
-      const ret = this.cache[url];
+    const cacheKey = url + JSON.stringify(queryParams);
+    if (this.cache[cacheKey]) {
+      const ret = this.cache[cacheKey];
       ret.params = sp;
-      return of(this.cache[url]);
+      return of(this.cache[cacheKey]);
     }
 
     return this.http
-      .get(url)
+      .get(url, {params: queryParams})
       .pipe(
-          map((r: any) => {
-              const endTime = new Date();
-              // console.log('req search time: ', (endTime.getTime()  - startTime.getTime()) / 1000, 'sec');
-              const ret = <SearchResults>r;
-              this.cache[url] = ret;
-              ret.params = sp;
-              return ret;
-          })
+        map((r: any) => {
+          const ret = <SearchResults>r;
+          this.cache[cacheKey] = ret;
+          ret.params = sp;
+          return ret;
+        }),
       );
   }
 
   count(sp: SearchParams, types: SearchBarType[]): Observable<SearchResults> {
-    const startTime: Date = new Date(); // update time-stamp
-    let url = `${URL}/count`;
+    let url = `${this.URL}/count`;
 
     const config = types
       .map((t: SearchBarType) => {
@@ -74,32 +72,29 @@ export class SearchApiService {
         };
     });
     const config_param = JSON.stringify(config);
-    url += '?config=' + encodeURIComponent(config_param);
-    if (sp.term) {
-      url += `&q=${encodeURIComponent(sp.term)}`;
+    const queryParams: any = {
+      config: config_param,
     }
-    if (sp.period && sp.period.value !== 'all') {
-      url += `&from_date=${sp.period.start}&to_date=${sp.period.end}`;
+    if (sp.term) {
+      queryParams.q = sp.term;
     }
     if (sp.context) {
-      url += `&context=${sp.context}`;
+      queryParams.context = sp.context;
     }
 
-    if (this.cache[url]) {
-      const ret = this.cache[url];
+    const cacheKey = url + JSON.stringify(queryParams);
+    if (this.cache[cacheKey]) {
+      const ret = this.cache[cacheKey];
       ret.params = sp;
-      return of(this.cache[url]);
+      return of(this.cache[cacheKey]);
     }
 
     return this.http
-      .get(url)
+      .get(url, {params: queryParams})
       .pipe(
         map((r: any) => {
-          const endTime = new Date();
-          // console.log('req count time: ', (endTime.getTime()  - startTime.getTime()) / 1000, 'sec');
           const ret = <SearchResults>r;
-          this.cache[url] = ret;
-          // window['cache'] = this.cache;
+          this.cache[cacheKey] = ret;
           ret.params = sp;
           return ret;
         })

@@ -5,7 +5,7 @@
   </div>
   <div class='results'>
     <div class='right-fade' [class.visible]='showRightFade' (click)='scroll(1)'></div>
-    <div class='cards' #cards>
+    <div class='cards' #cards [class.refresh]='refresh'>
       <div *ngIf='searchManager.last.docType' class='precard'>{{searchManager.last.docType.description}}</div>
       <search-result 
           *ngFor="let item of ((searchManager.searchResults | async)?.docs || []); let i = index"

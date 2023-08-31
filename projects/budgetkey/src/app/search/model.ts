@@ -4,7 +4,7 @@ export class SearchParams {
     constructor(other?: SearchParams) {
         if (other) {
             this.term = other.term;
-            this.period = other.period;
+            // this.period = other.period;
             this.docType = other.docType;
             this.offset = other.offset;
             this.pageSize = other.pageSize;
@@ -15,7 +15,7 @@ export class SearchParams {
     }
 
     term: string;
-    period: any;
+    // period: any;
     docType: SearchBarType;
     offset: number;
     pageSize: number;

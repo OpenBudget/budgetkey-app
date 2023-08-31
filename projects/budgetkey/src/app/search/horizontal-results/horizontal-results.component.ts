@@ -2,11 +2,14 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ElementRef, 
 import { SearchState, mergeFilters } from '../search-state/search-state';
 import { SearchManager, SearchOutcome } from '../search-manager/search-manager';
 import { SearchParams, SearchResults } from '../model';
-import { take, skip, switchMap, throttleTime, delay, debounceTime } from 'rxjs/operators';
-import { fromEvent, Subscription } from 'rxjs';
+import { take, skip, switchMap, throttleTime, delay, debounceTime, tap } from 'rxjs/operators';
+import { animationFrameScheduler, fromEvent, scheduled, Subscription } from 'rxjs';
 import { SearchApiService } from '../search-api.service';
 import { SearchBarType } from '../../common-components/components/searchbar/bk-search-bar.component';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+
+@UntilDestroy()
 @Component({
   selector: 'horizontal-results',
   templateUrl: './horizontal-results.component.html',
@@ -26,9 +29,9 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
   lastOutcome: SearchOutcome;
   docTypes: SearchBarType[];
   gotMore = false;
-  subscriptions: Subscription[] = [];
   showLeftFade = false;
   showRightFade = false;
+  refresh = false;
 
   constructor(
     private searchService: SearchApiService,
@@ -48,6 +51,7 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
     }
     this.state.searchQueue
         .pipe(
+          untilDestroyed(this),
           debounceTime(1000),
           switchMap((sp) => {
             return this.searchService.search({
@@ -55,7 +59,7 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
               offset: 0,
               pageSize: 1,
               term: sp.term,
-              period: null,
+              // period: null,
               filters: this.docType.filters,
               context: this.state.searchContext,
               ordering: sp.term ? null : this.docType.ordering
@@ -63,7 +67,7 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
           })
         ).subscribe((sr) => {
           if (sr && sr.search_results && sr.search_results.length > 0) {
-            this.docType['score'] = sr.search_results[0].score;
+            this.docType.score = sr.search_results[0].score;
           }
         });
 
@@ -72,48 +76,46 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
       this.state,
       this.docTypes,
       1000,
+      this,
       (sp: SearchParams) => {
         if (sp.offset === 0) {
           const ret = new SearchParams(sp);
           ret.docType = this.docType;
           ret.filters = this.docType.filters;
-          ret.period = null;
+          // ret.period = null;
           return ret;
         }
         return sp;
       }
     );
 
-    this.subscriptions = [];
-    this.subscriptions.push(
-      this.searchManager.searchResults.subscribe((outcome) => {
+    this.searchManager.searchResults.pipe(
+      untilDestroyed(this),
+      tap((outcome) => {
         this.lastOutcome = outcome;
         this.searching.emit(outcome.isSearching);
-        const el = this.cards.nativeElement as HTMLElement;
         this.showLeftFade = true;
-        el.classList.toggle('refresh');
-        setTimeout(() => {
-          el.classList.toggle('refresh');
-          this.scrollHandler(el);
-        }, 100);
+        this.refresh = !this.refresh;
+      }),
+      delay(100),
+      tap(() => {
+        this.refresh = !this.refresh;
+        this.scrollHandler(this.cards.nativeElement as HTMLElement);
       })
-    );
+    ).subscribe();
   }
 
   ngAfterViewInit() {
-    this.subscriptions.push(
-      fromEvent(this.cards.nativeElement, 'scroll').pipe(
-        throttleTime(150), delay(150)
-      ).subscribe((event: Event) => {
-        this.scrollHandler(event.target as HTMLElement);
-      })
-    );
+    scheduled(fromEvent(this.cards.nativeElement, 'scroll'), animationFrameScheduler).pipe(
+      untilDestroyed(this),
+      throttleTime(150),
+      delay(150)
+    ).subscribe((event: Event) => {
+      this.scrollHandler(event.target as HTMLElement);
+    });
   }
 
   ngOnDestroy() {
-    while (this.subscriptions.length > 0) {
-      this.subscriptions.shift()?.unsubscribe();
-    }
   }
 
   shouldShow() {

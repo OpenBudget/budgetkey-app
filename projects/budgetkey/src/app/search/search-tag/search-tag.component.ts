@@ -1,11 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'search-tag',
   templateUrl: './search-tag.component.html',
   styleUrls: ['./search-tag.component.less']
 })
-export class SearchTagComponent implements OnInit {
+export class SearchTagComponent implements OnChanges {
 
   @Input() name: string;
   @Input() amount: number;
@@ -15,7 +15,7 @@ export class SearchTagComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges) {
   }
 
 }

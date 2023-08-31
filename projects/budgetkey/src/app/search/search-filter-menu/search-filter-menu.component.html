@@ -3,7 +3,7 @@
   <div class='select'>
     <select [(ngModel)]="selectedOption">
       <ng-container *ngFor="let option of menu.options">
-        <option [value]="option">{{option.display}}</option>
+        <option [ngValue]="option">{{option.display}}</option>
       </ng-container> 
     </select>
     <img src='assets/search/img/select-dropdown.svg'>  
