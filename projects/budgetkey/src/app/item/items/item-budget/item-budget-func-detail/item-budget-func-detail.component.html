@@ -1,0 +1,17 @@
+<app-budget-item [item]='item' [questions]='questions'>
+    <ng-container class='preTitleTemplate'>תת-סיווג נושאי רוחבי</ng-container>
+    <ng-container class='subtitleTemplate'>
+        ריכוז כלל ההוצאה תחת תת-נושא
+        {{ item.func_cls_title_2[0] }},
+        במסגרת הנושא
+        <app-item-link [itemId]='parentId'>{{parent}}</app-item-link>.<br/>
+        הטיפול בתת-נושא זה יכול להתחלק בין מספר משרדים שונים.
+    </ng-container>
+    <ng-container class='textTemplate'>
+        <div class="objective" *ngIf='item.explanation'>
+            <span [innerHTML]='item.explanation'></span>
+            <div><small>&mdash;&nbsp;מקור: {{item.explanation_source}}</small></div>
+        </div>
+        <br/>
+    </ng-container>
+</app-budget-item>

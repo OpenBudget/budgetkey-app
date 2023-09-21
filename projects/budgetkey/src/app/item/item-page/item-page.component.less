@@ -1,0 +1,46 @@
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    z-index: 9000;
+}
+
+.desktop-notification img {
+    width: 90px;
+}
+
+.desktop-notification span {
+    display: inline-block;
+    padding: 10px 0;
+}
+
+.desktop-notification a {
+    background-color: #734DE5;
+}
+
+.desktop-notification a i {
+    transform: scaleX(-1);
+}
+
+:host {
+    min-height: 100%;
+    background: #FCFCFC;
+    font-family: "Abraham TRIAL", "Alef Hebrew", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-feature-settings: 'tnum','lnum';
+    -webkit-font-feature-settings: 'tnum','lnum';
+    -moz-font-feature-settings: 'tnum','lnum';
+
+    ::ng-deep {
+        .number {
+            direction: ltr;
+            text-align: right;
+            display: inline-block;
+            text-decoration: inherit;
+        }    
+    }
+      
+    .container-fluid {
+        max-width: 1280px;
+    }
+}

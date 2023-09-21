@@ -15,8 +15,10 @@ import { SearchTagComponent } from './search-tag/search-tag.component';
 import { VerticalResultsComponent } from './vertical-results/vertical-results.component';
 import { FormsModule } from '@angular/forms';
 
-import * as dayjs from 'dayjs'
-import 'dayjs/locale/he'
+import * as dayjs from 'dayjs';
+import 'dayjs/locale/he';
+import 'dayjs/plugin/duration';
+import 'dayjs/plugin/relativeTime';
 import { SearchApiService } from './search-api.service';
 dayjs.locale('he')
 

@@ -1,0 +1,48 @@
+<div class='title-container' [class]='item?.kind || ""'>
+    <div class="title-row">
+        <span class="pretitle-wrapper">
+            <span class="pretitle">
+                {{ item.kind_he }}
+            </span>
+        </span>
+        <span class='title-wrapper'>
+            <span class="title">{{item.name}}</span>
+        </span>
+        <span class="org-id invert">
+            <small>מספר תאגיד</small>
+            <div>{{ item.id }}</div>
+        </span>
+        <span class="amount invert" *ngIf='overrideAmount'>
+            <ng-content select='.amountTemplate'></ng-content>
+        </span>
+        <span class="amount invert" *ngIf='!overrideAmount'>
+            <small [bkTooltip]='"תמיכות והתקשרויות מתועדות משלוש השנים האחרונות"'>
+                כספי ממשלה שהתקבלו
+            </small>
+            <span class='figure'>
+                {{ format.number(item.received_amount) }} ₪
+            </span>    
+        </span>
+    </div>
+</div>
+<div class="row-container text-container">
+    <div class="text" *ngIf='overrideText'>
+        <ng-content select='.textTemplate'></ng-content>
+    </div>
+    <div class="text" *ngIf='!overrideText'>
+        <strong>{{ item.name }}</strong>
+        <span *ngIf='item.name_en'>
+            ({{item.name_en}})
+        </span>
+        <span>
+            היא
+            {{ item.kind_he }}
+            (מספר תאגיד: {{ item.id }})    
+        </span>
+    </div>
+    <div class='tips'>
+        <ng-content select='.tipsTemplate'></ng-content>
+    </div>
+</div>
+
+<app-item-visualizations *ngIf="item.charts" [item]="item"></app-item-visualizations>

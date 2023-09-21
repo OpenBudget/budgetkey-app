@@ -266,7 +266,7 @@ export class CategoryVisualizationComponent implements OnInit, AfterViewInit {
           percent: datum.value / root.value * this.category.percent,
         };
       })
-      .on('click', function (datum: any) {
+      .on('click', function (event: Event, datum: any) {
         window.location.href = datum.data.href;
       })
       .on('mouseout', () => {

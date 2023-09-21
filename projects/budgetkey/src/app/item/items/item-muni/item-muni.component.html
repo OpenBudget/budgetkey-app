@@ -1,0 +1,125 @@
+<div class='streched'>
+    <div class='header'>
+        <h1>{{ (ext.name && ext.name.value) || item.name }}</h1>
+    </div>
+    <div class='general-info'>
+        <div class='section'>
+            <div class='section-icon'>
+                <div class='ic information'></div>
+            </div>
+            <div class='section-content'>
+                <app-muni-item-tidbit [item]='ext.status'></app-muni-item-tidbit>
+                <span> במחוז </span>
+                <app-muni-item-tidbit [item]='ext.district'></app-muni-item-tidbit>
+                <ng-container *ngIf='ext.status_year'>
+                    <span> מאז שנת </span>
+                    <app-muni-item-tidbit [item]='ext.status_year'></app-muni-item-tidbit>.
+                </ng-container>
+                <ng-container *ngIf='ext.other_names && ext.other_names.value.length > 0'>
+                    <span> בעבר נקראה גם </span>
+                    <app-muni-item-tidbit [item]='ext.other_names'></app-muni-item-tidbit>.
+                </ng-container>
+                <ng-container *ngIf='ext.num_settlements && ext.num_settlements.value > 0'>
+                    <span>במועצה יש </span>
+                    <app-muni-item-tidbit [item]='ext.num_settlements'></app-muni-item-tidbit>
+                    <span> יישובים.</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class='section'>
+            <div class='section-icon'>
+                <div class='ic demographics'></div>
+            </div>
+            <div class='section-content'>
+                <span>ברשות מתגוררים </span>
+                <app-muni-item-tidbit [item]='ext.residents' kind='integer' *ngIf='ext.residents'></app-muni-item-tidbit>
+                <span> תושבים, מתוכם </span>
+                <ng-container *ngIf='ext.pct_jews_other'>
+                    <app-muni-item-tidbit [item]='ext.pct_jews_other' kind='percent'></app-muni-item-tidbit>
+                    <span> יהודים</span>
+                </ng-container>
+                <ng-container *ngIf='ext.pct_jews_other && ext.pct_arabs'><span> ו-</span></ng-container>
+                <ng-container *ngIf='ext.pct_arabs'>
+                    <app-muni-item-tidbit [item]='ext.pct_arabs' kind='percent'></app-muni-item-tidbit>
+                    <span> ערבים</span>
+                </ng-container>
+                <span>.</span>
+            </div>
+        </div>
+        <div class='section' *ngIf='ext.socioeconomic_cluster && ext.socioeconomic_rating'>
+            <div class='section-icon'>
+                <div class='ic socioeconomic'></div>
+            </div>
+            <div class='section-content'>
+                <span>לפי <strong>המדד החברתי-כלכלי</strong>, הרשות נמצאת באשכול </span>
+                <app-muni-item-tidbit [item]='ext.socioeconomic_cluster'></app-muni-item-tidbit>
+                <span>. יחסית לרשויות אחרות, היא מדורגת במקום ה-</span>
+                <app-muni-item-tidbit [item]='ext.socioeconomic_rating'></app-muni-item-tidbit>
+                <span> (כאשר 1 הוא המקום/אשכול הנמוך ביותר).</span>
+            </div>
+        </div>
+        <div class='section'  *ngIf='ext.peripheriality_cluster'>
+            <div class='section-icon'>
+                <div class='ic periphery'></div>
+            </div>
+            <div class='section-content'>
+                <ng-container>
+                    <span>הרשות נמצאת באשכול </span>
+                    <app-muni-item-tidbit [item]='ext.peripheriality_cluster'></app-muni-item-tidbit>
+                    <span> של <strong>מדד הפריפריאליות</strong> המייצג, בין השאר, את מידת הנגישות הפוטנציאלית של הרשות ואת הקרבה שלה למחוז תל-אביב (אשכול 1 הוא הפריפריאלי ביותר).</span>
+                </ng-container>
+            </div>
+        </div>
+        <div class='section'>
+            <div class='section-icon'>
+                <div class='ic institutional'></div>
+            </div>
+            <div class='section-content-2'>
+                <app-muni-item-tidbit [item]='ext.symbol' *ngIf='ext.symbol' [name]='true'></app-muni-item-tidbit>
+                <app-muni-item-tidbit [item]='ext.building_committee_name' *ngIf='ext.building_committee_name' [name]='true'></app-muni-item-tidbit>
+                <app-muni-item-tidbit [item]='ext.council_member_count' *ngIf='ext.council_member_count' [name]='true'></app-muni-item-tidbit>
+            </div>
+        </div>
+
+        <div class='section budget' *ngIf='budgets.length > 0'>
+            <div class='budget-info'>
+                <div class='budget-title'>סעיפי תקציב נבחרים</div>
+                <div class='budget-subtitle'>{{budgets[0].value_kind}} בשנת {{budgets[0].year}}</div>
+                <div class='budget-items'>
+                    <ng-container  *ngFor='let budget of budgets'>
+                        <div class='budget-item' *ngIf='budget.use === "selected"'>
+                            <div class='budget-item-icon'>
+                                <a [href]='budgetHref(budget)'><i [class]='"fa " + budget.icon'></i></a>
+                            </div>
+                            <div class='budget-item-title'>
+                                <a [href]='budgetHref(budget)'>{{budget.name}}</a>
+                            </div>
+                            <div class='budget-item-amount number' 
+                                 [innerHTML]='format.ils(budget.value)'
+                            ></div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class='budget-info' *ngIf='incomeChartLayout.width > 0'>
+                <div class='budget-title'>מקורות ההכנסה למימון הפעילות</div>
+                <div class='budget-subtitle'>{{budgets[0].value_kind}} בשנת {{budgets[0].year}}</div>
+                <app-plotly [data]='incomeChartData' [layout]='incomeChartLayout' [config]='incomeChartConfig'></app-plotly>
+            </div>
+        </div>
+    </div>
+    <div class='full-budget' *ngIf='budgets.length > 0'>
+        <div>
+            <div class='budget-title'>סה״כ הכנסות: <span class='number' [innerHtml]='format.ils(totalIncome)'></span></div>
+            <ng-container *ngFor='let budget of incomeBudgets'>
+                <app-muni-budget-minicard [item]='budget' [entry]='budget'></app-muni-budget-minicard>
+            </ng-container>
+        </div>
+        <div>
+            <div class='budget-title'>סה״כ הוצאות: <span class='number' [innerHtml]='format.ils(totalExpense)'></span></div>
+            <ng-container *ngFor='let budget of expenseBudgets'>
+                <app-muni-budget-minicard [item]='budget' [entry]='budget'></app-muni-budget-minicard>
+            </ng-container>    
+        </div>
+    </div>
+</div>

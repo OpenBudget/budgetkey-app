@@ -1,0 +1,167 @@
+<div class='procure-container'>
+    <div class='marquee'>
+        <span class='status-text decision'>{{ decisionText() }}</span>
+        <span class='break'></span>
+        <span class='status-timestamp'>
+            עדכון אחרון: {{ format.date(item.payments[item.payments.length - 1].date) }}
+        </span>
+        <span class='created-timestamp' *ngIf='item.firstUpdateDate'>
+            דיווח ראשון: {{ item.firstUpdateDate }}
+        </span>
+    </div>
+    <div class='header'>
+        <div class='titles'>
+            <div class='title'>
+                {{ item.purpose }}
+                <span class='process-type-tag'>התקשרות ממשלתית</span>
+            </div>
+            <div class='parties'>
+                <span class='from'>{{ publisher() }} &larr; </span>
+                <ng-container *ngIf='toText()'>
+                    <span class='to'>
+                        {{ toText() }}
+                    </span>
+                </ng-container>
+            </div>
+            <div class='tags'>
+                <span class='tag' *ngFor='let tag of item.subject_list_keywords'>
+                    {{ tag }}
+                </span>
+            </div>
+        </div>
+        <div class='amount' *ngIf='totalAmount()'>
+            <div class='progress-text'>
+                <app-timeline-part [size]='13'
+                            [percent]='100 * totalPaid() / totalAmount()'
+                            [padding]='0' 
+                            [major]='true'
+                            [first]='true'
+                            [last]='true'>
+                </app-timeline-part>
+                <span>
+                    <span>עד כה שולמו&nbsp;</span>
+                    <span class='figure' [innerHtml]='format.percent(totalPaid() / totalAmount())'></span>
+                    <span>&nbsp;מתוך:</span>
+                </span>
+            </div>
+            <div class='volume'>
+                <span class='figure number' [innerHtml]='format.ils(totalAmount())'></span>
+            </div>
+        </div>
+    </div>
+    <div class='hero'>
+        <div class='details'>
+            <div *ngIf='item.resolved_budget_codes && item.resolved_budget_codes.length'>
+                <label>סעיף תקציבי:&nbsp;</label><br/>
+                <span class='label-text'>
+                    <a [href]='"/i/" + item.resolved_budget_codes[0].doc_id'>
+                    {{ item.resolved_budget_codes[0].title }} ({{ item.resolved_budget_codes[0].code.slice(2) }})
+                    </a>
+                </span>
+            </div>
+            <div *ngIf='item.purchase_method'>
+                <label>אופן רכישה:&nbsp;</label><br/>
+                <span class='label-text'>{{ item.purchase_method }}</span>
+                <span *ngIf='item.exemption_reason && item.exemption_reason.length && item.exemption_reason[0].length && item.exemption_reason[0].length > 5'>&nbsp;({{item.exemption_reason[0]}})</span>
+            </div>
+            
+            <div class='payments' *ngIf='paymentsTable'>
+                <label>דיווחים רבעוניים על תשלומים שבוצעו</label>
+                <table>
+                    <thead>
+                        <th></th>
+                        <th></th>
+                        <th>ינואר - מרץ</th>
+                        <th></th>
+                        <th>אפריל - יוני</th>
+                        <th></th>
+                        <th>יולי - ספטמבר</th>
+                        <th></th>
+                        <th>אוקטובר - דצמבר</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let row of paymentsTable'>
+                            <td>{{ row.year }}</td>
+                            <ng-container *ngFor='let period of ["1","2","3","4"]'>
+                                <td>
+                                    <ng-container *ngIf='row[period]'>
+                                        <a class='bk-tooltip-anchor' 
+                                        [href]='row[period].url' 
+                                        target='_blank'
+                                        *ngIf='row[period].url && row[period].diff != 0'>
+                                            <i class='glyphicon glyphicon-paperclip'></i>
+                                            <span class='bk-tooltip'>להורדת הדו"ח הרבעוני</span>
+                                        </a>
+                                    </ng-container>
+                                </td>
+                                <td>
+                                    <ng-container *ngIf='row[period]'>
+                                        <span *ngIf='row[period].diff != 0'
+                                            class='number'
+                                            [innerHtml]="format.ils(row[period].diff)">
+                                        </span>
+                                        <span *ngIf='row[period].diff == 0'>
+                                            &#8212;
+                                        </span>
+                                    </ng-container>
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class='payments-mobile' *ngIf='currentPaymentRow'>
+                <label>דיווחים רבעוניים על תשלומים שבוצעו</label>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>חודשים/שנים</th>
+                            <th>
+                                <div>
+                                    <span class='prevnext' [class.disabled]='!prevPaymentRow' (click)='prevPaymentRow && updatePaymentRows(currentPaymentRowIndex+1)'>
+                                        <i class='glyphicon glyphicon-chevron-right'></i>
+                                    </span>
+                                    <span class='year'>{{currentPaymentRow.year}}</span>
+                                    <span class='prevnext' [class.disabled]='!nextPaymentRow' (click)='nextPaymentRow && updatePaymentRows(currentPaymentRowIndex-1)'>
+                                        <i class='glyphicon glyphicon-chevron-left'></i>
+                                    </span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let period of ["ינואר - מרץ", "אפריל - יוני", "יולי - ספטמבר", "אוקטובר - דצמבר"]; let i = index'>
+                            <td>{{period}}</td>
+                            <td>
+                                <ng-container *ngIf='currentPaymentRow[i]'>
+                                    <span *ngIf='currentPaymentRow[i].diff != 0'
+                                        class='number'
+                                        [innerHtml]="format.ils(currentPaymentRow[i].diff)">
+                                    </span>
+                                    <span *ngIf='currentPaymentRow[i].diff == 0'>
+                                        &#8212;
+                                    </span>
+                                </ng-container>                            
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class='points'>
+                    <div class='point'
+                         *ngFor='let row of paymentsTable; let i=index;'
+                         [class.active]='i == currentPaymentRowIndex'
+                         (click)='updatePaymentRows(i)'
+                    ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='payments-graph'>
+        <label>סכום התשלומים המצטבר בהתקשרות
+            <span style='font-weight: normal'>(לפי רבעונים)</span>
+        </label>
+        <app-contract-payments [payments]='item.payments'>
+        </app-contract-payments>
+    </div>
+</div>

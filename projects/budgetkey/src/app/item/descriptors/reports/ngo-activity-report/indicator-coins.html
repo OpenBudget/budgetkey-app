@@ -1,0 +1,6 @@
+{% if details.total_received_in_field %}
+סך כספי הממשלה שהועברו באופן ישיר לארגונים
+{{ details.total_received_in_field | format_number }}₪
+{% else %}
+ארגונים בתחום זה לא קיבלו כספי ממשלה בשלוש השנים האחרונות
+{% endif %}

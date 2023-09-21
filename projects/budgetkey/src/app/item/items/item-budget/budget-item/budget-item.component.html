@@ -1,0 +1,88 @@
+<app-simple-item [item]='item' [questions]='questions'>
+  <ng-container class='preTitleTemplate'>
+    <ng-content select='.preTitleTemplate'></ng-content>
+  </ng-container>
+  <ng-container class='amountTemplate'>
+    <small>תקציב מאושר:&nbsp;</small>
+    <span class='number'>{{ format.number(item.net_revised) }}</span>
+    <small>₪</small>
+  </ng-container>
+  <ng-container class='titleTemplate'>{{item.title}}</ng-container>
+  <ng-container class='subtitleTemplate'>
+    <ng-content select='.subtitleTemplate'></ng-content>
+  </ng-container>
+  <ng-container class='textTemplate'>
+    <ng-content select='.textTemplate'></ng-content>
+    בשנת {{item.year}} תקציב {{item.title}}
+    <ng-container *ngIf='item.net_allocated'>הוא ₪{{ format.number(item.net_allocated) }}.</ng-container>
+    <ng-container *ngIf='!item.net_allocated'>לא הוקצה.</ng-container>
+    
+    <ng-container *ngIf='item.net_allocated !== item.net_revised'>
+      <br />אחרי העברות תקציביות, התקציב הוא ₪{{ format.number(item.net_revised) }}
+    </ng-container>
+    
+    <ng-container *ngIf='!takana && item.total_direction_income < 0'>
+      <br />
+      יחד עם הכנסות עצמיות של ₪{{ format.number(-item.total_direction_income) }}, סך ההוצאות תחת סעיף זה הן ₪{{ format.number(item.total_direction_expense) }}.
+    </ng-container>
+
+    <ng-container *ngIf='takana'>
+      <br />
+      זוהי תקנת {{item.direction[0]}} המשמשת לצורך {{item['nice-econ-category']}}.
+    </ng-container>
+    
+    <br />
+    <ng-container *ngIf='item.covid19_expenses_revised > 0'>
+      <strong>
+        סעיף זה כולל הוצאה מיוחדת להתמודדות עם מגיפת הקורונה בסך 
+        ₪{{ format.number(item.covid19_expenses_revised) }}.
+      </strong>
+      <br />                    
+    </ng-container>
+    
+    <ng-container *ngIf='!takana'>
+      בחלוקה לפי סוגי הוצאה עיקריים:
+      <ul>
+        <li *ngIf='item.total_econ_cls_salaries > 0'>שכר: ₪{{ format.number(item.total_econ_cls_salaries) }}
+          ({{ format.number(item.total_econ_cls_salaries/item.total_direction_expense*100) }}%)
+        </li>
+        <li *ngIf='item.total_econ_cls_transfers > 0'>תמיכות והעברות: ₪{{ format.number(item.total_econ_cls_transfers) }}
+          ({{ format.number(item.total_econ_cls_transfers/item.total_direction_expense*100) }}%)
+        </li>
+        <li *ngIf='item.total_econ_cls_procurement > 0'>רכש וקניות: ₪{{ format.number(item.total_econ_cls_procurement) }}
+          ({{ format.number(item.total_econ_cls_procurement/item.total_direction_expense*100) }}%)
+        </li>
+      </ul>
+    </ng-container>
+
+    <ng-container *ngIf='executedYear'>
+      <br />
+      הביצוע בשנת {{executedYear}} עמד על
+      ₪{{ format.number(item.history[executedYear].net_executed) }}
+      <br />
+    </ng-container>
+    
+    <ng-container *ngIf='!!item.personnel_allocated || !!item.contractors_allocated'>
+      תחת סעיף זה מוקצים
+      <ng-container *ngIf='item.personnel_allocated > 0'>
+        {{ format.number(item.personnel_allocated) }} תקני כח אדם
+      </ng-container>
+      <ng-container *ngIf='item.personnel_allocated > 0 && item.contractors_allocated > 0'>
+        , ובנוסף
+      </ng-container>
+      <ng-container *ngIf='item.contractors_allocated > 0'>
+        {{ format.number(item.contractors_allocated) }} חודשי עבודה בלתי צמיתה (יועצים וקבלנים)
+      </ng-container>
+      <br />
+    </ng-container>
+
+    <ng-container *ngIf='!!startYear'>
+      <ng-container *ngIf='startYear !== item.year'>
+        תקציב זה פעיל בין השנים: {{ startYear }} - {{ item.year }}.
+      </ng-container>
+      <ng-container *ngIf='startYear === item.year'>
+        תקציב זה פעיל בשנת: {{ item.year }} בלבד.
+      </ng-container>
+    </ng-container>  
+  </ng-container>
+</app-simple-item>

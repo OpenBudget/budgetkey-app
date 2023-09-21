@@ -1,0 +1,12 @@
+<app-budget-item [item]='item' [questions]='questions'>
+    <ng-container class='preTitleTemplate'>{{item['nice-code']}}</ng-container>
+    <ng-container class='subtitleTemplate'>
+        תקנה תקציבית בתכנית
+        <app-item-link [itemId]='parentId'>{{parent}}</app-item-link>
+        (תחת תחום
+        <app-item-link [itemId]='grandParentId'>{{grandParent}}</app-item-link>
+        בסעיף
+        <app-item-link [itemId]='grandGrandParentId'>{{grandGrandParent}}</app-item-link>).<br/>        
+        כוללת תקציב עבור הוצאה מסוג ספציפי בפעילות אחת של הממשלה.
+    </ng-container>
+</app-budget-item>

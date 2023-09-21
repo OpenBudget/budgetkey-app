@@ -1,0 +1,43 @@
+<app-container [showHeader]="true" [showSearchBar]="true">
+  <div #container class="budgetkey-item-wrapper container-fluid" [ngClass]="'style-' + style" *ngIf='init'>
+    <div class='item-container'>
+      <app-item-budget0dig *ngIf='prefix("budget/00/")' [item]='item'></app-item-budget0dig>
+      <app-item-budget-func *ngIf='prefix("budget/C[0-9]/")' [item]='item'></app-item-budget-func>
+      <app-item-budget-func-detail *ngIf='prefix("budget/C[0-9][0-9]+/")' [item]='item'></app-item-budget-func-detail>
+      <app-item-budget2dig *ngIf='prefix("budget/00([0-9][1-9]|[1-9][0-9])/")' [item]='item'></app-item-budget2dig>
+      <app-item-budget4dig *ngIf='prefix("budget/00([0-9][1-9]|[1-9][0-9])[0-9]{2}/")' [item]='item'></app-item-budget4dig>
+      <app-item-budget6dig *ngIf='prefix("budget/00([0-9][1-9]|[1-9][0-9])[0-9]{4}/")' [item]='item'></app-item-budget6dig>
+      <app-item-budget8dig *ngIf='prefix("budget/00([0-9][1-9]|[1-9][0-9])[0-9]{6}/")' [item]='item'></app-item-budget8dig>
+
+      <app-item-income2dig *ngIf='prefix("budget/0000/")' [item]='item'></app-item-income2dig>
+      <app-item-income4dig *ngIf='prefix("budget/0000[0-9]{2}/")' [item]='item'></app-item-income4dig>
+      <app-item-income6dig *ngIf='prefix("budget/0000[0-9]{4}/")' [item]='item'></app-item-income6dig>
+      <app-item-income8dig *ngIf='prefix("budget/0000[0-9]{6}/")' [item]='item'></app-item-income8dig>
+
+      <app-item-budget-changes *ngIf='prefix("national-budget-changes/")' [item]='item'></app-item-budget-changes>
+
+      <app-item-association *ngIf='prefix("org/association/")' [item]='item'></app-item-association>
+      <app-item-company *ngIf='prefix("org/company/")' [item]='item'></app-item-company>
+      <ng-container *ngIf='!prefix("org/association") && !prefix("org/company") && !prefix("org/municipality")'>
+        <app-org-item *ngIf='prefix("org/")' [item]='item'></app-org-item>
+      </ng-container>
+
+      <app-item-muni *ngIf='prefix("org/municipality")' [item]='item'></app-item-muni>
+      <app-item-muni-budget *ngIf='prefix("muni_budgets/")' [item]='item'></app-item-muni-budget>
+
+      <app-item-procurement *ngIf='prefix("contract-spending")' [item]='item'></app-item-procurement>
+      <app-item-procurement *ngIf='prefix("tenders/central")' [item]='item'></app-item-procurement>
+      <app-item-procurement *ngIf='prefix("tenders/office")' [item]='item'></app-item-procurement>
+      <app-item-procurement *ngIf='prefix("tenders/exemptions")' [item]='item'></app-item-procurement>
+      <app-item-procurement *ngIf='prefix("calls_for_bids")' [item]='item'></app-item-procurement>
+      <app-item-procurement *ngIf='prefix("support_criteria")' [item]='item'></app-item-procurement>
+      <app-item-procurement *ngIf='prefix("muni_tenders/office")' [item]='item'></app-item-procurement>
+    </div>
+    <!-- <app-item-container *ngIf="style" [style]="style"> -->
+    <!-- </app-item-container> -->
+    
+    <ng-container *ngIf='showQuestions'>
+      <!-- <app-questions-panel #questionsPanel></app-questions-panel> -->
+    </ng-container>
+  </div>
+</app-container>

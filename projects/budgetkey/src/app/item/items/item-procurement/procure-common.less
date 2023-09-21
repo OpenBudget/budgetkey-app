@@ -1,0 +1,738 @@
+:host {
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1015px;	
+    flex-flow: column;
+
+    font-family: "Abraham TRIAL";	
+    font-size: 18px;
+    font-weight: normal;
+    color: #512C0A;
+
+    label, th {
+        padding-top: 13px;
+        font-weight: bold;
+        color: #19008F;
+        white-space: nowrap;
+    }
+
+    .alert {
+        min-height: 80px;
+        border-radius: 10px;
+        background-color: rgba(255, 90, 95, 0.1);
+        font-size: 18px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.33;
+        letter-spacing: normal;
+        text-align: right;
+        color: #ff5a5f; 
+        padding: 16px 25px;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        
+        > *:first-child {
+            flex: 1 1 auto;
+            padding: 0 25px;
+        }
+
+        .separator {
+            width: 0;
+            height: 100%;
+            border-right: 1px solid rgba(255, 90, 95, 0.75);
+        }
+
+        > a {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            padding-right: 25px;
+
+            &, &:hover, &:visited {
+                color: rgba(255, 90, 95, 0.75);
+                text-decoration: none;
+            }
+        }
+    }
+
+    .procure-container {
+        border: 2px solid rgba(0,0,0,0.02);	
+        border-radius: 3px;	
+        background-color: #FFFBF2;	
+        box-shadow: 0 1px 2px 0 rgba(189,189,189,0.6);
+
+        a {
+            color: #512C0A;
+            text-decoration: underline;
+        }
+    
+        .marquee {
+            width: 100%;
+            height: 26px;
+            display: flex;
+            flex-flow: row;
+            border-bottom: 2px solid rgba(0,0,0,0.04);
+    
+            > span {
+                width: auto;
+                color: #512C0A;	
+                padding-left: 8px;
+                padding-right: 8px;
+                font-family: "Abraham TRIAL";	
+                font-size: 16px;
+            }
+    
+            .break {
+                flex-basis: 100%;
+                height: 0;
+                display: none;
+            }
+              
+            .status-alert {
+                font-weight: bold;
+                background-color: #FFF37B;
+            }
+    
+            .status-text {
+                font-weight: normal;
+                &.decision {
+                    background-color:rgba(0, 0, 0, 0.05);  
+                }
+            }
+    
+            // .status-alert {
+            // }
+    
+            // .status-timestamp {
+            // }
+    
+            .created-timestamp {
+                margin-right: auto;
+                text-align: left;
+            }
+        }
+    
+        .header {
+            padding-top: 26px;
+            padding-bottom: 26px;
+            padding-left: 50px;
+            padding-right: 50px;
+            border-bottom: 2px solid rgba(0,0,0,0.04);
+            display: flex;
+            flex-flow: row;
+    
+            .titles {
+                flex: 7;
+    
+                .process-type-tag {
+                    display: inline-block;
+                    border-radius: 4px;	
+                    background-color: #19008F;
+                    color: #FFFBF2;	
+                    font-family: "Abraham TRIAL";	
+                    font-size: 13px;	
+                    font-weight: 500;
+                    margin: 0 10px;
+                    padding: 0 3px;
+                    vertical-align: middle;
+                }
+    
+                .title {
+                    font-family: "Miriam Libre";	
+                    font-size: 26px;	
+                    font-weight: bold;
+                    color: #19008F;
+
+                }
+    
+                .parties {
+                    color: #19008F;	
+                    font-family: "Miriam Libre";	
+                    font-size: 26px;
+    
+                    .from {
+                        font-weight: bold;
+                    }
+    
+                    // .to {
+    
+                    // }
+    
+                    .to-entity-id {
+                        display: none;
+                    }
+                }
+    
+                &.call-for-bid, &.support-criteria {
+                    .parties, .title {
+                        color: rgb(35, 80, 0);
+                    }
+                    .process-type-tag {
+                        background-color: rgb(35, 80, 0);
+                    }
+                }
+
+                .tags {
+                    .tag {
+                        color: #512C0A;	
+                        font-family: "Abraham TRIAL";	
+                        font-size: 14px;
+                        border: 1px solid #512C0A;	
+                        opacity: 0.25;	
+                        border-radius: 6px;	
+                        background-color: #FFFBF2;
+                        margin-right: 15px;
+                        padding: 0 3px;
+                        display: inline-block;
+                    }
+                }
+            }
+    
+            .amount {
+                flex: 3;
+                text-align: left;
+                padding-top: 10px;
+    
+                .progress-text {
+                    color: #19008F;	
+                    font-family: "Abraham TRIAL";	
+                    font-size: 16px;
+                    display: flex;
+                    flex-flow: row;
+                    align-items: center;
+                    justify-content: flex-end;    
+                    
+                    timeline-part {
+                        div {
+                            display: inline-block;
+                        }
+                        padding-top: 6px;
+                        padding-left: 3px;
+                    }
+                }
+    
+                .volume {
+                    color: #19008F;
+                    font-family: "Miriam Libre";
+                    font-size: 26px;
+                    font-weight: bold;
+                }
+            }
+        }
+    
+        .hero {
+            display: flex;
+            flex-flow: row;
+              
+            .details {
+                padding-top: 26px;
+                padding-bottom: 26px;
+                padding-left: 50px;
+                padding-right: 50px;
+                border-bottom: 2px solid rgba(0,0,0,0.04);
+                display: flex;
+                flex-flow: column;
+                flex: 5;
+
+                .description {
+                    .readmore-overlay {
+                        display: none;
+                    }
+
+                    &.readmore {
+                        max-height: 400px;
+                        overflow-y: hidden;
+                        position: relative;
+
+                        .readmore-overlay {
+                            position: absolute;
+                            width: 100%;
+                            display: flex;
+                            flex-flow: column;
+                            align-items: center;
+                            justify-content: center;
+                            bottom: 0;
+                            padding-top: 100px;
+                            padding-bottom: 10px;
+                            background: rgb(255,251,242);
+                            background: linear-gradient(180deg, rgba(255,251,242,0) 0%, rgba(255,251,242,1) 100%);
+
+                            .readmore-button {
+                                font-family: "Abraham TRIAL";	
+                                font-size: 16px;
+                                font-weight: normal;
+                                font-style: normal;
+                                line-height: 1.5;
+                                color: #512c0a;
+                                border-radius: 5px;
+                                border: solid 1px #512c0a;
+                                padding: 3px 10px;
+                                background: rgb(255,251,242);
+                                cursor: pointer;
+                            }
+                        }
+
+                    }
+                }
+        
+                .timeline {
+                    table {
+                        height: 1px;
+                        margin-top: 26px;
+                        width: 100%;
+                        border-collapse:separate; 
+                        border-spacing:0 22px;
+                        tr {
+                            height: 100%;
+                        }
+                        tr.major {
+                            background-color: rgba(81,44,10, 0.05);
+                        }
+                        td:last-child {
+                            width: 75%;
+                        }
+                        th, td {
+                            height: 100%;
+                            padding-left: 15px;
+                            timeline-part {
+                                height: 100%;
+                            }
+                        }
+                        td:nth-child(2) {
+                            white-space: nowrap;
+                        }
+                        td:nth-child(4) {
+                            // text-overflow: ellipsis;
+                            // overflow: hidden;
+                            // white-space: nowrap;
+                        }
+                    }
+                }
+            
+                .awardees, .awardees-mobile {
+                    table {
+                        width: 100%;
+                        thead {
+                            height: 30px;
+                        }
+                        tr:nth-child(2n+1) {
+                            background-color: rgba(81,44,10, 0.05);
+                        }
+                        th, td {
+                            padding-left: 15px;
+                        }
+                        td:nth-child(2),td:nth-child(3),td:nth-child(4) {
+                            // text-align: left;
+                            white-space: nowrap;
+                        }
+                        tr.total {
+                            border-top: solid 1px #444;
+                            td {
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+                
+                .awardees-mobile {
+                    display: none;
+                    td {
+                        display: flex;
+                        flex-flow: column;
+                        padding: 8px;
+                        font-size: 14px;
+
+                        strong {
+                            margin-left: 5px;
+                        }
+                    }
+                }
+        
+                .payments {
+                    table {
+                        width: 100%;
+                        tr, thead {
+                            height: 30px;
+                        }
+                        th, td {
+                            color: #512C0A;	
+                            font-family: "Abraham TRIAL";	
+                            font-size: 18px;	
+                            font-weight: 300;
+                        }
+                        td:nth-child(2n) {
+                            text-align: left;
+                            width: 55px;
+                            padding-left: 5px;
+                        }
+                        td:nth-child(2n+3) {
+                            font-weight: 500;
+                        }
+                    }
+                }
+
+                .payments-mobile {
+                    display: none;
+                    table {
+                        max-width: 400px;
+                        width: 100%;
+                        tr {
+                            th, td {
+                                padding: 15px;
+                                color: #512c0a;
+                            }
+                            th:first-child {
+                                opacity: 0.36;
+                                font-size: 16px;
+                                font-weight: normal;
+                                color: #512c0a;
+                            }
+                            td:last-child {
+                                text-align: center;
+                            }
+                            th:last-child {
+                                min-width: 50%;
+                                & >div {
+                                    width: 100%;
+                                    display: flex;
+                                    flex-flow: row;
+                                    justify-content: space-evenly;
+                                    align-items: center;
+                                    .prevnext {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        background-color: rgba(0, 0, 0, 0.05);
+                                        width: 34px;
+                                        height: 34px;
+                                        border-radius: 20px;
+                                        cursor: pointer;
+                                        &.disabled {
+                                            color: rgba(0, 0, 0, 0.11);
+                                            cursor: inherit;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .points {
+                        display: flex;
+                        flex-flow: row-reverse;
+                        justify-content: center;
+                        align-items: center;
+
+                        .point {
+                            display: block;
+                            width: 6px;
+                            height: 6px;
+                            border-radius: 3px;
+                            border: none;
+                            background-color: rgba(0, 0, 0, 0.11);
+                            margin: 0 9px;
+
+                            &.active {
+                                background-color: #512c0a;
+                            }
+                        }
+                    }
+                }
+            }
+        
+            .tips {
+                flex: 2;
+                display: flex;
+                flex-flow: column;
+                padding-left: 50px;
+    
+                .tip {
+                    border: solid 1px rgba(189, 189, 189, 0.6);
+                    // border: 4px dashed rgba(0,0,0,0.25);	
+                    border-radius: 10px;
+                    background-color: #FFFBF2;
+                    margin: 25px 0px;
+                    padding: 0;
+                    display: flex;
+                    flex-flow: column;
+                    align-items: stretch;
+    
+                    div, a {
+                        padding: 20px;
+                        margin: 0;
+                        font-family: "Abraham TRIAL";
+                        color: #512C0A;
+                        font-size: 18px;
+                        line-height: 1.33;
+                        font-weight: 300;
+                        display: block;
+                    }
+                    a, a:visited {
+                        border-top: solid 1px rgba(189, 189, 189, 0.6);
+                        font-size: 18px;
+                        font-weight: normal;
+                        font-style: normal;
+                        text-decoration: none;
+                        display: block;
+                        padding: 10px;
+                        margin: 0;
+                        color: #19008F;
+                        text-align: center;
+    
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+       
+        .attachments {
+            padding-top: 26px;
+            padding-bottom: 26px;
+            padding-left: 50px;
+            padding-right: 50px;
+            background-color: rgba(0,0,0,0.02);
+    
+            .file-list {
+                display: flex;
+                flex-flow: row wrap;
+    
+                .attachment {
+                    position: relative;
+                    width: ~"calc(33% - 38px)";
+                    display: flex;
+                    flex-flow: row;
+                    align-items: center;
+                    padding-right: 23px;
+                    padding-left: 10px;
+                    margin: 19px;
+                    margin-top: 35px;
+                    min-height: 63px;
+                    border-radius: 4px;	
+                    background-color: rgba(81,44,10, 0.04);
+                    cursor: pointer;
+    
+                    .update-time {
+                        position: absolute;
+                        top: -16px;
+                        right: 0px;
+                        opacity: 0.5;	
+                        color: #512C0A;	
+                        font-family: "Abraham TRIAL";
+                        font-size: 14px;
+                    }
+                    .filename {
+                        margin-right: 5px;
+                        padding: 10px 0;
+                    }
+    
+                    .icon {
+                        margin-right: auto;
+                        font-size: 43px;
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+    
+        .payments-graph {
+            padding-top: 26px;
+            padding-bottom: 26px;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+    }
+
+    .bk-tooltip-anchor {
+        white-space: nowrap;
+
+        img {
+            // text-decoration: none;
+            height: 0.6em;
+        }
+    }
+    
+    .bk-tooltip {
+        width: 150px;
+        margin-left: -145px !important;
+        white-space: normal;
+
+        .mobile-tooltip-instruction {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        .bk-tooltip {
+            margin-left: 0 !important;
+            width: 80vw;
+            margin-right: -40vw;
+            right: 50vw !important;
+            top: 40vh !important;
+            position: fixed !important;
+            font-size: 14px;
+            line-height: 1.3;
+            padding: 10px;
+
+            &:after {
+                display: none;
+            }
+
+            .mobile-tooltip-instruction {
+                display: block;
+                margin-top: 10px;
+                text-align: left;
+                font-size: 80%;
+            }    
+        }
+
+        .alert {
+            min-height: 0;
+        }
+
+        .procure-container {
+            font-size: 16px;
+
+            label {
+                font-size: 16px;
+            }
+        
+            .marquee {
+                flex-wrap: wrap;
+                .break {
+                    display: block;
+                }
+                .status-timestamp, .created-timestamp {
+                    font-size: 12px;
+                } 
+            }
+
+            .header {
+                flex-flow: column;
+                padding: 20px 8px;
+
+                .titles {
+                    flex: 1 1 auto;
+                    .title, .parties {
+                        font-size: 20px;
+                    }
+                    .tags {
+                        .tag:first-child {
+                            margin-right: 0px;
+                        }
+                        .tag {
+                            font-size: 12px;
+                        }
+                    }
+                }
+
+                .amount {
+                    text-align: right;
+
+                    .progress-text {
+                        justify-content: flex-start;
+                        font-size: 14px;
+                    }
+
+                    .volume {
+                        font-size: 20px;
+                    }
+                }
+            }
+
+            .hero {
+                flex-flow: column;
+                .details {
+                    padding: 20px 8px;
+                    flex: 1 1 auto;
+                    .description {
+                        overflow-wrap: break-word;
+                    }
+                    .awardees {
+                        display: none;
+                    }
+                    .awardees-mobile {
+                        display: flex;
+                        flex-flow: column;
+                        label:last-child {
+                            color: #512c0a;
+                            cursor: pointer;
+                            text-decoration: underline;
+                        }
+                    }
+                    .timeline {
+                        
+                        table {
+                            td {
+                                height: 100%;
+                                width: 0;
+                                font-size: 14px;
+                                white-space: nowrap;
+                            }
+                            td:last-child {
+                                white-space: normal;                            
+                            }
+                            //     position: relative;
+                            //     &>a, &>span {
+                            //         position: absolute;
+                            //         top: 3px;
+                            //         width: 100%;
+                            //         white-space: nowrap;
+                            //         overflow: hidden;
+                            //         text-overflow: ellipsis;
+                            //     }
+                            // }
+                        }
+                    }
+                    .payments {
+                        display: none;
+                    }
+                    .payments-mobile {
+                        display: block;
+                    }
+                }
+
+                .tips {
+                    flex: 1 1 auto;
+                    padding-left: 0;
+
+                    .tip {
+                        margin: 10px 0;
+                    }
+                }
+            }
+
+            .attachments {
+                padding: 20px 8px;
+
+                .file-list {
+                    flex-flow: column;
+
+                    .attachment {
+                        padding: 0 10px;
+                        width: 100%;
+                        font-size: 14px;
+                        margin: 0;
+                        margin-top: 19px;
+
+                        .filename {
+                            margin: 0 10px;
+                        }
+
+                    }
+                }
+
+            }
+
+            .payments-graph {
+                display: none;
+            }
+        }
+    }
+      
+}
+

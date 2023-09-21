@@ -1,0 +1,34 @@
+<app-simple-item [item]='item' [questions]='questions'>
+    <ng-container class='preTitleTemplate'>{{item['nice-code']}}</ng-container>
+    <ng-container class='amountTemplate'>
+      <small>הכנסות:&nbsp;</small>
+      <span class='number'>{{ format.number(item.net_revised) }}</span>
+      <small>₪</small>
+    </ng-container>
+    <ng-container class='titleTemplate'>{{item.title}}</ng-container>
+    <ng-container class='subtitleTemplate'>
+      <ng-content select='.subtitleTemplate'></ng-content>
+    </ng-container>
+    <ng-container class='textTemplate'>
+      <ng-content select='.textTemplate'></ng-content>
+      בשנת {{item.year}} תחזית הכנסות {{item.title}}
+      <ng-container *ngIf='item.net_allocated'>היא ₪{{ format.number(item.net_allocated) }}.</ng-container>
+      <ng-container *ngIf='!item.net_allocated'>לא הוקצתה.</ng-container>
+      
+      <ng-container *ngIf='executedYear'>
+        <br />
+        ההכנסות בפועל בשנת {{executedYear}} עמדו על
+        ₪{{ format.number(item.history[executedYear].net_executed) }}
+        <br />
+      </ng-container> 
+
+      <ng-container *ngIf='!!startYear'>
+        <ng-container *ngIf='startYear !== item.year'>
+          סעיף הכנסה זה פעיל בין השנים: {{ startYear }} - {{ item.year }}.
+        </ng-container>
+        <ng-container *ngIf='startYear === item.year'>
+            סעיף הכנסה זה פעיל בשנת: {{ item.year }} בלבד.
+        </ng-container>
+      </ng-container>    
+    </ng-container>
+  </app-simple-item>

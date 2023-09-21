@@ -1,0 +1,20 @@
+export default [
+  {
+    text: "היסטוריה תקציבית לסעיף זה",
+    query: [
+        "WITH e AS (SELECT jsonb_array_elements(history) AS el FROM muni_budgets", 
+        "WHERE YEAR=:year",
+        "AND code=':code'",
+        "AND muni_code=':muni_code')",
+        "SELECT el->'year' AS \"שנה\", el->'allocated' as \"תקציב מקורי\", el->'revised' as \"תקציב אחרי שינויים\", el->'executed' as \"ביצוע בפועל\" FROM e order by 1 asc"
+    ],
+    parameters: {
+    },
+    headers: [
+      "שנה",
+      "תקציב מקורי:number",
+      "תקציב אחרי שינויים:number",
+      "ביצוע בפועל:number"
+    ]
+  }
+]

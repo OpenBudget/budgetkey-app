@@ -1,0 +1,179 @@
+@import './muni-common.less';
+
+:host {
+    font-family: "Abraham TRIAL";
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+    width: 100%;
+
+    .streched {
+        display: flex;
+        flex-flow: column;
+        align-items: stretch;
+        width: calc(100% ~'+' 30px);
+        margin: 0 -15px;
+        gap: 8px;
+
+        .header {
+            width: 100%;
+            padding: 8px 32px;
+            background: @color-light-blue;
+            box-shadow: -5px 5px 10px rgba(172, 186, 206, 0.2), 5px -5px 10px rgba(133, 157, 193, 0.2), -5px -5px 10px rgba(255, 255, 255, 0.9), 5px 5px 13px rgba(206, 223, 242, 0.9), inset 1px 1px 2px rgba(255, 255, 255, 0.3), inset -1px -1px 2px rgba(205, 211, 227, 0.5);
+            h1 {
+                margin: 0;
+                font-weight: 700;
+                font-size: 48px;
+                color: @color-dark-blue;    
+            }
+        }
+        .general-info {
+            display: flex;
+            flex-flow: column;
+            align-items: stretch ;
+            gap: 16px;
+
+            width: 100%;
+            background: @color-off-white;
+            background-image: url(../../../../assets/item/img/muni-full-details.svg), url(../../../../assets/item/img/muni-image-bottom.svg);
+            background-size: 120px 60px, contain;
+            background-position: bottom, bottom;
+            background-repeat: no-repeat, no-repeat;
+            padding: 16px 32px;
+            @media only screen and (max-width: 600px) {
+                padding-right: 16px;
+                padding-left: 16px;
+            }
+            padding-bottom: 33%;
+            font-size: 20px;
+
+            .section {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                gap: 16px;
+                span {
+                    white-space: pre-wrap;
+                }
+                word-spacing: 100%;
+                .section-content {
+                    flex: 1 1 auto;
+                    width: 100%;
+                }
+                .section-content-2 {
+                    flex: 1 1 auto;
+                    width: 100%;
+                    display: flex;
+                    flex-flow: column;
+                    justify-content: baseline;
+                    & > * {
+                        flex: 0 0 50%;
+                        min-width: 269px;
+                    }    
+                }
+
+
+                &.budget {
+                    margin-top: 32px;
+                    align-items: flex-start;
+                    flex-wrap: wrap;
+                }
+                .budget-info {
+                    display: flex;
+                    flex-flow: column;
+                    align-items: center;
+                    gap: 16px;
+                    flex: 1 1 auto;
+
+                    app-plotly {
+                        max-width: 100%;
+                    }
+
+                    .budget-subtitle {
+                        color: @color-dark-blue;
+                        font-weight: 300;
+                        font-size: 16px;
+                        margin-top: -16px;
+                    }
+
+                    .budget-items {
+                        display: flex;
+                        flex-flow: row wrap;
+                        align-items: center;
+                        justify-content: space-evenly;
+                        gap: 16px 32px;
+                        max-width: 790px;
+                        @media only screen and (min-width: 600px) {
+                            min-width: 450px;
+                        }
+
+                        .budget-item {
+                            display: flex;
+                            flex-flow: column;
+                            align-items: center;
+
+                            .budget-item-icon {
+                                width: 64px;
+                                height: 64px;
+                                font-size: 36px;
+                                display: flex;
+                                flex-flow: column;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 32px;
+                                background: #FFFFFF;
+                                box-shadow: 0px 20px 30px rgba(104, 169, 175, 0.15);
+                                margin-bottom: 16px;
+                                a {
+                                    color: @color-icon-gray;
+                                }
+                            }
+                            .budget-item-title {
+                                font-weight: 400;
+                                font-size: 18px;
+                                // line-height: 26px;
+                                a {
+                                    color: @color-dark-blue;
+                                }
+                            }
+                            .budget-item-amount {
+                                font-weight: 400;
+                                font-size: 22px;
+                                // line-height: 30px;
+                                color: @color-neon-blue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .budget-title {
+            color: @color-dark-blue;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .full-budget {
+            display: flex;
+            flex-flow: row wrap;
+            gap: 48px;
+            align-items: flex-start;
+            width: 100%;
+            padding: 64px 32px;
+            background: linear-gradient(180deg, #658280  0%, #dae1e0 48px, #dae1e0 100%);
+            margin-top: -10px;
+
+            & > div {
+                flex: 1 1 calc(50% ~'-' 24px);
+                display: flex;
+                flex-flow: column;
+                align-items: stretch;
+                gap: 8px;
+                min-width: 300px;
+                .budget-title {
+                    margin-bottom: 32px;
+                }
+            }
+        }
+    }
+
+}

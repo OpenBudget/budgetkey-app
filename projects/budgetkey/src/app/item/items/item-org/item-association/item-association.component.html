@@ -1,0 +1,207 @@
+<app-org-item [item]='item'
+    [overrideText]='true' [overrideAmount]='true'>
+    <ng-container class='amountTemplate'>
+        <small>            
+            <span [bkTooltip]='"השנה האחרונה לגביה מוצג דיווח שנתי באתר \"גיידסטאר\""'>מחזור כספי שנתי</span>
+            <br/>לשנת {{ item.details.last_report_year}}
+        </small>
+        <span class='figure'>
+            ₪{{ format.number(item.details.yearly_turnover) }}
+        </span>
+    </ng-container>
+    <ng-container class='textTemplate'>
+        <div class="tag">
+            תחום {{ item.details.field_of_activity_display }}
+        </div>
+            
+        <p>
+            ארגון זה הוא
+            {{item.kind_he}} 
+            העוסקת בתחום
+            <app-item-link [itemId]='"reports/ngo-activity-report/" + item.details.field_of_activity'>{{item.details.field_of_activity_display}}</app-item-link>
+        </p>
+            
+        <p *ngIf='item.country_wide'>
+                על פי הדיווח, פעילות הארגון מבוצעת בפריסה ארצית.
+        </p>
+        <p *ngIf='!item.country_wide && item.details.activity_region_list.length === 1'>
+                על פי הדיווח, הפעילות מרוכזת ב{{item.details.activity_region_list[0]}}.
+        </p>
+        <p *ngIf='!item.country_wide && item.details.activity_region_list.length !== 1 && item.details.activity_region_districts.length === 1'>
+            על פי הדיווח, הפעילות מרוכזת במחוז 
+            <app-item-link [itemId]='"reports/ngo-district-report/" + item.details.activity_region_districts[0]'>{{ item.details.activity_region_districts[0] }}</app-item-link>
+        </p>
+                    
+        <p *ngIf='!!item.details.unique_activity_districts?.length'>
+            זהו הארגון הפעיל היחיד העוסק בתחום
+            {{ item.details.field_of_activity_display }}
+            במחוזות
+            <span class='comma-list'>
+                <app-item-link
+                    *ngFor='let district of item.details.unique_activity_districts'
+                    [itemId]='"reports/ngo-district-report/" + district'>
+                    {{ district }}
+                </app-item-link>
+            </span>
+        </p>
+            
+        <p *ngIf='!!item.details.unique_activity_regions?.length'>
+            זהו הארגון הפעיל היחיד שדיווח על פעילות בתחום
+            {{ item.details.field_of_activity_display }}
+            <span *ngIf='(item.details.unique_activity_regions.length) > 1'>
+                בישובים
+            </span>
+            <span *ngIf='(item.details.unique_activity_regions.length) === 1'>
+                בישוב
+            </span>
+            <span class='comma-list'>
+                <span *ngFor='let region of item.details.unique_activity_regions'>{{region}}</span>
+            </span>
+        </p>
+          
+        <ng-container *ngIf='item.details.yearly_turnover'>
+            <p>
+                המחזור הכספי השנתי המדווח האחרון
+                ({{ item.details.last_report_year }})
+                , עמד על 
+                ₪{{ format.number(item.details.yearly_turnover) }}.
+            </p>
+                
+            <p *ngIf='item.details.rank_of_yearly_turnover_in_field'>
+                זהו הארגון ה-{{ item.details.rank_of_yearly_turnover_in_field }}
+                בגובה המחזור הכספי המדווח מבין הארגונים הפעילים בתחום.
+            </p>
+                
+            <p *ngIf='item.details.has_highest_turnover_in_district'>
+                הוא הארגון בעל המחזור הכספי השנתי הגבוה בתחום
+                <app-item-link [itemId]='"reports/ngo-activity-report/" + item.details.field_of_activity'>{{item.details.field_of_activity_display}}</app-item-link>
+                במחוז
+                <app-item-link [itemId]='"reports/ngo-district-report/" + item.details.activity_region_districts[0]'>{{item.details.activity_region_districts[0]}}</app-item-link>
+            </p>
+        
+            <p>
+                גובה המחזור הכספי השנתי החציוני של ארגונים הפועלים בתחום ודיווחו על פעילותם הוא 
+                ₪{{ format.number(item.details.median_turnover_in_field_of_activity) }}.
+            </p>
+        </ng-container>
+            
+        <p *ngIf='item.details.rank_of_employees_in_field_of_activity'>
+            זהו הארגון ה-{{ item.details.rank_of_employees_in_field_of_activity }}
+            במספר העובדים מבין הארגונים הפעילים בתחום.
+        </p>
+            
+        <p *ngIf='item.details.rank_of_volunteers_in_field_of_activity'>
+            זהו הארגון ה-{{item.details.rank_of_volunteers_in_field_of_activity}}
+            במספר המתנדבים מבין הארגונים הפעילים בתחום.
+        </p>
+            
+        <p *ngIf='item.details.is_oldest_org_in_field_of_activity'>
+            זהו הארגון הפעיל הותיק ביותר בתחום
+            <app-item-link [itemId]='"reports/ngo-activity-report/" + item.details.field_of_activity'>{{ item.details.field_of_activity_display }}</app-item-link>
+            בכל הארץ.
+        </p>
+            
+        <p *ngIf='item.details.districts_where_oldest_org_in_field_of_activity?.length'>
+            זהו הארגון הפעיל הותיק ביותר בתחום
+            <app-item-link [itemId]='"reports/ngo-activity-report/" + item.details.field_of_activity'>{{item.details.field_of_activity_display}}</app-item-link>
+            במחוז
+            <span class='comma-list'>
+                <app-item-link *ngFor='let district of item.details.districts_where_oldest_org_in_field_of_activity'
+                    [itemId]='"reports/ngo-district-report/" + district'>{{ district }}</app-item-link>
+            </span>
+        </p>
+            
+        <ng-container *ngIf='item.received_amount'>
+            <p>
+                <ng-container *ngIf='item.received_amount_contracts && item.received_amount_supports'>
+                    סך הכנסות הארגון מכספי המדינה בשלוש השנים האחרונות הוא
+                    ₪{{format.number(item.received_amount)}},
+                    מתוכם
+                    ₪{{format.number(item.received_amount_contracts)}}
+                    בהתקשרויות
+                    ו-₪{{format.number(item.received_amount_supports)}}
+                    בתמיכות.
+                </ng-container>
+                <ng-container *ngIf='item.received_amount_contracts && !item.received_amount_supports'>
+                    סך הכנסות הארגון מהתקשרויות עם המדינה בשלוש השנים האחרונות
+                    ₪{{format.number(item.received_amount_contracts)}}.
+                </ng-container>
+                <ng-container *ngIf='!item.received_amount_contracts && item.received_amount_supports'>
+                    סך התמיכות להן זכה הארגון מהמדינה בשלוש השנים האחרונות
+                    ₪{{format.number(item.received_amount_supports)}}.
+                </ng-container>
+            </p>
+                
+            <p *ngIf='item.details.rank_of_overall_recipient_in_field_of_activity'>
+                הארגון דורג במקום ה-{{item.details.rank_of_overall_recipient_in_field_of_activity}}
+                בגובה ההכנסות מכספי מדינה בשלוש השנים האחרונות
+                בתחום.
+            </p>
+                
+            <p *ngIf='item.details.rank_of_overall_recipient_in_field_of_activity'>
+                הארגון מדורג במקום ה-{{item.details.rank_of_contract_recipient_in_field_of_activity}}
+                בגובה ההכנסות מהתקשרויות עם גופי ממשל
+                בתחום.
+            </p>
+                
+            <p *ngIf='item.details.rank_of_supports_recipient_in_field_of_activity'>
+                הארגון מדורג במקום ה-{{item.details.rank_of_supports_recipient_in_field_of_activity}}
+                בגובה ההכנסות מתמיכות מכספי מדינה
+                בתחום.
+            </p>
+                
+            <p *ngIf='item.details.sole_government_procurer_name'>
+                כל ההתקשרויות המתועדות
+                ({{item.details.sole_government_procurer_contract_count}})
+                הן עם
+                {{item.details.sole_government_procurer_name}}.
+            </p>
+                
+            <p *ngIf='item.details.sole_government_supporter_name'>
+                כל התמיכות הממשלתיות המתועדות 
+                ({{item.details.sole_government_supporter_support_count}})
+                הועברו על ידי
+                {{item.details.sole_government_supporter_name}}.
+            </p>
+        </ng-container>
+        <ng-container *ngIf='!item.received_amount'>
+            <p *ngIf='!item.details.sole_government_supporter_name'>
+                <ng-container *ngIf='item.received_amount_alltime'>
+                    לא תועדו הכנסות של הארגון מכספי המדינה בשלוש השנים האחרונות, (אם כי היו בעבר).
+                </ng-container>
+                <ng-container *ngIf='!item.received_amount_alltime'>
+                    לא תועדו הכנסות של הארגון מכספי המדינה בשלוש השנים האחרונות.
+                </ng-container>
+            </p>
+        </ng-container>
+    </ng-container>
+    <ng-container class='tipsTemplate'>
+        <div class='tip'>
+            <div>
+                <strong>
+                מחפשים מידע נוסף על עמותה או חברה לתועלת הציבור?
+                </strong>
+            </div>
+            <div>
+                <strong>
+                מבקשים לתקן פרטי מידע שגויים?
+                </strong>
+            </div>
+            <div>
+                מידע בסיסי על ארגוני המגזר השלישי ודו"חות כספיים שנתיים שלהם מתפרסמים ב<a href='https://www.guidestar.org.il/home'>אתר גיידסטאר</a>. 
+            </div>
+            <div>
+                מומלץ לפנות אליהם לבירור או תיקון פרטים אלו.
+            </div>                
+        </div>
+        <div class='tip'>
+            <div>
+                למידע מפורט או מעמיק יותר לגבי ארגון ניתן לפנות ל
+                <a href='http://www.justice.gov.il/Units/RasutHataagidim/ContactUs/Pages/pnyot.aspx'>רשם העמותות במשרד המשפטים</a>
+                או 
+                <a href='https://ica.justice.gov.il/Request/OpenRequest?rt=ExposeDocumentsAssociation'>להזמין את תיק העמותה</a>:
+                מסמכים פנימיים, פרוטוקלים וכל מידע מתועד רשמי שאינו מוצג בגיידסטאר.
+            </div>            
+        </div>
+    </ng-container>
+</app-org-item>

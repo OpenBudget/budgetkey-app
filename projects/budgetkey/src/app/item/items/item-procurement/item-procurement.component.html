@@ -1,0 +1,6 @@
+<ng-container *ngIf='item'>
+    <app-item-tender [item]='item' *ngIf='isTender'></app-item-tender>
+    <app-item-contract [item]='item' *ngIf='isContract'></app-item-contract>
+    <app-item-calls-for-bids [item]='item' *ngIf='isCallForBids'></app-item-calls-for-bids>
+    <app-item-support-criteria [item]='item' *ngIf='isSupportCriteria'></app-item-support-criteria>    
+</ng-container>
