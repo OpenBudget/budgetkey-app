@@ -1,34 +1,29 @@
 export class Question {
     text: string;
     query: string | string[];
-    parameters: object = {};
-    defaults: object | null = {};
+    parameters: any = {};
+    defaults: any | null = {};
     headers: string[];
     formatters: any[] = [];
-    originalHeaders: string[] | null;
+    originalHeaders: string[];
     graphFormatter: string;
   }
 
-  export class PreparedQuestionTextFragment {
-    isText = false;
-    isParameter = false;
-    value = '';
-  }
+  export class PreparedQuestionFragment {
+    public isText = false;
+    public isParameter = false;
+    public value = '';
+    public name = '';
+    public values: any = {};
 
-  export class PreparedQuestionParameterFragment {
-    isText = false;
-    isParameter = false;
-    name = '';
-    value = '';
-    values: object = {};
-  }
-
-  export type PreparedQuestionFragment = PreparedQuestionTextFragment | PreparedQuestionParameterFragment;
-  export type PreparedQuestionFragments = PreparedQuestionFragment[];
+    valueKeys() {
+      return Object.keys(this.values);
+    }
+}
 
   export class PreparedQuestion extends Question {
-    parsed: PreparedQuestionFragments = [];
-    override defaults: object = {};  // key-value pairs of default values for each parameter
+    parsed: PreparedQuestionFragment[] = [];
+    override defaults: any = {};  // key-value pairs of default values for each parameter
   }
 
   export type Questions = Question[];

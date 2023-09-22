@@ -19,7 +19,7 @@
       <app-item-association *ngIf='prefix("org/association/")' [item]='item'></app-item-association>
       <app-item-company *ngIf='prefix("org/company/")' [item]='item'></app-item-company>
       <ng-container *ngIf='!prefix("org/association") && !prefix("org/company") && !prefix("org/municipality")'>
-        <app-org-item *ngIf='prefix("org/")' [item]='item'></app-org-item>
+        <app-base-org-item *ngIf='prefix("org/")' [item]='item'></app-base-org-item>
       </ng-container>
 
       <app-item-muni *ngIf='prefix("org/municipality")' [item]='item'></app-item-muni>
@@ -32,12 +32,19 @@
       <app-item-procurement *ngIf='prefix("calls_for_bids")' [item]='item'></app-item-procurement>
       <app-item-procurement *ngIf='prefix("support_criteria")' [item]='item'></app-item-procurement>
       <app-item-procurement *ngIf='prefix("muni_tenders/office")' [item]='item'></app-item-procurement>
+
+      <app-item-supports *ngIf='prefix("supports")' [item]='item'></app-item-supports>
+
+      <app-item-people *ngIf='prefix("people")' [item]='item'></app-item-people>
+
+      <app-item-gov-decision *ngIf='prefix("gov_decisions")' [item]='item'></app-item-gov-decision>
+
+      <app-item-social-service *ngIf='prefix("activities/gov_social_service")' [item]='item'></app-item-social-service>
+      <app-item-social-service-gov-unit *ngIf='prefix("units/gov_social_service_unit")' [item]='item'></app-item-social-service-gov-unit>
     </div>
-    <!-- <app-item-container *ngIf="style" [style]="style"> -->
-    <!-- </app-item-container> -->
     
     <ng-container *ngIf='showQuestions'>
-      <!-- <app-questions-panel #questionsPanel></app-questions-panel> -->
+      <app-questions-panel #questionsPanel [item]='item' [questions]='questions'></app-questions-panel>
     </ng-container>
   </div>
 </app-container>

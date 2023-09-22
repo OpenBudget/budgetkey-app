@@ -1,0 +1,100 @@
+<app-base-simple-item [item]='item' [questions]='questions'>
+    <ng-container class='preTitleTemplate'>
+        {{ item.request_type }}
+    </ng-container>
+    <ng-container class='amountTemplate'>
+        <small>סה״כ שולם:</small>
+        <span class='number'>{{ format.number(item.amount_total) }}</span>
+        <small>₪</small>
+    </ng-container>
+    <ng-container class='titleTemplate'>
+        תמיכה תקציבית ב
+        {{item.recipient}}
+    </ng-container>
+    <ng-container class='subtitleTemplate'>
+        <div>
+            תמיכה משנת
+            {{item.year_requested}}
+            ב
+            <ng-container *ngIf='item.entity_name'>
+                <app-item-link [itemId]='"org/" + item.entity_kind + "/" + item.entity_id'>
+                    {{ item.entity_name }}
+                </app-item-link>
+            </ng-container>
+            <ng-container *ngIf='!item.entity_name'>
+                {{ item.recipient }}
+            </ng-container>
+            </div>            
+    </ng-container>
+    <ng-container class='textTemplate'>
+        <ng-container *ngFor='let purpose of purposes'>
+        <div>
+            <label class="field-label">
+                מטרת התמיכה:
+            </label>
+            {{ purpose.support_title }}
+        </div>
+        <div>
+            <label class="field-label">
+                מטעם:
+            </label>
+            {{ purpose.supporting_ministry }}
+        </div>
+        <div *ngIf='purpose.budget_code'>
+            <label class="field-label">
+                התקנה התקציבית:
+            </label>
+            <app-search-link [searchQuery]='purpose.budget_code' [searchType]='"budget"'>
+                {{ purpose.budget_code }}
+            </app-search-link>
+        </div>
+</ng-container>
+
+    <div>
+        <label class="field-label">
+            תשלומים:
+        </label>
+        <ul>
+            <ng-container *ngFor='let payment of item.payments'>
+                <li *ngIf='payment.amount_approved'>
+                    <label class="field-label">
+                        אושר ב-
+                        {{ item.year_requested}}:
+                    </label>
+                    <span class='number'>
+                        {{ format.number(payment.amount_approved) }}
+                    </span>
+                    <small>₪</small>
+                </li>
+            </ng-container>
+    
+            <ng-container *ngFor='let payment of item.payments'>
+                <li *ngIf='payment.amount_paid'>
+                    <label class="field-label">
+                        שולם ב-
+                        {{payment.year_paid}}:
+                    </label>
+                    <span class='number'>
+                        {{ format.number(payment.amount_total) }}
+                    </span>
+                    <small>₪</small>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+    
+    <div *ngIf='item.criteria_docs?.length > 0'>
+        <label class="field-label">
+            מבחני תמיכה:
+        </label>
+        <ul>
+            <li *ngFor='let doc of item.criteria_docs'>
+                <a [href]="doc.pdf_url" target="_blank">
+                    {{doc.title}} ({{doc.date}})
+                </a>
+            </li>
+        </ul>
+        <small>הערה: אנו לא יודעים להתאים בוודאות תמיכה תקציבית למבחן התמיכה הרלוונטי אליה. המבחנים המקושרים למעלה הן התאמות אפשריות אך לא וודאיות.</small>
+    </div>
+    </ng-container>
+  </app-base-simple-item>

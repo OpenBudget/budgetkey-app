@@ -2,6 +2,8 @@ import { AfterViewInit, Component, ElementRef, Input, OnChanges } from '@angular
 import { Format } from '../format';
 import { timer } from 'rxjs';
 import { GlobalSettingsService } from '../../../common-components/global-settings.service';
+import { ItemApiService } from '../../item-api.service';
+import questions from '../item-org/questions';
 
 @Component({
   selector: 'app-item-muni',
@@ -25,7 +27,7 @@ export class ItemMuniComponent implements OnChanges, AfterViewInit {
   totalIncome = 0;
   totalExpense = 0;
 
-  constructor(private globalSettings: GlobalSettingsService, private el: ElementRef) {}
+  constructor(private globalSettings: GlobalSettingsService, private el: ElementRef, private itemApi: ItemApiService) {}
 
   ngOnChanges() {
     this.budgets = ((this.item.details && this.item.details.select_budgets) || ([] as any[])).sort((a: any, b: any) => b.value - a.value);
@@ -76,6 +78,7 @@ export class ItemMuniComponent implements OnChanges, AfterViewInit {
       plot_bgcolor: 'rgba(255,255,255,0)',
       colorway : ['#022E57', '#03548F', '#08A6A7', '#0CB0A7', '#0DC0DE']
     };
+    this.itemApi.setQuestions(questions);
   }
 
   ngAfterViewInit() {

@@ -1,0 +1,97 @@
+@import '../../social-service-common.less';
+
+:host {
+    margin-top: 64px;
+    display: block;
+}
+
+.results-table {
+    max-width: 100%;
+
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 5px;
+  
+        th {
+            white-space: nowrap;
+            padding: 0 5px;
+            ::ng-deep {
+                .bk-tooltip {
+                    white-space: normal;
+                }
+            }
+        }
+        
+        td {
+          padding: 10px;
+        }
+  
+        thead td {
+          color: #B7B7B7;
+          font-weight: bold;
+        }
+  
+        tbody tr {
+          border-radius: 4px;
+          background-color: #FFFFFF;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.05);
+
+          &.inactive {
+            td {
+                color: #999;
+                font-style: italic;
+            }
+          }
+        }
+
+        .fa, th {
+            cursor: pointer;
+        }
+    }      
+}
+
+.pager {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 300;
+
+    > * {
+        margin-left: 32px;
+    }
+
+    div > span, div > a {
+        margin-left: 16px;
+    }
+    .pager-control {
+        text-decoration: underline;
+        color: #888;
+        &.active {
+            color: black;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.filters {
+    input {
+        margin-left: 8px;
+    }
+    margin-bottom: 16px;
+}
+
+.download {
+    margin-right: auto;
+    cursor: pointer;
+
+    button {
+        border: none;
+        background: none;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;    
+    }
+}

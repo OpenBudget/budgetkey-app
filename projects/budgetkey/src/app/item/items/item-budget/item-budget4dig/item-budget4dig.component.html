@@ -1,8 +1,8 @@
-<app-budget-item [item]='item' [questions]='questions'>
+<app-base-budget-item [item]='item' [questions]='questions'>
     <ng-container class='preTitleTemplate'>{{item['nice-code']}}</ng-container>
     <ng-container class='subtitleTemplate'>
         תחום פעילות בתקציב המדינה - תחת סעיף
         <app-item-link [itemId]='parentId'>{{parent}}</app-item-link>.<br/>
         לרוב כולל תקציב עבור קבוצת פעילויות מרכזית במשרד ממשלתי כלשהו.
     </ng-container>
-</app-budget-item>
+</app-base-budget-item>

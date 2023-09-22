@@ -1,4 +1,4 @@
-<app-budget-item [item]='item' [questions]='questions'>
+<app-base-budget-item [item]='item' [questions]='questions'>
     <ng-container class='preTitleTemplate'>{{item['nice-code']}}</ng-container>
     <ng-container class='subtitleTemplate'>
         תקנה תקציבית בתכנית
@@ -9,4 +9,4 @@
         <app-item-link [itemId]='grandGrandParentId'>{{grandGrandParent}}</app-item-link>).<br/>        
         כוללת תקציב עבור הוצאה מסוג ספציפי בפעילות אחת של הממשלה.
     </ng-container>
-</app-budget-item>
+</app-base-budget-item>

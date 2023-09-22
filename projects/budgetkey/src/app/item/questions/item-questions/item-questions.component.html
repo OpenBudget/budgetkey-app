@@ -1,0 +1,46 @@
+<div class="budgetkey-item-questions-wrapper">
+    <div class="">
+      <div class='download-data' [innerHtml]='label'>
+      </div>
+    </div>
+    <div class="budgetkey-item-questions">
+      <div class="questions">
+        <div *ngFor="let question of manager.preparedQuestions" class="item-questions-fragments-wrapper"
+          [class.active]="question===manager.currentQuestion"
+          (click)="selectQuestion(question)">
+          <ng-container *ngIf='question===manager.currentQuestion'>
+            <ng-container *ngFor="let fragment of manager.currentQuestion.parsed">
+              <span *ngIf="fragment.isText"
+                    [innerHtml]="fragment.value"></span>
+              <app-item-questions-parameter 
+                *ngIf="fragment.isParameter"
+                [value]="currentParameters[fragment.name]"
+                [values]="fragment.valueKeys()"
+                (change)="setParameter(fragment.name, $event)"
+              ></app-item-questions-parameter>
+            </ng-container>
+            &nbsp;<i *ngIf="isSearching" class="fa fa-circle-o-notch fa-spin"></i>
+            <div #btnToggleItemQuest class="toggle">
+              <i class="glyphicon glyphicon-chevron-left"></i>
+            </div>
+          </ng-container>
+          <ng-container *ngIf='question!==manager.currentQuestion'>
+            <ng-container *ngFor="let fragment of question.parsed">
+              <span *ngIf="fragment.isText"
+                    [innerHtml]="fragment.value"></span>
+              <span class="item-questions-parameter value" *ngIf="fragment.isParameter">{{ fragment.value }}</span>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="item-questions-actions">
+      <a [href]="downloadUrl" title="הורדת טבלה" target="_blank">
+        <img src='assets/item/img/icon-csv.svg'>
+      </a>
+      <a [href]="downloadUrlXlsx" title="הורדת אקסל" target="_blank">
+        <img src='assets/item/img/icon-xlsx.svg'>
+      </a>
+    </div>
+  </div>
+  

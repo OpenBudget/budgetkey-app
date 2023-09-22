@@ -1,0 +1,20 @@
+<ng-container *ngIf='questionsManager'>
+    <div #questionsPanel class="sticky questions-panel" (click)="scrollToTable()">
+      <app-item-questions [manager]='questionsManager' [item]='item'></app-item-questions>
+    </div>
+    <div #dataTable class="data-table">
+      <app-item-data-table [manager]='questionsManager'></app-item-data-table>
+    </div>
+    <div class='desktop-notification'>
+      <img src='assets/item/img/desktop.svg' title='Computer by Juan Manuel Corredor from the Noun Project'/>
+      <span>
+          מידע ונתונים נוספים זמינים בגרסת הדסקטופ
+      </span>
+      <a class="btn btn-primary btn-lg"
+         [href]="mailto()" target='_blank'>
+         <i class='glyphicon glyphicon-share-alt'></i>&nbsp;
+         שלחו לעצמכם תזכורת או שתפו
+      </a>
+    </div>    
+  </ng-container>
+  

@@ -4,7 +4,8 @@ import { EMPTY, catchError, delay, filter, first, map, switchMap, tap, timer } f
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { ItemApiService } from '../item-api.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-// import DESCRIPTORS from '../descriptors';
+import { QuestionsPanelComponent } from '../questions/questions-panel/questions-panel.component';
+import { Question } from '../model';
 
 @UntilDestroy()
 @Component({
@@ -16,11 +17,13 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
   item: any | null;
   itemId: string;
   descriptor: any | null;
-  showQuestions = true;
   style: string;
   init = false;
 
-  // @ViewChild('questionsPanel') questionsPanel: QuestionsPanelComponent;
+  @ViewChild('questionsPanel') questionsPanel: QuestionsPanelComponent;
+
+  showQuestions = false;
+  questions: Question[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router,
     public globalSettings: GlobalSettingsService, private itemApi: ItemApiService) {
@@ -34,6 +37,7 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
       tap((url: string) => {
         this.init = false;
         this.itemId = url;
+        this.showQuestions = false;
         // this.descriptor = this.fetchDescriptor(this.itemId);
       }),
       switchMap((id: string) => this.itemApi.fetchItem(id)),
@@ -64,7 +68,15 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
       //   );
       // }
     });
-    this.showQuestions = true;
+    this.itemApi.questions.pipe(
+      untilDestroyed(this),
+      delay(0),
+    ).subscribe((questions: any) => {
+      if (questions) {
+        this.showQuestions = true;
+        this.questions = questions;
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -73,7 +85,7 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
       filter((fragment: string | null) => fragment === 'questions'),
       delay(3000),
     ).subscribe(() => {
-      // this.questionsPanel.scrollToTable(); #TODO
+      this.questionsPanel.scrollToTable();
     });
   }
 

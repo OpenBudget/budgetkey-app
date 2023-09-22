@@ -15,6 +15,7 @@ import { AuthModule } from '../auth/auth.module';
 import { ListsService } from './services/lists.service';
 import { HttpClientModule } from '@angular/common/http';
 import { GlobalSettingsService } from './global-settings.service';
+import { ClickOnReturnDirective } from './directives/click-on-return.directive';
 
 /**
  * Created by adam on 27/12/2016.
@@ -34,7 +35,8 @@ import { GlobalSettingsService } from './global-settings.service';
     BkTooltipDirective,
     BkSubscribeStar,
     BkSubscriptionManager,
-    ModalComponent
+    ModalComponent,
+    ClickOnReturnDirective,
   ],
   providers: [
     ListsService,
@@ -49,6 +51,7 @@ import { GlobalSettingsService } from './global-settings.service';
     BkSubscribeStar,
     BkSubscriptionManager,
     ModalComponent,
+    ClickOnReturnDirective,
   ]
 })
 export class CommonComponentsModule { }

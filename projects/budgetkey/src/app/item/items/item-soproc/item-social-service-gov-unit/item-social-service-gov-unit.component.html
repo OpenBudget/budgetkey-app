@@ -1,0 +1,115 @@
+<div class='sticky-contact-us'><a href='mailto:rehesh.hevrati@pmo.gov.il' target='_blank'>יצירת קשר או דיווח על תקלה</a></div>
+<div class='soproc-header' [style.top]='stickyTop()' [class.sticky-filters]='sticky'>
+    <div class='soproc-bg'></div>
+    <h1>מפתח לרכש החברתי</h1>
+
+    <div class='page-links'>
+        <a *ngFor='let link of PAGE_LINKS' [href]='link.href + "?theme=soproc"' [class.active]='item.breadcrumbs === link.title'>{{ link.title }}</a>
+    </div>
+
+    <div class='intro' *ngIf="!item.office">
+        <p>
+            מידי שנה מספקים המשרדים החברתיים מאות שירותים חברתיים באמצעות מפעילים חיצוניים (מיקור חוץ). באילו שירותים מדובר? למי הם מיועדים? מי מספק אותם בפועל? מהם ההליכים המכרזיים שבמסגרתם הם מסופקים? מהן מגמות השינוי בהספקת השירותים לאורך השנים? גללו ומצאו.
+        </p>
+        <p>
+            ניתן לבחון את תמונת המאקרו הכוללת של שלושת המשרדים יחדיו או להיכנס לעמוד של כל אחד משלושת המשרדים החברתיים לקבלת התמונה הספציפית אליו. 
+        </p>
+        <p>
+            תוכלו לצפות בגרפים מצרפיים של תמונת השירותים ושל מפעילי השירותים וגם ברשימת המידע הגולמי של השירותים, הליכי הרכש והמפעילים. בחירת סננים בחלונית הסינון תשפיע על כלל הנתונים המוצגים בעמוד. 
+            בנוסף, לכל שירות ולכל מפעיל קיים עמוד מידע נפרד, אליו ניתן להיכנס באמצעות לחיצה על שם השירות או על שם המפעיל.     
+        </p>
+        <p>
+            יודעים מה אתם מחפשים? ניתן לחפש שירותים, מפעיל והליך רכש באמצעות טקסט חופשי בשורת החיפוש בראש העמוד. 
+        </p>
+        <p>המידע באתר מעודכן לשנת 2021. המידע לשנת 2022 יעודכן במהלך שנת 2023.</p>
+        <a href='/about?theme=soproc'>למידע נוסף על מהם שירותים חברתיים במיקור חוץ</a>
+    </div>        
+    <div class='intro' *ngIf="item.office === 'משרד הבריאות'">
+        <p>מערכת הבריאות בישראל הינה אחת המערכות החברתיות והציבוריות המורכבות. משרד הבריאות נושא באחריות ממלכתית כוללת להבטחת בריאות תושבי המדינה ובאמצעותו מיישמת הממשלה את מדיניותה בנושא הבריאות ובכלל זה קביעת סדרי עדיפויות ועקרונות לפעילות המערכת.</p>
+
+        <p>
+        למשרד הבריאות ישנם תפקידים רבים, בין היתר מהווה המשרד רגולטור וספק שירותים:
+        </p>
+        <ol>
+            <li>תפקיד הרגולטור - פיקוח ובקרה, רישוי, חקיקה, קביעת סטנדרטים, תכנון כוח אדם, הערכות לשעת חירום, פיתוח שירותי הבריאות ועוד.</li>
+            <li>אספקת שירותי בריאות מתוקף התוספת השלישית לחוק ביטוח בריאות ממלכתי וחוקים יעודים נוספים, כגון חוק שיקום נכי נפש בקהילה – השירותים ניתנים באופן ישיר ע"י המשרד במערך האשפוז הממשלתי, באמצעות למעלה מרבע ממיטות האשפוז לסוגיהן ובקהילה, באמצעות לשכות הבריאות, טיפות החלב ומרפאות.</li>
+        </ol>
+        
+        <p>
+            חלק ניכר מהשירותים הניתנים ע"י המשרד מתוקף התוספת השלישית, ניתנים ע"י ספקי שירותים במיקור חוץ. הליכי ההתקשרות עם הספקים מאופיינים, מבוצעים ומבוקרים על ידי חטיבת רפואה ובריאות הציבור, אגף רכש נכסים ולוגיסטיקה, ועדת מכרזים ויחידות נוספות המעורבות בהליך. 
+        </p>
+    </div>        
+    <div class='intro' *ngIf="item.office === 'משרד הרווחה'">
+        <p>
+            משרד הרווחה והביטחון החברתי משמש חוליה מרכזית במדינת הרווחה הישראלית. ייעודו לעסוק, יחד עם משרדים וגופים אחרים, באיתור, מניעה, טיפול, הגנה,  שיקום וסיוע לכל אדם, משפחה וקהילה הנתונים במצבים של משבר זמני או מתמשך מפאת מוגבלות, עוני והדרה חברתית, קשיי תפקוד, גיל, אבטלה, הזנחה, אפליה או ניצול.
+        </p>
+        <p>
+            השירותים החברתיים עליהם אמון המשרד מסופקים באופנים שונים – בעוד שחלקם מסופקים באופן ישיר על ידי המשרד עצמו או על ידי הרשויות המקומיות, מרביתם מסופקים באמצעות מיקור חוץ (להלן: "רכש שירותים חברתיים"). היקף גדול מתקציב המשרד מופנה לשירותים אלה, תוך מימון נוסף של חלקם על ידי הרשויות המקומיות. שירותים המסופקים באופן בלעדי על ידי רשויות מקומיות ומתוקצבים על ידי המשרד לא מופיעים באתר זה.
+        </p>
+    </div>        
+    <div class='intro' *ngIf="item.office === 'משרד החינוך'">
+        <p>
+            משרד החינוך עומד בראש המערכת המרכזית - המעצבת את עתידה של חברה, אומה – עתיד העם.
+        </p>
+        <p>
+            למערכת החינוך בישראל, ישנם שלושה תפקידי ליבה עיקריים:
+        </p>
+        <ol>
+            <li>
+                מתן הזדמנות שווה לכל ילדה וילד, תוך מתן אפשרות לקיומה של מוביליות חברתית, בתפוצה רחבה.
+            </li>
+            <li>
+                הכנה אופטימלית להשתלבותם של בוגרי מערכת החינוך בשוק העבודה העתידי.
+            </li>
+            <li>
+                הטמעתם של זיקה, זהות וערכים ישראליים בקרב כלל אזרחי המדינה ללא הבדל דת, לאום ומגזר.
+            </li>
+        </ol>
+        <p>
+            באתר מופיעים שירותים חברתיים אותם מפעיל המשרד באמצעות מיקור חוץ, זאת על מנת ליישם הלכה למעשה את מחויבותו בתחומים רבים וחשובים, למען המשך חיזוקה ועתידה של החברה והמדינה.
+        </p>
+    </div>        
+
+
+    <div class='well filters-wrapper' #filtersElement>
+        <div class='filters'>
+            <div class='filter' *ngFor='let filter of PAGE_FILTERS'>
+                <label [for]='filter.id' *ngIf='!filter.tooltip'>{{ filter.title }}</label>
+                <label [for]='filter.id' *ngIf='filter.tooltip' class='bk-tooltip-anchor'>{{ filter.title }}<span class='bk-tooltip'>{{ filter.tooltip }}</span></label>
+                <app-multi-select [(value)]='filters[filter.id]' [id]='filter.id' [options]='parameters[filter.id]'></app-multi-select>
+            </div>
+            <div class='filter' *ngIf='subunits'>
+                <label>מנהל/אגף</label>
+                <select [(ngModel)]='item.unit' (change)='processLevel()'>
+                    <option value='' selected>הכל</option>
+                    <option *ngFor='let option of subunits' [value]='option'>{{option}}</option>
+                </select>
+            </div>
+        </div>
+        <div class='subtext'>
+            <span>לסימון מספר אפשרויות יש להשתמש בכפתורי Shift/Ctrl/Cmd במקלדת</span>
+            <a class='clear-filters' (click)='clearFilters()'>ניקוי כל הסינונים</a>
+            <button type='button' class='apply-filters' (click)='filtersChanged()'>סינון</button>
+        </div>
+    </div>
+</div>
+
+<div class='tab-selectors' #tabs>
+    <a [class.active]='currentTab === "services"' (activated)='currentTab = "services"' tabindex='0' clickOnReturn>תמונת השירותים</a>
+    <a [class.active]='currentTab === "suppliers"' (activated)='currentTab = "suppliers"' tabindex='0' clickOnReturn>הרחבה לגבי מפעילי השירותים</a>
+    <a [class.active]='currentTab === "tenders"' (activated)='currentTab = "tenders"' tabindex='0' clickOnReturn>הרחבה על הליכי רכש (בהרצה)</a>
+</div>
+
+<div class='charts columns-2'>
+    <ng-container *ngFor='let ct of chartTemplates'>
+        <ng-container *ngIf='charts[ct.id] && currentTab === ct.location'>
+            <div class='single-chart'>
+                <div class='chart-title' [innerHtml]='processTitles(ct)'></div>
+                <div class='chart-subtitle'>{{ct._subtitle}}</div>
+                <app-plotly [layout]='charts[ct.id].layout' [data]='charts[ct.id].data'></app-plotly>
+            </div>
+        </ng-container>
+    </ng-container>    
+</div>
+
+<app-social-service-data-table *ngIf='colorscheme | async' [tables]='tables' [default]='"services"' [replacements]='replacements' [filename]='item.page_title' [item]='item'></app-social-service-data-table>

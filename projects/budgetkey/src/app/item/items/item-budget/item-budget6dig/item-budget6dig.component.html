@@ -1,4 +1,4 @@
-<app-budget-item [item]='item' [questions]='questions'>
+<app-base-budget-item [item]='item' [questions]='questions'>
     <ng-container class='preTitleTemplate'>{{item['nice-code']}}</ng-container>
     <ng-container class='subtitleTemplate'>
         תכנית בתקציב המדינה - תחת תחום
@@ -7,4 +7,4 @@
         <app-item-link [itemId]='grandParentId'>{{grandParent}}</app-item-link>.<br/>
         לרוב כוללת תקציב עבור פעילות מרכזית אחת של הממשלה. העברות תקציביות מבוצעות ברמת התכנית.
     </ng-container>
-</app-budget-item>
+</app-base-budget-item>

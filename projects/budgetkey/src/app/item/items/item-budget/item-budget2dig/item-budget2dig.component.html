@@ -1,8 +1,8 @@
-<app-budget-item [item]='item' [questions]='questions'>
+<app-base-budget-item [item]='item' [questions]='questions'>
     <ng-container class='preTitleTemplate'>{{item['nice-code']}}</ng-container>
     <ng-container class='subtitleTemplate'>
         סעיף תקציבי בתקציב המדינה - תחת תת-הנושא
         <app-item-link [itemId]='"budget/C" + category + "/" + item.year'>{{item['nice-category']}}</app-item-link>.<br/>
         לרוב משרד ממשלתי או סעיף הוצאה משמעותי.
     </ng-container>
-</app-budget-item>
+</app-base-budget-item>

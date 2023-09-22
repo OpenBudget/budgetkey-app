@@ -1,0 +1,32 @@
+<app-base-simple-item [item]='item' [questions]='[]'>
+    <ng-container class='preTitleTemplate'>
+        {{ item.policy_type }}
+    </ng-container>
+    <ng-container class='amountTemplate'>
+    </ng-container>
+    <ng-container class='titleTemplate'>
+        {{ item.title }}
+    </ng-container>
+    <ng-container class='subtitleTemplate'>
+        <div *ngIf='item.procedure_number'>
+            <label>
+                החלטת ממשלה {{ item.procedure_number }}
+            </label>
+        </div>
+        <div>
+            <label>פורסם ב-{{ format.date(item.publish_date) }}</label>
+        </div>
+        <ng-container *ngIf='item.office'>
+            משרד: {{ item.office }}
+        </ng-container>
+        <div *ngIf='item.linked_docs?.length > 0'>
+            מסמכים:
+            <div *ngFor='let doc of item.linked_docs'>
+                <a [href]='doc.href'>{{doc.title}}</a>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container class='textTemplate'>
+        <div [innerHTML]="item.text"></div>
+    </ng-container>
+</app-base-simple-item>

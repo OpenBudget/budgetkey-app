@@ -9,6 +9,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 @Component({
     selector: 'app-container',
     templateUrl: './app-container.component.html',
+    styleUrls: ['./app-container.component.less'],
 })
 export class AppContainerComponent {
     @Input() showHeader = true;

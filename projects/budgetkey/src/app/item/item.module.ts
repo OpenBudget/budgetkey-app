@@ -4,15 +4,15 @@ import { NgModule } from '@angular/core';
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { ChartRouterComponent } from '../vis/chart-router/chart-router.component';
 import { ItemVisualizationsComponent } from '../vis/item-visualizations/item-visualizations.component';
-import { BudgetItemComponent } from './items/item-budget/budget-item/budget-item.component';
+import { BudgetItemComponent } from './items/item-budget/base-budget-item/base-budget-item.component';
 import { ItemBudget0digComponent } from './items/item-budget/item-budget0dig/item-budget0dig.component';
 import { ItemBudget2digComponent } from './items/item-budget/item-budget2dig/item-budget2dig.component';
 import { ItemApiService } from './item-api.service';
 import { ItemLinkComponent } from './item-link/item-link.component';
 import { ItemPageComponent } from './item-page/item-page.component';
 import { ItemRoutingModule } from './item-routing.module';
-import { OrgItemComponent } from './items/org-item/org-item.component';
-import { SimpleItemComponent } from './items/simple-item/simple-item.component';
+import { BaseOrgItemComponent } from './items/base-org-item/base-org-item.component';
+import { BaseSimpleItemComponent } from './items/base-simple-item/base-simple-item.component';
 import { ItemBudget4digComponent } from './items/item-budget/item-budget4dig/item-budget4dig.component';
 import { ItemBudget6digComponent } from './items/item-budget/item-budget6dig/item-budget6dig.component';
 import { ItemBudget8digComponent } from './items/item-budget/item-budget8dig/item-budget8dig.component';
@@ -39,54 +39,84 @@ import { TimelinePartComponent } from './items/item-procurement/timeline-part/ti
 import { ItemTenderComponent } from './items/item-procurement/item-tender/item-tender.component';
 import { ItemCallsForBidsComponent } from './items/item-procurement/item-calls-for-bids/item-calls-for-bids.component';
 import { ItemSupportCriteriaComponent } from './items/item-procurement/item-support-criteria/item-support-criteria.component';
+import { ItemSupportsComponent } from './items/item-supports/item-supports.component';
+import { SearchLinkComponent } from './search-link/search-link.component';
+import { ItemPeopleComponent } from './items/item-people/item-people.component';
+import { ItemGovDecisionComponent } from './items/item-gov-decision/item-gov-decision.component';
+import { ItemSocialServiceComponent } from './items/item-soproc/item-social-service/item-social-service.component';
+import { ItemSocialServiceGovUnitComponent } from './items/item-soproc/item-social-service-gov-unit/item-social-service-gov-unit.component';
+import { SocialServiceDataTableComponent } from './items/item-soproc/item-social-service/social-service-data-table/social-service-data-table.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BudgetKeyItemService } from './budgetkey-item.service';
+import { MultiSelectComponent } from './items/item-soproc/item-social-service-gov-unit/multi-select/multi-select.component';
+import { QuestionsPanelComponent } from './questions/questions-panel/questions-panel.component';
+import { ItemQuestionsComponent } from './questions/item-questions/item-questions.component';
+import { ItemQuestionsParameterComponent } from './questions/item-questions/item-questions-parameter/item-questions-parameter.component';
+import { ItemDataTableComponent } from './questions/item-data-table/item-data-table.component';
 
 
 
 @NgModule({
   declarations: [
+    BaseOrgItemComponent,
+    BaseSimpleItemComponent,
     BudgetItemComponent,
     ChartRouterComponent,
+    ContractPaymentsComponent,
+    IncomeItemComponent,
+    ItemAssociationComponent,
     ItemBudget0digComponent,
     ItemBudget2digComponent,
-    ItemLinkComponent,
-    ItemPageComponent,
-    ItemVisualizationsComponent,
-    OrgItemComponent,
-    SimpleItemComponent,
     ItemBudget4digComponent,
     ItemBudget6digComponent,
     ItemBudget8digComponent,
+    ItemBudgetChangesComponent,
     ItemBudgetFuncComponent,
     ItemBudgetFuncDetailComponent,
-    ItemBudgetChangesComponent,
+    ItemCallsForBidsComponent,
+    ItemCompanyComponent,
+    ItemContractComponent,
     ItemIncome2digComponent,
     ItemIncome4digComponent,
     ItemIncome6digComponent,
     ItemIncome8digComponent,
-    IncomeItemComponent,
-    ItemAssociationComponent,
-    ItemCompanyComponent,
-    ItemMuniComponent,
-    MuniItemTidbitComponent,
-    MuniBudgetMinicardComponent,
-    PlotlyComponent,
+    ItemLinkComponent,
     ItemMuniBudgetComponent,
-    MuniBudgetLinkComponent,
+    ItemMuniComponent,
+    ItemPageComponent,
+    ItemPeopleComponent,
     ItemProcurementComponent,
-    ItemContractComponent,
-    ContractPaymentsComponent,
-    TimelinePartComponent,
-    ItemTenderComponent,
-    ItemCallsForBidsComponent,
     ItemSupportCriteriaComponent,
+    ItemSupportsComponent,
+    ItemTenderComponent,
+    ItemVisualizationsComponent,
+    MuniBudgetLinkComponent,
+    MuniBudgetMinicardComponent,
+    MuniItemTidbitComponent,
+    PlotlyComponent,
+    SearchLinkComponent,
+    TimelinePartComponent,
+    ItemGovDecisionComponent,
+    ItemSocialServiceComponent,
+    ItemSocialServiceGovUnitComponent,
+    SocialServiceDataTableComponent,
+    MultiSelectComponent,
+    QuestionsPanelComponent,
+    ItemQuestionsComponent,
+    ItemQuestionsParameterComponent,
+    ItemDataTableComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    HttpClientModule,
     CommonComponentsModule,
-    ItemRoutingModule
+    ItemRoutingModule,
   ],
   providers: [
-    ItemApiService
+    ItemApiService,
+    BudgetKeyItemService,
   ]
 })
 export class ItemModule { }
