@@ -1,6 +1,8 @@
 import { ReplaySubject } from "rxjs";
 import { PreparedQuestion, PreparedQuestionFragment, PreparedQuestions, Question, Questions } from "../model";
 import { BudgetKeyItemService } from "../budgetkey-item.service";
+import { QuestionParser } from "./question-parser";
+import { GlobalSettingsService } from "../../common-components/global-settings.service";
 
 export class QuestionsManager {
   
@@ -14,7 +16,7 @@ export class QuestionsManager {
   
   loading = false;
   
-  constructor(private item: any, private questions: Question[], private itemService: BudgetKeyItemService) {
+  constructor(private item: any, private questions: Question[], private itemService: BudgetKeyItemService, private globalSettings: GlobalSettingsService) {
     this.preparedQuestions = this.parseQuestions(questions, item);
   }
   
@@ -105,6 +107,7 @@ export class QuestionsManager {
   }
   
   parseQuestions(questions: Questions, parameters: any): PreparedQuestions {
+    QuestionParser.processQuestions(questions, this.globalSettings.themeId);
     return questions.map((question: Question) => {
       const result = new PreparedQuestion();
       if (Array.isArray(question.query)) {

@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Format } from '../format';
 import { GlobalSettingsService } from '../../../common-components/global-settings.service';
+import questions from './questions';
+import { ItemApiService } from '../../item-api.service';
 
 @Component({
   selector: 'app-item-muni-budget',
@@ -14,7 +16,7 @@ export class ItemMuniBudgetComponent implements OnChanges {
   format = new Format();
   totalValue = 0;
 
-  constructor(public globalSettings: GlobalSettingsService) { }
+  constructor(public globalSettings: GlobalSettingsService, private itemApi: ItemApiService) { }
 
   ngOnChanges() {
     let children = this.item.children;
@@ -31,5 +33,6 @@ export class ItemMuniBudgetComponent implements OnChanges {
       });
       this.item.children = children;
     }
+    this.itemApi.setQuestions(questions);
   }
 }

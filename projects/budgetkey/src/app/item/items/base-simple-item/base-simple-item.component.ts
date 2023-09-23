@@ -17,5 +17,10 @@ export class BaseSimpleItemComponent implements OnInit{
     if (this.questions) {
       this.api.setQuestions(this.questions);
     }
+    if (this.item) {
+      if (this.item.code) {
+        this.item.child_code_len = this.item.code.length + 2;
+      }
+    }
   }
 }

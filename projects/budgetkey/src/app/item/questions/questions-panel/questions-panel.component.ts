@@ -22,7 +22,7 @@ export class QuestionsPanelComponent implements OnChanges {
   constructor(public globalSettings: GlobalSettingsService, private itemService: BudgetKeyItemService) { }
 
   ngOnChanges() {
-    this.questionsManager = new QuestionsManager(this.item, this.questions, this.itemService);
+    this.questionsManager = new QuestionsManager(this.item, this.questions, this.itemService, this.globalSettings);
   }
 
   mailto() {
