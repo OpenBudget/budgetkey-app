@@ -1,0 +1,63 @@
+<div class="container" *ngIf='item'>
+  <div class="title">
+    <small>
+      <ng-content select='.titlePrefix'></ng-content>
+    </small><br/>
+    <strong>
+      <span (click)="dropdownHidden = !dropdownHidden">
+        {{ item.details[titleField] }}
+      </span>
+      <div class="report-dropdown"
+      [ngClass]="{hidden: dropdownHidden}"
+      >
+      <div class='report-dropdown-bg' (click)='dropdownHidden=true' (touchmove)='false'></div>
+      <div class='report-dropdown-scroll'>
+        <span *ngFor="let other of item['others']">
+          <a [href]="href(other)">{{other}}</a>
+        </span>
+      </div>
+      <span class='close' (click)='dropdownHidden=true'>&times;</span>
+    </div>
+  </strong><br/>
+  <small>{{titleSuffix}}</small>
+</div>
+<div class="indicator-row row" [style.right]="(4 - indicators.length)*12.5 + '%'">
+  <div class="indicator col-md-3" *ngFor="let indicator of indicators">
+    <div>
+      <span class="borderon"></span>
+      <img [src]="'assets/item/img/' + indicator.asset"/>
+      <div class="indicator-text" [innerHTML]="indicator.template"></div>
+    </div>
+  </div>
+</div>
+<div class='indicator-carousel'>
+  <div class='indicator-carousel-main'>
+    <span (click)='prevIndicator()'>
+      <i class='glyphicon glyphicon-chevron-right'></i>
+    </span>
+    <div class='indicator'>
+      <div>
+        <img [src]="'assets/img/' + indicators[selectedIndicator].asset"/>
+        <div class="indicator-text"
+        [innerHTML]="indicators[selectedIndicator].template">
+      </div>
+    </div>
+  </div>
+  <span (click)='nextIndicator()'>
+    <i class='glyphicon glyphicon-chevron-left'></i>
+  </span>
+</div>
+<div class='indicator-carousel-dots'>
+  <div class='dot'
+  *ngFor='let ind of indicators; let idx = index'
+  [ngClass]='{active: selectedIndicator===idx}'
+  (click)='selectedIndicator=idx'
+  ></div>
+</div>
+</div>
+<div class="suffix">
+  <ng-content select='.suffixTemplate'></ng-content>
+</div>
+</div>
+
+<app-item-visualizations *ngIf="item?.charts" [item]="item"></app-item-visualizations>

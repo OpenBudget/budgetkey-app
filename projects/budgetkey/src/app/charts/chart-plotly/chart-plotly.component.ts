@@ -3,14 +3,14 @@ import { ReplaySubject, first } from 'rxjs';
 import * as Plotly from 'plotly.js-basic-dist';
 
 @Component({
-  selector: 'app-plotly',
-  templateUrl: './plotly.component.html',
-  styleUrls: ['./plotly.component.less'],
+  selector: 'app-chart-plotly',
+  templateUrl: './chart-plotly.component.html',
+  styleUrls: ['./chart-plotly.component.less'],
   host: {
     '[class.enlarged]': 'enlarged'
   }
 })
-export class PlotlyComponent implements OnChanges, AfterViewInit {
+export class ChartPlotlyComponent implements OnChanges, AfterViewInit {
 
   @Input() public data: any;
   @Input() public layout: any;

@@ -1,0 +1,4 @@
+<div class='vertical-part' *ngFor="let inner of data.parts">
+    <div *ngIf="inner.title" class="title">{{ inner.title }}</div>
+    <app-chart-router [chart]="inner" [item]='item'></app-chart-router>
+</div>

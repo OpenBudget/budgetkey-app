@@ -1,0 +1,49 @@
+.pointatron-container {
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .pointatron-container {
+        flex-flow: column;
+        align-items: center;
+    }
+    
+    .pointatron {
+        padding: 20px 0;
+    }
+}
+
+
+.pointatron {
+    display: inline-block;
+    text-align: center;
+    width: 400px;
+}
+
+.svg-container {
+    display: inline-block;
+    line-height: 200px;
+}
+
+svg {
+    vertical-align: middle;
+}
+
+.title {
+    font-family: "Abraham TRIAL";
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.amount {
+    font-family: "Miriam Libre";
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 26px;
+}
+
+circle {
+    stroke: white;
+    stroke-width: 1;
+}

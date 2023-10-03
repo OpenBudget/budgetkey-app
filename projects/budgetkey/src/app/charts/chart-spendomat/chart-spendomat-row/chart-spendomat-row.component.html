@@ -1,0 +1,75 @@
+<div class="spendomat-container" [class]="theme">
+    <div class="spendomat-row"
+         (mouseleave)="hoverIndex = -1">
+      <div class="row-bg"></div>
+      <div class="row-part"
+           *ngFor="let s of row.spending.slice().reverse(); let i = index;"
+           [style.width]='s.acc_width + "%"'
+           [class.hovered]="i == row.spending.length - 1 - hoverIndex"
+           (mouseover)="hoverIndex = row.spending.length - 1 - i"
+           >
+      </div>
+      <div class="row-label payer-label">
+        <span>{{row.payer}}</span>
+      </div>
+      <div class="row-label amount-label">
+        <span [innerHtml]="row.amount_fmt"></span>
+      </div>
+      <div class="chevron-container"
+           [class.selected]="selected"
+           (click)="selected = !selected"
+      >
+        <div class="chevron"></div>
+      </div>
+    </div>
+    <div class="spendomat-tags"
+    [class.selected]="selected"
+    (mouseleave)="hoverIndex = -1"
+    >
+      <div class="tag"
+           *ngFor="let s of row.spending.slice(0, 4); let i = index"
+           [class.hovered]="i == hoverIndex"
+           (mouseover)="hoverIndex = i"
+           >
+        {{ s.tag }}
+      </div>
+    </div>
+
+    <div class="small-spendomat-rows"
+         [class.selected]="selected"
+         (mouseleave)="hoverIndex = -1"
+      >
+      <div class="small spendomat-row" *ngFor="let s of row.spending; let i = index"
+           (mouseover)="hoverIndex = i"
+      >
+        <div class="row-bg"></div>
+        <div class="row-part"
+            [style.width]='aw + "%"' *ngFor='let aw of s.amount_widths'
+            [class.hovered]="i == hoverIndex"
+        ></div>
+        <div class="row-label payer-label"
+             [class.hovered]="i == hoverIndex"
+        >
+          <span>{{s.tag}}</span>
+        </div>
+        <div class="row-label amount-label">
+          <span [innerHtml]="s.amount_fmt"></span>
+          </div>
+        <div class="row-label kinds-label">
+          <span *ngIf="s.count == 1 && s.spending_types[0] == 'contract'">התקשרות אחת</span>
+          <span *ngIf="s.count == 1 && s.spending_types[0] == 'support'">תמיכה אחת</span>
+          <ng-container *ngIf="s.count > 1">
+            <span>{{s.count}}</span>
+            <ng-container *ngIf="s.spending_types.length > 1">
+              <span>התקשרויות ותמיכות</span>
+            </ng-container>
+            <ng-container *ngIf="s.spending_types.length == 1">
+              <span *ngIf="s.spending_types[0] == 'contract'">התקשרויות</span>
+              <span *ngIf="s.spending_types[0] == 'support'">תמיכות</span>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+  </div>

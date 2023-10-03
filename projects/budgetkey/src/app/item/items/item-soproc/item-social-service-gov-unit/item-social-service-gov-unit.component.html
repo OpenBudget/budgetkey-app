@@ -106,7 +106,7 @@
             <div class='single-chart'>
                 <div class='chart-title' [innerHtml]='processTitles(ct)'></div>
                 <div class='chart-subtitle'>{{ct._subtitle}}</div>
-                <app-plotly [layout]='charts[ct.id].layout' [data]='charts[ct.id].data'></app-plotly>
+                <app-chart-plotly [layout]='charts[ct.id].layout' [data]='charts[ct.id].data'></app-chart-plotly>
             </div>
         </ng-container>
     </ng-container>    

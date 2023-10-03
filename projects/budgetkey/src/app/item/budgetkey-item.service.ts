@@ -105,7 +105,7 @@ export class BudgetKeyItemService {
           map(
             (res: any) => {
               const items: object[] = [];
-              const rows = res.rows;
+              const rows = res.rows || [];
               const total = res.total;
               const pages = res.pages;
               const page = res.page;

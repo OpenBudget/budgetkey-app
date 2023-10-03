@@ -41,6 +41,9 @@
 
       <app-item-social-service *ngIf='prefix("activities/gov_social_service")' [item]='item'></app-item-social-service>
       <app-item-social-service-gov-unit *ngIf='prefix("units/gov_social_service_unit")' [item]='item'></app-item-social-service-gov-unit>
+
+      <app-item-ngo-activity-report *ngIf='prefix("reports/ngo-activity-report")' [item]='item'></app-item-ngo-activity-report>
+      <app-item-ngo-district-report *ngIf='prefix("reports/ngo-district-report")' [item]='item'></app-item-ngo-district-report>
     </div>
     
     <ng-container *ngIf='showQuestions'>

@@ -7,7 +7,7 @@
       <span [class.active]='!graphSelected' (click)='graphSelected=false'>הצגה כטבלה</span>
     </div>
     <ng-container *ngIf='graphSelected && graphLayout && graphData'>
-      <app-plotly [data]='graphData' [layout]='graphLayout'></app-plotly>
+      <app-chart-plotly [data]='graphData' [layout]='graphLayout'></app-chart-plotly>
     </ng-container>
     <table *ngIf='(data.length > 0) && (headers.length > 0) && !graphSelected'>
       <thead>

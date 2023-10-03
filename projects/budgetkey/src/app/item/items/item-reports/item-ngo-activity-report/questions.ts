@@ -1,3 +1,5 @@
+import { Question } from "../../../model";
+
 export default [
   {
     "text": "כל הארגונים <status> בתחום <strong>:details.field_of_activity</strong> ב<district>",
@@ -50,4 +52,4 @@ export default [
       "תאריך בדיקה אחרונה"
     ]
   }
-]
+] as Question[];

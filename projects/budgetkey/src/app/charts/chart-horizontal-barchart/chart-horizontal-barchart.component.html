@@ -1,0 +1,15 @@
+<div class="chart">
+    <table>
+      <tbody>
+        <tr *ngFor='let value of data.values; let i = index'>
+          <td class='cell-index'>{{ i + 1 }}</td>
+          <td class='cell-label' [innerHTML]="value.label"></td>
+          <td class='cell-bar'>
+            <span class="bar-bg"></span>
+            <span class="bar" [style.width]="100 * (value.value / maxValue) + '%'"></span>
+            <span class="bar-label">{{ value.value }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

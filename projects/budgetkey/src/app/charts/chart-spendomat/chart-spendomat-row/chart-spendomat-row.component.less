@@ -1,0 +1,296 @@
+@colorscheme1primaryBorder: #5d40d4;
+@colorscheme1primaryBg: #b6a5eb;
+@colorscheme1tagBg: #f6f3fa;
+@colorscheme1tagBorder: #b3aade;
+@colorscheme1text: #3e4e59;
+
+@colorscheme2primaryBorder: #80c8ff;
+@colorscheme2primaryBg: #cee7fd;
+@colorscheme2tagBg: #f0f6fa;
+@colorscheme2tagBorder: #b5dfff;
+@colorscheme2text: #3e4e59;
+
+.spendomat-container {
+  padding-top: 23px;
+  width: 100%;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+@media only screen and (max-width: 600px) {
+  .spendomat-container {
+    padding-top: 0;
+    border-bottom: none;
+  }
+}
+
+.spendomat-row {
+  position: relative;
+  height: 78px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .spendomat-row {
+    height: 37px;
+    margin-top: 45px;
+  }
+}
+
+.spendomat-row.small {
+  position: relative;
+  height: 16px;
+  width: 60%;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.row-part {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.row-part.hovered {
+  color: #ffffff;
+}
+
+.small .row-part {
+  border-radius: 0px 4px 4px 0px;
+}
+
+.row-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  border-radius: 10px;
+}
+
+.small .row-bg {
+  border-radius: 4px;
+}
+
+.row-label {
+  position: absolute;
+  top: 0;
+  display: flex;
+  height: 100%;
+  flex-flow: column;
+  justify-content: center;
+  padding: 0 19px;
+  font-family: "Miriam Libre";
+  pointer-events: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .row-label {
+    top: -45px;
+    padding: 0;
+  }
+  
+  .payer-label {
+    font-size: 13px;
+  }
+}
+
+.payer-label {
+  right: 0;
+  
+  width: 80%;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 22px;
+  
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.small .payer-label {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 16px;
+}
+
+.amount-label {
+  left: 0;
+  text-align: left;
+  padding: 0 4px;
+  white-space: nowrap;
+  
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.kinds-label {
+  left: -200px;
+  text-align: right;
+  width: 200px;
+  
+  font-size: 10px;
+  line-height: 18px;
+  display: inline-block;
+}
+
+.small .amount-label {
+  font-size: 10px;
+  line-height: 13px;
+  text-align: right;
+}
+
+.chevron-container {
+  width: 20px;
+  height: 100%;
+  position: absolute;
+  right: -20px;
+  top: 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .chevron-container {
+    display: none;
+  }
+}
+
+.chevron {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 7px 7px 0;
+  transition-property: transform;
+  transition-duration: 200ms;
+  transform: rotate(0);
+}
+
+.selected .chevron {
+  transform: rotate(-90deg);
+}
+
+.spendomat-tags {
+  min-height: 30px;
+  overflow-y: hidden;
+  transition-property: height;
+  transition-duration: 200ms;
+  margin: 6px 0;
+}
+
+.spendomat-tags.selected {
+  height: 0.1px;
+  min-height: 0px;
+}
+
+.tag {
+  display: inline-block;
+  margin: 0 4px;
+  padding: 0px 2px;
+  font-family: "Abraham TRIAL";
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tag.hovered {
+  color: #ffffff;
+}
+
+.small-spendomat-rows {
+  overflow: hidden;
+  height: 0px;
+}
+
+.small-spendomat-rows.selected {
+  height: auto;
+}
+
+.theme-1 .row-part {
+  border: 1px solid @colorscheme1primaryBorder;
+  background-color: @colorscheme1primaryBg;
+}
+
+.theme-1 .row-part.hovered {
+  background-color: @colorscheme1primaryBorder;
+}
+
+.theme-1 .small .row-part {
+  background-color: @colorscheme1tagBg;
+  border: 1px solid @colorscheme1tagBorder;
+}
+
+.theme-1 .small .row-part.hovered {
+  background-color: @colorscheme1primaryBorder;
+}
+
+.theme-1 .row-bg {
+  border: 1px solid @colorscheme1primaryBorder;
+  background-color: @colorscheme1primaryBg;
+}
+
+.theme-1 .row-label {
+  color: @colorscheme1text;
+}
+
+.theme-1 .chevron {
+  border-color: transparent @colorscheme1primaryBorder transparent transparent;
+}
+
+.theme-1 .tag {
+  color: @colorscheme1text;
+  background-color: @colorscheme1tagBg;
+  border: 1px solid @colorscheme1tagBorder;
+}
+
+.theme-1 .tag.hovered {
+  background-color: @colorscheme1primaryBorder;
+}
+
+.theme-2 .row-part {
+  border: 1px solid @colorscheme2primaryBorder;
+  background-color: @colorscheme2primaryBg;
+}
+
+.theme-2 .row-part.hovered {
+  background-color: @colorscheme2primaryBorder;
+}
+
+.theme-2 .small .row-part {
+  background-color: @colorscheme2tagBg;
+  border: 1px solid @colorscheme2tagBorder;
+}
+
+.theme-2 .small .row-part.hovered {
+  background-color: @colorscheme2primaryBorder;
+}
+
+.theme-2 .row-bg {
+  border: 1px solid @colorscheme2primaryBorder;
+  background-color: @colorscheme2primaryBg;
+}
+
+.theme-2 .row-label {
+  color: @colorscheme2text;
+}
+
+.theme-2 .chevron {
+  border-color: transparent @colorscheme2primaryBorder transparent transparent;
+}
+
+.theme-2 .tag {
+  color: @colorscheme2text;
+  background-color: @colorscheme2tagBg;
+  border: 1px solid @colorscheme2tagBorder;
+}
+
+.theme-2 .tag.hovered {
+  background-color: @colorscheme2primaryBorder;
+}

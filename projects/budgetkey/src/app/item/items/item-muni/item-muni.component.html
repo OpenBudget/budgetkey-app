@@ -104,7 +104,7 @@
             <div class='budget-info' *ngIf='incomeChartLayout.width > 0'>
                 <div class='budget-title'>מקורות ההכנסה למימון הפעילות</div>
                 <div class='budget-subtitle'>{{budgets[0].value_kind}} בשנת {{budgets[0].year}}</div>
-                <app-plotly [data]='incomeChartData' [layout]='incomeChartLayout' [config]='incomeChartConfig'></app-plotly>
+                <app-chart-plotly [data]='incomeChartData' [layout]='incomeChartLayout' [config]='incomeChartConfig'></app-chart-plotly>
             </div>
         </div>
     </div>
@@ -123,3 +123,5 @@
         </div>
     </div>
 </div>
+
+<app-item-visualizations *ngIf="item.charts" [item]="item"></app-item-visualizations>

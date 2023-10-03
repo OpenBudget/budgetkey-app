@@ -30,16 +30,14 @@
       </div>
       <ng-container *ngIf="!subcharts">
         <ng-container *ngFor="let tab of charts">
-          <!-- <budgetkey-chart-router [chart]="chart" *ngIf="tab == current">
-          </budgetkey-chart-router> -->
+          <app-chart-router [chart]='chart' [item]='item' *ngIf="tab == current"></app-chart-router>
         </ng-container>
       </ng-container>
       <ng-container *ngIf="subcharts">
         <ng-container *ngFor="let subtab of subcharts">
           <ng-container *ngIf="subtab == currentSub">
             <div class="subtab-title" *ngIf="subtab.long_title" [innerHtml]="subtab.long_title"></div>
-            <!-- <budgetkey-chart-router [chart]="chart">
-            </budgetkey-chart-router> -->
+            <app-chart-router [chart]='chart' [item]='item'></app-chart-router>
           </ng-container>
         </ng-container>
       </ng-container>

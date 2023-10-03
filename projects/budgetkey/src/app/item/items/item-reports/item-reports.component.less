@@ -1,0 +1,231 @@
+:host {
+    .row {
+        position: relative;
+    }
+    
+    .container {
+        margin-top: 25px;
+        // background-color: rgba(216, 239, 197, 0.14);
+    }
+    
+    .title {
+        font-family: "Miriam Libre", sans-serif;
+        font-size: 32px;
+        font-weight: normal;
+        line-height: 38px;	
+        text-align: center;
+        margin-top: 27px;
+        
+        strong {
+            background-color: #FEE2DA;
+            display: inline-block;
+            
+            span {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+            
+            .report-dropdown {
+                position: absolute;
+                height: 260px;
+                z-index: 2;
+                
+                .report-dropdown-scroll {
+                    position: absolute;
+                    background: white;
+                    padding: 10px;
+                    box-shadow: 0px 5px 9px -4px rgba(0,0,0,0.75);
+                    border-radius: 4px;
+                    border: 1px solid #EEEEEE;
+                    height: 100%;
+                    overflow-y: scroll;
+                    z-index: 1;
+                    
+                    span {
+                        white-space: nowrap;
+                    }
+                }
+                
+                .report-dropdown-bg {
+                    display: none;
+                    position: fixed;
+                    height: 100vh;
+                    width: 100vw;
+                    top: 0;
+                    left: 0;
+                    background-color: rgba(0,0,0,0.5);
+                    z-index: 1;
+                    pointer-events: all;
+                }
+                
+                .close {
+                    display: none;
+                    position: absolute;
+                    z-index: 2;
+                    top: 10px;
+                    left: 13px;
+                    font-size: 20px;
+                    color: #180A42;
+                }
+                
+                @media only screen and (max-width: 600px) {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    height: 80vh;
+                    max-height: none;
+                    width: 80vw;
+                    margin: 10vh 10vw;
+                    
+                    .close {
+                        display: block;
+                    }
+                    
+                    .report-dropdown-bg {
+                        display: block;
+                    }
+                    
+                    .report-dropdown-scroll {
+                        width: 100%;
+                        
+                        span {
+                            white-space: normal;
+                        }
+                    }
+                }
+                
+                &.hidden {
+                    display: none;
+                }
+                
+                span {
+                    display: block;
+                    font-size: 24px;
+                    font-weight: normal;
+                    text-decoration: none;
+                    text-align: right;
+                }
+            }
+            // &::after {
+                //   content: "\e114";
+                //   font-family: 'Glyphicons Halflings';
+                //   font-style: normal;
+                //   font-weight: 400;
+                //   font-size: 20px
+                // }
+            }
+        }
+        
+        .indicator-row {
+            @media only screen and (max-width: 600px) {
+                display: none;
+            }
+        }
+        
+        .indicator-carousel {
+            display: none;
+            @media only screen and (max-width: 600px) {
+                display: flex;
+                width: 100%;
+                flex-flow: column;
+                align-items: center;
+                
+                i {
+                    font-size: 24px;
+                    color: #888;
+                }
+                
+                .indicator-carousel-main {
+                    display: flex;
+                    flex-flow: row;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    width: 100%;
+                    
+                    .indicator {
+                        width: 60vw;
+                        height: 50vh;
+                    }
+                }
+                
+                .indicator-carousel-dots {
+                    display: flex;
+                    flex-flow: row;
+                    
+                    .dot {
+                        width: 14px;
+                        height: 14px;
+                        margin: 14px;
+                        border-radius: 7px;
+                        background-color: #D8D8D8;
+                        
+                        &.active {
+                            background-color: #5A32D1;
+                        }
+                    }
+                }
+            }  
+        }
+        
+        .indicator {
+            > div {
+                width: 100%;
+                text-align: center;
+                margin-top: 70px;
+            }
+            img {
+                height: 85px;
+                margin-bottom: 20px;
+            }
+            .indicator-text {
+                color: #4A4A4A;	
+                font-size: 18px;	
+                line-height: 28px;	
+                
+                ::ng-deep {
+                    .figure {
+                        font-weight: bold;
+                        line-height: 40px;
+                        font-size: 28px;
+                    }    
+                }
+            }
+        }
+        
+        .borderon {
+            box-sizing: border-box;	
+            height: 186px;	
+            width: 3px;	
+            border: 1px solid #E6E6E6;
+            float: left;
+            position: relative;
+            right: 15px
+        }
+        
+        .row > div:last-child .borderon {
+            display: none;
+        }
+        
+        .suffix {
+            margin-top: 60px;
+            margin-bottom: 30px;
+            color: #AAAAAA;
+            font-family: "Miriam Libre";
+            font-size: 16px;
+            text-align: center;
+            font-weight: 400;
+        }
+    }
+    
+    app-chart-adamkey {
+        .amount-col {
+            white-space: nowrap;
+            padding-left: 10px;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .details-container {
+                padding: 0 !important;
+            }
+        }
+    }

@@ -1,5 +1,5 @@
 import { ReportDescriptor, Indicator } from '../../../model';
-import questions from './questions';
+import questions from '../../../items/item-reports/item-ngo-activity-report/questions';
 
 const activeTooltip = 'ארגון מוגדר כפעיל אם הוצג עבורו דיווח שנתי באתר "גיידסטאר" באחת משלוש השנים האחרונות.';
 

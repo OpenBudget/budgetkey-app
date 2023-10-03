@@ -1,0 +1,15 @@
+<app-item-reports
+    [item]='item'
+    [indicators]='indicators'
+    [titleOtherURLPrefix]='"reports/ngo-activity-report/"'
+    [titleField]='"field_of_activity_display"'
+    [titleSuffix]='"בכל הארץ"'
+    [questions]='questions'
+>
+    <ng-container class='titlePrefix'>
+        ארגונים הפעילים<span class='bk-tooltip-anchor'><img src='assets/common/img/help.svg'><span class='bk-tooltip'>ארגון מוגדר כפעיל אם הוצג עבורו דיווח שנתי באתר "גיידסטאר" באחת משלוש השנים האחרונות.</span></span> בתחום
+    </ng-container>
+    <ng-container class='suffixTemplate'>
+        הנתונים מבוססים על שנת הדיווח האחרונה של הארגונים הפעילים ולכן מוצגים לצורך הבנת סדרי הגודל
+    </ng-container>
+</app-item-reports>

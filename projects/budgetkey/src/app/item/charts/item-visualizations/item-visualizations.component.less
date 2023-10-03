@@ -1,0 +1,207 @@
+.budgetkey-item-visualizations-wrapper {
+    overflow: visible;
+    width: 80%;
+    margin-right: 10%;
+
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+      margin: 0;
+    }
+
+    &:before, &:after {
+      content: '';
+      display: block;
+      height: 1px;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .tabs {
+      .tabs-row {
+        height: 75px;
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+
+        .tab-header {
+          display: inline-block;
+          text-align: center;
+          .tab-title {
+            color: #9E9E9E;
+            font-family: "Miriam Libre";
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 50px;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+          }
+
+          &.active .tab-title {
+            color: #4A4A4A;
+          }
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        .tabs-row {
+          display: flex;
+          flex-flow: row;
+          height: 85px;
+          justify-content: flex-start;
+          align-items: center;
+          width: ~"calc(100vw + 2px)";
+          overflow-x: scroll;
+          overflow-y: hidden;
+          margin-right: -16px;
+
+          .tab-header {
+            display: block;
+            width: 75vw;
+            border: 1px solid #D8D8D8;	
+            flex: 1 0 auto;
+            position: relative;
+
+            &.active {
+              background-color: #F5F5F5;
+              .tab-title {
+                color: #4A4A4A;
+              }
+
+              &:after, &:before {
+                top: 100%;
+                left: 50%;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+              }
+              
+              &:after {
+                border-color: rgba(245, 245, 245, 0);
+                border-top-color: #f5f5f5;
+                border-width: 8px;
+                margin-left: -8px;
+              }
+  
+              &:before {
+                border-color: rgba(216, 216, 216, 0);
+                border-top-color: #d8d8d8;
+                border-width: 9px;
+                margin-left: -9px;
+              }
+            }
+
+            .tab-title {
+              color: #9E9E9E;	
+              font-family: "Miriam Libre";
+              font-size: 18px;
+              font-weight: bold;  
+              margin: 20px 0px;
+              white-space: nowrap;
+              cursor: pointer;
+            }
+ 
+          }
+        }
+
+      }
+    }
+
+    .subtabs {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+
+      .subtab-row {
+        width: 100%;
+        // min-height: 68px;
+        padding: 20px 0;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        padding: 12px;
+
+        @media only screen and (max-width: 600px) {
+          flex-flow: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+        }
+      }
+
+      .subtab {
+        display: inline-block;
+        text-align: center;
+
+        @media only screen and (max-width: 600px) {
+          width: 100%;
+          text-align: right;
+        }
+
+        input, label {
+          margin: 0;
+          color: #3C4948;
+          font-family: "Abraham TRIAL";
+          font-size: 20px;
+          font-weight: 100;
+          vertical-align: middle;
+
+          ::ng-deep .figure {
+            color: #FE8255;
+            font-family: "Miriam Libre";
+            font-weight: bold;
+          }
+
+        }
+
+        input {
+          margin-top: -1px;
+        }
+      }
+    }
+
+    .tab-contents {
+      padding: 55px 0 10px 0;
+      margin: 0;
+
+      @media only screen and (max-width: 600px) {
+        padding: 10px;
+      }
+    }
+
+    .subtab-title {
+      color: #4A4A4A;
+      font-family: "Miriam Libre";
+      font-size: 20px;
+      font-weight: bold;
+      padding: 10px 0;
+
+      @media only screen and (max-width: 600px) {
+        font-size: 16px;
+      }
+
+    }
+
+    .chart-title {
+      min-height: 41px;
+      color: #4A4A4A;
+      font-family: "Miriam Libre";
+      font-size: 32px;
+      font-weight: bold;
+      line-height: 32px;
+      border-bottom: 1px solid black;
+      padding-bottom: 9px;
+      @media only screen and (max-width: 600px) {
+        white-space: normal;
+        font-size: 18px;
+      }
+    }
+
+    .chart-description {
+      font-family: "Miriam Libre";
+      font-size: 16px;
+      font-weight: normal;
+      color: #888;
+    }
+  }

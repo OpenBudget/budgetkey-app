@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { CommonComponentsModule } from '../common-components/common-components.module';
-import { ChartRouterComponent } from '../vis/chart-router/chart-router.component';
-import { ItemVisualizationsComponent } from '../vis/item-visualizations/item-visualizations.component';
+import { ChartRouterComponent } from './charts/chart-router/chart-router.component';
+import { ItemVisualizationsComponent } from './charts/item-visualizations/item-visualizations.component';
 import { BudgetItemComponent } from './items/item-budget/base-budget-item/base-budget-item.component';
 import { ItemBudget0digComponent } from './items/item-budget/item-budget0dig/item-budget0dig.component';
 import { ItemBudget2digComponent } from './items/item-budget/item-budget2dig/item-budget2dig.component';
@@ -29,7 +29,6 @@ import { ItemCompanyComponent } from './items/item-org/item-company/item-company
 import { ItemMuniComponent } from './items/item-muni/item-muni.component';
 import { MuniItemTidbitComponent } from './items/item-muni/muni-item-tidbit/muni-item-tidbit.component';
 import { MuniBudgetMinicardComponent } from './items/item-muni-budget/muni-budget-minicard/muni-budget-minicard.component';
-import { PlotlyComponent } from './charts/plotly/plotly.component';
 import { ItemMuniBudgetComponent } from './items/item-muni-budget/item-muni-budget.component';
 import { MuniBudgetLinkComponent } from './items/item-muni-budget/muni-budget-link/muni-budget-link.component';
 import { ItemProcurementComponent } from './items/item-procurement/item-procurement.component';
@@ -54,6 +53,11 @@ import { QuestionsPanelComponent } from './questions/questions-panel/questions-p
 import { ItemQuestionsComponent } from './questions/item-questions/item-questions.component';
 import { ItemQuestionsParameterComponent } from './questions/item-questions/item-questions-parameter/item-questions-parameter.component';
 import { ItemDataTableComponent } from './questions/item-data-table/item-data-table.component';
+import { ChartsModule } from '../charts/charts.module';
+import { ChartVerticalLayoutComponent } from './charts/chart-vertical-layout/chart-vertical-layout.component';
+import { ItemNgoActivityReportComponent } from './items/item-reports/item-ngo-activity-report/item-ngo-activity-report.component';
+import { ItemNgoDistrictReportComponent } from './items/item-reports/item-ngo-district-report/item-ngo-district-report.component';
+import { ItemReportsComponent } from './items/item-reports/item-reports.component';
 
 
 
@@ -94,7 +98,6 @@ import { ItemDataTableComponent } from './questions/item-data-table/item-data-ta
     MuniBudgetLinkComponent,
     MuniBudgetMinicardComponent,
     MuniItemTidbitComponent,
-    PlotlyComponent,
     SearchLinkComponent,
     TimelinePartComponent,
     ItemGovDecisionComponent,
@@ -106,6 +109,10 @@ import { ItemDataTableComponent } from './questions/item-data-table/item-data-ta
     ItemQuestionsComponent,
     ItemQuestionsParameterComponent,
     ItemDataTableComponent,
+    ChartVerticalLayoutComponent,
+    ItemNgoActivityReportComponent,
+    ItemNgoDistrictReportComponent,
+    ItemReportsComponent
   ],
   imports: [
     CommonModule,
@@ -113,6 +120,7 @@ import { ItemDataTableComponent } from './questions/item-data-table/item-data-ta
     HttpClientModule,
     CommonComponentsModule,
     ItemRoutingModule,
+    ChartsModule
   ],
   providers: [
     ItemApiService,

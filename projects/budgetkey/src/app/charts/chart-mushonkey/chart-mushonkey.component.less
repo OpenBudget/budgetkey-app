@@ -1,0 +1,32 @@
+.mushonkey-wrapper {
+    width: 90%;
+    padding-right: 5%;
+    direction: ltr;
+}
+
+:host {
+    ::ng-deep {
+        .centerpiece {
+            /*stroke: lightgray;*/
+            /*stroke-width: 2;*/
+            fill: url('#centerPiece');
+        }
+        
+        .centerpiece-text {
+            font-size: 20px;
+            stroke: none;
+            fill: #7A6B99;
+        }
+        
+        .text { font-family: "Abraham TRIAL"; }
+        
+        .budget-expense.connector { stroke: lightblue; }
+        .budget-expense.text { fill: voilet; }
+        
+        .budget-parent.connector { stroke: #E4DCF5; }
+        .budget-parent.text { fill: #7A6B99; }
+        
+        .budget-revenues.connector { stroke: violet; }
+        .budget-revenues.text { fill: black; }
+    }
+}

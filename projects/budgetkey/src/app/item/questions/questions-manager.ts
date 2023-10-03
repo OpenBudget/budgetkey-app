@@ -95,6 +95,18 @@ export class QuestionsManager {
     });
   }
   
+  getField(obj: any, field: string) {
+    const parts = field.split('.');
+    let result = obj;
+    for (const part of parts) {
+      result = result[part];
+      if (result === undefined) {
+        return undefined;
+      }
+    }
+    return result;
+  }
+
   formatQuery(query: string | string[], parameters: any): string {
     // TODO: Escape parameters (needs to be discussed)
     if (query instanceof Array) {
@@ -102,7 +114,7 @@ export class QuestionsManager {
     }
     return (<string>query).replace(/:([a-z][a-z0-9_.]*)/ig, (match, name) => {
       // return _.get(parameters, name) ? _.get(parameters, name) : match;
-      return parameters[name] || match;
+      return this.getField(parameters, name) || match;
     });
   }
   

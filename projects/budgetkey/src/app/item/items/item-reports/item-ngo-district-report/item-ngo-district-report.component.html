@@ -1,0 +1,15 @@
+<app-item-reports
+    [item]='item'
+    [indicators]='indicators'
+    [titleOtherURLPrefix]='"reports/ngo-district-report/"'
+    [titleField]='"district"'
+    [titleSuffix]='""'
+    [questions]='questions'
+>
+    <ng-container class='titlePrefix'>
+        ארגונים הפעילים<span class='bk-tooltip-anchor'><img src='assets/common/img/help.svg'><span class='bk-tooltip'>ארגון מוגדר כפעיל אם הוצג עבורו דיווח שנתי באתר "גיידסטאר" באחת משלוש השנים האחרונות.</span></span> במחוז
+    </ng-container>
+    <ng-container class='suffixTemplate'>
+        המידע מבוסס על דיווחי הארגונים בשנת הדיווח האחרונה
+    </ng-container>
+</app-item-reports>

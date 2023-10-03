@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { Item } from '../../item/model';
+import { Item } from '../../model';
 
 @Component({
   selector: 'app-item-visualizations',
