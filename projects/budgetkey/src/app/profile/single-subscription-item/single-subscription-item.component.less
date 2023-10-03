@@ -1,0 +1,125 @@
+:host {
+    width: 100%;
+}
+
+.item-row {
+    margin-bottom: 25px;
+}
+
+.main, .item-row {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    width: 100%;
+}
+
+.main-container {
+    width: 100%;
+    position: relative;
+    z-index: 0;
+    margin-right: 10px;
+}
+
+.main {
+    position: relative;
+    border-radius: 35px;
+    background-color: #FF5A5F;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+    padding: 10px 20px;
+    margin-left: 2.5px;
+    flex: none;
+    z-index: 2;
+    cursor: pointer;
+    overflow-x: hidden;
+    display: flex;
+    flex-flow: row;
+}
+
+.main.text {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.sharers {
+    left: 0px;
+    top: 0px;
+    width: 210px;
+    position: absolute;
+    height: 50px;
+    padding-top: 9px;
+    z-index: 1;
+}
+
+.main {
+    transition-property: width, z-index;
+    transition-duration: 0.6s;
+}
+
+.sharing .main {
+    width: calc(100% - 210px);
+}
+
+// .sharing .sharers {
+//     z-index: 1;
+// }
+
+.emphasis {
+    color: #FFFFFF;
+    font-family: "Abraham TRIAL";
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.43px; 
+    max-width: 380px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: 16px;
+    flex: none;
+}
+
+.regular {
+    color: rgba(0,0,0,0.5);	
+    font-family: "Abraham TRIAL";	
+    font-size: 20px;	
+    letter-spacing: 0.43px;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.goto-container {
+    margin-right: auto;
+}
+
+.goto {
+    color: #FFFFFF;
+    font-family: "Abraham TRIAL";
+    font-size: 20px;
+    letter-spacing: 0.43px;
+    background: linear-gradient(270deg, rgba(255,90,95,0) 0%, rgba(255,90,95,0.8) 30px);
+    // padding-right: 30px;
+    // margin-right: -30px;
+    white-space: nowrap;
+    flex: none;
+}
+
+.icon {
+    cursor: pointer;
+    text-align: center;
+    flex: none;
+    width: 30px;
+}
+
+.break {
+    display: none;
+    flex-basis: 100%;
+    height: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    .break {
+        display: block;
+    }
+    .emphasis, .regular, .goto {
+        font-size: 14px;
+    }
+}

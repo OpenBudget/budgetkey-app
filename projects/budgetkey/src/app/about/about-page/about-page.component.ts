@@ -3,16 +3,16 @@ import { Component, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import * as Showdown from 'showdown';
-import { GlobalSettingsService } from '../common-components/global-settings.service';
+import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { switchMap } from 'rxjs';
 
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.less']
+  selector: 'app-about-page',
+  templateUrl: './about-page.component.html',
+  styleUrls: ['./about-page.component.less']
 })
-export class AboutComponent {
+export class AboutPageComponent {
   converter: Showdown.Converter;
   html: SafeHtml;
 

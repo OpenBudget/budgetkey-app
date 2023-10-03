@@ -68,7 +68,7 @@ export class ListsService {
       );
   }
 
-  public delete(list: string, item_id: number): Observable<boolean> {
+  public delete(list: string, item_id: number | null): Observable<boolean> {
     const _item_id = item_id ? item_id : 'all';
     return <Observable<boolean>>(this.token
       .pipe(

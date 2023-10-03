@@ -1,0 +1,41 @@
+<app-container [showHeader]="true" [showSearchBar]="true">
+  <div class='main'>
+    <ng-container *ngIf='init && !hasItems'>
+      <img class='logo' src='assets/profile/img/update_stars_empty.svg'/>
+      <span class='subtitle'>(פה יופיעו)</span>
+      <span class='title'>ההתראות השמורות שלי</span>
+      <div class='instructions' *ngIf='authenticated'>
+        <div class='instructions-title'>הגעת לכאן, אבל עוד לא נרשמת להתראות</div>
+        <div class='instructions-subtitle'>
+          <span>
+            אל חשש, בדף תוצאות החיפוש לחיצה קטנה על הכוכב בשורת החיפוש תרשום אותך 
+            לקבלת התראות בדוא״ל שניתן יהיה לערוך בעמוד זה
+          </span>
+        </div>
+        <img src='assets/profile/img/no_alerts_stars_transition.svg'/>
+      </div>
+      <div class='instructions' *ngIf='!authenticated'>
+        <div class='instructions-title'>הגעת לכאן, אבל עוד לא התחברת למערכת</div>
+        <div class='instructions-subtitle'>
+          <a [href]='loginUrl'><img src='assets/profile/img/google_login.svg'></a>
+          <span class='connect'>התחברו עם גוגל</span>
+          <span>חדשים כאן? אל חשש, בדף תוצאות החיפוש לחיצה קטנה על הכוכב בשורת החיפוש תרשום
+            אותך לקבלת התראות בדוא"ל, שניתן יהיה לערוך בעמוד זה
+          </span>
+        </div>
+        <img src='assets/profile/img/no_alerts_stars_transition.svg'/>
+      </div>
+    </ng-container>
+    <ng-container *ngIf='init && hasItems'>
+      <img class='logo' src='assets/profile/img/update_stars.svg'/>
+      <span class='title'>ההתראות השמורות שלי</span>
+      <ng-container *ngFor='let item of (items | async)'>
+        <app-single-subscription-item *ngIf='item.properties && item.properties.kind==="search"'
+        [item]='item' 
+        (changed)='updateItems()'
+        ></app-single-subscription-item>
+      </ng-container>
+      <app-delete-all-subscription-items (changed)='updateItems()'></app-delete-all-subscription-items>
+    </ng-container>
+  </div>
+</app-container>
