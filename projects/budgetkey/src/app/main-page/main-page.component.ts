@@ -67,10 +67,4 @@ export class MainPageComponent {
       });
     });
   }
-
-  onNavigate(url: string) {
-    console.log('WWWW', url);
-    window.open(url, '_self');
-    // this.router.navigateByUrl(url);
-  }
 }

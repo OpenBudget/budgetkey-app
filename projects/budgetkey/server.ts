@@ -28,8 +28,14 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
+  
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
+    const hostname = req.headers['x-forwarded-host'] || req.hostname;
+    if (req.path === '/' && hostname.indexOf('socialpro.org.il') > -1) {
+      res.redirect('https://www.socialpro.org.il/i/units/gov_social_service_unit/main?theme=soproc');
+      return;
+    }
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
   });
 

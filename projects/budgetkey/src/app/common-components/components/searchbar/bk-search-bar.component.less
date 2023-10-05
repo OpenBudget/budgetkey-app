@@ -227,7 +227,6 @@ input:focus::placeholder {
     font-size: 16px;
     line-height: 25px;
     text-align: right;
-    opacity: 0.25;
 }
 
 input {
@@ -244,4 +243,30 @@ input {
     z-index: 3;
     left: 11px;
     top: 11px;
+}
+
+.search-box.fake {
+    background-image: url('../../../../assets/common/img/search-glass-red.svg');
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 20px 20px;
+    border-radius: 25px;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 48px;
+    background-color: #fff;
+    font-family: "Abraham TRIAL";
+    font-size: 16px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+    height: 44px;
+    color: #000000;
+    border: 1px solid #FF5A5F;
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited {
+        color: #000000;
+        text-decoration: underline;
+    }
 }

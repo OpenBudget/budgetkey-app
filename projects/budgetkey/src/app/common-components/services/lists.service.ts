@@ -4,7 +4,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { map, filter, switchMap, first } from 'rxjs/operators';
 

@@ -18,12 +18,12 @@
     </div>
     <div class='header'>
         <div class='titles'>
-            <div class='title'>
+            <h1 class='title'>
                 <span [innerHtml]='tooltip(itemTitle())'></span>
                 <span class='process-type-tag' [innerHtml]='tooltip(item.tender_type_he)'></span>
-            </div>
+            </h1>
             <div class='parties'>
-                <span class='from' [innerHtml]='tooltip(publisher()) + " &larr; "'></span>
+                <h2 class='from' [innerHtml]='tooltip(publisher()) + " &larr; "'></h2>
                 <ng-container *ngIf='item.awardees_text && item.simple_decision !== "פתוח"'>
                     <ng-container *ngIf='!item.entity_id'>
                         <span class='to' [innerHtml]='tooltip(item.awardees_text)'>
@@ -31,8 +31,8 @@
                     </ng-container>
                     <ng-container *ngIf='item.entity_id'>
                         <a [href]='"/i/org/" + item.entity_kind + "/" + item.entity_id'>
-                            <span class='to' [innerHtml]='tooltip(item.awardees_text)'>
-                            </span>
+                            <h2 class='to' [innerHtml]='tooltip(item.awardees_text)'>
+                            </h2>
                         </a>
                     </ng-container>
                 </ng-container>
@@ -72,25 +72,25 @@
     <div class='hero'>
         <div class='details'>   
             <div *ngIf='item.tender_type == "exemptions"'>
-                <label>סוג הליך רכש:&nbsp;</label>
+                <h3>סוג הליך רכש:&nbsp;</h3>
                 <span class='label-text'>פטור ממכרז</span><br/>
-                <label>מספר הפרסום:&nbsp;</label>
+                <h3>מספר הפרסום:&nbsp;</h3>
                 <span class='label-text' [innerHtml]='item.publication_id'></span><br/>
                 <ng-container *ngIf='item.extended_status'>
-                    <label>מצב נוכחי:&nbsp;</label>
+                    <h3>מצב נוכחי:&nbsp;</h3>
                     <span class='label-text' [innerHtml]='tooltip(item.extended_status)'></span><br/>
                 </ng-container>
                 <ng-container *ngIf='item.reason'>
-                    <label>סיבות בקשת הפטור:&nbsp;</label>
+                    <h3>סיבות בקשת הפטור:&nbsp;</h3>
                     <span class='label-text' [innerHtml]='tooltip(item.reason)'></span><br/>
                 </ng-container>
                 <ng-container *ngIf='item.regulation'>
-                    <label>הסתמכות על תקנה:&nbsp;</label>
+                    <h3>הסתמכות על תקנה:&nbsp;</h3>
                     <span class='label-text' [innerHtml]='tooltip(item.regulation)'></span><br/>
                 </ng-container>
             </div>
             <div *ngIf='item.tender_type == "office"'>
-                <label>פרטי המכרז</label><br/>
+                <h3>פרטי המכרז</h3><br/>
                 <span class='label-text'>סוג המכרז: {{item.tender_type_he}}
                 </span><br/>
                 <ng-container *ngIf='item.publication_id !== "0"'>
@@ -113,7 +113,7 @@
                 </span><br/>
             </div>
             <div *ngIf='item.tender_type == "central"'>
-                <label>פרטי המכרז</label><br/>
+                <h3>פרטי המכרז</h3><br/>
                 <span class='label-text'>סוג המכרז:
                     מרכזי 
                     <span *ngIf='item.regulation && item.regulation !== "מכרז"' [innerHtml]='" - " + tooltip(item.regulation)'></span>
@@ -182,7 +182,7 @@
             </div>
 
             <div class='awardees-mobile' *ngIf='item.awardees && item.awardees.length && item.contract_volume && item.simple_decision !== "פתוח"'>
-                <label>הזוכים במכרז</label>
+                <h3>הזוכים במכרז</h3>
                 <table>
                     <tbody>
                         <tr *ngFor='let awardee of sliced_awardees()'>
@@ -256,7 +256,7 @@
         </div>
     </div>
     <div class='attachments' *ngIf='item.documents && item.documents.length > 0'>
-        <label>קבצים מצורפים:&nbsp;</label>
+        <h3>קבצים מצורפים:&nbsp;</h3>
         <div class='file-list'>
             <div class='attachment' *ngFor='let attachment of item.documents'
                 (click)='open_document(attachment)'>

@@ -3,8 +3,8 @@
         [showSearchBar]="showSearchBar"
         [showLanguages]="showLanguages"
     ></app-bk-header>
-    <div class="app">
-    <ng-content></ng-content>
+    <div class="app" id='main'>
+        <ng-content></ng-content>
     </div>
     <app-bk-footer *ngIf="showFooter" [helpWidget]='helpWidget'></app-bk-footer>
 </ng-container>

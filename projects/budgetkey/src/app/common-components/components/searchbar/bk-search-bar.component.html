@@ -1,6 +1,6 @@
-<div class="search-box input-group input-group-lg">
+<div class="search-box input-group input-group-lg" *ngIf='!fake'>
     <div #btnSearchMenu class="input-group-addon outer-right-side roundCorners-border-right-side"
-         (click)="dropdownOpen = !dropdownOpen">
+         (click)="openCloseSearchTypeDropDown($event)">
          <div class="inner-right-side roundCorners-border-right-side"
          [ngClass]="{'has-text-all-tab': isSearchBarHasText && selectedSearchType.main,
                      'has-text-not-all-tab': isSearchBarHasText && !selectedSearchType.main,
@@ -44,7 +44,6 @@
           [autofocus]='!disableAutofocus'
           (keyup)="doSearch(searchBox.value)"
           (keyup.backspace)="doSearch(searchBox.value)"
-          (keyup.enter)="doNavigate(searchBox.value)"
           [value]="searchTerm"
           (focus)="isSearchBarHasFocus = true"
           (focusout)="isSearchBarHasFocus = false"
@@ -61,3 +60,7 @@
     </div>
 
 </div>
+
+<a class='search-box fake' *ngIf='fake' [href]='externalUrl' clickOnReturn>
+    <span>חיפוש באתר...</span>
+</a>

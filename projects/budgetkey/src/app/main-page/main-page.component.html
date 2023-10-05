@@ -22,10 +22,7 @@
                     {{ __('מחפשים משהו מסוים? גשו ישר ל') }}
                     <a href='/s/'>{{ __('חיפוש') }} 
                         <span style='font-size:65%'><i class='glyphicon glyphicon-search'></i></span></a><br/>
-                    <app-bk-search-bar [searchTerm]='""'
-                            (navigate)="onNavigate($event)"
-                            [allowSubscribe]="false"
-                    ></app-bk-search-bar>
+                    <app-bk-search-bar [searchTerm]='""' [fake]='true'></app-bk-search-bar>
                 </app-speech-bubble>
                 <app-speech-bubble kind='answer'>
                     {{ __('רוצים להבין את הכנסות המדינה - מיסים, גירעון, ענפי משק ועוד?') }}<br/>

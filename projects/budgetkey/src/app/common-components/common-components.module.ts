@@ -11,12 +11,14 @@ import { BkSubscribeStar } from './components/subscribe-star/bk-subscribe-star.c
 import { BkSubscriptionManager } from './components/subcsription-manager/bk-subscription-manager.component';
 import { ModalComponent} from './components/modal/modal.component';
 
-import { AuthModule } from '../auth/auth.module';
 import { ListsService } from './services/lists.service';
 import { HttpClientModule } from '@angular/common/http';
 import { GlobalSettingsService } from './global-settings.service';
 import { ClickOnReturnDirective } from './directives/click-on-return.directive';
 import { PlatformService } from './platform.service';
+import { AuthComponent } from './auth/auth.component';
+import { AuthService } from './auth/auth.service';
+import { RouterModule } from '@angular/router';
 
 /**
  * Created by adam on 27/12/2016.
@@ -25,8 +27,8 @@ import { PlatformService } from './platform.service';
   imports: [
     CommonModule,
     HttpClientModule,
-    AuthModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   declarations: [
     AppContainerComponent,
@@ -38,11 +40,13 @@ import { PlatformService } from './platform.service';
     BkSubscriptionManager,
     ModalComponent,
     ClickOnReturnDirective,
+    AuthComponent
   ],
   providers: [
     ListsService,
     GlobalSettingsService,
-    PlatformService
+    PlatformService,
+    AuthService
   ],
   exports: [
     AppContainerComponent,

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Question } from '../../model';
 import { Format } from '../../../format';
 import { ItemApiService } from '../../item-api.service';
+import questions from './questions';
 
 @Component({
   selector: 'app-base-org-item',
@@ -10,7 +11,6 @@ import { ItemApiService } from '../../item-api.service';
 })
 export class BaseOrgItemComponent {
   @Input() item: any;
-  @Input() questions: Question[];
 
   @Input() overrideText = false;
   @Input() overrideAmount = false;
@@ -20,8 +20,6 @@ export class BaseOrgItemComponent {
   constructor(private api: ItemApiService) { }
 
   ngOnInit(): void {
-    if (this.questions) {
-      this.api.setQuestions(this.questions);
-    }
+    this.api.setQuestions(questions);
   }
 }

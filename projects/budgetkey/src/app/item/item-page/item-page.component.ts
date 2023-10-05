@@ -79,6 +79,7 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
       untilDestroyed(this),
       delay(0),
     ).subscribe((questions: any) => {
+      console.log('QUESTIONS', questions, this.ps.browser());
       if (questions) {
         this.showQuestions = this.ps.browser();
         this.questions = questions;

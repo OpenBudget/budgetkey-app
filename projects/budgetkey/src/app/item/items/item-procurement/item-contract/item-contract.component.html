@@ -11,16 +11,16 @@
     </div>
     <div class='header'>
         <div class='titles'>
-            <div class='title'>
+            <h1 class='title'>
                 {{ item.purpose }}
                 <span class='process-type-tag'>התקשרות ממשלתית</span>
-            </div>
+            </h1>
             <div class='parties'>
-                <span class='from'>{{ publisher() }} &larr; </span>
+                <h2 class='from'>{{ publisher() }} &larr; </h2>
                 <ng-container *ngIf='toText()'>
-                    <span class='to'>
+                    <h2 class='to'>
                         {{ toText() }}
-                    </span>
+                    </h2>
                 </ng-container>
             </div>
             <div class='tags'>
@@ -52,7 +52,7 @@
     <div class='hero'>
         <div class='details'>
             <div *ngIf='item.resolved_budget_codes && item.resolved_budget_codes.length'>
-                <label>סעיף תקציבי:&nbsp;</label><br/>
+                <h3>סעיף תקציבי:&nbsp;</h3><br/>
                 <span class='label-text'>
                     <a [href]='"/i/" + item.resolved_budget_codes[0].doc_id'>
                     {{ item.resolved_budget_codes[0].title }} ({{ item.resolved_budget_codes[0].code.slice(2) }})
@@ -60,13 +60,13 @@
                 </span>
             </div>
             <div *ngIf='item.purchase_method'>
-                <label>אופן רכישה:&nbsp;</label><br/>
+                <h3>אופן רכישה:&nbsp;</h3><br/>
                 <span class='label-text'>{{ item.purchase_method }}</span>
                 <span *ngIf='item.exemption_reason && item.exemption_reason.length && item.exemption_reason[0].length && item.exemption_reason[0].length > 5'>&nbsp;({{item.exemption_reason[0]}})</span>
             </div>
             
             <div class='payments' *ngIf='paymentsTable'>
-                <label>דיווחים רבעוניים על תשלומים שבוצעו</label>
+                <h3>דיווחים רבעוניים על תשלומים שבוצעו</h3>
                 <table>
                     <thead>
                         <th></th>
@@ -112,7 +112,7 @@
             </div>
 
             <div class='payments-mobile' *ngIf='currentPaymentRow'>
-                <label>דיווחים רבעוניים על תשלומים שבוצעו</label>
+                <h3>דיווחים רבעוניים על תשלומים שבוצעו</h3>
                 <table>
                     <thead>
                         <tr>
@@ -158,9 +158,9 @@
         </div>
     </div>
     <div class='payments-graph'>
-        <label>סכום התשלומים המצטבר בהתקשרות
+        <h3>סכום התשלומים המצטבר בהתקשרות
             <span style='font-weight: normal'>(לפי רבעונים)</span>
-        </label>
+        </h3>
         <app-contract-payments [payments]='item.payments'>
         </app-contract-payments>
     </div>

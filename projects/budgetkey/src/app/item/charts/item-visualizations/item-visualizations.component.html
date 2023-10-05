@@ -4,8 +4,11 @@
         <ng-container>
           <div *ngFor="let tab of charts"
               class="tab-header"
-              [ngClass]="{active: tab == current}"
-              (click)="showTab(tab)">
+              [class.active]='tab == current'
+              role="tab" [attr.aria-selected]="tab == current"
+              (activated)="showTab(tab)"
+              clickOnReturn
+              >
               <span class='tab-title'
                     (click)="showTab(tab)">
                     {{ tab.title }}
@@ -15,14 +18,15 @@
       </div>
     </div>
     <div class="tab-contents" *ngIf="chart">
-      <div class="chart-title" [innerHtml]="current['long_title'] || current.title"></div>
+      <h2 class="chart-title" [innerHtml]="current['long_title'] || current.title"></h2>
       <div class="chart-description" *ngIf="current.description"
            [innerHtml]="current.description"></div>
       <div class="subtabs" *ngIf="subcharts">
         <div class="subtab-row">
           <div class="subtab" *ngFor="let subtab of subcharts"
               [ngClass]="{active: subtab === currentSub}"
-              (click)="showSubTab(subtab)">
+              (activated)="showSubTab(subtab)"
+              clickOnReturn>
               <input type="radio" [checked]="subtab === currentSub"/>
               <label [innerHtml]="subtab.title"></label>
           </div>
@@ -36,7 +40,7 @@
       <ng-container *ngIf="subcharts">
         <ng-container *ngFor="let subtab of subcharts">
           <ng-container *ngIf="subtab == currentSub">
-            <div class="subtab-title" *ngIf="subtab.long_title" [innerHtml]="subtab.long_title"></div>
+            <h2 class="subtab-title" *ngIf="subtab.long_title" [innerHtml]="subtab.long_title"></h2>
             <app-chart-router [chart]='chart' [item]='item'></app-chart-router>
           </ng-container>
         </ng-container>

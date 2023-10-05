@@ -1,5 +1,5 @@
 import {Component, Inject, Input, Output, EventEmitter, OnChanges, OnInit} from '@angular/core';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { ListsService, ListItem, ListContents } from '../../services/lists.service';
 import { SEARCHES_LIST } from '../../constants';
 import { first, tap } from 'rxjs/operators';

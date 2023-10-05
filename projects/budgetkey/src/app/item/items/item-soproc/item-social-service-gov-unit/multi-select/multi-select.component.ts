@@ -11,6 +11,7 @@ export class MultiSelectComponent implements OnInit {
   @Input() value: any[];
   @Input() options: {value: any; display: string}[] = [];
   @Input() id: string;
+  @Input() title: string;
   @Output() valueChange = new EventEmitter<any>();
   @Output() changed = new EventEmitter<void>();
 
@@ -87,5 +88,11 @@ export class MultiSelectComponent implements OnInit {
 
   get visible() {
     return this._visible;
+  }
+
+  keyDown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.visible = false;
+    }
   }
 }

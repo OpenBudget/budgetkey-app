@@ -9,6 +9,23 @@ header {
   background-color: #f8f8f8;
   border-color: #e7e7e7;
 
+  .skip-to-content {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    transform: translateY(-100%);
+    overflow: hidden;
+
+    &:focus {
+      transform: translateY(0);
+      background: #fff;
+      padding: 4px 8px;
+      border: 1px solid #e7e7e7;
+      height: auto;
+      width: auto;
+    }
+  }
+
   div.logo {
     width: 80px;
     height: 100%;
@@ -36,16 +53,16 @@ header {
   }
   div.menu-links {
     margin-right: auto;
-    white-space: nowrap;
     display: flex;
     align-items: center;
-    flex-flow: row-reverse;
+    flex-flow: row;
     justify-content: left;
     margin-left: 40px;
 
     a {
       margin-right: 40px;
       cursor: pointer;
+      white-space: nowrap;
 
       &, &:hover, &:visited {
         color: #192841;
@@ -131,9 +148,6 @@ header {
   }
 
   @media only screen and (min-width: 600px) and (max-width: 768px){
-    div.menu-links {
-      flex-flow: column;
-    }
   }
 
   @media only screen and (max-width: 600px) {

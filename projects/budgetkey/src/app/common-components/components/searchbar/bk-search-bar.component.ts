@@ -12,7 +12,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { GlobalSettingsService } from '../../global-settings.service';
-import { timer } from 'rxjs';
+import { first, fromEvent, timer } from 'rxjs';
 import { PlatformService } from '../../platform.service';
 
 declare var window: any;
@@ -65,10 +65,10 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   @Input() externalTitle: string;
   @Input() externalUrlParams: string;
   @Input() externalProperties: any;
+  @Input() fake = false;
   
   @Output() selected = new EventEmitter<any>();
   @Output() search = new EventEmitter<string>();
-  @Output() navigate = new EventEmitter<string>();
   
   @ViewChild('searchBox') searchBox: ElementRef;
   @ViewChild('btnSearchMenu') btnSearchMenu: ElementRef;
@@ -107,16 +107,6 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
     }
   }
   
-  
-  @HostListener('document:click', ['$event'])
-  onClickOutOfDropdown(event: any) {
-    const isClickedOnDropdown = this.btnSearchMenu.nativeElement.contains(event.target);
-    
-    if (this.dropdownOpen && !isClickedOnDropdown) {
-      this.dropdownOpen = false;
-    }
-  }
-  
   public isNumeric(n: number) {
     return n !== null && n >= 0;
   }
@@ -142,11 +132,13 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   }
     
   ngAfterViewInit() {
-    timer(100).subscribe(() => {
-      if (this.searchBox.nativeElement.offsetWidth < 500) {
-        this.forcedPlaceholder = 'בואו נחפש';
-      }
-    });
+    if (!this.fake) {
+      timer(100).subscribe(() => {
+        if (this.searchBox.nativeElement.offsetWidth < 500) {
+          this.forcedPlaceholder = 'בואו נחפש';
+        }
+      });  
+    }
   }
     
   ngOnChanges() {
@@ -164,8 +156,14 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
     this.search.emit(term);
   }
   
-  openCloseSearchTypeDropDown() {
+  openCloseSearchTypeDropDown(event?: MouseEvent) {
+    event?.stopPropagation();
     this.dropdownOpen = !this.dropdownOpen;
+    if (this.dropdownOpen) {
+      fromEvent(window, 'click').pipe(first()).subscribe(() => {
+        this.dropdownOpen = false;
+      });
+    }
   }
   
   switchTab($event: any, selectedSearchType: any) {
@@ -176,13 +174,6 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
     this.calcExternalUrl();
     
     this.selected.emit(selectedSearchType);
-  }
-  
-  doNavigate(term: string) {
-    this.searchTerm = term;
-    this.calcExternalUrl();
-    
-    this.navigate.emit(this.externalUrl);
   }
   
   glassIcon() {

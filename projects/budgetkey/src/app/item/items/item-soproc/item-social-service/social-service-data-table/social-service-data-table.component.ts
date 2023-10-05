@@ -117,10 +117,6 @@ export class SocialServiceDataTableComponent implements OnInit, OnChanges {
       const url = `https://next.obudget.org/datapackages/reports/services/שירותים חברתיים - ${this.item.office}.xlsx`;
       return url;
     }
-
-    doSearch(href: string) {
-      window.open(href, '_self');
-    }
   
     replaceAll(query: string, conf: any[]) {
       for (const {from, to} of conf) {

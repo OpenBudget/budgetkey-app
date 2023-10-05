@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
-import { PlatformService } from '../common-components/platform.service';
+import { PlatformService } from '../platform.service';
 
 
 @Component({

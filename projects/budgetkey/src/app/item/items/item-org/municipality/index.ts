@@ -1,5 +1,5 @@
 import { MuniDescriptor } from '../../../model';
-import questions from '../questions';
+import questions from '../../base-org-item/questions';
 
 export default new MuniDescriptor({
   pathPrefix: 'org/municipality',

@@ -12,11 +12,17 @@
     font-weight: normal;
     color: #512C0A;
 
-    label, th {
+    label, th, h3 {
+        margin: 0;
         padding-top: 13px;
         font-weight: bold;
         color: #19008F;
         white-space: nowrap;
+    }
+
+    h3 {
+        font-size: inherit;
+        display: inline-block;
     }
 
     .alert {
@@ -127,6 +133,11 @@
             .titles {
                 flex: 7;
     
+                h1, h2 {
+                    line-height: 1.25;
+                    margin: 0;
+                }
+
                 .process-type-tag {
                     display: inline-block;
                     border-radius: 4px;	
@@ -142,10 +153,9 @@
     
                 .title {
                     font-family: "Miriam Libre";	
-                    font-size: 26px;	
+                    font-size: 26px;
                     font-weight: bold;
                     color: #19008F;
-
                 }
     
                 .parties {
@@ -154,12 +164,18 @@
                     font-size: 26px;
     
                     .from {
+                        display: inline;
+                        margin: 0;
+                        font-size: 26px;
                         font-weight: bold;
                     }
     
-                    // .to {
-    
-                    // }
+                    .to {
+                        display: inline;
+                        font-size: 26px;
+                        margin: 0;
+                        font-weight: 400;
+                    }
     
                     .to-entity-id {
                         display: none;

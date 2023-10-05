@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../common-components/auth/auth.service';
 
 @Component({
   selector: 'app-bare-search-bar',

@@ -3,7 +3,7 @@ import { Format } from '../../../format';
 import { timer } from 'rxjs';
 import { GlobalSettingsService } from '../../../common-components/global-settings.service';
 import { ItemApiService } from '../../item-api.service';
-import questions from '../item-org/questions';
+import questions from '../base-org-item/questions';
 
 @Component({
   selector: 'app-item-muni',

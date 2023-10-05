@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import { SearchParams } from '../model';
 import { SearchState } from '../search-state/search-state';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../common-components/auth/auth.service';
 import { filter, first, switchMap } from 'rxjs/operators';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { SearchBarType } from '../../common-components/components/searchbar/bk-search-bar.component';

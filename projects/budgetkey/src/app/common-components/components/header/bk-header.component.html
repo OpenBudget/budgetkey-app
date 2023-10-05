@@ -1,19 +1,20 @@
 <header>
+    <a class="skip-to-content" [routerLink]="['.']" [fragment]='"main"' [queryParamsHandling]='"preserve"'>דלג לתוכן עיקרי</a>
     <div class="logo">
       <a [href]="globalSettings.theme.siteUrl"  aria-label='homepage' [style.background-image]='"url(assets/common/img/" + globalSettings.theme.siteLogo + ")"'>
       </a>
     </div>
     <div *ngIf="showSearchBar" class="search-div">
-      <app-bk-search-bar (navigate)="doSearch($event)" [disableAutofocus]='true' [allowSubscribe]="true"></app-bk-search-bar>
+      <app-bk-search-bar [fake]='true'></app-bk-search-bar>
     </div>
     <div class="menu-links">
       <ng-container *ngFor="let link of globalSettings.theme.headerLinks">
-        <a [href]="link.href" [innerHtml]='link.title' target='_blank'></a>
+        <a [href]="link.href" [innerHtml]='link.title' target='_blank' clickOnReturn></a>
       </ng-container>
       <ng-container *ngIf='showLanguages'>
-        <a (click)='switchLang("en")'>En</a>
-        <a (click)='switchLang("ar")'>عر</a>
-        <a (click)='switchLang("he")'>עב</a>
+        <a (activated)='switchLang("en")' clickOnReturn>En</a>
+        <a (activated)='switchLang("ar")' clickOnReturn>عر</a>
+        <a (activated)='switchLang("he")' clickOnReturn>עב</a>
       </ng-container>
     </div>
     <div *ngIf="showSearchBar" class="collapsed-search" (click)='doSearch()'>
@@ -23,7 +24,7 @@
       <i class="glyphicon glyphicon-menu-hamburger"></i>
       <div class='menu'>
         <ng-container *ngFor="let link of globalSettings.theme.headerLinks">
-          <span class='menu-line' (click)="doNavigate(link.href)" [innerHtml]='link.title'></span>
+          <a class='menu-line' (activated)="doNavigate(link.href)" [innerHtml]='link.title' clickOnReturn></a>
         </ng-container>
       </div>
     </div>

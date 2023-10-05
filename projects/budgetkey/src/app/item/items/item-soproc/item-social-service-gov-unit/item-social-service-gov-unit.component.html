@@ -3,8 +3,10 @@
     <div class='soproc-bg'></div>
     <h1>מפתח לרכש החברתי</h1>
 
-    <div class='page-links'>
-        <a *ngFor='let link of PAGE_LINKS' [href]='link.href + "?theme=soproc"' [class.active]='item.breadcrumbs === link.title'>{{ link.title }}</a>
+    <div class='page-links' aria-role='menu'>
+        <a *ngFor='let link of PAGE_LINKS' [href]='link.href + "?theme=soproc"' 
+           [attr.aria-current]='item.breadcrumbs === link.title ? "page" : null'
+           [class.active]='item.breadcrumbs === link.title'>{{ link.title }}</a>
     </div>
 
     <div class='intro' *ngIf="!item.office">
@@ -76,7 +78,7 @@
             <div class='filter' *ngFor='let filter of PAGE_FILTERS'>
                 <label [for]='filter.id' *ngIf='!filter.tooltip'>{{ filter.title }}</label>
                 <label [for]='filter.id' *ngIf='filter.tooltip' class='bk-tooltip-anchor'>{{ filter.title }}<span class='bk-tooltip'>{{ filter.tooltip }}</span></label>
-                <app-multi-select [(value)]='filters[filter.id]' [id]='filter.id' [options]='parameters[filter.id]'></app-multi-select>
+                <app-multi-select [title]='filter.title' [(value)]='filters[filter.id]' [id]='filter.id' [options]='parameters[filter.id]'></app-multi-select>
             </div>
             <div class='filter' *ngIf='subunits'>
                 <label>מנהל/אגף</label>
@@ -88,22 +90,25 @@
         </div>
         <div class='subtext'>
             <span>לסימון מספר אפשרויות יש להשתמש בכפתורי Shift/Ctrl/Cmd במקלדת</span>
-            <a class='clear-filters' (click)='clearFilters()'>ניקוי כל הסינונים</a>
-            <button type='button' class='apply-filters' (click)='filtersChanged()'>סינון</button>
+            <a class='clear-filters' (activated)='clearFilters()' clickOnReturn>ניקוי כל הסינונים</a>
+            <button type='button' class='apply-filters' (activated)='filtersChanged()' clickOnReturn>סינון</button>
         </div>
     </div>
 </div>
 
-<div class='tab-selectors' #tabs>
-    <a [class.active]='currentTab === "services"' (activated)='currentTab = "services"' tabindex='0' clickOnReturn>תמונת השירותים</a>
-    <a [class.active]='currentTab === "suppliers"' (activated)='currentTab = "suppliers"' tabindex='0' clickOnReturn>הרחבה לגבי מפעילי השירותים</a>
-    <a [class.active]='currentTab === "tenders"' (activated)='currentTab = "tenders"' tabindex='0' clickOnReturn>הרחבה על הליכי רכש (בהרצה)</a>
+<div class='tab-selectors' #tabs aria-role='menu' aria-label='תפריט תרשימים' aria-orientation='horizontal'>
+    <a [class.active]='currentTab === "services"' (activated)='currentTab = "services"' tabindex='0' clickOnReturn
+        [attr.aria-selected]='currentTab === "services"'>תמונת השירותים</a>
+    <a [class.active]='currentTab === "suppliers"' (activated)='currentTab = "suppliers"' tabindex='0' clickOnReturn
+        [attr.aria-selected]='currentTab === "suppliers"'>הרחבה לגבי מפעילי השירותים</a>
+    <a [class.active]='currentTab === "tenders"' (activated)='currentTab = "tenders"' tabindex='0' clickOnReturn
+        [attr.aria-selected]='currentTab === "tenders"'>הרחבה על הליכי רכש (בהרצה)</a>
 </div>
 
 <div class='charts columns-2'>
     <ng-container *ngFor='let ct of chartTemplates'>
         <ng-container *ngIf='charts[ct.id] && currentTab === ct.location'>
-            <div class='single-chart'>
+            <div class='single-chart' role='figure' [attr.aria-label]='ct.title + " - " + (ct._subtitle || "")'>
                 <div class='chart-title' [innerHtml]='processTitles(ct)'></div>
                 <div class='chart-subtitle'>{{ct._subtitle}}</div>
                 <app-chart-plotly [layout]='charts[ct.id].layout' [data]='charts[ct.id].data'></app-chart-plotly>

@@ -4,7 +4,6 @@ import { MainPageComponent } from './main-page.component';
 import { MainPageRoutingModule } from './main-page-routing.module';
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { SpeechBubbleComponent } from './speech-bubble/speech-bubble.component';
-import { AuthModule } from '../auth/auth.module';
 import { MainPageSummaryComponent } from './main-page-summary/main-page-summary.component';
 import { HeroComponent } from './hero/hero.component';
 import { CategoryVisualizationComponent } from './category-visualization/category-visualization.component';
@@ -27,7 +26,6 @@ import { NgxSeoModule } from '@avivharuzi/ngx-seo';
   imports: [
     CommonModule,
     CommonComponentsModule,
-    AuthModule,
     MainPageRoutingModule,
     MushonkeyModule,
   ],

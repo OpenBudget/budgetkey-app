@@ -1,4 +1,4 @@
-<app-bk-search-bar (navigate)="doSearch($event)" [disableAutofocus]='true' [allowSubscribe]="false"></app-bk-search-bar>
+<app-bk-search-bar [fake]='true'></app-bk-search-bar>
 
 <div class='tab-selectors'>
     <span>מידע גולמי עבור:</span>
@@ -15,10 +15,10 @@
             <span class='pager-control' disabled>הקודם</span>
         </ng-container>
         <ng-container *ngIf='currentTable.currentPage > 0'>
-            <a class='pager-control active' (activated)='movePage(-1)' tabindex="0" clickOnReturn>הקודם</a>
+            <a class='pager-control active' (activated)='movePage(-1)' clickOnReturn aria-label='מעבר לעמוד התוצאות הקודם'>הקודם</a>
         </ng-container>
         <ng-container *ngIf='currentTable.currentPage < currentTable.totalPages - 1'>
-            <a class='pager-control active' (activated)='movePage(1)' tabindex="0" clickOnReturn>הבא</a>
+            <a class='pager-control active' (activated)='movePage(1)' clickOnReturn aria-label='מעבר לעמוד התוצאות הבא'>הבא</a>
         </ng-container>
         <ng-container *ngIf='currentTable.currentPage === currentTable.totalPages - 1'>
             <span class='pager-control'>הבא</span>
@@ -26,17 +26,17 @@
     </div>
     <form class='download' [action]='download()' method='post' name='download' ngNoForm>
         <input type='hidden' name='query' [value]='currentTable.actualQuery'>
-        <button type='submit' tabindex="0">
+        <button type='submit' clickOnReturn>
             הורדת הטבלה לאקסל עם שדות נוספים&nbsp;&nbsp;<img src='assets/item/img/icon-xlsx.svg' alt='download to excel'>
         </button>
-        <a [href]='downloadReportUrl()' tabindex="0" *ngIf='item.office'>
+        <a [href]='downloadReportUrl()' *ngIf='item.office' clickOnReturn>
             הורדת דו״ח כוללני עבור {{item.office}}&nbsp;&nbsp;<img src='assets/item/img/icon-xlsx.svg' alt='download to excel'>
         </a>    
     </form>
 </div>
 
 <div class='filters' *ngIf='hasActive()'>
-    <input type='checkbox' id='only-active' [(ngModel)]='currentTable.onlyActive' (change)='refreshTable(currentTable)'>
+    <input type='checkbox' id='only-active' [(ngModel)]='currentTable.onlyActive' (change)='refreshTable(currentTable)' clickOnReturn>
     <label for='only-active'>הצגת רק שורות פעילות</label>
 </div>
 
@@ -45,7 +45,11 @@
         <thead>
             <ng-container *ngFor='let header of currentTable.uiHeaders; let i = index' >
                 <th>
-                    <a (activated)='sortBy(currentTable.sorting[i])' [innerHtml]='header' tabindex="0" clickOnReturn></a>
+                    <a (activated)='sortBy(currentTable.sorting[i])' [innerHtml]='header' tabindex="0" clickOnReturn
+                        [attr.aria-label]='header + " לחץ למיון לפי השדה הנבחר"'
+                        [attr.aria-pressed]='currentTable.sorting[i] === currentTable.sortField'
+                        [attr.aria-sort]='currentTable.sorting[i] === currentTable.sortField ? currentTable.sortDirectionDesc ? "descending" : "ascending" : null'
+                    ></a>
                     <i class="fa fa-chevron-down" *ngIf='currentTable.sorting[i] === currentTable.sortField && currentTable.sortDirectionDesc'></i>
                     <i class="fa fa-chevron-up" *ngIf='currentTable.sorting[i] === currentTable.sortField && !currentTable.sortDirectionDesc'></i>
                 </th> 
