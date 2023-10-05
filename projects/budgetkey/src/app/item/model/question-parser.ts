@@ -1,9 +1,10 @@
-import { format_number } from '../pipes';
+import { Format } from '../../format';
 import { Question } from './questions';
 
 export class QuestionParser {
     private static SIMPLE_MODIFIER = /:([-a-z_]+)$/;
     private static PARAMETER_MODIFIER = /:([-a-z_]+\([a-z_]+\))$/;
+    private static format = new Format();
 
     private static getFormatter(mod: string, themeId: string) {
       // Simple modifiers first
@@ -12,7 +13,7 @@ export class QuestionParser {
           x = parseFloat(x);
 
           return isFinite(x)
-            ? format_number(x)
+            ? this.format.number(x)
             : '-';
         };
       } else if (mod === 'budget_code') {

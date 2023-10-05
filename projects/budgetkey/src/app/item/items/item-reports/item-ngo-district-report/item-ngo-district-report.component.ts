@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Indicator } from '../../../model';
 import questions from './questions';
-import { Format } from '../../format';
+import { Format } from '../../../../format';
 
 @Component({
   selector: 'app-item-ngo-district-report',

@@ -3,6 +3,7 @@ import { ReplaySubject } from 'rxjs';
 import { ListItem, ListsService } from '../../common-components/services/lists.service';
 import { AuthService } from '../../auth/auth.service';
 import { SEARCHES_LIST } from '../../common-components/constants';
+import { PlatformService } from '../../common-components/platform.service';
 
 declare const window: any;
 
@@ -19,7 +20,7 @@ export class ProfilePageComponent {
   hasItems = false;
   loginUrl: string | null = null;
   
-  constructor(private lists: ListsService, private auth: AuthService) {
+  constructor(private lists: ListsService, private auth: AuthService, private ps: PlatformService) {
     this.updateItems();
   }
   
@@ -53,16 +54,18 @@ export class ProfilePageComponent {
   }
   
   refreshShareThis() {
-    if (window.__sharethis__ && window.__sharethis__.initialize) {
-      window.setTimeout(() => {
-        window.__sharethis__.initialize();
-      }, 1000);
-    } else {
-      console.log('Failed to find ShareThis buttons');
-      window.setTimeout(() => {
-        this.ngAfterViewInit();
-      }, 3000);
-    }
+    this.ps.browser(() => {
+      if (window.__sharethis__ && window.__sharethis__.initialize) {
+        window.setTimeout(() => {
+          window.__sharethis__.initialize();
+        }, 1000);
+      } else {
+        console.log('Failed to find ShareThis buttons');
+        window.setTimeout(() => {
+          this.ngAfterViewInit();
+        }, 3000);
+      }
+    });
   }
   
 }

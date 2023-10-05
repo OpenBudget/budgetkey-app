@@ -1,5 +1,7 @@
 <app-base-budget-item [item]='item' [questions]='questions'>
-    <ng-container class='preTitleTemplate'>{{item['nice-code']}}</ng-container>
+    <ng-container class='preTitleTemplate'>
+        {{item['nice-code']}}
+    </ng-container>
     <ng-container class='subtitleTemplate'>
         תכנית בתקציב המדינה - תחת תחום
         <app-item-link [itemId]='parentId'>{{parent}}</app-item-link>

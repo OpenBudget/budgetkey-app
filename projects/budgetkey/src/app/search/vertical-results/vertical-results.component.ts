@@ -7,6 +7,7 @@ import { GlobalSettingsService } from '../../common-components/global-settings.s
 import { SearchApiService } from '../search-api.service';
 import { SearchBarType } from '../../common-components/components/searchbar/bk-search-bar.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { PlatformService } from '../../common-components/platform.service';
 
 @UntilDestroy()
 @Component({
@@ -29,6 +30,7 @@ export class VerticalResultsComponent implements OnInit, OnDestroy {
   constructor(
     private searchService: SearchApiService,
     private globalSettings: GlobalSettingsService,
+    private ps: PlatformService
   ) {
   }
 
@@ -48,18 +50,20 @@ export class VerticalResultsComponent implements OnInit, OnDestroy {
       this.searching.emit(outcome.isSearching);
     });
 
-    scheduled(fromEvent(window, 'scroll'), animationFrameScheduler).pipe(
-      untilDestroyed(this),
-    ).subscribe(() => {
-      if (window.innerHeight + window.scrollY + 300 > window.document.body.scrollHeight) {
-        if (!this.gotMore) {
-          this.gotMore = true;
-          this.searchManager.getMore();
-          this.searchManager.searchResults.pipe(first()).subscribe(() => {
-            this.gotMore = false;
-          });
+    this.ps.browser(() => {
+      scheduled(fromEvent(window, 'scroll'), animationFrameScheduler).pipe(
+        untilDestroyed(this),
+      ).subscribe(() => {
+        if (window.innerHeight + window.scrollY + 300 > window.document.body.scrollHeight) {
+          if (!this.gotMore) {
+            this.gotMore = true;
+            this.searchManager.getMore();
+            this.searchManager.searchResults.pipe(first()).subscribe(() => {
+              this.gotMore = false;
+            });
+          }
         }
-      }
+      });
     });
   }
 

@@ -12,6 +12,7 @@ import { CategoryVisualizationInfoPopupComponent } from './category-visualizatio
 import { MushonkeyModule } from 'mushonkey';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilsService } from './utils.service';
+import { NgxSeoModule } from '@avivharuzi/ngx-seo';
 
 
 @NgModule({

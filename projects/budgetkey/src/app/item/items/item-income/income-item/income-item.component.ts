@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Question } from '../../../model';
-import { Format } from '../../format';
+import { Format } from '../../../../format';
 import questions from '../questions';
 
 @Component({

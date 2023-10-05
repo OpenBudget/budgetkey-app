@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { format_number } from '../../pipes';
 
 import { scaleLinear, ScaleLinear } from 'd3-scale';
 import { select } from 'd3-selection';
 import { max } from 'd3-array';
+import { Format } from '../../../format';
 
 @Component({
   selector: 'app-contract-payments',
@@ -21,6 +21,8 @@ export class ContractPaymentsComponent implements AfterViewInit {
   private data: any[];
   private x: ScaleLinear<number, number>;
   private y: ScaleLinear<number, number>;
+
+  format = new Format();
 
   constructor() {}
 
@@ -105,6 +107,6 @@ export class ContractPaymentsComponent implements AfterViewInit {
        .style('top',
               (p) => (this.y(this.data[this.data.length - 1].executed) - this.TEXT_SIZE) + 'px')
        .style('width', (p) => (this.x(1) - this.x(0)) + 'px')
-       .html((p) => format_number(this.data[this.data.length - 1].executed) + '₪');
+       .html((p) => this.format.number(this.data[this.data.length - 1].executed) + '₪');
   }
 }

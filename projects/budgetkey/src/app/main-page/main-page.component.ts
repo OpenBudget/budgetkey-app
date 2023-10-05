@@ -3,6 +3,9 @@ import { bubbles } from './bubbles';
 import { HttpClient } from '@angular/common/http';
 import { GlobalSettingsService } from '../common-components/global-settings.service';
 import { switchMap } from 'rxjs';
+import { PlatformService } from '../common-components/platform.service';
+import { Router } from '@angular/router';
+import { NgxSeoService } from '@avivharuzi/ngx-seo';
 
 
 const _TRANSLATIONS: any = {};
@@ -32,7 +35,7 @@ export class MainPageComponent {
   public adVisible = false;
   public translationsLoaded = false;
 
-  constructor(private globalSettings: GlobalSettingsService, private http: HttpClient) {
+  constructor(private globalSettings: GlobalSettingsService, private http: HttpClient, private ps: PlatformService, private router: Router, private ngxSeoService: NgxSeoService) {
     this.year = bubbles.year;
     this.funcCategories = bubbles.func;
     this.econCategories = bubbles.econ;
@@ -44,7 +47,7 @@ export class MainPageComponent {
     this.proposalAmount = bubbles.proposalAmount;
     this.prevProposalAmount = bubbles.prevProposalAmount;
     globalSettings.ready.pipe(
-      switchMap(() => this.http.get(`/assets/themes/main_page.translations.${globalSettings.lang}.json`))
+      switchMap(() => this.http.get(ps.BASE + `/assets/themes/main_page.translations.${globalSettings.lang}.json`))
     ).subscribe((translations: any) => {
       Object.assign(_TRANSLATIONS, translations);
       this.translationsLoaded = true;
@@ -58,9 +61,16 @@ export class MainPageComponent {
 
   ngOnInit() {
     this.adVisible = true;
+    this.globalSettings.ready.subscribe(() => {
+      this.ngxSeoService.setSeo({
+        title: this.globalSettings.siteName,
+      });
+    });
   }
 
   onNavigate(url: string) {
-    window.location.href = url;
+    console.log('WWWW', url);
+    window.open(url, '_self');
+    // this.router.navigateByUrl(url);
   }
 }

@@ -13,6 +13,9 @@ import {
 } from '@angular/core';
 import { GlobalSettingsService } from '../../global-settings.service';
 import { timer } from 'rxjs';
+import { PlatformService } from '../../platform.service';
+
+declare var window: any;
 
 export class FilterOption {
   id: string;
@@ -77,10 +80,10 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   public externalUrl: string;
   public forcedPlaceholder: string;
   
-  constructor (public globalSettings: GlobalSettingsService) {
+  constructor (public globalSettings: GlobalSettingsService, private ps: PlatformService) {
   }
   
-  public static buildExternalUrl(searchTerm: string, searchType: SearchBarType, extraUrlParams: string | null, theme: any | null, lang: string | null) {
+  public static buildExternalUrl(searchTerm: string, searchType: SearchBarType, extraUrlParams: string | null, theme: any | null, lang: string | null, hostname: string) {
     let urlParams =
     'q=' + encodeURIComponent(searchTerm) +
     '&dd=' + searchType.id;
@@ -95,7 +98,13 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
       params.set('lang', lang);
     }
     urlParams = params.toString();
-    return 'https://next.obudget.org/s/?' + urlParams;
+    const url = '/s/?' + urlParams;
+    console.log('BUILDING URL', url, hostname);
+    if (hostname !== 'next.obudget.org' && hostname.indexOf('localhost') !== 0) {
+      return 'https://next.obudget.org' + url;
+    } else {
+      return url;
+    }
   }
   
   
@@ -118,67 +127,67 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
       this.selectedSearchType,
       this.externalUrlParams,
       this.globalSettings.theme,
-      this.globalSettings.lang
-      );
-    }
+      this.globalSettings.lang,
+      this.ps.browser() ? window.location.hostname : 'next.obudget.org'
+    );
+  }
     
-    ngOnInit() {
-      this.searchTypes = this.searchTypes || this.globalSettings.theme.searchBarConfig;
-      this.searchTerm = this.searchTerm || '';
-      this.selectedSearchType = this.selectedSearchType || this.searchTypes[0];
-      this.isSearchBarHasText = this.searchTerm !== '';
-      this.showSubscribe = !this.globalSettings.theme.disableAuth && this.allowSubscribe;
-      this.calcExternalUrl();
-    }
+  ngOnInit() {
+    this.searchTypes = this.searchTypes || this.globalSettings.theme.searchBarConfig;
+    this.searchTerm = this.searchTerm || '';
+    this.selectedSearchType = this.selectedSearchType || this.searchTypes[0];
+    this.isSearchBarHasText = this.searchTerm !== '';
+    this.showSubscribe = !this.globalSettings.theme.disableAuth && this.allowSubscribe;
+    this.calcExternalUrl();
+  }
     
-    ngAfterViewInit() {
-      timer(100).subscribe(() => {
-        if (this.searchBox.nativeElement.offsetWidth < 500) {
-          this.forcedPlaceholder = 'בואו נחפש';
-        }
-      });
-    }
-    
-    ngOnChanges() {
-      if (this.selectedSearchType) {
-        this.calcExternalUrl();
+  ngAfterViewInit() {
+    timer(100).subscribe(() => {
+      if (this.searchBox.nativeElement.offsetWidth < 500) {
+        this.forcedPlaceholder = 'בואו נחפש';
       }
-    }
+    });
+  }
     
-    doSearch(term: string) {
-      this.isSearchBarHasText = term !== '';
-      
-      this.searchTerm = term;
+  ngOnChanges() {
+    if (this.selectedSearchType) {
       this.calcExternalUrl();
-      
-      this.search.emit(term);
-    }
-    
-    openCloseSearchTypeDropDown() {
-      this.dropdownOpen = !this.dropdownOpen;
-    }
-    
-    switchTab($event: any, selectedSearchType: any) {
-      $event.stopPropagation();
-      $event.preventDefault();
-      
-      this.selectedSearchType = selectedSearchType;
-      this.calcExternalUrl();
-      
-      this.selected.emit(selectedSearchType);
-    }
-    
-    doNavigate(term: string) {
-      this.searchTerm = term;
-      this.calcExternalUrl();
-      
-      this.navigate.emit(this.externalUrl);
-    }
-    
-    glassIcon() {
-      return (!this.selectedSearchType.main && this.isSearchBarHasText)
-      ? 'assets/common/img/search-glass-white.svg' :
-      'assets/common/img/search-glass-red.svg';
     }
   }
   
+  doSearch(term: string) {
+    this.isSearchBarHasText = term !== '';
+    
+    this.searchTerm = term;
+    this.calcExternalUrl();
+    
+    this.search.emit(term);
+  }
+  
+  openCloseSearchTypeDropDown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+  
+  switchTab($event: any, selectedSearchType: any) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    
+    this.selectedSearchType = selectedSearchType;
+    this.calcExternalUrl();
+    
+    this.selected.emit(selectedSearchType);
+  }
+  
+  doNavigate(term: string) {
+    this.searchTerm = term;
+    this.calcExternalUrl();
+    
+    this.navigate.emit(this.externalUrl);
+  }
+  
+  glassIcon() {
+    return (!this.selectedSearchType.main && this.isSearchBarHasText)
+    ? 'assets/common/img/search-glass-white.svg' :
+    'assets/common/img/search-glass-red.svg';
+  }
+}

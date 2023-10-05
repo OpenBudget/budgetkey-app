@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { Format } from '../format';
+import { Format } from '../../../format';
 
 @Component({
   selector: 'app-item-procurement',

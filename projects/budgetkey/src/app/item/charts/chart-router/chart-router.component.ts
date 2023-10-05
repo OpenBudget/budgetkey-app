@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { PlatformService } from '../../../common-components/platform.service';
 
 @Component({
   selector: 'app-chart-router',
@@ -8,6 +9,12 @@ import { Component, Input } from '@angular/core';
 export class ChartRouterComponent {
   @Input() public item: any;
   @Input() public chart: any;
+
+  show = false;
+
+  constructor(private ps: PlatformService) {
+    this.show = this.ps.browser();
+  }
 
   orgCredentialsPath() {
     const rad = Math.PI * this.item.details.pct_proper_management_in_field_of_activity / 50;

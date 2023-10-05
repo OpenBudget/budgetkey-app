@@ -10,11 +10,7 @@ import { GlobalSettingsService } from '../../common-components/global-settings.s
 import { SearchBarType } from '../../common-components/components/searchbar/bk-search-bar.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { timer } from 'rxjs';
-
-
-const gtag: any = (window as any)['gtag'];
-
-
+import { PlatformService } from '../../common-components/platform.service';
 
 @UntilDestroy()
 @Component({
@@ -41,6 +37,7 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public globalSettings: GlobalSettingsService,
+    private ps: PlatformService
   ) {
     this.searchState = new SearchState(<SearchBarType[]>this.globalSettings.theme.searchBarConfig);
     this.docTypes = this.globalSettings.theme.searchBarConfig;
@@ -80,14 +77,17 @@ export class SearchComponent implements OnInit {
       
       this.updateSubscriptionProperties(sp);
       
-      if (sp.offset === 0) {
-        if (gtag) {
-          gtag('event', 'search', { 
-            search_term: sp.term,
-            kinds: sp.docType.id 
-          });
+      this.ps.browser(() => {
+        const gtag: any = (window as any)['gtag'];
+        if (sp.offset === 0) {
+          if (gtag) {
+            gtag('event', 'search', { 
+              search_term: sp.term,
+              kinds: sp.docType.id 
+            });
+          }
         }
-      }
+      });
     });
       
     // Handle the URL query params

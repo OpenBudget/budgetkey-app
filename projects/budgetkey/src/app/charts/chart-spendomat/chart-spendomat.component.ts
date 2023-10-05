@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Format } from '../../item/items/format';
+import { Format } from '../../format';
 
 @Component({
   selector: 'app-chart-spendomat',

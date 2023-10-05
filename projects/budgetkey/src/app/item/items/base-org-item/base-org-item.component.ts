@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Question } from '../../model';
-import { Format } from '../format';
+import { Format } from '../../../format';
 import { ItemApiService } from '../../item-api.service';
 
 @Component({

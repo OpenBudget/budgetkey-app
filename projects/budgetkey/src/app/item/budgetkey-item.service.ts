@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Item } from './model';
-import { Format } from './items/format';
+import { Format } from '../format';
 import { GlobalSettingsService } from '../common-components/global-settings.service';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { Format } from "../items/format";
+import { Format } from "../../format";
 import { Question } from "../model";
 
 export class QuestionParser {

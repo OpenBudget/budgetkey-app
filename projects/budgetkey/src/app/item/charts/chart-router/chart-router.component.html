@@ -1,19 +1,21 @@
-<app-chart-plotly          *ngIf="chart.type == 'plotly'"
-    [data]="chart.chart"
-    [layout]="chart.layout"
-></app-chart-plotly>
-<app-chart-mushonkey            *ngIf="chart.type == 'mushonkey'"
-    [data]="chart.chart"
-></app-chart-mushonkey>
+<ng-container *ngIf='show'>
+    <app-chart-mushonkey            *ngIf="chart.type == 'mushonkey'"
+        [data]="chart.chart"
+    ></app-chart-mushonkey>
+    <app-chart-plotly              *ngIf="chart.type == 'plotly'"
+        [data]="chart.chart"
+        [layout]="chart.layout"
+    ></app-chart-plotly>
+    <app-chart-pointatron           *ngIf="chart.type == 'pointatron'"
+        [data]="chart.chart"
+    ></app-chart-pointatron>
+</ng-container>
 <app-chart-horizontal-barchart  *ngIf="chart.type == 'horizontal-barchart'"
     [data]="chart.chart"
 ></app-chart-horizontal-barchart>
 <app-chart-vertical-layout *ngIf="chart.type == 'vertical'"
                     [data]="chart.chart" [item]='item'
 ></app-chart-vertical-layout>
-<app-chart-pointatron           *ngIf="chart.type == 'pointatron'"
-        [data]="chart.chart"
-></app-chart-pointatron>
 <app-chart-comparatron          *ngIf="chart.type == 'comparatron'"
         [data]="chart.chart"
 ></app-chart-comparatron>

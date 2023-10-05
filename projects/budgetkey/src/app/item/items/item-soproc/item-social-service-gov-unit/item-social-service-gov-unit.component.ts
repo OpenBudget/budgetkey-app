@@ -4,6 +4,7 @@ import { BudgetKeyItemService } from '../../../budgetkey-item.service';
 import { tableDefs } from './tables';
 import { chartTemplates } from './charts';
 import { GlobalSettingsService } from 'projects/budgetkey/src/app/common-components/global-settings.service';
+import { PlatformService } from 'projects/budgetkey/src/app/common-components/platform.service';
 
 @Component({
   selector: 'app-item-social-service-gov-unit',
@@ -83,7 +84,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   public xValues: any = {};
   public sticky = false;
 
-  constructor(private api: BudgetKeyItemService, private globalSettings: GlobalSettingsService) {
+  constructor(private api: BudgetKeyItemService, private globalSettings: GlobalSettingsService, private ps: PlatformService) {
     const fields = ['subject', 'intervention', 'target_audience', 'target_age_group'];
     from(fields).pipe(
       mergeMap((field) => {
@@ -115,12 +116,17 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
         this.subunits = this.xValues[this.item.office];
       }
     });
-    if (window.innerWidth < 600) {
-      alert('מומלץ לפתוח ממחשב שולחני לשימוש מיטבי');
-    }
+    this.ps.browser(() => {
+      if (window.innerWidth < 600) {
+        alert('מומלץ לפתוח ממחשב שולחני לשימוש מיטבי');
+      }
+    });
   }
 
   ngAfterViewInit() {
+    if (this.ps.server()) {
+      return;
+    }
     this.ready.pipe(
       first(),
       switchMap(() => this.colorscheme),
@@ -370,7 +376,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   }
 
   stickyTop() {
-    if (this.filtersElement && this.filtersElement.nativeElement) {
+    if (this.ps.browser() && this.filtersElement && this.filtersElement.nativeElement) {
       const el = this.filtersElement.nativeElement;
       const top = el.offsetTop;
       return `-${top}px`;

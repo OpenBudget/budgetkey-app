@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 
 @Component({
@@ -6,11 +6,15 @@ import { Component, Input } from '@angular/core';
   templateUrl: './muni-item-tidbit.component.html',
   styleUrls: ['./muni-item-tidbit.component.less']
 })
-export class MuniItemTidbitComponent {
+export class MuniItemTidbitComponent implements OnChanges {
   
   @Input() item: any;
   @Input() name = false;
   @Input() kind = 'string';
+
+  ngOnChanges() {
+    this.item = this.item || {};
+  }
 
   get value() {
     if (!this.item) {

@@ -1,5 +1,6 @@
 import {Component, Inject, Input} from '@angular/core';
 import { GlobalSettingsService } from '../../global-settings.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-bk-header',
@@ -12,14 +13,14 @@ export class BkHeaderComponent {
     @Input() showLanguages = false;
     public showAuth = false;
 
-    constructor (public globalSettings: GlobalSettingsService) {
+    constructor (public globalSettings: GlobalSettingsService, private router: Router) {
       this.showAuth = !globalSettings.theme.disableAuth;
     }
 
     doSearch(href?: string) {
-      const themeId = this.globalSettings.theme.themeId || 'budgetkey';
-      const _href = href || `//next.obudget.org/s/?theme=${themeId}&lang=${this.globalSettings.lang}`;
-      window.open(_href, '_self');
+      const themeId = this.globalSettings.theme.themeId;
+      let _href = href || `https://next.obudget.org/s/?theme=${themeId}&lang=${this.globalSettings.lang}`;
+      this.doNavigateURL(_href, '_self');
     }
 
     switchLang(lang: string) {
@@ -37,6 +38,11 @@ export class BkHeaderComponent {
     }
 
     doNavigate(href: string) {
-        window.open(href, '_blank');
+      this.doNavigateURL(href, '_blank');
+    }
+
+    doNavigateURL(href: string, target: string) {
+      console.log('doNavigateURL', href, window.location.hostname);
+      window.open(href, target);
     }
 }

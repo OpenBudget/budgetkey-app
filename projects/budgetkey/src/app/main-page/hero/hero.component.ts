@@ -9,6 +9,7 @@ import { __T as __ } from '../main-page.component';
 import { sum as d3Sum, max as d3Max } from 'd3-array';
 import { easeExpOut, easePolyInOut } from 'd3-ease';
 import { bubbles } from '../bubbles';
+import { timer } from 'rxjs';
 
 const CENTER_WIDTH = 200;
 const CENTER_HEIGHT = 80;
@@ -725,7 +726,7 @@ export class HeroComponent {
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: Event) {
-    setTimeout(() => {
+    timer(10).subscribe(() => {
       const el = this.heroElement.nativeElement;
       const rectTop = el.getBoundingClientRect().top;
       const offsetHeight = el.scrollHeight;
@@ -737,7 +738,7 @@ export class HeroComponent {
       } else {
         this.scroller.emit(1);
       }
-    }, 10);
+    });
   }
 
   makeDeficitCharts(data: any) {

@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import questions from './questions';
 import { Indicator } from '../../../model';
-import { Format } from '../../format';
+import { Format } from '../../../../format';
 
 @Component({
   selector: 'app-item-ngo-activity-report',

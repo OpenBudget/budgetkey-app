@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { Format } from '../../format';
+import { Format } from '../../../../format';
 import { ItemApiService } from '../../../item-api.service';
 import questions from './questions';
 

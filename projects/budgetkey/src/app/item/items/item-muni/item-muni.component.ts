@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnChanges } from '@angular/core';
-import { Format } from '../format';
+import { Format } from '../../../format';
 import { timer } from 'rxjs';
 import { GlobalSettingsService } from '../../../common-components/global-settings.service';
 import { ItemApiService } from '../../item-api.service';
@@ -43,10 +43,10 @@ export class ItemMuniComponent implements OnChanges, AfterViewInit {
         b.num_value = b.executed || b.revised || b.allocated;
         if (b.code[0] < '6') {
           this.incomeBudgets.push(b);
-          this.totalIncome += b.value;
+          this.totalIncome += parseFloat(b.value);
         } else {
           this.expenseBudgets.push(b);
-          this.totalExpense += b.value;
+          this.totalExpense += parseFloat(b.value);
         }
       }
     });

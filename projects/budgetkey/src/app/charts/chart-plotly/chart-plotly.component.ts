@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
-import { ReplaySubject, first } from 'rxjs';
-import * as Plotly from 'plotly.js-basic-dist';
+import { ReplaySubject, first, timer } from 'rxjs';
+import { PlatformService } from '../../common-components/platform.service';
+import { PlotlyService } from './plotly.service';
 
 @Component({
   selector: 'app-chart-plotly',
@@ -19,23 +20,28 @@ export class ChartPlotlyComponent implements OnChanges, AfterViewInit {
   @ViewChild('plot') plot: ElementRef;
   @ViewChild('wrapper') wrapper: ElementRef;
 
+  ready = false;
+
   _enlarged = false;
 
-  private ready = new ReplaySubject<void>(1);
-
-  constructor() {
+  constructor(private ps: PlatformService, private plotly: PlotlyService) {
   }
 
   ngAfterViewInit() {
-    this.ready.next();
+    this.ready = true;
+    this.draw();
   }
 
   ngOnChanges() {
-    this.ready.pipe(first()).subscribe(() => { this.checkPlotly(); });;
+    if (this.ready) {
+      this.draw();
+    }
   }
 
-  checkPlotly(big?: boolean) {
-    // if (window['Plotly']) {
+  draw(big?: boolean) {
+    if (this.ps.server()) {
+      return;
+    }
     const wrapper = this.wrapper.nativeElement as HTMLDivElement;
     const el = this.plot.nativeElement as HTMLDivElement;
     const layout = Object.assign({
@@ -54,22 +60,22 @@ export class ChartPlotlyComponent implements OnChanges, AfterViewInit {
     }
 
     el.innerHTML = '';
-    Plotly.newPlot(el, this.data, layout, Object.assign({responsive: true}, this.config));
+    console.log('plotly new plot', this.data, layout, this.config);
+    this.plotly.newPlot(el, this.data, layout, Object.assign({responsive: true}, this.config));
     el.querySelectorAll('svg').forEach((svg) => {
       svg.setAttribute('alt', this.data.title || 'diagram');
       svg.setAttribute('role', 'img');
       svg.setAttribute('aria-label', this.data.title || 'diagram');
     });
-    // } else {
-    //   setTimeout(() => this.checkPlotly(), 100);
-    // }
   }
 
   set enlarged(value: boolean) {
     this._enlarged = value;
-    setTimeout(() => {
-      this.checkPlotly(value);
-    }, 0);
+    this.ps.browser(() => {
+      timer(0).subscribe(() => {
+        this.draw(value);
+      });
+    });
   }
 
   get enlarged(): boolean {

@@ -4,8 +4,11 @@ import { EMPTY, catchError, delay, filter, first, map, switchMap, tap, timer } f
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { ItemApiService } from '../item-api.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { QuestionsPanelComponent } from '../questions/questions-panel/questions-panel.component';
+// import { QuestionsPanelComponent } from '../questions/questions-panel/questions-panel.component';
 import { Question } from '../model';
+import { PlatformService } from '../../common-components/platform.service';
+import { QuestionsPanelComponent } from '../questions/questions-panel/questions-panel.component';
+import { NgxSeoService } from '@avivharuzi/ngx-seo';
 
 @UntilDestroy()
 @Component({
@@ -25,8 +28,8 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
   showQuestions = false;
   questions: Question[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router,
-    public globalSettings: GlobalSettingsService, private itemApi: ItemApiService) {
+  constructor(private route: ActivatedRoute, private router: Router, private ngxSeoService: NgxSeoService,
+    public globalSettings: GlobalSettingsService, private itemApi: ItemApiService, private ps: PlatformService) {
   }
 
   ngOnInit() {
@@ -46,7 +49,10 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
       }),
     ).subscribe((item: any) => {
       this.init = true;
-      this.item = item;  
+      this.item = item;
+      this.ngxSeoService.setSeo({
+        title: this.globalSettings.siteName + ' - ' + item.page_title,
+      });
     });
     this.route.queryParamMap.pipe(
       untilDestroyed(this),
@@ -57,23 +63,24 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
       filter((li: number) => !isNaN(li)),
     ).subscribe((searchPosition) => {
       this.router.navigate([], {queryParams: {li: null}, queryParamsHandling: 'merge', replaceUrl: true});
-      // if (gtag) {  #### TODO: fix gtag
-      //   window.setTimeout(
-      //     () => {
-      //       gtag('event', 'view_item', {
-      //         'event_label': itemId,
-      //         'value': position
-      //       });
-      //     }, 5000
-      //   );
-      // }
+      this.ps.browser(() => {
+        const gtag = (<any>window).gtag;
+        if (gtag) {
+          timer(5000).subscribe(() => {
+            gtag('event', 'view_item', {
+              'event_label': this.itemId,
+              'value': searchPosition
+            });
+          });
+        }
+      });
     });
     this.itemApi.questions.pipe(
       untilDestroyed(this),
       delay(0),
     ).subscribe((questions: any) => {
       if (questions) {
-        this.showQuestions = true;
+        this.showQuestions = this.ps.browser();
         this.questions = questions;
       }
     });
@@ -83,7 +90,7 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
     this.route.fragment.pipe(
       first(),
       filter((fragment: string | null) => fragment === 'questions'),
-      delay(3000),
+      delay(this.ps.browser() ? 3000 : 0),
     ).subscribe(() => {
       this.questionsPanel.scrollToTable();
     });

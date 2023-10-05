@@ -3,6 +3,7 @@ import {
 } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { PlatformService } from '../common-components/platform.service';
 
 
 @Component({
@@ -16,11 +17,13 @@ export class AuthComponent implements OnInit {
 
     @Input() theme: any;
 
-    constructor(private auth: AuthService) {}
+    constructor(private auth: AuthService, private ps: PlatformService) {}
 
     ngOnInit() {
-        this.next = document.location.href;
-        this.setUser(this.auth.check(this.next));
+        this.ps.browser(() => {
+            this.next = document.location.href;
+            this.setUser(this.auth.check(this.next));
+        });
     }
 
     setUser(o: Observable<any>) {

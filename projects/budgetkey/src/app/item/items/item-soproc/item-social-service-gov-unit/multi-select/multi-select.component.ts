@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-multi-select',
@@ -74,9 +75,9 @@ export class MultiSelectComponent implements OnInit {
   set visible(visible: boolean) {
     this._visible = visible;
     if (visible) {
-      setTimeout(() => {
+      timer(0).subscribe(() => {
         this.select.nativeElement.focus();
-      }, 0);
+      });
     } else {
       this.fixEmpty();
       this.valueChange.emit(this.value);

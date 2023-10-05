@@ -16,6 +16,7 @@ import { ListsService } from './services/lists.service';
 import { HttpClientModule } from '@angular/common/http';
 import { GlobalSettingsService } from './global-settings.service';
 import { ClickOnReturnDirective } from './directives/click-on-return.directive';
+import { PlatformService } from './platform.service';
 
 /**
  * Created by adam on 27/12/2016.
@@ -40,7 +41,8 @@ import { ClickOnReturnDirective } from './directives/click-on-return.directive';
   ],
   providers: [
     ListsService,
-    GlobalSettingsService
+    GlobalSettingsService,
+    PlatformService
   ],
   exports: [
     AppContainerComponent,

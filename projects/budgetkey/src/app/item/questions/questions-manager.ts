@@ -209,7 +209,7 @@ export class QuestionsManager {
             name: s.display || s.field,
             x: items.map((x) => x[formatter.x_field]),
             y: items.map((x) => x[s.field]),
-          };2
+          };
         });
         return {graphLayout, graphData};
       };

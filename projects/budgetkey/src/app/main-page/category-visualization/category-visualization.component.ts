@@ -7,6 +7,7 @@ import { select as d3Select, Selection } from 'd3-selection';
 import { pack as d3Pack, hierarchy as d3Hierarchy } from 'd3-hierarchy';
 import { easeBackOut, easeQuad } from 'd3-ease';
 import 'd3-transition';
+import { PlatformService } from '../../common-components/platform.service';
 
 
 type SelectionType<T extends Element> = Selection<T, unknown, any, undefined>;
@@ -36,7 +37,7 @@ export class CategoryVisualizationComponent implements OnInit, AfterViewInit {
     return this.utils.formatNumber(value / 1000000000, 2) + ' ' + __T('מיליארד') + ' ₪';
   }
 
-  constructor(private utils: UtilsService, private el: ElementRef) {}
+  constructor(private utils: UtilsService, private el: ElementRef, private ps: PlatformService) {}
 
   private createContainer(svg: SelectionType<HTMLElement>, diameter_w: number, diameter_h: number) {
     return svg.append('g')
@@ -221,6 +222,10 @@ export class CategoryVisualizationComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    if (!this.ps.browser()) {
+      return;
+    }
+
     const svg: SelectionType<HTMLElement> = d3Select(this.svg.nativeElement as HTMLElement);
     const diameter_w = +svg.attr('width');
     const diameter_h = +svg.attr('height');

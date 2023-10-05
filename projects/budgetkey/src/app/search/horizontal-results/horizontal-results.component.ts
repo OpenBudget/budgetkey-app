@@ -1,12 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { SearchState, mergeFilters } from '../search-state/search-state';
-import { SearchManager, SearchOutcome } from '../search-manager/search-manager';
-import { SearchParams, SearchResults } from '../model';
-import { take, skip, switchMap, throttleTime, delay, debounceTime, tap } from 'rxjs/operators';
-import { animationFrameScheduler, fromEvent, scheduled, Subscription } from 'rxjs';
-import { SearchApiService } from '../search-api.service';
-import { SearchBarType } from '../../common-components/components/searchbar/bk-search-bar.component';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { animationFrameScheduler, fromEvent, scheduled } from 'rxjs';
+import { debounceTime, delay, skip, switchMap, take, tap, throttleTime } from 'rxjs/operators';
+import { SearchBarType } from '../../common-components/components/searchbar/bk-search-bar.component';
+import { PlatformService } from '../../common-components/platform.service';
+import { SearchParams } from '../model';
+import { SearchApiService } from '../search-api.service';
+import { SearchManager, SearchOutcome } from '../search-manager/search-manager';
+import { SearchState, mergeFilters } from '../search-state/search-state';
 
 
 @UntilDestroy()
@@ -33,9 +34,7 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
   showRightFade = false;
   refresh = false;
 
-  constructor(
-    private searchService: SearchApiService,
-  ) { }
+  constructor(private searchService: SearchApiService, private ps: PlatformService) { }
 
   ngOnInit() {
     this.docTypes = [this.docType];
@@ -52,7 +51,7 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
     this.state.searchQueue
         .pipe(
           untilDestroyed(this),
-          debounceTime(1000),
+          debounceTime(this.ps.browser() ? 1000 : 0),
           switchMap((sp) => {
             return this.searchService.search({
               docType: this.docTypes[0],
@@ -106,12 +105,14 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   ngAfterViewInit() {
-    scheduled(fromEvent(this.cards.nativeElement, 'scroll'), animationFrameScheduler).pipe(
-      untilDestroyed(this),
-      throttleTime(150),
-      delay(150)
-    ).subscribe((event: Event) => {
-      this.scrollHandler(event.target as HTMLElement);
+    this.ps.browser(() => {
+      scheduled(fromEvent(this.cards.nativeElement, 'scroll'), animationFrameScheduler).pipe(
+        untilDestroyed(this),
+        throttleTime(150),
+        delay(150)
+      ).subscribe((event: Event) => {
+        this.scrollHandler(event.target as HTMLElement);
+      });
     });
   }
 

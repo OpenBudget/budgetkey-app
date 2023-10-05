@@ -8,7 +8,7 @@ import { GlobalSettingsService } from '../../common-components/global-settings.s
 })
 export class ChartAdamkeyComponent implements OnInit  {
 
-  @Input() public data: any;
+  @Input() data: any;
 
   constructor(private globalSettings: GlobalSettingsService) {
   }

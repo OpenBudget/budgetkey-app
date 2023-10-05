@@ -3,6 +3,7 @@ import { GlobalSettingsService } from '../../../common-components/global-setting
 import { Question } from '../../model';
 import { QuestionsManager } from '../questions-manager';
 import { BudgetKeyItemService } from '../../budgetkey-item.service';
+import { PlatformService } from '../../../common-components/platform.service';
 
 @Component({
   selector: 'app-questions-panel',
@@ -19,17 +20,20 @@ export class QuestionsPanelComponent implements OnChanges {
 
   questionsManager: QuestionsManager;
 
-  constructor(public globalSettings: GlobalSettingsService, private itemService: BudgetKeyItemService) { }
+  constructor(public globalSettings: GlobalSettingsService, private itemService: BudgetKeyItemService, private ps: PlatformService) { }
 
   ngOnChanges() {
     this.questionsManager = new QuestionsManager(this.item, this.questions, this.itemService, this.globalSettings);
   }
 
   mailto() {
+    if (this.ps.server()) {
+      return '';
+    }
     const subject = `קישור למידע מאתר "${this.globalSettings.theme.siteName}"`;
     const body = `שלום.
 
-העמוד ״${document.title}״ נשלח אליכם ממכשיר נייד.
+העמוד ״${this.globalSettings.siteName}״ נשלח אליכם ממכשיר נייד.
 לחצו כאן לצפייה בעמוד: ${window.location.href}`;
     return 'mailto:?' +
       'subject=' + encodeURIComponent(subject) +
@@ -39,7 +43,7 @@ export class QuestionsPanelComponent implements OnChanges {
 
   scrollToTable() {
     const questionsPanelElement = this.questionsPanel.nativeElement as HTMLElement;
-    if (questionsPanelElement && questionsPanelElement.scrollIntoView) {
+    if (this.ps.browser() && questionsPanelElement && questionsPanelElement.scrollIntoView) {
       questionsPanelElement.scrollIntoView({behavior: 'smooth'});
     }
   }

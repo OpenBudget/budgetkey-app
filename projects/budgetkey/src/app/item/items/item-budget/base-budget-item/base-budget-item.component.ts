@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Question } from '../../../model';
-import { Format } from '../../format';
+import { Format } from '../../../../format';
 
 @Component({
   selector: 'app-base-budget-item',

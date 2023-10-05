@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { Format } from '../../format';
+import { Format } from '../../../../format';
 import * as dayjs from 'dayjs';
 import { tooltip } from '../tooltips';
 import { GlobalSettingsService } from '../../../../common-components/global-settings.service';
