@@ -1,5 +1,5 @@
 import { isPlatformBrowser, isPlatformServer } from "@angular/common";
-import { Injectable, Inject, PLATFORM_ID, makeStateKey, StateKey } from "@angular/core";
+import { Injectable, Inject, PLATFORM_ID, makeStateKey, StateKey, NgZone } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import * as memoryCache from 'memory-cache';
@@ -9,7 +9,7 @@ import { TransferState } from "@angular/core";
 @Injectable()
 export class PlatformService {
   
-  constructor(private http: HttpClient, private transferState: TransferState, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(private http: HttpClient, private transferState: TransferState, @Inject(PLATFORM_ID) private platformId: Object, private zone: NgZone) {}
   
   get BASE() {
     if (isPlatformBrowser(this.platformId)) {
@@ -48,7 +48,9 @@ export class PlatformService {
       } else {
         return request.pipe(
           tap((data: T) => {
-            memoryCache.put(key, data, 1000 * 60 * 60 * 24);
+            this.zone.runOutsideAngular(() => {
+              memoryCache.put(key, data, 1000 * 60 * 60 * 24);
+            });    
           })
         );
       }
