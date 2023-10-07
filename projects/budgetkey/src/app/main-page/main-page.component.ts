@@ -44,7 +44,7 @@ export class MainPageComponent {
     this.funcCategories.forEach((category: any) => {
       this.totalAmount += category.amount;
     });
-    this.proposalAmount = bubbles.proposalAmount;
+    this.proposalAmount = bubbles.proposalAmount || 0;
     this.prevProposalAmount = bubbles.prevProposalAmount;
     globalSettings.ready.pipe(
       switchMap(() => this.ps.cachedRequest(`translations.${globalSettings.lang}`, http.get(ps.BASE + `/assets/themes/main_page.translations.${globalSettings.lang}.json`)))

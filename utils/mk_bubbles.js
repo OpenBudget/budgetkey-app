@@ -83,7 +83,7 @@ const SQL_INCOME_BUBBLES_DATA = `
 const SQL_INCOME_FUNCTIONS = `
   SELECT
     func_cls_title_2->>0 as title,
-    sum(coalesce(net_revised, net_allocated)) as net_amount
+    sum(coalesce(net_revised, net_allocated)) as net_allocated
   FROM raw_budget
   WHERE ` + INCOME_CONDITION + `
   GROUP BY 1
@@ -133,9 +133,6 @@ function fetch_sql(sql) {
   const url = API_URL + encodeURIComponent(sql);
   return get_url(url)
     .then((data) => {
-      if (sql.indexOf(':b') > 0) {
-        console.log('QQQ', sql, data);
-      }
       return data.rows;
     });
 }
@@ -310,7 +307,7 @@ function fetch_all() {
 
 fetch_all()
   .then((data) => {
-    const content = `export const bubbles: any = ` + JSON.stringify(data) + `;`;
+    const content = `export const bubbles: any = ` + JSON.stringify(data, undefined, 4) + `;`;
     const filename = '../projects/budgetkey/src/app/main-page/bubbles.ts'
     fs.writeFileSync(filename, content);
   });
