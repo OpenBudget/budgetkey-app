@@ -76,6 +76,10 @@ export class SearchApiService {
           filters: t.filters || {}
         };
     });
+    let config_key = '';
+    config.forEach((c: any) => {
+      config_key += c.id + c.doc_types.join(',') + JSON.stringify(c.filters);
+    });
     const config_param = JSON.stringify(config);
     const queryParams: any = {
       config: config_param,
@@ -88,7 +92,7 @@ export class SearchApiService {
     }
 
     // const cacheKey = url + JSON.stringify(queryParams);
-    const cacheKey = `${url}${queryParams.q}${queryParams.context}${queryParams.config}`;
+    const cacheKey = `${url}${queryParams.q}${queryParams.context}${config_key}`;
     return this.cache(cacheKey, sp, this.http.get(url, {params: queryParams}) as Observable<SearchResults>);
   }
 

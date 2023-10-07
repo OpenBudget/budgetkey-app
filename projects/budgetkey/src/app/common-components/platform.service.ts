@@ -55,9 +55,11 @@ export class PlatformService {
     } else {
       const stateKey =  makeStateKey(key) as StateKey<T>;
       if (this.transferState.hasKey(stateKey)) {
+        console.log('CACHE BROWSER HIT', key);
         const ret = this.transferState.get(stateKey, null) as T;
         return from([ret]);
       }
+      console.log('CACHE BROWSER MISS', key, this.transferState);
       return request;
     }
   }
