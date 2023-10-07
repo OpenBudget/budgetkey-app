@@ -7,6 +7,7 @@ RUN npm install -g npm@8
 RUN npm install
 
 COPY . /app/
+RUN cd utils && ./mk_bubbles.sh
 
 RUN npm run build:ssr
 

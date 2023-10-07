@@ -47,7 +47,7 @@ export class MainPageComponent {
     this.proposalAmount = bubbles.proposalAmount;
     this.prevProposalAmount = bubbles.prevProposalAmount;
     globalSettings.ready.pipe(
-      switchMap(() => this.http.get(ps.BASE + `/assets/themes/main_page.translations.${globalSettings.lang}.json`))
+      switchMap(() => this.ps.cachedRequest(`translations.${globalSettings.lang}`, http.get(ps.BASE + `/assets/themes/main_page.translations.${globalSettings.lang}.json`)))
     ).subscribe((translations: any) => {
       Object.assign(_TRANSLATIONS, translations);
       this.translationsLoaded = true;

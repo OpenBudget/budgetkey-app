@@ -1,22 +1,43 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 // import { URL } from './config';
 import { SearchResults, SearchParams } from './model';
 import { SearchBarType } from '../common-components/components/searchbar/bk-search-bar.component';
 import { SearchModule } from './search.module';
+import { PlatformService } from '../common-components/platform.service';
 // import { SearchBarType } from 'budgetkey-ng2-components';
 
 
 @Injectable()
 export class SearchApiService {
 
-  private cache: any = {};
+  private cache_: any = {};
   private URL = 'https://next.obudget.org/search';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private ps: PlatformService) {}
+
+  cache<T>(cacheKey: string, sp: SearchParams, req: Observable<T>): Observable<T> {
+    if (this.cache_[cacheKey]) {
+      const ret = this.cache_[cacheKey];
+      req = from([this.cache_[cacheKey]]);
+    } else if (!sp.term) {
+      req = this.ps.cachedRequest(cacheKey, req);
+    }
+
+    req = req.pipe(
+      map((r: any) => {
+        const ret = r as T;
+        this.cache_[cacheKey] = ret;
+        (ret as any).params = sp;
+        return ret;
+      })
+    );
+
+    return req;
+  }
 
   search(sp: SearchParams): Observable<SearchResults> {
     // const startTime: Date = new Date(); // update time-stamp
@@ -41,28 +62,12 @@ export class SearchApiService {
       queryParams.context = sp.context;
     }
 
-    const cacheKey = url + JSON.stringify(queryParams);
-    if (this.cache[cacheKey]) {
-      const ret = this.cache[cacheKey];
-      ret.params = sp;
-      return of(this.cache[cacheKey]);
-    }
-
-    return this.http
-      .get(url, {params: queryParams})
-      .pipe(
-        map((r: any) => {
-          const ret = <SearchResults>r;
-          this.cache[cacheKey] = ret;
-          ret.params = sp;
-          return ret;
-        }),
-      );
+    const cacheKey = `${url}${queryParams.q}${queryParams.filter}${queryParams.order}${queryParams.context}${queryParams.size}${queryParams.offset}`;
+    return this.cache(cacheKey, sp, this.http.get(url, {params: queryParams}) as Observable<SearchResults>);
   }
 
   count(sp: SearchParams, types: SearchBarType[]): Observable<SearchResults> {
     let url = `${this.URL}/count`;
-
     const config = types
       .map((t: SearchBarType) => {
         return {
@@ -82,23 +87,9 @@ export class SearchApiService {
       queryParams.context = sp.context;
     }
 
-    const cacheKey = url + JSON.stringify(queryParams);
-    if (this.cache[cacheKey]) {
-      const ret = this.cache[cacheKey];
-      ret.params = sp;
-      return of(this.cache[cacheKey]);
-    }
-
-    return this.http
-      .get(url, {params: queryParams})
-      .pipe(
-        map((r: any) => {
-          const ret = <SearchResults>r;
-          this.cache[cacheKey] = ret;
-          ret.params = sp;
-          return ret;
-        })
-      );
+    // const cacheKey = url + JSON.stringify(queryParams);
+    const cacheKey = `${url}${queryParams.q}${queryParams.context}${queryParams.config}`;
+    return this.cache(cacheKey, sp, this.http.get(url, {params: queryParams}) as Observable<SearchResults>);
   }
 
 

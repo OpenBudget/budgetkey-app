@@ -21,7 +21,6 @@ export class BudgetKeyLink {
     }
 
     _onClick($event: Event) {
-        console.log('click!', $event);
         if (this.handleClick) {
             this.handleClick()
                 .then((value: any) => {

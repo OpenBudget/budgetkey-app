@@ -42,7 +42,6 @@ export class BkHeaderComponent {
     }
 
     doNavigateURL(href: string, target: string) {
-      console.log('doNavigateURL', href, window.location.hostname);
       window.open(href, target);
     }
 }

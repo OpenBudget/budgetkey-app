@@ -9,7 +9,7 @@
     </div>
     <div class="menu-links">
       <ng-container *ngFor="let link of globalSettings.theme.headerLinks">
-        <a [href]="link.href" [innerHtml]='link.title' target='_blank' clickOnReturn></a>
+        <a [href]="link.href" [innerHtml]='link.title' [target]='link.href.indexOf("http") === 0 ? "_blank" : null' clickOnReturn></a>
       </ng-container>
       <ng-container *ngIf='showLanguages'>
         <a (activated)='switchLang("en")' clickOnReturn>En</a>

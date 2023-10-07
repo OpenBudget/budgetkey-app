@@ -25,7 +25,6 @@ export class AppContainerComponent {
         route.queryParams.pipe(
             untilDestroyed(this),
             map((params: any) => {
-                console.log('ac params', params);
                 const themeId = params.theme || 'budgetkey';
                 const lang = params.lang || 'he';
                 return {themeId, lang};
@@ -34,15 +33,13 @@ export class AppContainerComponent {
                 return a.themeId === b.themeId && a.lang === b.lang;
             }),
             switchMap(({themeId, lang}) => {
-                console.log('ac getting theme');
-                return this.http.get(ps.BASE + `/assets/themes/theme.${themeId}.${lang}.json`).pipe(
+                return this.ps.cachedRequest(`theme.${themeId}`, this.http.get(ps.BASE + `/assets/themes/theme.${themeId}.${lang}.json`)).pipe(
                     map((theme: any) => {
                         return {theme, themeId, lang};
                     })
                 );
             })
         ).subscribe(({theme, themeId, lang}) => {
-            console.log('ac got theme');
             const theme_ = Object.assign({}, 
                 theme.BUDGETKEY_APP_GENERIC_ITEM_THEME || {},
                 theme.BUDGETKEY_NG2_COMPONENTS_THEME || {}
@@ -52,7 +49,6 @@ export class AppContainerComponent {
             globalSettings.themeId = themeId;
             globalSettings.siteName = theme_.siteName;
             this.configured = true;
-            console.log('ac configured true');
             globalSettings.ready.next();
             globalSettings.ready.complete();
         });
