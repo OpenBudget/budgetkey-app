@@ -10,6 +10,16 @@ import { SearchModule } from './search.module';
 import { PlatformService } from '../common-components/platform.service';
 // import { SearchBarType } from 'budgetkey-ng2-components';
 
+const DROP_FIELDS = [
+  'tenders', 
+  'history',
+  'explanation',
+  'semantic_tags',
+  '__date_range_months',
+  '__date_range_from',
+  '__date_range_to',
+];
+
 
 @Injectable()
 export class SearchApiService {
@@ -63,7 +73,20 @@ export class SearchApiService {
     }
 
     const cacheKey = `${url}${queryParams.q}${queryParams.filter}${queryParams.order}${queryParams.context}${queryParams.size}${queryParams.offset}`;
-    return this.cache(cacheKey, sp, this.http.get(url, {params: queryParams}) as Observable<SearchResults>);
+    const req: Observable<SearchResults> = this.http.get(url, {params: queryParams}).pipe(
+      map((data: any) => {
+        const res = data as SearchResults;
+        res.search_results.forEach((sr) => {
+          for (const f of DROP_FIELDS) {
+            if (sr.source.hasOwnProperty(f)) {
+              delete sr.source[f];
+            }
+          }
+        });
+        return res;
+      })
+    );
+    return this.cache(cacheKey, sp, req);
   }
 
   count(sp: SearchParams, types: SearchBarType[]): Observable<SearchResults> {
