@@ -73,6 +73,7 @@ export class SearchManager {
   getMore() {
     if (!this.done) {
       this.last.offset = this.allResults.length;
+      this.last.pageSize = 10;
       this.moreQueue.next(this.last);
     }
   }

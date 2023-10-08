@@ -1,4 +1,4 @@
-<div class='host' [class.shown]='shouldShow()'>
+<div class='host' [class.shown]='shouldShow()' [attr.data-doc-type]='docType.id'>
   <div class='title' (click)='titleClicked()' *ngIf='searchManager.last.docType'>
     {{searchManager.last.docType.name}}
     <span *ngIf='searchManager.last.docType.amount'>({{searchManager.last.docType.amount | number}})</span>

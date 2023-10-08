@@ -137,7 +137,7 @@ export class SearchState {
         if (!this._term) {
             sp.ordering = sp.docType.ordering;
         }
-    this.searchQueue.next(sp);
+        this.searchQueue.next(sp);
     }
 
     start() {

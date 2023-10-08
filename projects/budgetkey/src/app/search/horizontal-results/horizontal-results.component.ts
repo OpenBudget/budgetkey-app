@@ -81,8 +81,11 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
           const ret = new SearchParams(sp);
           ret.docType = this.docType;
           ret.filters = this.docType.filters;
+          ret.pageSize = 3;
           // ret.period = null;
           return ret;
+        } else {
+          sp.pageSize = 10;
         }
         return sp;
       }
