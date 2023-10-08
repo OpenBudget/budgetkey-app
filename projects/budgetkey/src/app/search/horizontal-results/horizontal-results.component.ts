@@ -68,54 +68,60 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
           if (sr && sr.search_results && sr.search_results.length > 0) {
             this.docType.score = sr.search_results[0].score;
           }
+          if (sr.search_counts && this.docType.id === 'all') {
+            this.docType.amount = sr.search_counts._current.total_overall || 0;
+          }
         });
 
-    this.searchManager = new SearchManager(
-      this.searchService,
-      this.state,
-      this.docTypes,
-      1000,
-      this,
-      (sp: SearchParams) => {
-        if (sp.offset === 0) {
-          const ret = new SearchParams(sp);
-          ret.docType = this.docType;
-          ret.filters = this.docType.filters;
-          ret.pageSize = 3;
-          // ret.period = null;
-          return ret;
-        } else {
-          sp.pageSize = 10;
+    if (this.docType.id !== 'all') {
+      this.searchManager = new SearchManager(
+        this.searchService,
+        this.state,
+        this.docTypes,
+        1000,
+        this,
+        (sp: SearchParams) => {
+          if (sp.offset === 0) {
+            const ret = new SearchParams(sp);
+            ret.docType = this.docType;
+            ret.filters = this.docType.filters;
+            ret.pageSize = 3;
+            // ret.period = null;
+            return ret;
+          } else {
+            sp.pageSize = 10;
+          }
+          return sp;
         }
-        return sp;
-      }
-    );
-
-    this.searchManager.searchResults.pipe(
-      untilDestroyed(this),
-      tap((outcome) => {
-        this.lastOutcome = outcome;
-        this.searching.emit(outcome.isSearching);
-        this.showLeftFade = true;
-        this.refresh = !this.refresh;
-      }),
-      delay(100),
-      tap(() => {
-        this.refresh = !this.refresh;
-        this.scrollHandler(this.cards.nativeElement as HTMLElement);
-      })
-    ).subscribe();
+      );
+      this.searchManager.searchResults.pipe(
+        untilDestroyed(this),
+        tap((outcome) => {
+          this.lastOutcome = outcome;
+          this.searching.emit(outcome.isSearching);
+          this.showLeftFade = true;
+          this.refresh = !this.refresh;
+        }),
+        delay(100),
+        tap(() => {
+          this.refresh = !this.refresh;
+          this.scrollHandler(this.cards.nativeElement as HTMLElement);
+        })
+      ).subscribe();
+    }
   }
 
   ngAfterViewInit() {
     this.ps.browser(() => {
-      scheduled(fromEvent(this.cards.nativeElement, 'scroll'), animationFrameScheduler).pipe(
-        untilDestroyed(this),
-        throttleTime(150),
-        delay(150)
-      ).subscribe((event: Event) => {
-        this.scrollHandler(event.target as HTMLElement);
-      });
+      if (this.cards?.nativeElement) {
+        scheduled(fromEvent(this.cards.nativeElement, 'scroll'), animationFrameScheduler).pipe(
+          untilDestroyed(this),
+          throttleTime(150),
+          delay(150)
+        ).subscribe((event: Event) => {
+          this.scrollHandler(event.target as HTMLElement);
+        });
+      }
     });
   }
 
@@ -128,6 +134,7 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
             !this.lastOutcome.isSearching &&
             !this.lastOutcome.isErrorInLastSearch &&
             !this.anySearching &&
+            this.searchManager &&
             this.searchManager.last &&
             this.searchManager.last.docType &&
             this.searchManager.last.docType.amount &&

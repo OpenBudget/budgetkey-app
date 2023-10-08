@@ -42,7 +42,7 @@ export class SearchModeSelectorComponent implements OnInit {
     }
 
     sortedDocTypes() {
-        let sorted: SearchBarType[] = (this.globalSettings.theme.searchBarConfig as SearchBarType[]).slice().filter(x => x.id !== 'all');
+        let sorted: SearchBarType[] = (this.globalSettings.theme.searchBarConfig as SearchBarType[]).slice();//.filter(x => x.id !== 'all');
         if (!this.globalSettings.theme.keepDocTypesOrder) {
             sorted = sorted.sort((a, b) => this.cmp(a, b, 'score', this.cmp(a, b, 'amount', 0)));
         }
