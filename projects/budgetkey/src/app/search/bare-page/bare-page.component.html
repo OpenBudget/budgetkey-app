@@ -1,22 +1,24 @@
-<app-search [bare]='true' #search></app-search>
-<div class='footer'>
-    <div class='signup'>
-        <ng-container *ngIf='search && search.searchState && search.searchState.term'>
-            <app-bk-subscription-manager
-                    [term]='search.searchState.term'
-                    [docType]='all' 
-                    [externalTitle]='globalSettings.theme.siteName + ": " + search.searchState.term'
-                    [externalProperties]='search.subscriptionProperties'
-                    [externalUrl]='externalUrl()'
-                    [newWindow]='true'
-            ></app-bk-subscription-manager>    
-            <!-- <img src='assets/img/search/envelope-icon.svg'>
-            <span i18n>הרשמו לעדכונים מאתר מפתח התקציב</span> -->
-        </ng-container>
+<ng-container *ngIf='init'>
+    <app-search [bare]='true' #search></app-search>
+    <div class='footer'>
+        <div class='signup'>
+            <ng-container *ngIf='search && search.searchState && search.searchState.term'>
+                <app-bk-subscription-manager
+                        [term]='search.searchState.term'
+                        [docType]='all' 
+                        [externalTitle]='globalSettings.theme.siteName + ": " + search.searchState.term'
+                        [externalProperties]='search.subscriptionProperties'
+                        [externalUrl]='externalUrl()'
+                        [newWindow]='true'
+                ></app-bk-subscription-manager>    
+                <!-- <img src='assets/img/search/envelope-icon.svg'>
+                <span i18n>הרשמו לעדכונים מאתר מפתח התקציב</span> -->
+            </ng-container>
+        </div>
+        <div class='credits'>
+            <img src='assets/search/img/budgetkey-red-key-logo.svg'>
+            <span i18n>תוצאות מעודכנות מתוך
+                 <a href='http://next.obudget.org/' target='_blank'>אתר מפתח תקציב</a></span>
+        </div>
     </div>
-    <div class='credits'>
-        <img src='assets/search/img/budgetkey-red-key-logo.svg'>
-        <span i18n>תוצאות מעודכנות מתוך
-             <a href='http://next.obudget.org/' target='_blank'>אתר מפתח תקציב</a></span>
-    </div>
-</div>
+</ng-container>

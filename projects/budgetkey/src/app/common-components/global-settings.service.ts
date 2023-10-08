@@ -1,6 +1,10 @@
-import { Injectable, TransferState, PLATFORM_ID, Inject } from '@angular/core';
+import { Injectable, TransferState, PLATFORM_ID, Inject, Component } from '@angular/core';
 import { DEFAULT_THEME } from './theme.budgetkey.he';
-import { Observable, ReplaySubject, from, tap } from 'rxjs';
+import { Observable, ReplaySubject, distinctUntilChanged, from, map, switchMap, tap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { untilDestroyed } from '@ngneat/until-destroy';
+import { PlatformService } from './platform.service';
+import { HttpClient } from '@angular/common/http';
 
 const CACHE: any = {};
 
@@ -9,13 +13,44 @@ export class GlobalSettingsService {
 
   ready = new ReplaySubject<void>(1);
   
-  constructor() { }
+  constructor(private ps: PlatformService, private http: HttpClient) { }
 
   lang = 'he';
   themeId = 'budgetkey';
   siteName = 'מפתח התקציב';
   theme: any = DEFAULT_THEME;
 
+  init(component: any, route: ActivatedRoute) {
+    route.queryParams.pipe(
+      untilDestroyed(component),
+      map((params: any) => {
+          const themeId = params.theme || 'budgetkey';
+          const lang = params.lang || 'he';
+          return {themeId, lang};
+      }),
+      distinctUntilChanged((a, b) => {
+          return a.themeId === b.themeId && a.lang === b.lang;
+      }),
+      switchMap(({themeId, lang}) => {
+          return this.ps.cachedRequest(`theme.${themeId}`, this.http.get(this.ps.BASE + `/assets/themes/theme.${themeId}.${lang}.json`)).pipe(
+              map((theme: any) => {
+                  return {theme, themeId, lang};
+              })
+          );
+      })
+    ).subscribe(({theme, themeId, lang}) => {
+      const theme_ = Object.assign({}, 
+          theme.BUDGETKEY_APP_GENERIC_ITEM_THEME || {},
+          theme.BUDGETKEY_NG2_COMPONENTS_THEME || {}
+      );
+      this.theme = theme_;
+      this.lang = lang;
+      this.themeId = themeId;
+      this.siteName = theme_.siteName;      
+      this.ready.next();
+      this.ready.complete();
+    });
+  }
   // cacheSet(key: string, value: any) {
   //   if (isPlatformServer(this.platformId)) {
   //     console.log(key, 'SETTING CACHE', value);

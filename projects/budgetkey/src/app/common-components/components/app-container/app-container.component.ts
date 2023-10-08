@@ -22,35 +22,9 @@ export class AppContainerComponent {
     configured = false;
 
     constructor(private http: HttpClient, private route: ActivatedRoute, private globalSettings: GlobalSettingsService, private ps: PlatformService) {
-        route.queryParams.pipe(
-            untilDestroyed(this),
-            map((params: any) => {
-                const themeId = params.theme || 'budgetkey';
-                const lang = params.lang || 'he';
-                return {themeId, lang};
-            }),
-            distinctUntilChanged((a, b) => {
-                return a.themeId === b.themeId && a.lang === b.lang;
-            }),
-            switchMap(({themeId, lang}) => {
-                return this.ps.cachedRequest(`theme.${themeId}`, this.http.get(ps.BASE + `/assets/themes/theme.${themeId}.${lang}.json`)).pipe(
-                    map((theme: any) => {
-                        return {theme, themeId, lang};
-                    })
-                );
-            })
-        ).subscribe(({theme, themeId, lang}) => {
-            const theme_ = Object.assign({}, 
-                theme.BUDGETKEY_APP_GENERIC_ITEM_THEME || {},
-                theme.BUDGETKEY_NG2_COMPONENTS_THEME || {}
-            );
-            globalSettings.theme = theme_;
-            globalSettings.lang = lang;
-            globalSettings.themeId = themeId;
-            globalSettings.siteName = theme_.siteName;
+        globalSettings.ready.subscribe(() => {
             this.configured = true;
-            globalSettings.ready.next();
-            globalSettings.ready.complete();
         });
+        globalSettings.init(this, route);
     }
 }

@@ -3,7 +3,10 @@ import { BkSearchBar, SearchBarType } from '../../common-components/components/s
 import { SearchComponent } from '../search/search.component';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { PlatformService } from '../../common-components/platform.service';
+import { ActivatedRoute } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-bare-page',
   templateUrl: './bare-page.component.html',
@@ -12,16 +15,21 @@ import { PlatformService } from '../../common-components/platform.service';
 export class BarePageComponent implements OnInit {
 
   all: SearchBarType;
+  init = false;
 
   @ViewChild('search') search: SearchComponent;
 
   constructor(
-    public globalSettings: GlobalSettingsService, private ps: PlatformService
+    public globalSettings: GlobalSettingsService, private ps: PlatformService, private route: ActivatedRoute
   ) {
+    globalSettings.init(this, route);
   }
 
   ngOnInit() {
-    this.all = this.globalSettings.theme.searchBarConfig[0];
+    this.globalSettings.ready.subscribe(() => {
+      this.all = this.globalSettings.theme.searchBarConfig[0];
+      this.init = true;
+    });
   }
 
   externalUrl() {
