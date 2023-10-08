@@ -18,6 +18,8 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   @ViewChild('filtersElement') filtersElement: ElementRef;
   @ViewChild('tabs') tabsElement: ElementRef;
   intersection: Subscription|null = null;
+  stickyTop = '-80px';
+  
 
   PAGE_LINKS = [
     {title: 'משרדי הממשלה', href: '/i/units/gov_social_service_unit/main'},
@@ -138,6 +140,11 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
           const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
           this.sticky = scrollTop > top;
         });
+      }
+      if (this.ps.browser() && this.filtersElement && this.filtersElement.nativeElement) {
+        const el = this.filtersElement.nativeElement;
+        const top = el.offsetTop;
+        this.stickyTop = `-${top}px`;
       }
     });
   }
@@ -375,12 +382,4 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
     }
   }
 
-  stickyTop() {
-    if (this.ps.browser() && this.filtersElement && this.filtersElement.nativeElement) {
-      const el = this.filtersElement.nativeElement;
-      const top = el.offsetTop;
-      return `-${top}px`;
-    }
-    return '-80px';
-  }
 }
