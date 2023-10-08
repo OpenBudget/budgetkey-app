@@ -86,7 +86,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   public xValues: any = {};
   public sticky = false;
 
-  constructor(private api: BudgetKeyItemService, private globalSettings: GlobalSettingsService, private ps: PlatformService) {
+  constructor(private api: BudgetKeyItemService, private globalSettings: GlobalSettingsService, public ps: PlatformService) {
     const fields = ['subject', 'intervention', 'target_audience', 'target_age_group'];
     from(fields).pipe(
       mergeMap((field) => {
@@ -185,7 +185,8 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       const orgKinds = ['עסקי', 'מגזר שלישי', 'רשויות מקומיות', 'משולב'];
       const exemptionKinds = ['מימוש אופציה', 'ספק יחיד', 'התקשרות המשך', 'מיזם משותף', 'התקשרות עם רשות מקומית', 'מכרז סגור'];
       const tenderTypes = ['מכרז פומבי', 'התקשרות בפטור במכרז או בהליך תחרותי אחר', 'פרסום כוונה להתקשרות', 'פרסום מיזם ללא כוונת רווח', 'פניה לקבלת מידע RFI', 'קול קורא להקמת/עדכון רשימת מציעים (מאגר'];
-      for (const l of [orgSizes, orgKinds, exemptionKinds, tenderTypes]) {
+      const model = ['מחיר קבוע (תעריף)', 'הצעת מחיר'];
+      for (const l of [orgSizes, orgKinds, exemptionKinds, tenderTypes, model]) {
         for (const i in l) {
           scheme[l[i]] = parseInt(i) + 4;
         }
