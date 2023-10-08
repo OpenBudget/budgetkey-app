@@ -25,7 +25,7 @@ export class IncomeItemComponent implements OnChanges{
     this.takana = this.item?.code?.length === 10; 
     if (this.item?.history) {
       for (let year = this.item.year-1; year > this.item.year - 5; year--) {
-        if (this.item.history[year].net_executed) {
+        if (this.item.history[year]?.net_executed) {
           this.executedYear = year;
           break;
         }
