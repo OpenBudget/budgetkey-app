@@ -15,7 +15,10 @@ export class BkTooltipDirective implements OnInit {
     }
 
     ngOnInit() {
-        this.tooltipEl.innerHTML += `<span class='bk-tooltip-anchor'><img src='assets/common/img/help.svg'>` +
-            `<span class='bk-tooltip'>${this.content}</span></span>`;
+        const html = this.tooltipEl.innerHTML || '';
+        if (html.indexOf('bk-tooltip-anchor') === -1) {
+            this.tooltipEl.innerHTML += `<span class='bk-tooltip-anchor'><img src='assets/common/img/help.svg'>` +
+                `<span class='bk-tooltip'>${this.content}</span></span>`;
+        }
     }
 }
