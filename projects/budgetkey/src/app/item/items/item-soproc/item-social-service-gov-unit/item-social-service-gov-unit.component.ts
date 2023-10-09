@@ -23,9 +23,9 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
 
   PAGE_LINKS = [
     {title: 'משרדי הממשלה', href: '/i/units/gov_social_service_unit/main'},
-    {title: 'משרד הרווחה', href: '/i/units/gov_social_service_unit/משרד הרווחה'},
-    {title: 'משרד הבריאות', href: '/i/units/gov_social_service_unit/משרד הבריאות'},
-    {title: 'משרד החינוך', href: '/i/units/gov_social_service_unit/משרד החינוך'},
+    {title: 'משרד הרווחה', href: '/i/units/gov_social_service_unit/welfare'},
+    {title: 'משרד הבריאות', href: '/i/units/gov_social_service_unit/health'},
+    {title: 'משרד החינוך', href: '/i/units/gov_social_service_unit/education'},
   ];   
   PAGE_FILTERS = [
     {title: 'אוכלוסיית היעד', id: 'target_audience'},

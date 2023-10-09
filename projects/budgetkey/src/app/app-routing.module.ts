@@ -8,8 +8,7 @@ const routes: Routes = [
   { path: 'i', loadChildren: () => import('./item/item.module').then(m => m.ItemModule) },
   { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
   { path: 'p', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
-  { path: 'not-found', component: PageNotFoundComponent },
-  { path: '**', pathMatch: 'full', redirectTo: '/not-found' }, 
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
 
 @NgModule({

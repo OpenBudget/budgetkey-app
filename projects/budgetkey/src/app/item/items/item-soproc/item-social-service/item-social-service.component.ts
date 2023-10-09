@@ -138,7 +138,6 @@ export class ItemSocialServiceComponent implements OnInit {
     if (this.supplierRegions[region]) {
       count += this.supplierRegions[region].count;
     }
-    console.log('this.supplierRegions', count, this.supplierRegions[region])
     return count;
   }
 
