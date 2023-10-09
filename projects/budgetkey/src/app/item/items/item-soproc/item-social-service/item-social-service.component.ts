@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { tableDefs } from './tables';
 import { BudgetKeyItemService } from '../../../budgetkey-item.service';
+import { PlatformService } from 'projects/budgetkey/src/app/common-components/platform.service';
 
 @Component({
   selector: 'app-item-social-service',
@@ -24,7 +25,7 @@ export class ItemSocialServiceComponent implements OnInit {
     'ירושלים ויו"ש'
   ];
 
-  constructor(private api: BudgetKeyItemService, private sanitizer: DomSanitizer) {
+  constructor(private api: BudgetKeyItemService, private sanitizer: DomSanitizer, public ps: PlatformService) {
   }
 
   ngOnInit() {

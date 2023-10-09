@@ -105,18 +105,18 @@
         [attr.aria-selected]='currentTab === "tenders"'>הרחבה על הליכי רכש (בהרצה)</a>
 </div>
 
-<div class='charts columns-2'>
-    <ng-container *ngFor='let ct of chartTemplates'>
-        <ng-container *ngIf='charts[ct.id] && currentTab === ct.location'>
-            <div class='single-chart' role='figure' [attr.aria-label]='ct.title + " - " + (ct._subtitle || "")'>
-                <div class='chart-title' [innerHtml]='processTitles(ct)'></div>
-                <div class='chart-subtitle'>{{ct._subtitle}}</div>
-                <app-chart-plotly [layout]='charts[ct.id].layout' [data]='charts[ct.id].data'></app-chart-plotly>
-            </div>
-        </ng-container>
-    </ng-container>    
-</div>
-
 <ng-container *ngIf='ps.browser()'>
+    <div class='charts columns-2'>
+        <ng-container *ngFor='let ct of chartTemplates'>
+            <ng-container *ngIf='charts[ct.id] && currentTab === ct.location'>
+                <div class='single-chart' role='figure' [attr.aria-label]='ct.title + " - " + (ct._subtitle || "")'>
+                    <div class='chart-title' [innerHtml]='processTitles(ct)'></div>
+                    <div class='chart-subtitle'>{{ct._subtitle}}</div>
+                    <app-chart-plotly [layout]='charts[ct.id].layout' [data]='charts[ct.id].data'></app-chart-plotly>
+                </div>
+            </ng-container>
+        </ng-container>    
+    </div>
+
     <app-social-service-data-table *ngIf='colorscheme | async' [tables]='tables' [default]='"services"' [replacements]='replacements' [filename]='item.page_title' [item]='item'></app-social-service-data-table>
 </ng-container>

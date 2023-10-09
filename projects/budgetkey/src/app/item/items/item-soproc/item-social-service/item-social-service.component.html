@@ -224,18 +224,20 @@
     </div>
 </div>
 
-<div class='charts columns-2'>
+<ng-container *ngIf='ps.browser()'>
+    <div class='charts columns-2'>
 
-    <div class='single-chart'>
-        <div class='chart-title bk-tooltip-anchor'>תקציב מאושר וביצוע תקציב בש״ח<span class='bk-tooltip'>התקציב המאושר ותקציב הביצוע בפועל של השירות לאורך זמן. שינויים בתקציב עשויים לנבוע ממעבר של השירות לצורות הפעלה שונות (שאינן הליך מכרזי) או משינויים במבנה ארגוני (כגון איחוד שירותים) ואינם מעידים בהכרח על שינויים באספקת השירות בפועל. בחלק מהשירותים התקציב כולל השתתפות רשויות מקומיות.</span></div>
-        <app-chart-plotly [layout]='budget_chart.layout' [data]='budget_chart.data'></app-chart-plotly>
+        <div class='single-chart'>
+            <div class='chart-title bk-tooltip-anchor'>תקציב מאושר וביצוע תקציב בש״ח<span class='bk-tooltip'>התקציב המאושר ותקציב הביצוע בפועל של השירות לאורך זמן. שינויים בתקציב עשויים לנבוע ממעבר של השירות לצורות הפעלה שונות (שאינן הליך מכרזי) או משינויים במבנה ארגוני (כגון איחוד שירותים) ואינם מעידים בהכרח על שינויים באספקת השירות בפועל. בחלק מהשירותים התקציב כולל השתתפות רשויות מקומיות.</span></div>
+            <app-chart-plotly [layout]='budget_chart.layout' [data]='budget_chart.data'></app-chart-plotly>
+        </div>
+    
+        <div class='single-chart'>
+            <div class='chart-title bk-tooltip-anchor'>מספר מוטבים ({{item.beneficiary_kind_name}})<span class='bk-tooltip'>מספר מוטבי השירות לאורך זמן. שינוי במספר המוטבים עשוי לנבוע ממעבר של השירות לצורות הפעלה שונות (שאינן הליך מכרזי) או משינויים במבנה ארגוני (כגון איחוד שירותים) ואינם מעידים בהכרח על שינוי בפועל במספר המוטבים</span></div>
+            <app-chart-plotly [layout]='beneficiary_chart.layout' [data]='beneficiary_chart.data'></app-chart-plotly>
+        </div>
+    
     </div>
-
-    <div class='single-chart'>
-        <div class='chart-title bk-tooltip-anchor'>מספר מוטבים ({{item.beneficiary_kind_name}})<span class='bk-tooltip'>מספר מוטבי השירות לאורך זמן. שינוי במספר המוטבים עשוי לנבוע ממעבר של השירות לצורות הפעלה שונות (שאינן הליך מכרזי) או משינויים במבנה ארגוני (כגון איחוד שירותים) ואינם מעידים בהכרח על שינוי בפועל במספר המוטבים</span></div>
-        <app-chart-plotly [layout]='beneficiary_chart.layout' [data]='beneficiary_chart.data'></app-chart-plotly>
-    </div>
-
-</div>
-
-<app-social-service-data-table [tables]='tables' [default]='"tenders"' [replacements]='replacements' [filename]='item.page_title' [item]='item'></app-social-service-data-table>
+    
+    <app-social-service-data-table [tables]='tables' [default]='"tenders"' [replacements]='replacements' [filename]='item.page_title' [item]='item'></app-social-service-data-table>
+</ng-container>

@@ -17,7 +17,7 @@ export class ItemApiService {
   fetchItem(id: string) {
     return this.http.get('https://next.obudget.org/get/' + id).pipe(
       map((res: any) => res.value),
-      tap((item: any) => {
+      map((item: any) => {
         if (item.__redirect) {
           const to = `/i/${item.__redirect}`;
           this.ps.browser(() => {
@@ -26,7 +26,9 @@ export class ItemApiService {
           this.ps.server(() => {
             this.request?.res?.redirect(to);
           });
+          return null;
         }
+        return item;
       })
     );
   }

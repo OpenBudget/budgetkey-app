@@ -48,11 +48,13 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
         return EMPTY;
       }),
     ).subscribe((item: any) => {
-      this.init = true;
-      this.item = item;
-      this.ngxSeoService.setSeo({
-        title: this.globalSettings.siteName + ' - ' + item.page_title,
-      });
+      if (item) {
+        this.init = true;
+        this.item = item;
+        this.ngxSeoService.setSeo({
+          title: this.globalSettings.siteName + ' - ' + item.page_title,
+        });  
+      }
     });
     this.route.queryParamMap.pipe(
       untilDestroyed(this),
