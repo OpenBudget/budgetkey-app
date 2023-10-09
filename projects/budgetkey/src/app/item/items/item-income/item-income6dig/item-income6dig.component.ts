@@ -14,7 +14,7 @@ export class ItemIncome6digComponent implements OnChanges {
   grandParentId = '';
 
   ngOnChanges() {
-    if (this.item) {
+    if (this.item && this.item.hierarchy && this.item.hierarchy.length > 0) {
       const lastHierarchy = this.item.hierarchy[this.item.hierarchy.length - 1];
       this.parent = lastHierarchy[1];
       this.parentId = `budget/${lastHierarchy[0]}/${this.item.year}`;
