@@ -227,7 +227,7 @@ export default [
               "currency AS \"מטבע\",",
               "min_year||'-'||max_year AS \"תקופה\", ", 
               "purpose AS \"תיאור\", ", 
-              "'contract-spending/' || publisher_name || '/' || order_id || '/' || budget_code AS cs_item_id, ", 
+              "'contract-spending/' || publisher_key || '/' || order_id || '/' || budget_code AS cs_item_id, ", 
               "case when entity_name is null then supplier_name->>0 else entity_name end as \"ספק\", ",
               "case when entity_id is null then null else ('org/' || entity_kind || '/' || entity_id) end as e_item_id, ",
               "purchase_method->>0 AS \"אופן רכישה\",",

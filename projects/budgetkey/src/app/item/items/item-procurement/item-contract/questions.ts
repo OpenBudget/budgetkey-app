@@ -7,7 +7,7 @@ export default [
       "entity_id,",
       "'org/' || entity_kind || '/' || entity_id as entity_link, ",
       "purpose as \"כותרת התקשרות\",",
-      "'contract-spending/' || publisher_name || '/' || order_id || '/' || budget_code  as contract_link, ",
+      "'contract-spending/' || publisher_key || '/' || order_id || '/' || budget_code  as contract_link, ",
       "publisher_name as \"הגורם המזמין\",",
       "purchase_method->>0 as \"סוג הרכש\",",
       "contract_is_active as \"התקשרות פעילה\",",

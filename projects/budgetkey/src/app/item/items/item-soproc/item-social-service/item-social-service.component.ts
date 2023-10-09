@@ -117,9 +117,11 @@ export class ItemSocialServiceComponent implements OnInit {
       }]
     };
     this.analyzeSupplierGeo();
-    if (window.innerWidth < 600) {
-      alert('מומלץ לפתוח ממחשב שולחני לשימוש מיטבי');
-    }
+    this.ps.browser(() => {
+      if (window.innerWidth < 600) {
+        alert('מומלץ לפתוח ממחשב שולחני לשימוש מיטבי');
+      }
+    });
   }
 
   analyzeSupplierGeo() {

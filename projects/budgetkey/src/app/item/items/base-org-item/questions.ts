@@ -215,7 +215,7 @@ export default [
               "executed AS \"ביצוע\",",
               "currency AS \"מטבע\", min_year||'-'||max_year AS \"תקופה\", ",
               "purpose AS \"תיאור\", ",
-              "'contract-spending/' || publisher_name || '/' || order_id || '/' || budget_code AS item_id, ",
+              "'contract-spending/' || publisher_key || '/' || order_id || '/' || budget_code AS item_id, ",
               "purchase_method->>0 AS \"אופן רכישה\",",
               "((publisher->>0) || '/' || (purchasing_unit->>0)) AS \"היחידה הרוכשת\",",
               "order_date AS \"תאריך הזמנה\",",
