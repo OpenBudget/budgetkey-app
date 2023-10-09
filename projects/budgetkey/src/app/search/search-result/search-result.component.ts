@@ -3,8 +3,11 @@ import { Component, Input, Inject, OnInit } from '@angular/core';
 
 import { DocResultEntry } from '../model';
 
-import * as dayjs from 'dayjs'
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
+
+import * as dayjs from 'dayjs';
+import 'dayjs/locale/he';
+dayjs.locale('he');
 
 type StringOrFunc = string | ((x: any) => string);
 

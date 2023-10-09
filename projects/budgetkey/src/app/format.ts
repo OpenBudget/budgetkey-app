@@ -1,7 +1,15 @@
-import * as dayjs from 'dayjs'
+import * as durationPlugin from 'dayjs/plugin/duration';
+import * as relativeTimePlugin from 'dayjs/plugin/relativeTime';
+import * as dayjs from 'dayjs';
+import 'dayjs/locale/he';
+dayjs.locale('he')
+dayjs.extend(durationPlugin);
+dayjs.extend(relativeTimePlugin);
 
 export class Format {
   
+  static dayjs = dayjs;
+
   public number(value: number): string {
     if (value) {
       let fracDigits = 0;

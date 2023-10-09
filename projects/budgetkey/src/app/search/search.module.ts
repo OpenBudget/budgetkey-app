@@ -15,13 +15,8 @@ import { SearchTagComponent } from './search-tag/search-tag.component';
 import { VerticalResultsComponent } from './vertical-results/vertical-results.component';
 import { FormsModule } from '@angular/forms';
 
-import * as dayjs from 'dayjs';
-import 'dayjs/locale/he';
-import 'dayjs/plugin/duration';
-import 'dayjs/plugin/relativeTime';
 import { SearchApiService } from './search-api.service';
 import { NgxSeoModule } from '@avivharuzi/ngx-seo';
-dayjs.locale('he')
 
 @NgModule({
   declarations: [

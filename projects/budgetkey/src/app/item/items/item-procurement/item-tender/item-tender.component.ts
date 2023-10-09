@@ -1,11 +1,12 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Format } from '../../../../format';
-import * as dayjs from 'dayjs';
 import { tooltip } from '../tooltips';
 import { GlobalSettingsService } from '../../../../common-components/global-settings.service';
 import { ItemApiService } from '../../../item-api.service';
 import questionsTenders from './questions-tenders';
 import questionsMunicipal from './questions-municipal';
+
+const dayjs = Format.dayjs;
 
 @Component({
   selector: 'app-item-tender',

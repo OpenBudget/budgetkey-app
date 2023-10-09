@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Format } from '../../../../format';
-import * as dayjs from 'dayjs';
 import { tooltip } from '../tooltips';
+
+const dayjs = Format.dayjs;
 
 @Component({
   selector: 'app-item-calls-for-bids',

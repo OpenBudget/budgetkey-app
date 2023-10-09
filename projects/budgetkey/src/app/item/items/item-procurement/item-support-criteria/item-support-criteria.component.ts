@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Format } from '../../../../format';
 import { tooltip } from '../tooltips';
-import * as dayjs from 'dayjs';
+
+
+const dayjs = Format.dayjs;
 
 @Component({
   selector: 'app-item-support-criteria',
