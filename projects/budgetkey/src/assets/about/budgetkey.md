@@ -9,7 +9,7 @@
 - רשימת העמותות והחברות לתועלת הציבור נמשכת מתוך [אתר מאגרי המידע הממשלתיים (data.gov.il)](data.gov.il).
 - מידע ופרטים נוספים על עמותות וחל"צ מתוך [אתר "גיידסטאר" של משרד המשפטים](https://www.guidestar.org.il/).
 - דו"חות רבעוניים: נוהל "פרסום התקשרויות הממשלה" של אגף החשבת הכללית במשרד האוצר והיחידה הממשלתית לחופש מידע במשרד המשפטים מחייב את משרדי הממשלה ויחידות הסמך, [העובדות עם מערכת מרכב"ה](https://mof.gov.il/AG/AccountingReports/chariot), לפרסם באופן יזום דו"ח רבעוני בדבר התקשרויותיהם.
-המידע מוצג ומפורסם ב[אתר הממשלתי המרכזי לחופש מידע](https://foi.gov.il/he/search/site/?f%5b0%5d=im_field_mmdtypes:368). ניתן לצפות ברשימת הגורמים הממשלתיים שעומדים או מפרים את הנוהל ב[אתר משרד המשפטים](href="http://www.justice.gov.il/Units/YechidatChofeshHameyda/PeilotHayehida/DohotHayhida/ReportsPro/Pages/hitkashrout2016.aspx).
+המידע מוצג ומפורסם ב[אתר הממשלתי המרכזי לחופש מידע](https://foi.gov.il/he/search/site/?f%5b0%5d=im_field_mmdtypes:368). ניתן לצפות ברשימת הגורמים הממשלתיים שעומדים או מפרים את הנוהל ב[אתר משרד המשפטים](http://www.justice.gov.il/Units/YechidatChofeshHameyda/PeilotHayehida/DohotHayhida/ReportsPro/Pages/hitkashrout2016.aspx).
 
 
 
