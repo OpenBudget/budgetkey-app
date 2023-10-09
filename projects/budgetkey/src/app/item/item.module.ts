@@ -58,7 +58,6 @@ import { ItemSocialServiceComponent } from './items/item-soproc/item-social-serv
 import { SocialServiceDataTableComponent } from './items/item-soproc/item-social-service/social-service-data-table/social-service-data-table.component';
 import { ItemSupportsComponent } from './items/item-supports/item-supports.component';
 import { SearchLinkComponent } from './search-link/search-link.component';
-import { NgxSeoModule } from '@avivharuzi/ngx-seo';
 
 @NgModule({
   declarations: [

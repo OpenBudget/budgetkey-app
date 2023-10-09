@@ -8,7 +8,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Question } from '../model';
 import { PlatformService } from '../../common-components/platform.service';
 import { QuestionsPanelComponent } from '../questions/questions-panel/questions-panel.component';
-import { NgxSeoService } from '@avivharuzi/ngx-seo';
+import { SeoService } from '../../common-components/seo.service';
 
 @UntilDestroy()
 @Component({
@@ -28,7 +28,7 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
   showQuestions = false;
   questions: Question[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private ngxSeoService: NgxSeoService,
+  constructor(private route: ActivatedRoute, private router: Router, private seo: SeoService,
     public globalSettings: GlobalSettingsService, private itemApi: ItemApiService, private ps: PlatformService) {
   }
 
@@ -51,9 +51,7 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
       if (item) {
         this.init = true;
         this.item = item;
-        this.ngxSeoService.setSeo({
-          title: this.globalSettings.siteName + ' - ' + item.page_title,
-        });  
+        this.seo.setSeo(this.globalSettings.siteName + ' - ' + item.page_title, `https://next.obudget.org/i/${item.doc_id}`);
       }
     });
     this.route.queryParamMap.pipe(

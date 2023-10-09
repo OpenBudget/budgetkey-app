@@ -16,7 +16,6 @@ import { VerticalResultsComponent } from './vertical-results/vertical-results.co
 import { FormsModule } from '@angular/forms';
 
 import { SearchApiService } from './search-api.service';
-import { NgxSeoModule } from '@avivharuzi/ngx-seo';
 
 @NgModule({
   declarations: [

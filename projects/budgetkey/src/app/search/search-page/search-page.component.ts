@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
-import { NgxSeoService } from '@avivharuzi/ngx-seo';
+import { SeoService } from '../../common-components/seo.service';
 
 @Component({
   selector: 'app-search-page',
@@ -11,7 +11,7 @@ export class SearchPageComponent implements OnInit {
 
   init = false;
 
-  constructor(private globalSettings: GlobalSettingsService, private ngxSeoService: NgxSeoService) {
+  constructor(private globalSettings: GlobalSettingsService, private seo: SeoService) {
     globalSettings.ready.subscribe(() => {
       this.init = true;
     });
@@ -19,9 +19,7 @@ export class SearchPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.globalSettings.ready.subscribe(() => {
-      this.ngxSeoService.setSeo({
-        title: this.globalSettings.siteName + ' - חיפוש',
-      });
+      this.seo.setSeo(this.globalSettings.siteName + ' - חיפוש', `https://next.obudget.org/s`);
     });
   }
 }

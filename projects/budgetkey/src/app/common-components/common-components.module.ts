@@ -19,6 +19,7 @@ import { PlatformService } from './platform.service';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './auth/auth.service';
 import { RouterModule } from '@angular/router';
+import { SeoService } from './seo.service';
 
 /**
  * Created by adam on 27/12/2016.
@@ -46,7 +47,8 @@ import { RouterModule } from '@angular/router';
     ListsService,
     GlobalSettingsService,
     PlatformService,
-    AuthService
+    AuthService,
+    SeoService
   ],
   exports: [
     AppContainerComponent,
