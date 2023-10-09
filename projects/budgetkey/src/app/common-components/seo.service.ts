@@ -25,7 +25,6 @@ export class SeoService {
     //       ]
     //   }
     // };
-    console.log('setSeo', title, this.globalSettings.siteName, canonical);
     this.seo.setTitle(title);
     this.seo.setMetaSiteName(this.globalSettings.siteName + '1');
     this.seo.setMetaCanonical(canonical);
