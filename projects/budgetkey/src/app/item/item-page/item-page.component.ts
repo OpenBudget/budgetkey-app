@@ -10,6 +10,12 @@ import { PlatformService } from '../../common-components/platform.service';
 import { QuestionsPanelComponent } from '../questions/questions-panel/questions-panel.component';
 import { NgxSeoService } from '@avivharuzi/ngx-seo';
 
+import * as dayjs from 'dayjs';
+import 'dayjs/locale/he';
+import 'dayjs/plugin/duration';
+import 'dayjs/plugin/relativeTime';
+dayjs.locale('he')
+
 @UntilDestroy()
 @Component({
   selector: 'app-item-page',

@@ -60,12 +60,6 @@ import { ItemSupportsComponent } from './items/item-supports/item-supports.compo
 import { SearchLinkComponent } from './search-link/search-link.component';
 import { NgxSeoModule } from '@avivharuzi/ngx-seo';
 
-import * as dayjs from 'dayjs';
-import 'dayjs/locale/he';
-import 'dayjs/plugin/duration';
-import 'dayjs/plugin/relativeTime';
-dayjs.locale('he')
-
 @NgModule({
   declarations: [
     BaseOrgItemComponent,
