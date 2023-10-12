@@ -21,7 +21,7 @@ export class AppErrorHandler implements ErrorHandler {
   
   pageNotFound(error: any): boolean {
     const msg = error.message || error;
-    return msg.indexOf('Cannot match any routes') > -1;
+    return msg.indexOf('Cannot match any routes') > -1 || msg.indexOf('NG04002') > -1;
   }
 
   handleBrowser(error: any): void {
