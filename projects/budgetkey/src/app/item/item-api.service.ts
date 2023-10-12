@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, Optional } from '@angular/core';
-import { Subject, map, tap } from 'rxjs';
+import { EMPTY, Subject, catchError, map, tap } from 'rxjs';
 import { GlobalSettingsService } from '../common-components/global-settings.service';
 import { Router } from '@angular/router';
 import { PlatformService } from '../common-components/platform.service';
@@ -29,6 +29,15 @@ export class ItemApiService {
           return null;
         }
         return item;
+      }),
+      catchError((err: any) => {
+        if (err?.status === 404) {
+          this.ps.server(() => {
+            this.request?.res?.status(404);
+          });
+          this.router.navigate(['/not-found'], {queryParamsHandling: 'preserve', replaceUrl: true});
+        }    
+        return EMPTY;
       })
     );
   }

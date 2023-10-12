@@ -36,7 +36,22 @@ export function app(): express.Express {
       res.redirect('https://www.socialpro.org.il/i/units/gov_social_service_unit/main?theme=soproc');
       return;
     }
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] }, (err, html) => {
+      console.log(`${new Date().toISOString()} | ${res.statusCode} | ${err?.name || 'OK'} | ${req.url} | ${req.headers['user-agent']}}`);      
+      if (err) {
+        if (res.statusCode !== 302) {
+          console.log('ERR:', err);
+        }
+        res.end();
+      } else {
+        // if (res.statusCode === 404) {
+        //   req.path = '/not-found';
+        //   res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+        // } else {
+          res.send(html);
+        // }
+      }
+    });
   });
 
   return server;
