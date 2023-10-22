@@ -136,26 +136,33 @@ export class ItemSocialServiceComponent implements OnInit {
     }
   }
 
-  countForRegion(region: string) {
+  countForRegion(region?: string) {
     let count = ((this.supplierRegions['ארצי'] || {}).count || 0);
-    if (this.supplierRegions[region]) {
-      count += this.supplierRegions[region].count;
+    for (let k of Object.keys(this.supplierRegions)) {
+      if (!region || k === region) {
+        if (this.supplierRegions[k]) {
+          count += this.supplierRegions[k].count;
+        }
+      }
     }
     return count;
   }
 
-  titleForRegion(region: string) {
+  titleForRegion(region?: string) {
     let ret = '';
     let count = this.countForRegion(region);
     if (count > 0) {
       ret += count === 1 ? 'מפעיל אחד' : `${count} מפעילים:`; 
       ret += '\n';
     }
-    for (const r of [region, 'ארצי']) {
-      if (this.supplierRegions[r]) {
-        const sr = this.supplierRegions[r];
-        const suppliers = (sr.suppliers as string[]).map(x => `- ${x}`).join('\n');
-        ret += `${r}\n${suppliers}\n`;
+    const regions = [...Object.keys(this.supplierRegions).filter(x => x !== 'ארצי'), 'ארצי'];
+    for (const r of regions) {
+      if (!region || r === region || r === 'ארצי') {
+        if (this.supplierRegions[r]) {
+          const sr = this.supplierRegions[r];
+          const suppliers = (sr.suppliers as string[]).map(x => `- ${x}`).join('\n');
+          ret += `${r}\n${suppliers}\n`;
+        }
       }
     }
     return ret;

@@ -1,8 +1,9 @@
-<div class="item-questions-parameter">
-    <span class="value" (click)="toggleDropdown($event)">{{ value }}</span>
-    <ul class="values" *ngIf="isDropDownVisible">
-      <li *ngFor="let item of values" (click)="setValue(item)"
-        [ngClass]="{selected: item === value}">{{ item }}</li>
+<div class="item-questions-parameter" [attr.aria-expanded]='isDropDownVisible'>
+    <span class="value" (activated)="toggleDropdown($event)" clickOnReturn>{{ value }}</span>
+    <ul class="values" *ngIf="isDropDownVisible" role='listbox'>
+      <li *ngFor="let item of values" (activated)="setValue(item)"
+        [class.selected]='item === value' clickOnReturn role='option'
+      >{{ item }}</li>
     </ul>
   </div>
   

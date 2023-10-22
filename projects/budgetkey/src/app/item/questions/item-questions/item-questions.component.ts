@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BudgetKeyItemService } from '../../budgetkey-item.service';
-import { PreparedQuestion } from '../../model';
+import { PreparedQuestion, PreparedQuestionFragment } from '../../model';
 import { GlobalSettingsService } from '../../../common-components/global-settings.service';
 import { QuestionsManager } from '../questions-manager';
 
@@ -108,4 +108,17 @@ export class ItemQuestionsComponent implements OnChanges, OnInit {
     this.manager.currentParameters = params;
   }
 
+  toText(fragments: PreparedQuestionFragment[]) {
+    let ret: string[] = [];
+    for (const fragment of fragments) {
+      if (fragment.isText) {
+        ret.push(fragment.value);
+        continue;
+      }
+      if (fragment.isParameter) {
+        ret.push(this.currentParameters[fragment.name]);
+      }
+    }
+    return ret.join(' ');
+  }
 }

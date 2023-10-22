@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { first, fromEvent } from 'rxjs';
 
 @Component({
@@ -16,7 +16,7 @@ export class ItemQuestionsParameterComponent {
   constructor() {
   }
 
-  toggleDropdown(event?: MouseEvent) {
+  toggleDropdown(event?: Event) {
     event?.stopPropagation();
     this.isDropDownVisible = !this.isDropDownVisible;
     if (this.isDropDownVisible) {
@@ -31,5 +31,4 @@ export class ItemQuestionsParameterComponent {
     this.isDropDownVisible = false;
     this.change.emit(this.value);
   }
-
 }

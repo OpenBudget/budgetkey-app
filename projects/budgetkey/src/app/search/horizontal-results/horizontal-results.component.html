@@ -19,7 +19,7 @@
       <ng-container *ngFor='let docType of docTypes'>
         <search-tag *ngIf='docTypes[0] !== docType && docType.amount'
                     [name]='docType.display' [amount]='docType.amount'
-                    (click)='optionClicked(docType)'
+                    (select)='optionClicked(docType)'
         ></search-tag>
       </ng-container>
     </div>

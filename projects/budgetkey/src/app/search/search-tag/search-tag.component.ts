@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChange, SimpleChanges, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'search-tag',
@@ -13,9 +13,15 @@ export class SearchTagComponent implements OnChanges {
   @Input() main = false;
   @Input() bare = false;
 
+  @Output() select = new EventEmitter<void>();
+
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
+  }
+
+  select_() {
+    this.select.emit();
   }
 
 }

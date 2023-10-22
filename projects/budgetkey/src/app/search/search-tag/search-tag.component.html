@@ -1,4 +1,7 @@
-<div class='search-tag' [class.bare]='bare'>
+<div class='search-tag' [class.bare]='bare' clickOnReturn (activated)='select_()'
+    [attr.aria-label]='"סינון " + name + " - " + (amount || 0).toLocaleString() + " תוצאות"'
+    [attr.aria-current]='selected ? "tab" : null'
+>
     <div class='search-tag-name' [class.selected]='selected' [class.main]='main'>{{name}}</div>
     <div class='search-tag-amount' [class.selected]='selected'>{{amount | number}}</div>
 </div>

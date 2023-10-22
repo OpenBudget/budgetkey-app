@@ -1,6 +1,9 @@
-<div class="search-box input-group input-group-lg" *ngIf='!fake'>
+<div class="search-box input-group input-group-lg" *ngIf='!fake && !!selectedSearchType'>
     <div #btnSearchMenu class="input-group-addon outer-right-side roundCorners-border-right-side"
-         (click)="openCloseSearchTypeDropDown($event)">
+         (activated)="openCloseSearchTypeDropDown($event)" clickOnReturn
+         [attr.aria-expanded]='dropdownOpen' role='listbox'
+         [attr.aria-label]='"בחירת סוג חיפוש, כרגע מציג " + (selectedSearchType.amount || 0).toLocaleString() + " " + selectedSearchType.name'
+    >
          <div class="inner-right-side roundCorners-border-right-side"
          [ngClass]="{'has-text-all-tab': isSearchBarHasText && selectedSearchType.main,
                      'has-text-not-all-tab': isSearchBarHasText && !selectedSearchType.main,
@@ -14,7 +17,7 @@
                 <span *ngIf="isSearchBarHasText || !selectedSearchType.main"
                     class="type-text-in-search-bar-right">
                     {{selectedSearchType.name}}
-                    <span *ngIf="isNumeric(selectedSearchType.amount)">
+                    <span *ngIf="selectedSearchType.amount && isNumeric(selectedSearchType.amount)">
                         ({{selectedSearchType.amount.toLocaleString()}})
                     </span>
                 </span>
@@ -25,9 +28,11 @@
             </div>
 
             <div class="dropdown-content"
-                [ngClass]="{show: dropdownOpen}">
+                [class.show]='dropdownOpen'>
                 <a *ngFor="let tab of searchTypes" href="#"
-                (click)="dropdownOpen = false; switchTab($event, tab);">
+                (activated)="dropdownOpen = false; switchTab($event, tab);" clickOnReturn
+                role='option'
+            >
                 {{tab.name}}
                     <span *ngIf="isNumeric(tab.amount)">
                         ({{ tab.amount.toLocaleString() }})

@@ -55,7 +55,7 @@ export interface SearchBarType {
 export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   
   @Input() searchTypes: SearchBarType[];
-  @Input() selectedSearchType: SearchBarType;
+  @Input() selectedSearchType: SearchBarType | undefined;
   @Input() searchTerm: string;
   @Input() isSearching: boolean;
   @Input() disableAutofocus: boolean;
@@ -111,14 +111,16 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   }
   
   private calcExternalUrl() {
-    this.externalUrl = BkSearchBar.buildExternalUrl(
-      this.searchTerm,
-      this.selectedSearchType,
-      this.externalUrlParams,
-      this.globalSettings.theme,
-      this.globalSettings.lang,
-      this.ps.browser() ? window.location.hostname : 'next.obudget.org'
-    );
+    if (this.selectedSearchType) {
+      this.externalUrl = BkSearchBar.buildExternalUrl(
+        this.searchTerm,
+        this.selectedSearchType,
+        this.externalUrlParams,
+        this.globalSettings.theme,
+        this.globalSettings.lang,
+        this.ps.browser() ? window.location.hostname : 'next.obudget.org'
+      );  
+    }
   }
     
   ngOnInit() {
@@ -155,7 +157,7 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
     this.search.emit(term);
   }
   
-  openCloseSearchTypeDropDown(event?: MouseEvent) {
+  openCloseSearchTypeDropDown(event?: Event) {
     event?.stopPropagation();
     this.dropdownOpen = !this.dropdownOpen;
     if (this.dropdownOpen) {
@@ -176,7 +178,7 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   }
   
   glassIcon() {
-    return (!this.selectedSearchType.main && this.isSearchBarHasText)
+    return (!this.selectedSearchType?.main && this.isSearchBarHasText)
     ? 'assets/common/img/search-glass-white.svg' :
     'assets/common/img/search-glass-red.svg';
   }

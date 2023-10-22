@@ -1,5 +1,5 @@
 <div class="budgetkey-item-visualizations-wrapper row" *ngIf="item.charts">
-    <div class="tabs" *ngIf="charts.length > 1">
+    <div class="tabs" *ngIf="charts.length > 1" role='tablist'>
       <div class="tabs-row" (scroll)='tabsScroll($event)'>
         <ng-container>
           <div *ngFor="let tab of charts"

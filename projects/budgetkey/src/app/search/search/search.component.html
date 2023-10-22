@@ -5,7 +5,7 @@
         <search-tag [name]='docType.name' [amount]='docType.amount' 
                     [selected]='searchState.docType===docType'
                     [bare]='bare'
-                    (click)='onDocTypeSelected(docType)'
+                    (select)='onDocTypeSelected(docType)'
         ></search-tag>
       </ng-container>
     </div>
@@ -45,14 +45,14 @@
                      (selected)="onDocTypeSelected($event)"
   ></app-bk-search-bar>
   <ng-container *ngIf='!isSearching'>
-    <div class='count-tags'>
+    <div class='count-tags' role='tablist'>
         <div>
           <ng-container *ngFor='let docType of docTypes'>
             <search-tag *ngIf='docType.id === "all"'
                         [name]='docType.name' [amount]='docType.amount' 
                         [selected]='searchState.docType===docType'
                         [main]='true'
-                        (click)='onDocTypeSelected(docType)'
+                        (select)='onDocTypeSelected(docType)'
             ></search-tag>
           </ng-container>
         </div>
@@ -62,7 +62,7 @@
                         [name]='docType.name' [amount]='docType.amount' 
                         [selected]='searchState.docType===docType'
                         [main]='true'
-                        (click)='onDocTypeSelected(docType)'
+                        (select)='onDocTypeSelected(docType)'
             ></search-tag>
           </ng-container>
         </div>

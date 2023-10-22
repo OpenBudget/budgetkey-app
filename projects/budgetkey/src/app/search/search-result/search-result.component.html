@@ -26,12 +26,15 @@
         <span [class]='"right-icon " + p.rightIcon' *ngIf='p.rightIcon'>
             <img [src]='"/assets/search/img/icon-" + p.rightIcon + ".svg"'/>
         </span>
-        <div class='main-content'
+        <h2 class='main-content'
              [style.color]='p.primaryColor'
+             [attr.aria-label]='p.title'
             >
             <a [href]='href()' class='body-title' *ngIf='p.title'
                [target]='bare ? "_blank" : "_self"'
-               [style.color]='p.primaryColor'               
+               [style.color]='p.primaryColor'
+               clickOnReturn
+               [attr.aria-label]='p.title + " - מעבר לעמוד הפריט"'
             >
                 <span [innerHtml]='p.title' [title]='p.title'></span>
                 <div class='fadeoff'
@@ -50,7 +53,7 @@
                 ></div>
             </span>
             <span class='body-main-id' *ngIf='p.mainId' [innerHtml]='p.mainId'></span>        
-        </div>
+        </h2>
         <span [class]='"left-icon " + p.leftIcon' *ngIf='p.leftIcon'>
             <img [src]='"/assets/search/img/icon-" + p.leftIcon + ".svg"'/>
         </span>
@@ -59,7 +62,7 @@
         <span class='bottom-line-text' *ngIf='p.bottomLineText'
               [style.color]='p.primaryColor' [style.opacity]='p.bottomLineTextOpacity || "1.0"'
         >
-            <span [innerHtml]='p.bottomLineText'></span>
+            <span [innerHtml]='p.bottomLineText' tabindex="-1"></span>
             <div class='fadeoff'
                 [style.background]='fadeoff(true)'
             ></div>

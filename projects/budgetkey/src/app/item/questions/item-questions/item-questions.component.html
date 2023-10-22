@@ -4,10 +4,12 @@
       </div>
     </div>
     <div class="budgetkey-item-questions">
-      <div class="questions">
+      <div class="questions" role='listbox'>
         <div *ngFor="let question of manager.preparedQuestions" class="item-questions-fragments-wrapper"
           [class.active]="question===manager.currentQuestion"
-          (click)="selectQuestion(question)">
+          (activated)="selectQuestion(question)" clickOnReturn
+          role='option' [attr.aria-label]='"ביצוע שאילתא: " + toText(question.parsed)'
+        >
           <ng-container *ngIf='question===manager.currentQuestion'>
             <ng-container *ngFor="let fragment of manager.currentQuestion.parsed">
               <span *ngIf="fragment.isText"
@@ -35,10 +37,10 @@
       </div>
     </div>
     <div class="item-questions-actions">
-      <a [href]="downloadUrl" title="הורדת טבלה" target="_blank">
+      <a [href]="downloadUrl" title="הורדת הנתונים לטבלה" target="_blank" clickOnReturn>
         <img src='assets/item/img/icon-csv.svg'>
       </a>
-      <a [href]="downloadUrlXlsx" title="הורדת אקסל" target="_blank">
+      <a [href]="downloadUrlXlsx" title="הורדת הנתונים לקובץ אקסל" target="_blank" clickOnReturn>
         <img src='assets/item/img/icon-xlsx.svg'>
       </a>
     </div>

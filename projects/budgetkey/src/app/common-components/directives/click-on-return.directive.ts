@@ -21,7 +21,7 @@ export class ClickOnReturnDirective implements AfterViewInit{
       this.activated.emit(event);
     });
     el.setAttribute('tabindex', '0');
-    if (el.tagName !== 'button') {
+    if (el.tagName !== 'button' && !el.getAttribute('role')) {
       el.setAttribute('role', 'button');
     }
   }
