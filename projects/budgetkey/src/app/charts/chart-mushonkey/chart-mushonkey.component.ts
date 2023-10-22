@@ -21,7 +21,8 @@ export class ChartMushonkeyComponent {
   }
 
   onSelected(context: any) {
-    this.router.navigate(['/i', context], { queryParamsHandling: 'preserve' });
+    const parts = context.split('/');
+    this.router.navigate(['/i', ...parts], { queryParamsHandling: 'preserve' });
   }
 
   ngOnInit() {
