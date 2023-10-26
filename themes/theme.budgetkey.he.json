@@ -288,6 +288,23 @@
                 }
               }
             ]
+          },
+          {
+            "id": "pending",
+            "display": "סטטוס",
+            "options": [
+              {
+                "id": "all",
+                "display": "כל ההעברות"
+              },
+              {
+                "id": "pending",
+                "display": "ממתינות לאישור",
+                "filters": {
+                  "is_pending": true
+                }
+              }
+            ]
           }
         ]
       },

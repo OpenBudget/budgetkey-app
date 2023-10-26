@@ -351,6 +351,23 @@
                 "id": "2011"
               }
             ]
+          },
+          {
+            "display": "סטטוס",
+            "id": "pending",
+            "options": [
+              {
+                "display": "כל ההעברות",
+                "id": "all"
+              },
+              {
+                "display": "ממתינות לאישור",
+                "filters": {
+                  "is_pending": true
+                },
+                "id": "pending"
+              }
+            ]
           }
         ],
         "id": "national-budget-changes",
