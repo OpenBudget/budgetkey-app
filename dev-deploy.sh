@@ -4,7 +4,7 @@ git checkout dev && \
 git checkout -b dist && \
 rm .gitignore && \
 cd utils && ./mk_bubbles.sh && cd .. && \
-npm run build && \
+npm run build-dev && \
 cp dist/budgetkey/index.html dist/budgetkey/404.html && \
 cp CNAME dist/budgetkey/ || true && \
 git add dist/budgetkey && \
