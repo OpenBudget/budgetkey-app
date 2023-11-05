@@ -5,7 +5,7 @@ git checkout -b dist && \
 rm .gitignore && \
 cd utils && ./mk_bubbles.sh && cd .. && \
 npm run build-dev && \
-cp dist/budgetkey/index.html dist/budgetkey/404.html && \
+cp dist/budgetkey/browser/index.html dist/budgetkey/browser/404.html && \
 cp CNAME dist/budgetkey/browser/ && \
 git add dist/budgetkey/browser/ && \
 git commit -m dist && \
