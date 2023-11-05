@@ -17,6 +17,8 @@ jobs:
         node-version: '16'
     - name: Build
       run: |
+        git config --global user.email "adam.kariv@gmail.com"
+        git config --global user.name "Adam Kariv"
         npm install -g npm@8
         npm install
         ./dev-deploy.sh
