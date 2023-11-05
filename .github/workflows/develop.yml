@@ -17,6 +17,6 @@ jobs:
         node-version: '16'
     - name: Build
       run: |
-        npm install -g npm@latest
+        npm install -g npm@8
         npm install
         ./dev-deploy.sh
