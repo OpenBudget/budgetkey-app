@@ -6,11 +6,11 @@ rm .gitignore && \
 cd utils && ./mk_bubbles.sh && cd .. && \
 npm run build-dev && \
 cp dist/budgetkey/index.html dist/budgetkey/404.html && \
-cp CNAME dist/budgetkey/ && \
-git add dist/budgetkey && \
+cp CNAME dist/budgetkey/browser/ && \
+git add dist/budgetkey/browser/ && \
 git commit -m dist && \
 (git branch -D gh-pages || true) && \
-git subtree split --prefix dist/budgetkey -b gh-pages && \
+git subtree split --prefix dist/budgetkey/browser -b gh-pages && \
 git push -f origin gh-pages:gh-pages && \
 git checkout dev && \
 git branch -D gh-pages && \
