@@ -305,9 +305,11 @@ function fetch_all() {
     });
 }
 
+console.log('RUNNING');
 fetch_all()
   .then((data) => {
     const content = `export const bubbles: any = ` + JSON.stringify(data, undefined, 4) + `;`;
     const filename = '../projects/budgetkey/src/app/main-page/bubbles.ts'
+    console.log('DONE');
     fs.writeFileSync(filename, content);
   });
