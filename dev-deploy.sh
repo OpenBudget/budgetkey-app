@@ -6,7 +6,7 @@ rm .gitignore && \
 cd utils && ./mk_bubbles.sh && cd .. && \
 npm run build-dev && \
 cp dist/budgetkey/index.html dist/budgetkey/404.html && \
-cp CNAME dist/budgetkey/ || true && \
+cp CNAME dist/budgetkey/ && \
 git add dist/budgetkey && \
 git commit -m dist && \
 (git branch -D gh-pages || true) && \

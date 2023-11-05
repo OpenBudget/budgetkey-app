@@ -70,7 +70,7 @@
               "namedChunks": true
             },
             "staging": {
-              "index": "projects/budgetkey/src/index.dev.html",
+              "index": "projects/budgetkey/src/index.staging.html",
               "outputHashing": "all"
             }
           },
