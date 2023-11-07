@@ -919,13 +919,13 @@ export const bubbles: any = {
                 "2024-12"
             ],
             "__date_range_to": "2024-12-31",
-            "__hash": "ab436470503b80d5ac999798c94757d6",
+            "__hash": "f68c928c1c8c58fcd2b486399f24ee2a",
             "__is_new": false,
             "__is_stale": true,
-            "__last_modified_at": "2023-10-01T12:30:58Z",
-            "__last_updated_at": "2023-10-01T12:30:58Z",
+            "__last_modified_at": "2023-11-03T00:18:43Z",
+            "__last_updated_at": "2023-11-03T00:18:43Z",
             "__next_update_days": 1,
-            "__revision": 278,
+            "__revision": 283,
             "__staleness": 133333,
             "admin_cls_code_0": [
                 "1"
@@ -1146,7 +1146,7 @@ export const bubbles: any = {
                                         68999783000,
                                         71759037000,
                                         74618184000,
-                                        77776056000,
+                                        81357346000,
                                         82937392000
                                     ]
                                 },
@@ -1209,7 +1209,7 @@ export const bubbles: any = {
                                         60947384862,
                                         64030668117,
                                         66380500348,
-                                        null,
+                                        70670247585,
                                         null,
                                         null
                                     ]
@@ -1292,7 +1292,7 @@ export const bubbles: any = {
                                         null,
                                         12.913400620871085,
                                         13.451893571089116,
-                                        15.948085230602214,
+                                        15.443126899908203,
                                         16.053320595775848
                                     ]
                                 },
@@ -1356,7 +1356,7 @@ export const bubbles: any = {
                                         13.287852952289818,
                                         13.700564153310584,
                                         14.801862645710596,
-                                        15.948085230602214,
+                                        16.15422384644625,
                                         16.053320595775848
                                     ]
                                 },
@@ -1419,7 +1419,7 @@ export const bubbles: any = {
                                         14.36620732548621,
                                         12.330909828739141,
                                         12.673669290554018,
-                                        null,
+                                        14.018718250923005,
                                         null,
                                         null
                                     ]
@@ -2116,42 +2116,42 @@ export const bubbles: any = {
             ],
             "doc_id": "budget/0020/2024",
             "econ_cls_json": [
-                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"173\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
                 "[\"028\", \"\\u05d7\\u05e9\\u05d1\\u05d5\\u05e0\\u05d5\\u05ea \\u05de\\u05e2\\u05d1\\u05e8\", \"095\", \"\\u05d7\\u05e9\\u05d1\\u05d5\\u05e0\\u05d5\\u05ea \\u05de\\u05e2\\u05d1\\u05e8\"]",
-                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"033\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d0\\u05e8\\u05e5\"]",
-                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"198\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d7\\u05d5\\\"\\u05dc\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"031\", \"\\u05de\\u05d5\\u05e6\\u05e8\\u05d9\\u05dd \\u05e6\\u05d9\\u05d1\\u05d5\\u05e8\\u05d9\\u05d9\\u05dd\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"029\", \"\\u05e9\\u05db\\u05e8 \\u05e2\\u05e7\\u05d9\\u05e3\"]",
-                "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"301\", \"\\u05d4\\u05e4\\u05d7\\u05ea\\u05d5\\u05ea\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"034\", \"\\u05ea\\u05e9\\u05dc\\u05d5\\u05de\\u05d9 \\u05d4\\u05e2\\u05d1\\u05e8\\u05d4 \\u05e1\\u05d5\\u05e6\\u05d9\\u05d0\\u05dc\\u05d9\\u05d9\\u05dd\"]",
-                "[\"004\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05de\\u05d9\\u05d5\\u05e2\\u05d3\\u05d5\\u05ea\", \"041\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1 \\u05e8\\u05d2\\u05d9\\u05dc\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"036\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
-                "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"300\", \"\\u05d4\\u05e9\\u05ea\\u05ea\\u05e4\\u05d5\\u05d9\\u05d5\\u05ea\"]",
-                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"104\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"035\", \"\\u05ea\\u05de\\u05d9\\u05db\\u05d5\\u05ea \\u05dc\\u05e4\\u05d9 \\u05e1\\u05e2\\u05d9\\u05e3 3\\u05d0\"]",
-                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"030\", \"\\u05e9\\u05db\\u05e8 \\u05d1\\u05d0\\u05e8\\u05e5\"]"
+                "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"300\", \"\\u05d4\\u05e9\\u05ea\\u05ea\\u05e4\\u05d5\\u05d9\\u05d5\\u05ea\"]",
+                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"033\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d0\\u05e8\\u05e5\"]",
+                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"173\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
+                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"198\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d7\\u05d5\\\"\\u05dc\"]",
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"034\", \"\\u05ea\\u05e9\\u05dc\\u05d5\\u05de\\u05d9 \\u05d4\\u05e2\\u05d1\\u05e8\\u05d4 \\u05e1\\u05d5\\u05e6\\u05d9\\u05d0\\u05dc\\u05d9\\u05d9\\u05dd\"]",
+                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"104\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"036\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"029\", \"\\u05e9\\u05db\\u05e8 \\u05e2\\u05e7\\u05d9\\u05e3\"]",
+                "[\"004\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05de\\u05d9\\u05d5\\u05e2\\u05d3\\u05d5\\u05ea\", \"041\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1 \\u05e8\\u05d2\\u05d9\\u05dc\"]",
+                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"030\", \"\\u05e9\\u05db\\u05e8 \\u05d1\\u05d0\\u05e8\\u05e5\"]",
+                "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"301\", \"\\u05d4\\u05e4\\u05d7\\u05ea\\u05d5\\u05ea\"]",
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"031\", \"\\u05de\\u05d5\\u05e6\\u05e8\\u05d9\\u05dd \\u05e6\\u05d9\\u05d1\\u05d5\\u05e8\\u05d9\\u05d9\\u05dd\"]"
             ],
             "econ_cls_title_1": [
                 "חשבונות מעבר",
-                "העברות",
                 "שכר",
                 "העברות  פנים תקציביות",
-                "קניות",
-                "הכנסות מיועדות"
+                "הכנסות מיועדות",
+                "העברות",
+                "קניות"
             ],
             "econ_cls_title_2": [
                 "חשבונות מעבר",
-                "הפחתות",
-                "קניות בחו\"ל",
-                "מוצרים ציבוריים",
                 "תמיכות לפי סעיף 3א",
-                "שכר עקיף",
                 "הכנסות תקציב רגיל",
+                "שכר עקיף",
                 "השתתפויות",
+                "קניות בחו\"ל",
                 "שכר בארץ",
+                "מוצרים ציבוריים",
                 "רזרבה",
-                "תשלומי העברה סוציאליים",
-                "קניות בארץ"
+                "קניות בארץ",
+                "הפחתות",
+                "תשלומי העברה סוציאליים"
             ],
             "explanation": null,
             "explanation_short": null,
@@ -3203,26 +3203,35 @@ export const bubbles: any = {
                 },
                 "2022": {
                     "amounts_allocated": 7504848,
+                    "amounts_executed": 1217596.85,
                     "amounts_revised": 7542461,
                     "code_titles": [
                         "0020:משרד החינוך"
                     ],
                     "commitment_allowance_allocated": 1898000000,
+                    "commitment_allowance_executed": 1795311212,
                     "commitment_allowance_revised": 1964672000,
                     "commitment_balance_allocated": 0,
+                    "commitment_balance_executed": 5068423556,
                     "commitment_balance_revised": 0,
                     "contractors_allocated": 0,
+                    "contractors_executed": 0,
                     "contractors_revised": 0,
                     "covid19_expenses_allocated": 0,
+                    "covid19_expenses_executed": 0,
                     "covid19_expenses_revised": 0,
                     "dedicated_allocated": -3062195000,
+                    "dedicated_executed": 0,
                     "dedicated_revised": -3447171000,
                     "depth": 1,
                     "gross_allocated": 3062195000,
+                    "gross_executed": 0,
                     "gross_revised": 3447171000,
                     "net_allocated": 67812808000,
+                    "net_executed": 70670247585,
                     "net_revised": 74618184000,
                     "personnel_allocated": 2438.5,
+                    "personnel_executed": 2442.61,
                     "personnel_revised": 2547.5,
                     "total_direction_expense": 74791974000,
                     "total_direction_income": -173790000,
@@ -3253,17 +3262,17 @@ export const bubbles: any = {
                     "gross_allocated": 3612195000,
                     "gross_revised": 3612195000,
                     "net_allocated": 77776056000,
-                    "net_revised": 77776056000,
+                    "net_revised": 81357346000,
                     "personnel_allocated": 2594.5,
-                    "personnel_revised": 2594.5,
-                    "total_direction_expense": 77920421000,
+                    "personnel_revised": 2647.5,
+                    "total_direction_expense": 81501711000,
                     "total_direction_income": -144365000,
                     "total_econ_cls_dedicated_income": 0,
                     "total_econ_cls_interim_accounts": 0,
                     "total_econ_cls_internal_transfers": 67343000,
-                    "total_econ_cls_procurement": 2729750000,
-                    "total_econ_cls_salaries": 30246044000,
-                    "total_econ_cls_transfers": 44732919000
+                    "total_econ_cls_procurement": 4589557000,
+                    "total_econ_cls_salaries": 31040352000,
+                    "total_econ_cls_transfers": 45660094000
                 }
             },
             "net_allocated": 82937392000,
@@ -3272,7 +3281,7 @@ export const bubbles: any = {
             "nice-breadcrumbs": "1997 - 2024",
             "nice-category": "שירותים חברתיים / חינוך",
             "nice-code": "20",
-            "nice-econ-category": "קניות-רזרבה, חשבונות מעבר-חשבונות מעבר, קניות-קניות בארץ, קניות-קניות בחו\"ל, העברות-מוצרים ציבוריים, העברות-שכר עקיף, העברות  פנים תקציביות-הפחתות, העברות-תשלומי העברה סוציאליים, הכנסות מיועדות-הכנסות תקציב רגיל, העברות-רזרבה, העברות  פנים תקציביות-השתתפויות, שכר-רזרבה, העברות-תמיכות לפי סעיף 3א, שכר-שכר בארץ",
+            "nice-econ-category": "חשבונות מעבר-חשבונות מעבר, העברות-תמיכות לפי סעיף 3א, העברות  פנים תקציביות-השתתפויות, קניות-קניות בארץ, קניות-רזרבה, קניות-קניות בחו\"ל, העברות-תשלומי העברה סוציאליים, שכר-רזרבה, העברות-רזרבה, העברות-שכר עקיף, הכנסות מיועדות-הכנסות תקציב רגיל, שכר-שכר בארץ, העברות  פנים תקציביות-הפחתות, העברות-מוצרים ציבוריים",
             "nice-prefixes": [
                 "0020",
                 "20"
@@ -3287,8 +3296,8 @@ export const bubbles: any = {
             "personnel_executed": null,
             "personnel_revised": 2632.5,
             "rev_created_at": "2023-03-23",
-            "rev_last_modified_at": "2023-10-01",
-            "rev_last_updated_at": "2023-10-01",
+            "rev_last_modified_at": "2023-11-03",
+            "rev_last_updated_at": "2023-11-03",
             "score": 82937392,
             "semantic_tags": [],
             "simple-code": "20",
@@ -3331,13 +3340,13 @@ export const bubbles: any = {
                 "2024-12"
             ],
             "__date_range_to": "2024-12-31",
-            "__hash": "7be73b6e66573d6dc8bccad6540c98b6",
+            "__hash": "15f850bbababed095231b28da7ff94da",
             "__is_new": false,
             "__is_stale": true,
-            "__last_modified_at": "2023-10-01T12:30:58Z",
-            "__last_updated_at": "2023-10-01T12:30:58Z",
+            "__last_modified_at": "2023-11-03T00:18:43Z",
+            "__last_updated_at": "2023-11-03T00:18:43Z",
             "__next_update_days": 1,
-            "__revision": 278,
+            "__revision": 283,
             "__staleness": 133333,
             "admin_cls_code_0": [
                 "1"
@@ -3442,7 +3451,7 @@ export const bubbles: any = {
                                         8062245000,
                                         6807389000,
                                         8227539000,
-                                        4652113000,
+                                        7556884000,
                                         5149915000
                                     ]
                                 },
@@ -3459,7 +3468,7 @@ export const bubbles: any = {
                                     "y": [
                                         5306155053,
                                         4099506711,
-                                        null,
+                                        6053968037,
                                         null,
                                         null
                                     ]
@@ -3574,29 +3583,29 @@ export const bubbles: any = {
             ],
             "doc_id": "budget/002067/2024",
             "econ_cls_json": [
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"035\", \"\\u05ea\\u05de\\u05d9\\u05db\\u05d5\\u05ea \\u05dc\\u05e4\\u05d9 \\u05e1\\u05e2\\u05d9\\u05e3 3\\u05d0\"]",
+                "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"300\", \"\\u05d4\\u05e9\\u05ea\\u05ea\\u05e4\\u05d5\\u05d9\\u05d5\\u05ea\"]",
                 "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"033\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d0\\u05e8\\u05e5\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"031\", \"\\u05de\\u05d5\\u05e6\\u05e8\\u05d9\\u05dd \\u05e6\\u05d9\\u05d1\\u05d5\\u05e8\\u05d9\\u05d9\\u05dd\"]",
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"036\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"029\", \"\\u05e9\\u05db\\u05e8 \\u05e2\\u05e7\\u05d9\\u05e3\"]",
                 "[\"004\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05de\\u05d9\\u05d5\\u05e2\\u05d3\\u05d5\\u05ea\", \"041\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1 \\u05e8\\u05d2\\u05d9\\u05dc\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"036\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
-                "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"300\", \"\\u05d4\\u05e9\\u05ea\\u05ea\\u05e4\\u05d5\\u05d9\\u05d5\\u05ea\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"035\", \"\\u05ea\\u05de\\u05d9\\u05db\\u05d5\\u05ea \\u05dc\\u05e4\\u05d9 \\u05e1\\u05e2\\u05d9\\u05e3 3\\u05d0\"]",
-                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"030\", \"\\u05e9\\u05db\\u05e8 \\u05d1\\u05d0\\u05e8\\u05e5\"]"
+                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"030\", \"\\u05e9\\u05db\\u05e8 \\u05d1\\u05d0\\u05e8\\u05e5\"]",
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"031\", \"\\u05de\\u05d5\\u05e6\\u05e8\\u05d9\\u05dd \\u05e6\\u05d9\\u05d1\\u05d5\\u05e8\\u05d9\\u05d9\\u05dd\"]"
             ],
             "econ_cls_title_1": [
-                "העברות",
                 "שכר",
                 "העברות  פנים תקציביות",
-                "קניות",
-                "הכנסות מיועדות"
+                "הכנסות מיועדות",
+                "העברות",
+                "קניות"
             ],
             "econ_cls_title_2": [
-                "מוצרים ציבוריים",
                 "תמיכות לפי סעיף 3א",
-                "שכר עקיף",
                 "הכנסות תקציב רגיל",
+                "שכר עקיף",
                 "השתתפויות",
                 "שכר בארץ",
+                "מוצרים ציבוריים",
                 "רזרבה",
                 "קניות בארץ"
             ],
@@ -3699,26 +3708,35 @@ export const bubbles: any = {
                 },
                 "2022": {
                     "amounts_allocated": 5040,
+                    "amounts_executed": 0,
                     "amounts_revised": 5040,
                     "code_titles": [
                         "002067:פעולות משלימות לקידום"
                     ],
                     "commitment_allowance_allocated": 1419000000,
+                    "commitment_allowance_executed": 1516160694,
                     "commitment_allowance_revised": 1419000000,
                     "commitment_balance_allocated": 0,
+                    "commitment_balance_executed": 3032197039,
                     "commitment_balance_revised": 0,
                     "contractors_allocated": 0,
+                    "contractors_executed": 0,
                     "contractors_revised": 0,
                     "covid19_expenses_allocated": 0,
+                    "covid19_expenses_executed": 0,
                     "covid19_expenses_revised": 0,
                     "dedicated_allocated": -638810000,
+                    "dedicated_executed": 0,
                     "dedicated_revised": -713795000,
                     "depth": 2,
                     "gross_allocated": 638810000,
+                    "gross_executed": 0,
                     "gross_revised": 713795000,
                     "net_allocated": 5427659000,
+                    "net_executed": 6053968037,
                     "net_revised": 8227539000,
                     "personnel_allocated": 0,
+                    "personnel_executed": 0,
                     "personnel_revised": 0,
                     "total_direction_expense": 8233839000,
                     "total_direction_income": -6300000,
@@ -3748,16 +3766,16 @@ export const bubbles: any = {
                     "gross_allocated": 695770000,
                     "gross_revised": 695770000,
                     "net_allocated": 4652113000,
-                    "net_revised": 4652113000,
+                    "net_revised": 7556884000,
                     "personnel_allocated": 0,
                     "personnel_revised": 0,
-                    "total_direction_expense": 4652113000,
+                    "total_direction_expense": 7556884000,
                     "total_direction_income": 0,
                     "total_econ_cls_dedicated_income": 0,
                     "total_econ_cls_internal_transfers": 7350000,
-                    "total_econ_cls_procurement": 511803000,
+                    "total_econ_cls_procurement": 3095544000,
                     "total_econ_cls_salaries": 4112000,
-                    "total_econ_cls_transfers": 4128848000
+                    "total_econ_cls_transfers": 4449878000
                 }
             },
             "net_allocated": 5149915000,
@@ -3766,7 +3784,7 @@ export const bubbles: any = {
             "nice-breadcrumbs": "2020 - 2024 / משרד החינוך",
             "nice-category": "שירותים חברתיים / חינוך",
             "nice-code": "20.67",
-            "nice-econ-category": "קניות-קניות בארץ, העברות-מוצרים ציבוריים, העברות-שכר עקיף, הכנסות מיועדות-הכנסות תקציב רגיל, העברות-רזרבה, העברות  פנים תקציביות-השתתפויות, העברות-תמיכות לפי סעיף 3א, שכר-שכר בארץ",
+            "nice-econ-category": "העברות-תמיכות לפי סעיף 3א, העברות  פנים תקציביות-השתתפויות, קניות-קניות בארץ, העברות-רזרבה, העברות-שכר עקיף, הכנסות מיועדות-הכנסות תקציב רגיל, שכר-שכר בארץ, העברות-מוצרים ציבוריים",
             "nice-prefixes": [
                 "0020",
                 "002067",
@@ -3785,8 +3803,8 @@ export const bubbles: any = {
             "personnel_executed": null,
             "personnel_revised": 0,
             "rev_created_at": "2023-03-23",
-            "rev_last_modified_at": "2023-10-01",
-            "rev_last_updated_at": "2023-10-01",
+            "rev_last_modified_at": "2023-11-03",
+            "rev_last_updated_at": "2023-11-03",
             "score": 5149915,
             "semantic_tags": [],
             "simple-code": "2067",
@@ -3829,13 +3847,13 @@ export const bubbles: any = {
                 "2024-12"
             ],
             "__date_range_to": "2024-12-31",
-            "__hash": "632b99e6349b4b336bedb152ae561b27",
+            "__hash": "371e54d2feb46f105a2ebb4d87b19419",
             "__is_new": false,
             "__is_stale": true,
-            "__last_modified_at": "2023-10-01T12:30:58Z",
-            "__last_updated_at": "2023-10-01T12:30:58Z",
+            "__last_modified_at": "2023-11-03T00:18:43Z",
+            "__last_updated_at": "2023-11-03T00:18:43Z",
             "__next_update_days": 1,
-            "__revision": 278,
+            "__revision": 283,
             "__staleness": 133333,
             "admin_cls_code_0": [
                 "1"
@@ -4295,7 +4313,7 @@ export const bubbles: any = {
                                         5229136000,
                                         4670790000,
                                         5772397000,
-                                        2675779000,
+                                        5259520000,
                                         3119918000
                                     ]
                                 },
@@ -4312,7 +4330,7 @@ export const bubbles: any = {
                                     "y": [
                                         3277266860,
                                         2565572849,
-                                        null,
+                                        3976880397,
                                         null,
                                         null
                                     ]
@@ -4963,27 +4981,27 @@ export const bubbles: any = {
             "doc_id": "budget/00206701/2024",
             "econ_cls_json": [
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"035\", \"\\u05ea\\u05de\\u05d9\\u05db\\u05d5\\u05ea \\u05dc\\u05e4\\u05d9 \\u05e1\\u05e2\\u05d9\\u05e3 3\\u05d0\"]",
+                "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"300\", \"\\u05d4\\u05e9\\u05ea\\u05ea\\u05e4\\u05d5\\u05d9\\u05d5\\u05ea\"]",
                 "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"033\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d0\\u05e8\\u05e5\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"031\", \"\\u05de\\u05d5\\u05e6\\u05e8\\u05d9\\u05dd \\u05e6\\u05d9\\u05d1\\u05d5\\u05e8\\u05d9\\u05d9\\u05dd\"]",
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"036\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"029\", \"\\u05e9\\u05db\\u05e8 \\u05e2\\u05e7\\u05d9\\u05e3\"]",
                 "[\"004\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05de\\u05d9\\u05d5\\u05e2\\u05d3\\u05d5\\u05ea\", \"041\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1 \\u05e8\\u05d2\\u05d9\\u05dc\"]",
-                "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"300\", \"\\u05d4\\u05e9\\u05ea\\u05ea\\u05e4\\u05d5\\u05d9\\u05d5\\u05ea\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"036\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]"
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"031\", \"\\u05de\\u05d5\\u05e6\\u05e8\\u05d9\\u05dd \\u05e6\\u05d9\\u05d1\\u05d5\\u05e8\\u05d9\\u05d9\\u05dd\"]"
             ],
             "econ_cls_title_1": [
                 "קניות",
+                "העברות",
                 "העברות  פנים תקציביות",
-                "הכנסות מיועדות",
-                "העברות"
+                "הכנסות מיועדות"
             ],
             "econ_cls_title_2": [
-                "מוצרים ציבוריים",
                 "תמיכות לפי סעיף 3א",
-                "שכר עקיף",
                 "הכנסות תקציב רגיל",
-                "קניות בארץ",
+                "שכר עקיף",
+                "השתתפויות",
+                "מוצרים ציבוריים",
                 "רזרבה",
-                "השתתפויות"
+                "קניות בארץ"
             ],
             "explanation": null,
             "explanation_short": null,
@@ -5086,26 +5104,35 @@ export const bubbles: any = {
                 },
                 "2022": {
                     "amounts_allocated": 4240,
+                    "amounts_executed": 0,
                     "amounts_revised": 4240,
                     "code_titles": [
                         "00206701:פעילויות ופרוייקטים"
                     ],
                     "commitment_allowance_allocated": 63000000,
+                    "commitment_allowance_executed": 33716212,
                     "commitment_allowance_revised": 63000000,
                     "commitment_balance_allocated": 0,
+                    "commitment_balance_executed": 1844969393,
                     "commitment_balance_revised": 0,
                     "contractors_allocated": 0,
+                    "contractors_executed": 0,
                     "contractors_revised": 0,
                     "covid19_expenses_allocated": 0,
+                    "covid19_expenses_executed": 0,
                     "covid19_expenses_revised": 0,
                     "dedicated_allocated": -182810000,
+                    "dedicated_executed": 0,
                     "dedicated_revised": -147795000,
                     "depth": 3,
                     "gross_allocated": 182810000,
+                    "gross_executed": 0,
                     "gross_revised": 147795000,
                     "net_allocated": 3677372000,
+                    "net_executed": 3976880397,
                     "net_revised": 5772397000,
                     "personnel_allocated": 0,
+                    "personnel_executed": 0,
                     "personnel_revised": 0,
                     "total_direction_expense": 5778697000,
                     "total_direction_income": -6300000,
@@ -5134,14 +5161,14 @@ export const bubbles: any = {
                     "gross_allocated": 145770000,
                     "gross_revised": 145770000,
                     "net_allocated": 2675779000,
-                    "net_revised": 2675779000,
+                    "net_revised": 5259520000,
                     "personnel_allocated": 0,
                     "personnel_revised": 0,
-                    "total_direction_expense": 2675779000,
+                    "total_direction_expense": 5259520000,
                     "total_direction_income": 0,
                     "total_econ_cls_dedicated_income": 0,
                     "total_econ_cls_internal_transfers": 7350000,
-                    "total_econ_cls_procurement": 511283000,
+                    "total_econ_cls_procurement": 3095024000,
                     "total_econ_cls_transfers": 2157146000
                 }
             },
@@ -5151,7 +5178,7 @@ export const bubbles: any = {
             "nice-breadcrumbs": "2020 - 2024 / משרד החינוך / פעולות משלימות לקידום",
             "nice-category": "שירותים חברתיים / חינוך",
             "nice-code": "20.67.01",
-            "nice-econ-category": "העברות-תמיכות לפי סעיף 3א, קניות-קניות בארץ, העברות-מוצרים ציבוריים, העברות-שכר עקיף, הכנסות מיועדות-הכנסות תקציב רגיל, העברות  פנים תקציביות-השתתפויות, העברות-רזרבה",
+            "nice-econ-category": "העברות-תמיכות לפי סעיף 3א, העברות  פנים תקציביות-השתתפויות, קניות-קניות בארץ, העברות-רזרבה, העברות-שכר עקיף, הכנסות מיועדות-הכנסות תקציב רגיל, העברות-מוצרים ציבוריים",
             "nice-prefixes": [
                 "0020",
                 "002067",
@@ -5174,8 +5201,8 @@ export const bubbles: any = {
             "personnel_executed": null,
             "personnel_revised": 0,
             "rev_created_at": "2023-03-23",
-            "rev_last_modified_at": "2023-10-01",
-            "rev_last_updated_at": "2023-10-01",
+            "rev_last_modified_at": "2023-11-03",
+            "rev_last_updated_at": "2023-11-03",
             "score": 3119918,
             "semantic_tags": [],
             "simple-code": "206701",
@@ -5206,27 +5233,27 @@ export const bubbles: any = {
             {
                 "entity_name": "הסתדרות הנוער עובד והלומד ליד הסתדרות העובדים הכללית החדשה (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580297075",
-                "total_amount": 80238382
+                "total_amount": 88756443
             },
             {
                 "entity_name": "תנועת הצופים העבריים בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580028454",
-                "total_amount": 72404534
+                "total_amount": 76929403
             },
             {
                 "entity_name": "תנועת בני עקיבא בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580040343",
-                "total_amount": 64344345
+                "total_amount": 68683031
             },
             {
                 "entity_name": "הסתדרות השומר הצעיר בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580001659",
-                "total_amount": 22171842
+                "total_amount": 24064922
             },
             {
                 "entity_name": "עמותת תנועת הנוער הדרוזי בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580300432",
-                "total_amount": 19514634
+                "total_amount": 21617682
             },
             {
                 "entity_name": "תנועת הצופים הערבים בישראל (ע\"ר)",
@@ -5236,42 +5263,42 @@ export const bubbles: any = {
             {
                 "entity_name": "עזרא תנועת הנוער התורני לאומי בארץ-ישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580043297",
-                "total_amount": 16350991
+                "total_amount": 16574748
             },
             {
                 "entity_name": "אריאל - תנועת נוער ישראלית (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580004562",
-                "total_amount": 15419401
+                "total_amount": 15606758
             },
             {
                 "entity_name": "מועצת תנועות הנוער בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580019982",
-                "total_amount": 13844829
+                "total_amount": 14722085
             },
             {
                 "entity_name": "הנוער הלאומי - בית\"ר (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580038685",
-                "total_amount": 13604564
+                "total_amount": 14501633
             },
             {
                 "entity_name": "תנועת הנוער של האיחוד החקלאי (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580083046",
-                "total_amount": 9324677
+                "total_amount": 10240091
             },
             {
                 "entity_name": "תנועת המכבי הצעיר (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580308930",
-                "total_amount": 8831356
+                "total_amount": 9324946
             },
             {
                 "entity_name": "היכלי ענ\"ג - תנועת נוער (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580398279",
-                "total_amount": 8642679
+                "total_amount": 9250855
             },
             {
                 "entity_name": "המחנות העולים (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580240489",
-                "total_amount": 7797877
+                "total_amount": 8634189
             }
         ],
         {
@@ -5292,13 +5319,13 @@ export const bubbles: any = {
                 "2024-12"
             ],
             "__date_range_to": "2024-12-31",
-            "__hash": "d3304f97e123a984b4ff53c7b5ca872b",
+            "__hash": "3ad038fa164abf7c3157c6fb33c23d1f",
             "__is_new": false,
             "__is_stale": true,
-            "__last_modified_at": "2023-10-01T12:30:58Z",
-            "__last_updated_at": "2023-10-01T12:30:58Z",
+            "__last_modified_at": "2023-11-03T00:18:43Z",
+            "__last_updated_at": "2023-11-03T00:18:43Z",
             "__next_update_days": 1,
-            "__revision": 278,
+            "__revision": 283,
             "__staleness": 133333,
             "admin_cls_code_0": [
                 "1"
@@ -5355,7 +5382,7 @@ export const bubbles: any = {
                                     ],
                                     "y": [
                                         0,
-                                        null,
+                                        123594623,
                                         null,
                                         null
                                     ]
@@ -5514,26 +5541,35 @@ export const bubbles: any = {
                 },
                 "2022": {
                     "amounts_allocated": 0,
+                    "amounts_executed": 0,
                     "amounts_revised": 0,
                     "code_titles": [
                         "0020670142:תמיכה בתנועות נוער"
                     ],
                     "commitment_allowance_allocated": 0,
+                    "commitment_allowance_executed": 0,
                     "commitment_allowance_revised": 0,
                     "commitment_balance_allocated": 0,
+                    "commitment_balance_executed": 3351376,
                     "commitment_balance_revised": 0,
                     "contractors_allocated": 0,
+                    "contractors_executed": 0,
                     "contractors_revised": 0,
                     "covid19_expenses_allocated": 0,
+                    "covid19_expenses_executed": 0,
                     "covid19_expenses_revised": 0,
                     "dedicated_allocated": 0,
+                    "dedicated_executed": 0,
                     "dedicated_revised": 0,
                     "depth": 4,
                     "gross_allocated": 0,
+                    "gross_executed": 0,
                     "gross_revised": 0,
                     "net_allocated": 99589000,
+                    "net_executed": 123594623,
                     "net_revised": 126946000,
                     "personnel_allocated": 0,
+                    "personnel_executed": 0,
                     "personnel_revised": 0,
                     "total_direction_expense": 126946000,
                     "total_econ_cls_transfers": 126946000
@@ -5598,8 +5634,8 @@ export const bubbles: any = {
             "personnel_executed": null,
             "personnel_revised": 0,
             "rev_created_at": "2023-06-11",
-            "rev_last_modified_at": "2023-10-01",
-            "rev_last_updated_at": "2023-10-01",
+            "rev_last_modified_at": "2023-11-03",
+            "rev_last_updated_at": "2023-11-03",
             "score": 87709,
             "semantic_tags": [],
             "simple-code": "20670142",

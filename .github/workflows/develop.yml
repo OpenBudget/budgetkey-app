@@ -1,0 +1,24 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Build projects
+
+on:
+  push:
+    branches: [ dev ]
+  workflow_dispatch:
+jobs:
+  build-server:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+    - name: Build
+      run: |
+        git config --global user.email "adam.kariv@gmail.com"
+        git config --global user.name "Adam Kariv"
+        npm install -g npm@8
+        npm install
+        ./dev-deploy.sh

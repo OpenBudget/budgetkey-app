@@ -99,7 +99,7 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
     }
     urlParams = params.toString();
     const url = '/s/?' + urlParams;
-    if (hostname !== 'next.obudget.org' && hostname.indexOf('localhost') !== 0) {
+    if (hostname !== 'next.obudget.org' && hostname.indexOf('localhost') !== 0 && hostname.indexOf('whiletrue') < 0) {
       return 'https://next.obudget.org' + url;
     } else {
       return url;

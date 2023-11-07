@@ -68,6 +68,13 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "staging": {
+              "index": {
+                "input": "projects/budgetkey/src/index.staging.html",
+                "output": "index.html"
+              },
+              "outputHashing": "all"
             }
           },
           "defaultConfiguration": "production"

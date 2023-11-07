@@ -31,13 +31,19 @@ export function app(): express.Express {
   
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
+    const user_agent = req.headers['user-agent'];
+    if (user_agent === 'thesis-research-bot') {
+      res.send('יש לנו קובץ עם כל המידע, בבקשה לא לעשות לנו סקרייפינג!');
+      console.log(`${new Date().toISOString()} | ${res.statusCode} | REJECT | ${req.url} | ${user_agent}`);
+      return;
+    }
     const hostname = req.headers['x-forwarded-host'] || req.hostname;
     if (req.path === '/' && hostname.indexOf('socialpro.org.il') > -1) {
       res.redirect('https://www.socialpro.org.il/i/units/gov_social_service_unit/main?theme=soproc');
       return;
     }
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] }, (err, html) => {
-      console.log(`${new Date().toISOString()} | ${res.statusCode} | ${err?.name || 'OK'} | ${req.url} | ${req.headers['user-agent']}}`);      
+      console.log(`${new Date().toISOString()} | ${res.statusCode} | ${err?.name || 'OK'} | ${req.url} | ${user_agent}`);
       if (err) {
         if (res.statusCode !== 302) {
           console.log('ERR:', err);
