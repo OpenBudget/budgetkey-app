@@ -33,7 +33,7 @@ export function app(): express.Express {
   server.get('*', (req, res) => {
     const user_agent = req.headers['user-agent'];
     if (user_agent === 'thesis-research-bot') {
-      res.send('יש לנו קובץ עם כל המידע, בבקשה לא לעשות לנו סקרייפינג!');
+      res.send('יש לנו קובץ מידע פתוח לשימוש וקל להורדה עם כל המידע באתר, בבקשה לא לעשות לנו סקרייפינג!');
       console.log(`${new Date().toISOString()} | ${res.statusCode} | REJECT | ${req.url} | ${user_agent}`);
       return;
     }
