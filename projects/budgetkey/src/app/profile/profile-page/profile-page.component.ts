@@ -25,7 +25,7 @@ export class ProfilePageComponent {
   }
   
   updateItems() {
-    this.auth.check(window.location.href)
+    this.auth.check()
     .subscribe((result) => {
       if (result) {
         this.authenticated = result.authenticated;
@@ -43,8 +43,8 @@ export class ProfilePageComponent {
     this.lists.get(SEARCHES_LIST)
     .subscribe((lc) => {
       this.init = true;
-      this.hasItems = lc.items && lc.items.length > 0;
-      this.items.next(lc.items);
+      this.hasItems = !!lc.items && lc.items.length > 0;
+      this.items.next(lc.items || []);
       this.refreshShareThis();
     });
   }

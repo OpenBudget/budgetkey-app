@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { SearchParams } from '../model';
+import { SearchParams } from '../../common-components/search-models';
 import { SearchState } from '../search-state/search-state';
 import { AuthService } from '../../common-components/auth/auth.service';
 import { filter, first, switchMap } from 'rxjs/operators';

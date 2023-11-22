@@ -13,7 +13,7 @@ export class BareSearchBarComponent implements OnInit {
   @Output() search = new EventEmitter<string>();
 
   constructor(private auth: AuthService) {
-    auth.check(window.location.href).subscribe((user) => {});
+    auth.check().subscribe((user) => {});
   }
 
   ngOnInit() {

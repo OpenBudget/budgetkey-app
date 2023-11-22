@@ -41,7 +41,7 @@ import { SeoService } from './seo.service';
     BkSubscriptionManager,
     ModalComponent,
     ClickOnReturnDirective,
-    AuthComponent
+    AuthComponent,
   ],
   providers: [
     ListsService,

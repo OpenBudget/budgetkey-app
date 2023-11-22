@@ -30,18 +30,21 @@
              [style.color]='p.primaryColor'
              [attr.aria-label]='p.title'
             >
-            <a [href]='href()' class='body-title' *ngIf='p.title'
-               [target]='bare ? "_blank" : "_self"'
-               [style.color]='p.primaryColor'
-               clickOnReturn
-               [attr.aria-label]='p.title + " - מעבר לעמוד הפריט"'
-            >
-                <span [innerHtml]='p.title' [title]='p.title'></span>
-                <div class='fadeoff'
-                    [style.background]='fadeoff()'
+            <div class='body-title' *ngIf='p.title'>
+                <app-add-to-list-icon [item]='item' *ngIf='listable'></app-add-to-list-icon>
+                <a [href]='href()' 
+                    [target]='bare ? "_blank" : "_self"'
+                    [style.color]='p.primaryColor'
+                    clickOnReturn
+                    [attr.aria-label]='p.title + " - מעבר לעמוד הפריט"'
                 >
-                </div>
-            </a>
+                    <span [innerHtml]='p.title' [title]='p.title'></span>
+                    <div class='fadeoff'
+                        [style.background]='fadeoff()'
+                    >
+                    </div>
+                </a> 
+            </div>
             <span class='parties' *ngIf='p.partyFrom || p.partyTo'>
                 <span class='body-party-from' *ngIf='p.partyFrom' [innerHtml]='p.partyFrom'></span>
                 <span class='body-arrow' *ngIf='p.arrowKind'>

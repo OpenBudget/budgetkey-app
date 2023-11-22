@@ -1,0 +1,29 @@
+<div class='header'>
+    <div class='header-content'>
+        <div class='author'>
+            <div class='avatar' [style.background-image]='"url(" + list.properties.avatar_url + ")"'></div>
+            <div class='name'>{{list.properties.name}}</div>
+        </div>
+        <div class='title'>
+            <div class='icon'></div>
+            <h1>{{list.title}}</h1>
+        </div>
+        <div class='timestamps'>
+            <span>עודכן:</span>
+            <span>{{format.relativeDate(list.update_time)}}</span>
+            <span>|</span>
+            <span>נוצר:</span>
+            <span>{{format.relativeDate(list.create_time)}}</span>
+        </div>
+        <div class='description'>
+            {{list.properties.description}}
+        </div>
+        <div class='selectors'>
+    
+        </div>
+    </div>
+</div>
+<div class='list-contents'>
+    <search-result [item]="item" [index]="i" [kind]="item.type" [bare]='false' [listable]='false'
+        *ngFor='let item of items(); let i = index'></search-result>
+</div>

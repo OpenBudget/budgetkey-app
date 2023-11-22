@@ -29,7 +29,7 @@ export class BkSubscriptionManager implements OnInit {
     ps.browser(() => {
       fromEvent(window, 'message').subscribe((evt) => {
         console.log('GOT Message', evt);
-        this.auth.check(window.location.href);
+        this.auth.check();
         this.loginModal = false;
       });    
     });
@@ -113,7 +113,7 @@ export class BkSubscriptionManager implements OnInit {
           if (this.isLoggedIn) {
             this.lists.get(SEARCHES_LIST)
               .subscribe((lc: ListContents) => {
-                for (const item of lc.items) {
+                for (const item of (lc.items || [])) {
                   const key = this.urlKey(item.url);
                   if (key) {
                     this.subscribedUrls[key] = item.id;

@@ -4,7 +4,7 @@ import { animationFrameScheduler, fromEvent, scheduled } from 'rxjs';
 import { debounceTime, delay, skip, switchMap, take, tap, throttleTime } from 'rxjs/operators';
 import { SearchBarType } from '../../common-components/components/searchbar/bk-search-bar.component';
 import { PlatformService } from '../../common-components/platform.service';
-import { SearchParams } from '../model';
+import { SearchParams } from '../../common-components/search-models';
 import { SearchApiService } from '../search-api.service';
 import { SearchManager, SearchOutcome } from '../search-manager/search-manager';
 import { SearchState, mergeFilters } from '../search-state/search-state';

@@ -1,0 +1,96 @@
+@max-width: 750px + 2 * 32px;
+
+:host {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    .header {
+        width: 100%;
+        background-image: url(../../../assets/lists/bg.png);
+        background-size: 8px;
+        background-repeat: repeat;
+        padding-top: 64px;
+        padding-bottom: 56px;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        .header-content {
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+            padding: 0 32px;
+            max-width: @max-width;
+            width: 100%;
+            gap: 8px;
+
+            .author {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                gap: 8px;
+                .avatar {
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 28px;
+                    border: 1px solid #FF5A5F;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+                .name {
+                    color: #4C4141;
+                    font-family: "Abraham TRIAL";
+                    font-size: 16px;
+                    font-weight: 400;
+                }
+            }
+            .title {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                gap: 8px;
+                .icon {
+                    width: 24px;
+                    height: 24px;
+                    margin-right: 2px;
+                    background-image: url(../../../assets/lists/list-icon-red.svg);
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+                h1 {
+                    margin: 0;
+                    font-size: 32px;
+                }    
+            }
+            .description {
+                font-size: 20px;
+                line-height: 36px; /* 180% */
+            }
+            .title, .description {
+                font-family: 'Gadi Almog', sans-serif;
+                color: #2C00AA;
+            }
+            .timestamps {
+                display: flex;
+                flex-flow: row;
+                align-items: baseline;
+                gap: 4px;
+
+                color: #807172;
+                font-family: "Abraham TRIAL";
+                font-size: 16px;
+                font-weight: 300;
+            }
+        }
+    }
+
+    .list-contents {
+        width: 100%;
+        padding: 16px 32px;
+        display: flex;
+        flex-flow: column;
+        gap: 8px;
+        max-width: @max-width;
+    }
+}

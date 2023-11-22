@@ -1,34 +1,34 @@
 import {
+    AfterViewInit,
   Component, Input, OnInit
 } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { PlatformService } from '../platform.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-
+@UntilDestroy()
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.less']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements AfterViewInit {
     public user: any;
-    private next: string;
 
     @Input() theme: any;
 
-    constructor(private auth: AuthService, private ps: PlatformService) {}
-
-    ngOnInit() {
-        this.ps.browser(() => {
-            this.next = document.location.href;
-            this.setUser(this.auth.check(this.next));
+    constructor(private auth: AuthService, private ps: PlatformService) {
+        this.auth.getUser().pipe(
+            untilDestroyed(this)
+        ).subscribe((user) => {
+            this.user = user;
         });
     }
 
-    setUser(o: Observable<any>) {
-        o.subscribe((user: any) => {
-            this.user = user;
+    ngAfterViewInit() {
+        this.ps.browser(() => {
+            this.auth.check().subscribe();
         });
     }
 
@@ -36,11 +36,10 @@ export class AuthComponent implements OnInit {
         if (this.user && this.user.providers) {
             const href = this.user.providers.google || this.user.providers.github;
             if (href && href.url) {
-                if (document.location.href === this.next) {
+                if (document.location.href === this.auth.getNext()) {
                     window.location.href = href.url;
                 } else {
-                    this.next = document.location.href;
-                    this.auth.check(this.next)
+                    this.auth.check()
                         .subscribe((user) => {
                             this.user = user;
                             this.login();
@@ -51,7 +50,9 @@ export class AuthComponent implements OnInit {
     }
 
     logout() {
-        this.auth.logout(document.location.href);
+        this.auth.logout().subscribe((user) => {
+            console.log('logged out!');
+        });
     }
 
     profile() {

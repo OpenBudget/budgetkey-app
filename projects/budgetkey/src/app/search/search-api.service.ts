@@ -4,7 +4,7 @@ import { Observable, from, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 // import { URL } from './config';
-import { SearchResults, SearchParams } from './model';
+import { SearchResults, SearchParams } from '../common-components/search-models';
 import { SearchBarType } from '../common-components/components/searchbar/bk-search-bar.component';
 import { SearchModule } from './search.module';
 import { PlatformService } from '../common-components/platform.service';

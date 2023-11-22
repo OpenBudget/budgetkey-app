@@ -1,4 +1,4 @@
-import { SearchBarType } from '../common-components/components/searchbar/bk-search-bar.component';
+import { SearchBarType } from './components/searchbar/bk-search-bar.component';
 
 export class SearchParams {
     constructor(other?: SearchParams) {

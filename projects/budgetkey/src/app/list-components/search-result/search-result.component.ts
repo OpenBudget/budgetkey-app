@@ -1,7 +1,7 @@
 import { Component, Input, Inject, OnInit } from '@angular/core';
 
 
-import { DocResultEntry } from '../model';
+import { DocResultEntry } from '../../common-components/search-models';
 
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 
@@ -55,6 +55,7 @@ export class SearchResultComponent implements OnInit {
   @Input() kind: string;
   @Input() horizontal = false;
   @Input() bare = false;
+  @Input() listable = true;
 
   private PARAMETERS: { [s: string]: Parameter; } = {
     // // ENTITIES

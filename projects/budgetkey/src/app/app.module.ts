@@ -21,7 +21,7 @@ import { AppErrorHandler } from './app-error-handler';
   ],
   providers: [
     provideClientHydration(),
-    {provide: ErrorHandler, useClass: AppErrorHandler},
+    // {provide: ErrorHandler, useClass: AppErrorHandler},
     {provide: NGX_SEO_CONFIG_TOKEN, useValue: {
       changeTitle: (title: any) => title,
       preserve: true,

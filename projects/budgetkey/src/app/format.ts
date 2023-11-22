@@ -34,11 +34,11 @@ export class Format {
     return dayjs(value).format('DD/MM/YYYY');
   }
 
-  public relativeDate(value: string): string {
+  public relativeDate(value: string|null|undefined, noVal?: string): string {
     if (value) {
       return dayjs(value).fromNow();
     }
-    return 'תאריך פרסום לא ידוע';
+    return noVal || 'תאריך פרסום לא ידוע';
   }
 
   public percent(value: number): string {
