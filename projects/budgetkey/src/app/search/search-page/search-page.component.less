@@ -4,11 +4,15 @@
             background: #fafafa fixed;
             min-height: 400px;
             display: block;
-            .container {
+            .inner {
               display:flex;
               flex-flow: column;
               align-content: center;
               align-items: center;
+              padding: 0 32px;
+              width: 100%;
+              max-width: 100%;
+              overflow-x: hidden;                
               app-search {
                 display: flex;
                 flex-flow: column;
@@ -50,7 +54,7 @@
             }
           
             app-container {
-              .container {
+              .inner {
                 app-search {
                   & > .row {
                     width: 100vw;

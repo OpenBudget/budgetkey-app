@@ -33,10 +33,13 @@
             <div class='body-title' *ngIf='p.title'>
                 <app-add-to-list-icon [item]='item' *ngIf='listable'></app-add-to-list-icon>
                 <a [href]='href()' 
-                    [target]='bare ? "_blank" : "_self"'
-                    [style.color]='p.primaryColor'
-                    clickOnReturn
-                    [attr.aria-label]='p.title + " - מעבר לעמוד הפריט"'
+                   [target]='bare ? "_blank" : "_self"'
+                   [style.color]='p.primaryColor'
+                   clickOnReturn
+                   [attr.aria-label]='p.title + " - מעבר לעמוד הפריט"'
+                   [routerLink]='routerLink()'
+                   [queryParams]='{li: index}'
+                   [queryParamsHandling]='"merge"'
                 >
                     <span [innerHtml]='p.title' [title]='p.title'></span>
                     <div class='fadeoff'

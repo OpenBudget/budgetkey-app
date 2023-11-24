@@ -8,6 +8,13 @@
 @import (css) url('//fonts.googleapis.com/css?family=Heebo:900&amp;subset=hebrew');
 @import (css) url('//next.obudget.org/_fonts/stylesheet.css');
 
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;    
+}
+
 body {
   display: block;
   margin: 0;
@@ -16,7 +23,18 @@ body {
   -webkit-font-feature-settings: 'tnum','lnum';
   -moz-font-feature-settings: 'tnum','lnum';
   overflow-x: hidden;
+  direction: rtl;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overscroll-behavior: none;
 }
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 
 @font-face {
   font-family: 'arrows';
