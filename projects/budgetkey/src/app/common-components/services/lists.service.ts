@@ -23,11 +23,13 @@ export class ListProperties {
   kind: string | null;
   update_time?: string;
   create_time?: string;
+  visibility?: number;
 }
 
 export class ListContents extends ListProperties {
   id: number;
   name: string;
+  user_id: string;
   items?: Array<ListItem>;
 }
 
@@ -96,6 +98,13 @@ export class ListsService {
             first()
           )
     );
+  }
+
+  public getAnonymous(user_id: string, list: string): Observable<ListContents> {
+    const params = {
+      list, user_id, items: true
+    };
+    return <Observable<ListContents>>(this.http.get('https://next.obudget.org/lists/', {params}));
   }
 
   public put(list: string, item: ListItem): Observable<ListItem> {
@@ -189,6 +198,7 @@ export class ListsService {
             ...user_props
           },
           kind: 'curated',
+          visibility: 1
         })
       }),
       switchMap(() => {

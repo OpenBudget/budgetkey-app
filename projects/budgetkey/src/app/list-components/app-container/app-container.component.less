@@ -1,4 +1,4 @@
-@import '../../common.less';
+@import '../../common-components/common.less';
 
 :host {
   display: flex;
@@ -16,9 +16,23 @@
     margin-top: 9px; //calc(9 - @headerHeight);
     margin-bottom: 6px;  
     width: 100%;
+    max-width: 100%;
     display: flex;
-    flex-flow: column;
-    align-items: center;
+    flex-flow: row;
+    align-items: flex-start;
+
+    .list {
+      flex: 0 0 auto;
+      width: 400px;
+    }
+
+    .main {
+      flex: 0 1 auto;
+      width: auto;
+      display: flex;
+      flex-flow: column;
+      align-items: center;  
+    }
   }  
   
 }

@@ -7,6 +7,7 @@ import { CommonComponentsModule } from './common-components/common-components.mo
 import { NGX_SEO_CONFIG_TOKEN, NgxSeoModule } from '@avivharuzi/ngx-seo';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppErrorHandler } from './app-error-handler';
+import { ListComponentsModule } from './list-components/list-components.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AppErrorHandler } from './app-error-handler';
     BrowserModule,
     AppRoutingModule,
     CommonComponentsModule,
+    ListComponentsModule,
     NgxSeoModule.forRoot(),
   ],
   providers: [

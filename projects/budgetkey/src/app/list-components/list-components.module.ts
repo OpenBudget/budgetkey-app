@@ -10,6 +10,8 @@ import { CommonComponentsModule } from '../common-components/common-components.m
 import { SearchResultComponent } from './search-result/search-result.component';
 import { ListPageComponent } from './list-page/list-page.component';
 import { ListRoutingModule } from './list-routing.module';
+import { EditedContentDirective } from './edited-content.directive';
+import { AppContainerComponent } from './app-container/app-container.component';
 
 /**
  * Created by adam on 27/12/2016.
@@ -27,14 +29,17 @@ import { ListRoutingModule } from './list-routing.module';
     AddToListIconComponent,
     ListViewComponent,
     SearchResultComponent,
-    ListPageComponent
+    ListPageComponent,
+    EditedContentDirective,
+    AppContainerComponent
   ],
   providers: [
   ],
   exports: [
     AddToListIconComponent,
     ListViewComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    AppContainerComponent
   ]
 })
 export class ListComponentsModule { }

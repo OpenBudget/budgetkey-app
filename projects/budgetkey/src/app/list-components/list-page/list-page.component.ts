@@ -23,9 +23,12 @@ export class ListPageComponent {
     });
     this.route.params.pipe(
       untilDestroyed(this),
-      map((params) => params['list-id']),
-      filter((listId) => !!listId),
-      switchMap((listId) => this.lists.get(listId)),
+      map((params) => ({
+        userId: params['user-id'],
+        listId: params['list-id']
+      })),
+      filter((params) => !!params.listId && !!params.userId),
+      switchMap((params) => this.lists.getAnonymous(params.userId, params.listId)),
     ).subscribe((list) => {
       this.list = list;
     });

@@ -6,7 +6,7 @@
         </div>
         <div class='title'>
             <div class='icon'></div>
-            <h1>{{list.title}}</h1>
+            <h1 [editedContent]='editable()' (updated)='title = $event' #titleEl>{{title}}</h1>
         </div>
         <div class='timestamps'>
             <span>עודכן:</span>
@@ -15,9 +15,7 @@
             <span>נוצר:</span>
             <span>{{format.relativeDate(list.create_time)}}</span>
         </div>
-        <div class='description'>
-            {{list.properties.description}}
-        </div>
+        <div class='description' [editedContent]='editable()' (updated)='description = $event' #descriptionEl>{{description}}</div>
         <div class='selectors'>
     
         </div>

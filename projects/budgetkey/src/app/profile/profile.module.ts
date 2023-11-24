@@ -6,6 +6,7 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { SingleSubscriptionItemComponent } from './single-subscription-item/single-subscription-item.component';
 import { DeleteAllSubscriptionItemsComponent } from './delete-all-subscription-items/delete-all-subscription-items.component';
+import { ListComponentsModule } from '../list-components/list-components.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { DeleteAllSubscriptionItemsComponent } from './delete-all-subscription-i
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    CommonComponentsModule
+    CommonComponentsModule,
+    ListComponentsModule,
   ]
 })
 export class ProfileModule { }

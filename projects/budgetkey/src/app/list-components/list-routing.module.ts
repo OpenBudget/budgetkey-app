@@ -4,7 +4,7 @@ import { ListPageComponent } from "./list-page/list-page.component";
 
 const routes: Routes = [
     {
-      path: ':list-id',
+      path: ':user-id/:list-id',
       component: ListPageComponent
     },
   ];

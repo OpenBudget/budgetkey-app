@@ -3,8 +3,13 @@
         [showSearchBar]="showSearchBar"
         [showLanguages]="showLanguages"
     ></app-bk-header>
-    <div class="app" id='main'>
-        <ng-content></ng-content>
+    <div class='app'>
+        <div class='main' id='main'>
+            <ng-content></ng-content>
+        </div>
+        <div class='list' *ngIf='list && listSideView && layout.desktop'>
+            <app-list-view [list]="list"></app-list-view>
+        </div>
     </div>
     <app-bk-footer *ngIf="showFooter" [helpWidget]='helpWidget'></app-bk-footer>
 </ng-container>
