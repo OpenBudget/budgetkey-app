@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { AddToListIconComponent } from './add-widget-icon/add-to-list-icon.component';
+import { AddToListIconComponent } from './add-to-list-icon/add-to-list-icon.component';
 import { ListViewComponent } from './list-view/list-view.component';
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { SearchResultComponent } from './search-result/search-result.component';

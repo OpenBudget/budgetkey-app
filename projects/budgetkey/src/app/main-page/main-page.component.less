@@ -1,98 +1,100 @@
-::ng-deep .main {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  position: relative;
-}
-
-::ng-deep app-bk-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 100;
-}
-
-.ad {
-  position: fixed;
-  left: 0;
-  border-top-right-radius: 10px;
-  background-color: #009adf;  
-  padding: 5px 10px;
-  bottom: -40px;
-  transition-property: bottom;
-  transition-delay: 0s;
-  transition-duration: 1s;
-  z-index: 100;
-  span {
-    font-size: 16px;
-    color: white;  
-  }
-  
-  &.active {
-    bottom: 0px;
-    transition-delay: 3s;
-  }
-  
-}
-
-.budgetism {
-  font-family: Heebo, sans-serif;
-  color: #fad900 !important;
-  background-image: url(https://act.obudget.org/wp-content/uploads/2018/02/banner_main-2.jpg);
-  border-radius: 15px;
-  padding: 0 20px;
-}
-
-.header, .footer {
-  width: 100vw;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
-
-.header {
-  .bubbles {
-    margin-top: 60px;
-    margin-bottom: 20px;
-  }
-  
-  .category-visualizations {
+:host {
+  ::ng-deep .main {
     display: flex;
-    flex-flow: row;
-    justify-content: center;
-    align-items: baseline;
-    flex-wrap: wrap;
-    max-width: 1250px;
-    width: 100%;
-  }
-}
-
-.course {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  margin-top: 2em;
-  margin-bottom: 0.5em;
-  padding: 0.5em 1em;
-  border-radius: 2em 2em 0 2em;
-  background: #F2F2F2;
-  font-size: 3em;
-  color:  black;
-  
-  .scroll-down{
-    flex: 0 0 auto;
-    margin: 30px 0 0 0;
-    display: flex;
-    flex-direction: column;
+    flex-flow: column;
     align-items: center;
-    justify-content: flex-end;
+    position: relative;
+  }
+  
+  ::ng-deep app-bk-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+  }
+  
+  .ad {
+    position: fixed;
+    left: 0;
+    border-top-right-radius: 10px;
+    background-color: #009adf;  
+    padding: 5px 10px;
+    bottom: -40px;
+    transition-property: bottom;
+    transition-delay: 0s;
+    transition-duration: 1s;
+    z-index: 100;
+    span {
+      font-size: 16px;
+      color: white;  
+    }
     
-    svg {
-      display: block;
+    &.active {
+      bottom: 0px;
+      transition-delay: 3s;
+    }
+    
+  }
+  
+  .budgetism {
+    font-family: Heebo, sans-serif;
+    color: #fad900 !important;
+    background-image: url(https://act.obudget.org/wp-content/uploads/2018/02/banner_main-2.jpg);
+    border-radius: 15px;
+    padding: 0 20px;
+  }
+  
+  .header, .footer {
+    width: 100vw;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  
+  .header {
+    .bubbles {
+      margin-top: 60px;
+      margin-bottom: 20px;
+    }
+    
+    .category-visualizations {
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+      align-items: baseline;
+      flex-wrap: wrap;
+      max-width: 1250px;
+      width: 100%;
+    }
+  }
+  
+  .course {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    padding: 0.5em 1em;
+    border-radius: 2em 2em 0 2em;
+    background: #F2F2F2;
+    font-size: 3em;
+    color:  black;
+    
+    .scroll-down{
+      flex: 0 0 auto;
+      margin: 30px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
       
-      path {
-        fill: #ff6666;
+      svg {
+        display: block;
+        
+        path {
+          fill: #ff6666;
+        }
       }
     }
   }

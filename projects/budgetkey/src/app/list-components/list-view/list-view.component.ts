@@ -15,6 +15,7 @@ import { sign } from 'crypto';
 export class ListViewComponent implements OnChanges {
 
   @Input() list: ListContents;
+  @Input() headerControls = false;
 
   @ViewChild('titleEl') titleEl: ElementRef;
   @ViewChild('descriptionEl') descriptionEl: ElementRef;

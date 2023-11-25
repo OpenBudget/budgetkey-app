@@ -78,12 +78,16 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   public dropdownOpen = false;
   public showSubscribe = false;
   public externalUrl: string;
+  public externalUrlHref: boolean;
   public forcedPlaceholder: string;
   
   constructor (public globalSettings: GlobalSettingsService, private ps: PlatformService) {
   }
   
-  public static buildExternalUrl(searchTerm: string, searchType: SearchBarType, extraUrlParams: string | null, theme: any | null, lang: string | null, hostname: string) {
+  public static buildExternalUrl(
+    searchTerm: string, searchType: SearchBarType, extraUrlParams: string | null, 
+    theme: any | null, lang: string | null, hostname: string
+  ): [string, boolean] {
     let urlParams =
     'q=' + encodeURIComponent(searchTerm) +
     '&dd=' + searchType.id;
@@ -100,9 +104,9 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
     urlParams = params.toString();
     const url = '/s/?' + urlParams;
     if (hostname !== 'next.obudget.org' && hostname.indexOf('localhost') !== 0 && hostname.indexOf('whiletrue') < 0) {
-      return 'https://next.obudget.org' + url;
+      return ['https://next.obudget.org' + url, true];
     } else {
-      return url;
+      return [url, false];
     }
   }
   
@@ -112,7 +116,7 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   
   private calcExternalUrl() {
     if (this.selectedSearchType) {
-      this.externalUrl = BkSearchBar.buildExternalUrl(
+      [this.externalUrl, this.externalUrlHref] = BkSearchBar.buildExternalUrl(
         this.searchTerm,
         this.selectedSearchType,
         this.externalUrlParams,

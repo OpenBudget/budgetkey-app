@@ -1,11 +1,11 @@
 /**
  * Created by adam on 18/12/2016.
  */
-import { Injectable, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { EMPTY, Observable, ReplaySubject, forkJoin, from, of } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { map, filter, switchMap, first } from 'rxjs/operators';
+import { map, filter, switchMap, first, tap } from 'rxjs/operators';
 
 export class ListItem {
   id?: number;
@@ -42,8 +42,35 @@ export class ListsService {
 
   public curatedLists = signal<Array<ListContents>>([]);
   public curatedItems = signal<Array<ListItem>>([]);
-  public curatedItemIds = signal<any>({});
+  public currentList = signal<ListContents | null>(null);
+  public currentListItemIds = computed<any>(() => {
+    const list = this.currentList();
+    console.log('COMPUTEDDD', list);
+    if (!list) {
+      return {};
+    }
+    const itemIds: any = {};
+    list.items?.forEach((item) => {
+      const doc_id = item.properties?.source.doc_id;
+      if (doc_id) {
+        itemIds[doc_id] = true;
+      }
+    });
+    console.log('LIST ITEM IDS', itemIds);
+    return itemIds;
+  });
   public hasCuratedLists = signal<boolean>(false);
+
+  public EMPTY_LIST: ListContents = {
+    id: 0,
+    name: '',
+    user_id: '',
+    url: null,
+    title: 'רשימה ללא שם',
+    properties: {description: 'תיאור הרשימה...'},
+    kind: 'curated',
+    items: []
+  };
 
   constructor(private http: HttpClient, private auth: AuthService) {
     this.auth.getJwt().pipe(
@@ -72,14 +99,6 @@ export class ListsService {
       this.curatedItems.set(items);
       console.table(lists);
       console.table(items);
-      const itemIds: any = {};
-      items.forEach((item) => {
-        const doc_id = item.properties?.source.doc_id;
-        if (doc_id) {
-          itemIds[doc_id] = true;
-        }
-      });
-      this.curatedItemIds.set(itemIds);
       this.hasCuratedLists.set(enabled);
     });
   }
@@ -180,13 +199,14 @@ export class ListsService {
     );
   }
 
-  public testAdd(item: any) {
-    this.auth.getUser().pipe(
+  public addItemToList(listName: string, item: any) {
+    return this.auth.getUser().pipe(
       map((user) => {
         console.log('USER', user);
         return {
           name: user.profile?.name,
           avatar_url: user.profile?.avatar_url,
+          user_id: user.profile?.id,
         };
       }),
       switchMap((user_props) => {
@@ -195,21 +215,30 @@ export class ListsService {
           url: null,
           properties: {
             description: 'זו רשימה שנוצרה לטובת בדיקות של המערכת. כל התוכן פה הוא שרירותי ולא מעניין את אף אחד',
-            ...user_props
+            name: user_props.name,
+            avatar_url: user_props.avatar_url,
           },
           kind: 'curated',
           visibility: 1
-        })
+        }).pipe(
+          map(() => user_props.user_id)
+        )
       }),
       switchMap(() => {
-        return this.put('test-list', {
+        return this.put(listName, {
           title: item.source.page_title,
           url: '/i/' + item.source.doc_id,
           properties: item
         });
+      }),
+      switchMap(() => {
+        return this.get(listName);
+      }),
+      tap((list) => {
+        this.currentList.set(list);
       })
-    ).subscribe((item) => {
-      console.log('ITEM ADDED', item);
-    });
+    );
   }
+
+
 }

@@ -1,3 +1,5 @@
+@import '../../../common.less';
+
 @max-width: 750px + 2 * 32px;
 
 :host {
@@ -32,6 +34,7 @@
                 align-items: center;
                 gap: 8px;
                 .avatar {
+                    flex: 0 0 auto;
                     width: 28px;
                     height: 28px;
                     border-radius: 28px;
@@ -52,6 +55,9 @@
                 align-items: center;
                 gap: 8px;
                 .icon {
+                    flex: 0 0 auto;
+                    align-self: flex-start;
+                    margin-top: 4px;
                     width: 24px;
                     height: 24px;
                     margin-right: 2px;
@@ -83,6 +89,29 @@
                 font-family: "Abraham TRIAL";
                 font-size: 16px;
                 font-weight: 300;
+            }
+        }
+        .controls {
+            display: flex;
+            flex-flow: row;
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            
+            .close-button, .fullscreen-button {
+                width: 32px;
+                height: 32px;
+                flex: 0 0 auto;
+                .background-image;
+                background-size: 16px;
+            }
+
+            .close-button {
+                background-image: url(../../../assets/lists/icon-close-gray-500.svg);
+            }
+
+            .fullscreen-button {
+                background-image: url(../../../assets/lists/icon-fullscreen-gray-500.svg);
             }
         }
     }

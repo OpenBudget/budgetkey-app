@@ -20,6 +20,10 @@
     
         </div>
     </div>
+    <div class='controls' *ngIf='headerControls'>
+        <a class='fullscreen-button' [routerLink]='["/l",  list.user_id, list.name]' [queryParams]='{list: null}' queryParamsHandling='merge' clickOnReturn></a>
+        <a class='close-button' [routerLink]='"."' [queryParams]='{list: null}' queryParamsHandling='merge' clickOnReturn></a>
+    </div>
 </div>
 <div class='list-contents'>
     <search-result [item]="item" [index]="i" [kind]="item.type" [bare]='false' [listable]='false'

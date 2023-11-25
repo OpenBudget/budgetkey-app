@@ -32,13 +32,13 @@ export class BarePageComponent implements OnInit {
     });
   }
 
-  externalUrl() {
+  externalUrl(): string {
     return BkSearchBar.buildExternalUrl(
       this.search.searchState.term || '',
       this.all,
       this.search.subscriptionUrlParams,
       this.globalSettings.theme, this.globalSettings.lang,
       this.ps.browser() ? window.location.hostname : 'next.obudget.org'
-    );
+    )[0];
   }
 }

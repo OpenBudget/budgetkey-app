@@ -33,10 +33,4 @@ export class ListPageComponent {
       this.list = list;
     });
   }
-
-  ngOnInit(): void {
-    this.globalSettings.ready.subscribe(() => {
-      // this.seo.setSeo(this.globalSettings.siteName + ' - חיפוש', `https://next.obudget.org/s`);
-    });
-  }
 }
