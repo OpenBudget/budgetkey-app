@@ -12,6 +12,7 @@ import { ListPageComponent } from './list-page/list-page.component';
 import { ListRoutingModule } from './list-routing.module';
 import { EditedContentDirective } from './edited-content.directive';
 import { AppContainerComponent } from './app-container/app-container.component';
+import { AddToListDialogComponent } from './add-to-list-dialog/add-to-list-dialog.component';
 
 /**
  * Created by adam on 27/12/2016.
@@ -31,7 +32,8 @@ import { AppContainerComponent } from './app-container/app-container.component';
     SearchResultComponent,
     ListPageComponent,
     EditedContentDirective,
-    AppContainerComponent
+    AppContainerComponent,
+    AddToListDialogComponent
   ],
   providers: [
   ],

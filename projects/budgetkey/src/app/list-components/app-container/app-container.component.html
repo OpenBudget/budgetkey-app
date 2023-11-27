@@ -8,7 +8,7 @@
             <ng-content></ng-content>
         </div>
         <div class='list' *ngIf='lists.currentList() && listSideView && layout.desktop'>
-            <app-list-view [list]="lists.currentList() || lists.EMPTY_LIST" [headerControls]='true'></app-list-view>
+            <app-list-view [list]="lists.currentList() || lists.emptyList" [headerControls]='true'></app-list-view>
         </div>
     </div>
     <app-bk-footer *ngIf="showFooter" [helpWidget]='helpWidget'></app-bk-footer>

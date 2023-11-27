@@ -39,10 +39,8 @@ export class AppContainerComponent {
                 }
             }),
             filter((list) => !!list),
-            map((list) => list.split(':')),
-            switchMap((parts) => this.lists.getAnonymous(parts[0], parts[1])),
         ).subscribe((list) => {
-            this.lists.currentList.set(list);
+            this.lists.currentListId.set(list);
         });
     }
 }

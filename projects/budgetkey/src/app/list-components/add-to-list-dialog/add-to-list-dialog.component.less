@@ -1,0 +1,97 @@
+@import '../../../common.less';
+
+.dialog {
+    width: 280px;
+    min-height: 32px;
+    max-height: 220px;
+    border-radius: 4px;
+    border: 1px solid @color-fill-lead;
+    background: @color-white;
+    background-image: url(../../../assets/lists/bg.png);
+    background-size: 8px;
+    background-repeat: repeat;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+
+    .header {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        gap: 8px;
+        padding: 2px 8px;
+
+        .icon {
+            flex: 0 0 auto;
+            margin-top: 4px;
+            width: 24px;
+            height: 24px;
+            margin-right: 2px;
+            background-image: url(../../../assets/lists/list-icon-red.svg);
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .title {
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+            gap: 4px;
+
+            span {
+                color: @color-gray-600;
+                .font-abraham;
+                font-size: 11px;
+                font-weight: 300;
+                line-height: normal;
+            }
+            h1 {
+                color: @color-lists-blue;
+                .font-gadi;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+            }
+        }
+    }
+    .notes {
+        padding: 4px;
+        .placeholder {
+            border-radius: 2px;
+            background: @color-white;
+            border: 1px solid @color-lists-blue2;
+            padding: 4px;
+            padding-right: 32px;
+            color: @color-gray-600;
+            .font-abraham;
+            font-size: 13px;
+            font-weight: 300;
+            line-height: normal;
+            .background-image;
+            background-image: url(../../../assets/lists/icon-edit-gray-400.svg);
+            background-size: 16px;
+            background-position: center right 8px;
+            cursor: pointer;
+        }
+        textarea {
+            width: 100%;
+            border-radius: 2px;
+            background: @color-white;
+            border: 1px solid @color-lists-blue2;
+            padding: 8px;
+            color: @color-lists-blue;
+            text-align: right;
+            .font-gadi;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 18px;
+            &::placeholder {
+                color: @color-gray-600;
+                .font-abraham;
+                font-size: 13px;
+                font-weight: 300;
+                line-height: normal;    
+            }
+        }
+    }
+}

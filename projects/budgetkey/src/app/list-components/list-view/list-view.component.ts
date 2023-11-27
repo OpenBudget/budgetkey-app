@@ -21,28 +21,29 @@ export class ListViewComponent implements OnChanges {
   @ViewChild('descriptionEl') descriptionEl: ElementRef;
 
   format = new Format();
-  items = signal<any[]>([]);
   editable = signal<boolean>(false);
+  userId = '';
 
   constructor(private auth: AuthService, private lists: ListsService) {
     this.auth.getUser().pipe(
       untilDestroyed(this),
-      map((user) => user?.profile?.id)
-    ).subscribe((user) => {
-      if (user) {
-        this.editable.set(user === this.list?.user_id);
-      } else {
-        this.editable.set(false);
-      }
+      map((user) => user?.profile?.id || '')
+    ).subscribe((userId) => {
+      this.userId = userId;
+      this.checkEditable();
     });
   }
 
   ngOnChanges(): void {
-    this.items.set(
-      (this.list?.items || [])
-      .map((item) => item.properties)
-      .filter((item) => !!item)
-    );
+    this.checkEditable();
+  }
+
+  checkEditable() {
+    if (this.userId.length) {
+      this.editable.set(this.userId === this.list?.user_id);
+    } else {
+      this.editable.set(false);
+    }
   }
 
   save() {
@@ -78,5 +79,12 @@ export class ListViewComponent implements OnChanges {
 
   get description(): string {
     return this.list?.properties?.description || 'רשימה ללא תיאור';
+  }
+
+  updateNotes(item: any, notes: string) {
+    item.properties.__notes = notes;
+    this.lists.addDocToList(this.list.name, item.properties).subscribe((item) => {
+      console.log('UPDATED ITEM', item);
+    });
   }
 }

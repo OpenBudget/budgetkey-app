@@ -1,0 +1,15 @@
+<div class='dialog'>
+    <div class='header'>
+        <div class='icon'></div>
+        <div class='title'>
+            <span>נוסף לרשימה:</span>
+            <h1>{{list.title}}</h1>
+        </div>
+    </div>
+    <div class='notes' *ngIf='notes'>
+        <div class='placeholder' *ngIf='!editing' clickOnReturn (activated)='editing = true'>#תגיות והערות לסעיף זה...</div>
+        <textarea [(ngModel)]='itemNotes' placeholder='#תגיות והערות לסעיף זה...' *ngIf='editing'></textarea>
+    </div>
+    <div class='list-selection' *ngIf='!notes'>
+    </div>
+</div>

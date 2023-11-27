@@ -26,6 +26,12 @@
     </div>
 </div>
 <div class='list-contents'>
-    <search-result [item]="item" [index]="i" [kind]="item.type" [bare]='false' [listable]='false'
-        *ngFor='let item of items(); let i = index'></search-result>
+    <ng-container  *ngFor='let item of list.items; let i = index'>
+        <search-result [item]="item.properties" [index]="i" [kind]="item.properties.type" 
+            [bare]='false' [listable]='false'
+            [showNotes]='true' [notes]='item.properties.__notes' [editableNotes]='editable()'
+            (updatedNotes)='updateNotes(item, $event)'
+            *ngIf='item.properties'
+        ></search-result>
+    </ng-container>    
 </div>

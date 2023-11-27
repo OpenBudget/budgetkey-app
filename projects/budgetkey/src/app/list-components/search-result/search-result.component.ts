@@ -1,4 +1,4 @@
-import { Component, Input, Inject, OnInit } from '@angular/core';
+import { Component, Input, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 
 
 import { DocResultEntry } from '../../common-components/search-models';
@@ -57,6 +57,11 @@ export class SearchResultComponent implements OnInit {
   @Input() horizontal = false;
   @Input() bare = false;
   @Input() listable = true;
+  
+  @Input() showNotes = false;
+  @Input() editableNotes = false;
+  @Input() notes: string;
+  @Output() updatedNotes = new EventEmitter<string>();
 
   private PARAMETERS: { [s: string]: Parameter; } = {
     // // ENTITIES
@@ -710,5 +715,9 @@ export class SearchResultComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  updateNotes() {
+    this.updatedNotes.emit(this.notes);
   }
 }

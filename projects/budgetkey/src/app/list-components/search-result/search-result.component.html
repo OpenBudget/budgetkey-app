@@ -80,4 +80,11 @@
               [style.background-color]='p.tertiaryColor'
         ></span>
     </div>
+    <div class='notes' *ngIf='showNotes && (editableNotes || (notes && notes.length))'>
+        <div class='inner'>
+            <input [(ngModel)]='notes' kind='text' placeholder='#תגיות והערות לסעיף זה....' [class.empty]='!notes || !notes.length'
+            (blur)='updateNotes()' [disabled]='!editableNotes'
+            >
+        </div>
+    </div>
 </div>

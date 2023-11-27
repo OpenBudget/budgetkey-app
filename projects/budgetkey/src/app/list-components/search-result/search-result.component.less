@@ -1,3 +1,5 @@
+@import '../../../common.less';
+
 .card {
     display: flex;
     flex-flow: column;
@@ -87,6 +89,7 @@
             display: flex;
             flex-flow: column;
             align-items: flex-start;
+            gap: 4px;
             // margin: 0 8px;
             max-width: 100%;
             margin: 0;
@@ -106,7 +109,11 @@
                 max-height: 44px;
                 width: 100%;
                 position: relative;
-
+                display: flex;
+                flex-flow: row;
+                gap: 4px;
+                align-items: center;
+            
                 .fadeoff {
                     content: '';
                     position: absolute;
@@ -219,6 +226,54 @@
             border-radius: 8px;
             position: relative;
             top: -1px;
+        }
+    }
+
+    .notes {
+        padding: 4px;
+        padding-top: 0;
+        width: 100%;
+        
+        .inner {
+            display: block;
+            width: 100%;
+            border-radius: 2px;
+            border: 1px solid #9CD3FE;
+            background-color: @color-white;
+            background-image: url(../../../assets/lists/bg.png);
+            background-size: 8px;
+            background-repeat: repeat;
+            padding: 8px;
+            color: @color-lists-blue;
+            text-align: right;
+            .font-gadi;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 18px;
+            display: flex;
+            flex-flow: column;
+            align-items: stretch;
+            input {
+                width: 100%;
+                border: none;
+                outline: none;
+                background-color: transparent;
+
+                &.empty {
+                    padding-right: 24px;
+                }
+
+                &::placeholder {
+                    color: @color-gray-600;
+                    .font-abraham;
+                    font-size: 13px;
+                    font-weight: 300;
+                    .background-image;
+                    background-size: 16px;
+                    background-image: url(../../../assets/lists/icon-edit-gray-400.svg);
+                    background-position: center right;
+                }
+            }
         }
     }
 }

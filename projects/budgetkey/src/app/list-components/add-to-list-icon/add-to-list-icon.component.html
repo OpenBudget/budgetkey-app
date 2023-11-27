@@ -1,3 +1,2 @@
-<div class='icon' [class.subscribed]='subscribed' clickOnReturn *ngIf='enabled' (activated)='add()'>
-    {{subscribed ? 'V': 'X'}}
-</div>
+<div class='icon' [class.subscribed]='subscribed' [class.processing]='processing' clickOnReturn *ngIf='enabled' (activated)='click()'></div>
+<app-add-to-list-dialog *ngIf='adding' (selectedList)='add($event)'></app-add-to-list-dialog>
