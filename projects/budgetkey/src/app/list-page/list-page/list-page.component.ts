@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { SeoService } from '../../common-components/seo.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ListContents, ListsService } from '../../common-components/services/lists.service';
 import { filter, map, switchMap } from 'rxjs';
 
@@ -17,9 +17,12 @@ export class ListPageComponent {
   init = false;
   list: ListContents|null = null;
 
-  constructor(private globalSettings: GlobalSettingsService, private seo: SeoService, private route: ActivatedRoute, private lists: ListsService) {
-    globalSettings.ready.subscribe(() => {
+  constructor(private globalSettings: GlobalSettingsService, private seo: SeoService, private route: ActivatedRoute, private lists: ListsService, private router: Router) {
+    this.globalSettings.ready.subscribe(() => {
       this.init = true;
+    });
+    effect(() => {
+      this.list = lists.currentList();
     });
     this.route.params.pipe(
       untilDestroyed(this),
@@ -28,9 +31,9 @@ export class ListPageComponent {
         listId: params['list-id']
       })),
       filter((params) => !!params.listId && !!params.userId),
-      switchMap((params) => this.lists.getAnonymous(params.userId, params.listId)),
     ).subscribe((list) => {
-      this.list = list;
+      const key = `${list.userId}:${list.listId}`;
+      this.router.navigate(['.'], { relativeTo: this.route, queryParams: { list: key }, queryParamsHandling: 'merge', replaceUrl: true});
     });
   }
 }

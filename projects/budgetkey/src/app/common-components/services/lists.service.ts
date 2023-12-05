@@ -46,7 +46,8 @@ export const EMPTY_LIST: ListContents = {
   title: 'רשימה ללא שם',
   properties: {description: 'תיאור הרשימה...'},
   kind: 'curated',
-  items: []
+  items: [],
+  visibility: 1
 };
 
 @Injectable()
@@ -65,6 +66,19 @@ export class ListsService {
     return map;
   });
   public hasCuratedLists = signal<boolean>(false);
+  public curatedItemIds = computed<any>(() => {
+    const lists = this.curatedLists();
+    const itemIds: any = {};
+    lists.forEach((list) => {
+      list.items?.forEach((item) => {
+        const doc_id = item.properties?.source.doc_id;
+        if (doc_id) {
+          itemIds[doc_id] = true;
+        }
+      });
+    });
+    return itemIds;
+  });
 
   public currentListId = signal<string | null>(null);
   public currentList = signal<ListContents | null>(null);
@@ -111,6 +125,7 @@ export class ListsService {
         }
       }),
     ).subscribe(([enabled, lists, items]) => {
+      lists = lists.sort((a: ListContents, b: ListContents) => (b.update_time || '').localeCompare(a.update_time || ''));
       items = items.sort((a: ListItem, b: ListItem) => (b.create_time || '').localeCompare(a.create_time || ''));
       lists.forEach((list: any) => {
         list.items = items.filter((item: ListItem) => item.list_id === list.id);
@@ -120,6 +135,10 @@ export class ListsService {
     });
     effect(() => {
       const id = this.currentListId();
+      if (!id) {
+        this.currentList.set(null);
+        return;
+      }
       const parts = id ? id.split(':') : [];
       if (parts.length === 2) {
         const user_id = parts[0];
@@ -133,7 +152,7 @@ export class ListsService {
           }
         }
         this.anonymousSub?.unsubscribe();
-        this.anonymousSub = timer(5000).pipe(
+        this.anonymousSub = timer(1).pipe(
           switchMap(() => this.getAnonymous(user_id, name))
         ).subscribe((list) => {
           this.currentList.set(list);
@@ -153,17 +172,19 @@ export class ListsService {
       this.token
           .pipe(
             filter((token) => token !== null),
+            first(),
             switchMap((token) => {
               const params = {
                 list, items: true
               };
               return this.http.get('https://next.obudget.org/lists/', {params, headers: this.headers(token)});
             }),
-            first(),
             tap((resp: any) => {
               const list = resp as ListContents;
-              const curatedLists = this.curatedLists();
-              this.curatedLists.set([list, ...curatedLists.filter((l) => l.name !== list.name)]);
+              if (list.kind === CURATED_KIND) {
+                const curatedLists = this.curatedLists();
+                this.curatedLists.set([list, ...curatedLists.filter((l) => l.name !== list.name)]);
+              }
             })
           )
     );
@@ -185,6 +206,7 @@ export class ListsService {
     return this.token
       .pipe(
         filter((token) => token !== null),
+        first(),
         switchMap((token) => {
           console.log('PUTTING ITEM', item);
           const params = {list};
@@ -198,11 +220,13 @@ export class ListsService {
             const itemIndex = (curatedList.items || []).findIndex((i) => i.properties.source.doc_id === item.properties.source.doc_id);
             if (itemIndex >= 0) {
               curatedList.items?.splice(itemIndex, 1, resp);
-              this.curatedLists.set([...curatedLists]);
+            } else {
+              curatedList.items?.unshift(resp);
             }
+            const list = curatedLists.splice(listIndex, 1);
+            this.curatedLists.set([...list, ...curatedLists]);
           }
         }),
-        first()
       );
   }
 
@@ -210,12 +234,15 @@ export class ListsService {
     return this.token
       .pipe(
         filter((token) => token !== null),
+        first(),
         switchMap((token) => {
           console.log('PUTTING LIST', listName, list);
-          const params: any = {list: listName, self: true};
+          const params: any = {self: true};
+          if (listName) {
+            params['list'] = listName;
+          }
           return this.http.put('https://next.obudget.org/lists/', list, {params, headers: this.headers(token)});
         }),
-        first(),
         tap(() => {
           const curatedLists = this.curatedLists();
           const listIndex = curatedLists.findIndex((l) => l.name === listName);
@@ -233,11 +260,11 @@ export class ListsService {
     return this.token
       .pipe(
         filter((token) => token !== null),
+        first(),
         switchMap((token) => {
           const params = {list, item_id: _item_id}; 
           return this.http.delete('https://next.obudget.org/lists/', {params, headers: this.headers(token)});
         }),
-        first(),
         tap(() => {
           const curatedLists = this.curatedLists();
           const listIndex = curatedLists.findIndex((l) => l.name === list);
@@ -304,8 +331,9 @@ export class ListsService {
     );
   }
 
-  public createList(listName: string) {
+  public createList(properties?: ListProperties) {
     return this.auth.getUser().pipe(
+      first(),
       map((user) => {
         return {
           name: user.profile?.name,
@@ -314,7 +342,7 @@ export class ListsService {
         };
       }),
       switchMap((user_props) => {
-        const list = Object.assign({}, this.emptyList, {visibility: 1});
+        const list = Object.assign({}, this.emptyList, properties || {});
         list.properties = Object.assign(list.properties, {
           name: user_props.name,
           avatar_url: user_props.avatar_url,
@@ -322,6 +350,7 @@ export class ListsService {
         return this.updateList(null, list)
       }),
       tap((list) => {
+        list.items = [];
         this.curatedLists.set([list, ...this.curatedLists()]);
       })
     );

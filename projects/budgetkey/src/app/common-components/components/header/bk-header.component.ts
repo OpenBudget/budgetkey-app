@@ -1,6 +1,8 @@
 import {Component, Inject, Input} from '@angular/core';
 import { GlobalSettingsService } from '../../global-settings.service';
 import { Router } from '@angular/router';
+import { platform } from 'os';
+import { PlatformService } from '../../platform.service';
 
 @Component({
     selector: 'app-bk-header',
@@ -13,8 +15,8 @@ export class BkHeaderComponent {
     @Input() showLanguages = false;
     public showAuth = false;
 
-    constructor (public globalSettings: GlobalSettingsService, private router: Router) {
-      this.showAuth = !globalSettings.theme.disableAuth;
+    constructor (public globalSettings: GlobalSettingsService, private router: Router, private platform: PlatformService) {
+      this.showAuth = !globalSettings.theme.disableAuth && this.platform.browser();
     }
 
     doSearch(href?: string) {

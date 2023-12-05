@@ -2,5 +2,6 @@
   <ng-container *ngFor="let item of ((searchManager.searchResults | async)?.docs || []); let i = index" >
     <search-result [item]="item" [index]="i" [kind]="item.type" [bare]='bare'></search-result>
   </ng-container>
-  <div i18n="@@statusText" class="status" [innerHtml]='getStatusText()'></div>
+  <div class='loading' *ngIf='!searchManager.done'></div>
+  <div i18n="@@statusText" class="status" [innerHtml]='getStatusText()' #more></div>
 </div>

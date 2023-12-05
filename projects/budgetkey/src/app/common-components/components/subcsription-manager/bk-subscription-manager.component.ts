@@ -29,7 +29,9 @@ export class BkSubscriptionManager implements OnInit {
     ps.browser(() => {
       fromEvent(window, 'message').subscribe((evt) => {
         console.log('GOT Message', evt);
-        this.auth.check();
+        if (this.loginModal) {
+          this.auth.check();
+        }
         this.loginModal = false;
       });    
     });

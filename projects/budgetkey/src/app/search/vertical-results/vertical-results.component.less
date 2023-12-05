@@ -1,12 +1,23 @@
+@import '../../../common.less';
+
 :host {
     display: flex;
     flex-flow: column;
     align-items: center;
+    width: 100%;
+    overflow: hidden;
+
     .search_body {
         display: flex;
         flex-flow: column;
         gap: 20px;
-        max-width: 800px;
+        max-width: @container-width;
         width: 100%;
+
+        .loading {
+            height: 120px;
+            width: 100%;
+            max-width: @container-width;
+        }
     }
 }

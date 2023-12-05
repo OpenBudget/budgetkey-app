@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject, HostListener, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Inject, HostListener, Output, EventEmitter, OnDestroy, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { SearchState } from '../search-state/search-state';
 import { SearchManager, SearchOutcome } from '../search-manager/search-manager';
 import { take, skip, first } from 'rxjs/operators';
@@ -15,17 +15,20 @@ import { PlatformService } from '../../common-components/platform.service';
   templateUrl: './vertical-results.component.html',
   styleUrls: ['./vertical-results.component.less']
 })
-export class VerticalResultsComponent implements OnInit, OnDestroy {
+export class VerticalResultsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() state: SearchState;
   @Input() bare = false;
   @Output() searching = new EventEmitter<boolean>();
 
+  @ViewChild('more') moreElement: ElementRef;
+  
   searchManager: SearchManager;
 
   // Autofetch control
   gotMore = false;
   lastOutcome: SearchOutcome;
+  moreObserver: IntersectionObserver;
 
   constructor(
     private searchService: SearchApiService,
@@ -49,12 +52,12 @@ export class VerticalResultsComponent implements OnInit, OnDestroy {
       this.lastOutcome = outcome;
       this.searching.emit(outcome.isSearching);
     });
+  }
 
+  ngAfterViewInit() {
     this.ps.browser(() => {
-      scheduled(fromEvent(window, 'scroll'), animationFrameScheduler).pipe(
-        untilDestroyed(this),
-      ).subscribe(() => {
-        if (window.innerHeight + window.scrollY + 300 > window.document.body.scrollHeight) {
+      this.moreObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
           if (!this.gotMore) {
             this.gotMore = true;
             this.searchManager.getMore();
@@ -64,6 +67,7 @@ export class VerticalResultsComponent implements OnInit, OnDestroy {
           }
         }
       });
+      this.moreObserver.observe(this.moreElement?.nativeElement);
     });
   }
 

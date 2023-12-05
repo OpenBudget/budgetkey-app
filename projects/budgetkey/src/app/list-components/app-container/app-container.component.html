@@ -3,13 +3,15 @@
         [showSearchBar]="showSearchBar"
         [showLanguages]="showLanguages"
     ></app-bk-header>
-    <div class='app'>
-        <div class='main' id='main'>
-            <ng-content></ng-content>
+    <div class='scrollable'>
+        <div class='app'>
+            <div class='main' id='main' [style.width]='maxWidth() + "px"'>
+                <ng-content></ng-content>
+            </div>
+            <div class='list' *ngIf='showListView()'>
+                <app-list-view [list]="lists.currentList() || lists.emptyList" [headerControls]='true'></app-list-view>
+            </div>
         </div>
-        <div class='list' *ngIf='lists.currentList() && listSideView && layout.desktop'>
-            <app-list-view [list]="lists.currentList() || lists.emptyList" [headerControls]='true'></app-list-view>
-        </div>
+        <app-bk-footer *ngIf="showFooter" [helpWidget]='helpWidget'></app-bk-footer>    
     </div>
-    <app-bk-footer *ngIf="showFooter" [helpWidget]='helpWidget'></app-bk-footer>
 </ng-container>

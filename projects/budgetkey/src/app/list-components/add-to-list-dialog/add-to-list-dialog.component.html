@@ -1,15 +1,41 @@
 <div class='dialog'>
-    <div class='header'>
-        <div class='icon'></div>
-        <div class='title'>
-            <span>נוסף לרשימה:</span>
-            <h1>{{list.title}}</h1>
+    <ng-container *ngIf='!listSelection'>
+        <div class='header'>
+            <div class='icon'></div>
+            <div class='title'>
+                <span>נוסף לרשימה:</span>
+                <h1>{{list.title}}</h1>
+            </div>
+            <div class='action'>
+                <a class='close-button' *ngIf='editing' (activated)='done()' clickOnReturn></a>
+            </div>
         </div>
-    </div>
-    <div class='notes' *ngIf='notes'>
-        <div class='placeholder' *ngIf='!editing' clickOnReturn (activated)='editing = true'>#תגיות והערות לסעיף זה...</div>
-        <textarea [(ngModel)]='itemNotes' placeholder='#תגיות והערות לסעיף זה...' *ngIf='editing'></textarea>
-    </div>
-    <div class='list-selection' *ngIf='!notes'>
-    </div>
+        <div class='notes'>
+            <div class='placeholder' *ngIf='!editing' clickOnReturn (activated)='editing = true'>#תגיות והערות לסעיף זה...</div>
+            <textarea [(ngModel)]='itemNotes' placeholder='#תגיות והערות לסעיף זה...' *ngIf='editing'></textarea>
+        </div>
+    </ng-container>
+    <ng-container *ngIf='listSelection'>
+        <div class='list-selection' *ngIf='listSelection'>
+            <ng-container *ngFor='let list of lists.curatedLists()'>
+                <div class='list-selection-item' clickOnReturn (activated)='toggleSubscription(list)' [class.subscribed]='subscribed(list)'>
+                    <div class='icon'></div>
+                    <div class='title'>{{list.title}}</div>
+                </div>
+            </ng-container>
+        </div>
+        <div class='new-list'>
+            <div class='editor' clickOnReturn (activated)='editing = true' *ngIf='!editing'>
+                <div class='icon'></div>
+                <div class='placeholder'>רשימה חדשה</div>
+            </div>
+            <div class='editor' *ngIf='editing'>
+                <div class='icon'></div>
+                <input [(ngModel)]='newList' placeholder='רשימה חדשה'/>
+            </div>
+            <div class='action'>
+                <a class='close-button' (activated)='done()' clickOnReturn></a>
+            </div>
+        </div>
+    </ng-container>
 </div>

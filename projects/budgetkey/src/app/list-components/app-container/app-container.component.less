@@ -1,45 +1,52 @@
-@import '../../common-components/common.less';
+@import '../../../common.less';
 
 :host {
   display: flex;
   flex-flow: column;
-  min-height: 100vh;
+  height: 100%;
+  max-height: 100%;
   
   app-bk-header {
     flex: 0 0 auto;
   }
   
-  .app {
-    flex: 1 0 auto;    
-    direction: rtl;
-    min-height: ~"calc(100vh - 333px - 64px)";
-    margin-top: 9px; //calc(9 - @headerHeight);
-    margin-bottom: 6px;  
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    flex-flow: row;
-    align-items: flex-start;
+  .scrollable {
+    flex: 1 1 auto; 
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 
-    .list {
-      flex: 0 0 auto;
-      width: 400px;
-      position: sticky;
-      left: 0;
-      top: 0;
-      max-height: 100vh;
-      overflow: scroll;
-      border-right: 1px solid #DAEAF5;
-      box-shadow: 0px 1px 2px 0px rgba(189, 189, 189, 0.60);
-    }
-
-    .main {
-      flex: 0 1 auto;
+    .app {
+      direction: rtl;
+      min-height: calc(100vh ~'-' @headerHeight - 100px);
+      // margin-top: 9px; //calc(9 - @headerHeight);
+      // margin-bottom: 6px;  
       width: 100%;
+      max-width: 100%;
       display: flex;
-      flex-flow: column;
-      align-items: center;  
-    }
-  }  
+      flex-flow: row;
+      align-items: flex-start;
   
+      .list {
+        flex: 0 0 auto;
+        width: 400px;
+        position: sticky;
+        left: 0;
+        top: 0;
+        max-height: 100vh;
+        height: calc(100vh ~'-' @headerHeight);
+        overflow: scroll;
+        border-right: 1px solid #DAEAF5;
+        box-shadow: 0px 1px 2px 0px rgba(189, 189, 189, 0.60);
+      }
+  
+      .main {
+        flex: 0 1 auto;
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+        align-items: center;  
+      }
+    }  
+  }  
 }

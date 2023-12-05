@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'i', loadChildren: () => import('./item/item.module').then(m => m.ItemModule) },
   { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
   { path: 'p', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
-  { path: 'l', loadChildren: () => import('./list-components/list-components.module').then(m => m.ListComponentsModule) },
+  { path: 'l', loadChildren: () => import('./list-page/list-page.module').then(m => m.ListPageModule) },
   { path: 'not-found', component: PageNotFoundComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
@@ -17,6 +17,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabledBlocking',
     anchorScrolling: 'enabled',
+    // enableTracing: true,
 })],
   exports: [RouterModule]
 })

@@ -31,7 +31,7 @@
              [attr.aria-label]='p.title'
             >
             <div class='body-title' *ngIf='p.title'>
-                <app-add-to-list-icon [item]='item' *ngIf='listable'></app-add-to-list-icon>
+                <app-add-to-list-icon [doc]='item' *ngIf='listable'></app-add-to-list-icon>
                 <a [href]='href()' 
                    [target]='bare ? "_blank" : "_self"'
                    [style.color]='p.primaryColor'

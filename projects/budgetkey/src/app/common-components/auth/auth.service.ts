@@ -18,7 +18,7 @@ export class AuthService {
         authServerUrl: 'https://next.obudget.org',
         jwtLocalStorageKey: 'jwt',
         jwtQueryParam: 'jwt',
-        profilePagePath: '/p/'
+        profilePagePath: ['/p']
     };    
 
     constructor(private http: HttpClient, private platform: PlatformService) {
@@ -104,9 +104,7 @@ export class AuthService {
     }
 
     logout(): Observable<any> {
-        console.log('LOGOUT');
         this.deleteToken();
-        console.log('token delted');
         return this.check();
     }
 

@@ -10,10 +10,10 @@
         </div>
         <div class='timestamps'>
             <span>עודכן:</span>
-            <span>{{format.relativeDate(list.update_time)}}</span>
+            <span>{{format.relativeUTCDate(list.update_time)}}</span>
             <span>|</span>
             <span>נוצר:</span>
-            <span>{{format.relativeDate(list.create_time)}}</span>
+            <span>{{format.relativeUTCDate(list.create_time)}}</span>
         </div>
         <div class='description' [editedContent]='editable()' (updated)='description = $event' #descriptionEl>{{description}}</div>
         <div class='selectors'>
@@ -24,14 +24,41 @@
         <a class='fullscreen-button' [routerLink]='["/l",  list.user_id, list.name]' [queryParams]='{list: null}' queryParamsHandling='merge' clickOnReturn></a>
         <a class='close-button' [routerLink]='"."' [queryParams]='{list: null}' queryParamsHandling='merge' clickOnReturn></a>
     </div>
+    <div class='edit-controls' *ngIf='editable()'>
+        <a class='delete-button' (activated)='deleteDialog.set(true)' clickOnReturn>מחיקת רשימה</a>
+    </div>
 </div>
 <div class='list-contents'>
-    <ng-container  *ngFor='let item of list.items; let i = index'>
-        <search-result [item]="item.properties" [index]="i" [kind]="item.properties.type" 
-            [bare]='false' [listable]='false'
-            [showNotes]='true' [notes]='item.properties.__notes' [editableNotes]='editable()'
-            (updatedNotes)='updateNotes(item, $event)'
-            *ngIf='item.properties'
-        ></search-result>
-    </ng-container>    
+    <div class='list-contents-results'>
+        <ng-container  *ngFor='let item of list.items; let i = index'>
+            <search-result [item]="item.properties" [index]="i" [kind]="item.properties.type" 
+                [bare]='false'
+                [showNotes]='true' [notes]='item.properties.__notes' [editableNotes]='editable()'
+                (updatedNotes)='updateNotes(item, $event)'
+                *ngIf='item.properties'
+            ></search-result>
+        </ng-container>        
+    </div>
+    <div class='share'>
+        <button class='share-button' clickOnReturn (activated)='share()'>שיתוף</button>
+    </div>
 </div>
+<app-modal [standardLayout]='false'
+    *ngIf='shareDialog()'
+    (close)='shareDialog.set(false)'
+>
+    <div class='dialog-header'>
+        <span>שיתוף הרשימה:</span>
+        <div class='title'>{{list.title}}</div>
+    </div>
+    <div class='dialog-explanation'>
+        <span>אפשר לצפות ברשימה זו רק באמצעות <a [href]='link'>הקישור הסודי הזה</a>.</span><br/>
+    </div>
+    <div class='dialog-done'>
+        <button class='copy-to-clipboard' clickOnReturn (activated)='copyLinkToClipboard()' [class.copied]='copied'>
+            <span class='icon'></span>
+            העתקת הקישור
+        </button>
+        <button class='done-button' clickOnReturn (activated)='shareDialog.set(false)'>אישור</button>
+    </div>
+</app-modal>

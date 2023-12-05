@@ -16,8 +16,9 @@
             </svg>
         </div>
         <div *ngIf="user && user.authenticated" class='menu'>
-            <a class='menu-line' (activated)="profile()" clickOnReturn>התראות שמורות</a>
-            <a class='menu-line' (activated)="profile()" clickOnReturn>פרופיל אישי</a>
+            <a class='menu-line' (activated)="profile()" *ngIf='hasProfile' clickOnReturn>התראות שמורות</a>
+            <a class='menu-line' (activated)="myLists()" clickOnReturn *ngIf='lists.hasCuratedLists()'>הרשימות שלי</a>
+            <!-- <a class='menu-line' (activated)="profile()" clickOnReturn>פרופיל אישי</a> -->
             <a class='menu-line' (activated)="logout()" clickOnReturn>התנתקות</a>
         </div>
 </div>

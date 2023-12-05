@@ -6,6 +6,8 @@ import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { PlatformService } from '../platform.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { Router } from '@angular/router';
+import { ListsService } from '../services/lists.service';
 
 @UntilDestroy()
 @Component({
@@ -18,7 +20,7 @@ export class AuthComponent implements AfterViewInit {
 
     @Input() theme: any;
 
-    constructor(private auth: AuthService, private ps: PlatformService) {
+    constructor(private auth: AuthService, private ps: PlatformService, private router: Router, public lists: ListsService) {
         this.auth.getUser().pipe(
             untilDestroyed(this)
         ).subscribe((user) => {
@@ -55,13 +57,17 @@ export class AuthComponent implements AfterViewInit {
         });
     }
 
+    get hasProfile() {
+        return this.auth?.authConfig?.profilePagePath || null;
+    }
+    
     profile() {
         if (this.auth.authConfig.profilePagePath) {
-            let params = '';
-            if (this.theme && this.theme.themeId) {
-                params = '?theme=' + this.theme.themeId;
-            }
-            window.location.href = this.auth.authConfig.profilePagePath + params;
+            this.router.navigate(this.auth.authConfig.profilePagePath, { queryParamsHandling: 'preserve' });
         }
+    }
+
+    myLists() {
+        this.router.navigate(['/l/my'], { queryParamsHandling: 'preserve' });
     }
 }

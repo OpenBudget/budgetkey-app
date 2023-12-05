@@ -1,2 +1,4 @@
-<div class='icon' [class.subscribed]='subscribed' [class.processing]='processing' clickOnReturn *ngIf='enabled' (activated)='click()'></div>
-<app-add-to-list-dialog *ngIf='adding' (selectedList)='add($event)'></app-add-to-list-dialog>
+<ng-container *ngIf='doc'>
+    <div class='icon' [class.subscribed]='subscribed' [class.processing]='processing' clickOnReturn *ngIf='enabled' (activated)='click()'></div>
+    <app-add-to-list-dialog *ngIf='dialogOpen' [doc]='doc' [listSelection]='subscribed' (commands)='execute($event)'></app-add-to-list-dialog>
+</ng-container>

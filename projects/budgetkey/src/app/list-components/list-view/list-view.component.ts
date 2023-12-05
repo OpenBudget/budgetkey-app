@@ -23,6 +23,10 @@ export class ListViewComponent implements OnChanges {
   format = new Format();
   editable = signal<boolean>(false);
   userId = '';
+  shareDialog = signal<boolean>(false);
+  copied = false;
+  deleteDialog = signal<boolean>(false);
+  link = '';
 
   constructor(private auth: AuthService, private lists: ListsService) {
     this.auth.getUser().pipe(
@@ -36,6 +40,7 @@ export class ListViewComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.checkEditable();
+    this.link = `${window.location.origin}/l/${this.list.user_id}/${this.list.name}`;
   }
 
   checkEditable() {
@@ -86,5 +91,19 @@ export class ListViewComponent implements OnChanges {
     this.lists.addDocToList(this.list.name, item.properties).subscribe((item) => {
       console.log('UPDATED ITEM', item);
     });
+  }
+
+  share() {
+    this.shareDialog.set(true);
+  }
+
+  copyLinkToClipboard() {
+    const el = document.createElement('textarea');
+    el.value = this.link;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    this.copied = true;
   }
 }

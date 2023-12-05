@@ -8,6 +8,8 @@ import { NGX_SEO_CONFIG_TOKEN, NgxSeoModule } from '@avivharuzi/ngx-seo';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AppErrorHandler } from './app-error-handler';
 import { ListComponentsModule } from './list-components/list-components.module';
+import { provideRouter, withDebugTracing } from '@angular/router';
+import { ListPageModule } from './list-page/list-page.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { ListComponentsModule } from './list-components/list-components.module';
     CommonComponentsModule,
     ListComponentsModule,
     NgxSeoModule.forRoot(),
+    ListPageModule,
   ],
   providers: [
     provideClientHydration(),

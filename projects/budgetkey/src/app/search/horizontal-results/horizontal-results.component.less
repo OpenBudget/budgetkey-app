@@ -1,8 +1,11 @@
+@import '../../../common.less';
+
 :host {
     display: flex;
     flex-flow: column;
     align-items: center;
     width: 100%;
+    max-width: @container-width;
 }
 .host {
     display: flex;
@@ -16,7 +19,6 @@
     margin-bottom: 10px;
 
     @media only screen and (max-width: 600px) {
-        width: 100vw;
         margin-top: 30px;
     }
 
@@ -32,7 +34,7 @@
         background-color: #fafafa;
         font-size: 22px;
         font-weight: normal;
-        font-family: "Abraham TRIAL";
+        .font-abraham;
         top: -16px;
         right: 16px;
         margin-bottom: -32px;
@@ -92,6 +94,14 @@
                 & > * {
                     transform: translatez(0);
                 }
+            }
+
+            .loading {
+                width: 240px;
+                align-self: stretch;
+                flex: 0 0 auto;
+                margin: 16px 16px 16px 8px;
+                border-radius: 4px;
             }
         }
 

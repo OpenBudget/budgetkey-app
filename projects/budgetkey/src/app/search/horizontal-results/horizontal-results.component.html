@@ -12,6 +12,7 @@
             *ngFor="let item of ((searchManager.searchResults | async)?.docs || []); let i = index"
             [item]="item" [index]="i" [kind]="item.type" [horizontal]='true' [bare]='bare'
         ></search-result>
+        <div class='loading' *ngIf='!searchManager.done'></div>
       </div>
       <div class='left-fade' [class.visible]='showLeftFade' (click)='scroll(-1)'></div>
     </div>

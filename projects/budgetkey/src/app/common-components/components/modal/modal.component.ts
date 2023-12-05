@@ -3,12 +3,12 @@ import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angu
 
 @Component({
     selector: 'app-modal',
-    encapsulation: ViewEncapsulation.None,
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.component.less'],
 })
 export class ModalComponent {
   @Input() title: string;
+  @Input() standardLayout = true;
   @Output() close = new EventEmitter();
 
   constructor() {

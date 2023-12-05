@@ -22,7 +22,7 @@ export class SearchManager {
     
   // Fetch more
   private moreQueue = new Subject<SearchParams>();
-  private done = false;
+  public done = false;
   public last: SearchParams = new SearchParams();
   
   // Results

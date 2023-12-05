@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {Component, ViewEncapsulation, Input} from '@angular/core';
+import {Component, ViewEncapsulation, Input, signal, AfterViewInit, effect, computed} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { distinct, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs';
@@ -24,23 +24,32 @@ export class AppContainerComponent {
 
     configured = false;
 
+    maxWidth = signal<number>(0);
+    showListView = computed(() => !!this.lists.currentList() && this.listSideView && this.layout.desktop);
+
     constructor(private route: ActivatedRoute, private globalSettings: GlobalSettingsService, public lists: ListsService, public layout: LayoutService) {
         this.globalSettings.ready.subscribe(() => {
             this.configured = true;
         });
         this.globalSettings.init(this, this.route);
+        // console.log('CCC', this.route.);
         this.route.queryParams.pipe(
             untilDestroyed(this),
             map((params) => params['list']),
             distinctUntilChanged(),
-            tap((list) => {
-                if (!list) {
-                    this.lists.currentList.set(null);
-                }
-            }),
-            filter((list) => !!list),
         ).subscribe((list) => {
+            console.log('SET LIST', list);
             this.lists.currentListId.set(list);
         });
+        effect(() => {
+            let maxWidth = this.layout.width();
+            if (this.showListView()) {
+                maxWidth -= 400;
+            }
+            if (maxWidth < 0) {
+                maxWidth = 0;
+            }
+            this.maxWidth.set(maxWidth);
+        }, { allowSignalWrites: true});
     }
 }
