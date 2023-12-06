@@ -34,6 +34,7 @@ export class ListContents extends ListProperties {
   name: string;
   user_id: string;
   items?: Array<ListItem>;
+  success?: boolean;
 }
 
 export const CURATED_KIND = 'curated';
@@ -43,7 +44,7 @@ export const EMPTY_LIST: ListContents = {
   name: '',
   user_id: '',
   url: null,
-  title: 'רשימה ללא שם',
+  title: 'הרשימה שלי',
   properties: {description: 'תיאור הרשימה...'},
   kind: 'curated',
   items: [],
@@ -190,7 +191,7 @@ export class ListsService {
     );
   }
 
-  public getAnonymous(user_id: string, list: string): Observable<ListContents> {
+  public getAnonymous(user_id: string, list: string): Observable<ListContents | null> {
     const params = {
       list, user_id, items: true
     };
@@ -198,7 +199,7 @@ export class ListsService {
       .pipe(
         tap((resp: ListContents) => {
           resp.items = resp.items?.sort((a: ListItem, b: ListItem) => (b.create_time || '').localeCompare(a.create_time || ''));
-        })
+        }),
       );
   }
 
@@ -277,6 +278,7 @@ export class ListsService {
               }
             } else {
               curatedList.items = [];
+              curatedLists.splice(listIndex, 1);
             }
             this.curatedLists.set([...curatedLists]);
           }

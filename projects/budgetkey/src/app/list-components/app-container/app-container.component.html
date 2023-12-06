@@ -9,7 +9,9 @@
                 <ng-content></ng-content>
             </div>
             <div class='list' *ngIf='showListView()'>
-                <app-list-view [list]="lists.currentList() || lists.emptyList" [headerControls]='true'></app-list-view>
+                <app-list-view [list]="lists.currentList() || lists.emptyList" [headerControls]='true'
+                    (deleted)='onDeleted()'
+                ></app-list-view>
             </div>
         </div>
         <app-bk-footer *ngIf="showFooter" [helpWidget]='helpWidget'></app-bk-footer>    

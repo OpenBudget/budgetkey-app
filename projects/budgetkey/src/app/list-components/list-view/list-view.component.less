@@ -149,12 +149,52 @@
                 background-image: url(../../../assets/lists/icon-fullscreen-gray-500.svg);
             }
         }
+
         .edit-controls {
             display: flex;
             flex-flow: row;
             position: absolute;
             top: 8px;
             right: 8px;
+
+            .delete-button {
+                appearance: none;
+                border: none;
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                justify-content: center;
+                gap: 2px;
+                padding: 2px 4px 2px 12px;
+                border-radius: 4px;
+                border: 1px solid @color-lists-light-blue;
+                background: @color-white;
+                                
+                color: @color-lists-grayish-blue;
+                .font-abraham;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 28px;
+                text-decoration: none;
+
+                .icon {
+                    .background-image;
+                    background-image: url(../../../assets/lists/icon-lists-trash-grayish-blue.svg);
+                    display: inline-block;
+                    width: 24px;
+                    height: 24px;
+                }
+
+                &:hover {
+                    border: 1px solid @color-fill-lead;
+                    background: @color-fill-lead-lighter;
+                    color: @color-fill-lead;
+
+                    .icon {
+                        background-image: url(../../../assets/lists/icon-lists-trash-red.svg);
+                    }    
+                }
+            }
         }
     }
 
@@ -229,7 +269,7 @@
 
     .dialog-explanation {
         width: 100%;
-        padding: 16px 24px;
+        padding: 16px 32px;
         color: @color-gray-800;
         text-align: right;
         .font-abraham;
@@ -274,6 +314,22 @@
                 .icon {
                     background-image: url(../../../assets/lists/icon-check-red.svg);
                 }
+            }
+        }
+
+        .cancel-button {
+            appearance: none;
+            border: none;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: center;
+            color: @color-gray-500;
+            background-color: white;
+            padding: 0 24px;
+
+            &:hover {
+                color: @color-gray-800;
             }
         }
 

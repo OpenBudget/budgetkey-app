@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {Component, ViewEncapsulation, Input, signal, AfterViewInit, effect, computed} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { distinct, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -25,9 +25,26 @@ export class AppContainerComponent {
     configured = false;
 
     maxWidth = signal<number>(0);
-    showListView = computed(() => !!this.lists.currentList() && this.listSideView && this.layout.desktop);
+    hasListView = computed(() => {
+        console.log('SHOW LIST VIEW', this.layout.desktop, this.listSideView, this.lists.currentList(), this.listKey());
+        const list = this.lists.currentList();
+        if (!list) {
+            return false;
+        }
+        if (list.success === false) {
+            return false;
+        }
+        if (!this.listKey()) {
+            return false;
+        }
+        if (this.listKey() !== `${list?.user_id}:${list?.name}`) {
+            return false;
+        }
+        return true;
+    });
+    listKey = signal<string | null>(null);
 
-    constructor(private route: ActivatedRoute, private globalSettings: GlobalSettingsService, public lists: ListsService, public layout: LayoutService) {
+    constructor(private route: ActivatedRoute, private globalSettings: GlobalSettingsService, public lists: ListsService, public layout: LayoutService, private router: Router) {
         this.globalSettings.ready.subscribe(() => {
             this.configured = true;
         });
@@ -39,7 +56,8 @@ export class AppContainerComponent {
             distinctUntilChanged(),
         ).subscribe((list) => {
             console.log('SET LIST', list);
-            this.lists.currentListId.set(list);
+            this.listKey.set(list);
+            this.lists.currentListId.set(this.listKey());
         });
         effect(() => {
             let maxWidth = this.layout.width();
@@ -51,5 +69,13 @@ export class AppContainerComponent {
             }
             this.maxWidth.set(maxWidth);
         }, { allowSignalWrites: true});
+    }
+
+    showListView() {
+        return this.layout.desktop && this.listSideView && this.hasListView();
+    }
+    
+    onDeleted() {
+        this.router.navigate(['.'], { relativeTo: this.route, queryParams: { list: null }, queryParamsHandling: 'merge', replaceUrl: true});
     }
 }

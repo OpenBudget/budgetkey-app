@@ -25,7 +25,10 @@
         <a class='close-button' [routerLink]='"."' [queryParams]='{list: null}' queryParamsHandling='merge' clickOnReturn></a>
     </div>
     <div class='edit-controls' *ngIf='editable()'>
-        <a class='delete-button' (activated)='deleteDialog.set(true)' clickOnReturn>מחיקת רשימה</a>
+        <a class='delete-button' (activated)='deleteDialog.set(true)' clickOnReturn>
+            <span class='icon'></span>
+            מחיקת רשימה
+        </a>
     </div>
 </div>
 <div class='list-contents'>
@@ -60,5 +63,24 @@
             העתקת הקישור
         </button>
         <button class='done-button' clickOnReturn (activated)='shareDialog.set(false)'>אישור</button>
+    </div>
+</app-modal>
+
+<app-modal [standardLayout]='false'
+    *ngIf='deleteDialog()'
+    (close)='deleteDialog.set(false)'
+>
+    <div class='dialog-header'>
+        <span>מחיקת הרשימה:</span>
+        <div class='title'>{{list.title}}</div>
+    </div>
+    <div class='dialog-explanation'>
+        <span>לא ניתן לבטל פעולה זו.</span><br/>
+    </div>
+    <div class='dialog-done'>
+        <button class='cancel-button' clickOnReturn (activated)='deleteDialog.set(false)'>
+            ביטול
+        </button>
+        <button class='done-button' clickOnReturn (activated)='deleteSelf()'>מחיקה</button>
     </div>
 </app-modal>

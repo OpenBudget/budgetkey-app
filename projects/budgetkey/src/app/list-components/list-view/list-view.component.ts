@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, computed, signal } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, computed, signal } from '@angular/core';
 import { ListContents, ListsService } from '../../common-components/services/lists.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Format } from '../../format';
@@ -16,6 +16,8 @@ export class ListViewComponent implements OnChanges {
 
   @Input() list: ListContents;
   @Input() headerControls = false;
+
+  @Output() deleted = new EventEmitter<void>();
 
   @ViewChild('titleEl') titleEl: ElementRef;
   @ViewChild('descriptionEl') descriptionEl: ElementRef;
@@ -105,5 +107,13 @@ export class ListViewComponent implements OnChanges {
     document.execCommand('copy');
     document.body.removeChild(el);
     this.copied = true;
+  }
+
+  deleteSelf() {
+    this.lists.delete(this.list.name, null).subscribe((success) => {
+      console.log('DELETED LIST', success);
+      this.deleted.emit();
+      this.deleteDialog.set(false);
+    });
   }
 }

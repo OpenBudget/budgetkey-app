@@ -41,21 +41,28 @@ export class AddToListDialogComponent implements AfterViewInit, OnChanges {
         return;
       }
       const currentList = this.lists.currentList();
-      if (currentList) {
-        this.list = currentList;
+      let list: ListContents | null = null;
+      if (currentList && currentList.success !== false) {
+        list = currentList;
       } else {
         const lists = (this.lists.curatedLists() || []).sort((a, b) => (b.update_time || '').localeCompare(a.update_time || ''));
         if (lists.length > 0) {
-          this.list = lists[0];
+          list = lists[0];
         }
       }
-      this.lists.curatedLists()?.forEach((list) => {
-        this.originalSubscriptionState[list.name] = this.checkSubscribed(list);
-        this.subscriptionState[list.name] = this.originalSubscriptionState[list.name];
+      this.lists.curatedLists()?.forEach((list_) => {
+        this.originalSubscriptionState[list_.name] = this.checkSubscribed(list_);
+        this.subscriptionState[list_.name] = this.originalSubscriptionState[list_.name];
       });
-      if (this.list && !this.listSelection) {
-        this.originalSubscriptionState[this.list.name] = false;
-        this.subscriptionState[this.list.name] = true;
+      if (list && !this.listSelection) {
+        this.originalSubscriptionState[list.name] = false;
+        this.subscriptionState[list.name] = true;
+      }
+      if (!list) {
+        this.list = this.lists.emptyList;
+        this.newList = this.list.title;
+      } else {
+        this.list = list;
       }
     });
   }
