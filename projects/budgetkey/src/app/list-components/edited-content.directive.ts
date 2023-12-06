@@ -22,7 +22,6 @@ export class EditedContentDirective implements AfterViewInit {
     el.style.display = 'inline';
     el.style.whiteSpace = 'pre-wrap';
 
-    console.log('LIST CONTENT DIRECTIVE', el);
     fromEvent(el, 'click').pipe(
       untilDestroyed(this),
     ).subscribe(() => {

@@ -26,7 +26,6 @@ export class AppContainerComponent {
 
     maxWidth = signal<number>(0);
     hasListView = computed(() => {
-        console.log('SHOW LIST VIEW', this.layout.desktop, this.listSideView, this.lists.currentList(), this.listKey());
         const list = this.lists.currentList();
         if (!list) {
             return false;
@@ -49,13 +48,11 @@ export class AppContainerComponent {
             this.configured = true;
         });
         this.globalSettings.init(this, this.route);
-        // console.log('CCC', this.route.);
         this.route.queryParams.pipe(
             untilDestroyed(this),
             map((params) => params['list']),
             distinctUntilChanged(),
         ).subscribe((list) => {
-            console.log('SET LIST', list);
             this.listKey.set(list);
             this.lists.currentListId.set(this.listKey());
         });
@@ -74,7 +71,7 @@ export class AppContainerComponent {
     showListView() {
         return this.layout.desktop && this.listSideView && this.hasListView();
     }
-    
+
     onDeleted() {
         this.router.navigate(['.'], { relativeTo: this.route, queryParams: { list: null }, queryParamsHandling: 'merge', replaceUrl: true});
     }

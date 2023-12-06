@@ -49,7 +49,6 @@ export class ItemDataTableComponent implements OnInit {
 
   private onDataReady(ev: any) {
     const {headers, data, err, total, graphData, graphLayout} = ev;
-    // console.log('DATA READY', ev);
     this.headers = headers;
     this.data = data;
     this.err = err;

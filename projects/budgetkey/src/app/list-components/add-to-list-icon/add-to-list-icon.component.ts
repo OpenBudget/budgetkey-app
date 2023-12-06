@@ -87,9 +87,6 @@ export class AddToListIconComponent implements OnChanges {
           switchMap((list: ListContents) => {
             return this.lists.addDocToList(list.name, this.doc).pipe(
               map(() => list),
-              tap((list) => {
-                console.log('NEW-LIST', list);
-              })
             );
           }),
         );

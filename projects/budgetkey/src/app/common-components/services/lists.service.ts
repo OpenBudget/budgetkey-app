@@ -209,7 +209,6 @@ export class ListsService {
         filter((token) => token !== null),
         first(),
         switchMap((token) => {
-          console.log('PUTTING ITEM', item);
           const params = {list};
           return this.http.put<ListItem>('https://next.obudget.org/lists/', item, {params, headers: this.headers(token)});
         }),
@@ -237,7 +236,6 @@ export class ListsService {
         filter((token) => token !== null),
         first(),
         switchMap((token) => {
-          console.log('PUTTING LIST', listName, list);
           const params: any = {self: true};
           if (listName) {
             params['list'] = listName;

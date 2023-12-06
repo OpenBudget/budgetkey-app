@@ -201,7 +201,6 @@ export class QuestionsManager {
   getGraphFormatter(formatter: any) {
     if (formatter.type === 'bars') {
       return (items: any[]) => {
-        // console.log('DATA', items);
         const graphLayout = {barmode: 'stack'};
         const graphData = formatter.series.map((s: any) => {
           return {

@@ -55,15 +55,12 @@ export class ListViewComponent implements OnChanges {
 
   save() {
     if (this.editable()) {
-      console.log('SAVING LIST', this.list);
       this.lists.updateList(this.list.name, this.list).subscribe((list) => {
-        console.log('SAVED LIST', list);
       });
     }
   }
 
   set title(title: string) {
-    console.log('TITLE', title);
     this.list.title = title.trim();
     this.save();
     (this.titleEl.nativeElement as HTMLElement).innerHTML = this.title;
@@ -73,12 +70,11 @@ export class ListViewComponent implements OnChanges {
     if (this.list?.title?.trim().length) {
       return this.list?.title.trim();
     } else {
-      return 'רשימה ללא שם';
+      return this.lists.emptyList.title || '';
     }
   }
 
   set description(description: string) {
-    console.log('DESCRIPTION', description);
     this.list.properties.description = description;
     this.save();
     (this.descriptionEl.nativeElement as HTMLElement).innerHTML = this.description;
@@ -90,9 +86,7 @@ export class ListViewComponent implements OnChanges {
 
   updateNotes(item: any, notes: string) {
     item.properties.__notes = notes;
-    this.lists.addDocToList(this.list.name, item.properties).subscribe((item) => {
-      console.log('UPDATED ITEM', item);
-    });
+    this.lists.addDocToList(this.list.name, item.properties).subscribe((item) => {});
   }
 
   share() {
@@ -111,7 +105,6 @@ export class ListViewComponent implements OnChanges {
 
   deleteSelf() {
     this.lists.delete(this.list.name, null).subscribe((success) => {
-      console.log('DELETED LIST', success);
       this.deleted.emit();
       this.deleteDialog.set(false);
     });
