@@ -720,4 +720,11 @@ export class SearchResultComponent implements OnInit {
   updateNotes() {
     this.updatedNotes.emit(this.notes);
   }
+
+  inputClicked(ev: Event) {
+    if (this.editableNotes) {
+      ev.stopPropagation();
+      ev.preventDefault();  
+    }
+  }
 }

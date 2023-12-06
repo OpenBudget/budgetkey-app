@@ -143,6 +143,10 @@
                 &.subscribed {
                     .icon {
                         background-image: url(../../../assets/lists/icon-list-red.svg);
+
+                        &:hover {
+                            background-image: url(../../../assets/lists/icon-remove-list-red.svg);
+                        }
                     }
     
                     .title {
@@ -241,6 +245,11 @@
                 &.close-button {
                     background-image: url(../../../assets/lists/icon-complete-red.svg);
                     background-size: 24px;
+                }
+
+                &.select-list-button {
+                    background-image: url(../../../assets/lists/icon-chevron-down-grayish-blue.svg);
+                    background-size: 12px;
                 }
             }
         }

@@ -12,18 +12,17 @@
 
     position: relative;
 
-    &.enabled {
+    // &.enabled {
         width: 24px;
         height: 24px;
         overflow: visible;
-    }
+    // }
     .icon {
         display: inline-block;
         width: 24px;
         height: 24px;
         .background-image;
         background-size: 24px;
-        cursor: pointer;
 
         background-image: url(../../../assets/lists/icon-not-subscribed.svg);
         &.subscribed {
@@ -32,6 +31,12 @@
         &.processing {
             opacity: 0.5;
             cursor: wait;
+        }
+    }
+
+    &.enabled {
+        .icon {
+            cursor: pointer;
         }
     }
 

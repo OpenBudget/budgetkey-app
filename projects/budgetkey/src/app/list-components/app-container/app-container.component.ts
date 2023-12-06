@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {Component, ViewEncapsulation, Input, signal, AfterViewInit, effect, computed} from '@angular/core';
+import {Component, ViewEncapsulation, Input, signal, AfterViewInit, effect, computed, OnChanges} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { distinct, distinctUntilChanged, filter, map, switchMap, tap } from 'rxjs';
@@ -14,7 +14,7 @@ import { LayoutService } from '../../common-components/layout.service';
     templateUrl: './app-container.component.html',
     styleUrls: ['./app-container.component.less'],
 })
-export class AppContainerComponent {
+export class AppContainerComponent implements AfterViewInit, OnChanges {
     @Input() showHeader = true;
     @Input() showFooter = true;
     @Input() showSearchBar = false;
@@ -57,15 +57,18 @@ export class AppContainerComponent {
             this.lists.currentListId.set(this.listKey());
         });
         effect(() => {
-            let maxWidth = this.layout.width();
-            if (this.showListView()) {
-                maxWidth -= 400;
-            }
-            if (maxWidth < 0) {
-                maxWidth = 0;
-            }
-            this.maxWidth.set(maxWidth);
+            const x = this.hasListView();
+            this.updateWidth();
         }, { allowSignalWrites: true});
+    }
+
+    ngAfterViewInit(): void {
+        this.layout.recalcWidth();
+        this.updateWidth();
+    }
+
+    ngOnChanges(): void {
+        this.updateWidth();
     }
 
     showListView() {
@@ -74,5 +77,16 @@ export class AppContainerComponent {
 
     onDeleted() {
         this.router.navigate(['.'], { relativeTo: this.route, queryParams: { list: null }, queryParamsHandling: 'merge', replaceUrl: true});
+    }
+
+    updateWidth() {
+        let maxWidth = this.layout.width();
+        if (this.showListView()) {
+            maxWidth -= 400;
+        }
+        if (maxWidth < 0) {
+            maxWidth = 0;
+        }
+        this.maxWidth.set(maxWidth);
     }
 }

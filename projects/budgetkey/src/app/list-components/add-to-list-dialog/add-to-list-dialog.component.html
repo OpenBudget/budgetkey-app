@@ -1,5 +1,5 @@
 <div class='dialog'>
-    <ng-container *ngIf='!listSelection'>
+    <ng-container *ngIf='!listSelectionMode'>
         <div class='header'>
             <div class='icon'></div>
             <div class='title'>
@@ -8,6 +8,7 @@
             </div>
             <div class='action'>
                 <a class='close-button' *ngIf='editing' (activated)='done()' clickOnReturn></a>
+                <a class='select-list-button' *ngIf='!editing' (activated)='listSelectionMode = true' clickOnReturn></a>
             </div>
         </div>
         <div class='notes'>
@@ -15,8 +16,8 @@
             <textarea [(ngModel)]='itemNotes' placeholder='#תגיות והערות לסעיף זה...' *ngIf='editing'></textarea>
         </div>
     </ng-container>
-    <ng-container *ngIf='listSelection'>
-        <div class='list-selection' *ngIf='listSelection'>
+    <ng-container *ngIf='listSelectionMode'>
+        <div class='list-selection'>
             <ng-container *ngFor='let list of lists.curatedLists()'>
                 <div class='list-selection-item' clickOnReturn (activated)='toggleSubscription(list)' [class.subscribed]='subscribed(list)'>
                     <div class='icon'></div>

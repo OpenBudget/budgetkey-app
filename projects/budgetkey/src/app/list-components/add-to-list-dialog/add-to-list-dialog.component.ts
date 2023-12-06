@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, Output, effect, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, effect, signal } from '@angular/core';
 import { EMPTY_LIST, ListContents, ListItem, ListsService } from '../../common-components/services/lists.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { first, fromEvent, take, timer } from 'rxjs';
@@ -19,7 +19,7 @@ export interface AddToListDialogCommand {
   templateUrl: './add-to-list-dialog.component.html',
   styleUrls: ['./add-to-list-dialog.component.less']
 })
-export class AddToListDialogComponent implements AfterViewInit, OnChanges {
+export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChanges {
 
   @Input() listSelection = false;
   @Input() doc: DocResultEntry;
@@ -31,6 +31,7 @@ export class AddToListDialogComponent implements AfterViewInit, OnChanges {
   originalSubscriptionState: any = {};
   subscriptionState: any = {};
 
+  listSelectionMode = false;
   editing = false;
   itemNotes = '';
   newList: string | null = null;
@@ -54,7 +55,7 @@ export class AddToListDialogComponent implements AfterViewInit, OnChanges {
         this.originalSubscriptionState[list_.name] = this.checkSubscribed(list_);
         this.subscriptionState[list_.name] = this.originalSubscriptionState[list_.name];
       });
-      if (list && !this.listSelection) {
+      if (list && !this.listSelectionMode) {
         this.originalSubscriptionState[list.name] = false;
         this.subscriptionState[list.name] = true;
       }
@@ -65,6 +66,10 @@ export class AddToListDialogComponent implements AfterViewInit, OnChanges {
         this.list = list;
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.listSelectionMode = this.listSelection;
   }
 
   ngOnChanges(): void {

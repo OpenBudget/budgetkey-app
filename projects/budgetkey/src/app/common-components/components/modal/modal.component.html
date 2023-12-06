@@ -1,16 +1,13 @@
 <div class="bkmodal-bg">
   <div class="bkmodal-dialog">
-    <div class="bkmodal-content" *ngIf='standardLayout'>
-      <button type="button" class="close" (click)="_close()">&times;</button>
-      <div class="bkmodal-header" *ngIf='title'>
+    <div class="bkmodal-content">
+      <button *ngIf='standardLayout' type="button" class="close" (click)="_close()">&times;</button>
+      <div  *ngIf='standardLayout && title' class='bkmodal-header'>
         <h4 class="modal-title">{{title}}</h4>
       </div>
-      <div class="bkmodal-body">
+      <div [class.bkmodal-body]='standardLayout'>
         <ng-content></ng-content>
       </div>
-    </div>
-    <div *ngIf='!standardLayout'>
-      <ng-content></ng-content>
     </div>
   </div>
 </div>

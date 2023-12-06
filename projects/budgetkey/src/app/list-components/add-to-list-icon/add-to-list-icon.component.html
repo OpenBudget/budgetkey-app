@@ -1,4 +1,9 @@
 <ng-container *ngIf='doc'>
-    <div class='icon' [class.subscribed]='subscribed' [class.processing]='processing' clickOnReturn *ngIf='enabled' (activated)='click()'></div>
-    <app-add-to-list-dialog *ngIf='dialogOpen' [doc]='doc' [listSelection]='subscribed' (commands)='execute($event)'></app-add-to-list-dialog>
+    <div class='icon bk-tooltip-anchor' *ngIf='!enabled()'>
+        <span *ngIf='tooltipText()' class='bk-tooltip bk-align-top bk-bigger' [innerHTML]='tooltipText()'></span>
+    </div>
+    <div class='icon bk-tooltip-anchor' *ngIf='enabled()' [class.subscribed]='subscribed()' [class.processing]='processing()' clickOnReturn (activated)='click()'>
+        <span *ngIf='tooltipText()' class='bk-tooltip bk-align-top bk-bigger' [innerHTML]='tooltipText()'></span>
+    </div>
+    <app-add-to-list-dialog *ngIf='dialogOpen()' [doc]='doc' [listSelection]='subscribed()' (commands)='execute($event)'></app-add-to-list-dialog>
 </ng-container>

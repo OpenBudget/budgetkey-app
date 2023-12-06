@@ -10,10 +10,14 @@ export class LayoutService {
   constructor(private window: WindowService) {
     if (this.window._) {
       fromEvent(this.window._, 'resize').subscribe(() => {
-        this.width.set(this.window._?.innerWidth || 0);
+        this.recalcWidth();
       });
-      this.width.set(this.window._?.innerWidth || 0);
+      this.recalcWidth();
     }
+  }
+
+  recalcWidth() {
+    this.width.set(this.window._?.innerWidth || 0);
   }
 
   get mobile() {

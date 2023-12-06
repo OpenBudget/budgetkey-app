@@ -13,10 +13,9 @@ const routes: Routes = [
     component: ListPageComponent
   },
 ];
-  
-  @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
-  })
-  export class ListRoutingModule {}
-  
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class ListRoutingModule {}
