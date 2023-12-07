@@ -20,6 +20,7 @@ export class ListPageComponent {
   init = false;
   list: ListContents|null = null;
   listKey: string|null = null;
+  canonical: string = '';
 
   constructor(private globalSettings: GlobalSettingsService, private seo: SeoService, private route: ActivatedRoute,
       private lists: ListsService, private router: Router, private ps: PlatformService, @Optional() @Inject(REQUEST) private request: Request) {
@@ -41,6 +42,7 @@ export class ListPageComponent {
         this.router.navigate(['/not-found'], {queryParamsHandling: 'preserve', replaceUrl: true});
       } else {
         this.list = list;
+        this.seo.setSeo(`${list?.title} - מפתח התקציב`, this.canonical);
       }
     });
     this.route.params.pipe(
@@ -52,6 +54,7 @@ export class ListPageComponent {
       filter((params) => !!params.listId && !!params.userId),
     ).subscribe((list) => {
       this.listKey = `${list.userId}:${list.listId}`;
+      this.canonical = `https://next.obudget.org/l/${list.userId}/${list.listId}`;
       this.router.navigate(['.'], { relativeTo: this.route, queryParams: { list: this.listKey }, queryParamsHandling: 'merge', replaceUrl: true});
     });
   }

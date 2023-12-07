@@ -54,13 +54,15 @@ export class AddToListIconComponent implements OnChanges {
     this.subscribed.set(this.doc && this.doc.source.doc_id && !!this.itemIds[this.doc.source.doc_id]);
   }
 
-  click() {
+  click(ev: Event) {
     if (!this.enabled()) {
       return;
     }
     if (this.processing()) {
       return;
     }
+    ev.stopPropagation();
+    ev.preventDefault();
     this.dialogOpen.set(true);
     timer(50).subscribe(() => {
       this.subscribed.set(true);

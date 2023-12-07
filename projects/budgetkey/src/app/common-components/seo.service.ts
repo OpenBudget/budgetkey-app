@@ -26,7 +26,7 @@ export class SeoService {
     //   }
     // };
     this.seo.setTitle(title);
-    this.seo.setMetaSiteName(this.globalSettings.siteName + '1');
+    this.seo.setMetaSiteName(this.globalSettings.siteName + '');
     this.seo.setMetaCanonical(canonical);
     this.seo.setMetaUrl(canonical);
     this.seo.setMetaCustomTags([

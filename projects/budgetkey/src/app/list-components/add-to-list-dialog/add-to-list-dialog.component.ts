@@ -147,4 +147,8 @@ export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChange
   toggleSubscription(list: ListContents) {
     this.subscriptionState[list.name] = !this.subscriptionState[list.name];
   }
+
+  cancel() {
+    this.commands.emit([]);
+  }
 }

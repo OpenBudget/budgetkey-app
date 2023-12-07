@@ -1,7 +1,7 @@
 <div class='dialog'>
     <ng-container *ngIf='!listSelectionMode'>
         <div class='header'>
-            <div class='icon'></div>
+            <div class='icon' (activated)='cancel()' clickOnReturn></div>
             <div class='title'>
                 <span>נוסף לרשימה:</span>
                 <h1>{{list.title}}</h1>

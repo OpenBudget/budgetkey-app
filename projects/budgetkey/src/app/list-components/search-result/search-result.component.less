@@ -6,6 +6,35 @@
     border-radius: 4px;
     box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
     border: solid 1px black;
+    position: relative;
+
+    * {
+        pointer-events: none;
+    }
+
+    & > * {
+        z-index: 1;
+        position: relative;
+        background-color: @color-white;
+    }
+
+    & > a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: all;
+        background: rgba(100,0,0,0.1);
+        z-index: 0;
+    }
+
+    .notes, app-add-to-list-icon {
+        * {
+            pointer-events: all;
+        }
+        pointer-events: all;
+    }
 
     &.horizontal {
         width: 320px;
@@ -17,6 +46,7 @@
         display: flex;
         flex-flow: row;
         align-items: center;
+        position: relative;
 
         span {
             font-family: 'Abraham TRIAL';
@@ -261,6 +291,10 @@
 
                 &.empty {
                     padding-right: 24px;
+                    .background-image;
+                    background-size: 16px;
+                    background-image: url(../../../assets/lists/icon-edit-gray-400.svg);
+                    background-position: center right;    
                 }
 
                 &::placeholder {
@@ -268,11 +302,11 @@
                     .font-abraham;
                     font-size: 13px;
                     font-weight: 300;
-                    .background-image;
-                    background-size: 16px;
-                    background-image: url(../../../assets/lists/icon-edit-gray-400.svg);
-                    background-position: center right;
                 }
+
+                // &:focus {
+                //     background-image: none;
+                // }
             }
         }
     }

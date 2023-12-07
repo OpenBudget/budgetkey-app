@@ -1,16 +1,19 @@
-<a  [href]='href()' 
-    [target]='bare ? "_blank" : "_self"'
-    clickOnReturn
-    [attr.aria-label]='p.title + " - מעבר לעמוד הפריט"'
-    [routerLink]='routerLink()'
-    [queryParams]='{li: index}'
-    [queryParamsHandling]='"merge"'
+<div  
     class='card' 
     [class.horizontal]='horizontal'
     [style.border-color]='p.secondaryColor'
     [style.background-color]='p.bgColor'
     [attr.data-doc-id]='item.source.doc_id'
     >
+    <a
+        [href]='href()' 
+        [target]='bare ? "_blank" : "_self"'
+        clickOnReturn
+        [attr.aria-label]='p.title + " - מעבר לעמוד הפריט"'
+        [routerLink]='routerLink()'
+        [queryParams]='{li: index}'
+        [queryParamsHandling]='"merge"'
+    ></a>
     <div class='top-line'>
         <span class='top-line-tag' *ngIf='p.tag' [innerHtml]='p.tag'
               [style.background-color]='p.tagColor'
@@ -82,8 +85,7 @@
     <div class='notes' *ngIf='showNotes && (editableNotes || (notes && notes.length))'>
         <div class='inner'>
             <input [(ngModel)]='notes' kind='text' placeholder='#תגיות והערות לסעיף זה....' [class.empty]='!notes || !notes.length'
-            (blur)='updateNotes()' (click)='inputClicked($event)' [style.pointer-events]='editableNotes ? "all" : "none"'
-            >
+            (blur)='updateNotes()' [style.pointer-events]='editableNotes ? "all" : "none"'>
         </div>
     </div>
-</a>
+</div>
