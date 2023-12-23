@@ -7,6 +7,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PlatformService } from '../../common-components/platform.service';
 import { ListContents, ListsService } from '../../common-components/services/lists.service';
 import { LayoutService } from '../../common-components/layout.service';
+import { ListDialogService } from '../list-dialog.service';
 
 @UntilDestroy()
 @Component({
@@ -43,7 +44,8 @@ export class AppContainerComponent implements AfterViewInit, OnChanges {
     });
     listKey = signal<string | null>(null);
 
-    constructor(private route: ActivatedRoute, private globalSettings: GlobalSettingsService, public lists: ListsService, public layout: LayoutService, private router: Router) {
+    constructor(private route: ActivatedRoute, private globalSettings: GlobalSettingsService, public lists: ListsService, 
+        public layout: LayoutService, private router: Router, public listDialog: ListDialogService) {
         this.globalSettings.ready.subscribe(() => {
             this.configured = true;
         });

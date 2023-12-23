@@ -7,7 +7,7 @@
                 <h1>{{list.title}}</h1>
             </div>
             <div class='action'>
-                <a class='close-button' *ngIf='editing' (activated)='done()' clickOnReturn></a>
+                <a class='close-button' *ngIf='editing' (activated)='listDialog.close()' clickOnReturn></a>
                 <a class='select-list-button' *ngIf='!editing' (activated)='listSelectionMode = true' clickOnReturn></a>
             </div>
         </div>
@@ -35,7 +35,7 @@
                 <input [(ngModel)]='newList' placeholder='רשימה חדשה'/>
             </div>
             <div class='action'>
-                <a class='close-button' (activated)='done()' clickOnReturn></a>
+                <a class='close-button' (activated)='$event.stopPropagation(); listDialog.close()' clickOnReturn></a>
             </div>
         </div>
     </ng-container>

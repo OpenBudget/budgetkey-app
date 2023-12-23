@@ -11,6 +11,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
 import { EditedContentDirective } from './edited-content.directive';
 import { AppContainerComponent } from './app-container/app-container.component';
 import { AddToListDialogComponent } from './add-to-list-dialog/add-to-list-dialog.component';
+import { ListDialogService } from './list-dialog.service';
 
 /**
  * Created by adam on 27/12/2016.
@@ -32,12 +33,13 @@ import { AddToListDialogComponent } from './add-to-list-dialog/add-to-list-dialo
     AddToListDialogComponent,
   ],
   providers: [
+    ListDialogService,
   ],
   exports: [
     AddToListIconComponent,
     ListViewComponent,
     SearchResultComponent,
-    AppContainerComponent
+    AppContainerComponent,
   ]
 })
 export class ListComponentsModule { }

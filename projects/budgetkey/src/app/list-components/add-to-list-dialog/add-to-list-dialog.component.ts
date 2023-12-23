@@ -1,29 +1,21 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, effect, signal } from '@angular/core';
-import { EMPTY_LIST, ListContents, ListItem, ListsService } from '../../common-components/services/lists.service';
+import { AfterViewInit, Component, ElementRef, OnChanges, OnInit, effect, signal } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { first, fromEvent, take, timer } from 'rxjs';
-import { DocResultEntry } from '../../common-components/search-models';
-import { sign } from 'crypto';
+import { fromEvent, take, timer } from 'rxjs';
+import { EMPTY_LIST, ListContents, ListItem, ListsService } from '../../common-components/services/lists.service';
+import { AddToListDialogCommand, ListDialogService } from '../list-dialog.service';
 
-export interface AddToListDialogCommand {
-  command: 'add-item' | 'remove-item' | 'open-list' | 'new-list';
-  list?: ListContents;
-  itemNotes?: string;
-  itemId?: number;
-  listTitle?: string;
-};
 
 @UntilDestroy()
 @Component({
   selector: 'app-add-to-list-dialog',
   templateUrl: './add-to-list-dialog.component.html',
-  styleUrls: ['./add-to-list-dialog.component.less']
+  styleUrls: ['./add-to-list-dialog.component.less'],
+  host: {
+    '[style.top]': 'listDialog.top() + "px"',
+    '[style.left]': 'listDialog.right() + "px"',
+  }
 })
 export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChanges {
-
-  @Input() listSelection = false;
-  @Input() doc: DocResultEntry;
-  @Output() commands = new EventEmitter<AddToListDialogCommand[]>();
 
   ready = signal<boolean>(false);
 
@@ -36,7 +28,7 @@ export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChange
   itemNotes = '';
   newList: string | null = null;
 
-  constructor(private el: ElementRef, public lists: ListsService) {
+  constructor(private el: ElementRef, public lists: ListsService, public listDialog: ListDialogService) {
     effect(() => {
       if (!this.ready()) {
         return;
@@ -66,10 +58,16 @@ export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChange
         this.list = list;
       }
     });
+    listDialog.closeQ.pipe(
+      take(1)
+    ).subscribe(() => {
+      this.done();
+    });
   }
 
   ngOnInit(): void {
-    this.listSelectionMode = this.listSelection;
+    this.listSelectionMode = this.listDialog.listSelection();
+    this.ready.set(true);
   }
 
   ngOnChanges(): void {
@@ -101,23 +99,24 @@ export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChange
       untilDestroyed(this)
     ).subscribe(() => {
       if (!clicked) {
-        this.done();
+        this.listDialog.close();
       }
     });
     fromEvent(document, 'click').pipe(
       untilDestroyed(this),
       take(1),
     ).subscribe(() => {
-      this.done();
+      this.listDialog.close();
     });
   }
 
-  done() {
+  done(ev: Event | null = null) {
+    ev?.stopPropagation();
     const commands: AddToListDialogCommand[] = [];
     let toOpenList: ListContents | null = null;
     for (const list of this.lists.curatedLists()) {
       if (this.originalSubscriptionState[list.name] && !this.subscriptionState[list.name]) {
-        const itemId = (list.items || []).find((item: ListItem) => item.properties.source.doc_id === this.doc.source.doc_id)?.id;
+        const itemId = (list.items || []).find((item: ListItem) => item.properties.source.doc_id === this.listDialog.doc().source.doc_id)?.id;
         commands.push({command: 'remove-item', list, itemId});
       }
       if (!this.originalSubscriptionState[list.name] && this.subscriptionState[list.name]) {
@@ -133,11 +132,12 @@ export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChange
     if (toOpenList) {
       commands.push({'command': 'open-list', 'list': toOpenList});
     }
-    this.commands.emit(commands);
+    this.listDialog.executeQ.next([this.listDialog.doc(), commands]);
+    this.listDialog.dialogOpen.set(false);
   }
 
   checkSubscribed(list: ListContents) {
-    return (list.items || []).map((item: ListItem) => item.properties.source.doc_id).indexOf(this.doc.source.doc_id) >= 0;
+    return (list.items || []).map((item: ListItem) => item.properties.source.doc_id).indexOf(this.listDialog.doc().source.doc_id) >= 0;
   }
 
   subscribed(list: ListContents) {
@@ -149,6 +149,6 @@ export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChange
   }
 
   cancel() {
-    this.commands.emit([]);
+    this.listDialog.executeQ.next([this.listDialog.doc(), []]);
   }
 }

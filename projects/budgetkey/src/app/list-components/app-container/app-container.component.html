@@ -16,4 +16,5 @@
         </div>
         <app-bk-footer *ngIf="showFooter" [helpWidget]='helpWidget'></app-bk-footer>    
     </div>
+    <app-add-to-list-dialog *ngIf='listDialog.dialogOpen()'></app-add-to-list-dialog>
 </ng-container>

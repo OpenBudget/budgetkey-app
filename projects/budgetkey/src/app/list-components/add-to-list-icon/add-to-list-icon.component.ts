@@ -1,10 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges, computed, effect, signal } from '@angular/core';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, computed, effect, signal } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { EMPTY_LIST, ListContents, ListsService } from '../../common-components/services/lists.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AddToListDialogCommand } from '../add-to-list-dialog/add-to-list-dialog.component';
-import { EMPTY, forkJoin, from, map, of, switchMap, tap, timer } from 'rxjs';
+import { EMPTY, first, forkJoin, from, map, of, switchMap, tap, timer } from 'rxjs';
 import { DocResultEntry } from '../../common-components/search-models';
+import { AddToListDialogCommand, ListDialogService } from '../list-dialog.service';
 
 @UntilDestroy()
 @Component({
@@ -23,7 +23,7 @@ export class AddToListIconComponent implements OnChanges {
   });
   subscribed = signal(false);
   tooltipText = computed(() => {
-    if (this.dialogOpen()) {
+    if (this.listDialog.dialogOpen()) {
       return null;
     }
     if (!this.enabled()) {
@@ -37,9 +37,8 @@ export class AddToListIconComponent implements OnChanges {
   });
   itemIds: any = {};
   processing = signal(false);
-  dialogOpen = signal(false);
 
-  constructor(public lists: ListsService, private router: Router, private route: ActivatedRoute) {
+  constructor(public lists: ListsService, private router: Router, private route: ActivatedRoute, private listDialog: ListDialogService, private el: ElementRef) {
     effect(() => this.update(), {
       allowSignalWrites: true,
     });
@@ -63,17 +62,23 @@ export class AddToListIconComponent implements OnChanges {
     }
     ev.stopPropagation();
     ev.preventDefault();
-    this.dialogOpen.set(true);
+    this.listDialog.open(this.doc, this.subscribed(), this.el.nativeElement as HTMLElement);
     timer(50).subscribe(() => {
       this.subscribed.set(true);
     });
+    this.listDialog.executeQ.pipe(
+      untilDestroyed(this),
+      first(),
+    ).subscribe(([doc, commands]) => this.execute(doc, commands));
   }
 
   tooltip() {
   }
 
-  execute(commands: AddToListDialogCommand[]) {
-    this.dialogOpen.set(false);
+  execute(doc: DocResultEntry, commands: AddToListDialogCommand[]) {
+    if (doc !== this.doc) {
+      return;
+    }
     this.processing.set(true);
     this.update();
     if (commands.length === 0) {
