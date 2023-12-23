@@ -3,6 +3,8 @@ import { GlobalSettingsService } from '../../global-settings.service';
 import { Router } from '@angular/router';
 import { platform } from 'os';
 import { PlatformService } from '../../platform.service';
+import { WindowService } from '../../window.service';
+import { EMPTY, fromEvent, switchMap, take, timer } from 'rxjs';
 
 @Component({
     selector: 'app-bk-header',
@@ -14,8 +16,9 @@ export class BkHeaderComponent {
     @Input() showSearchBar = false;
     @Input() showLanguages = false;
     public showAuth = false;
+    public showCollapsedMenu = false;
 
-    constructor (public globalSettings: GlobalSettingsService, private router: Router, private platform: PlatformService) {
+    constructor (public globalSettings: GlobalSettingsService, private router: Router, private platform: PlatformService, private window: WindowService) {
       this.showAuth = !globalSettings.theme.disableAuth && this.platform.browser();
     }
 
@@ -45,5 +48,17 @@ export class BkHeaderComponent {
 
     doNavigateURL(href: string, target: string) {
       window.open(href, target);
+    }
+
+    openCollapsedMenu() {
+      this.showCollapsedMenu = true;
+      if (this.window._) {
+        timer(100).pipe(
+          switchMap(() => this.window._ ? fromEvent(this.window._, 'click') : EMPTY),
+          take(1),
+        ).subscribe(() => {
+          this.showCollapsedMenu = false;
+        });
+      }
     }
 }

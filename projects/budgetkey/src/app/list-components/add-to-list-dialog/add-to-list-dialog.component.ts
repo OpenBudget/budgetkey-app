@@ -3,6 +3,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { fromEvent, take, timer } from 'rxjs';
 import { EMPTY_LIST, ListContents, ListItem, ListsService } from '../../common-components/services/lists.service';
 import { AddToListDialogCommand, ListDialogService } from '../list-dialog.service';
+import { LayoutService } from '../../common-components/layout.service';
 
 
 @UntilDestroy()
@@ -11,8 +12,9 @@ import { AddToListDialogCommand, ListDialogService } from '../list-dialog.servic
   templateUrl: './add-to-list-dialog.component.html',
   styleUrls: ['./add-to-list-dialog.component.less'],
   host: {
-    '[style.top]': 'listDialog.top() + "px"',
-    '[style.left]': 'listDialog.right() + "px"',
+    '[style.top]': 'layout.desktop ? listDialog.top() + "px" : 0',
+    '[style.left]': 'layout.desktop ? listDialog.right() + "px" : 0',
+    '(click)': 'layout.mobile ? done($event) : null',
   }
 })
 export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChanges {
@@ -28,7 +30,7 @@ export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChange
   itemNotes = '';
   newList: string | null = null;
 
-  constructor(private el: ElementRef, public lists: ListsService, public listDialog: ListDialogService) {
+  constructor(private el: ElementRef, public lists: ListsService, public listDialog: ListDialogService, public layout: LayoutService) {
     effect(() => {
       if (!this.ready()) {
         return;
@@ -99,7 +101,7 @@ export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChange
       untilDestroyed(this)
     ).subscribe(() => {
       if (!clicked) {
-        this.listDialog.close();
+        // this.listDialog.close();
       }
     });
     fromEvent(document, 'click').pipe(

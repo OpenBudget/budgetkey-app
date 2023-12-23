@@ -4,7 +4,8 @@
     />
 </ng-container>
 <ng-container *ngIf='!active || !enabled'>
-    <span [class.faded]='!enabled'
+    <span class='layout-desktop'
+          [class.faded]='!enabled'
           (click)='click($event)'
     >הרשמו לעדכונים</span>
     <img src='assets/common/img/star-inactive.svg'

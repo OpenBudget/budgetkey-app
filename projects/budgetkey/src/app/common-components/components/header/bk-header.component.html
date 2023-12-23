@@ -20,7 +20,7 @@
     <div *ngIf="showSearchBar" class="collapsed-search" (click)='doSearch()'>
       <img class="search-icon" src="/assets/common/img/search-glass-white.svg">
     </div>
-    <div class="collapsed-menu" [ngClass]="{'with-search': showSearchBar}">
+    <div class="collapsed-menu" [ngClass]="{'with-search': showSearchBar}" [class.visible]='showCollapsedMenu' (click)='openCollapsedMenu()'>
       <i class="glyphicon glyphicon-menu-hamburger"></i>
       <div class='menu'>
         <ng-container *ngFor="let link of globalSettings.theme.headerLinks">

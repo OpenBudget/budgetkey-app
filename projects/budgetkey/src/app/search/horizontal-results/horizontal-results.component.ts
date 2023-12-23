@@ -8,6 +8,7 @@ import { SearchParams } from '../../common-components/search-models';
 import { SearchApiService } from '../search-api.service';
 import { SearchManager, SearchOutcome } from '../search-manager/search-manager';
 import { SearchState, mergeFilters } from '../search-state/search-state';
+import { LayoutService } from '../../common-components/layout.service';
 
 
 @UntilDestroy()
@@ -34,7 +35,7 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
   showRightFade = false;
   refresh = false;
 
-  constructor(private searchService: SearchApiService, private ps: PlatformService) { }
+  constructor(private searchService: SearchApiService, private ps: PlatformService, private layout: LayoutService) { }
 
   ngOnInit() {
     this.docTypes = [this.docType];
@@ -114,9 +115,9 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
   ngAfterViewInit() {
     this.ps.browser(() => {
       if (this.cards?.nativeElement) {
-        scheduled(fromEvent(this.cards.nativeElement, 'scroll'), animationFrameScheduler).pipe(
+        fromEvent(this.cards.nativeElement, 'scroll').pipe(
           untilDestroyed(this),
-          throttleTime(150),
+          throttleTime(150, animationFrameScheduler),
           delay(150)
         ).subscribe((event: Event) => {
           this.scrollHandler(event.target as HTMLElement);
@@ -156,7 +157,7 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
       }
     }
     this.showRightFade = target.scrollLeft < -320;
-    this.showLeftFade = left > 0;
+    this.showLeftFade = this.layout.mobile ? target.scrollLeft === 0 : left > 0;
   }
 
   titleClicked() {
