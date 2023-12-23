@@ -1,6 +1,6 @@
 <div class="bkmodal-bg">
   <div class="bkmodal-dialog">
-    <div class="bkmodal-content">
+    <div class="bkmodal-content" [class.standard]='standardLayout'>
       <button *ngIf='standardLayout' type="button" class="close" (click)="_close()">&times;</button>
       <div  *ngIf='standardLayout && title' class='bkmodal-header'>
         <h4 class="modal-title">{{title}}</h4>

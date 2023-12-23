@@ -27,7 +27,9 @@
 
   .bkmodal-content {
       position: relative;
-      padding: 100px;
+      &.standard {
+        padding: 100px;        
+      }
   }
 
   .close {
@@ -56,7 +58,9 @@
 
   @media only screen and (max-width: 600px)  {
     .bkmodal-content {
-      padding: 20px;
+      &.standard {
+        padding: 20px;        
+      }
     }
 
     .bkmodal-dialog {
