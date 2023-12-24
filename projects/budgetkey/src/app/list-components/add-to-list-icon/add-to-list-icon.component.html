@@ -1,5 +1,5 @@
 <ng-container *ngIf='doc'>
-    <div class='icon bk-tooltip-anchor' *ngIf='!enabled()'>
+    <div class='icon bk-tooltip-anchor' *ngIf='!enabled()' (click)='$event.stopPropagation(); $event.preventDefault()'>
         <span *ngIf='tooltipText()' class='bk-tooltip bk-align-top bk-bigger' [innerHTML]='tooltipText()'></span>
     </div>
     <div class='icon bk-tooltip-anchor' *ngIf='enabled()' [class.subscribed]='subscribed()' [class.processing]='processing()' clickOnReturn (activated)='click($event)'>

@@ -720,4 +720,11 @@ export class SearchResultComponent implements OnInit {
   updateNotes() {
     this.updatedNotes.emit(this.notes);
   }
+
+  stopEvent(event: Event) {
+    event.stopPropagation();
+    if (event.type === 'click') {
+      event.preventDefault();
+    }
+  }
 }

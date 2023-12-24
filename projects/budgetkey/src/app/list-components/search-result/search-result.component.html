@@ -81,7 +81,7 @@
         ></span>
     </div>
     <div class='notes' *ngIf='showNotes && (editableNotes || (notes && notes.length))'>
-        <div class='inner'>
+        <div class='inner' (click)='stopEvent($event)' (keydown)='stopEvent($event)'>
             <input [(ngModel)]='notes' kind='text' placeholder='#תגיות והערות לסעיף זה....' [class.empty]='!notes || !notes.length'
             (blur)='updateNotes()' [style.pointer-events]='editableNotes ? "all" : "none"'>
         </div>

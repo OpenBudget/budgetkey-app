@@ -256,7 +256,8 @@
             background-image: url(../../../assets/lists/bg.png);
             background-size: 8px;
             background-repeat: repeat;
-            padding: 8px;
+            height: 24px;
+            padding: 0 4px;
             color: @color-lists-blue;
             text-align: right;
             .font-gadi;
@@ -264,8 +265,8 @@
             font-weight: 400;
             line-height: 18px;
             display: flex;
-            flex-flow: column;
-            align-items: stretch;
+            flex-flow: row;
+            align-items: center;
             input {
                 width: 100%;
                 border: none;
@@ -273,11 +274,11 @@
                 background-color: transparent;
 
                 &.empty {
-                    padding-right: 24px;
+                    padding-right: 20px;
                     .background-image;
-                    background-size: 16px;
+                    background-size: 10px;
                     background-image: url(../../../assets/lists/icon-edit-gray-400.svg);
-                    background-position: center right;    
+                    background-position: center right 2px;
                 }
 
                 &::placeholder {
