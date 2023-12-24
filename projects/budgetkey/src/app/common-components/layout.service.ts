@@ -21,10 +21,10 @@ export class LayoutService {
   }
 
   get mobile() {
-    return (this.window._?.innerWidth || 0) < 768;
+    return (this.window._?.innerWidth || 0) < 1000;
   }
 
   get desktop() {
-    return (this.window._?.innerWidth || 0) >= 768;
+    return (this.window._?.innerWidth || 0) >= 1000;
   }
 }

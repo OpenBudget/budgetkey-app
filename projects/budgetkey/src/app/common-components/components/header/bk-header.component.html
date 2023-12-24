@@ -4,10 +4,11 @@
       <a [routerLink]='["/"]'  aria-label='homepage' [style.background-image]='"url(assets/common/img/" + globalSettings.theme.siteLogo + ")"'>
       </a>
     </div>
-    <div *ngIf="showSearchBar" class="search-div">
+    <div *ngIf="showSearchBar" class="search-div layout-desktop">
       <app-bk-search-bar [fake]='true'></app-bk-search-bar>
     </div>
-    <div class="menu-links">
+    <div class='mobile-separator'></div>
+    <div class="menu-links layout-desktop">
       <ng-container *ngFor="let link of globalSettings.theme.headerLinks">
         <a [href]="link.href" [innerHtml]='link.title' [target]='link.href.indexOf("http") === 0 ? "_blank" : null' clickOnReturn></a>
       </ng-container>
@@ -17,14 +18,37 @@
         <a (activated)='switchLang("he")' clickOnReturn>עב</a>
       </ng-container>
     </div>
-    <div *ngIf="showSearchBar" class="collapsed-search" (click)='doSearch()'>
+    <div *ngIf="showSearchBar" class="collapsed-search layout-mobile" (click)='doSearch()'>
       <img class="search-icon" src="/assets/common/img/search-glass-white.svg">
     </div>
-    <div class="collapsed-menu" [ngClass]="{'with-search': showSearchBar}" [class.visible]='showCollapsedMenu' (click)='openCollapsedMenu()'>
+    <div *ngIf='showShare' class="collapsed-share" [class.visible]='showShareMenu()' (click)='openShareMenu()'>
+      <div class="share-icon"></div>
+      <div class='menu'>
+        <a class='menu-line' [href]='seo.twitterShare' target="_blank">
+          <span class='icon twitter'></span>
+          שיתוף בטוויטר
+        </a>
+        <a class='menu-line' [href]='seo.fbShare' target="_blank">
+          <span class='icon facebook'></span>
+          שיתוף בפייסבוק
+        </a>
+        <a class='menu-line' [href]='seo.whatsappShare' target="_blank">
+          <span class='icon whatsapp'></span>
+          שיתוף בוואטסאפ
+        </a>
+        <a class='menu-line layout-mobile' (activated)="seo.mobileShare()" clickOnReturn>
+          <span class='icon mobile-share'></span>
+          שיתוף אחר
+        </a>
+      </div>
+    </div>
+    <div class="collapsed-menu layout-mobile" [class.with-search]='showSearchBar' [class.visible]='showCollapsedMenu()' (click)='openCollapsedMenu()'>
       <i class="glyphicon glyphicon-menu-hamburger"></i>
       <div class='menu'>
         <ng-container *ngFor="let link of globalSettings.theme.headerLinks">
-          <a class='menu-line' (activated)="doNavigate(link.href)" [innerHtml]='link.title' clickOnReturn></a>
+          <a class='menu-line' (activated)="doNavigate(link.href)" clickOnReturn>
+            <span [innerHtml]='link.title'></span>
+          </a>
         </ng-container>
       </div>
     </div>

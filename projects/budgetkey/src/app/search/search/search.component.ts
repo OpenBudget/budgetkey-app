@@ -11,6 +11,7 @@ import { SearchBarType } from '../../common-components/components/searchbar/bk-s
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { timer } from 'rxjs';
 import { PlatformService } from '../../common-components/platform.service';
+import { SeoService } from '../../common-components/seo.service';
 
 @UntilDestroy()
 @Component({
@@ -37,7 +38,8 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public globalSettings: GlobalSettingsService,
-    private ps: PlatformService
+    private ps: PlatformService,
+    private seo: SeoService
   ) {
     this.searchState = new SearchState(<SearchBarType[]>this.globalSettings.theme.searchBarConfig);
     this.docTypes = this.globalSettings.theme.searchBarConfig;
@@ -86,6 +88,7 @@ export class SearchComponent implements OnInit {
               kinds: sp.docType.id 
             });
           }
+          this.seo.setSeo(this.globalSettings.siteName + ' - חיפוש ' + sp.term, `https://next.obudget.org/s?q=${encodeURIComponent(sp.term)}`);
         }
       });
     });
