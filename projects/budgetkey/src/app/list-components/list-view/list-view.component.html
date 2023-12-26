@@ -2,7 +2,7 @@
     <div class='header-content'>
         <div class='author'>
             <div class='avatar' [style.background-image]='"url(" + list.properties.avatar_url + ")"'></div>
-            <div class='name'>{{list.properties.name}}</div>
+            <a class='name' [routerLink]='["/l", list.user_id]' queryParamsHandling='preserve'>{{list.properties.name}}</a>
         </div>
         <div class='title'>
             <div class='icon'></div>
@@ -54,8 +54,22 @@
         <span>שיתוף הרשימה:</span>
         <div class='title'>{{list.title}}</div>
     </div>
-    <div class='dialog-explanation'>
-        <span>אפשר לצפות ברשימה זו רק באמצעות <a [href]='link'>הקישור הסודי הזה</a>.</span><br/>
+    <div class='dialog-explanation' *ngIf='editable()'>
+        <span>מי יכול לראות את הרשימה הזו?</span>
+        <div class='dialog-option private' [class.active]='!public' clickOnReturn (activated)='public = false'>
+            <div class='icon'></div>
+            <div class='dialog-option-text'>
+                <strong>טיוטא</strong>
+                <span>רק למי שיש את הקישור הסודי הזה</span>
+            </div>
+        </div>
+        <div class='dialog-option public' [class.active]='public' clickOnReturn (activated)='public = true'>
+            <div class='icon'></div>
+            <div class='dialog-option-text'>
+                <strong>פומבי</strong>
+                <span>לכולם יש גישה לרשימה, אפילו למנועי חיפוש</span>    
+            </div>
+        </div>
     </div>
     <div class='dialog-done'>
         <button class='copy-to-clipboard' clickOnReturn (activated)='copyLinkToClipboard()' [class.copied]='copied'>

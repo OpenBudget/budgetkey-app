@@ -277,6 +277,76 @@
         font-size: 16px;
         font-weight: 400;
         line-height: 28px;
+        
+        display: flex;
+        flex-flow: column;
+        gap: 8px;
+
+        .dialog-option {
+            display: flex;
+            flex-flow: row;
+            padding: 4px 6px 4px 12px;
+            align-items: center;
+            gap: 8px;
+            align-self: stretch;
+
+            border-radius: 25px;
+            border: 1px solid @color-disabled;
+
+            &.active {
+                border: 1px solid @color-gray-600;
+            }
+
+            .icon {
+                .background-image;
+                width: 28px;
+                height: 28px;
+                background-size: 28px;
+                flex: 0 0 auto;
+            }
+
+            .dialog-option-text {
+                display: flex;
+                flex-flow: column;
+                align-items: flex-start;
+
+                color: @color-gray-500;
+                .font-abraham;
+                font-size: 16px;
+                font-weight: 300;
+                line-height: 16px;
+
+                strong {
+                    font-weight: 700;
+                }
+            }
+
+            &.private {
+                .icon {
+                    background-image: url(../../../assets/lists/icon-list-private-inactive.svg);
+                }
+            }
+
+            &.public {
+                .icon {
+                    background-image: url(../../../assets/lists/icon-list-public-inactive.svg);
+                }
+            }
+
+            &.active {
+                &.private {
+                    .icon {
+                        background-image: url(../../../assets/lists/icon-list-private-active.svg);
+                    }
+                }
+    
+                &.public {
+                    .icon {
+                        background-image: url(../../../assets/lists/icon-list-public-active.svg);
+                    }
+                }    
+            }
+        }
     }
 
     .dialog-done {
@@ -284,8 +354,9 @@
         width: 100%;
         display: flex;
         flex-flow: row;
+        gap: 20px;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-between;
         border-top: 1px solid @color-lists-lighter-blue;
 
         .copy-to-clipboard {
@@ -336,7 +407,9 @@
 
         .done-button {
             margin-right: auto;
+            flex: 0 0 auto;
             .list-button;
+            padding: 0 40px;
         }
     }
 }

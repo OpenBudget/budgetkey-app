@@ -68,6 +68,6 @@ export class AuthComponent implements AfterViewInit {
     }
 
     myLists() {
-        this.router.navigate(['/l/my'], { queryParamsHandling: 'preserve' });
+        this.router.navigate(['/l', this.user.profile.id], { queryParamsHandling: 'preserve' });
     }
 }

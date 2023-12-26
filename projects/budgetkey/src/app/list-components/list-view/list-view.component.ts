@@ -56,6 +56,7 @@ export class ListViewComponent implements OnChanges {
   save() {
     if (this.editable()) {
       this.lists.updateList(this.list.name, this.list).subscribe((list) => {
+        // console.log('List updated', list);
       });
     }
   }
@@ -108,5 +109,14 @@ export class ListViewComponent implements OnChanges {
       this.deleted.emit();
       this.deleteDialog.set(false);
     });
+  }
+
+  get public() {
+    return (this.list?.visibility || 0) > 1;
+  }
+
+  set public(value: boolean) {
+    this.list.visibility = value ? 2 : 1;
+    this.save();
   }
 }

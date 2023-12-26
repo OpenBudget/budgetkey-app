@@ -2,10 +2,10 @@
     <ng-container *ngIf='init'>
         <div class='header'>
             <div class='logo'></div>
-            <div class='title'>הרשימות שלי</div>
+            <div class='title'>הרשימות של<br/>{{theLists()[0]?.properties?.name}}</div>
         </div>
         <div class='lists'>
-            <div class='list' *ngFor='let list of lists.curatedLists()'
+            <div class='list' *ngFor='let list of theLists()'
                 [routerLink]='["/l", list.user_id, list.name]'
                 clickOnReturn
             >

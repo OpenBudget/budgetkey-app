@@ -203,6 +203,18 @@ export class ListsService {
       );
   }
 
+  public getPublicLists(user_id: string): Observable<ListContents[]> {
+    const params = {
+      user_id, kind: CURATED_KIND
+    };
+    return (this.http.get<ListContents[]>('https://next.obudget.org/lists/', {params}))
+      .pipe(
+        map((resp: ListContents[]) => {
+          return resp.sort((a: ListContents, b: ListContents) => (b.update_time || '').localeCompare(a.update_time || ''));
+        })
+      );
+  }
+
   public put(list: string, item: ListItem): Observable<ListItem> {
     return this.token
       .pipe(
