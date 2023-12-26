@@ -4,9 +4,10 @@ import { SeoService } from '../../common-components/seo.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListContents, ListsService } from '../../common-components/services/lists.service';
-import { filter, map, switchMap } from 'rxjs';
+import { filter, from, map, switchMap } from 'rxjs';
 import { Format } from '../../format';
 import { AuthService } from '../../common-components/auth/auth.service';
+import { PlatformService } from '../../common-components/platform.service';
 
 @UntilDestroy()
 @Component({
@@ -24,7 +25,7 @@ export class UserListsPageComponent {
   theLists = this.publicLists;
 
   constructor(private globalSettings: GlobalSettingsService, private seo: SeoService, private auth: AuthService,
-      public lists: ListsService, private router: Router, private route: ActivatedRoute) {
+      public lists: ListsService, private router: Router, private route: ActivatedRoute, private platform: PlatformService) {
     this.globalSettings.ready.subscribe(() => {
       this.init = true;
     });
@@ -32,10 +33,16 @@ export class UserListsPageComponent {
       untilDestroyed(this),
       map((params) => params['user-id']),
       filter((userId) => !!userId),
-      switchMap((userId) => this.auth.getUser().pipe(
-        map((user) => user?.profile?.id || ''),
-        map((loggedInUserId) => ({ userId, loggedInUserId }))
-      )),
+      switchMap((userId: string) => {
+        if (this.platform.browser()) {
+          return this.auth.getUser().pipe(
+              map((user) => user?.profile?.id || ''),
+              map((loggedInUserId: string) => ({ userId, loggedInUserId }))
+          );
+        } else {
+          return from([{ userId, loggedInUserId: '' }]);
+        }
+      }),
       map(({userId, loggedInUserId}) => {
         if (userId === loggedInUserId) {
           return this.lists.curatedLists;
