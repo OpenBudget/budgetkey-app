@@ -1,0 +1,190 @@
+{
+  "BUDGETKEY_APP_GENERIC_ITEM_THEME": {
+    "siteName": "יודעת"
+  },
+  "BUDGETKEY_NG2_COMPONENTS_THEME": {
+    "disableAuth": false,
+    "euDisclaimer": false,
+    "footerLinks": [],
+    "headerLinks": [],
+    "keepDocTypesOrder": false,
+    "sampleSearches": [],
+    "searchBarConfig": [
+      {
+        "id": "all",
+        "main": true,
+        "name": "הכל",
+        "placeholder": "חפשו הזדמנויות בתחום המגדר...",
+        "types": [
+          "support_criteria",
+          "tenders",
+          "calls_for_bids"
+        ]
+      },
+      {
+        "description": "מכרזים שהמדינה עורכת לקניית סחורות ושירותים וקולות קוראים לתמיכות ומיזמים.",
+        "filterMenu": [
+          {
+            "display": "סוג ההזדמנות",
+            "id": "kind",
+            "options": [
+              {
+                "display": "הכל",
+                "id": "all"
+              },
+              {
+                "display": "מכרזים",
+                "filters": {
+                  "_type": "tenders"
+                },
+                "id": "tenders"
+              },
+              {
+                "display": "קולות קוראים",
+                "filters": {
+                  "_type": "calls_for_bids"
+                },
+                "id": "calls_for_bids"
+              }
+            ]
+          },
+          {
+            "display": "חיפוש ממוקד",
+            "id": "focused",
+            "options": [
+              {
+                "display": "פתוחים",
+                "filters": {
+                  "claim_date__gte": "now"
+                },
+                "id": "open"
+              },
+              {
+                "display": "נסגרים בקרוב",
+                "filters": {
+                  "claim_date__gte": "now",
+                  "claim_date__lte": "now+1w"
+                },
+                "id": "closing"
+              },
+              {
+                "display": "חדשים",
+                "filters": {
+                  "rev_created_at__gte": "now-1w"
+                },
+                "id": "new"
+              },
+              {
+                "display": "התעדכנו לאחרונה",
+                "filters": {
+                  "claim_date__gte": "now+1w",
+                  "last_update_date__gte": "now-1w"
+                },
+                "id": "updated"
+              },
+              {
+                "display": "הכל",
+                "id": "no"
+              }
+            ]
+          }
+        ],
+        "id": "tenders_and_calls_for_bids",
+        "name": "מכרזים וקולות קוראים",
+        "ordering": "__date_range_to",
+        "placeholder": "חפשו מכרזים וקולות קוראים",
+        "types": [
+          "tenders",
+          "calls_for_bids"
+        ]
+      },
+      {
+        "description": "מבחנים וקריטריונים לתמיכה של המדינה בגופים",
+        "filterMenu": [
+          {
+            "display": "חיפוש ממוקד",
+            "id": "focused",
+            "options": [
+              {
+                "display": "הכל",
+                "id": "no"
+              },
+              {
+                "display": "חדשים",
+                "filters": {
+                  "rev_created_at__gte": "now-1w"
+                },
+                "id": "new"
+              },
+              {
+                "display": "התעדכנו לאחרונה",
+                "filters": {
+                  "claim_date__gte": "now+1w",
+                  "last_update_date__gte": "now-1w",
+                  "rev_created_at__lte": "now-1w"
+                },
+                "id": "updated"
+              }
+            ]
+          }
+        ],
+        "id": "support_criteria",
+        "name": "מבחני תמיכה",
+        "placeholder": "חפשו מבחני תמיכה",
+        "types": [
+          "support_criteria"
+        ]
+      }
+    ],
+    "searchContext": [
+      "נשים",
+      "נערות",
+      "מגדר",
+      "פמיניזם",
+      "פמיניסטי",
+      "הריון",
+      "מוכות",
+      "אונס",
+      "זנות",
+      "בסיכון",
+      "ילדות",
+      "במצוקה",
+      "מקלטים",
+      "צעירות",
+      "שוויון מגדרי",
+      "העצמה",
+      "נפגעות אלימות",
+      "הכשרה",
+      "דירות מעבר",
+      "הריון",
+      "יולדות",
+      "לידה",
+      "מעמד האישה",
+      "עבריינות מין",
+      "משפחות",
+      "מנהיגות",
+      "הורות",
+      "הורות שוויונית",
+      "שובינזם",
+      "פוליאנדריה",
+      "פטריארכיה",
+      "פולינמיה",
+      "פוליגמיה",
+      "מונוגמיה",
+      "טרנסג'נדר",
+      "להט״ב",
+      "קוויר",
+      "זוגיות",
+      "הנקה",
+      "אפליה",
+      "הפליה",
+      "להטב"
+    ],
+    "siteLogo": "budgetkey.svg",
+    "siteName": "יודעת",
+    "siteUrl": "https://yodaat.org",
+    "supporterInfos": {},
+    "supporters": [],
+    "themeId": "yodaat"
+  }
+}

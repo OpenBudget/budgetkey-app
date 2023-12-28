@@ -1,0 +1,259 @@
+{
+  "BUDGETKEY_APP_GENERIC_ITEM_THEME": {
+    "siteName": "מפתח לרכש החברתי"
+  },
+  "BUDGETKEY_NG2_COMPONENTS_THEME": {
+    "disableAuth": true,
+    "footerLinks": [
+      {
+        "href": "/about?theme=soproc",
+        "title": "על הפרויקט"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey/blob/master/documentation/UsingTheAPI.md",
+        "title": "API"
+      },
+      {
+        "href": "mailto:rehesh.hevrati@pmo.gov.il",
+        "title": "יצירת קשר/דיווח על תקלה"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey",
+        "title": "كود الموقع"
+      },
+      {
+        "href": "/about#privacy",
+        "title": "سياسة الخصوصية"
+      },
+      {
+        "href": "https://next.obudget.org",
+        "title": "مفتاح الميزاينة"
+      }
+    ],
+    "footerText": "רכש חברתי הינו אספקת שירותים חברתיים במיקור חוץ. אתר זה הוא פרי עבודת מיפוי ואיסוף נתונים שנעשית על-ידי שלושת המשרדים החברתיים: בריאות, חינוך, ומשרד הרווחה והשירותים החברתיים, ומשקף את המידע אודות שירותים אלה. האתר הוקם במסגרת מיזם משותף של משרד ראש הממשלה וג'וינט-אלכא, ובשיתוף הסדנא לידע ציבורי. המידע המופיע באתר אינו מהווה תחליף למידע במקורות הראשוניים, ובכל מקרה של סתירה המידע שבמקורות הראשוניים הוא הקובע. הסתמכות על האמור באתר היא באחריות המשתמש בלבד.<br/>תאריך עדכון אחרון: ספטמבר 2021.",
+    "headerLinks": [
+      {
+        "href": "/about?theme=soproc",
+        "title": "عن"
+      },
+      {
+        "href": "https://www.gov.il/he/departments/topics/rechesh/govil-landing-page",
+        "title": "אגף ממשל וחברה במשרד ראש הממשלה"
+      }
+    ],
+    "hideFooterHasadnaLogo": true,
+    "searchBarConfig": [
+      {
+        "filters": [
+          {
+            "_type": "tenders",
+            "soproc_tender": true
+          },
+          {
+            "_type": "entities",
+            "soproc_supplier": true
+          }
+        ],
+        "id": "all",
+        "main": true,
+        "name": "الكل",
+        "placeholder": "חפשו שירותים חברתיים, מפעילים והליכי רכש",
+        "types": [
+          "tenders",
+          "entities",
+          "activities"
+        ]
+      },
+      {
+        "description": "שירותים חברתיים במיקור חוץ",
+        "filterMenu": [
+          {
+            "display": "وزارة",
+            "id": "office",
+            "options": [
+              {
+                "display": "כל המשרדים",
+                "id": "all"
+              },
+              {
+                "display": "משרד הרווחה",
+                "filters": {
+                  "office": "הרווחה"
+                },
+                "id": "welfare"
+              },
+              {
+                "display": "وزارة التربية",
+                "filters": {
+                  "office": "החינוך"
+                },
+                "id": "education"
+              },
+              {
+                "display": "משרד הבריאות",
+                "filters": {
+                  "office": "הבריאות"
+                },
+                "id": "health"
+              }
+            ]
+          }
+        ],
+        "id": "activities",
+        "name": "خدمات اجتماعية",
+        "placeholder": "חפשו שמות של שירותים חברתיים...",
+        "types": [
+          "activities"
+        ]
+      },
+      {
+        "description": "עמותות, חברות פרטיות וארגונים אחרים אשר מפעילים שירותים חברתיים במיקור חוץ.",
+        "filterMenu": [
+          {
+            "display": "סוג המפעיל",
+            "id": "entity_kind",
+            "options": [
+              {
+                "display": "כל סוגי המפעילים",
+                "id": "all"
+              },
+              {
+                "display": "شركات",
+                "filters": {
+                  "kind": "company"
+                },
+                "id": "companies"
+              },
+              {
+                "display": "جمعيات خيرية وشركات ذات نفع عام",
+                "filters": {
+                  "kind": "association"
+                },
+                "id": "associations"
+              },
+              {
+                "display": "سلطات محلية",
+                "filters": {
+                  "kind": "municipality"
+                },
+                "id": "municipalities"
+              },
+              {
+                "display": "סוגים אחרים",
+                "filters": {
+                  "kind__not": [
+                    "company",
+                    "association",
+                    "municipality"
+                  ]
+                },
+                "id": "other"
+              }
+            ]
+          }
+        ],
+        "filters": {
+          "soproc_supplier": true
+        },
+        "id": "entities",
+        "name": "מפעילים",
+        "placeholder": "חפשו פרטים של מפעילים...",
+        "types": [
+          "entities"
+        ]
+      },
+      {
+        "description": "מכרזים שהמדינה עורכת להפעלת שירותים חברתיים..",
+        "filterMenu": [
+          {
+            "display": "نوع المرحلة",
+            "id": "tender_type",
+            "options": [
+              {
+                "display": "الكل",
+                "id": "all"
+              },
+              {
+                "display": "مناقصات",
+                "filters": {
+                  "_type": "tenders",
+                  "tender_type": [
+                    "office",
+                    "central"
+                  ]
+                },
+                "id": "tenders"
+              },
+              {
+                "display": "طلبات لاعفاء من المناقصة",
+                "filters": {
+                  "_type": "tenders",
+                  "tender_type": [
+                    "exemptions"
+                  ]
+                },
+                "id": "exemptions"
+              }
+            ]
+          },
+          {
+            "display": "סטטוס",
+            "id": "status",
+            "options": [
+              {
+                "display": "الكل",
+                "id": "all"
+              },
+              {
+                "display": "פתוח להגשת הצעות",
+                "filters": [
+                  {
+                    "_type": "tenders",
+                    "claim_date__gte": "now",
+                    "tender_type__not": "exemptions"
+                  },
+                  {
+                    "_type": "tenders",
+                    "simple_decision": "פתוח",
+                    "tender_type__not": "exemptions"
+                  }
+                ],
+                "id": "open"
+              }
+            ]
+          }
+        ],
+        "filters": {
+          "soproc_tender": true
+        },
+        "id": "procurement",
+        "name": "הליכי רכש",
+        "placeholder": "חפשו פרטים על מכרזים ופטורים ממכרז...",
+        "types": [
+          "tenders"
+        ]
+      }
+    ],
+    "searchPlaceholder": "חפשו שירותים חברתיים, מפעילים והליכי רכש",
+    "siteLogo": "soproc.svg",
+    "siteName": "מפתח לרכש החברתי",
+    "siteUrl": "https://www.socialpro.org.il",
+    "supporterInfos": {
+      "gov": {
+        "logo": "gov.svg",
+        "name": "אגף ממשל וחברה במשרד ראש הממשלה",
+        "url": "https://www.gov.il/he/departments/governance-and-social-affairs"
+      },
+      "joint": {
+        "logo": "joint.png",
+        "name": "ג׳וינט אלכא",
+        "url": "https://www.thejoint.org.il/elka/"
+      }
+    },
+    "supporters": [
+      "gov",
+      "joint"
+    ],
+    "themeId": "soproc"
+  }
+}

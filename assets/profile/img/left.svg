@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="8px" viewBox="0 0 27 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow/payment/left</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M5.42309576,7 L6.70986293,8.29422165 C7.09925767,8.68587223 7.09742896,9.31903457 6.70577838,9.70842931 C6.3141278,10.0978241 5.68096546,10.0959953 5.29157071,9.70434476 L2.29952068,6.69496124 C1.91092095,6.30411028 1.91183304,5.67251987 2.30156001,5.2827929 L5.29057137,2.29378154 C5.68109566,1.90325725 6.31426064,1.90325725 6.70478493,2.29378154 C7.09530922,2.68430583 7.09530922,3.31747081 6.70478493,3.7079951 L5.41278004,5 L27.5,5 C28.0522847,5 28.5,5.44771525 28.5,6 C28.5,6.55228475 28.0522847,7 27.5,7 L5.42309576,7 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="notifications/search" transform="translate(-109.000000, -19.000000)">
+            <g id="Group" transform="translate(90.000000, 0.000000)">
+                <g id="arrow/payment/left" transform="translate(17.000000, 17.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Combined-Shape" fill="#5D4245" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="colors/white" mask="url(#mask-2)" fill="#FFFFFF" fill-rule="evenodd">
+                        <rect x="0" y="0" width="32" height="12"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

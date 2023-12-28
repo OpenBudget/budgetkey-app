@@ -1,0 +1,414 @@
+{
+  "BUDGETKEY_APP_GENERIC_ITEM_THEME": {
+    "siteName": "الخارطة الاجتماعية"
+  },
+  "BUDGETKEY_NG2_COMPONENTS_THEME": {
+    "disableAuth": false,
+    "euDisclaimer": false,
+    "footerLinks": [
+      {
+        "href": "https://next.obudget.org/about?theme=socialmap",
+        "title": "عن"
+      },
+      {
+        "href": "https://next.obudget.org/about?theme=socialmap#team",
+        "title": "الطاقم"
+      },
+      {
+        "href": "https://next.obudget.org/about?theme=socialmap#privacy",
+        "title": "سياسة الخصوصية"
+      },
+      {
+        "href": "http://www.hasadna.org.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
+        "title": "اتصلوا بنا"
+      },
+      {
+        "href": "https://forum.hasadna.org.il/c/eknights/obudget",
+        "title": "الابلاغ عن الخطأ"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey",
+        "title": "كود الموقع"
+      },
+      {
+        "href": "https://forum.hasadna.org.il/c/eknights/obudget",
+        "title": "مجموعاتنا النقاشبة"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey/blob/master/documentation/UsingTheAPI.md",
+        "title": "API"
+      },
+      {
+        "href": "https://next.obudget.org",
+        "title": "مفتاح الميزاينة"
+      }
+    ],
+    "headerLinks": [
+      {
+        "href": "https://next.obudget.org/about/?theme=socialmap",
+        "title": "من نحن"
+      }
+    ],
+    "keepDocTypesOrder": true,
+    "sampleSearches": [
+      "ארגונים פעילים בתחום יוזמות עסקיות",
+      "הנוער העובד והלומד",
+      "ארגונים הפעילים במחוז הדרום"
+    ],
+    "sampleSearches[0]": "المنظمات الناشطة في مجال مبادرات الاعمال",
+    "sampleSearches[1]": "الشبيبة العاملة والمتعلمة",
+    "sampleSearches[2]": "المنظمات الناشطة في لواء الجنوب",
+    "searchBarConfig": [
+      {
+        "filters": [
+          {
+            "_type": "entities",
+            "kind": "association"
+          },
+          {
+            "_type": "reports"
+          },
+          {
+            "_type": "tenders",
+            "claim_date__gte": "now",
+            "tender_type__not": "exemptions"
+          },
+          {
+            "_type": "tenders",
+            "simple_decision": "פתוח",
+            "tender_type__not": "exemptions"
+          },
+          {
+            "_type": [
+              "calls_for_bids",
+              "support_criteria"
+            ],
+            "decision": [
+              "פתוח",
+              "בתוקף"
+            ]
+          },
+          {
+            "_type": [
+              "calls_for_bids",
+              "support_criteria"
+            ],
+            "claim_date__gte": "now"
+          }
+        ],
+        "id": "all",
+        "main": true,
+        "name": "الكل",
+        "placeholder": "ابحثوا عن كل شيء.. بند في الميزانية, منظمة, شخص, او كل شيء اخر يدور في خلدك",
+        "types": [
+          "all"
+        ]
+      },
+      {
+        "description": "אילו גופים פועלים במגזר השלישי? כאן תמצאו עמותות וחברות לתועלת הציבור -",
+        "filterMenu": [
+          {
+            "display": "نوع المنظمة",
+            "id": "org_kind",
+            "options": [
+              {
+                "display": "كل الانواع",
+                "id": "all"
+              },
+              {
+                "display": "جمعيات خيرية",
+                "filters": {
+                  "details.org_kind": "עמותה"
+                },
+                "id": "only_associations"
+              },
+              {
+                "display": "شركات ذات نفع عام",
+                "filters": {
+                  "details.org_kind": "חל\"צ"
+                },
+                "id": "public_good_companies"
+              }
+            ]
+          },
+          {
+            "display": "منطقة النشاط",
+            "id": "region",
+            "options": [
+              {
+                "display": "جميع الالوية",
+                "id": "all"
+              },
+              {
+                "display": "لواء الشمال",
+                "filters": {
+                  "details.activity_region_districts": "הצפון"
+                },
+                "id": "north"
+              },
+              {
+                "display": "لواء المركز",
+                "filters": {
+                  "details.activity_region_districts": "המרכז"
+                },
+                "id": "center"
+              },
+              {
+                "display": "لواء الجنوب",
+                "filters": {
+                  "details.activity_region_districts": "הדרום"
+                },
+                "id": "south"
+              },
+              {
+                "display": "لواء تل-ابيب - يافا",
+                "filters": {
+                  "details.activity_region_districts": "אביב"
+                },
+                "id": "tel-aviv"
+              },
+              {
+                "display": "لواء القدس",
+                "filters": {
+                  "details.activity_region_districts": "ירושלים"
+                },
+                "id": "jerusalem"
+              },
+              {
+                "display": "لواء حيفا",
+                "filters": {
+                  "details.activity_region_districts": "חיפה"
+                },
+                "id": "haifa"
+              },
+              {
+                "display": "لواء يهودا والسامرة",
+                "filters": {
+                  "details.activity_region_districts": "והשומרון"
+                },
+                "id": "yosh"
+              }
+            ]
+          },
+          {
+            "display": "تصاريح",
+            "id": "creds",
+            "options": [
+              {
+                "display": "بلا قيود",
+                "id": "all"
+              },
+              {
+                "display": "حاصلة على الموافقة على ادارة سليمة",
+                "filters": {
+                  "details.proper_management": "יש"
+                },
+                "id": "proper_management"
+              },
+              {
+                "display": "حاصلة على المصادقة حسب بند 46",
+                "filters": {
+                  "details.has_article_46": "יש"
+                },
+                "id": "article46"
+              }
+            ]
+          },
+          {
+            "display": "اموال الدولة",
+            "id": "public_funds",
+            "options": [
+              {
+                "display": "بلا قيود",
+                "id": "all"
+              },
+              {
+                "display": "استلموا دعم حكومي",
+                "filters": {
+                  "received_amount_supports__gt": 0
+                },
+                "id": "supported"
+              },
+              {
+                "display": "وفّروا خدمات للحكومة",
+                "filters": {
+                  "received_amount_contracts__gt": 0
+                },
+                "id": "contracted"
+              },
+              {
+                "display": "كلاهما",
+                "filters": {
+                  "received_amount_contracts__gt": 0,
+                  "received_amount_supports__gt": 0
+                },
+                "id": "both"
+              }
+            ]
+          }
+        ],
+        "filters": {
+          "kind": "association"
+        },
+        "id": "associations",
+        "name": "جمعيات خيرية وشركات ذات نفع عام",
+        "placeholder": "ابحثوا عن اسماء جمعيات خيرية او شركات ذات نفع عام",
+        "types": [
+          "entities"
+        ]
+      },
+      {
+        "description": "באילו תחומים פועלים במגזר השלישי? כאן תמצאו מידע על כל אחד מתחומי הפעילות -",
+        "filters": {
+          "kind": "fieldofactivity"
+        },
+        "id": "field-of-activity-reports",
+        "name": "مجالات النشاط",
+        "placeholder": "ابحثوا عن \"المنظمات الناشطة في المجال...\"",
+        "types": [
+          "reports"
+        ]
+      },
+      {
+        "description": "היכן בארץ פועלים במגזר השלישי? כאן תמצאו מידע על כל אחד מהמחוזות בארץ -",
+        "filters": {
+          "kind": "district"
+        },
+        "id": "district-reports",
+        "name": "الوية",
+        "placeholder": "ابحثوا عن \"المنظمات الناشطة في اللواء...\"",
+        "types": [
+          "reports"
+        ]
+      },
+      {
+        "description": "הזדמנויות במגזר השלישי? כאן תמצאו קולות קוראים, מכרזים, מבחני תמיכה ועוד!",
+        "filterMenu": [
+          {
+            "display": "סוג ההזדמנות",
+            "id": "kind",
+            "options": [
+              {
+                "display": "الكل",
+                "id": "all"
+              },
+              {
+                "display": "مناقصات",
+                "filters": {
+                  "_type": "tenders"
+                },
+                "id": "tenders"
+              },
+              {
+                "display": "מבחני תמיכה",
+                "filters": {
+                  "_type": "support_criteria"
+                },
+                "id": "support_criteria"
+              },
+              {
+                "display": "קולות קוראים",
+                "filters": {
+                  "_type": "calls_for_bids"
+                },
+                "id": "calls_for_bids"
+              }
+            ]
+          },
+          {
+            "display": "بحث محدّد",
+            "id": "focused",
+            "options": [
+              {
+                "display": "بلا",
+                "id": "no"
+              },
+              {
+                "display": "سيتمّ اغلاقها قريبا",
+                "filters": {
+                  "claim_date__gte": "now",
+                  "claim_date__lte": "now+1w"
+                },
+                "id": "closing"
+              },
+              {
+                "display": "جديدة",
+                "filters": {
+                  "rev_created_at__gte": "now-1w"
+                },
+                "id": "new"
+              },
+              {
+                "display": "تمّ تحديثها أخيرا",
+                "filters": {
+                  "claim_date__gte": "now+1w",
+                  "last_update_date__gte": "now-1w",
+                  "rev_created_at__lte": "now-1w"
+                },
+                "id": "updated"
+              }
+            ]
+          }
+        ],
+        "filters": [
+          {
+            "_type": "tenders",
+            "claim_date__gte": "now",
+            "tender_type__not": "exemptions"
+          },
+          {
+            "_type": "tenders",
+            "simple_decision": "פתוח",
+            "tender_type__not": "exemptions"
+          },
+          {
+            "_type": [
+              "calls_for_bids",
+              "support_criteria"
+            ],
+            "decision": [
+              "פתוח",
+              "בתוקף"
+            ]
+          },
+          {
+            "_type": [
+              "calls_for_bids",
+              "support_criteria"
+            ],
+            "claim_date__gte": "now"
+          }
+        ],
+        "id": "opportunities",
+        "name": "הזדמנויות",
+        "ordering": "__date_range_to",
+        "placeholder": "חפשו הזדמנויות!",
+        "types": [
+          "tenders",
+          "calls_for_bids",
+          "support_criteria"
+        ]
+      }
+    ],
+    "siteLogo": "socialmap.svg",
+    "siteName": "الخارطة الاجتماعية",
+    "siteUrl": "https://socialmap.org.il",
+    "supporterInfos": {
+      "midot": {
+        "logo": "midot.svg",
+        "name": "\"ميدوت\"",
+        "url": "http://www.midot.org.il/"
+      },
+      "migdal": {
+        "logo": "migdal.svg",
+        "name": "\"ميجدال\"",
+        "url": "https://www.migdal.co.il/He/MigdalTeam/social_involvment_migdal/Pages/social_inv.aspx"
+      }
+    },
+    "supporters": [
+      "midot",
+      "migdal"
+    ],
+    "themeId": "socialmap"
+  }
+}

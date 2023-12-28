@@ -1,0 +1,591 @@
+{
+  "BUDGETKEY_APP_GENERIC_ITEM_THEME": {
+    "siteName": "The Budget Key"
+  },
+  "BUDGETKEY_NG2_COMPONENTS_THEME": {
+    "footerLinks": [
+      {
+        "href": "/about",
+        "title": "About Us"
+      },
+      {
+        "href": "/about#team",
+        "title": "The Team"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey/blob/master/documentation/UsingTheAPI.md",
+        "title": "API"
+      },
+      {
+        "href": "https://next.obudget.org/datapackages/sitemaps/sitemap.html",
+        "title": "Site Map"
+      },
+      {
+        "href": "http://www.hasadna.org.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
+        "title": "Contact Us"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey/issues/new",
+        "title": "Report an Issue"
+      },
+      {
+        "href": "/about#privacy",
+        "title": "Privacy Policy"
+      },
+      {
+        "href": "https://www.jgive.com/new/he/ils/donation-targets/3268#donation-modal",
+        "title": "Donate"
+      },
+      {
+        "href": "https://socialmap.org.il",
+        "title": "The Social Map"
+      },
+      {
+        "href": "https://next.obudget.org/govbuy/",
+        "title": "OpenProcure"
+      }
+    ],
+    "headerLinks": [
+      {
+        "href": "/about/",
+        "title": "About Us"
+      },
+      {
+        "href": "https://www.jgive.com/new/he/ils/donation-targets/3268#donation-modal",
+        "title": "Donate"
+      },
+      {
+        "href": "https://chat.whatsapp.com/BXxxMMpukgjCrn5wN4RB12",
+        "title": "קבוצת המשתמשים<br/>בווטסאפ <i class='fa fa-whatsapp' aria-hidden='true'></i>"
+      }
+    ],
+    "searchBarConfig": [
+      {
+        "id": "all",
+        "main": true,
+        "name": "All",
+        "placeholder": "Search for anything... budget items, organizations or anything you can think of",
+        "types": [
+          "all"
+        ]
+      },
+      {
+        "defaultTerm": "משרד",
+        "description": "Expenses in the National Budget, from 1997 all through the current and planned budgets.",
+        "filterMenu": [
+          {
+            "display": "Item Kind",
+            "id": "kind",
+            "options": [
+              {
+                "display": "All Budget Levels",
+                "id": "all"
+              },
+              {
+                "display": "קופסאות הקורונה",
+                "filters": {
+                  "covid19_expenses_revised__gt": 0,
+                  "depth": 4
+                },
+                "id": "covid19"
+              },
+              {
+                "display": "Government Offices",
+                "filters": {
+                  "depth": 1
+                },
+                "id": "ministries"
+              },
+              {
+                "display": "Functional Classification",
+                "filters": {
+                  "depth__lt": 0
+                },
+                "id": "func"
+              },
+              {
+                "display": "Programs",
+                "filters": {
+                  "depth": 3
+                },
+                "id": "programs"
+              },
+              {
+                "display": "Only Regulations",
+                "filters": {
+                  "depth": 4
+                },
+                "id": "regulations"
+              }
+            ]
+          },
+          {
+            "display": "Fiscal Year",
+            "id": "fiscal-year",
+            "options": [
+              {
+                "display": "All Years",
+                "id": "all"
+              },
+              {
+                "display": "Current Year",
+                "filters": {
+                  "year": 2024
+                },
+                "id": "latest"
+              }
+            ]
+          }
+        ],
+        "filters": {
+          "func_cls_title_1__not": "הכנסות"
+        },
+        "id": "budget",
+        "name": "Budget Items",
+        "placeholder": "Search for budget item names...",
+        "types": [
+          "budget"
+        ]
+      },
+      {
+        "description": "Revenues in the National Budget, from 1997 all through the current and planned budgets",
+        "filters": {
+          "func_cls_title_1": "הכנסות"
+        },
+        "id": "revenues",
+        "name": "National Revenues",
+        "placeholder": "Search for revenue budget items",
+        "types": [
+          "budget"
+        ]
+      },
+      {
+        "description": "NGOs, Companies and other entities in financial connections with the government",
+        "filterMenu": [
+          {
+            "display": "Organization Kind",
+            "id": "entity_kind",
+            "options": [
+              {
+                "display": "All Kinds",
+                "id": "all"
+              },
+              {
+                "display": "Companies",
+                "filters": {
+                  "kind": "company"
+                },
+                "id": "companies"
+              },
+              {
+                "display": "Associations",
+                "filters": {
+                  "kind": "association"
+                },
+                "id": "associations"
+              },
+              {
+                "display": "Municipalities",
+                "filters": {
+                  "kind": "municipality"
+                },
+                "id": "municipalities"
+              },
+              {
+                "display": "Other Organizations",
+                "filters": {
+                  "kind__not": [
+                    "company",
+                    "association",
+                    "municipality"
+                  ]
+                },
+                "id": "other"
+              }
+            ]
+          },
+          {
+            "display": "State Funding",
+            "id": "public_funds",
+            "options": [
+              {
+                "display": "No Restriction",
+                "id": "all"
+              },
+              {
+                "display": "Received Subsidies",
+                "filters": {
+                  "received_amount_supports__gt": 0
+                },
+                "id": "supported"
+              },
+              {
+                "display": "Supplied Services to Government",
+                "filters": {
+                  "received_amount_contracts__gt": 0
+                },
+                "id": "contracted"
+              },
+              {
+                "display": "Both",
+                "filters": {
+                  "received_amount_contracts__gt": 0,
+                  "received_amount_supports__gt": 0
+                },
+                "id": "both"
+              }
+            ]
+          }
+        ],
+        "id": "entities",
+        "name": "Organizations",
+        "placeholder": "Look up information about companies, associations and other organizations...",
+        "types": [
+          "entities"
+        ]
+      },
+      {
+        "description": "Budget Revisions performed throughout the year",
+        "filterMenu": [
+          {
+            "display": "בשנת התקציב",
+            "id": "fiscal-year",
+            "options": [
+              {
+                "display": "All Years",
+                "id": "all"
+              },
+              {
+                "display": "2023",
+                "filters": {
+                  "year": 2023
+                },
+                "id": "2023"
+              },
+              {
+                "display": "2022",
+                "filters": {
+                  "year": 2022
+                },
+                "id": "2022"
+              },
+              {
+                "display": "2021",
+                "filters": {
+                  "year": 2021
+                },
+                "id": "2021"
+              },
+              {
+                "display": "2020",
+                "filters": {
+                  "year": 2020
+                },
+                "id": "2020"
+              },
+              {
+                "display": "2019",
+                "filters": {
+                  "year": 2019
+                },
+                "id": "2019"
+              },
+              {
+                "display": "2018",
+                "filters": {
+                  "year": 2018
+                },
+                "id": "2018"
+              },
+              {
+                "display": "2017",
+                "filters": {
+                  "year": 2017
+                },
+                "id": "2017"
+              },
+              {
+                "display": "2016",
+                "filters": {
+                  "year": 2016
+                },
+                "id": "2016"
+              },
+              {
+                "display": "2015",
+                "filters": {
+                  "year": 2015
+                },
+                "id": "2015"
+              },
+              {
+                "display": "2014",
+                "filters": {
+                  "year": 2014
+                },
+                "id": "2014"
+              },
+              {
+                "display": "2013",
+                "filters": {
+                  "year": 2013
+                },
+                "id": "2013"
+              },
+              {
+                "display": "2012",
+                "filters": {
+                  "year": 2012
+                },
+                "id": "2012"
+              },
+              {
+                "display": "2011",
+                "filters": {
+                  "year": 2011
+                },
+                "id": "2011"
+              }
+            ]
+          },
+          {
+            "display": "סטטוס",
+            "id": "pending",
+            "options": [
+              {
+                "display": "כל ההעברות",
+                "id": "all"
+              },
+              {
+                "display": "ממתינות לאישור",
+                "filters": {
+                  "is_pending": true
+                },
+                "id": "pending"
+              }
+            ]
+          }
+        ],
+        "id": "national-budget-changes",
+        "name": "שינויים תקציביים",
+        "placeholder": "חפשו פרטים על שינויים תקציביים...",
+        "types": [
+          "national-budget-changes"
+        ]
+      },
+      {
+        "description": "רכש ותמיכות מן המדינה לעמותות, ספקים, רשויות מקומיות וגופים נוספים.",
+        "filterMenu": [
+          {
+            "display": "סוג ההוצאה",
+            "id": "kind",
+            "options": [
+              {
+                "display": "All",
+                "id": "all"
+              },
+              {
+                "display": "תמיכות תקציביות",
+                "filters": {
+                  "_type": "supports"
+                },
+                "id": "supports"
+              },
+              {
+                "display": "התקשרויות רכש",
+                "filters": {
+                  "_type": "contract-spending"
+                },
+                "id": "contract"
+              }
+            ]
+          }
+        ],
+        "id": "expenses",
+        "name": "הוצאות",
+        "placeholder": "חפשו פרטים על הוצאות...",
+        "types": [
+          "supports",
+          "contract-spending"
+        ]
+      },
+      {
+        "description": "מבחנים וקריטריונים לתמיכה של המדינה בגופים",
+        "id": "support_criteria",
+        "name": "מבחני תמיכה",
+        "placeholder": "חפשו פרטים על מבחני תמיכה...",
+        "types": [
+          "support_criteria"
+        ]
+      },
+      {
+        "description": "מכרזים שהמדינה עורכת לקניית סחורות ושירותים וקולות קוראים לתמיכות ומיזמים..",
+        "filterMenu": [
+          {
+            "display": "Process Kind",
+            "id": "tender_type",
+            "options": [
+              {
+                "display": "All",
+                "id": "all"
+              },
+              {
+                "display": "Tenders",
+                "filters": {
+                  "_type": "tenders",
+                  "tender_type": [
+                    "office",
+                    "central"
+                  ]
+                },
+                "id": "tenders"
+              },
+              {
+                "display": "Exemption Requests",
+                "filters": {
+                  "_type": "tenders",
+                  "tender_type": [
+                    "exemptions"
+                  ]
+                },
+                "id": "exemptions"
+              },
+              {
+                "display": "קולות קוראים",
+                "filters": {
+                  "_type": "calls_for_bids"
+                },
+                "id": "calls_for_bids"
+              },
+              {
+                "display": "מכרזים מוניציפליים",
+                "filters": {
+                  "_type": "muni_tenders"
+                },
+                "id": "municipal"
+              }
+            ]
+          },
+          {
+            "display": "סטטוס",
+            "id": "status",
+            "options": [
+              {
+                "display": "All",
+                "id": "all"
+              },
+              {
+                "display": "פתוח להגשת הצעות",
+                "filters": [
+                  {
+                    "_type": "tenders",
+                    "claim_date__gte": "now",
+                    "tender_type__not": "exemptions"
+                  },
+                  {
+                    "_type": "tenders",
+                    "simple_decision": "פתוח",
+                    "tender_type__not": "exemptions"
+                  },
+                  {
+                    "_type": "calls_for_bids",
+                    "decision": "פתוח"
+                  },
+                  {
+                    "_type": "calls_for_bids",
+                    "claim_date__gte": "now"
+                  },
+                  {
+                    "_type": "muni_tenders",
+                    "claim_date__gte": "now"
+                  }
+                ],
+                "id": "open"
+              }
+            ]
+          }
+        ],
+        "id": "procurement",
+        "name": "מכרזים וקולות קוראים",
+        "placeholder": "חפשו פרטים על מכרזים, פטורים ממכרז וקולות קוראים...",
+        "types": [
+          "tenders",
+          "calls_for_bids",
+          "muni_tenders"
+        ]
+      },
+      {
+        "description": "Various names collected form our data sources",
+        "id": "people",
+        "name": "Names",
+        "placeholder": "Search for people's names in our database",
+        "types": [
+          "people"
+        ]
+      },
+      {
+        "description": "Government Decisions, Policy Documents and other publications",
+        "id": "gov_decisions",
+        "name": "Government Decisions",
+        "placeholder": "Search government decisions and policy documents",
+        "types": [
+          "gov_decisions"
+        ]
+      },
+      {
+        "description": "פעילויות המבוצעות על ידי המדינה.",
+        "filterMenu": [
+          {
+            "display": "משרד ממשלתי",
+            "id": "publisher",
+            "options": [
+              {
+                "display": "כולם",
+                "id": "all"
+              },
+              {
+                "display": "משרד הבריאות",
+                "filters": {
+                  "publisher_name": "משרד הבריאות"
+                },
+                "id": "health"
+              },
+              {
+                "display": "Ministry of Education",
+                "filters": {
+                  "publisher_name": "משרד החינוך"
+                },
+                "id": "education"
+              },
+              {
+                "display": "משרד הרווחה",
+                "filters": {
+                  "publisher_name": "משרד הרווחה"
+                },
+                "id": "welfare"
+              },
+              {
+                "display": "משרד העליה והקליטה",
+                "filters": {
+                  "publisher_name": "משרד העליה והקליטה"
+                },
+                "id": "immigration"
+              }
+            ]
+          }
+        ],
+        "id": "activities",
+        "name": "שירותים ופרויקטים",
+        "placeholder": "חפשו שמות של שירותים חברתיים או פרויקטים...",
+        "types": [
+          "activities"
+        ]
+      }
+    ],
+    "searchPlaceholder": "Search for anything... budget items, organizations or anything you can think of",
+    "siteLogo": "budgetkey.svg",
+    "siteName": "The Budget Key",
+    "siteUrl": "https://next.obudget.org",
+    "themeId": "budgetkey"
+  }
+}

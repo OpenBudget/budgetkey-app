@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="159px" height="89px" viewBox="0 0 159 89" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>ECEA8199-9A40-4B66-85ED-3E45AA49526D</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M35.1817094,84.1444424 C29.3126903,87.2299683 22.4532308,82.2462793 23.5741137,75.7110305 L26.4041554,59.2106214 L14.4159065,47.5249667 C9.66777032,42.8966779 12.2878507,34.8328997 18.8496135,33.8794197 L35.4169661,31.4720425 L42.8261114,16.4594743 C45.7606209,10.5135086 54.2393791,10.5135086 57.1738886,16.4594743 L64.5830339,31.4720425 L81.1503865,33.8794197 C87.7121493,34.8328997 90.3322297,42.8966779 85.5840935,47.5249667 L73.5958446,59.2106214 L76.4258863,75.7110305 C77.5467692,82.2462793 70.6873097,87.2299683 64.8182906,84.1444424 L50,76.3540059 L35.1817094,84.1444424 Z" id="path-1"></path>
+        <path d="M23.2199282,55.535332 C19.3463756,57.5717791 14.8191324,54.2825443 15.5589151,49.9692801 L17.4267426,39.0790101 L9.51449827,31.3664781 C6.38072841,28.3118074 8.10998145,22.9897138 12.4407449,22.360417 L23.3751976,20.771548 L28.2652335,10.863253 C30.2020098,6.93891565 35.7979902,6.93891565 37.7347665,10.863253 L42.6248024,20.771548 L53.5592551,22.360417 C57.8900185,22.9897138 59.6192716,28.3118074 56.4855017,31.3664781 L48.5732574,39.0790101 L50.4410849,49.9692801 C51.1808676,54.2825443 46.6536244,57.5717791 42.7800718,55.535332 L33,50.3936439 L23.2199282,55.535332 Z" id="path-3"></path>
+        <path d="M23.2199282,55.535332 C19.3463756,57.5717791 14.8191324,54.2825443 15.5589151,49.9692801 L17.4267426,39.0790101 L9.51449827,31.3664781 C6.38072841,28.3118074 8.10998145,22.9897138 12.4407449,22.360417 L23.3751976,20.771548 L28.2652335,10.863253 C30.2020098,6.93891565 35.7979902,6.93891565 37.7347665,10.863253 L42.6248024,20.771548 L53.5592551,22.360417 C57.8900185,22.9897138 59.6192716,28.3118074 56.4855017,31.3664781 L48.5732574,39.0790101 L50.4410849,49.9692801 C51.1808676,54.2825443 46.6536244,57.5717791 42.7800718,55.535332 L33,50.3936439 L23.2199282,55.535332 Z" id="path-5"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="search-6" transform="translate(-561.000000, -136.000000)">
+            <g id="update_stars" transform="translate(545.000000, 124.000000)">
+                <g id="ui/icon/star-active" transform="translate(46.000000, 0.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Path" fill="#FF5A5F" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="colors/lead" mask="url(#mask-2)" fill="#FF5A5F" fill-rule="evenodd">
+                        <rect x="0" y="0" width="100" height="100"></rect>
+                    </g>
+                </g>
+                <g id="ui/icon/star-active" transform="translate(42.000000, 74.000000) rotate(-18.000000) translate(-42.000000, -74.000000) translate(9.000000, 41.000000)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Path" fill="#FF5A5F" fill-rule="nonzero" xlink:href="#path-3"></use>
+                    <g id="colors/lead" mask="url(#mask-4)" fill="#FF5A5F" fill-rule="evenodd">
+                        <rect x="0" y="0" width="66" height="66"></rect>
+                    </g>
+                </g>
+                <g id="ui/icon/star-active" transform="translate(149.000000, 74.000000) rotate(10.000000) translate(-149.000000, -74.000000) translate(116.000000, 41.000000)">
+                    <mask id="mask-6" fill="white">
+                        <use xlink:href="#path-5"></use>
+                    </mask>
+                    <use id="Path" fill="#FF5A5F" fill-rule="nonzero" xlink:href="#path-5"></use>
+                    <g id="colors/lead" mask="url(#mask-6)" fill="#FF5A5F" fill-rule="evenodd">
+                        <rect x="0" y="0" width="66" height="66"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

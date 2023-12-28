@@ -1,0 +1,68 @@
+{
+  "BUDGETKEY_APP_GENERIC_ITEM_THEME": {
+    "siteName": "מפתח התקציב העירוני - אשדוד"
+  },
+  "BUDGETKEY_NG2_COMPONENTS_THEME": {
+    "disableAuth": true,
+    "footerLinks": [
+      {
+        "href": "/about?theme=muni",
+        "title": "על הפרויקט"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey/blob/master/documentation/UsingTheAPI.md",
+        "title": "API"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey",
+        "title": "קוד האתר"
+      },
+      {
+        "href": "/about#privacy",
+        "title": "מדיניות פרטיות"
+      },
+      {
+        "href": "https://next.obudget.org",
+        "title": "מפתח התקציב"
+      }
+    ],
+    "footerText": "המידע המופיע באתר אינו מהווה תחליף למידע במקורות הראשוניים, ובכל מקרה של סתירה המידע שבמקורות הראשוניים הוא הקובע. הסתמכות על האמור באתר היא באחריות המשתמש בלבד.<br/>תאריך עדכון אחרון: ספטמבר 2022.",
+    "headerLinks": [
+      {
+        "href": "/about?theme=muni",
+        "title": "אודות"
+      },
+      {
+        "href": "https://www.ashdod.muni.il/",
+        "title": "אתר העיריה"
+      },
+      {
+        "href": "https://next.obudget.org/i/org/municipality/500200704?theme=muni-ashdod",
+        "title": "חזרה לעמוד הראשי"
+      }
+    ],
+    "hideFooterHasadnaLogo": true,
+    "searchBarConfig": [
+      {
+        "description": "סעיפים בתקציב הרגיל של הרשות",
+        "filters": [
+          {
+            "_type": "muni_budgets",
+            "muni_code": "0070"
+          }
+        ],
+        "id": "muni_budgets",
+        "name": "סעיפי תקציב",
+        "placeholder": "חפשו שמות של סעיפים בתקציב...",
+        "types": [
+          "muni_budgets"
+        ]
+      }
+    ],
+    "searchPlaceholder": "חפשו סעיפי תקציב...",
+    "siteLogo": "muni-logo-ashdod.png",
+    "siteName": "מפתח התקציב העירוני - אשדוד",
+    "siteUrl": "https://next.obudget.org/i/org/municipality/500200704?theme=muni-ashdod",
+    "themeId": "muni-ashdod"
+  }
+}

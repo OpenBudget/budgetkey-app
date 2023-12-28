@@ -1,0 +1,411 @@
+{
+  "BUDGETKEY_APP_GENERIC_ITEM_THEME": {
+    "siteName": "המפה החברתית"
+  },
+  "BUDGETKEY_NG2_COMPONENTS_THEME": {
+    "disableAuth": false,
+    "euDisclaimer": false,
+    "footerLinks": [
+      {
+        "href": "https://next.obudget.org/about?theme=socialmap",
+        "title": "אודות"
+      },
+      {
+        "href": "https://next.obudget.org/about?theme=socialmap#team",
+        "title": "הצוות"
+      },
+      {
+        "href": "https://next.obudget.org/about?theme=socialmap#privacy",
+        "title": "מדיניות פרטיות"
+      },
+      {
+        "href": "http://www.hasadna.org.il/%d7%a6%d7%95%d7%a8-%d7%a7%d7%a9%d7%a8/",
+        "title": "צרו קשר"
+      },
+      {
+        "href": "https://forum.hasadna.org.il/c/eknights/obudget",
+        "title": "דווחו על תקלה"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey",
+        "title": "קוד האתר"
+      },
+      {
+        "href": "https://forum.hasadna.org.il/c/eknights/obudget",
+        "title": "קבוצת הדיון שלנו"
+      },
+      {
+        "href": "https://github.com/OpenBudget/BudgetKey/blob/master/documentation/UsingTheAPI.md",
+        "title": "API"
+      },
+      {
+        "href": "https://next.obudget.org",
+        "title": "מפתח התקציב"
+      }
+    ],
+    "headerLinks": [
+      {
+        "href": "https://next.obudget.org/about/?theme=socialmap",
+        "title": "מי אנחנו"
+      }
+    ],
+    "keepDocTypesOrder": true,
+    "sampleSearches": [
+      "ארגונים פעילים בתחום יוזמות עסקיות",
+      "הנוער העובד והלומד",
+      "ארגונים הפעילים במחוז הדרום"
+    ],
+    "searchBarConfig": [
+      {
+        "filters": [
+          {
+            "_type": "entities",
+            "kind": "association"
+          },
+          {
+            "_type": "reports"
+          },
+          {
+            "_type": "tenders",
+            "claim_date__gte": "now",
+            "tender_type__not": "exemptions"
+          },
+          {
+            "_type": "tenders",
+            "simple_decision": "פתוח",
+            "tender_type__not": "exemptions"
+          },
+          {
+            "_type": [
+              "calls_for_bids",
+              "support_criteria"
+            ],
+            "decision": [
+              "פתוח",
+              "בתוקף"
+            ]
+          },
+          {
+            "_type": [
+              "calls_for_bids",
+              "support_criteria"
+            ],
+            "claim_date__gte": "now"
+          }
+        ],
+        "id": "all",
+        "main": true,
+        "name": "הכל",
+        "placeholder": "חפשו הכל... סעיף תקציבי, ארגון, אדם או כל דבר אחר העולה על דעתכם...",
+        "types": [
+          "all"
+        ]
+      },
+      {
+        "description": "אילו גופים פועלים במגזר השלישי? כאן תמצאו עמותות וחברות לתועלת הציבור -",
+        "filterMenu": [
+          {
+            "display": "סוג ארגון",
+            "id": "org_kind",
+            "options": [
+              {
+                "display": "כל הסוגים",
+                "id": "all"
+              },
+              {
+                "display": "עמותות",
+                "filters": {
+                  "details.org_kind": "עמותה"
+                },
+                "id": "only_associations"
+              },
+              {
+                "display": "חברות לתועלת הציבור",
+                "filters": {
+                  "details.org_kind": "חל\"צ"
+                },
+                "id": "public_good_companies"
+              }
+            ]
+          },
+          {
+            "display": "אזור פעילות",
+            "id": "region",
+            "options": [
+              {
+                "display": "כל המחוזות",
+                "id": "all"
+              },
+              {
+                "display": "מחוז צפון",
+                "filters": {
+                  "details.activity_region_districts": "הצפון"
+                },
+                "id": "north"
+              },
+              {
+                "display": "מחוז מרכז",
+                "filters": {
+                  "details.activity_region_districts": "המרכז"
+                },
+                "id": "center"
+              },
+              {
+                "display": "מחוז דרום",
+                "filters": {
+                  "details.activity_region_districts": "הדרום"
+                },
+                "id": "south"
+              },
+              {
+                "display": "מחוז תל אביב - יפו",
+                "filters": {
+                  "details.activity_region_districts": "אביב"
+                },
+                "id": "tel-aviv"
+              },
+              {
+                "display": "מחוז ירושלים",
+                "filters": {
+                  "details.activity_region_districts": "ירושלים"
+                },
+                "id": "jerusalem"
+              },
+              {
+                "display": "מחוז חיפה",
+                "filters": {
+                  "details.activity_region_districts": "חיפה"
+                },
+                "id": "haifa"
+              },
+              {
+                "display": "מחוז יו״ש",
+                "filters": {
+                  "details.activity_region_districts": "והשומרון"
+                },
+                "id": "yosh"
+              }
+            ]
+          },
+          {
+            "display": "אישורים",
+            "id": "creds",
+            "options": [
+              {
+                "display": "ללא הגבלה",
+                "id": "all"
+              },
+              {
+                "display": "בעלי אישור ניהול תקין",
+                "filters": {
+                  "details.proper_management": "יש"
+                },
+                "id": "proper_management"
+              },
+              {
+                "display": "בעלי אישור בסעיף 46",
+                "filters": {
+                  "details.has_article_46": "יש"
+                },
+                "id": "article46"
+              }
+            ]
+          },
+          {
+            "display": "כספי מדינה",
+            "id": "public_funds",
+            "options": [
+              {
+                "display": "ללא הגבלה",
+                "id": "all"
+              },
+              {
+                "display": "קיבלו תמיכה ממשלתית",
+                "filters": {
+                  "received_amount_supports__gt": 0
+                },
+                "id": "supported"
+              },
+              {
+                "display": "סיפקו שירותים לממשלה",
+                "filters": {
+                  "received_amount_contracts__gt": 0
+                },
+                "id": "contracted"
+              },
+              {
+                "display": "גם וגם",
+                "filters": {
+                  "received_amount_contracts__gt": 0,
+                  "received_amount_supports__gt": 0
+                },
+                "id": "both"
+              }
+            ]
+          }
+        ],
+        "filters": {
+          "kind": "association"
+        },
+        "id": "associations",
+        "name": "עמותות וחל״צ",
+        "placeholder": "חפשו שמות של עמותות או חברות לתועלת הציבור'",
+        "types": [
+          "entities"
+        ]
+      },
+      {
+        "description": "באילו תחומים פועלים במגזר השלישי? כאן תמצאו מידע על כל אחד מתחומי הפעילות -",
+        "filters": {
+          "kind": "fieldofactivity"
+        },
+        "id": "field-of-activity-reports",
+        "name": "תחומי פעילות",
+        "placeholder": "חפשו 'ארגונים פעילים בתחום…'",
+        "types": [
+          "reports"
+        ]
+      },
+      {
+        "description": "היכן בארץ פועלים במגזר השלישי? כאן תמצאו מידע על כל אחד מהמחוזות בארץ -",
+        "filters": {
+          "kind": "district"
+        },
+        "id": "district-reports",
+        "name": "מחוזות",
+        "placeholder": "חפשו 'ארגונים פעילים במחוז'",
+        "types": [
+          "reports"
+        ]
+      },
+      {
+        "description": "הזדמנויות במגזר השלישי? כאן תמצאו קולות קוראים, מכרזים, מבחני תמיכה ועוד!",
+        "filterMenu": [
+          {
+            "display": "סוג ההזדמנות",
+            "id": "kind",
+            "options": [
+              {
+                "display": "הכל",
+                "id": "all"
+              },
+              {
+                "display": "מכרזים",
+                "filters": {
+                  "_type": "tenders"
+                },
+                "id": "tenders"
+              },
+              {
+                "display": "מבחני תמיכה",
+                "filters": {
+                  "_type": "support_criteria"
+                },
+                "id": "support_criteria"
+              },
+              {
+                "display": "קולות קוראים",
+                "filters": {
+                  "_type": "calls_for_bids"
+                },
+                "id": "calls_for_bids"
+              }
+            ]
+          },
+          {
+            "display": "חיפוש ממוקד",
+            "id": "focused",
+            "options": [
+              {
+                "display": "ללא",
+                "id": "no"
+              },
+              {
+                "display": "נסגרים בקרוב",
+                "filters": {
+                  "claim_date__gte": "now",
+                  "claim_date__lte": "now+1w"
+                },
+                "id": "closing"
+              },
+              {
+                "display": "חדשים",
+                "filters": {
+                  "rev_created_at__gte": "now-1w"
+                },
+                "id": "new"
+              },
+              {
+                "display": "התעדכנו לאחרונה",
+                "filters": {
+                  "claim_date__gte": "now+1w",
+                  "last_update_date__gte": "now-1w",
+                  "rev_created_at__lte": "now-1w"
+                },
+                "id": "updated"
+              }
+            ]
+          }
+        ],
+        "filters": [
+          {
+            "_type": "tenders",
+            "claim_date__gte": "now",
+            "tender_type__not": "exemptions"
+          },
+          {
+            "_type": "tenders",
+            "simple_decision": "פתוח",
+            "tender_type__not": "exemptions"
+          },
+          {
+            "_type": [
+              "calls_for_bids",
+              "support_criteria"
+            ],
+            "decision": [
+              "פתוח",
+              "בתוקף"
+            ]
+          },
+          {
+            "_type": [
+              "calls_for_bids",
+              "support_criteria"
+            ],
+            "claim_date__gte": "now"
+          }
+        ],
+        "id": "opportunities",
+        "name": "הזדמנויות",
+        "ordering": "__date_range_to",
+        "placeholder": "חפשו הזדמנויות!",
+        "types": [
+          "tenders",
+          "calls_for_bids",
+          "support_criteria"
+        ]
+      }
+    ],
+    "siteLogo": "socialmap.svg",
+    "siteName": "המפה החברתית",
+    "siteUrl": "https://socialmap.org.il",
+    "supporterInfos": {
+      "midot": {
+        "logo": "midot.svg",
+        "name": "מידות",
+        "url": "http://www.midot.org.il/"
+      },
+      "migdal": {
+        "logo": "migdal.svg",
+        "name": "מגדל",
+        "url": "https://www.migdal.co.il/He/MigdalTeam/social_involvment_migdal/Pages/social_inv.aspx"
+      }
+    },
+    "supporters": [
+      "midot",
+      "migdal"
+    ],
+    "themeId": "socialmap"
+  }
+}
