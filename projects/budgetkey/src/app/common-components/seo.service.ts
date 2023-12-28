@@ -43,17 +43,20 @@ export class SeoService {
     const link = head.querySelector('link[rel="canonical"]');
     link?.setAttribute('href', canonical);
 
-    this.prepareShare(title.replace(this.globalSettings.siteName, '#מפתח_התקציב'), canonical);
+    let shareMessage = title
+      .replace(this.globalSettings.siteName + ' - ', '')
+      .replace(this.globalSettings.siteName, '');
+    this.prepareShare(shareMessage, canonical, 'מפתח_התקציב');
   }
 
-  prepareShare(shareText: string, url: string) {
+  prepareShare(shareText: string, url: string, hashtag: string) {
     this.shareData = {
-      text: shareText,
+      text: shareText + '\n#' + hashtag,
       url
     };
-    this.twitterShare = this.sanitizer.bypassSecurityTrustUrl(`http://twitter.com/share?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}`);
+    this.twitterShare = this.sanitizer.bypassSecurityTrustUrl(`http://twitter.com/share?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent(hashtag)}`);
     this.fbShare = this.sanitizer.bypassSecurityTrustUrl(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
-    this.whatsappShare = this.sanitizer.bypassSecurityTrustUrl(`https://wa.me/?text=${encodeURIComponent(shareText)} ${encodeURIComponent(url)}`);
+    this.whatsappShare = this.sanitizer.bypassSecurityTrustUrl(`https://wa.me/?text= ${encodeURIComponent(url)} ${encodeURIComponent(shareText)}`);
   }
 
   async mobileShare() {
