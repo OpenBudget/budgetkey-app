@@ -5,7 +5,7 @@
     ></app-bk-header>
     <div class='scrollable'>
         <div class='app'>
-            <div class='main' id='main' [style.width]='maxWidth() + "px"'>
+            <div class='main' id='main' [style.width]='maxWidth() ? maxWidth() + "px" : "100%"'>
                 <ng-content></ng-content>
             </div>
             <div class='list' *ngIf='showListView()'>
