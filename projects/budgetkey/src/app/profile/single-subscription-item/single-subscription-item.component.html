@@ -30,12 +30,6 @@
                 </span>
             </span>
         </div>
-        <div class='sharers'>
-            <div class="sharethis-inline-share-buttons" [attr.data-url]="item.url" [attr.data-title]="item.title"></div>
-        </div>
-    </div>
-    <div class='icon share' (click)="share()">
-        <img [src]='sharing ? "assets/profile/img/close.svg" : "assets/profile/img/share-2.svg"'/>
     </div>
     <div class='icon trash' (click)="delete()">
         <img src='assets/profile/img/trash.svg'/>

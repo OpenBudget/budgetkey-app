@@ -45,27 +45,6 @@ export class ProfilePageComponent {
       this.init = true;
       this.hasItems = !!lc.items && lc.items.length > 0;
       this.items.next(lc.items || []);
-      this.refreshShareThis();
     });
-  }
-  
-  ngAfterViewInit() {
-    this.refreshShareThis();
-  }
-  
-  refreshShareThis() {
-    this.ps.browser(() => {
-      if (window.__sharethis__ && window.__sharethis__.initialize) {
-        window.setTimeout(() => {
-          window.__sharethis__.initialize();
-        }, 1000);
-      } else {
-        console.log('Failed to find ShareThis buttons');
-        window.setTimeout(() => {
-          this.ngAfterViewInit();
-        }, 3000);
-      }
-    });
-  }
-  
+  }  
 }

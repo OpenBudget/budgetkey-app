@@ -21,6 +21,7 @@ export class ListPageComponent {
   list: ListContents|null = null;
   listKey: string|null = null;
   canonical: string = '';
+  userId: string = ''
 
   constructor(private globalSettings: GlobalSettingsService, private seo: SeoService, private route: ActivatedRoute,
       private lists: ListsService, private router: Router, private ps: PlatformService, @Optional() @Inject(REQUEST) private request: Request) {
@@ -54,6 +55,7 @@ export class ListPageComponent {
       filter((params) => !!params.listId && !!params.userId),
     ).subscribe((list) => {
       this.listKey = `${list.userId}:${list.listId}`;
+      this.userId = list.userId;
       this.canonical = `https://next.obudget.org/l/${list.userId}/${list.listId}`;
       this.router.navigate(['.'], { relativeTo: this.route, queryParams: { list: this.listKey }, queryParamsHandling: 'merge', replaceUrl: true});
     });
@@ -61,7 +63,7 @@ export class ListPageComponent {
 
   onDeleted() {
     if (this.lists.curatedLists().length > 0) {
-      this.router.navigate(['/l/my'], { queryParamsHandling: 'preserve'});
+      this.router.navigate(['/l', this.userId], { queryParamsHandling: 'preserve'});
     } else {
       this.router.navigate(['/'], { queryParamsHandling: 'preserve' });
     }
