@@ -1,79 +1,85 @@
 :host {
-    ::ng-deep {
-        app-container {
-            background: #fafafa fixed;
-            min-height: 400px;
-            display: block;
-            .container {
-              display:flex;
-              flex-flow: column;
-              align-content: center;
-              align-items: center;
-              app-search {
-                display: flex;
-                flex-flow: column;
-                align-items: center;
-                width: 100%;
-                & > .row {
-                  max-width: 800px;
-                  width: 100%;
-                }
-              }
+//     ::ng-deep {
+//         app-container {
+//             background: #fafafa fixed;
+//             // min-height: 400px;
+//             // display: block;
+            .inner {
+//               display:flex;
+//               flex-flow: column;
+//               align-content: center;
+//               align-items: center;
+//               padding: 0 32px;
+              width: 100%;
+//               max-width: 100%;
+//               overflow-x: hidden;                
+//               app-search {
+//                 display: flex;
+//                 flex-flow: column;
+//                 align-items: center;
+//                 width: 100%;
+//                 & > .row {
+//                   max-width: 800px;
+//                   width: 100%;
+//                 }
+//               }
             }
-            .search_body {
-              margin-top: 20px;
+//             .search_body {
+//               margin-top: 20px;
           
-              .status {
-                padding: 0 10px;
-                color: #4A4A4A;
-                font-family: "Abraham TRIAL";
-                font-size: 16px;
-                letter-spacing: 0.37px;
-                line-height: 19px;
-              }
-            }
+//               .status {
+//                 padding: 0 10px;
+//                 color: #4A4A4A;
+//                 font-family: "Abraham TRIAL";
+//                 font-size: 16px;
+//                 letter-spacing: 0.37px;
+//                 line-height: 19px;
+//               }
+//             }
           
-          }
+//           }
           
-          app-bk-header header {
-            background-color: #fff;
-          }         
+//           app-bk-header header {
+//             background-color: #fff;
+//           }         
 
-          @media only screen and (max-width: 600px) {
-            .app {
-              margin-top: 0;
-              min-height: 100vh;
-            }
+//           @media only screen and (max-width: 600px) {
+//             .app > .main {
+//               margin-top: 0;
+//               min-height: 100vh;
+//             }
           
-            app-bk-header {
-              display: none;
-            }
+//             app-bk-header {
+//               display: none;
+//             }
           
-            app-container {
-              .container {
-                app-search {
-                  & > .row {
-                    width: 100vw;
-                  }
-                }
-              }
-            }
+//             app-container {
+//               .inner {
+//                 app-search {
+//                   & > .row {
+//                     width: 100vw;
+//                   }
+//                 }
+//               }
+//             }
             
-            app-bk-footer {
-              display: none;
-            }
+//             app-bk-footer {
+//               display: none;
+//             }
 
-            .type-text-in-search-bar-right {
-                display: none;
-            }
+//             .type-text-in-search-bar-right {
+//                 display: none;
+//             }
 
-            .bkmodal-dialog {
-                width: 90% !important;
-            }
+//             .bkmodal-dialog {
+//                 width: 90% !important;
+//             }
 
-            .bkmodal-content {
-                padding: 30px !important;
-            }
-        }    
-    }
+//             .bkmodal-content {
+//                 &.standard {
+//                   padding: 30px !important;
+//                 }
+//             }
+//         }    
+//     }
 }

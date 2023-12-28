@@ -1,5 +1,5 @@
 export const environment = {
-    ssrBase: 'http://localhost:4200',
+    ssrBase: 'http://127.0.0.1:4200',
 };
 
 /*

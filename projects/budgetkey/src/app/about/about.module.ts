@@ -5,6 +5,7 @@ import { AboutRoutingModule } from './about-routing.module';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ListComponentsModule } from '../list-components/list-components.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     CommonComponentsModule,
+    ListComponentsModule,
     HttpClientModule,
     AboutRoutingModule
   ]

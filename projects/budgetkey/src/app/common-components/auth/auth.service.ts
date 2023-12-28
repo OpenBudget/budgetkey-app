@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, ReplaySubject, tap } from 'rxjs';
+import { Observable, ReplaySubject, tap, timer } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
+import { Location } from '@angular/common';
+import { PlatformService } from '../platform.service';
 
 @Injectable()
 export class AuthService {
@@ -10,15 +12,16 @@ export class AuthService {
     private jwtQueryParam: string;
     private user = new ReplaySubject<any>();
     private jwt = new ReplaySubject<any>();
+    private next: string | null = null;
 
     public authConfig = {
         authServerUrl: 'https://next.obudget.org',
         jwtLocalStorageKey: 'jwt',
         jwtQueryParam: 'jwt',
-        profilePagePath: '/p/'
+        profilePagePath: ['/p']
     };    
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private platform: PlatformService) {
         this.authServerUrl = this.authConfig.authServerUrl;
         this.jwtLocalStorageKey = this.authConfig.jwtLocalStorageKey;
         this.jwtQueryParam = this.authConfig.jwtQueryParam;
@@ -78,30 +81,41 @@ export class AuthService {
         return this.jwt;
     }
 
-    check(next: string): Observable<any> {
+    public getNext(): string | null {
+        return this.next;
+    }
+
+    check(next_?: string): Observable<any> {
+        const next = next_ || window.location.href;
         const jwt = this.resolveToken();
+        const headers: any = {};
         if (jwt) {
             this.setToken(jwt);
+            headers['auth-token'] = jwt;
         }
         return this.http
-            .get(this.authServerUrl + '/auth/check?jwt=' + (jwt ? jwt : '') + '&next=' + encodeURIComponent(next))
+            .get(`${this.authServerUrl}/auth/check?next=${encodeURIComponent(next)}`, { headers })
             .pipe(
-                tap((user) => this.user.next(user)),
+                tap((user) => {
+                    this.next = next;
+                    this.user.next(user);
+                }),
             );
     }
 
-    logout(next: string): Observable<any> {
+    logout(): Observable<any> {
         this.deleteToken();
-        return this.check(next);
+        return this.check();
     }
 
     permission(service: string): Observable<any> {
         return this.jwt
             .pipe(
                 filter((token) => token !== null),
-                switchMap((token) =>
-                   this.http.get(this.authServerUrl + '/auth/authorize?service=' + service + '&jwt=' + token)
-                ),
+                switchMap((token) => {
+                    const headers = { 'auth-token': token };
+                    return this.http.get(`${this.authServerUrl}/auth/authorize?service=${service}`, { headers });
+                }),
                 first()
             );
     }

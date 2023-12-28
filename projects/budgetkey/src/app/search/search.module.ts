@@ -10,12 +10,12 @@ import { HorizontalResultsComponent } from './horizontal-results/horizontal-resu
 import { SearchFilterMenuComponent } from './search-filter-menu/search-filter-menu.component';
 import { SearchFilterMenuBarComponent } from './search-filter-menu-bar/search-filter-menu-bar.component';
 import { SearchModeSelectorComponent } from './search-mode-selector/search-mode-selector.component';
-import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchTagComponent } from './search-tag/search-tag.component';
 import { VerticalResultsComponent } from './vertical-results/vertical-results.component';
 import { FormsModule } from '@angular/forms';
 
 import { SearchApiService } from './search-api.service';
+import { ListComponentsModule } from '../list-components/list-components.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import { SearchApiService } from './search-api.service';
     SearchFilterMenuComponent,
     SearchFilterMenuBarComponent,
     SearchModeSelectorComponent,
-    SearchResultComponent,
     SearchTagComponent,
     VerticalResultsComponent,
   ],
@@ -36,6 +35,7 @@ import { SearchApiService } from './search-api.service';
     CommonComponentsModule,
     FormsModule,
     SearchRoutingModule,
+    ListComponentsModule,
   ],
   providers: [
     SearchApiService

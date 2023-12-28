@@ -1,8 +1,14 @@
+@import '../../../common.less';
+
 :host {
     display: flex;
     flex-flow: column;
     align-items: center;
     width: 100%;
+
+    .mobile({
+        padding: 0 16px;
+    });
 
     .count-tags {
         display: flex;

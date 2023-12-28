@@ -12,6 +12,7 @@ import { MushonkeyModule } from 'mushonkey';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilsService } from './utils.service';
 import { NgxSeoModule } from '@avivharuzi/ngx-seo';
+import { ListComponentsModule } from '../list-components/list-components.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { NgxSeoModule } from '@avivharuzi/ngx-seo';
   imports: [
     CommonModule,
     CommonComponentsModule,
+    ListComponentsModule,
     MainPageRoutingModule,
     MushonkeyModule,
   ],

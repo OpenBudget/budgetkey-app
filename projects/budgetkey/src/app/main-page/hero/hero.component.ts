@@ -1,4 +1,4 @@
-import {Component, ViewChild, ElementRef, EventEmitter, Inject, HostListener} from '@angular/core';
+import {Component, ViewChild, ElementRef, EventEmitter, AfterViewInit} from '@angular/core';
 import {
   MushonKeyChart, MushonKeyFlow, MushonKeyFlowGroup,
   MushonkeyComponent
@@ -9,7 +9,10 @@ import { __T as __ } from '../main-page.component';
 import { sum as d3Sum, max as d3Max } from 'd3-array';
 import { easeExpOut, easePolyInOut } from 'd3-ease';
 import { bubbles } from '../bubbles';
-import { timer } from 'rxjs';
+import { animationFrameScheduler, debounceTime, fromEvent } from 'rxjs';
+import { WindowService } from '../../common-components/window.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { PlatformService } from '../../common-components/platform.service';
 
 const CENTER_WIDTH = 200;
 const CENTER_HEIGHT = 80;
@@ -482,12 +485,13 @@ function initDialog() {
   }
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-hero',
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.less']
 })
-export class HeroComponent {
+export class HeroComponent implements AfterViewInit {
 
   @ViewChild('mushonkeyWrapper') mushonkeyComponentWrapper: ElementRef;
   @ViewChild('mushonkey') mushonkeyComponent: MushonkeyComponent;
@@ -513,7 +517,7 @@ export class HeroComponent {
     return new MushonKeyFlow(amount, title, null);
   }
 
-  constructor() {
+  constructor(private window: WindowService, private platform: PlatformService) {
     this.makeDeficitCharts(bubbles.deficitChart);
     bubbles.educationCharts.forEach((c: any) => this.makeEducationCharts(c));
     this.makeSupportChart(bubbles.supportChart[0], bubbles.supportChart[1]);
@@ -724,19 +728,26 @@ export class HeroComponent {
     });
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event: Event) {
-    timer(10).subscribe(() => {
-      const el = this.heroElement.nativeElement;
-      const rectTop = el.getBoundingClientRect().top;
-      const offsetHeight = el.scrollHeight;
-      if ((rectTop < 0) && (rectTop > -offsetHeight)) {
-        const progress = -1 * rectTop / offsetHeight;
-        this.scroller.emit(progress);
-      } else if (rectTop > 0) {
-        this.scroller.emit(0);
-      } else {
-        this.scroller.emit(1);
+  ngAfterViewInit(): void {
+    this.platform.browser(() => {
+      const el = this.window.D?.querySelector('.scrollable');
+      if (el) {
+        fromEvent(el, 'scroll').pipe(
+          untilDestroyed(this),
+          debounceTime(16, animationFrameScheduler),
+        ).subscribe((event: Event) => {
+          const el = this.heroElement.nativeElement;
+          const rectTop = el.getBoundingClientRect().top;
+          const offsetHeight = el.scrollHeight;
+          if ((rectTop < 0) && (rectTop > -offsetHeight)) {
+            const progress = -1 * rectTop / offsetHeight;
+            this.scroller.emit(progress);
+          } else if (rectTop > 0) {
+            this.scroller.emit(0);
+          } else {
+            this.scroller.emit(1);
+          }
+        });
       }
     });
   }

@@ -1,12 +1,13 @@
-import { Component, Input, Inject, OnInit } from '@angular/core';
+import { Component, Input, Inject, OnInit, EventEmitter, Output } from '@angular/core';
 
 
-import { DocResultEntry } from '../model';
+import { DocResultEntry } from '../../common-components/search-models';
 
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/he';
+import { DomSanitizer } from '@angular/platform-browser';
 dayjs.locale('he');
 
 type StringOrFunc = string | ((x: any) => string);
@@ -55,6 +56,12 @@ export class SearchResultComponent implements OnInit {
   @Input() kind: string;
   @Input() horizontal = false;
   @Input() bare = false;
+  @Input() listable = true;
+  
+  @Input() showNotes = false;
+  @Input() editableNotes = false;
+  @Input() notes: string;
+  @Output() updatedNotes = new EventEmitter<string>();
 
   private PARAMETERS: { [s: string]: Parameter; } = {
     // // ENTITIES
@@ -557,7 +564,7 @@ export class SearchResultComponent implements OnInit {
 
   public p: Parameter;
 
-  constructor(private globalSettings: GlobalSettingsService) { }
+  constructor(private globalSettings: GlobalSettingsService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     const parts = this.item.source.doc_id.split('/');
@@ -679,13 +686,21 @@ export class SearchResultComponent implements OnInit {
     return x['payments'][x['payments'].length - 1];
   }
 
+  routerLink() {
+    const doc_id = this.item.source.doc_id;
+    if (doc_id.indexOf('activities/gov_social_service') === 0) {
+      return null;
+    }
+    return [`/i/${doc_id}`];
+  }
+
   href() {
     const doc_id = this.item.source.doc_id;
-    let base = '';
     if (doc_id.indexOf('activities/gov_social_service') === 0) {
-      base = 'https://www.socialpro.org.il';
+      const theme = (!this.bare && this.globalSettings.themeId) ? `&theme=${this.globalSettings.themeId}` : '';
+      return this.sanitizer.bypassSecurityTrustUrl(`https://www.socialpro.org.il/i/${doc_id}?li=${this.index}${theme}`);
     }
-    return base + '/i/' + doc_id + '?li=' + this.index + (!this.bare && this.globalSettings.themeId ? '&theme=' + this.globalSettings.themeId : '');
+    return null;
   }
 
   remainingTime(x: any) {
@@ -700,5 +715,16 @@ export class SearchResultComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  updateNotes() {
+    this.updatedNotes.emit(this.notes);
+  }
+
+  stopEvent(event: Event) {
+    event.stopPropagation();
+    if (event.type === 'click') {
+      event.preventDefault();
+    }
   }
 }

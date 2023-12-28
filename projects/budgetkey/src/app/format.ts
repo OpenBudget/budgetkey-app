@@ -1,10 +1,12 @@
 import * as durationPlugin from 'dayjs/plugin/duration';
 import * as relativeTimePlugin from 'dayjs/plugin/relativeTime';
+import * as utcPlugin from 'dayjs/plugin/utc';
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/he';
 dayjs.locale('he')
 dayjs.extend(durationPlugin);
 dayjs.extend(relativeTimePlugin);
+dayjs.extend(utcPlugin);
 
 export class Format {
   
@@ -34,11 +36,18 @@ export class Format {
     return dayjs(value).format('DD/MM/YYYY');
   }
 
-  public relativeDate(value: string): string {
+  public relativeDate(value: string|null|undefined, noVal?: string): string {
     if (value) {
       return dayjs(value).fromNow();
     }
-    return 'תאריך פרסום לא ידוע';
+    return noVal || 'תאריך פרסום לא ידוע';
+  }
+
+  public relativeUTCDate(value: string|null|undefined, noVal?: string): string {
+    if (value) {
+      return dayjs.utc(value).fromNow();
+    }
+    return noVal || 'לא ידוע';
   }
 
   public percent(value: number): string {

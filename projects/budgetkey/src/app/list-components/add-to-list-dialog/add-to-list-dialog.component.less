@@ -1,0 +1,289 @@
+@import '../../../common.less';
+
+:host {
+    .desktop({
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translateX(-100%);
+        z-index: 100;    
+    });
+    .mobile({
+        position: fixed;
+        top: 0;
+        right: 0;    
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        flex-flow: column;
+        align-items: stretch;
+        justify-content: flex-end;
+    });
+
+    .dialog {
+        .desktop({
+            width: 280px;
+        });
+        .mobile({
+            width: 100%;
+            height: auto;
+        });
+        min-height: 32px;
+        max-height: 220px;
+        border-radius: 4px;
+        border: 1px solid @color-fill-lead;
+        background: @color-white;
+        box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+    
+        .header {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            gap: 8px;
+            padding: 2px 8px;
+            background-image: url(../../../assets/lists/bg.png);
+            background-size: 8px;
+            background-repeat: repeat;
+        
+            .icon {
+                flex: 0 0 auto;
+                // margin-top: 4px;
+                width: 24px;
+                height: 24px;
+                margin-right: 2px;
+                background-image: url(../../../assets/lists/icon-list-red.svg);
+                background-size: contain;
+                background-repeat: no-repeat;
+                cursor: pointer;
+
+                &:hover {
+                    background-image: url(../../../assets/lists/icon-remove-list-red.svg);
+                }
+            }
+    
+            .title {
+                display: flex;
+                flex-flow: column;
+                align-items: flex-start;
+                gap: 4px;
+    
+                span {
+                    color: @color-gray-600;
+                    .font-abraham;
+                    font-size: 11px;
+                    font-weight: 300;
+                    line-height: normal;
+                }
+                h1 {
+                    color: @color-lists-blue;
+                    .font-gadi;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: normal;
+                    margin: 0;
+                }
+            }
+        }
+        .notes {
+            padding: 4px;
+            .placeholder {
+                border-radius: 2px;
+                background: @color-white;
+                border: 1px solid @color-lists-blue2;
+                padding: 4px;
+                padding-right: 32px;
+                color: @color-gray-600;
+                .font-abraham;
+                font-size: 13px;
+                font-weight: 300;
+                line-height: normal;
+                .background-image;
+                background-image: url(../../../assets/lists/icon-edit-gray-400.svg);
+                background-size: 16px;
+                background-position: center right 8px;
+                cursor: pointer;
+            }
+            textarea {
+                width: 100%;
+                border-radius: 2px;
+                background: @color-white;
+                border: 1px solid @color-lists-blue2;
+                padding: 8px;
+                color: @color-lists-blue;
+                text-align: right;
+                .font-gadi;
+                font-size: 13px;
+                font-weight: 400;
+                line-height: 18px;
+                &::placeholder {
+                    color: @color-gray-600;
+                    .font-abraham;
+                    font-size: 13px;
+                    font-weight: 300;
+                    line-height: normal;    
+                }
+            }
+        }
+        .list-selection {
+            width: 100%;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            padding: 0 8px;
+            height: 128px;
+            overflow-y: auto;
+            .no-scrollbars;
+    
+            .list-selection-item {
+                width: 100%;
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                gap: 12px;
+                padding: 4px;
+                cursor: pointer;
+                border-bottom: 1px solid @color-disabled;
+    
+                // &:last-child {
+                //     border-bottom: none;
+                // }
+    
+                .icon {
+                    flex: 0 0 auto;
+                    width: 24px;
+                    height: 24px;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-image: url(../../../assets/lists/icon-select-list-gray-400.svg);
+                }
+    
+                .title {
+                    color: @color-gray-500;
+                    .font-gadi;
+                    font-size: 13px;
+                    font-weight: 400;
+                    line-height: normal;
+                    overflow: hidden;
+                    text-align: right;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+    
+                &.subscribed {
+                    .icon {
+                        background-image: url(../../../assets/lists/icon-list-red.svg);
+
+                        &:hover {
+                            background-image: url(../../../assets/lists/icon-remove-list-red.svg);
+                        }
+                    }
+    
+                    .title {
+                        color: @color-lists-blue;
+                    }
+                }
+            }
+        }
+    
+        .new-list {
+            padding: 4px 12px;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            gap: 12px;
+            background-image: url(../../../assets/lists/bg.png);
+            background-size: 8px;
+            background-repeat: repeat;
+            border-top: 1px solid @color-lists-blue2;
+
+            .editor {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                gap: 12px;
+                cursor: pointer;
+                flex: 1 1 auto;
+
+                .icon {
+                    flex: 0 0 auto;
+                    width: 24px;
+                    height: 24px;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-image: url(../../../assets/lists/icon-new-list-gray-500.svg);
+                }
+    
+                .placeholder {
+                    color: @color-gray-500;
+                    .font-abraham;
+                    text-align: right;
+                    font-size: 16px;
+                    font-weight: 300;
+                    line-height: normal;
+                }
+
+                input {
+                    flex: 1 1 auto;
+                    display: flex;
+                    height: 24px;
+                    padding: 1px 4px;
+                    border-radius: 2px;
+                    border: 1px solid @color-lists-blue2;
+                    background: @color-white;
+
+                    color: @color-lists-blue;
+                    text-align: right;
+                    .font-gadi;
+                    font-size: 13px;
+                    font-weight: 400;
+                    line-height: normal;
+
+                    &::placeholder {
+                        color: @color-gray-200;
+                        .font-abraham;
+                        text-align: right;
+                        font-size: 16px;
+                        font-weight: 300;
+                        line-height: normal;
+                    }
+                }
+            }
+        }
+
+        .action {
+            width: 24px;
+            height: 24px;
+            flex: 0 0 auto;
+            margin-right: auto;
+            cursor: pointer;
+    
+            a {
+                border: none;
+                appearance: none;
+                background: none;
+                .background-image;
+                width: 100%;
+                height: 100%;
+                display: inline-block;
+    
+                transform: translateY(0px);
+                &:hover {
+                    transform: translateY(1px);
+                }
+    
+                &.close-button {
+                    background-image: url(../../../assets/lists/icon-complete-red.svg);
+                    background-size: 24px;
+                }
+
+                &.select-list-button {
+                    background-image: url(../../../assets/lists/icon-chevron-down-grayish-blue.svg);
+                    background-size: 12px;
+                }
+            }
+        }
+    }
+}

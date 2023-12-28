@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../common-components/auth/auth.service';
+import { PlatformService } from '../../common-components/platform.service';
 
 @Component({
   selector: 'app-bare-search-bar',
@@ -12,8 +13,10 @@ export class BareSearchBarComponent implements OnInit {
   @Input() term = '';
   @Output() search = new EventEmitter<string>();
 
-  constructor(private auth: AuthService) {
-    auth.check(window.location.href).subscribe((user) => {});
+  constructor(private auth: AuthService, private ps: PlatformService) {
+    this.ps.browser(() => {
+      this.auth.check().subscribe((user) => {});
+    });
   }
 
   ngOnInit() {

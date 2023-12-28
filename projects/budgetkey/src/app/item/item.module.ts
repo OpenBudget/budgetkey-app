@@ -58,6 +58,7 @@ import { ItemSocialServiceComponent } from './items/item-soproc/item-social-serv
 import { SocialServiceDataTableComponent } from './items/item-soproc/item-social-service/social-service-data-table/social-service-data-table.component';
 import { ItemSupportsComponent } from './items/item-supports/item-supports.component';
 import { SearchLinkComponent } from './search-link/search-link.component';
+import { ListComponentsModule } from '../list-components/list-components.module';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { SearchLinkComponent } from './search-link/search-link.component';
     HttpClientModule,
     ItemRoutingModule,
     CommonComponentsModule,
+    ListComponentsModule,
     ChartsModule
   ],
   providers: [

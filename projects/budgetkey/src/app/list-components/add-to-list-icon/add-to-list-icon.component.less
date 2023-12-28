@@ -1,0 +1,49 @@
+@import '../../../common.less';
+
+:host {
+    display: inline-block;
+
+    width: 0;
+    margin-right: -4px;
+    overflow: hidden;
+    transition-property: width, margin-left;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+
+    position: relative;
+
+    // &.enabled {
+        width: 24px;
+        height: 24px;
+        overflow: visible;
+    // }
+    .icon {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        .background-image;
+        background-size: 24px;
+
+        background-image: url(../../../assets/lists/icon-not-subscribed.svg);
+        &.subscribed {
+            background-image: url(../../../assets/lists/icon-subscribed.svg);
+        }
+        &.processing {
+            opacity: 0.5;
+            cursor: wait;
+        }
+    }
+
+    &.enabled {
+        .icon {
+            cursor: pointer;
+        }
+    }
+
+    app-add-to-list-dialog {
+        position: absolute;
+        top: 24px;
+        right: 0;
+        z-index: 100;
+    }
+}

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { AppContainerComponent } from './components/app-container/app-container.component';
 import { BkHeaderComponent } from './components/header/bk-header.component';
 import { BkFooterComponent } from './components/footer/bk-footer.component';
 import { BkSearchBar } from './components/searchbar/bk-search-bar.component';
@@ -20,6 +19,8 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './auth/auth.service';
 import { RouterModule } from '@angular/router';
 import { SeoService } from './seo.service';
+import { LayoutService } from './layout.service';
+import { WindowService } from './window.service';
 
 /**
  * Created by adam on 27/12/2016.
@@ -32,7 +33,6 @@ import { SeoService } from './seo.service';
     RouterModule
   ],
   declarations: [
-    AppContainerComponent,
     BkHeaderComponent,
     BkFooterComponent,
     BkSearchBar,
@@ -41,17 +41,18 @@ import { SeoService } from './seo.service';
     BkSubscriptionManager,
     ModalComponent,
     ClickOnReturnDirective,
-    AuthComponent
+    AuthComponent,
   ],
   providers: [
     ListsService,
     GlobalSettingsService,
     PlatformService,
     AuthService,
-    SeoService
+    SeoService,
+    LayoutService,
+    WindowService
   ],
   exports: [
-    AppContainerComponent,
     BkHeaderComponent,
     BkFooterComponent,
     BkSearchBar,

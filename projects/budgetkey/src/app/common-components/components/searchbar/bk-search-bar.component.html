@@ -66,6 +66,10 @@
 
 </div>
 
-<a class='search-box fake' *ngIf='fake' [href]='externalUrl' clickOnReturn>
+<a class='search-box fake' *ngIf='fake' 
+   [href]='externalUrlHref ? externalUrl : null'
+   [routerLink]='externalUrlHref ? null : ["/s"]'
+   queryParamsHandling='merge'
+   clickOnReturn>
     <span>חיפוש באתר...</span>
 </a>

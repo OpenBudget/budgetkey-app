@@ -1,3 +1,5 @@
+@import '../../common.less';
+
 .bk-tooltip-anchor {
     position: relative;
     display: inline;
@@ -8,21 +10,31 @@
     span.bk-tooltip {
         position: absolute;
         display: none;
-        width: 300px;
+        width: max-content;
+        max-width: 300px;
         color: #FFFFFF;
-        background: #434343;
+        background: @color-gray-700;
         line-height: 18px;
-        text-align: center;
         visibility: hidden;
-        border-radius: 3px;
+        border-radius: 4px;
+
+        text-align: right;
         font-size: 14px;
+        line-height: 17x;
         font-weight: 300;
-        padding: 10px;
-        text-align: justify;
-        font-family: "Abraham TRIAL", "Alef Hebrew", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+
+        &.bk-bigger {
+            text-align: center;
+            font-size: 16px;
+            line-height: 20px;
+            font-weight: 400;    
+        }
+        padding: 4px 8px;
+
+        .font-abraham;
 
         @media only screen and (max-width: 600px)  {
-            width: 150px;
+            max-width: 150px;
             font-size: 10px;
             line-height: 12px;
             padding: 5px;
@@ -31,11 +43,10 @@
         &:after {
             content: '';
             position: absolute;
-            bottom: 100%;
-            left: 95%;
-            margin-left: -5px;
+            top: -5px;
+            right: 5px;
             width: 0; height: 0;
-            border-bottom: 5px solid #434343;
+            border-bottom: 5px solid @color-gray-700;
             border-right: 5px solid transparent;
             border-left: 5px solid transparent;
 
@@ -46,26 +57,37 @@
         
         &.bk-align-left {        
             &:after {
-                left: 5%;
+                left: 5px;
+                right: auto;
             }
         }
 
+        &.bk-align-top {        
+            &:after {
+                bottom: -5px;
+                top: auto;
+                transform: rotate(180deg);
+            }
+        }
     }
 
     &:hover .bk-tooltip {
         visibility: visible;
         display: inherit;
-        top: ~"calc(100% + 5px)";
-        left: 50%;
-        margin-left: -280px;
+        bottom: -4px;
+        right: calc(50% ~'-' 10px);
+        transform: translateY(100%);
         z-index: 999;    
 
-        @media only screen and (max-width: 600px)  {
-            margin-left: -75px;
+        &.bk-align-left {        
+            left: 4px;
+            right: auto;
         }
 
-        &.bk-align-left {        
-            margin-left: -10px;
+        &.bk-align-top {        
+            top: -4px;
+            bottom: auto;
+            transform: translateY(-100%);
         }
     }
 
@@ -76,8 +98,8 @@
         position: relative;
     }
     
-    &.img:hover .bk-tooltip {
-        top: ~"calc(100% + 0.75em)";
-        left: ~"calc(50% - 0.32em)";
-    }
+    // &.img:hover .bk-tooltip {
+    //     top: ~"calc(100% + 0.75em)";
+    //     left: ~"calc(50% - 0.32em)";
+    // }
 }

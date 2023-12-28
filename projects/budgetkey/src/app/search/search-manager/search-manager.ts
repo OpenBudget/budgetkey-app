@@ -1,5 +1,5 @@
 import { Subject, of, BehaviorSubject, Observable, from, merge, empty, EMPTY, ReplaySubject } from 'rxjs';
-import { SearchParams, SearchResults, DocResultEntry } from '../model';
+import { SearchParams, SearchResults, DocResultEntry } from '../../common-components/search-models';
 import { debounceTime, switchMap, mergeMap, filter, map, last, tap, catchError } from 'rxjs/operators';
 import { SearchState } from '../search-state/search-state';
 import { SearchApiService } from '../search-api.service';
@@ -22,7 +22,7 @@ export class SearchManager {
     
   // Fetch more
   private moreQueue = new Subject<SearchParams>();
-  private done = false;
+  public done = false;
   public last: SearchParams = new SearchParams();
   
   // Results

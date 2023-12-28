@@ -1,0 +1,100 @@
+<div class='header'>
+    <div class='header-content'>
+        <div class='author'>
+            <div class='avatar' [style.background-image]='"url(" + list.properties.avatar_url + ")"'></div>
+            <a class='name' [routerLink]='["/l", list.user_id]' queryParamsHandling='preserve'>{{list.properties.name}}</a>
+        </div>
+        <div class='title'>
+            <div class='icon'></div>
+            <h1 [editedContent]='editable()' (updated)='title = $event' #titleEl>{{title}}</h1>
+        </div>
+        <div class='timestamps'>
+            <span>עודכן:</span>
+            <span>{{format.relativeUTCDate(list.update_time)}}</span>
+            <span>|</span>
+            <span>נוצר:</span>
+            <span>{{format.relativeUTCDate(list.create_time)}}</span>
+        </div>
+        <div class='description' [editedContent]='editable()' (updated)='description = $event' #descriptionEl>{{description}}</div>
+        <div class='selectors'>
+    
+        </div>
+    </div>
+    <div class='controls' *ngIf='headerControls'>
+        <a class='fullscreen-button' [routerLink]='["/l",  list.user_id, list.name]' [queryParams]='{list: null}' queryParamsHandling='merge' clickOnReturn></a>
+        <a class='close-button' [routerLink]='"."' [queryParams]='{list: null}' queryParamsHandling='merge' clickOnReturn></a>
+    </div>
+    <div class='edit-controls' *ngIf='editable()'>
+        <a class='delete-button' (activated)='deleteDialog.set(true)' clickOnReturn>
+            <span class='icon'></span>
+            מחיקת רשימה
+        </a>
+    </div>
+</div>
+<div class='list-contents'>
+    <div class='list-contents-results'>
+        <ng-container  *ngFor='let item of list.items; let i = index'>
+            <search-result [item]="item.properties" [index]="i" [kind]="item.properties.type" 
+                [bare]='false'
+                [showNotes]='true' [notes]='item.properties.__notes' [editableNotes]='editable()'
+                (updatedNotes)='updateNotes(item, $event)'
+                *ngIf='item.properties'
+            ></search-result>
+        </ng-container>        
+    </div>
+    <div class='share'>
+        <button class='share-button' clickOnReturn (activated)='share()'>שיתוף</button>
+    </div>
+</div>
+<app-modal [standardLayout]='false'
+    *ngIf='shareDialog()'
+    (close)='shareDialog.set(false)'
+>
+    <div class='dialog-header'>
+        <span>שיתוף הרשימה:</span>
+        <div class='title'>{{list.title}}</div>
+    </div>
+    <div class='dialog-explanation' *ngIf='editable()'>
+        <span>מי יכול לראות את הרשימה הזו?</span>
+        <div class='dialog-option private' [class.active]='!public' clickOnReturn (activated)='public = false'>
+            <div class='icon'></div>
+            <div class='dialog-option-text'>
+                <strong>טיוטא</strong>
+                <span>רק למי שיש את הקישור הסודי הזה</span>
+            </div>
+        </div>
+        <div class='dialog-option public' [class.active]='public' clickOnReturn (activated)='public = true'>
+            <div class='icon'></div>
+            <div class='dialog-option-text'>
+                <strong>פומבי</strong>
+                <span>לכולם יש גישה לרשימה, אפילו למנועי חיפוש</span>    
+            </div>
+        </div>
+    </div>
+    <div class='dialog-done'>
+        <button class='copy-to-clipboard' clickOnReturn (activated)='copyLinkToClipboard()' [class.copied]='copied'>
+            <span class='icon'></span>
+            העתקת הקישור
+        </button>
+        <button class='done-button' clickOnReturn (activated)='shareDialog.set(false)'>אישור</button>
+    </div>
+</app-modal>
+
+<app-modal [standardLayout]='false'
+    *ngIf='deleteDialog()'
+    (close)='deleteDialog.set(false)'
+>
+    <div class='dialog-header'>
+        <span>מחיקת הרשימה:</span>
+        <div class='title'>{{list.title}}</div>
+    </div>
+    <div class='dialog-explanation'>
+        <span>לא ניתן לבטל פעולה זו.</span><br/>
+    </div>
+    <div class='dialog-done'>
+        <button class='cancel-button' clickOnReturn (activated)='deleteDialog.set(false)'>
+            ביטול
+        </button>
+        <button class='done-button' clickOnReturn (activated)='deleteSelf()'>מחיקה</button>
+    </div>
+</app-modal>

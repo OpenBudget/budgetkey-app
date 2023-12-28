@@ -1,4 +1,7 @@
-.bkmodal-bg {
+:host {
+  position: relative;
+  
+  .bkmodal-bg {
     position: fixed;
     z-index: 10000;
     top: 0;
@@ -13,8 +16,7 @@
   }
 
   .bkmodal-dialog {
-
-    width: 60%;
+    width: fit-content;
     max-width: 600px;
     background: white;
     border: none;
@@ -25,7 +27,9 @@
 
   .bkmodal-content {
       position: relative;
-      padding: 100px;
+      &.standard {
+        padding: 100px;        
+      }
   }
 
   .close {
@@ -54,10 +58,13 @@
 
   @media only screen and (max-width: 600px)  {
     .bkmodal-content {
-      padding: 20px;
+      &.standard {
+        padding: 20px;        
+      }
     }
 
     .bkmodal-dialog {
       width: 100%;
     }
   }
+}

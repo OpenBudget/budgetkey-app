@@ -19,7 +19,6 @@ export class PageNotFoundComponent {
     @Optional() @Inject(REQUEST) private request: Request
   ) {
     this.globalSettings.ready.subscribe(() => {
-      // console.log('NOT FOUND', this.route.snapshot.url);
       if (this.ps.server()) {
         this.request?.res?.status(404);
       }

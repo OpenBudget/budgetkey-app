@@ -21,4 +21,6 @@ RUN npm install
 
 COPY  --from=build /app/dist dist
 
+ENV NODE_ENV=production
+
 ENTRYPOINT [ "node", "/app/dist/budgetkey/server/main.js" ]

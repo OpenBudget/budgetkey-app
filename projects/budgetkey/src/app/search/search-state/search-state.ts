@@ -1,5 +1,5 @@
 import { ReplaySubject } from 'rxjs';
-import { SearchParams } from '../model';
+import { SearchParams } from '../../common-components/search-models';
 import { SearchBarType } from '../../common-components/components/searchbar/bk-search-bar.component';
 import { some } from 'd3-array';
 

@@ -1,9 +1,23 @@
+@import '../../../common.less';
+
 .card {
     display: flex;
     flex-flow: column;
     border-radius: 4px;
     box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
     border: solid 1px black;
+
+    &:hover {
+        text-decoration: inherit;
+    }
+
+    & > * {
+        background-color: @color-white;
+    }
+
+    app-add-to-list-icon {
+        pointer-events: all;
+    }
 
     &.horizontal {
         width: 320px;
@@ -15,6 +29,7 @@
         display: flex;
         flex-flow: row;
         align-items: center;
+        position: relative;
 
         span {
             font-family: 'Abraham TRIAL';
@@ -87,6 +102,7 @@
             display: flex;
             flex-flow: column;
             align-items: flex-start;
+            gap: 4px;
             // margin: 0 8px;
             max-width: 100%;
             margin: 0;
@@ -106,7 +122,11 @@
                 max-height: 44px;
                 width: 100%;
                 position: relative;
-
+                display: flex;
+                flex-flow: row;
+                gap: 4px;
+                align-items: center;
+            
                 .fadeoff {
                     content: '';
                     position: absolute;
@@ -219,6 +239,59 @@
             border-radius: 8px;
             position: relative;
             top: -1px;
+        }
+    }
+
+    .notes {
+        padding: 4px;
+        padding-top: 0;
+        width: 100%;
+        
+        .inner {
+            display: block;
+            width: 100%;
+            border-radius: 2px;
+            border: 1px solid #9CD3FE;
+            background-color: @color-white;
+            background-image: url(../../../assets/lists/bg.png);
+            background-size: 8px;
+            background-repeat: repeat;
+            height: 24px;
+            padding: 0 4px;
+            color: @color-lists-blue;
+            text-align: right;
+            .font-gadi;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 18px;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            input {
+                width: 100%;
+                border: none;
+                outline: none;
+                background-color: transparent;
+
+                &.empty {
+                    padding-right: 20px;
+                    .background-image;
+                    background-size: 10px;
+                    background-image: url(../../../assets/lists/icon-edit-gray-400.svg);
+                    background-position: center right 2px;
+                }
+
+                &::placeholder {
+                    color: @color-gray-600;
+                    .font-abraham;
+                    font-size: 13px;
+                    font-weight: 300;
+                }
+
+                // &:focus {
+                //     background-image: none;
+                // }
+            }
         }
     }
 }

@@ -1,0 +1,30 @@
+<app-container [showHeader]="true" [showSearchBar]="true" [listSideView]='false'>
+    <ng-container *ngIf='init'>
+        <div class='header'>
+            <div class='logo'></div>
+            <div class='title'>הרשימות של<br/>{{theLists()[0]?.properties?.name}}</div>
+        </div>
+        <div class='lists'>
+            <div class='list' *ngFor='let list of theLists()'
+                [routerLink]='["/l", list.user_id, list.name]'
+                clickOnReturn
+            >
+                <div class='list-title'>
+                    <div class='icon'></div>
+                    <h1>{{list.title}}</h1>
+                </div>
+                <div class='list-description'>
+                    {{list.properties.description}}
+                </div>
+                <div class='timestamps'>
+                    <span>עודכן:</span>
+                    <span>{{format.relativeUTCDate(list.update_time)}}</span>
+                    <span>|</span>
+                    <span>נוצר:</span>
+                    <span>{{format.relativeUTCDate(list.create_time)}}</span>
+                </div>        
+            </div>
+        </div>
+    </ng-container>
+</app-container>
+  

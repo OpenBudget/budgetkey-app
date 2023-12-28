@@ -1,0 +1,20 @@
+<ng-container *ngIf='configured'>
+    <app-bk-header *ngIf="showHeader"
+        [showSearchBar]="showSearchBar"
+        [showLanguages]="showLanguages"
+    ></app-bk-header>
+    <div class='scrollable'>
+        <div class='app'>
+            <div class='main' id='main' [style.width]='maxWidth() + "px"'>
+                <ng-content></ng-content>
+            </div>
+            <div class='list' *ngIf='showListView()'>
+                <app-list-view [list]="lists.currentList() || lists.emptyList" [headerControls]='true'
+                    (deleted)='onDeleted()'
+                ></app-list-view>
+            </div>
+        </div>
+        <app-bk-footer *ngIf="showFooter" [helpWidget]='helpWidget'></app-bk-footer>    
+    </div>
+    <app-add-to-list-dialog *ngIf='listDialog.dialogOpen()'></app-add-to-list-dialog>
+</ng-container>

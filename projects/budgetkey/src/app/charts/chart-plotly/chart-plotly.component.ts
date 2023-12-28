@@ -60,7 +60,6 @@ export class ChartPlotlyComponent implements OnChanges, AfterViewInit {
     }
 
     el.innerHTML = '';
-    console.log('plotly new plot', this.data, layout, this.config);
     this.plotly.newPlot(el, this.data, layout, Object.assign({responsive: true}, this.config));
     el.querySelectorAll('svg').forEach((svg) => {
       svg.setAttribute('alt', this.data.title || 'diagram');
