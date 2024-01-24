@@ -256,6 +256,13 @@
                 "id": "all"
               },
               {
+                "display": "2024",
+                "filters": {
+                  "year": 2024
+                },
+                "id": "2024"
+              },
+              {
                 "display": "2023",
                 "filters": {
                   "year": 2023
