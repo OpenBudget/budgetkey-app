@@ -22,9 +22,13 @@ export class BkHeaderComponent {
   public showShareMenu = signal(false);
   collapseMenuSub: Subscription | null = null;
   shareMenuSub: Subscription | null = null;
+  logoRouterLink = ['/'];
 
   constructor (public globalSettings: GlobalSettingsService, private router: Router, private platform: PlatformService, private window: WindowService, public seo: SeoService) {
     this.showAuth = !globalSettings.theme.disableAuth && this.platform.browser();
+    if (this.globalSettings.themeId === 'soproc') {
+      this.logoRouterLink = ['/i/units/gov_social_service_unit/main'];
+    }
   }
 
   doSearch(href?: string) {

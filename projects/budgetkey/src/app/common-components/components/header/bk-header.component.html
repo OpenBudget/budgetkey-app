@@ -1,7 +1,7 @@
 <header>
     <a class="skip-to-content" [routerLink]="['.']" [fragment]='"main"' [queryParamsHandling]='"preserve"'>דלג לתוכן עיקרי</a>
     <div class="logo">
-      <a [routerLink]='["/"]'  aria-label='homepage' [style.background-image]='"url(assets/common/img/" + globalSettings.theme.siteLogo + ")"'>
+      <a [routerLink]='logoRouterLink' [queryParamsHandling]='"preserve"' aria-label='homepage' [style.background-image]='"url(assets/common/img/" + globalSettings.theme.siteLogo + ")"'>
       </a>
     </div>
     <div *ngIf="showSearchBar" class="search-div layout-desktop">
