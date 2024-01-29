@@ -186,7 +186,7 @@ export class SearchResultComponent implements OnInit {
 
       // Top line:
       tag: (x) => x.code[0] === 'C' ? 'נושא תקציבי' : 'סעיף תקציבי',
-      amount: (x) => `${this.format_number(x.net_revised)}&nbsp;₪`,
+      amount: (x) => `${this.format_number(x.net_revised || x.net_allocated)}&nbsp;₪`,
 
       // Main body:
       title: ':title',

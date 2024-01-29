@@ -127,7 +127,7 @@ export class ListsService {
       }),
     ).subscribe(([enabled, lists, items]) => {
       lists = lists.sort((a: ListContents, b: ListContents) => (b.update_time || '').localeCompare(a.update_time || ''));
-      items = items.sort((a: ListItem, b: ListItem) => (b.create_time || '').localeCompare(a.create_time || ''));
+      items = items.sort((a: ListItem, b: ListItem) => (b.update_time || b.create_time || '').localeCompare(a.update_time || a.create_time || ''));
       lists.forEach((list: any) => {
         list.items = items.filter((item: ListItem) => item.list_id === list.id);
       });
