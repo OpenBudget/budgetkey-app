@@ -72,7 +72,7 @@ export class ListsService {
     const itemIds: any = {};
     lists.forEach((list) => {
       list.items?.forEach((item) => {
-        const doc_id = item.properties?.source.doc_id;
+        const doc_id = item.properties?.source?.doc_id;
         if (doc_id) {
           itemIds[doc_id] = true;
         }

@@ -34,12 +34,14 @@
 <div class='list-contents'>
     <div class='list-contents-results'>
         <ng-container  *ngFor='let item of list.items; let i = index'>
-            <search-result [item]="item.properties" [index]="i" [kind]="item.properties.type" 
-                [bare]='false'
-                [showNotes]='true' [notes]='item.properties.__notes' [editableNotes]='editable()'
-                (updatedNotes)='updateNotes(item, $event)'
-                *ngIf='item.properties'
-            ></search-result>
+            <ng-container *ngIf='item.properties?.source'>
+                <search-result [item]="item.properties" [index]="i" [kind]="item.properties.type" 
+                    [bare]='false'
+                    [showNotes]='true' [notes]='item.properties.__notes' [editableNotes]='editable()'
+                    (updatedNotes)='updateNotes(item, $event)'
+                    *ngIf='item.properties'
+                ></search-result>
+            </ng-container>
         </ng-container>        
     </div>
     <div class='share'>

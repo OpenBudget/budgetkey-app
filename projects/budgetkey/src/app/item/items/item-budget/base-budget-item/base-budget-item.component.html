@@ -31,6 +31,16 @@
       זוהי תקנת {{item.direction?.[0]}} המשמשת לצורך {{item['nice-econ-category']}}.
     </ng-container>
     
+    <ng-container *ngIf='!!item.gross_allocated || !!item.gross_revised'>
+      <br />
+      בנוסף, קיימת בסעיף זה הוצאה המונתית בהכנסה בסך של ₪{{ format.number(item.gross_revised || item.gross_allocated) }}.  
+    </ng-container>
+
+    <ng-container *ngIf='!!item.commitment_allowance_allocated || !!item.commitment_allowance_revised'>
+      <br />
+     בסעיף זה קיימת הרשאה להתחייב על סכום של ₪{{ format.number(item.commitment_allowance_revised || item.commitment_allowance_allocated) }}.
+    </ng-container>
+
     <br />
     <ng-container *ngIf='item.covid19_expenses_revised > 0'>
       <strong>
@@ -62,16 +72,16 @@
       <br />
     </ng-container>
     
-    <ng-container *ngIf='!!item.personnel_allocated || !!item.contractors_allocated'>
+    <ng-container *ngIf='!!item.personnel_allocated || !!item.contractors_allocated || !!item.personnel_revised || !!item.contractors_revised'>
       תחת סעיף זה מוקצים
-      <ng-container *ngIf='item.personnel_allocated > 0'>
-        {{ format.number(item.personnel_allocated) }} תקני כח אדם
+      <ng-container *ngIf='!!item.personnel_allocated || !!item.personnel_revised'>
+        {{ format.number(item.personnel_revised || item.personnel_allocated) }} תקני כח אדם
       </ng-container>
-      <ng-container *ngIf='item.personnel_allocated > 0 && item.contractors_allocated > 0'>
+      <ng-container *ngIf='(!!item.personnel_allocated || !!item.personnel_revised) && (!!item.contractors_allocated || !!item.contractors_revised)'>
         , ובנוסף
       </ng-container>
-      <ng-container *ngIf='item.contractors_allocated > 0'>
-        {{ format.number(item.contractors_allocated) }} חודשי עבודה בלתי צמיתה (יועצים וקבלנים)
+      <ng-container *ngIf='!!item.contractors_allocated || !!item.contractors_revised'>
+        {{ format.number(item.contractors_revised || item.contractors_allocated)}} חודשי עבודה בלתי צמיתה (יועצים וקבלנים)
       </ng-container>
       <br />
     </ng-container>
