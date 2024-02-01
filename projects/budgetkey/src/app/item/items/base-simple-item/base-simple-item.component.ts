@@ -11,6 +11,11 @@ export class BaseSimpleItemComponent implements OnInit{
   @Input() item: any;
   @Input() questions: Question[];
 
+  @Input() headerBorderColor: string;
+  @Input() headerBgColor: string;
+  @Input() headerPrimaryColor: string;
+  @Input() headerSecondaryColor: string;
+
   constructor(private api: ItemApiService) { }
 
   ngOnInit(): void {

@@ -59,6 +59,7 @@ import { SocialServiceDataTableComponent } from './items/item-soproc/item-social
 import { ItemSupportsComponent } from './items/item-supports/item-supports.component';
 import { SearchLinkComponent } from './search-link/search-link.component';
 import { ListComponentsModule } from '../list-components/list-components.module';
+import { ItemPageHeaderComponent } from './item-page-header/item-page-header.component';
 
 @NgModule({
   declarations: [
@@ -111,7 +112,8 @@ import { ListComponentsModule } from '../list-components/list-components.module'
     ChartVerticalLayoutComponent,
     ItemNgoActivityReportComponent,
     ItemNgoDistrictReportComponent,
-    ItemReportsComponent
+    ItemReportsComponent,
+    ItemPageHeaderComponent
   ],
   imports: [
     CommonModule,
