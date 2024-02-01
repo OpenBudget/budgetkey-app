@@ -3,9 +3,10 @@
 .card {
     display: flex;
     flex-flow: column;
-    border-radius: 4px;
     box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
     border: solid 1px black;
+    border-radius: 4px;
+    overflow: hidden;
 
     &:hover {
         text-decoration: inherit;
@@ -24,221 +25,236 @@
         height: 100%;
     }
 
-    .top-line {
-        height: 32px;
+
+    .top-line, .bottom-line {
         display: flex;
         flex-flow: row;
         align-items: center;
-        position: relative;
+        justify-content: flex-start;
+        gap: 4px;
+        width: 100%;
+        padding: 0 8px;
+        height: 32px;
+        .font-abraham;
+    }
 
-        span {
-            font-family: 'Abraham TRIAL';
+    .top-line {
+        .top-right {
+            flex: 0 0 auto;
             font-size: 13px;
-            font-style: normal;          
+            font-weight: 400;
+            opacity: 0.9;
+            .font-abraham;
+
+            ::ng-deep {
+                strong {
+                    font-weight: 700;
+                }
+                .soft {
+                    opacity: 0.9;
+                }
+            }
         }
 
-        .top-line-tag {
-            flex: 0 0 auto;
-            margin-right: 8px;
-            border-radius: 4px;
-            padding: 0 4px;
-            height: 16px;
-            font-weight: bold;
-        }
-        .top-line-post-tag {
-            margin-right: 8px;
-            padding: 0 4px;
-            min-height: 16px;
-            font-weight: bold;
-            max-height: 33px;
-        }
-        .top-line-separator {
-            width: 0;
+        .top-left {
             margin-right: auto;
-        }
-        .top-line-pre-amount {
+            flex: 0 1 100%;
+            .ellipsis;
             text-align: left;
-            font-weight: normal;
-            margin-left: 8px;
-            min-height: 16px;
+            font-size: 13px;
+            font-weight: 400;
+            .font-abraham;
+
+            ::ng-deep {
+                strong {
+                    font-weight: 700;
+                }
+                .soft {
+                    opacity: 0.7;
+                }
+            }
         }
-        .top-line-amount {
+
+        .icon-circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
             flex: 0 0 auto;
-            font-family: 'Miriam Libre';
-            font-weight: bold;          
-            margin-left: 8px;
+        }
+
+        .icon-notice {
+            width: 10px;
+            height: 10px;
+            flex: 0 0 auto;
+            .background-image;
+            background-size: 10px;
+            background-image: url(../../../assets/search/img/icon-notice.svg);
         }
     }
-    
+
     .body {
-        height: 70px;
+        padding: 8px 6px;
         display: flex;
         flex-flow: row;
-        align-items: center;
-        max-width: 100%;
-        padding: 0 8px;
-        flex: 1 0 auto;
+        gap: 4px;
+        align-items: flex-start;
+        width: 100%;
+        min-height: 40px;
+        // overflow: hidden;
 
-        &.ticket {
-            background: url(../../../assets/search/img/ticket-bg.svg) center repeat-x;
-            background-size: auto 100%;
-            background-color: transparent !important;
-        }
-
-        &.dashing {
-            border-top: 1px rgba(0,0,0,0.1) dashed;
-            border-bottom: 1px rgba(0,0,0,0.1) dashed;
-        }
-
-        .right-icon, .left-icon {
-            flex: 0 0 auto;
-            img {
-                margin: 0 8px;
-            }
-        }
-
-        .main-content {
-            flex: 1 1 auto;
+        .body-content {
             display: flex;
             flex-flow: column;
-            align-items: flex-start;
-            gap: 4px;
-            // margin: 0 8px;
-            max-width: 100%;
-            margin: 0;
-                
-            span, a {
-                font-family: 'Miriam Libre';
-                font-size: 16px;
-                font-style: normal;
+            flex: 1 1 auto;
+            overflow: hidden;
+
+            h2 {
+                display: flex;
+                flex-flow: column;
+                margin: 0;
                 overflow: hidden;
-            }
-            a, a:visited {
-                text-decoration: none;
-            }
     
-            .body-title {
-                font-weight: bold;
-                max-height: 44px;
-                width: 100%;
-                position: relative;
-                display: flex;
-                flex-flow: row;
-                gap: 4px;
-                align-items: center;
-            
-                .fadeoff {
-                    content: '';
-                    position: absolute;
-                    top: ~'calc(40px - 1em)';
-                    height: 1em;
-                    left: 0;
-                    width: 30px;
-                }
-        
-            }
-            .parties {
-                display: flex;
-                flex-flow: row;
-                align-items: center;
-                overflow-x: hidden;
-                width: 100%;
-                position: relative;
+                span.title {
+                    .font-miriam;
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    .ellipsis;
 
-                span {
-                    flex: 0 0 auto;
-                    white-space: nowrap;
-                }
-                .body-party-from {
-                }
-                .body-arrow {
-                    padding: 0 4px;
-                }
-                .body-party-to {
-                }
-                .fadeoff {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    height: 100%;
-                    left: 0;
-                    width: 30px;
+                    ::ng-deep {
+                        .arrow {
+                            .background-image;
+                            display: inline-block;
+                            width: 32px;
+                            height: 12px;
+                            background-size: 32px 12px;
+
+                            &.left-dashed {
+                                background-image: url(../../../assets/search/img/arrow-right-dashed.svg);
+                                transform: scaleX(-1);
+                            }
+                            &.right-dashed {
+                                background-image: url(../../../assets/search/img/arrow-right-dashed.svg);
+                            }
+                            &.left-solid {
+                                background-image: url(../../../assets/search/img/arrow-left-solid.svg);
+                            }
+                            &.right-solid {
+                                background-image: url(../../../assets/search/img/arrow-left-solid.svg);
+                                transform: scaleX(-1);
+                            }
+                        }
+                    }
                 }
             }
-            .body-main-id {
+
+            span.subtitle {
+                .font-miriam;
                 font-size: 13px;
+                line-height: 16px;
+                font-weight: 400;
+                opacity: 0.5;
+                .ellipsis;
+                height: 16px;
+                width: 100%;
             }
-        }
 
-        .left-icon {
-            flex: 0 0 auto;
         }
     }
 
     .bottom-line {
-        height: 32px;
-        display: flex;
-        flex-flow: row;
-        align-items: center;
-        line-height: 1em;
-        position: relative;
-
-        .bottom-line-text {
-            font-family: 'Abraham TRIAL';
+        .bottom-right {
+            flex: 0 1 100%;
             font-size: 13px;
-            font-style: normal;
-            margin: 0 8px;
-            max-height: 25px;
-            position: relative;
-            overflow-y: hidden;
+            font-weight: 400;
+            opacity: 0.8;
+            .font-miriam;
+            .ellipsis;
 
-            .fadeoff {
-                content: '';
-                position: absolute;
-                top: 13px;
-                height: 100%;
-                left: 0;
-                width: 50px;
+            ::ng-deep {
+                strong {
+                    font-weight: 700;
+                }
+                .soft {
+                    opacity: 0.9;
+                }
             }
         }
 
-        .bottom-line-label {
-            text-align: left;
+        .bottom-left {
             margin-right: auto;
-            margin-left: 8px;
-        }
+            flex: 0 0 auto;
+            .ellipsis;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 400;
+            .font-miriam;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            gap: 4px;
 
-        .ribbon {
-            background-color: #ff5a5f;
-            color: white;
-            left: -13px;
-            border-top-left-radius: 2px;
-            border-bottom-left-radius: 2px;
-            padding: 2px 8px;
-            padding-right: 4px;
-            position: absolute;
-            height: 17px;
-            &::before {
-                content: '';
-                width: 0;
-                height: 0;
-                position: absolute;
-                right: -7px;
-                top: 0;
-                border-style: solid;
-                border-width: 8.5px 7.5px 8.5px 0;
-                border-color: #ff5a5f transparent;
+            ::ng-deep {
+                strong {
+                    font-weight: 700;
+                }
+                .soft {
+                    opacity: 0.7;
+                }
             }
         }
+    }
 
-        .circle {
-            flex: 0 0 auto;
-            height: 10px;
-            width: 10px;
-            margin-left: 8px;
-            border-radius: 8px;
-            position: relative;
-            top: -1px;
+    &.borders-solid {
+        .body {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+    }
+
+    &.borders-dashing {
+        &.color-top {
+            .top-line {
+                background-image: url(../../../assets/search/img/dashed-bottom.svg);
+                background-size: 8px 100px;
+                background-position: bottom right;
+                background-repeat: repeat-x;
+            }
+        }
+        .body {
+            background-image: url(../../../assets/search/img/dashed-bottom.svg), url(../../../assets/search/img/dashed-top.svg);
+            background-size: 8px 100px, 8px 100px;
+            background-position: bottom right 2px, top right;
+            background-repeat: repeat-x, repeat-x;
+        }
+        &.color-bottom {
+            .bottom-line {
+                background-image: url(../../../assets/search/img/dashed-top.svg);
+                background-size: 8px 100px;
+                background-position: top right 2px;
+                background-repeat: repeat-x;
+            }
+        }
+        &:not(.color-bottom) {
+            .bottom-line {
+                background: linear-gradient(180deg, #E5DFDA 0%, rgba(229, 223, 218, 0.00) 7.03%), var(--Color-2, #FFF);
+            }
+        }
+    }
+
+    &.icon-gov {
+        .body {
+            .background-image;
+            background-image: url(../../../assets/search/img/search-bg-gov.svg);
+            background-size: contain;
+        }
+    }
+
+    &.icon-person {
+        .body {
+            .background-image;
+            background-image: url(../../../assets/search/img/search-bg-person.svg);
+            background-size: contain;
         }
     }
 

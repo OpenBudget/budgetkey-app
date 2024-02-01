@@ -33,7 +33,7 @@
     
     <ng-container *ngIf='!!item.gross_allocated || !!item.gross_revised'>
       <br />
-      בנוסף, קיימת בסעיף זה הוצאה המונתית בהכנסה בסך של ₪{{ format.number(item.gross_revised || item.gross_allocated) }}.  
+      בנוסף, קיימת בסעיף זה הוצאה המותנית בהכנסה בסך של ₪{{ format.number(item.gross_revised || item.gross_allocated) }}.
     </ng-container>
 
     <ng-container *ngIf='!!item.commitment_allowance_allocated || !!item.commitment_allowance_revised'>

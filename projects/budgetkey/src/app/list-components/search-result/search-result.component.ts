@@ -15,32 +15,22 @@ type StringOrFunc = string | ((x: any) => string);
 interface Parameter {
   // Colors:
   primaryColor: StringOrFunc;
-  secondaryColor: StringOrFunc;
-  tertiaryColor?: StringOrFunc;
+  // secondaryColor: StringOrFunc;
   bgColor: StringOrFunc;
-  tagColor: StringOrFunc;
+  bodyBgColor: StringOrFunc;
+  bodyBorderColor: StringOrFunc;
 
   // Top line:
-  tag?: StringOrFunc;
-  postTag?: StringOrFunc;
-  preAmount?: StringOrFunc;
-  amount?: StringOrFunc;
+  topRight: StringOrFunc;
+  topLeft?: StringOrFunc;
+  topLeftIcon?: StringOrFunc;
+  bottomRight: StringOrFunc;
+  bottomLeft?: StringOrFunc;
 
   // Main body:
-  bodyStyle?: StringOrFunc;
-  title?: StringOrFunc;
-  partyFrom?: StringOrFunc;
-  partyTo?: StringOrFunc;
-  arrowKind?: StringOrFunc;
-  mainId?: StringOrFunc;
-  rightIcon?: StringOrFunc;
-  leftIcon?: StringOrFunc;
-
-  // Bottom line:
-  bottomLineText?: StringOrFunc;
-  bottomLineLabel?: StringOrFunc;
-  bottomLineLabelStyle?: StringOrFunc;
-  bottomLineTextOpacity?: StringOrFunc;
+  bodyStyle: ('color-top' | 'color-bottom' | 'borders-solid' | 'borders-dashing' | 'icon-person' | 'icon-gov')[];
+  title?: StringOrFunc[];
+  subtitle?: StringOrFunc;
 }
 
 
@@ -64,501 +54,619 @@ export class SearchResultComponent implements OnInit {
   @Output() updatedNotes = new EventEmitter<string>();
 
   private PARAMETERS: { [s: string]: Parameter; } = {
+    '': <Parameter>{
+      primaryColor: '##444',
+      // secondaryColor: '#e4dcf5',
+      // tertiaryColor: '#b4a0de',
+      bgColor: '#ffffff',
+      // tagColor: '#7a6b99',
+
+      topRight: '',
+
+      title: [':page_title'],
+
+      bottomRight: '',
+
+      bodyStyle: ['borders-solid'],
+      bodyBorderColor: '#ccc',
+      bodyBgColor: '#fafafa',
+    },
     // // ENTITIES
     // Companies
-    'org/company': <Parameter>{
-      primaryColor: '#3e4e59',
-      secondaryColor: '#e8f5ff',
-      tertiaryColor: '#abbbc6',
-      bgColor: '#ffffff',
-      tagColor: '#3e4e59',
-      tag: ':kind_he',
-      preAmount: () => `הכנסות&nbsp;מהמדינה ${this.threeYears()}&nbsp;-&nbsp;${this.thisYear()}`,
-      amount: (x) => `${this.format_number(x.received_amount)} ₪`,
-
-      // Main body:
-      title: ':name',
-      mainId: '#:id',
-
-      // Bottom line:
-      bottomLineText: (x: any) => (x.details.description ?
-        `<strong>מטרות</strong>: ${x.details.description}` :
-        (x.details.goals ?
-          `<strong>מטרות</strong>: ${x.details.goals}` :
-          (x.details.address_lines ?
-            `<strong>כתובת</strong>: ${x.details.address_lines.join(', ')}` : null
-          )
-        )
-      )
-    },
+      'org/company': <Parameter>{
+        primaryColor: '#3C4B7C',
+        bgColor: '#ffffff',
+  
+        topRight: (x) => {
+          return `<strong>${x.kind_he}</strong>`;
+        },
+        topLeft: (x) => {
+          return x.details?.city || '&nbsp;';
+        },
+  
+        title: [':name'],
+  
+        bottomRight: '#:id',
+        bottomLeft: (x) => {
+          if (x.received_amount) {
+            const yearspan = `${this.threeYears()}&nbsp;-&nbsp;${this.thisYear()}`;
+            const amount =  `${this.format_number(x.received_amount)}&nbsp;₪`;
+            return `<span class='soft' title='הכנסות מהמדינה'>(${yearspan})</span><strong>${amount}</strong>`;
+          }
+          return '';
+        }, 
+  
+        bodyStyle: ['borders-solid'],
+        bodyBorderColor: '#CADAEC',
+      },
     // Associations
     'org/association': <Parameter>{
       primaryColor: '#235000',
-      secondaryColor: '#eaf9de',
-      tertiaryColor: '#abba9f',
       bgColor: '#ffffff',
-      tagColor: '#235000',
-      tag: ':kind_he',
-      preAmount: (x) => (
-        this.socialmapAmount() ?
-        (x.details['last_report_year'] ?
-          `מחזור&nbsp;כספי&nbsp;שנתי לשנת&nbsp;${x.details['last_report_year']}` :
-          `מחזור&nbsp;כספי&nbsp;שנתי לשנת&nbsp;הדיווח&nbsp;האחרונה`
-        ) :
-        (`הכנסות&nbsp;מהמדינה ${this.threeYears()}&nbsp;-&nbsp;${this.thisYear()}`)
-      ),
-      amount: (x) => (
-        this.socialmapAmount() ?
-        (`${this.format_number(x.details.yearly_turnover)} ₪`) :
-        (`${this.format_number(x.received_amount)} ₪`)
-      ),
 
-      // Main body:
-      title: ':name',
-      mainId: '#:id',
+      topRight: (x) => {
+        return `<strong>${x.kind_he}</strong>`;
+      },
+      topLeft: (x) => {
+        return x.details?.city || x.details?.address_city || '&nbsp;';
+      },
 
-      // Bottom line:
-      bottomLineText: (x: any) => (x.details.objective ?
-        `<strong>מטרות</strong>: ${x.details.objective}` :
-        (x.details.activity_region_list ?
-          `<strong>איזורי פעילות</strong>: ${x.details.activity_region_list.join(', ')}` :
-          (x.details.address_lines ?
-            `<strong>כתובת</strong>: ${x.details.address_lines.join(', ')}` : null
-          )
-        )
-      )
+      title: [':name'],
+      subtitle: (x) => {
+        if (x.details?.objective && x.details?.objective.length > 40) {
+          return x.details?.objective;
+        }
+        return null;
+      },
+
+      bottomRight: '#:id',
+      bottomLeft: (x) => {
+        if (x.received_amount) {
+          const yearspan = `${this.threeYears()}&nbsp;-&nbsp;${this.thisYear()}`;
+          const amount =  `${this.format_number(x.received_amount)}&nbsp;₪`;
+          return `<span class='soft' title='הכנסות מהמדינה'>(${yearspan})</span><strong>${amount}</strong>`;
+        } else if (x.details?.yearly_turnover) {
+          const amount =  `${this.format_number(x.details?.yearly_turnover)}&nbsp;₪`;
+          return `<span class='soft'>מחזור שנתי:</span><strong>${amount}</strong>`;
+        }
+        return '';
+      }, 
+
+      bodyStyle: ['borders-solid'],
+      bodyBorderColor: '#abba9f',
     },
-    // Municipalities
+    // // Municipalities
     'org/municipality': <Parameter>{
       primaryColor: '#564a2a',
-      secondaryColor: '#fef2d2',
-      tertiaryColor: '#564a2a',
       bgColor: '#ffffff',
-      tagColor: '#564a2a',
 
-      tag: ':kind_he',
-      postTag: ':details.status_municipal_2015',
-      preAmount: () => `הכנסות&nbsp;מהמדינה ${this.threeYears()}&nbsp;-&nbsp;${this.thisYear()}`,
-      amount: (x) => `${this.format_number(x.received_amount)} ₪`,
+      topRight: (x) => {
+        return `<strong>${x.details?.status_municipal_2015}</strong>`;
+      },
+      topLeft: (x) => {
+        if (x.details && x.details?.district_2015?.indexOf('אזור') < 0) {
+          return `מחוז ${x.details?.district_2015}`;
+        } else {
+          return x.details?.district_2015;
+        }  
+      },
 
-      // Main body:
-      title: ':name',
-      mainId: '#:id',
+      title: [':name'],
 
-      // Bottom line:
-      bottomLineText: (x: any) =>
-        `אזור ${x.details.district_2015} | ` +
-        `${this.format_number(x.details.total_population_end_2015_1000s * 1000)} תושבים | ` +
-        `אשכול ${x.details.index_socioeconomic_2013_cluster_from_1_to_10_1_lowest_most}/10`
-    },
-    // Other entities
+      bottomRight: '#:id',
+      bottomLeft: (x) => {
+        if (x.received_amount) {
+          const yearspan = `${this.threeYears()}&nbsp;-&nbsp;${this.thisYear()}`;
+          const amount =  `${this.format_number(x.received_amount)}&nbsp;₪`;
+          return `<span class='soft' title='הכנסות מהמדינה'>(${yearspan})</span><strong>${amount}</strong>`;
+        }
+        return '';
+      }, 
+
+      bodyStyle: ['borders-solid'],
+      bodyBorderColor: '#aaa595',
+    },      
+    // // Other entities
     'org': <Parameter>{
-      primaryColor: '#444',
-      secondaryColor: '#eee',
-      tertiaryColor: '#444',
+      primaryColor: '#444444',
       bgColor: '#ffffff',
-      tagColor: '#444',
 
-      tag: ':kind_he',
-      preAmount: () => `הכנסות&nbsp;מהמדינה ${this.threeYears()}&nbsp;-&nbsp;${this.thisYear()}`,
-      amount: (x) => `${this.format_number(x.received_amount)} ₪`,
+      topRight: (x) => {
+        if (x.details?.primary_type) {
+          return `<strong>${ x.kind_he }</strong> (${x.details?.primary_type})`;
+        } else {
+          return `<strong>${x.kind_he}</strong>`;
+        }
+      },
 
-      // Main body:
-      title: ':name',
-      mainId: '#:id',
+      topLeft: (x) => {
+        const ppp = parseInt(x.details?.city, 10);
+        if (Number.isNaN(ppp)) {
+          return x.details?.city || null;
+        }
+        return null;
+      },
+      title: [':name'],
+
+      bottomRight: '#:id',
+      bottomLeft: (x) => {
+        if (x.received_amount) {
+          const yearspan = `${this.threeYears()}&nbsp;-&nbsp;${this.thisYear()}`;
+          const amount =  `${this.format_number(x.received_amount)}&nbsp;₪`;
+          return `<span class='soft' title='הכנסות מהמדינה'>(${yearspan})</span><strong>${amount}</strong>`;
+        }
+        return '';
+      }, 
+
+      bodyStyle: ['borders-solid'],
+      bodyBorderColor: '#cccccc',
     },
     // // BUDGET ITEMS
     'budget': <Parameter>{
-      // Colors:
-      // .func-cls-1 { .budget-func-cls-color(#5C7899, #6092CC, #D7E7FA, #EBF2FA); } //Blue
-      // .func-cls-2 { .budget-func-cls-color(#7A6B99, #9281B8, #E4DCF5, #F1EDF7); } //Purple
-      // .func-cls-3 { .budget-func-cls-color(#6D8F89, #75BFB3, #CEF0EB, #EBF7F5); } //Cyan
-      // .func-cls-4 { .budget-func-cls-color(#A67453, #F0A16C, #FFD1B3, #FCF0E8); } //Orange
-      // .func-cls-5 { .budget-func-cls-color(#768275, #8EA38C, #D4E3D1, #ECF2EB); } //Greenish
-      // .func-cls-6 { .budget-func-cls-color(#998282, #C7B3B3, #EDE4E4, #F7F2F2); } //Sepia
-      // .func-cls-7 { .budget-func-cls-color(#8C8231, #F2E22E, #FFF7B3, #FCFADC); } //Yellow
-      // .func-cls-8 { .budget-func-cls-color(#313131, #2E2E2E, #B3B3B3, #DCDCDC); } //Yellow
-      primaryColor: '#7a6b99',
-      secondaryColor: '#e4dcf5',
-      tertiaryColor: '#b4a0de',
+      primaryColor: '#45375B',
       bgColor: '#ffffff',
-      tagColor: '#7a6b99',
 
-      // Top line:
-      tag: (x) => x.code[0] === 'C' ? 'נושא תקציבי' : 'סעיף תקציבי',
-      amount: (x) => `${this.format_number(x.net_revised || x.net_allocated)}&nbsp;₪`,
+      topRight: (x) => {
+        const bc = x['nice-breadcrumbs'] || ('' + x['year']);
+        const parts = bc.split(' / ');
+        return `<strong>${parts[0]}</strong><span class='soft'>${bc.substring(parts[0].length)}</span>`;
+      },
+      topLeft: (x) => x['nice-category'] || '&nbsp;',
+      topLeftIcon: 'circle',
 
-      // Main body:
-      title: ':title',
-      mainId: (x) => (!x || !x['nice-code'] || !x['nice-code'].length || x['nice-code'][0] === 'C') ? '' : ':nice-code',
+      title: [':title'],
 
-      // Bottom line:
-      bottomLineText: ':nice-breadcrumbs',
-      bottomLineLabel: ':nice-short-category',
-      bottomLineLabelStyle: 'circle'
+      bottomRight: ':nice-code',
+      bottomLeft: (x) => `<strong>${this.format_number(x.net_revised || x.net_allocated)}&nbsp;₪</strong>`, 
+
+      bodyStyle: ['color-center', 'borders-solid'],
+      bodyBorderColor: '#CBC2DE',
+      bodyBgColor: '#FAF7FF',
     },
     // // TRANSACTIONS
     // Contracts:
     'contract-spending': <Parameter>{
-      // Colors:
-      primaryColor: '#19008f',
-      secondaryColor: '#fffbf2',
-      bgColor: '#fffefc',
-      tagColor: '#19008f',
+      primaryColor: '#313E69',
+      bgColor: '#ffffff',
 
-      // Top line:
-      tag: 'התקשרות רכש',
-      postTag: (x) => x.contract_is_active ? 'פעילה' : 'הסתיימה',
-      amount: (x) => `${this.format_number(x['volume'])}&nbsp;₪`,
+      topRight: '<strong>התקשרות רכש</strong>',
+      topLeft: (x) => {
+        const paid = (x['executed'] / x['volume'] * 100).toFixed(0) + '%';
+        if (x.contract_is_active) {
+          return `<strong>פעילה</strong> (עד כה שולמו ${paid})`;
+        } else {
+          return `<strong>הסתיימה</strong> (סה״כ שולמו ${paid})`;
+        }
+      },
 
-      // Main body:
-      bodyStyle: 'ticket',
-      title: ':purpose',
-      partyFrom: ':publisher_name',
-      partyTo: (x) => x['entity_name'] || x['supplier_name'][0],
-      arrowKind: 'left',
+      title: [
+        ':purpose',
+        (x) => {
+          const partyFrom = x.publisher_name;
+          const partyTo = x['entity_name'] || x['supplier_name'][0];
+          return `${partyFrom} <span class='arrow left-solid'></span> ${partyTo}`;
+        }
+      ],
 
-      // Bottom line:
-      bottomLineText: (x) => this.contractPeriodDetails(x),
-      bottomLineTextOpacity: '0.5',
+      bottomRight: (x) => this.contractPeriodDetails(x),
+      bottomLeft: (x) => `<strong>${this.format_number(x['volume'])}&nbsp;₪</strong>`,
+
+      bodyStyle: ['color-top', 'borders-dashing'],
+      bodyBorderColor: '#E5DFDA',
+      bodyBgColor: '#FFFDFA',
     },
-    // Supports:
+    // // Supports:
     'supports': <Parameter>{
-      // Colors:
-      primaryColor: '#235000',
-      secondaryColor: '#fffbf2',
-      bgColor: '#fffefc',
-      tagColor: '#235000',
+      primaryColor: '#313E69',
+      bgColor: '#ffffff',
 
-      // Top line:
-      tag: 'תמיכה תקציבית',
-      postTag: (x) => x['request_type'] === 'א3' ? '3' + 'א' : x['request_type'],
-      amount: (x) => `${this.format_number(x['amount_total'])}&nbsp;₪`,
+      topRight: (x) => {
+        const kind = x['request_type'] === 'א3' ? '3' + 'א' : x['request_type'];
+        return `<strong>תמיכה תקציבית</strong> (${kind})`;
+      },
+      topLeft: (x) => {
+        const payment = this.lastSupportPayment(x);
+        const paid = (payment['amount_paid'] / payment['amount_approved'] * 100).toFixed(0) + '%';
+        return `${paid} ביצוע`;
+      },
 
-      // Main body:
-      bodyStyle: 'ticket',
-      title: (x) => this.lastSupportPayment(x)['support_title'],
-      partyFrom: (x) => this.lastSupportPayment(x)['supporting_ministry'],
-      partyTo: (x) => x['entity_name'] || x['recipient'],
-      arrowKind: 'left',
+      title: [
+        (x) => this.lastSupportPayment(x)['support_title'],
+        (x) => {
+          const partyFrom = this.lastSupportPayment(x)['supporting_ministry'];
+          const partyTo = x['entity_name'] || x['recipient'];
+          return `${partyFrom} <span class='arrow left-solid'></span> ${partyTo}`;
+        }
+      ],
 
-      // Bottom line:
-      bottomLineText: (x) => this.supportPeriodDetails(x),
-      bottomLineTextOpacity: '0.5',
+      bottomRight: (x) => this.supportPeriodDetails(x),
+      bottomLeft: (x) => `<strong>${this.format_number(x['amount_total'])}&nbsp;₪</strong>`,
+
+      bodyStyle: ['color-top', 'borders-dashing'],
+      bodyBorderColor: '#E5DFDA',
+      bodyBgColor: '#FFFDFA',
     },
-    // // OPEN CALLS
+    // OPEN CALLS
     // Exemptions:
     'tenders/exemptions': <Parameter>{
-      // Colors:
-      primaryColor: '#19008f',
-      secondaryColor: '#fffbf2',
-      bgColor: '#fffbf2',
-      tagColor: '#19008f',
+      primaryColor: '#313E69',
+      bgColor: '#ffffff',
 
-      // Top line:
-      tag: ':tender_type_he',
-      postTag: ':simple_decision_long',
-      amount: (x) => `${this.format_number(x.volume)}&nbsp;₪`,
+      topRight: '<strong>:tender_type_he</strong>',
+      topLeft: ':simple_decision_long',
 
-      // Main body:
-      bodyStyle: 'dashing',
-      title: ':description',
-      partyFrom: ':publisher',
-      partyTo: ':awardees_text',
-      arrowKind: 'left-dashed',
+      title: [
+        ':description',
+        (x) => {
+          const partyFrom = x.publisher || '';
+          const partyTo = x.awardees_text || '';
+          return `${partyFrom} <span class='arrow left-dashed'></span> ${partyTo}`;
+        }
+      ],
 
-      // Bottom line:
-      bottomLineText: (x) =>
-        x['last_update_date'] ?
-        `עודכן לאחרונה: ${dayjs(x['last_update_date']).format('DD/MM/YYYY')}`
-        : null,
-      // bottomLineLabel?: StringOrFunc;
-      // bottomLineLabelStyle?: StringOrFunc;
-      bottomLineTextOpacity: '0.5'
+      bottomRight: (x) => {
+        if (x.last_update_date) {
+          return `עודכן לאחרונה: ${dayjs(x['last_update_date']).format('DD/MM/YYYY')}`;
+        }
+        return null;
+      },
+      bottomLeft: (x) => x['volume'] ? `<strong>${this.format_number(x['volume'])}&nbsp;₪</strong>` : null, 
+
+      bodyStyle: ['color-top', 'color-bottom', 'borders-dashing'],
+      bodyBorderColor: '#E5DFDA',
+      bodyBgColor: '#FFFDFA',
     },
     // Tenders:
     'tenders': <Parameter>{
-      // Colors:
-      primaryColor: '#19008f',
-      secondaryColor: '#fffbf2',
-      bgColor: '#fffbf2',
-      tagColor: '#19008f',
+      primaryColor: '#313E69',
+      bgColor: '#ffffff',
 
-      // Top line:
-      tag: ':tender_type_he :simple_decision',
-      postTag: ':regulation',
+      topRight: '<strong>:tender_type_he</strong>',
+      topLeft: (x) => {
+        const remainingTime = this.remainingTime(x);
+        if (!remainingTime) {
+          return x.simple_decision;
+        } else {
+          return remainingTime;
+        }
+      },
+      topLeftIcon: (x) => {
+        const remainingTime = this.remainingTime(x);
+        if (!remainingTime) {
+          return null;
+        } else {
+          return 'notice';
+        }
+      },
 
-      // Main body:
-      bodyStyle: 'dashing',
-      title: ':description',
-      partyFrom: ':publisher',
-      partyTo: ':awardees_text',
-      arrowKind: 'left-dashed',
+      title: [
+        ':description',
+        (x) => {
+          const partyFrom = x.publisher || '';
+          const partyTo = x.awardees_text || '';
+          return `${partyFrom} <span class='arrow left-dashed'></span> ${partyTo}`;
+        }
+      ],
 
-      // Bottom line:
-      bottomLineText: (x) =>
-        x['last_update_date'] ?
-        `עודכן לאחרונה: ${dayjs(x['last_update_date']).format('DD/MM/YYYY')}`
-        : null,
-      bottomLineLabel: this.remainingTime,
-      bottomLineLabelStyle: 'ribbon',
-      bottomLineTextOpacity: '0.5'
+      bottomRight: (x) => {
+        if (x.last_update_date) {
+          return `עודכן לאחרונה: ${dayjs(x['last_update_date']).format('DD/MM/YYYY')}`;
+        }
+        return null;
+      },
+      bottomLeft: (x) => x['volume'] ? `<strong>${this.format_number(x['volume'])}&nbsp;₪</strong>` : null, 
+
+      bodyStyle: ['color-top', 'color-bottom', 'borders-dashing'],
+      bodyBorderColor: '#E5DFDA',
+      bodyBgColor: '#FFFDFA',
     },
     'muni_tenders': <Parameter>{
-      // Colors:
-      primaryColor: '#19008f',
-      secondaryColor: '#fffbf2',
-      bgColor: '#fffbf2',
-      tagColor: '#19008f',
+      primaryColor: '#313E69',
+      bgColor: '#ffffff',
 
-      // Top line:
-      tag: ':tender_type_he',
-
-      // Main body:
-      bodyStyle: 'dashing',
-      title: ':description',
-      partyFrom: ':publisher',
-      arrowKind: 'left-dashed',
-
-      // Bottom line:
-      bottomLineText: (x) => {
-        const parts = [];
-        if (x['publication_date']) {
-          parts.push(`תאריך פרסום: ${dayjs(x['publication_date']).format('DD/MM/YYYY')}`);
+      topRight: '<strong>:tender_type_he</strong>',
+      topLeft: (x) => {
+        const remainingTime = this.remainingTime(x);
+        if (!remainingTime) {
+          if (x.claim_date) {
+            return `מועד הגשה: ${dayjs(x['claim_date']).format('DD/MM/YYYY')}`;
+          }
+        } else {
+          return remainingTime;
         }
-        if (x['claim_date']) {
-          parts.push(`תאריך סגירה: ${dayjs(x['claim_date']).format('DD/MM/YYYY')}`);
-        }
-        return parts.join('   |   ');
+        return null;
       },
-      bottomLineLabel: this.remainingTime,
-      bottomLineLabelStyle: 'ribbon',
-      bottomLineTextOpacity: '0.5'
+      topLeftIcon: (x) => {
+        const remainingTime = this.remainingTime(x);
+        if (!remainingTime) {
+          return null;
+        } else {
+          return 'notice';
+        }
+      },
+
+      title: [
+        ':description',
+        (x) => {
+          const partyFrom = x.publisher || '';
+          return `${partyFrom} <span class='arrow left-dashed'></span>`;
+        }
+      ],
+
+      bottomRight: (x) => {
+        if (x.last_update_date) {
+          return `עודכן לאחרונה: ${dayjs(x['last_update_date']).format('DD/MM/YYYY')}`;
+        }
+        return null;
+      },
+      bottomLeft: (x) => x['volume'] ? `<strong>${this.format_number(x['volume'])}&nbsp;₪</strong>` : null, 
+
+      bodyStyle: ['color-top', 'color-bottom', 'borders-dashing'],
+      bodyBorderColor: '#E5DFDA',
+      bodyBgColor: '#FFFDFA',
     },
     // Calls for Bids:
     'calls_for_bids': <Parameter>{
-      // Colors:
-      primaryColor: '#235000',
-      secondaryColor: '#fffbf2',
-      bgColor: '#fffbf2',
-      tagColor: '#235000',
+      primaryColor: '#313E69',
+      bgColor: '#ffffff',
 
-      // Top line:
-      tag: ':tender_type_he :decision',
+      topRight: '<strong>:tender_type_he</strong>',
+      topLeft: (x) => {
+        const remainingTime = this.remainingTime(x);
+        if (!remainingTime) {
+          return x.decision;
+        } else {
+          return remainingTime;
+        }
+      },
+      topLeftIcon: (x) => {
+        const remainingTime = this.remainingTime(x);
+        if (!remainingTime) {
+          return null;
+        } else {
+          return 'notice';
+        }
+      },
 
-      // Main body:
-      bodyStyle: 'dashing',
-      title: ':page_title',
-      partyFrom: ':publisher',
+      title: [
+        ':page_title',
+        (x) => {
+          const partyFrom = x.publisher || '';
+          return `${partyFrom} <span class='arrow left-dashed'></span>`;
+        }
+      ],
 
-      // Bottom line:
-      bottomLineText: (x) => x['start_date'] ? `תאריך פרסום: ${dayjs(x.start_date).format('DD/MM/YYYY')}` : null,
-      bottomLineLabel: this.remainingTime,
-      bottomLineLabelStyle: 'ribbon',
-      bottomLineTextOpacity: '0.5'
+      bottomRight: (x) => {
+        if (x.start_date) {
+          return `תאריך פרסום: ${dayjs(x['start_date']).format('DD/MM/YYYY')}`;
+        }
+        return null;
+      },
+      bottomLeft: (x) => x['volume'] ? `<strong>${this.format_number(x['volume'])}&nbsp;₪</strong>` : null, 
+
+      bodyStyle: ['color-top', 'color-bottom', 'borders-dashing'],
+      bodyBorderColor: '#E5DFDA',
+      bodyBgColor: '#FFFDFA',
     },
     // Support Criteria:
     'support_criteria': <Parameter>{
-      // Colors:
-      primaryColor: '#235000',
-      secondaryColor: '#fffbf2',
-      bgColor: '#fffbf2',
-      tagColor: '#235000',
+      primaryColor: '#3C4B7C',
+      bgColor: '#ffffff',
 
-      // Top line:
-      tag: ':tender_type_he',
+      topRight: '<strong>:tender_type_he</strong>',
+      topLeft: this.remainingTime,
+      topLeftIcon: (x) => {
+        const remainingTime = this.remainingTime(x);
+        if (!remainingTime) {
+          return null;
+        } else {
+          return 'notice';
+        }
+      },
 
-      // Main body:
-      bodyStyle: 'dashing',
-      title: ':page_title',
-      partyFrom: ':publisher',
+      title: [
+        ':page_title',
+        (x) => {
+          const partyFrom = x.publisher || '';
+          if (partyFrom.length > 0) {
+            return `${partyFrom} <span class='arrow left-dashed'></span>`;
+          }
+          return null;
+        }
+      ],
+      subtitle: (x) => {
+        if (x.text) {
+          return new DOMParser().parseFromString(x.text, "text/html").documentElement.textContent;
+        }
+        return null;
+      },
 
-      // Bottom line:
-      bottomLineText: (x) => x['start_date'] ? `תאריך פרסום: ${dayjs(x.start_date).format('DD/MM/YYYY')}` : null,
-      bottomLineLabel: this.remainingTime,
-      bottomLineLabelStyle: 'ribbon',
-      bottomLineTextOpacity: '0.5'
+      bottomRight: (x) => x['start_date'] ? `תאריך פרסום: ${dayjs(x.start_date).format('DD/MM/YYYY')}` : null,
+
+      bodyStyle: ['icon-gov'],
+      bodyBorderColor: '#CADAEC',
+      bodyBgColor: '#ffffff',
     },
     // // PEOPLE:
     // People
     'people': <Parameter>{
-      // Colors:
-      primaryColor: '#91a0c2',
-      secondaryColor: '#fafafa',
-      tertiaryColor: '#91a0c2',
+      primaryColor: '#3C4B7C',
       bgColor: '#ffffff',
-      tagColor: '#91a0c2',
 
-      // Top line:
-      tag: 'אנשים',
-      preAmount: (x) => x.details.length > 1 ? `${x.details.length} רשומות` : 'רשומה אחת',
+      topRight: '<strong>אנשים</strong>',
 
-      // Main body:
-      title: ':key',
-      rightIcon: 'face',
+      title: [':key'],
+      subtitle: (x) => {
+        if (x.text) {
+          return new DOMParser().parseFromString(x.text, "text/html").documentElement.textContent;
+        }
+        return null;
+      },
 
-      // Bottom line:
-      bottomLineText: '', // TODO: Complete'
+      bottomRight: (x) => x.details.length > 1 ? `${x.details.length} רשומות` : 'רשומה אחת',
+
+      bodyStyle: ['icon-person'],
+      bodyBorderColor: '#CADAEC',
+      bodyBgColor: '#ffffff',
     },
     // // TRANSFERS:
     // Budget Changes
-    'national-budget-changes': <Parameter>{
-      // Colors:
-      primaryColor: '#7d7d7d',
-      secondaryColor: '#f5f5f5',
+    'national-budget-changes': <Parameter> {
+      primaryColor: '#45375B',
       bgColor: '#ffffff',
-      tagColor: '#7d7d7d',
 
-      // Top line:
-      tag: 'העברה תקציבית',
-      postTag: (x) => x.change_type_name && x.change_type_name.length > 0 ?
-        (x.committee_id && x.committee_id.length > 0 && x.committee_id[0] ?
-          x.change_type_name[0] + ' (פניה #' + x.committee_id[0] + ')' :
-          x.change_type_name[0]
-        ) : null,
-      amount: (x) => `${this.format_number(x.amount)} ₪`,
+      topRight: (x) => {
+        if (x.change_title && x.change_title.length > 0) {
+          return `העברה תקציבית (${x.change_title[0]})`;
+        } else {
+          return 'העברה תקציבית';
+        }
+      },
+      topLeft: (x) => {
+        if (x['pending'] && x['pending'][0]) {
+          return '<strong>ממתינה לאישור</strong>';
+        } else if (x['date'] && x['date'].length > 0) {
+            return dayjs(x['date'][0]).format('DD/MM/YYYY');
+        }
+        return null
+      },
+      topLeftIcon: (x) => {
+        if (x['pending'] && x['pending'][0]) {
+          return 'notice';
+        }
+        return null;
+      },
+      title: [
+        ':page_title',
+        (x) => {
+            const partyFrom = x['summary']['from'].map((i: any[]) => i[2]).join(', ');
+            const partyTo = x['summary']['to'].map((i: any[]) => i[2]).join(', ');
+            if (partyTo.length && partyFrom.length) {
+              return `${partyTo} <span class='arrow right-dashed'></span> ${partyFrom}`;              
+            } else if (partyTo.length) {
+              return `<span class='arrow left-dashed'></span> ${partyTo}`;
+            } else if (partyFrom.length) {
+              return `<span class='arrow right-dashed'></span> ${partyFrom} `;
+            }
+            return '';
+        }
+      ],
 
+      bottomRight: (x) => {
+        if (x.change_type_name && x.change_type_name.length > 0) {
+          return `${x.change_type_name}: ${x.transaction_id}`;
+        } else {
+          return x.transaction_id;
+        }
+      },
+      bottomLeft: (x) => `<strong>${this.format_number(x.amount)}&nbsp;₪</strong>`,
 
-      // Main body:
-      title: ':page_title',
-      partyFrom: (x) => x['summary']['from'].map((i: any[]) => i[2]).join(', '),
-      partyTo: (x) => x['summary']['to'].map((i: any[]) => i[2]).join(', '),
-      arrowKind: 'left-dashed',
-
-      // Bottom line:
-      bottomLineText: (x) =>
-          '<strong>מספר פניה:</strong> :transaction_id | ' +
-          (x['pending'] && (x['pending'][0] ?
-            '<strong>ממתינה לאישור</strong>'
-            : ((x['date'] && x['date'].length > 0) ?
-                `<strong>אושרה ב:</strong> ${dayjs(x['date'][0]).format('DD/MM/YYYY')}`
-                : 'מועד אישור לא ידוע')))
+      bodyStyle: ['color-center', 'borders-solid'],
+      bodyBorderColor: '#CBC2DE',
+      bodyBgColor: '#FAF7FF',
     },
     // // PUBLICATIONS
     // Government Decisions
     'gov_decisions': <Parameter>{
-      // Colors:
-      primaryColor: '#19008f',
-      secondaryColor: '#ebe9f5',
-      tertiaryColor: '#a4a1b3',
+      primaryColor: '#3C4B7C',
       bgColor: '#ffffff',
-      tagColor: '#19008f',
 
-      // Top line:
-      tag: ':policy_type',
-      postTag: (x) => x['unit'] && x['unit'].length < 36 ? ':unit' : null,
-      preAmount: (x) => dayjs(x['publish_date']).format('DD/MM/YYYY'),
+      topRight: '<strong>:policy_type</strong>',
+      topLeft: (x) => x.office + (x['unit'] && x['unit'].length < 36 ? ' / ' + x.unit : ''),
 
-      // Main body:
-      title: ':title',
-      mainId: (x) => x['procedure_number_str'] ? '#:procedure_number_str' : null,
-      leftIcon: 'emblem-of-israel',
+      title: [':title'],
+      subtitle: (x) => {
+        if (x.text) {
+          return new DOMParser().parseFromString(x.text, "text/html").documentElement.textContent;
+        }
+        return null;
+      },
 
-      // Bottom line:
-      bottomLineText: '<strong>מפרסם:</strong> :office'
+      bottomRight: (x) => x['procedure_number_str'] ? `#${x.procedure_number_str}` : null,
+      bottomLeft: (x) => dayjs(x['publish_date']).format('DD/MM/YYYY'),
+
+      bodyStyle: ['icon-gov'],
+      bodyBorderColor: '#CADAEC',
+      bodyBgColor: '#ffffff',
     },
     // // ACTIVITIES
     // Government Activities
     'activities': <Parameter>{
-      // Colors:
-      primaryColor: '#19008f',
-      secondaryColor: '#ebe9f5',
-      tertiaryColor: '#a4a1b3',
+      primaryColor: '#45375B',
       bgColor: '#ffffff',
-      tagColor: '#19008f',
 
-      // Top line:
-      tag: ':kind_he',
-      partyFrom: (x) => x['office'] + '/' + x['unit'] + (x['subunit'] ? '/' + x['subunit'] : ''),
-      preAmount: (x: any) => {
+      topRight: '<strong>:kind_he</strong>',
+      topLeft: (x) => x['office'] + '/' + x['unit'] + (x['subunit'] ? '/' + x['subunit'] : ''),
+
+      title: [':name'],
+      subtitle: ':description',
+
+      bottomLeft: (x: any) => {
         const h = x['manualBudget'] || [];
         for (const i of h) {
           if (i.approved) {
-            return 'התקציב ב-' + i.year;
-          }
-        }
-        return null;
-      },
-      amount: (x: any) => {
-        const h = x['manualBudget'] || [];
-        for (const i of h) {
-          if (i.approved) {
-            return `${this.format_number(i.approved)} ₪`;
+            return `(${i.year}) <strong>${this.format_number(i.approved)}&nbsp;₪</strong>`;
           }
         }
         return null;
       },
 
-      // Main body:
-      title: ':name',
-
-      // Bottom line:
-      bottomLineText: ':description',
+      bodyStyle: ['color-center', 'borders-solid'],
+      bodyBorderColor: '#CBC2DE',
+      bodyBgColor: '#FAF7FF',      
     },
     // // REPORTS
     // NGO Activity Report
     'reports/ngo-activity-report': <Parameter>{
-      // Colors:
       primaryColor: '#180a42',
-      secondaryColor: '#fe8255',
       bgColor: '#ffffff',
-      tagColor: '#180a42',
 
-      // Top line:
-      tag: 'תחום פעילות',
+      topRight: 'תחום פעילות',
 
-      // Main body:
-      title: ':title',
+      title: [':title'],
 
-      // Bottom line:
-      bottomLineText: '<strong>מספר ארגונים:</strong> :details.report.total.total_amount',
+      bottomRight: '<strong>מספר ארגונים:</strong> :details.report.total.total_amount',
+
+      bodyStyle: ['color-center', 'borders-solid'],
+      bodyBorderColor: '#fe8255',
+      bodyBgColor: '#FAF7FF',
     },
+    // },
     // District Report
     'reports/ngo-district-report': <Parameter>{
-      // Colors:
       primaryColor: '#180a42',
-      secondaryColor: '#fe8255',
       bgColor: '#ffffff',
-      tagColor: '#180a42',
 
-      // Top line:
-      tag: 'אזור פעילות',
+      topRight: 'אזור פעילות',
 
-      // Main body:
-      title: ':title',
+      title: [':title'],
 
-      // Bottom line:
-      bottomLineText: '<strong>מספר ארגונים:</strong> :details.report.total.count',
+      bottomRight: '<strong>מספר ארגונים:</strong> :details.report.total.count',
+
+      bodyStyle: ['color-center', 'borders-solid'],
+      bodyBorderColor: '#fe8255',
+      bodyBgColor: '#FAF7FF',
     },
-
     'muni_budgets': <Parameter>{
-      // Colors:
-      // .func-cls-1 { .budget-func-cls-color(#5C7899, #6092CC, #D7E7FA, #EBF2FA); } //Blue
-      // .func-cls-2 { .budget-func-cls-color(#7A6B99, #9281B8, #E4DCF5, #F1EDF7); } //Purple
-      // .func-cls-3 { .budget-func-cls-color(#6D8F89, #75BFB3, #CEF0EB, #EBF7F5); } //Cyan
-      // .func-cls-4 { .budget-func-cls-color(#A67453, #F0A16C, #FFD1B3, #FCF0E8); } //Orange
-      // .func-cls-5 { .budget-func-cls-color(#768275, #8EA38C, #D4E3D1, #ECF2EB); } //Greenish
-      // .func-cls-6 { .budget-func-cls-color(#998282, #C7B3B3, #EDE4E4, #F7F2F2); } //Sepia
-      // .func-cls-7 { .budget-func-cls-color(#8C8231, #F2E22E, #FFF7B3, #FCFADC); } //Yellow
-      // .func-cls-8 { .budget-func-cls-color(#313131, #2E2E2E, #B3B3B3, #DCDCDC); } //Yellow
-      primaryColor: '#7a6b99',
-      secondaryColor: '#e4dcf5',
-      tertiaryColor: '#b4a0de',
+      primaryColor: '#45375B',
       bgColor: '#ffffff',
-      tagColor: '#7a6b99',
 
-      // Top line:
-      tag: (x) => 'סעיף תקציבי',
-      amount: (x) => `${this.format_number(x.allocated)}&nbsp;₪`,
+      topRight: (x) => {
+        const bc = x['nice-breadcrumbs'] || ('' + x['year']);
+        const parts = bc.split(' / ');
+        return `<strong>${parts[0]}</strong><span class='soft'>${bc.substring(parts[0].length)}</span>`;
+      },
+      topLeft: (x) => x['nice-category'] || '&nbsp;',
+      topLeftIcon: 'circle',
 
-      // Main body:
-      title: ':title',
-      mainId: (x) => 'קוד סעיף: :nice-code',
+      title: [':title'],
 
-      // Bottom line:
-      bottomLineText: ':nice-breadcrumbs',
-      bottomLineLabel: ':nice-category',
-      bottomLineLabelStyle: 'circle'
+      bottomRight: 'קוד סעיף: :nice-code',
+      bottomLeft: (x) => `<strong>${this.format_number(x.allocated)}&nbsp;₪</strong>`,
+
+      bodyStyle: ['color-center', 'borders-solid'],
+      bodyBorderColor: '#CBC2DE',
+      bodyBgColor: '#FAF7FF',
     },
   };
 
@@ -569,33 +677,39 @@ export class SearchResultComponent implements OnInit {
   ngOnInit() {
     const parts = this.item.source.doc_id.split('/');
     this.p = {} as Parameter;
-    const template = (
+    let template: any = (
       this.PARAMETERS[parts[0] + '/' + parts[1]] ||
       this.PARAMETERS[parts[0]] ||
       this.PARAMETERS['']
     );
     if (template) {
-      for (const el of Object.entries(template)) {
-        const k = el[0] as string;
-        let v = el[1] as any;
-        if (typeof v === 'function') {
-          v = v(this.item.source);
-        }
-        if (typeof v === 'string') {
-          v = v.replace(/:([-a-z0-9_.]+)/g, (_, x) => this.get(x));
-        } else {
-          v = null;
-        }
-        (this.p as any)[k] = v;
-      }
+      this.p = this.processObject(template);
     }
     if (this.bare) {
       this.p.primaryColor = 'black';
-      this.p.secondaryColor = '#f9f9f9';
       this.p.bgColor = 'white';
     }
   }
 
+  processObject(obj: any): any {
+    if (typeof obj === 'string') {
+      return obj.replace(/:([-a-z0-9_.]+)/g, (_, x) => this.get(x));
+    }
+    if (typeof obj === 'function') {
+      return obj(this.item.source);
+    }
+    if (Array.isArray(obj)) {
+      return obj.map((x) => this.processObject(x));
+    }
+    if (typeof obj === 'object') {
+      const r: any = {};
+      for (const k of Object.keys(obj)) {
+        r[k] = this.processObject(obj[k]);
+      }
+      return r;
+    }
+    return null;
+  }
 
   threeYears() {
     const dt = new Date();
@@ -644,7 +758,7 @@ export class SearchResultComponent implements OnInit {
     if (primary) {
       return `linear-gradient(to left, ${this.p.bgColor}00 0%, ${this.p.bgColor}ff 100%)`;
     } else {
-      return `linear-gradient(to left, ${this.p.secondaryColor}00 0%, ${this.p.secondaryColor}ff 100%)`;
+      return `linear-gradient(to left, ${this.p.primaryColor}00 0%, ${this.p.primaryColor}ff 100%)`;
     }
   }
 
