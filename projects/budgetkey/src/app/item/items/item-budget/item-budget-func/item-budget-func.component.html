@@ -1,14 +1,17 @@
 <app-base-budget-item [item]='item' [questions]='questions'>
-    <ng-container class='preTitleTemplate'>סיווג נושאי רוחבי</ng-container>
-    <ng-container class='subtitleTemplate'>
-        ריכוז כלל ההוצאה תחת נושא אחד.<br/>
-        הטיפול בנושא זה יכול להתחלק בין מספר משרדים שונים.
+    <ng-container class='category'>
+        <strong>סיווג נושאי רוחבי</strong>&nbsp;/&nbsp;
+        <app-item-link [itemId]='"budget/00/" + item.year'>תקציב המדינה</app-item-link>
+    </ng-container>
+    <ng-container class='extraInfo'>
     </ng-container>
     <ng-container class='textTemplate'>
+        ריכוז כלל ההוצאה תחת נושא אחד.<br/>
+        הטיפול בנושא זה יכול להתחלק בין מספר משרדים שונים.<br/><br/>
         <div class="objective" *ngIf='item.explanation'>
             <span [innerHTML]='item.explanation'></span>
             <div><small>&mdash;&nbsp;מקור: {{item.explanation_source}}</small></div>
+            <br/>
         </div>
-        <br/>
     </ng-container>
 </app-base-budget-item>

@@ -1,8 +1,13 @@
+<app-item-page-header
+    [primaryColor]='"#5D5077"' [bgColor]='"white"'
+    [borderColor]='"#CADAEC"' [secondaryColor]='"#8778A5"'
+>
+    <ng-container class='category'>שמות אנשים</ng-container>
+    <ng-container class='title'>{{ item.page_title }}</ng-container>
+</app-item-page-header>
+
 <div class='header'>
     <div class='titles'>
-      <div class='title'>
-        {{ item.page_title }}
-      </div>
       <div class="disclaimer">
         * המידע נאסף באופן אוטומטי ממקורות שונים על סמך השם. המערכת אינה יכולה להבדיל בין אנשים שונים בעלי אותו השם.
       </div>

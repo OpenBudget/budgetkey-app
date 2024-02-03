@@ -1,31 +1,39 @@
-<app-base-simple-item [item]='item' [questions]='questions'>
-    <ng-container class='preTitleTemplate'>
-        {{ item.request_type }}
+<app-base-simple-item [item]='item' [questions]='questions'
+    [headerPrimaryColor]='"#313E69"' [headerSecondaryColor]='"#6D82B4"'
+    [headerBgColor]='"#FFFDFA"' [headerBorderColor]='"#E5DFDA"'
+>
+    <ng-container class='category'>
+        <strong>{{ item.request_type }}</strong>
     </ng-container>
-    <ng-container class='amountTemplate'>
-        <small>סה״כ שולם:</small>
+    <ng-container class='amount'>
         <span class='number'>{{ format.number(item.amount_total) }}</span>
         <small>₪</small>
     </ng-container>
-    <ng-container class='titleTemplate'>
-        תמיכה תקציבית ב
-        {{item.recipient}}
+    <ng-container class='title'>
+        @if (purposes.length) {
+            <span>{{ purposes[0].support_title }}</span>
+        } @else {
+            <span>תמיכה תקציבית</span>
+        }
     </ng-container>
-    <ng-container class='subtitleTemplate'>
-        <div>
-            תמיכה משנת
-            {{item.year_requested}}
-            ב
-            <ng-container *ngIf='item.entity_name'>
-                <app-item-link [itemId]='"org/" + item.entity_kind + "/" + item.entity_id'>
-                    {{ item.entity_name }}
-                </app-item-link>
-            </ng-container>
-            <ng-container *ngIf='!item.entity_name'>
-                {{ item.recipient }}
-            </ng-container>
-            </div>            
+    <ng-container class='subtitle'>
+        @if (purposes.length) {
+            <span>{{ purposes[0].supporting_ministry }}</span>
+        }
+        &larr;
+        @if (item.entity_id && item.entity_kind && item.entity_name) {
+            <app-item-link [itemId]='"org/" + item.entity_kind + "/" + item.entity_id'>
+                {{ item.entity_name }}
+            </app-item-link>
+        } @else {
+            <span>{{ item.recipient }}</span>
+        }
     </ng-container>
+    <ng-container class='extraInfo'>
+        תמיכה משנת
+        {{item.year_requested}}
+    </ng-container>
+
     <ng-container class='textTemplate'>
         <ng-container *ngFor='let purpose of purposes'>
         <div>
@@ -61,7 +69,7 @@
                         אושר ב-
                         {{ item.year_requested}}:
                     </label>
-                    <span class='number'>
+                    &nbsp;<span class='number'>
                         {{ format.number(payment.amount_approved) }}
                     </span>
                     <small>₪</small>
@@ -74,7 +82,7 @@
                         שולם ב-
                         {{payment.year_paid}}:
                     </label>
-                    <span class='number'>
+                    &nbsp;<span class='number'>
                         {{ format.number(payment.amount_total) }}
                     </span>
                     <small>₪</small>

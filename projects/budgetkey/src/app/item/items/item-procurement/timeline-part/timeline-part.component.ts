@@ -13,6 +13,7 @@ export class TimelinePartComponent implements OnInit {
   @Input() first: boolean;
   @Input() last: boolean;
   @Input() percent: number;
+  @Input() color: string;
 
   radius: number;
   fill: string;
@@ -27,7 +28,7 @@ export class TimelinePartComponent implements OnInit {
       if (this.major) {
           this.radius = (this.size - 2) / 2;
           this.fill = '#FFFBF2';
-          this.stroke = '#512C0A';
+          this.stroke = this.color || '#512C0A';
           this.strokeWidth = this.radius > 10 ? 2 : 1;
       } else {
           this.radius = 5;

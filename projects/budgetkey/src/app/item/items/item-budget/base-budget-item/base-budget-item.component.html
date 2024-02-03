@@ -5,14 +5,15 @@
   <ng-container class='category'>
     <ng-content select='.category'></ng-content>
   </ng-container>
+  <ng-container class='extraInfo'>
+    <ng-content select='.extraInfo'></ng-content>
+  </ng-container>
   <ng-container class='amount'>
     <span class='number'>{{ format.number(item.net_revised) }}</span>
     <small>₪</small>
   </ng-container>
-  <ng-container class='title'>{{item.title}}</ng-container>
-  <ng-container class='subtitle'>
-    <ng-content select='subtitle'></ng-content>
-  </ng-container>
+  <ng-container class='title'>{{title}}</ng-container>
+  <ng-container class='subtitle'>{{subtitle}}</ng-container>
   <ng-container class='textTemplate'>
     <ng-content select='.textTemplate'></ng-content>
     בשנת {{item.year}} תקציב {{item.title}}

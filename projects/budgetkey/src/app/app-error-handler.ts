@@ -1,7 +1,7 @@
 import {ErrorHandler, Inject, Injectable, NgZone, Optional, PLATFORM_ID} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
+import { REQUEST } from '../express.tokens';
 import { Request } from 'express';
 
 @Injectable()

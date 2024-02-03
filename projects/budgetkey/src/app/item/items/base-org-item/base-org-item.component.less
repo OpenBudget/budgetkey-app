@@ -1,209 +1,13 @@
+@import '../../../../common.less';
+
 :host {
     
     .row-container {
         padding: 0px 140px;
         
-        @media only screen and (max-width: 768px) {
+        .mobile({
             padding: 0 15px;
-        }
-    }
-    
-    .title-container {
-        display: flex;
-        flex-direction: column;
-        font-size: calc(0.625em + 0.4vw);
-        .title-row > span {
-            display: flex;
-            flex-wrap: nowrap;
-            flex-direction: row;
-            background-color: #F3EFFA;
-        }
-        
-        .title-row {
-            margin-top: 45px;
-            height: 100%;
-            border-top: 1px solid #EAF9DE;
-            border-bottom: 1px solid #EAF9DE;
-            align-items: stretch;
-            display: inline-flex;
-            flex-direction: row;
-            
-            @media only screen and (max-width: 768px) {
-                height: auto;
-                flex-flow: column;
-                align-items: flex-start;
-                margin: 0 -15px;
-                flex-wrap: wrap;
-            }
-            
-            .invert {
-                background-color: #fff !important;
-            }
-            
-            .pretitle-wrapper {
-                display: flex;
-                flex: 1 1 5%;
-                flex-flow: row;
-                display: inline-flex;
-                align-items: center;
-                justify-content: flex-start;
-                padding:0 140px 0 8px;
-                @media only screen and (max-width: 1000px) {
-                    padding:0 78px 0 17px;
-                }
-                
-                @media only screen and (max-width: 768px) {
-                    width: 100%;
-                    padding: 0 2em;
-                    padding-top: 1.2em;
-                    justify-content: flex-start;
-                }
-                
-                
-                .pretitle {
-                    display: inline-block;
-                    padding: 1px 5px;
-                    height: 17px;
-                    color: #FEE2DA;
-                    background-color: #FE8255;
-                    font-family: "Abraham TRIAL";
-                    font-size: 13px;
-                    font-weight: 400;
-                    line-height: 17px;
-                    border-radius: 4px;
-                    white-space: nowrap;
-                }
-                
-            }
-            
-            
-            
-            .title-wrapper {
-                flex: 3 1 auto;
-                display: flex;
-                flex-wrap: wrap;
-                flex-flow: row;
-                align-items: center;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                
-                
-                
-                
-                .title {
-                    color: #180A42;
-                    font-family: "Miriam Libre";
-                    font-size: calc(1em + 0.5vw);
-                    font-weight: bold;
-                    margin: 0;
-                }
-                
-                @media only screen and (max-width: 768px) {
-                    width: 100%;
-                    padding: 0.6em 2em;
-                }
-                
-            }
-            
-            .org-id {
-                flex: 1 1 10%;
-                padding: 0 1.8em;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                
-                small {
-                    color: #180A42;
-                    font-family: "Abraham TRIAL";
-                    font-size: 0.8em;
-                    padding-left: 0.8em;
-                }
-                div {
-                    color: #444;
-                    font-family: "Miriam Libre";
-                    font-size: 1.2em;
-                    font-weight: bold;
-                }
-                
-                @media only screen and (max-width: 768px) {
-                    display: flex;
-                    flex-flow: row;
-                    
-                    small, div {
-                        color: #4A4A4A;
-                        font-family: "Abraham TRIAL";
-                        font-size: 1.2em;
-                        font-weight: normal;
-                        padding: 0.3em;
-                    }
-                }
-            }
-            
-            .amount {
-                display: flex;
-                flex-flow: row;
-                align-items: center;
-                flex: 1 1 11%;
-                min-width: 20em;
-                /* ie 11 fallback */
-                justify-content: space-around;
-                justify-content: space-evenly;
-                
-                small {
-                    display: inline-block;
-                    flex-wrap: wrap;
-                    text-align: left;
-                    color: #180A42;
-                    font-family: "Abraham TRIAL";
-                    font-size: 0.8em;
-                    line-height: 1.2em;
-                }
-                
-                ::ng-deep .figure {
-                    color: #444;
-                    font-family: "Miriam Libre";
-                    font-size: 22px;
-                    font-weight: bold;
-                    line-height: 29px;
-                    white-space: nowrap;
-                }
-                
-                @media only screen and (max-width: 768px) {
-                    display: flex;
-                    flex-flow: row;
-                    padding: 0 2em;
-                    margin: 0;
-                    
-                    ::ng-deep {
-                        small, .figure {
-                            color: #4A4A4A;
-                            font-family: "Abraham TRIAL";
-                            font-size: 1.2em;
-                            font-weight: normal;
-                            padding-left: 1em;
-                            text-align: right;
-                        }
-                    }
-                }
-                
-            }
-            
-        }
-        
-        &.company {
-            
-            .title-row {
-                & > span {
-                    background-color: #D9EEFE;
-                }
-                
-                .pretitle {
-                    color: #E8F5FF;
-                    background-color: #3E4E59;
-                }
-            }
-        }
-        
+        });
     }
     
     .text-container {
@@ -217,6 +21,9 @@
         
         display: flex;
         flex-flow: row;
+        gap: 16px;
+        padding: 8px 16px;
+        padding-right: 48px;
         
         .text {
             flex: 1 1 auto;
@@ -227,24 +34,25 @@
             flex: 0 0 auto;
             display: flex;
             flex-flow: column;
+            gap: 20px;
+            margin-bottom: 20px;
             
             ::ng-deep .tip {
                 border: 4px dashed rgba(0,0,0,0.25);
                 border-radius: 10px;
                 background-color: #F0F6FA;
                 padding: 20px;
-                margin: 10px 0px;
                 max-width: 25vw;
                 
                 div, a {
-                    font-family: "Abraham TRIAL";
-                    color: #512C0A;
+                    .font-abraham;
+                    color: @color-yucky-brown;
                     font-size: 16px;
                     line-height: 20px;
                     font-weight: 300;
                 }
                 a {
-                    color: #19008F;
+                    color: @color-yucky-blue;
                     text-align: left;
                     font-weight: bold;
                 }
@@ -266,7 +74,7 @@
             color: #5A32D1;
         }
         
-        @media only screen and (max-width: 600px) {
+        .mobile({
             font-size: 16px;
             margin: 20px 0;
             flex-flow: column;
@@ -280,8 +88,7 @@
             ::ng-deep .tag {
                 display: none
             }
-        }
-        
+        });
     }
     
     

@@ -1,3 +1,5 @@
+@import '../../../common.less';
+
 .widget {
     position: relative;
     min-width: 50px;
@@ -7,7 +9,7 @@
      
 .login {
     // color: #BDBDBD;	
-    font-family: "Abraham TRIAL";	
+    .font-abraham;
     cursor: pointer;
     &:focus, &:hover {
         text-decoration: underline;
@@ -29,7 +31,7 @@
 .profile { 
     width: 30px;
     height: 30px;
-    border: 1px solid #FF5A5F;
+    border: 1px solid @color-fill-lead;
     border-radius: 15px;
     overflow: hidden;
 }
@@ -63,6 +65,6 @@
 }
 
 .menu-line:hover {
-    color: #FF5A5F;	
+    color: @color-fill-lead;	
     background-color: #FCEBEC;
 }

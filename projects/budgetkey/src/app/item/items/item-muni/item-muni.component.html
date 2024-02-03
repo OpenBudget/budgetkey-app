@@ -1,7 +1,18 @@
 <div class='streched'>
-    <div class='header'>
-        <h1>{{ (ext.name && ext.name.value) || item.name }}</h1>
-    </div>
+    <app-item-page-header
+        [bgColor]='"#F5FAFF"' [borderColor]='"#A5B9DA"'
+        [primaryColor]='"#495A8F"' [secondaryColor]='"#6D82B4"'>
+        <ng-container class='title'>{{ item.name }}</ng-container>
+        <ng-container class='subtitle'>#{{ item.id }}</ng-container>
+        <ng-container class='amount'>
+        <small [bkTooltip]='"<strong>כספי ממשלה שהתקבלו</strong> במסגרת תמיכות והתקשרויות מתועדות <strong>משלוש השנים האחרונות</strong>"'>
+        </small>
+        <span class='number'>{{ format.number(item.received_amount) }}</span>
+        <small>₪</small>    
+        </ng-container>
+        <ng-container class='category'><strong>{{item.kind_he}}</strong></ng-container>
+        <ng-container class='extraInfo'>{{ item.details?.address || item.details?.address_lines?.[0] || item.details?.city || item.details?.address_city || '' }}</ng-container>
+    </app-item-page-header>
     <div class='general-info'>
         <div class='section'>
             <div class='section-icon'>

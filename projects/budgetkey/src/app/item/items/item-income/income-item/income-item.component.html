@@ -1,14 +1,19 @@
-<app-base-simple-item [item]='item' [questions]='questions'>
-    <ng-container class='preTitleTemplate'>{{item['nice-code']}}</ng-container>
-    <ng-container class='amountTemplate'>
-      <small>הכנסות:&nbsp;</small>
-      <span class='number'>{{ format.number(item.net_revised) }}</span>
-      <small>₪</small>
+<app-base-simple-item [item]='item' [questions]='questions'
+  [headerBgColor]='"#FAF7FF"' [headerBorderColor]='"#BCB2D3"'
+  [headerPrimaryColor]='"#5D5077"' [headerSecondaryColor]='"#8778A5"'
+>
+    <ng-container class='category'>
+    <ng-content select='.category'></ng-content>
     </ng-container>
-    <ng-container class='titleTemplate'>{{item.title}}</ng-container>
-    <ng-container class='subtitleTemplate'>
-      <ng-content select='.subtitleTemplate'></ng-content>
+    <ng-container class='extraInfo'>
+    <ng-content select='.extraInfo'></ng-content>
     </ng-container>
+    <ng-container class='amount'>
+    <span class='number'>{{ format.number(item.net_revised) }}</span>
+    <small>₪</small>
+    </ng-container>
+    <ng-container class='title'>{{item.title}}</ng-container>
+    <ng-container class='subtitle'>{{item['nice-code']}}</ng-container>
     <ng-container class='textTemplate'>
       <ng-content select='.textTemplate'></ng-content>
       בשנת {{item.year}} תחזית הכנסות {{item.title}}

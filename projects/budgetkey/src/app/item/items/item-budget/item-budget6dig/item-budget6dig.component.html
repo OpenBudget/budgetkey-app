@@ -1,12 +1,15 @@
 <app-base-budget-item [item]='item' [questions]='questions'>
-    <ng-container class='preTitleTemplate'>
-        {{item['nice-code']}}
-    </ng-container>
-    <ng-container class='subtitleTemplate'>
-        תכנית בתקציב המדינה - תחת תחום
+    <ng-container class='category'>
+        <strong>תכנית תקציבית</strong>&nbsp;/&nbsp;
+        <app-item-link [itemId]='"budget/00/" + item.year'>תקציב המדינה</app-item-link>&nbsp;/&nbsp;
+        <app-item-link [itemId]='grandParentId'>{{grandParent}}</app-item-link>&nbsp;/&nbsp;
         <app-item-link [itemId]='parentId'>{{parent}}</app-item-link>
-        בסעיף
-        <app-item-link [itemId]='grandParentId'>{{grandParent}}</app-item-link>.<br/>
-        לרוב כוללת תקציב עבור פעילות מרכזית אחת של הממשלה. העברות תקציביות מבוצעות ברמת התכנית.
+    </ng-container>
+    <ng-container class='extraInfo'>
+        @if (item['nice-category']) {
+            <app-item-link [itemId]='"budget/C" + category + "/" + item.year'>{{item['nice-category']}}</app-item-link>
+        } @else if (item['nice-short-category']) {
+            <app-item-link [itemId]='"budget/C" + category + "/" + item.year'>{{item['nice-short-category']}}</app-item-link>
+        } 
     </ng-container>
 </app-base-budget-item>

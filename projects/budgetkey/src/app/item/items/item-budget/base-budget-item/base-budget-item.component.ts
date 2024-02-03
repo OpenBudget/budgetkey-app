@@ -7,7 +7,7 @@ import { Format } from '../../../../format';
   templateUrl: './base-budget-item.component.html',
   styleUrls: ['./base-budget-item.component.less']
 })
-export class BudgetItemComponent implements OnChanges{
+export class BudgetItemComponent implements OnChanges {
   @Input() item: any;
   @Input() questions: Question[];
 
@@ -16,6 +16,8 @@ export class BudgetItemComponent implements OnChanges{
   executedYear: number | null;
   startYear: number | null;
   takana = false;
+  title = '';
+  subtitle = '';
 
   ngOnChanges(): void {
     this.executedYear = null;
@@ -29,6 +31,10 @@ export class BudgetItemComponent implements OnChanges{
         }
       }
       this.startYear = parseInt(Object.keys(this.item.history).sort()[0]);
+    }
+    if (this.item) {
+      this.title = this.item.code === '00' ? 'תקציב המדינה' : this.item.title;
+      this.subtitle = this.item.code[0] === 'C' ? '' : (this.item.code === '00' ? `${this.item.year}` : this.item['nice-code']);
     }
   }
 }

@@ -1,7 +1,9 @@
+@import '../../../common.less';
+
 .search-tag {
-    font-family: 'Abraham TRIAL';
+    .font-abraham;
     font-size: 16px;
-    font-weight: normal;
+    font-weight: 400;
     color: #7d7d7d;
     display: flex;
     flex-flow: row;
@@ -13,7 +15,7 @@
         border: 2px solid #edeef0;
 
         &.selected {
-            border-color: #ff5a5f;
+            border-color: @color-fill-lead;
         }
     }
 
@@ -26,7 +28,7 @@
         cursor: pointer;
 
         &.selected {
-            background-color: #ff5a5f;
+            background-color: @color-fill-lead;
             color: #fff;
         }
 
@@ -46,7 +48,7 @@
 
         &.selected {
             background-color: #fcebec;
-            color: #ff5a5f;
+            color: @color-fill-lead;
         }
     }
 

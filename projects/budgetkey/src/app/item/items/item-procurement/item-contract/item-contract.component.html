@@ -1,36 +1,23 @@
 <div class='procure-container'>
-    <div class='marquee'>
-        <span class='status-text decision'>{{ decisionText() }}</span>
-        <span class='break'></span>
-        <span class='status-timestamp'>
-            עדכון אחרון: {{ format.date(item.payments[item.payments.length - 1].date) }}
-        </span>
-        <span class='created-timestamp' *ngIf='item.firstUpdateDate'>
-            דיווח ראשון: {{ item.firstUpdateDate }}
-        </span>
-    </div>
-    <div class='header'>
-        <div class='titles'>
-            <h1 class='title'>
-                {{ item.purpose }}
-                <span class='process-type-tag'>התקשרות ממשלתית</span>
-            </h1>
-            <div class='parties'>
-                <h2 class='from'>{{ publisher() }} &larr; </h2>
-                <ng-container *ngIf='toText()'>
-                    <h2 class='to'>
-                        {{ toText() }}
-                    </h2>
-                </ng-container>
-            </div>
-            <div class='tags'>
-                <span class='tag' *ngFor='let tag of item.subject_list_keywords'>
-                    {{ tag }}
-                </span>
-            </div>
-        </div>
-        <div class='amount' *ngIf='totalAmount()'>
-            <div class='progress-text'>
+
+    <app-item-page-header
+        [primaryColor]='"#313E69"' [secondaryColor]='"#6D82B4"'
+        [bgColor]='"#FFFDFA"' [borderColor]='"#E5DFDA"'
+    >
+        <ng-container class='category'>
+            <strong>התקשרות ממשלתית</strong>&nbsp;/&nbsp;
+            <span [title]='item.payments[item.payments.length - 1].date'>
+                (עדכון אחרון: {{ format.relativeDate(item.payments[item.payments.length - 1].date) }})
+            </span>
+        </ng-container>
+        <ng-container class='extraInfo'>
+
+            @if (totalAmount()) {
+                <span>עד כה שולמו</span>
+                <span class='number' [innerHtml]='format.ils(totalPaid())'></span>
+                <span>שהם</span>
+                <span class='number' [innerHtml]='format.percent(totalPaid() / totalAmount())'></span>
+                <span>מתוך:</span>
                 <app-timeline-part [size]='13'
                             [percent]='100 * totalPaid() / totalAmount()'
                             [padding]='0' 
@@ -38,17 +25,24 @@
                             [first]='true'
                             [last]='true'>
                 </app-timeline-part>
-                <span>
-                    <span>עד כה שולמו&nbsp;</span>
-                    <span class='figure' [innerHtml]='format.percent(totalPaid() / totalAmount())'></span>
-                    <span>&nbsp;מתוך:</span>
-                </span>
-            </div>
-            <div class='volume'>
-                <span class='figure number' [innerHtml]='format.ils(totalAmount())'></span>
-            </div>
-        </div>
-    </div>
+            }
+        </ng-container>
+        <ng-container class='title'><span>{{ item.purpose }}</span></ng-container>
+        <ng-container class='subtitle'>
+            <span>{{ publisher() }} &larr; </span>
+            @if (item.entity_id && item.entity_kind && item.entity_name) {
+                <app-item-link [itemId]='"org/" + item.entity_kind + "/" + item.entity_id'>{{item.entity_name}}</app-item-link>
+            } @else if (toText()) {
+                <span>{{ toText() }}</span>
+            }
+        </ng-container>
+        <ng-container class='amount'>
+            @if (totalAmount()) {
+                <span class='number' [innerHtml]='format.number(totalAmount())'></span>
+                <small>₪</small>
+            }
+        </ng-container>
+    </app-item-page-header>
     <div class='hero'>
         <div class='details'>
             <div *ngIf='item.resolved_budget_codes && item.resolved_budget_codes.length'>

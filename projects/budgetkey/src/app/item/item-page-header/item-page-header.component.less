@@ -16,7 +16,7 @@
             padding-left: 8px;
 
             display: flex;
-            flex-flow: row;
+            flex-flow: row wrap;
             align-items: center;
 
             .top-right {
@@ -24,6 +24,14 @@
                 font-size: 13px;
                 font-weight: 400;
                 line-height: normal;
+
+                display: flex;
+                flex-flow: row;
+                align-items: center; 
+    
+                app-share-widget {
+                    margin-left: 8px;
+                }
 
                 ::ng-deep {
                     strong {
@@ -37,18 +45,26 @@
                 font-size: 13px;
                 font-weight: 400;
                 line-height: normal;
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                gap: 0.25em;
+
                 ::ng-deep {
                     strong {
                         font-weight: 500;
                     }
                 }
+                .mobile({
+                    display: none;
+                });
             }
         }
 
         .bottom-line {
             width: 100%;
             display: flex;
-            flex-flow: row;
+            flex-flow: row wrap;
             align-items: flex-start;
             gap: 16px;
             padding: 16px 8px;
@@ -56,22 +72,29 @@
             border: 1px solid transparent;
         
             .bottom-right {
-                flex: 1 1 auto;
+                flex: 1 0 300px;
                 white-space: normal;
+                display: inline;
+                max-width: 100%;
+
                 .title {
-                    display: inline;
+                    display: inline-block;
+                    margin: 0;
                     .font-miriam;
                     text-align: right;
                     font-size: 32px;
                     font-weight: 700;
-                    line-height: normal;                    
+                    line-height: normal;
+                    margin-left: 8px;              
                 }
+
                 .subtitle {
-                    display: inline;
+                    display: inline-block;
+                    margin: 0;
                     .font-miriam;
                     text-align: right;
                     font-size: 32px;
-                    font-weight: 700;
+                    font-weight: 400;
                     line-height: normal;                    
                 }
             }

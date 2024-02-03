@@ -154,9 +154,9 @@ export function tooltip(content: string) {
   }
   for (let i = 0 ; i < TOOLTIPS.length ; i++ ) {
     const k = 'TTT' + i + 'PPP';
-    const repl = `${TOOLTIPS[i][0]}<span class='bk-tooltip-anchor'><img src='assets/common/img/help.svg'><span class='bk-tooltip'>` +
+    const repl = `${TOOLTIPS[i][0]} <span class='bk-tooltip-anchor'><img src='assets/common/img/help.svg'><span class='bk-tooltip'>` +
     TOOLTIPS[i][1] +
-          `<span class='mobile-tooltip-instruction'>לסגירה לחצו מחוץ לתיבה זו</span></span></span>`;
+          ` <span class='mobile-tooltip-instruction'>(לסגירה לחצו מחוץ לתיבה זו)</span></span></span>`;
     if (content.indexOf(k) >= 0) {
       content = content.replace(k, repl);
     }

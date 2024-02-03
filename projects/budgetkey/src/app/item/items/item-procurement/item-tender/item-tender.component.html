@@ -1,74 +1,71 @@
-<div class='alert' *ngIf='closingSoon()'>
-    <div [innerHtml]='closingSoonTitle() + tooltip(closingSoonAction()[0])'></div>
-    <div *ngIf='closingSoonAction()[1]'
-         class='separator'></div>
-    <a *ngIf='closingSoonAction()[1]' [href]='closingSoonAction()[1]'>פרטים נוספים</a>
-</div>
 <div class='procure-container'>
-    <div class='marquee'>
-        <span class='status-alert' *ngIf='alertText().length > 0' [innerHtml]="tooltip(alertText())"></span>
-        <span class='status-text decision' *ngIf='item.simple_decision_long' [innerHtml]="tooltip(item.simple_decision_long)"></span>
-        <span class='break'></span>
-        <span class='status-timestamp' *ngIf='lastUpdateDate()'>
-            עדכון אחרון: {{ lastUpdateDate() }}
-        </span>
-        <span class='created-timestamp' *ngIf='item.firstUpdateDate'>
-            דיווח ראשון: {{ item.firstUpdateDate }}
-        </span>
-    </div>
-    <div class='header'>
-        <div class='titles'>
-            <h1 class='title'>
-                <span [innerHtml]='tooltip(itemTitle())'></span>
-                <span class='process-type-tag' [innerHtml]='tooltip(item.tender_type_he)'></span>
-            </h1>
-            <div class='parties'>
-                <h2 class='from' [innerHtml]='tooltip(publisher()) + " &larr; "'></h2>
-                <ng-container *ngIf='item.awardees_text && item.simple_decision !== "פתוח"'>
-                    <ng-container *ngIf='!item.entity_id'>
-                        <span class='to' [innerHtml]='tooltip(item.awardees_text)'>
-                        </span>
-                    </ng-container>
-                    <ng-container *ngIf='item.entity_id'>
-                        <a [href]='"/i/org/" + item.entity_kind + "/" + item.entity_id'>
-                            <h2 class='to' [innerHtml]='tooltip(item.awardees_text)'>
-                            </h2>
-                        </a>
-                    </ng-container>
-                </ng-container>
-            </div>
-            <div class='tags'>
-                <span>
-                    <span class='tag' *ngFor='let tag of item.subject_list_keywords'>
-                        {{ tag }}
-                    </span>
-                </span>
-            </div>
-        </div>
-        <div class='amount' *ngIf='totalAmount()'>
-            <div class='progress-text'>
 
-                <app-timeline-part [size]='13'
-                            [percent]='100 * totalPaid() / totalAmount()'
-                            [padding]='0' 
-                            [major]='true'
-                            [first]='true'
-                            [last]='true'>
-                </app-timeline-part>
-                <span>
-                    <span>עד כה שולמו&nbsp;</span>
-                    <!--span class='figure' [innerHtml]='number(item.contract_executed)'></span>
-                    <span>שהם</span-->
-                    <span class='figure number' [innerHtml]='format.percent(totalPaid() / totalAmount())'></span>
-                    <span [bkTooltip]='"הסה״כ מייצג את סך כל ההתחייבויות לתשלום שפורסמו עד כה על ידי הגורם הממשלתי במסגרת המכרז או הפטור ממכרז, עם הספקים הרלוונטיים.<br/>סכום זה עשוי להשתנות ולגדול עם הזמן, בהתאם לתנאי המכרז או הפטור ממכרז שבמסגרתם מתבצעת ההתקשרות."'>&nbsp;מתוך:
-                    </span>
+    <app-item-page-header
+        [primaryColor]='"#313E69"' [secondaryColor]='"#6D82B4"'
+        [bgColor]='"#FFFDFA"' [borderColor]='"#E5DFDA"'
+    >
+        <ng-container class='category'>
+            <strong [innerHTML]='tooltip(item.tender_type_he)'></strong>&nbsp;/&nbsp;
+            <strong *ngIf='item.simple_decision_long' [innerHtml]="tooltip(item.simple_decision_long)"></strong>
+            <span *ngIf='lastUpdateDate()' [title]='lastUpdateDateTooltip()'>
+                (עדכון אחרון: {{ lastUpdateDate() }})
+            </span>
+        </ng-container>
+        <ng-container class='extraInfo'>
+            @if (totalAmount()) {
+                <span [bkTooltip]='"הסה״כ מייצג את סך כל ההתחייבויות לתשלום שפורסמו עד כה על ידי הגורם הממשלתי במסגרת המכרז או הפטור ממכרז, עם הספקים הרלוונטיים.<br/>סכום זה עשוי להשתנות ולגדול עם הזמן, בהתאם לתנאי המכרז או הפטור ממכרז שבמסגרתם מתבצעת ההתקשרות."'
+                >שולמו עד כה</span>
+                <span class='number' [innerHtml]='format.ils(totalPaid())'></span>
+                <span>שהם</span>
+                <span class='number'                        
+                    [innerHtml]='format.percent(totalPaid() / totalAmount())'>
                 </span>
-            </div>
-            <div class='volume'>
-                <span class='figure number' [innerHtml]='format.ils(totalAmount())'></span>
-            </div>
-        </div>
-    </div>
+                <span>מתוך:</span>
+                <app-timeline-part [size]='13'
+                    [percent]='100 * totalPaid() / totalAmount()'
+                    [padding]='0' 
+                    [major]='true'
+                    [first]='true'
+                    [last]='true'
+                    [color]='"#7D7D7D"'
+                >
+                </app-timeline-part>
+            } @else {
+                @if (closingSoon()) {
+                    <div [innerHtml]='closingSoonTitle() + tooltip(closingSoonAction()[0])'></div>
+                    <div *ngIf='closingSoonAction()[1]' class='separator'>
+                        <a *ngIf='closingSoonAction()[1]' [href]='closingSoonAction()[1]'>פרטים נוספים</a>
+                    </div>
+                }
+                @else {
+                    <span *ngIf='alertText().length > 0' [innerHtml]="tooltip(alertText())"></span>
+                    <span *ngIf='item.firstUpdateDate'>
+                        דיווח ראשון: {{ item.firstUpdateDate }}
+                    </span>    
+                }
+
+            }
+        </ng-container>
+        <ng-container class='title'><span [innerHtml]='tooltip(itemTitle())'></span></ng-container>
+        <ng-container class='subtitle'>
+            <span [innerHtml]='tooltip(publisher()) + " &larr; "'></span>
+            @if (item.awardees_text && item.simple_decision !== "פתוח") {
+                @if (!item.entity_id) {
+                    <span [innerHtml]='tooltip(item.awardees_text)'></span>
+                } @else {
+                    <app-item-link [itemId]='"org/" + item.entity_kind + "/" + item.entity_id'>
+                        <span [innerHtml]='tooltip(item.awardees_text)'></span>
+                    </app-item-link>
+                }
+            }
+        </ng-container>
+        <ng-container class='amount'>
+            @if (totalAmount()) {
+                <span class='number' [innerHtml]='format.number(totalAmount())'></span>
+                <small>₪</small>
+            }
+        </ng-container>
+    </app-item-page-header>
     <div class='hero'>
         <div class='details'>   
             <div *ngIf='item.tender_type == "exemptions"'>

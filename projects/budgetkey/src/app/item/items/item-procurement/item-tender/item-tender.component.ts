@@ -61,12 +61,16 @@ export class ItemTenderComponent implements OnChanges {
 
   lastUpdateDate() {
     if (this.item['last_update_date']) {
-      return this.format.date(this.item['last_update_date']);
+      return this.format.relativeDate(this.item['last_update_date']);
     }
     if (this.item['__last_modified_at']) {
-      return this.format.date(this.item['__last_modified_at']);
+      return this.format.relativeDate(this.item['__last_modified_at']);
     }
     return null;
+  }
+
+  lastUpdateDateTooltip() {
+    return this.item['last_update_date'] || this.item['__last_modified_at'] || null;
   }
 
   itemTitle() {

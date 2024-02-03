@@ -15,6 +15,7 @@ export class ItemBudget6digComponent implements OnChanges {
   parentId = '';
   grandParent = '';
   grandParentId = '';
+  category = '';
 
   questions = [
     ...questions_spending,
@@ -32,6 +33,9 @@ export class ItemBudget6digComponent implements OnChanges {
         this.grandParent = grandLastHierarchy[1];
         this.grandParentId = `budget/${grandLastHierarchy[0]}/${this.item.year}`;
       }
+    }
+    if (this.item) {
+      this.category = JSON.parse(this.item.func_cls_json[0])[0] + JSON.parse(this.item.func_cls_json[0])[2];
     }
   }
 }

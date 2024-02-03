@@ -1,14 +1,4 @@
-<app-base-org-item [item]='item'
-    [overrideText]='true' [overrideAmount]='true'>
-    <ng-container class='amountTemplate'>
-        <small>            
-            <span [bkTooltip]='"השנה האחרונה לגביה מוצג דיווח שנתי באתר \"גיידסטאר\""'>מחזור כספי שנתי</span>
-            <br/>לשנת {{ item.details.last_report_year}}
-        </small>
-        <span class='figure'>
-            ₪{{ format.number(item.details.yearly_turnover) }}
-        </span>
-    </ng-container>
+<app-base-org-item [item]='item' [overrideText]='true'>
     <ng-container class='textTemplate'>
         <div class="tag">
             תחום {{ item.details.field_of_activity_display }}

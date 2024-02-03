@@ -1,10 +1,10 @@
-import { Injectable, TransferState, PLATFORM_ID, Inject, Component } from '@angular/core';
-import { DEFAULT_THEME } from './theme.budgetkey.he';
-import { Observable, ReplaySubject, distinctUntilChanged, from, map, switchMap, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { untilDestroyed } from '@ngneat/until-destroy';
+import { ReplaySubject, distinctUntilChanged, map, switchMap } from 'rxjs';
 import { PlatformService } from './platform.service';
-import { HttpClient } from '@angular/common/http';
+import { DEFAULT_THEME } from './theme.budgetkey.he';
 
 const CACHE: any = {};
 
@@ -51,39 +51,4 @@ export class GlobalSettingsService {
       this.ready.complete();
     });
   }
-  // cacheSet(key: string, value: any) {
-  //   if (isPlatformServer(this.platformId)) {
-  //     console.log(key, 'SETTING CACHE', value);
-  //     this.transferState.set(makeStateKey(key), value);
-  //     CACHE[key] = value;
-  //   }
-  // }
-
-  // cacheGet(key: string) {
-  //   let value: any;
-  //   if (isPlatformServer(this.platformId)) {
-  //     if (CACHE.hasOwnProperty(key)) {
-  //       value = CACHE[key];
-  //     }
-  //     this.transferState.set(makeStateKey(key), value);
-  //   } else {
-  //     if (this.transferState.hasKey(makeStateKey(key))) {
-  //       value = this.transferState.get(makeStateKey(key), undefined);
-  //     }
-  //   }
-  //   return value;
-  // }
-
-  // cachedHttp<T>(key: string, request: Observable<T>) {
-  //   let value = this.cacheGet(key);
-  //   console.log(key, 'CHECKING CACHE', value);
-  //   if (value === undefined) {
-  //     console.log(key, 'NOT IN CACHE', request);
-  //     return request.pipe(
-  //       tap((v: T) => this.cacheSet(key, v))
-  //     );
-  //   } else {
-  //     return from([value]);
-  //   }
-  // }
 }

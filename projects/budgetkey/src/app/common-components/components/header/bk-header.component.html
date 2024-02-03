@@ -21,27 +21,7 @@
     <div *ngIf="showSearchBar" class="collapsed-search layout-mobile" (click)='doSearch()'>
       <img class="search-icon" src="/assets/common/img/search-glass-white.svg">
     </div>
-    <div *ngIf='showShare' class="collapsed-share" [class.visible]='showShareMenu()' (click)='openShareMenu()'>
-      <div class="share-icon"></div>
-      <div class='menu'>
-        <a class='menu-line' [href]='seo.twitterShare' target="_blank">
-          <span class='icon twitter'></span>
-          שיתוף בטוויטר
-        </a>
-        <a class='menu-line' [href]='seo.fbShare' target="_blank">
-          <span class='icon facebook'></span>
-          שיתוף בפייסבוק
-        </a>
-        <a class='menu-line' [href]='seo.whatsappShare' target="_blank">
-          <span class='icon whatsapp'></span>
-          שיתוף בוואטסאפ
-        </a>
-        <a class='menu-line layout-mobile' (activated)="seo.mobileShare()" clickOnReturn>
-          <span class='icon mobile-share'></span>
-          שיתוף אחר
-        </a>
-      </div>
-    </div>
+    <app-share-widget *ngIf='showShare'></app-share-widget>
     <div class="collapsed-menu layout-mobile" [class.with-search]='showSearchBar' [class.visible]='showCollapsedMenu()' (click)='openCollapsedMenu()'>
       <i class="glyphicon glyphicon-menu-hamburger"></i>
       <div class='menu'>

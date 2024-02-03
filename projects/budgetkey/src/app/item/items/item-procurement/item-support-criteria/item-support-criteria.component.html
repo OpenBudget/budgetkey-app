@@ -1,38 +1,39 @@
-<div class='alert' *ngIf='closingSoon()'>
-    <div [innerHtml]='closingSoonTitle() + tooltip(closingSoonAction()[0])'></div>
-    <div *ngIf='closingSoonAction()[1]'
-         class='separator'></div>
-    <a *ngIf='closingSoonAction()[1]'
-       [href]='closingSoonAction()[1]'
-       [innerHtml]='closingSoonAction()[2]'></a>
-</div>
 <div class='procure-container'>
-    <div class='marquee'>
-        <span class='status-alert' *ngIf='alertText().length > 0' [innerHtml]="tooltip(alertText())"></span>
-        <span class='status-text decision' *ngIf='item.decision' [innerHtml]="tooltip(item.decision)"></span>
-        <span class='break'></span>
-        <span class='status-timestamp' *ngIf='item.firstUpdateDate'>
-            פרסום באתר: {{ item.firstUpdateDate }}
-        </span>
-    </div>
-    <div class='header'>
-        <div class='titles support-criteria'>
-            <div class='parties'>
-                <span class='process-type-tag' [innerHtml]='tooltip(processTag())'></span>
-                <span class='from' [innerHtml]='tooltip(publisher())'></span>
-            </div>
-            <div class='title'>
-                <span [innerHtml]='tooltip(itemTitle())'></span>
-            </div>
-            <div class='tags'>
-                <span>
-                    <span class='tag' *ngFor='let tag of item.subject_list_keywords'>
-                        {{ tag }}
-                    </span>
-                </span>
-            </div>
-        </div>
-    </div>
+
+    <app-item-page-header
+        [primaryColor]='"#313E69"' [secondaryColor]='"#6D82B4"'
+        [bgColor]='"#FFFDFA"' [borderColor]='"#E5DFDA"'
+    >
+        <ng-container class='category'>
+            <strong [innerHtml]='tooltip(processTag())'></strong>&nbsp;/&nbsp;
+
+            @if (item.firstUpdateDate) {
+                <span>פרסום באתר: </span>
+                <span [title]='item.firstUpdateDate'>{{ format.relativeDate(item.firstUpdateDate) }}</span>    
+            }
+        </ng-container>
+        <ng-container class='extraInfo'>
+            @if (closingSoon()) {
+                <div class='alert'>
+                    <div [innerHtml]='closingSoonTitle() + tooltip(closingSoonAction()[0])'></div>
+                    <div *ngIf='closingSoonAction()[1]'
+                         class='separator'></div>
+                    <a *ngIf='closingSoonAction()[1]'
+                       [href]='closingSoonAction()[1]'
+                       [innerHtml]='closingSoonAction()[2]'></a>
+                </div>                    
+            } @else {
+                <span class='status-alert' *ngIf='alertText().length > 0' [innerHtml]="tooltip(alertText())"></span>
+                <span class='status-text decision' *ngIf='item.decision && item.decision !== "לא ידוע"' [innerHtml]="tooltip(item.decision)"></span>    
+            }
+        </ng-container>
+        <ng-container class='title'><span [innerHtml]='tooltip(itemTitle())'></span></ng-container>
+        <ng-container class='subtitle'>
+            <span class='from' [innerHtml]='tooltip(publisher()) + " &larr; "'></span>
+        </ng-container>
+        <ng-container class='amount'></ng-container>
+    </app-item-page-header>
+
     <div class='hero'>
         <div class='details'>   
             <div class='description' *ngIf='item.description' [class.readmore]='item.description.length > 1000 && !description_expanded'>

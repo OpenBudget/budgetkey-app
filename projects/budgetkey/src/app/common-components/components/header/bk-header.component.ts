@@ -19,9 +19,7 @@ export class BkHeaderComponent {
   @Input() showShare = true;
   public showAuth = false;
   public showCollapsedMenu = signal(false);
-  public showShareMenu = signal(false);
   collapseMenuSub: Subscription | null = null;
-  shareMenuSub: Subscription | null = null;
   logoRouterLink = ['/'];
 
   constructor (public globalSettings: GlobalSettingsService, private router: Router, private platform: PlatformService, private window: WindowService, public seo: SeoService) {
@@ -75,21 +73,5 @@ export class BkHeaderComponent {
       });
     }
   }
-  
-  openShareMenu() {
-    if (this.showShareMenu()) {
-      this.showShareMenu.set(false);
-      return;
-    }
-    this.showShareMenu.set(true);
-    if (this.window._) {
-      this.shareMenuSub?.unsubscribe();
-      this.shareMenuSub = timer(100).pipe(
-        switchMap(() => this.window._ ? fromEvent(this.window._, 'click') : EMPTY),
-        take(1),
-      ).subscribe(() => {
-        this.showShareMenu.set(false);
-      });
-    }
-  }
+
 }

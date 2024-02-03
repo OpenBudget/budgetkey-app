@@ -1,10 +1,12 @@
+@import '../../../../common.less';
+
 div {
     width: 100%;
     position: relative;
 }
 ::ng-deep rect {
     stroke: none;
-    fill: #512C0A;
+    fill: @color-yucky-brown;
 }
 ::ng-deep rect.bar-bg {
     opacity: 0.15;
@@ -20,21 +22,21 @@ div {
 }
 ::ng-deep .text-year {
     text-anchor: end;
-    fill: #512C0A;
-    font-family: "Abraham TRIAL";
+    fill: @color-yucky-brown;
+    .font-abraham;
     font-size: 18;
 }
 ::ng-deep .text-amount {
     position: absolute;
     display: inline-block;
     text-align: center;
-    color: #512C0A;
-    font-family: "Abraham TRIAL";
+    color: @color-yucky-brown;
+    .font-abraham;
     font-size: 18px;
 }
 ::ng-deep .grid {
     stroke-width: 1;
-    stroke: #512C0A;
+    stroke: @color-yucky-brown;
     opacity: 0.25;
 }
 ::ng-deep .grid-25 {
@@ -49,7 +51,7 @@ div {
 ::ng-deep .grid-text {
     text-anchor: end;
     opacity: 0.5;
-    color: #512C0A;
+    color: @color-yucky-brown;
     font-family: "Abraham TRIAL";
     font-size: 12px;
 }

@@ -1,31 +1,19 @@
-<div class='title-container' [class]='item?.kind || ""'>
-    <div class="title-row">
-        <span class="pretitle-wrapper">
-            <span class="pretitle">
-                {{ item.kind_he }}
-            </span>
-        </span>
-        <span class='title-wrapper'>
-            <h1 class="title">{{item.name}}</h1>
-        </span>
-        <span class="org-id invert">
-            <small>מספר תאגיד</small>
-            <div>{{ item.id }}</div>
-        </span>
-        <span class="amount invert" *ngIf='overrideAmount'>
-            <ng-content select='.amountTemplate'></ng-content>
-        </span>
-        <span class="amount invert" *ngIf='!overrideAmount'>
-            <small [bkTooltip]='"תמיכות והתקשרויות מתועדות משלוש השנים האחרונות"'>
-                כספי ממשלה שהתקבלו
-            </small>
-            <span class='figure'>
-                {{ format.number(item.received_amount) }} ₪
-            </span>    
-        </span>
-    </div>
-</div>
-<div class="row-container text-container">
+<app-item-page-header
+      [bgColor]='"#F5FAFF"' [borderColor]='"#A5B9DA"'
+      [primaryColor]='"#495A8F"' [secondaryColor]='"#6D82B4"'>
+  <ng-container class='title'>{{ item.name }}</ng-container>
+  <ng-container class='subtitle'>#{{ item.id }}</ng-container>
+  <ng-container class='amount'>
+    <small [bkTooltip]='"<strong>כספי ממשלה שהתקבלו</strong> במסגרת תמיכות והתקשרויות מתועדות <strong>משלוש השנים האחרונות</strong>"'>
+    </small>
+    <span class='number'>{{ format.number(item.received_amount) }}</span>
+    <small>₪</small>    
+  </ng-container>
+  <ng-container class='category'><strong>{{item.kind_he}}</strong></ng-container>
+  <ng-container class='extraInfo'>{{ item.details?.address || item.details?.address_lines?.[0] || item.details?.city || item.details?.address_city || '' }}</ng-container>
+</app-item-page-header>
+
+<div class="text-container" [style.color]='"#512C0A"'>
     <div class="text" *ngIf='overrideText'>
         <ng-content select='.textTemplate'></ng-content>
     </div>

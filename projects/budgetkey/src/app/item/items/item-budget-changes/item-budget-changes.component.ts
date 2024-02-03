@@ -12,4 +12,14 @@ export class ItemBudgetChangesComponent {
   questions = [];
 
   format = new Format();
+
+  partyFrom = '';
+  partyTo = '';
+
+  ngOnChanges() {
+    if (this.item) {
+      this.partyFrom = this.item?.summary?.from.map((i: any[]) => i[2]).join(', ');
+      this.partyTo = this.item?.summary?.to.map((i: any[]) => i[2]).join(', ');
+    }
+  }
 }

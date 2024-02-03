@@ -2,7 +2,7 @@ import { Component, Inject, Optional } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalSettingsService } from '../common-components/global-settings.service';
 import { PlatformService } from '../common-components/platform.service';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
+import { REQUEST } from '../../express.tokens';
 import { Request } from 'express';
 
 @Component({

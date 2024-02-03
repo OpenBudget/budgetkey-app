@@ -14,7 +14,7 @@ export class ItemLinkComponent implements OnChanges {
   constructor(private globalSettings: GlobalSettingsService) {}
 
   ngOnChanges() {
-    let base = '//next.obudget.org';
+    let base = '';
     if (this.itemId.indexOf('activities/gov_social_service') === 0) {
       base = '//www.socialpro.org.il';
     }

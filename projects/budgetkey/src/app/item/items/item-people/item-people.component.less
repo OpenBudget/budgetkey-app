@@ -1,44 +1,43 @@
+@import '../../../../common.less';
+
 :host {
     display: flex;
     margin: 30px auto;
   
     width: 100%;
-    border: 2px solid rgba(0,0,0,0.02);
     border-radius: 3px;
-    background-color: #FFFBF2;
-    box-shadow: 0 1px 2px 0 rgba(189,189,189,0.6);
     flex-flow: column;
   
-    font-family: "Abraham TRIAL", "Alef Hebrew", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    .font-abraham;
+    font-weight: 400;
     font-size: 18px;
-    font-weight: normal;
-    color: #512C0A;
+    color: @color-yucky-brown;
   
     label, th {
       padding-top: 13px;
       font-weight: bold;
-      color: #19008F;
+      color: @color-yucky-blue;
       white-space: nowrap;
     }
   
     a {
-      color: #512C0A;
+      color: @color-yucky-brown;
     }
   
     .header {
       padding: 26px 50px;
   
-      border-bottom: 2px solid rgba(0,0,0,0.04);
+      // border-bottom: 2px solid rgba(0,0,0,0.04);
   
   
       .titles {
         width: 70%;
   
         .title {
-          font-family:  "Miriam Libre", sans-serif;;
+          .font-miriam;
           font-size: 26px;
-          font-weight: bold;
-          color: #19008F;
+          font-weight: 700;
+          color: @color-yucky-blue;
         }
   
       }
@@ -48,13 +47,13 @@
     .disclaimer {
       width: 70%;
       font-size: 12px;
-      font-weight: normal;
-      color: #FF5A5F;
+      font-weight: 400;
+      color: @color-fill-lead;
     }
   
     .details {
       padding: 26px 50px;
-      border-bottom: 2px solid rgba(0,0,0,0.04);
+      // border-bottom: 2px solid rgba(0,0,0,0.04);
       width: 100%;
   
       .timeline {
@@ -127,7 +126,7 @@
             top: -16px;
             right: 0;
             opacity: 0.5;
-            color: #512C0A;
+            color: @color-yucky-brown;
             font-family: "Abraham TRIAL", "Alef Hebrew", "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-size: 14px;
           }

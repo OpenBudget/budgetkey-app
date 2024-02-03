@@ -1,32 +1,34 @@
-<app-base-simple-item [item]='item' [questions]='[]'>
-    <ng-container class='preTitleTemplate'>
-        {{ item.policy_type }}
+<app-base-simple-item [item]='item' [questions]='[]'
+    [headerPrimaryColor]='"#5D5077"' [headerBgColor]='"white"'
+    [headerBorderColor]='"#CADAEC"' [headerSecondaryColor]='"#8778A5"'
+>
+    <ng-container class='category'>
+        <strong>{{ item.policy_type }}</strong>&nbsp;/&nbsp;
+        <span>{{ item.office }}</span>
+        @if (item.unit?.length < 36) {
+            &nbsp;/&nbsp;<span>{{ item.unit }}</span>
+        }
+        @if (item.procedure_number_str) {
+            &nbsp;/&nbsp;<span>#{{ item.procedure_number_str }}</span>
+        }
     </ng-container>
-    <ng-container class='amountTemplate'>
+    <ng-container class='amount'>
     </ng-container>
-    <ng-container class='titleTemplate'>
+    <ng-container class='title'>
         {{ item.title }}
     </ng-container>
     <ng-container class='subtitleTemplate'>
-        <div *ngIf='item.procedure_number'>
-            <label>
-                החלטת ממשלה {{ item.procedure_number }}
-            </label>
-        </div>
-        <div>
-            <label>פורסם ב-{{ format.date(item.publish_date) }}</label>
-        </div>
-        <ng-container *ngIf='item.office'>
-            משרד: {{ item.office }}
-        </ng-container>
+    </ng-container>
+    <ng-container class='extraInfo'>
+        פורסם ב-{{ format.date(item.publish_date) }}
+    </ng-container>
+    <ng-container class='textTemplate'>
         <div *ngIf='item.linked_docs?.length > 0'>
             מסמכים:
             <div *ngFor='let doc of item.linked_docs'>
                 <a [href]='doc.href'>{{doc.title}}</a>
             </div>
         </div>
-    </ng-container>
-    <ng-container class='textTemplate'>
         <div [innerHTML]="item.text"></div>
     </ng-container>
 </app-base-simple-item>

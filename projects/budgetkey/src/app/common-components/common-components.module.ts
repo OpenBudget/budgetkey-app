@@ -21,6 +21,7 @@ import { RouterModule } from '@angular/router';
 import { SeoService } from './seo.service';
 import { LayoutService } from './layout.service';
 import { WindowService } from './window.service';
+import { ShareWidgetComponent } from './components/share-widget/share-widget.component';
 
 /**
  * Created by adam on 27/12/2016.
@@ -42,6 +43,7 @@ import { WindowService } from './window.service';
     ModalComponent,
     ClickOnReturnDirective,
     AuthComponent,
+    ShareWidgetComponent,
   ],
   providers: [
     ListsService,
@@ -61,6 +63,7 @@ import { WindowService } from './window.service';
     BkSubscriptionManager,
     ModalComponent,
     ClickOnReturnDirective,
+    ShareWidgetComponent,
   ]
 })
 export class CommonComponentsModule { }

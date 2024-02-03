@@ -1,3 +1,5 @@
+@import '../../../../common.less';
+
 :host {
     width: 130px;
     height: 25px;
@@ -11,10 +13,10 @@
         align-items: center;
     }
     .title {
-        font-family: "Miriam Libre";
+        .font-miriam;
         font-size: 22px;
         font-weight: bold;
-        color: #FF5A5F;
+        color: @color-fill-lead;
         margin-bottom: 30px;
     }
     p {
@@ -25,7 +27,7 @@
         display: block;
         pointer-events: none;
         color: #FFFFFF;
-        font-family: "Miriam Libre";
+        .font-miriam;
         font-size: 14px;
         font-weight: bold;
         letter-spacing: 0.4px;

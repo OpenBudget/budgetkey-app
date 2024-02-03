@@ -13,6 +13,7 @@ export class ItemBudget4digComponent implements OnChanges {
 
   parent = '';
   parentId = '';
+  category = '';
 
   questions = [
     ...questions_spending,
@@ -25,6 +26,9 @@ export class ItemBudget4digComponent implements OnChanges {
       const lastHierarchy = this.item.hierarchy[this.item.hierarchy.length - 1];
       this.parent = lastHierarchy[1];
       this.parentId = `budget/${lastHierarchy[0]}/${this.item.year}`;
+    }
+    if (this.item) {
+      this.category = JSON.parse(this.item.func_cls_json[0])[0] + JSON.parse(this.item.func_cls_json[0])[2];
     }
   }
 }

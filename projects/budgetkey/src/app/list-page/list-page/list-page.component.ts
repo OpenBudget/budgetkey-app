@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ListContents, ListsService } from '../../common-components/services/lists.service';
 import { filter, map, switchMap } from 'rxjs';
 import { PlatformService } from '../../common-components/platform.service';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
+import { REQUEST } from '../../../express.tokens';
 import { Request } from 'express';
 
 @UntilDestroy()

@@ -4,7 +4,7 @@ import { EMPTY, Subject, catchError, map, tap } from 'rxjs';
 import { GlobalSettingsService } from '../common-components/global-settings.service';
 import { Router } from '@angular/router';
 import { PlatformService } from '../common-components/platform.service';
-import { REQUEST } from '@nguniversal/express-engine/tokens';
+import { REQUEST } from '../../express.tokens';
 import { Request } from 'express';
 
 @Injectable()
