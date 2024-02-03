@@ -57,11 +57,14 @@ export function app(): express.Express {
           { provide: APP_BASE_HREF, useValue: baseUrl },
           { provide: RESPONSE, useValue: res },
           { provide: REQUEST, useValue: req }
-],
+        ],
       })
       .then((html) => {
         console.log(`${new Date().toISOString()} | ${res.statusCode} | OK | ${req.url} | ${user_agent}`);
-        return res.send(html);
+        if (html) {
+          return res.send(html);
+        }
+        return '';
       })
       .catch((err) => {
         console.log(`${new Date().toISOString()} | ${res.statusCode} | ${err?.name || 'ERR'} | ${req.url} | ${user_agent}`);

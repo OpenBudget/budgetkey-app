@@ -34,8 +34,8 @@ export class ItemContractComponent implements OnChanges, OnInit {
   }
 
   publisher() {
-    if (this.item['publisher']) {
-      if (this.item['purchasing_unit']) {
+    if (this.item['publisher']?.length) {
+      if (this.item['purchasing_unit']?.length) {
         if (this.item['purchasing_unit'][0].indexOf(this.item['publisher'][0]) === -1) {
           return this.item['publisher'][0] + ', ' + this.item['purchasing_unit'][0];
         } else {

@@ -59,7 +59,7 @@
                 <span *ngIf='item.exemption_reason && item.exemption_reason.length && item.exemption_reason[0].length && item.exemption_reason[0].length > 5'>&nbsp;({{item.exemption_reason[0]}})</span>
             </div>
             
-            <div class='payments' *ngIf='paymentsTable'>
+            <div class='payments' *ngIf='paymentsTable && paymentsTable.length'>
                 <h3>דיווחים רבעוניים על תשלומים שבוצעו</h3>
                 <table>
                     <thead>
@@ -80,9 +80,9 @@
                                 <td>
                                     <ng-container *ngIf='row[period]'>
                                         <a class='bk-tooltip-anchor' 
-                                        [href]='row[period].url' 
-                                        target='_blank'
-                                        *ngIf='row[period].url && row[period].diff != 0'>
+                                            [href]='row[period].url' 
+                                            target='_blank'
+                                            *ngIf='row[period].url && row[period].diff != 0'>
                                             <i class='glyphicon glyphicon-paperclip'></i>
                                             <span class='bk-tooltip'>להורדת הדו"ח הרבעוני</span>
                                         </a>
