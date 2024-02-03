@@ -1,5 +1,5 @@
 <a  
-    [class]='"card " + p.bodyStyle.join(" ")'
+    [class]='"card " + (p.bodyStyle || []).join(" ")'
     [class.horizontal]='horizontal'
     [style.background-color]='p.bgColor'
     [style.border-color]='p.bodyBorderColor'

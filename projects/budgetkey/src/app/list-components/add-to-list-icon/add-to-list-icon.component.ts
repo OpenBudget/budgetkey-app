@@ -17,6 +17,8 @@ import { AddToListDialogCommand, ListDialogService } from '../list-dialog.servic
 })
 export class AddToListIconComponent implements OnChanges {
   @Input() doc: DocResultEntry;
+  @Input() color = '#5D5077';
+  @Input() secondaryColor = '#9888BB';
 
   enabled = computed(() => {
     return this.lists.hasCuratedLists();

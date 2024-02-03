@@ -12,6 +12,10 @@
         [style.background-color]='bgColor'
         [style.border-color]='borderColor'
     >
+        <app-add-to-list-icon [doc]='doc'
+            [color]='primaryColor'
+            [secondaryColor]='secondaryColor || "#9888BB"'
+        ></app-add-to-list-icon>
         <div class='bottom-right'>
             <h1 class='title' [style.color]='primaryColor'>
                 <ng-content select='.title'></ng-content>

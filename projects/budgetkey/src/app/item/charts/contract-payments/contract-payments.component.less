@@ -1,57 +1,59 @@
 @import '../../../../common.less';
 
-div {
-    width: 100%;
-    position: relative;
-}
-::ng-deep rect {
-    stroke: none;
-    fill: @color-yucky-brown;
-}
-::ng-deep rect.bar-bg {
-    opacity: 0.15;
-}
-::ng-deep rect.bar-bg:nth-child(2n+1) {
-    fill: none;
-}
-::ng-deep rect.bar-executed {
-    opacity: 0.5;
-}
-::ng-deep rect.bar-diff {
-    opacity: 1;
-}
-::ng-deep .text-year {
-    text-anchor: end;
-    fill: @color-yucky-brown;
-    .font-abraham;
-    font-size: 18;
-}
-::ng-deep .text-amount {
-    position: absolute;
-    display: inline-block;
-    text-align: center;
-    color: @color-yucky-brown;
-    .font-abraham;
-    font-size: 18px;
-}
-::ng-deep .grid {
-    stroke-width: 1;
-    stroke: @color-yucky-brown;
-    opacity: 0.25;
-}
-::ng-deep .grid-25 {
-    stroke-dasharray: 2, 8;
-}
-::ng-deep .grid-75 {
-    stroke-dasharray: 2, 8;
-}
-::ng-deep .grid-50 {
-    stroke-dasharray: 2, 4;
-}
-::ng-deep .grid-text {
-    text-anchor: end;
-    opacity: 0.5;
-    color: @color-yucky-brown;
-    font-family: "Abraham TRIAL";
-    font-size: 12px;
+:host {
+    div {
+        width: 100%;
+        position: relative;
+    }
+    ::ng-deep rect {
+        stroke: none;
+        fill: @color-yucky-brown;
+    }
+    ::ng-deep rect.bar-bg {
+        opacity: 0.15;
+    }
+    ::ng-deep rect.bar-bg:nth-child(2n+1) {
+        fill: none;
+    }
+    ::ng-deep rect.bar-executed {
+        opacity: 0.5;
+    }
+    ::ng-deep rect.bar-diff {
+        opacity: 1;
+    }
+    ::ng-deep .text-year {
+        text-anchor: end;
+        fill: @color-yucky-brown;
+        .font-abraham;
+        font-size: 18;
+    }
+    ::ng-deep .text-amount {
+        position: absolute;
+        display: inline-block;
+        text-align: center;
+        color: @color-yucky-brown;
+        .font-abraham;
+        font-size: 18px;
+    }
+    ::ng-deep .grid {
+        stroke-width: 1;
+        stroke: @color-yucky-brown;
+        opacity: 0.25;
+    }
+    ::ng-deep .grid-25 {
+        stroke-dasharray: 2, 8;
+    }
+    ::ng-deep .grid-75 {
+        stroke-dasharray: 2, 8;
+    }
+    ::ng-deep .grid-50 {
+        stroke-dasharray: 2, 4;
+    }
+    ::ng-deep .grid-text {
+        text-anchor: end;
+        opacity: 0.5;
+        color: @color-yucky-brown;
+        font-family: "Abraham TRIAL";
+        font-size: 12px;
+    }
 }
