@@ -293,6 +293,9 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   }
 
   refreshChart(ct: any, where: string) {
+    if (this.ps.server()) {
+      return;
+    }
     const query = this.prepareChartQuery(ct.query, where);
     forkJoin([
         this.colorscheme,
