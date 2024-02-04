@@ -38,7 +38,10 @@ interface Parameter {
 @Component({
   selector: 'search-result',
   templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.less']
+  styleUrls: ['./search-result.component.less'],
+  host: {
+    '[class.horizontal]': 'horizontal',
+  }
 })
 export class SearchResultComponent implements OnInit {
 

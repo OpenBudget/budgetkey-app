@@ -1,5 +1,17 @@
 @import '../../../common.less';
 
+:host {
+    width: 100%;
+
+    &.horizontal {
+        max-width: 320px;
+        height: 100%;
+        width: calc(100% ~'-' 56px);
+        height: 100%;
+        flex: 0 0 auto;
+    }
+}
+
 .card {
     display: flex;
     flex-flow: column;
@@ -7,6 +19,7 @@
     border: solid 1px black;
     border-radius: 4px;
     overflow: hidden;
+    width: 100%;
 
     &:hover {
         text-decoration: inherit;
@@ -19,12 +32,6 @@
     app-add-to-list-icon {
         pointer-events: all;
     }
-
-    &.horizontal {
-        width: 320px;
-        height: 100%;
-    }
-
 
     .top-line, .bottom-line {
         display: flex;
