@@ -96,11 +96,16 @@ export class BudgetKeyItemService {
   }
 
   getItemData(query: string, headersOrder: string[], formatters: any[], page = 0, pageSize?: number): Observable<object> {
-    let url = 'https://next.obudget.org/api/query?query=' + encodeURIComponent(query) + '&page=' + page;
+    const params: any = {
+      page
+    };
+    let url = 'https://next.obudget.org/api/query';
     if (!!pageSize) {
-      url += '&page_size=' + pageSize;
+      params['page_size'] = pageSize;
     }
-    return this.http.get(url)
+    const formData = new FormData();
+    formData.append('query', query);
+    return this.http.post(url, formData, {params})
         .pipe(
           map(
             (res: any) => {
