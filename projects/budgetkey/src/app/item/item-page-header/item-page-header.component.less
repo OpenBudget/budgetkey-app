@@ -10,14 +10,19 @@
 
         .top-line {
             width: 100%;
-            height: 32px;
+            min-height: 32px;
 
+            padding: 4px 0;
             padding-right: 14px;
             padding-left: 8px;
 
             display: flex;
             flex-flow: row wrap;
             align-items: center;
+
+            app-share-widget {
+                margin-left: 8px;
+            }
 
             .top-right {
                 .font-abraham;
@@ -26,12 +31,9 @@
                 line-height: normal;
 
                 display: flex;
-                flex-flow: row;
+                flex-flow: row wrap;
                 align-items: center; 
     
-                app-share-widget {
-                    margin-left: 8px;
-                }
 
                 ::ng-deep {
                     strong {

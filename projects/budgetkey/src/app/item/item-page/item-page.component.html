@@ -1,4 +1,4 @@
-<app-container [showHeader]="true" [showSearchBar]="true" [listSideView]='true'>
+<app-container [showHeader]="true" [showSearchBar]="true" [listSideView]='true' [showShare]="false">
   <div #container class="budgetkey-item-wrapper container-fluid" [ngClass]="'style-' + style" *ngIf='init'>
     <div class='item-container'>
       <app-item-budget0dig *ngIf='prefix("budget/00/")' [item]='item'></app-item-budget0dig>
