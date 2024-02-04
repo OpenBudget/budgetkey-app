@@ -14,7 +14,7 @@
     [queryParamsHandling]='"merge"'
 >
     <div class='top-line'
-        [style.background-color]='p.bodyStyle.indexOf("color-top") > -1 ? p.bodyBgColor : null'>
+        [style.background-color]='(p.bodyStyle || []).indexOf("color-top") > -1 ? p.bodyBgColor : null'>
         <span class='top-right' *ngIf='p.topRight' [innerHtml]='p.topRight'
         ></span>
         <span class='top-left' *ngIf='p.topLeft' [innerHtml]='p.topLeft'
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class='bottom-line'
-         [style.background-color]='p.bodyStyle.indexOf("color-bottom") > -1 ? p.bodyBgColor : null'>
+         [style.background-color]='(p.bodyStyle || []).indexOf("color-bottom") > -1 ? p.bodyBgColor : null'>
     <span class='bottom-right' *ngIf='p.bottomRight' [innerHtml]='p.bottomRight'
         ></span>
         <span class='bottom-left' *ngIf='p.bottomLeft' [innerHtml]='p.bottomLeft'

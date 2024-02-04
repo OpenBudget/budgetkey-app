@@ -8,6 +8,7 @@ import { GlobalSettingsService } from '../../common-components/global-settings.s
 import * as dayjs from 'dayjs';
 import 'dayjs/locale/he';
 import { DomSanitizer } from '@angular/platform-browser';
+import { PlatformService } from '../../common-components/platform.service';
 dayjs.locale('he');
 
 type StringOrFunc = string | ((x: any) => string);
@@ -476,7 +477,7 @@ export class SearchResultComponent implements OnInit {
       ],
       subtitle: (x) => {
         if (x.text) {
-          return new DOMParser().parseFromString(x.text, "text/html").documentElement.textContent;
+          return this.cleanHtml(x.text);
         }
         return null;
       },
@@ -498,7 +499,7 @@ export class SearchResultComponent implements OnInit {
       title: [':key'],
       subtitle: (x) => {
         if (x.text) {
-          return new DOMParser().parseFromString(x.text, "text/html").documentElement.textContent;
+          return this.cleanHtml(x.text);
         }
         return null;
       },
@@ -577,7 +578,7 @@ export class SearchResultComponent implements OnInit {
       title: [':title'],
       subtitle: (x) => {
         if (x.text) {
-          return new DOMParser().parseFromString(x.text, "text/html").documentElement.textContent;
+          return this.cleanHtml(x.text);
         }
         return null;
       },
@@ -672,7 +673,7 @@ export class SearchResultComponent implements OnInit {
 
   public p: Parameter;
 
-  constructor(private globalSettings: GlobalSettingsService, private sanitizer: DomSanitizer) { }
+  constructor(private globalSettings: GlobalSettingsService, private sanitizer: DomSanitizer, private ps: PlatformService) { }
 
   ngOnInit() {
     const parts = this.item.source.doc_id.split('/');
@@ -840,5 +841,12 @@ export class SearchResultComponent implements OnInit {
     if (event.type === 'click') {
       event.preventDefault();
     }
+  }
+
+  cleanHtml(html: string) {
+    if (this.ps.server()) {
+      return '';
+    }
+    return new DOMParser().parseFromString(html, "text/html").documentElement.textContent;
   }
 }
