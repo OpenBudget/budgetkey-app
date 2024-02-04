@@ -266,13 +266,16 @@ input {
     font-size: 16px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
     height: 44px;
-    color: #000000;
     border: 1px solid @color-fill-lead;
     text-decoration: none;
     white-space: nowrap;
     
-    &:focus, &:hover, &:visited {
-        color: #000000;
+    &, &:visited {
+        color: #888888;
+    }
+
+    &:focus, &:hover {
+        color: #222222;
         text-decoration: underline;
     }
 

@@ -71,14 +71,14 @@
         <a class='search-box fake'
         [href]='externalUrl'
         clickOnReturn>
-         <span>חיפוש באתר...</span>
+         <span>{{forcedPlaceholder || globalSettings.theme.searchPlaceholder}}</span>
      </a>
     } @else {
         <a class='search-box fake'
         [routerLink]='["/s"]'
         queryParamsHandling='merge'
         clickOnReturn>
-         <span>חיפוש באתר...</span>
+         <span>{{ forcedPlaceholder || globalSettings.theme.searchPlaceholder }}</span>
      </a>
     }    
 }
