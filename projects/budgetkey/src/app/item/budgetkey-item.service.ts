@@ -1,16 +1,17 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Item } from './model';
 import { Format } from '../format';
 import { GlobalSettingsService } from '../common-components/global-settings.service';
+import { PlatformService } from '../common-components/platform.service';
 
 @Injectable()
 export class BudgetKeyItemService {
   format = new Format();
-  constructor(private http: HttpClient, private globalSettings: GlobalSettingsService) {}
+  constructor(private http: HttpClient, private globalSettings: GlobalSettingsService, private ps: PlatformService) {}
 
   getRedashUrl(query: string): string {
     // TODO: Implement
@@ -96,6 +97,9 @@ export class BudgetKeyItemService {
   }
 
   getItemData(query: string, headersOrder: string[], formatters: any[], page = 0, pageSize?: number): Observable<object> {
+    if (this.ps.server()) {
+      return from([{query, headers: [], items: [], total: 0, rows: [], error: null, pages: 0, page: 0}])
+    }
     const params: any = {
       page
     };
