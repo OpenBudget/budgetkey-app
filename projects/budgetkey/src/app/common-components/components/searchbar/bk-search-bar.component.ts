@@ -122,7 +122,7 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
         this.externalUrlParams,
         this.globalSettings.theme,
         this.globalSettings.lang,
-        this.ps.browser() ? window.location.hostname : 'next.obudget.org'
+        this.ps.browser() ? window.location.hostname : 'server-side'
       );  
     }
   }

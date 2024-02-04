@@ -5,6 +5,7 @@ import { select } from 'd3-selection';
 import { max } from 'd3-array';
 import { Format } from '../../../format';
 import { timer } from 'rxjs';
+import { PlatformService } from '../../../common-components/platform.service';
 
 @Component({
   selector: 'app-contract-payments',
@@ -25,19 +26,24 @@ export class ContractPaymentsComponent implements AfterViewInit, OnDestroy {
 
   format = new Format();
 
-  resizeObserver = new ResizeObserver(() => {
-   this.redraw();
-  });
+  resizeObserver: ResizeObserver | null = null;
 
-  constructor() {}
+  constructor(private ps: PlatformService) {}
 
   ngAfterViewInit () {
-   this.resizeObserver.observe(this.container.nativeElement);
-   this.redraw();
+   this.ps.browser(() => {
+      this.resizeObserver?.disconnect();
+      this.resizeObserver= new ResizeObserver(() => {
+         this.redraw();
+      });
+      this.resizeObserver.observe(this.container.nativeElement);
+      this.redraw();   
+   });
   }
 
    ngOnDestroy() {
-    this.resizeObserver.disconnect();
+    this.resizeObserver?.disconnect();
+    this.resizeObserver = null;
    }
 
   redraw() {
