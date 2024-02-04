@@ -66,10 +66,19 @@
 
 </div>
 
-<a class='search-box fake' *ngIf='fake' 
-   [href]='externalUrlHref ? externalUrl : null'
-   [routerLink]='externalUrlHref ? null : ["/s"]'
-   queryParamsHandling='merge'
-   clickOnReturn>
-    <span>חיפוש באתר...</span>
-</a>
+@if (fake) {
+    @if (externalUrlHref) {
+        <a class='search-box fake'
+        [href]='externalUrl'
+        clickOnReturn>
+         <span>חיפוש באתר...</span>
+     </a>
+    } @else {
+        <a class='search-box fake'
+        [routerLink]='["/s"]'
+        queryParamsHandling='merge'
+        clickOnReturn>
+         <span>חיפוש באתר...</span>
+     </a>
+    }    
+}

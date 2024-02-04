@@ -3,8 +3,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
-  Inject,
   Input,
   OnChanges,
   OnInit,
@@ -123,7 +121,7 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
         this.globalSettings.theme,
         this.globalSettings.lang,
         this.ps.browser() ? window.location.hostname : 'server-side'
-      );  
+      );
     }
   }
     
