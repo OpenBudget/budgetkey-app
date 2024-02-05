@@ -67,6 +67,7 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   
   @Output() selected = new EventEmitter<any>();
   @Output() search = new EventEmitter<string>();
+  @Output() submit = new EventEmitter<string>();
   
   @ViewChild('searchBox') searchBox: ElementRef;
   @ViewChild('btnSearchMenu') btnSearchMenu: ElementRef;
@@ -157,6 +158,11 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
     this.calcExternalUrl();
     
     this.search.emit(term);
+  }
+
+  doSubmit() {
+    this.calcExternalUrl();
+    this.submit.emit(this.externalUrl);
   }
   
   openCloseSearchTypeDropDown(event?: Event) {

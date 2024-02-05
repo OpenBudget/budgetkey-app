@@ -104,4 +104,7 @@ export class ItemPageComponent implements AfterViewInit, OnInit {
     return searchPattern.test(this.itemId);
   }
 
+  get fakeSearchBar() {
+    return this.itemId?.indexOf('units/') !== 0 && this.itemId?.indexOf('activities/gov_social_service') !== 0;
+  }
 }

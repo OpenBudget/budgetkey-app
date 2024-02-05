@@ -17,6 +17,7 @@ export class BkHeaderComponent {
   @Input() showSearchBar = false;
   @Input() showLanguages = false;
   @Input() showShare = true;
+  @Input() fakeSearchBar = true;
   public showAuth = false;
   public showCollapsedMenu = signal(false);
   collapseMenuSub: Subscription | null = null;

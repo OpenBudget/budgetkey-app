@@ -23,6 +23,7 @@ export class AppContainerComponent implements AfterViewInit, OnChanges {
     @Input() showShare = true;
     @Input() helpWidget = true;
     @Input() listSideView = false;
+    @Input() fakeSearchBar = true;
 
     configured = false;
 

@@ -49,6 +49,7 @@
           [autofocus]='!disableAutofocus'
           (keyup)="doSearch(searchBox.value)"
           (keyup.backspace)="doSearch(searchBox.value)"
+          (keydown.enter)="doSubmit()"
           [value]="searchTerm"
           (focus)="isSearchBarHasFocus = true"
           (focusout)="isSearchBarHasFocus = false"

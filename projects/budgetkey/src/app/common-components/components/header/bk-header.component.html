@@ -5,7 +5,7 @@
       </a>
     </div>
     <div *ngIf="showSearchBar" class="search-div layout-desktop">
-      <app-bk-search-bar [fake]='true'></app-bk-search-bar>
+      <app-bk-search-bar [fake]='fakeSearchBar' (submit)='doSearch($event)'></app-bk-search-bar>
     </div>
     <div class='mobile-separator'></div>
     <div class="menu-links layout-desktop">
