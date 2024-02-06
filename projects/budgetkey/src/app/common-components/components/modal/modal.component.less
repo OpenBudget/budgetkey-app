@@ -22,13 +22,12 @@
     border: none;
     box-shadow: 0 2px 10px 0 rgba(0,0,0,0.5);
     border-radius: 10px;
-
   }
 
   .bkmodal-content {
       position: relative;
       &.standard {
-        padding: 100px;        
+        padding: 64px;        
       }
   }
 
@@ -59,12 +58,12 @@
   @media only screen and (max-width: 600px)  {
     .bkmodal-content {
       &.standard {
-        padding: 20px;        
+        padding: 64px 20px;        
       }
     }
 
     .bkmodal-dialog {
-      width: 100%;
+      width: calc(100% ~'-' 20px)
     }
   }
 }

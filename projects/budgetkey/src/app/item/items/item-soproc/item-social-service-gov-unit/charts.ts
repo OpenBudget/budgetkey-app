@@ -213,7 +213,8 @@ export const chartTemplates: any[] = [
          years AS
       (SELECT office,
               (obj->>'year')::integer AS year
-       FROM objs)
+       FROM objs
+       WHERE (obj->>'approved')::numeric > 0 or (obj->>'executed')::numeric > 0)
     SELECT office,
            year,
            count(1) AS value

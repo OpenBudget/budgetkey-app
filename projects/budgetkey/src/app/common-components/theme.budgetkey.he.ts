@@ -193,6 +193,13 @@ export const DEFAULT_THEME: any={
               "display": "כל שנות התקציב"
             },
             {
+              "id": "2024",
+              "display": "2024",
+              "filters": {
+                "year": 2024
+              }                
+            },
+            {
               "id": "2023",
               "display": "2023",
               "filters": {
@@ -281,6 +288,23 @@ export const DEFAULT_THEME: any={
               "display": "2011",
               "filters": {
                 "year": 2011
+              }
+            }
+          ]
+        },
+        {
+          "id": "pending",
+          "display": "סטטוס",
+          "options": [
+            {
+              "id": "all",
+              "display": "כל ההעברות"
+            },
+            {
+              "id": "pending",
+              "display": "ממתינות לאישור",
+              "filters": {
+                "is_pending": true
               }
             }
           ]
@@ -482,14 +506,11 @@ export const DEFAULT_THEME: any={
       "title": "מי אנחנו"
     },
     {
-      "href": "http://www.hasadna.org.il/%D7%9E%D7%A4%D7%AA%D7%97-%D7%94%D7%AA%D7%A7%D7%A6%D7%99%D7%91/",
-      "title": "הסדנא"
-    },
-    {
       "href": "https://www.jgive.com/new/he/ils/donation-targets/3268#donation-modal",
       "title": "תרמו לנו"
     }
   ],
+  "userGroup": true,
   "footerLinks": [
     {
       "href": "/about",

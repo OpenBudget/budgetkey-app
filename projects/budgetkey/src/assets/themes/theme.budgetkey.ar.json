@@ -53,10 +53,6 @@
       {
         "href": "https://www.jgive.com/new/he/ils/donation-targets/3268#donation-modal",
         "title": "تبرّعوا لنا"
-      },
-      {
-        "href": "https://chat.whatsapp.com/BXxxMMpukgjCrn5wN4RB12",
-        "title": "קבוצת המשתמשים<br/>בווטסאפ <i class='fa fa-whatsapp' aria-hidden='true'></i>"
       }
     ],
     "searchBarConfig": [
@@ -593,6 +589,7 @@
     "siteLogo": "budgetkey.svg",
     "siteName": "مفتاح الميزاينة",
     "siteUrl": "https://next.obudget.org",
-    "themeId": "budgetkey"
+    "themeId": "budgetkey",
+    "userGroup": true
   }
 }

@@ -12,6 +12,9 @@
       <ng-container *ngFor="let link of globalSettings.theme.headerLinks">
         <a [href]="link.href" [innerHtml]='link.title' [target]='link.href.indexOf("http") === 0 ? "_blank" : null' clickOnReturn></a>
       </ng-container>
+      <a *ngIf='globalSettings.theme.userGroup' (activated)='whatsappGroupModal.set(true)' clickOnReturn>
+        <span>קבוצת המשתמשים<br/>בווטסאפ <i class='fa fa-whatsapp' aria-hidden='true'></i></span>
+      </a>
       <ng-container *ngIf='showLanguages'>
         <a (activated)='switchLang("en")' clickOnReturn>En</a>
         <a (activated)='switchLang("ar")' clickOnReturn>عر</a>
@@ -30,9 +33,27 @@
             <span [innerHtml]='link.title'></span>
           </a>
         </ng-container>
-      </div>
+        <a *ngIf='globalSettings.theme.userGroup' class='menu-line' (activated)="whatsappGroupModal.set(true)" clickOnReturn>
+          <span>קבוצת המשתמשים<br/>בווטסאפ <i class='fa fa-whatsapp' aria-hidden='true'></i></span>
+        </a>
+    </div>
     </div>
     <div class="auth-widget">
       <app-auth [theme]='globalSettings.theme' *ngIf='showAuth'></app-auth>
     </div>
   </header>
+
+<app-modal [standardLayout]='true'
+    *ngIf='whatsappGroupModal()'
+    (close)='whatsappGroupModal.set(false)'
+    title='הצטרפות לקבוצת המשתמשים בווטסאפ'
+>
+  <div class='subscription-modal-contents'>
+    <p>
+      מטרת הקבוצה היא לאפשר למשתמשי ומשתמשות האתר לשאול שאלות על תקציב המדינה ועל השימוש באתר ״מפתח התקציב״, להציע לאחרים עזרה בהבנה ובתפעול ולהציע הצעות לשיפור.
+      <br/><br/>
+      יוצרי האתר גם נמצאים בקבוצה (אבל לא תמיד), אז תהיו נחמדים!
+    </p>
+    <a href='https://chat.whatsapp.com/BXxxMMpukgjCrn5wN4RB12' target="_blank">להצטרפות לקבוצת הווטסאפ <i class='fa fa-whatsapp' aria-hidden='true'></i></a>
+  </div>
+</app-modal>

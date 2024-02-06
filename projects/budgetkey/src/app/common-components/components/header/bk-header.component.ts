@@ -20,6 +20,7 @@ export class BkHeaderComponent {
   @Input() fakeSearchBar = true;
   public showAuth = false;
   public showCollapsedMenu = signal(false);
+  public whatsappGroupModal = signal(false);
   collapseMenuSub: Subscription | null = null;
   logoRouterLink = ['/'];
 
