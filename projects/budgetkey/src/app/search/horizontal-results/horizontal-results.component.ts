@@ -176,8 +176,10 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
     }
   }
 
-  scroll(direction: number) {
+  scroll(direction: number, event: Event) {
     const el = this.cards.nativeElement as HTMLElement;
-    el.scrollBy({left: el.offsetWidth * 0.8 * direction, behavior: 'smooth'});
+    el.scrollBy({left: 320 * direction, behavior: 'smooth'});
+    event?.stopPropagation();
+    event?.preventDefault();
   }
 }
