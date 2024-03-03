@@ -35,10 +35,6 @@
       {
         "href": "/about?theme=soproc",
         "title": "About Us"
-      },
-      {
-        "href": "https://www.gov.il/he/departments/topics/rechesh/govil-landing-page",
-        "title": "אגף ממשל וחברה במשרד ראש הממשלה"
       }
     ],
     "hideFooterHasadnaLogo": true,
@@ -239,11 +235,6 @@
     "siteName": "מפתח לרכש החברתי",
     "siteUrl": "https://www.socialpro.org.il",
     "supporterInfos": {
-      "gov": {
-        "logo": "gov.svg",
-        "name": "אגף ממשל וחברה במשרד ראש הממשלה",
-        "url": "https://www.gov.il/he/departments/governance-and-social-affairs"
-      },
       "joint": {
         "logo": "joint.png",
         "name": "ג׳וינט אלכא",

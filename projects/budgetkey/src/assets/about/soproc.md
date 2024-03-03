@@ -31,7 +31,7 @@
 
 ## שותפים במיזם {supporters}
 
-[![הסדנא לידע ציבורי](assets/common/img/hasadna.png =120x120)](https://hasadna.org.il) האגף לממשל ולחברה במשרד ראש הממשלה [![האגף לממשל ולחברה במשרד ראש הממשלה](assets/common/img/gov.svg =97x120)](https://www.gov.il/he/departments/governance-and-social-affairs)[![ג׳וינט אלכא](assets/common/img/joint-elka.png =382x72)](https://www.thejoint.org.il/elka/)
+[![הסדנא לידע ציבורי](assets/common/img/hasadna.png =120x120)](https://hasadna.org.il)[![ג׳וינט אלכא](assets/common/img/joint-elka.png =382x72)](https://www.thejoint.org.il/elka/)
 
 
 ## שאלות? תגובות? רעיונות?
