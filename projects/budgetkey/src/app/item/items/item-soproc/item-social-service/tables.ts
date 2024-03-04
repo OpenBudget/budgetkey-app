@@ -15,7 +15,7 @@ export const tableDefs = {
     name: 'הליכי רכש',
     query: `
     with t as (
-      select office || ' / ' || unit || ' / ' || subunit as org_unit,
+      select case when subunit is null then office || ' / ' || unit else office || ' / ' || unit || ' / ' || subunit  end as org_unit,
               jsonb_array_elements(tenders) as tenders
               from activities where :where and tenders is not null and tenders::text != 'null'
     ), tt as (select tenders->>'tender_type_he' as tender_type_he,
