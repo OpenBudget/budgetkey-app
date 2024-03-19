@@ -93,7 +93,7 @@ const SQL_INCOME_FUNCTIONS = `
 const SUPPORTS_BUBBLES_DATA = `
   SELECT
     entity_name,
-    sum(amount_total) as total_amount,
+    sum(amount_total)/3 as total_amount,
     'https://next.obudget.org/i/org/' || entity_kind || '/' || entity_id as href
   FROM raw_supports
   WHERE budget_code='` + BUDGET_CODE + `'

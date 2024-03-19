@@ -1,418 +1,418 @@
 export const bubbles: any = {
-    "year": 2023,
+    "year": 2024,
     "func": [
         {
             "name": "שירותים חברתיים",
-            "doc_id": "budget/C2/2023",
+            "doc_id": "budget/C2/2024",
             "values": {
                 "בריאות": {
-                    "amount": 45556773000,
-                    "href": "https://next.obudget.org/i/budget/C221/2023",
-                    "doc_id": "budget/C221/2023",
+                    "amount": 55249706000,
+                    "href": "https://next.obudget.org/i/budget/C221/2024",
+                    "doc_id": "budget/C221/2024",
                     "explanation": "<p>משרד הבריאות עוסק בתכנון, פיקוח, רישוי ותיאום במערכת הבריאות.</p><p>במסגרת זו המשרד אחראי לקביעת הסטנדרטים המקצועיים בכל תחומי הרפואה ולביצוע פיקוח ובקרה על קופות החולים וגופי בריאות נוספים במסגרת חוק ביטוח בריאות ממלכתי.  המשרד עוסק גם בפיקוח ומפעיל באופן ישיר (כבעלים) מיטות אשפוז בבתי חולים כלליים ובבתי חולים פסיכיאטריים וגריאטריים.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "העברות לביטוח הלאומי": {
-                    "amount": 57733399000,
-                    "href": "https://next.obudget.org/i/budget/C225/2023",
-                    "doc_id": "budget/C225/2023",
+                    "amount": 64747133000,
+                    "href": "https://next.obudget.org/i/budget/C225/2024",
+                    "doc_id": "budget/C225/2024",
                     "explanation": "<p>הביטוח הלאומי הוא גוף סטטוטורי (גוף הפועל מכוח חוק) אשר פועל, כמשתמע משמו, כמוסד ביטוחי – תשלום שוטף בעת שגרה מבטיח קבלת ההחזרים במקרה הצורך.</p><p>פרט לקצבאות הביטוחיות שמחלק המוסד לביטוח לאומי, באחריותו גם קצבאות שאינן ביטוחיות, והכספים עבורן מגיעים ישירות מאוצר המדינה. תשלומים אלו ניתנים במקרים בהם המדינה בחרה לתגמל אוכלוסיות מסוימות למרות שלא צברו זכויות ביטוחיות, והביטוח הלאומי אינו אלא צינור להעברת כסף זה.</p>",
                     "explanation_source": "ויקיפדיה"
                 },
                 "השכלה גבוהה": {
-                    "amount": 12593397000,
-                    "href": "https://next.obudget.org/i/budget/C223/2023",
-                    "doc_id": "budget/C223/2023",
+                    "amount": 13906485000,
+                    "href": "https://next.obudget.org/i/budget/C223/2024",
+                    "doc_id": "budget/C223/2024",
                     "explanation": "<p>מערכת ההשכלה הגבוהה בישראל כוללת מוסדות המוכרים על ידי המועצה להשכלה גבוהה, שהסמיכה אותם להעניק תארים אקדמיים. תקצוב המוסדות נעשה באמצעות הוועדה לתכנון ולתקצוב (ות\"ת) ועל ידי משרד החינוך (התומך בחלק מהמכללות לחינוך). מערכת ההשכלה הגבוהה כוללת גם מוסדות אשר אין בתקציבם השתתפות מתקציב המדינה (מוסדות חוץ-תקציביים).</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "חינוך": {
-                    "amount": 79611940000,
-                    "href": "https://next.obudget.org/i/budget/C222/2023",
-                    "doc_id": "budget/C222/2023",
+                    "amount": 85656519000,
+                    "href": "https://next.obudget.org/i/budget/C222/2024",
+                    "doc_id": "budget/C222/2024",
                     "explanation": "<p>משרד החינוך אחראי להקניית ידע לילדים וזכאים לחינוך בהתאם לחוק לימוד חובה. המשרד אחראי לקידום המצוינות, לשיפור ההישגים ולרמת האיכות החינוכית, תוך צמצום הפערים החברתיים ; ליצירת מערכת חינוך אפקטיבית ויעילה שתשרת את צורכי הפרט ואת צרכיה המשתנים של מדינת ישראל; ולקידום ערכים ציוניים, יהודיים, דמוקרטיים וחברתיים.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "מדע, תרבות וספורט": {
-                    "amount": 2535972000,
-                    "href": "https://next.obudget.org/i/budget/C226/2023",
-                    "doc_id": "budget/C226/2023",
+                    "amount": 2481351000,
+                    "href": "https://next.obudget.org/i/budget/C226/2024",
+                    "doc_id": "budget/C226/2024",
                     "explanation": "<p>משרד המדע, הטכנולוגיה והחלל פועל לקביעת מדיניות ולקידום, חיזוק והקמת תשתית בתחום המדע והטכנולוגיה.</p><p>משרד התרבות והספורט פועל לקביעת מדיניות ולקידום, לחיזוק ולהקמת תשתית בשני התחומים העיקריים שבסמכותו: התרבות והספורט.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "קליטת עליה": {
-                    "amount": 1957445000,
-                    "href": "https://next.obudget.org/i/budget/C227/2023",
-                    "doc_id": "budget/C227/2023",
+                    "amount": 1777146000,
+                    "href": "https://next.obudget.org/i/budget/C227/2024",
+                    "doc_id": "budget/C227/2024",
                     "explanation": null,
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "רווחה": {
-                    "amount": 15232824000,
-                    "href": "https://next.obudget.org/i/budget/C224/2023",
-                    "doc_id": "budget/C224/2023",
+                    "amount": 16680710000,
+                    "href": "https://next.obudget.org/i/budget/C224/2024",
+                    "doc_id": "budget/C224/2024",
                     "explanation": "<p>משרד הרווחה משמש חולייה מרכזית בהתוויית מדיניות הרווחה בישראל והוא אחראי לקביעת הסטנדרטים של שירותי הרווחה, להערכה ומחקר של השירותים החברתיים ולתקצוב, פיקוח ובקרה של אספקת שירותי הרווחה וברשויות המקומיות, אשר באמצעותן מסופקים מרבית שירותי הרווחה.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "תעסוקה": {
-                    "amount": 3900283000,
-                    "href": "https://next.obudget.org/i/budget/C228/2023",
-                    "doc_id": "budget/C228/2023",
+                    "amount": 3954205000,
+                    "href": "https://next.obudget.org/i/budget/C228/2024",
+                    "doc_id": "budget/C228/2024",
                     "explanation": null,
                     "explanation_source": null
                 }
             },
-            "amount": 219122033000,
-            "percent": 45.199877845121755,
+            "amount": 244453255000,
+            "percent": 41.8514301955012,
             "scale": 1
         },
         {
             "name": "בטחון וסדר ציבורי",
-            "doc_id": "budget/C1/2023",
+            "doc_id": "budget/C1/2024",
             "values": {
                 "בטחון": {
-                    "amount": 63101415000,
-                    "href": "https://next.obudget.org/i/budget/C111/2023",
-                    "doc_id": "budget/C111/2023",
+                    "amount": 117527156000,
+                    "href": "https://next.obudget.org/i/budget/C111/2024",
+                    "doc_id": "budget/C111/2024",
                     "explanation": "<p>שיעור תקציב הבטחון מהתמ\"ג גבוה בישראל מאשר במדינות אירופה וארה\"ב, אולם הוא נמצא בתוואי יורד בשנים האחרונות, וכך גם האחוז שהוא מהווה מההוצאה הממשלתית.</p><p>באירועים חריגים בעבר נוספו לתקציב המשרד תוספות בגין עלויות לחימה (כמו, למשל, במלחמת לבנון השניה או מבצע \"עופרת יצוקה\").</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "בטחון פנים": {
-                    "amount": 22158785000,
-                    "href": "https://next.obudget.org/i/budget/C112/2023",
-                    "doc_id": "budget/C112/2023",
+                    "amount": 25431933000,
+                    "href": "https://next.obudget.org/i/budget/C112/2024",
+                    "doc_id": "budget/C112/2024",
                     "explanation": "<p>המשרד לביטחון פנים הוא גוף מטה משולב האחראי לאכיפת החוק, לשמירת הסדר הציבורי ולפעילות בתחומים השונים של ביטחון הפנים במדינת ישראל.</p><p>המשרד פועל, בין היתר, באמצעות משטרת ישראל, שירות בתי הסוהר, הרשות הלאומית לכבאות והצלה, הרשות להגנה על עדים, הרשות הלאומית למלחמה בסמים ובאלכוהול וגופים נוספים.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "בטחון-אחר": {
-                    "amount": 16727742000,
-                    "href": "https://next.obudget.org/i/budget/C113/2023",
-                    "doc_id": "budget/C113/2023",
+                    "amount": 18260669000,
+                    "href": "https://next.obudget.org/i/budget/C113/2024",
+                    "doc_id": "budget/C113/2024",
                     "explanation": null,
                     "explanation_source": "צוות מפתח התקציב"
                 }
             },
-            "amount": 101987942000,
-            "percent": 21.03778637393056,
-            "scale": 0.6822309062948526
+            "amount": 161219758000,
+            "percent": 27.601503805185974,
+            "scale": 0.8121031970998236
         },
         {
             "name": "החזרי חוב",
-            "doc_id": "budget/C6/2023",
+            "doc_id": "budget/C6/2024",
             "values": {
                 "קרן - ביטוח לאומי": {
-                    "amount": 17432579000,
-                    "href": "https://next.obudget.org/i/budget/C663/2023",
-                    "doc_id": "budget/C663/2023",
+                    "amount": 18190000000,
+                    "href": "https://next.obudget.org/i/budget/C663/2024",
+                    "doc_id": "budget/C663/2024",
                     "explanation": "<p>הביטוח הלאומי צבר לאורך השנים עודפים תקציביים גדולים שמטרתם להבטיח את התשלומים העתידיים של הביטוח הלאומי. את העודפים התקציביים מפקיד המוסד במשרד האוצר ומקבל את הכסף בחזרה, בתוספת ריבית, לאחר מספר שנים. סעיף זה מציין את היקף הכספים שממשלת ישראל החזירה לביטוח הלאומי מתוך הקרן שהוא הפקיד בידיה.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "ריבית": {
-                    "amount": 43667499000,
-                    "href": "https://next.obudget.org/i/budget/C661/2023",
-                    "doc_id": "budget/C661/2023",
+                    "amount": 48320151000,
+                    "href": "https://next.obudget.org/i/budget/C661/2024",
+                    "doc_id": "budget/C661/2024",
                     "explanation": "<p>אלו תשלומי הריבית השוטפים שממשלת ישראל משלמת כל שנה על החוב שלה. סעיף זה כולל את התשלום על מלוות הפנים (חוב שנלקח מאזרחי מדינת ישראל) ומלוות החוץ (חוב שנלקח מאזרחי העולם).</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 }
             },
-            "amount": 61100078000,
-            "percent": 12.603552568935006,
-            "scale": 0.5280534179252679
+            "amount": 66510151000,
+            "percent": 11.386818890461264,
+            "scale": 0.5216101751658562
         },
         {
             "name": "תשתיות",
-            "doc_id": "budget/C3/2023",
+            "doc_id": "budget/C3/2024",
             "values": {
                 "אנרגיה": {
-                    "amount": 585823000,
-                    "href": "https://next.obudget.org/i/budget/C333/2023",
-                    "doc_id": "budget/C333/2023",
+                    "amount": 578951000,
+                    "href": "https://next.obudget.org/i/budget/C333/2024",
+                    "doc_id": "budget/C333/2024",
                     "explanation": "<p>משרד התשתיות הלאומיות, האנרגיה והמים מופקד, בין היתר, על תכנונה ועל ביצועה של המדיניות הלאומית בתחום האנרגיה, המים ותשתית משאבי הטבע במדינת ישראל.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "בינוי ושיכון": {
-                    "amount": 5992623000,
-                    "href": "https://next.obudget.org/i/budget/C334/2023",
-                    "doc_id": "budget/C334/2023",
+                    "amount": 5998419000,
+                    "href": "https://next.obudget.org/i/budget/C334/2024",
+                    "doc_id": "budget/C334/2024",
                     "explanation": "<p>משרד הבינוי והשיכון פועל בשני מישורים בתחום הדיור: ליצור תנאים להרחבת היצע הדיור בדרך שתאפשר מתן מענה לביקוש, סיוע בדיור מכּוון לתמיכה בזכאים מקרב אוכלוסיות חלשות.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "משק המים": {
-                    "amount": 719863000,
-                    "href": "https://next.obudget.org/i/budget/C332/2023",
-                    "doc_id": "budget/C332/2023",
+                    "amount": 650285000,
+                    "href": "https://next.obudget.org/i/budget/C332/2024",
+                    "doc_id": "budget/C332/2024",
                     "explanation": "<p>הרשות הממשלתית למיום ולביוב אמונה על ניהול משק המים, ובכלל זה על קביעת כללים לאסדרת המשק וכן על הקצאת המשאבים בתחום. מדיניות משק המים נתונה בידי מועצה (מועצת רשות המים) המורכבת מנציגי משרדי ממשלה בכירים ומנציגי הציבור. בסמכות מועצת רשות המים לקבוע את חקיקת המשנה לפעילות הרשות בנושאים רבים, ביניהם אסדרת משק המים וקביעת תעריפים.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "תחבורה": {
-                    "amount": 33838493000,
-                    "href": "https://next.obudget.org/i/budget/C331/2023",
-                    "doc_id": "budget/C331/2023",
+                    "amount": 35282552000,
+                    "href": "https://next.obudget.org/i/budget/C331/2024",
+                    "doc_id": "budget/C331/2024",
                     "explanation": "<p>משרד התחבורה אחראי לפיתוח ולהסדרה של מערכות התחבורה היבשתית, האווירית והימית בישראל.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 }
             },
-            "amount": 41136802000,
-            "percent": 8.48558403681368,
-            "scale": 0.43328358781199794
+            "amount": 42510207000,
+            "percent": 7.277927065674812,
+            "scale": 0.4170121393856163
         },
         {
             "name": "הוצאות אחרות",
-            "doc_id": "budget/C7/2023",
+            "doc_id": "budget/C7/2024",
             "values": {
                 "גמלאות": {
-                    "amount": 21824107000,
-                    "href": "https://next.obudget.org/i/budget/C771/2023",
-                    "doc_id": "budget/C771/2023",
+                    "amount": 23049769000,
+                    "href": "https://next.obudget.org/i/budget/C771/2024",
+                    "doc_id": "budget/C771/2024",
                     "explanation": "<p>החבות האקטוארית החשבונאית של המדינה בגין הגמלאים ועובדי המדינה הפעילים, לרבות משרתי הקבע, שוטרים, סוהרים ועובדי הוראה.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "הוצאות שונות": {
-                    "amount": 8156868000,
-                    "href": "https://next.obudget.org/i/budget/C772/2023",
-                    "doc_id": "budget/C772/2023",
+                    "amount": 9750589000,
+                    "href": "https://next.obudget.org/i/budget/C772/2024",
+                    "doc_id": "budget/C772/2024",
                     "explanation": "<p>סעיף סל שמרכז הוצאות שונות של הממשלה על מגוון נושאים. בין שאר הנושאים אפשר לציין השקעה בפרויקטי מחשוב רוחביים,  מימון תכניות הבראה לגופים ציבוריים, תקציבים לרשויות הפיקוח ממשלתיות עצמאיות ועוד.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "רזרבה": {
                     "amount": 0,
-                    "href": "https://next.obudget.org/i/budget/C773/2023",
-                    "doc_id": "budget/C773/2023",
+                    "href": "https://next.obudget.org/i/budget/C773/2024",
+                    "doc_id": "budget/C773/2024",
                     "explanation": "<p>על ידי סעיף זה הממשלה שומרת לעצמה כסף בצד להוצאות לא צפויות. שימו לב שבשנים של תקציב דו שנתי נשמרת רזרבה גם למקרה שהתחזיות הכלכליות, שנעשו שנתיים מראש, יתגלו כלא מדויקות.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 }
             },
-            "amount": 29980975000,
-            "percent": 6.184391360031099,
-            "scale": 0.3698961847196491
+            "amount": 32800358000,
+            "percent": 5.61555988781761,
+            "scale": 0.3663037626193992
         },
         {
             "name": "משרדי מטה",
-            "doc_id": "budget/C4/2023",
+            "doc_id": "budget/C4/2024",
             "values": {
                 "אוצר": {
-                    "amount": 5028966000,
-                    "href": "https://next.obudget.org/i/budget/C442/2023",
-                    "doc_id": "budget/C442/2023",
+                    "amount": 5489899000,
+                    "href": "https://next.obudget.org/i/budget/C442/2024",
+                    "doc_id": "budget/C442/2024",
                     "explanation": "<p>משרד האוצר נחלק למשרד הראשי ולרשות המסים בישראל.</p><p>היחידות העיקריות של המשרד הראשי הן</p><p>1. אגף התקציבים, שמכין את תקציב המדינה ומפקח עליו;</p><p>2. האגף לשכר ולהסכמי עבודה, המבצע הסכמי עבודה במשק;</p><p>3. אגף הכלכלן הראשי.</p><p>רשות המסים אחראית לגביית המסים הישירים והעקיפים.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "חוץ": {
-                    "amount": 1760609000,
-                    "href": "https://next.obudget.org/i/budget/C444/2023",
-                    "doc_id": "budget/C444/2023",
+                    "amount": 1793286000,
+                    "href": "https://next.obudget.org/i/budget/C444/2024",
+                    "doc_id": "budget/C444/2024",
                     "explanation": "<p>משרד החוץ מופקד על גיבוש מדיניות החוץ של ממשלת ישראל ועל ביצועה בקרב מדינות המקיימות יחסים דיפלומטיים עם מדינת ישראל.  המשרד מטפל גם בשמירת זכויותיהם של האזרחים הישראלים השוהים בחו\"ל ומסייע להם באמצעות נציגויותיו בחו\"ל.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "משפטים": {
-                    "amount": 4448103000,
-                    "href": "https://next.obudget.org/i/budget/C443/2023",
-                    "doc_id": "budget/C443/2023",
+                    "amount": 4730399000,
+                    "href": "https://next.obudget.org/i/budget/C443/2024",
+                    "doc_id": "budget/C443/2024",
                     "explanation": "<p>משרד המשפטים אחראי על מספר גדול של יחידות, ביניהן: הנהלת בתי המשפט, האגך לרישום והסדר מקרקעין, פרקליטות המדינה, הסנגוריה הציבורית, האפוטרופוס הכללי, רשות האכיפה והגבייה (המורכבת מההוצאה לפועל ומהמרכז לגביית קנסות), בתי דין שונים ויחידות וגופים נוספים.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "משרדים נוספים": {
-                    "amount": 1657771000,
-                    "href": "https://next.obudget.org/i/budget/C446/2023",
-                    "doc_id": "budget/C446/2023",
+                    "amount": 1709091000,
+                    "href": "https://next.obudget.org/i/budget/C446/2024",
+                    "doc_id": "budget/C446/2024",
                     "explanation": null,
                     "explanation_source": null
                 },
                 "פנים ושלטון מקומי": {
-                    "amount": 8243727000,
-                    "href": "https://next.obudget.org/i/budget/C445/2023",
-                    "doc_id": "budget/C445/2023",
+                    "amount": 8782000000,
+                    "href": "https://next.obudget.org/i/budget/C445/2024",
+                    "doc_id": "budget/C445/2024",
                     "explanation": "<p>משרד הפנים אחראי מטעם הממשלה לנושאים הבאים:</p><li>פיקוח על הרשויות המקומיות והכוונת פעולותיהן.</li><li>ארגון וניהול הבחירות לרשויות המקומיות.</li><li>פיקוח על אתרי הרחצה ועל רישוי עסקים.</li><li>היערכות לשעת חירום ברשויות המקומיות.</li><li>מתן שירותי דת וסיוע בשיפוץ ובפיתוח של מבני דת לעדות הלא יהודיות.</li><li>שמירה על המאגר הביומטרי.</li>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "ראש הממשלה": {
-                    "amount": 3644468000,
-                    "href": "https://next.obudget.org/i/budget/C441/2023",
-                    "doc_id": "budget/C441/2023",
+                    "amount": 3137920000,
+                    "href": "https://next.obudget.org/i/budget/C441/2024",
+                    "doc_id": "budget/C441/2024",
                     "explanation": "<p>משרד ראש הממשלה כולל את היחידות הגופים והתחומים הכפופים ישירות לאחריות ראש הממשלה ויחידות וגופים עצמאיים בקביעת תכניות העבודה שלהם וניהול התקציב.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "שירותי דת": {
-                    "amount": 793493000,
-                    "href": "https://next.obudget.org/i/budget/C447/2023",
-                    "doc_id": "budget/C447/2023",
+                    "amount": 789937000,
+                    "href": "https://next.obudget.org/i/budget/C447/2024",
+                    "doc_id": "budget/C447/2024",
                     "explanation": "<p>עד לשנת 2016 המשרד לשירותי דת היה מתוקצב כחלק מתקציב משרד ראש הממשלה. החל משנה זו המשרד מתוקצב בסעיף תקציבי נפרד, הכולל את המשרד ואת יחידות הסמך הכפופות לו: הרבנות הראשית ובתי הדין הרבניים.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 }
             },
-            "amount": 25577137000,
-            "percent": 5.275980019900345,
-            "scale": 0.3416511922046017
+            "amount": 26432532000,
+            "percent": 4.525361169309657,
+            "scale": 0.3288300292469617
         },
         {
             "name": "ענפי משק",
-            "doc_id": "budget/C5/2023",
+            "doc_id": "budget/C5/2024",
             "values": {
                 "הגנת הסביבה": {
-                    "amount": 384025000,
-                    "href": "https://next.obudget.org/i/budget/C554/2023",
-                    "doc_id": "budget/C554/2023",
+                    "amount": 394999000,
+                    "href": "https://next.obudget.org/i/budget/C554/2024",
+                    "doc_id": "budget/C554/2024",
                     "explanation": "<p>המשרד להגנת הסביבה פועל להתוויה של מדיניות סביבתית וכן מקדם הליכי תקינה בתחום.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "חקלאות": {
-                    "amount": 2209247000,
-                    "href": "https://next.obudget.org/i/budget/C552/2023",
-                    "doc_id": "budget/C552/2023",
+                    "amount": 1963979000,
+                    "href": "https://next.obudget.org/i/budget/C552/2024",
+                    "doc_id": "budget/C552/2024",
                     "explanation": "<p>משרד החקלאות ופיתוח הכפר אחראי מטעם הממשלה לחקלאות ולמרחב הכפרי בישראל.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "כלכלה ותעשיה": {
-                    "amount": 2770985000,
-                    "href": "https://next.obudget.org/i/budget/C553/2023",
-                    "doc_id": "budget/C553/2023",
+                    "amount": 4567498000,
+                    "href": "https://next.obudget.org/i/budget/C553/2024",
+                    "doc_id": "budget/C553/2024",
                     "explanation": "<p>משרד הכלכלה והתעשייה מופקד על עידוד ענפי התעשייה והמסחר, לרבות עסקים קטנים ובינוניים וקידום סחר החוץ וכן על יישום מדיניות הממשלה להפחתת יוקר המחיה ולהגברת התחרות במשק.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 },
                 "תיירות": {
-                    "amount": 422478000,
-                    "href": "https://next.obudget.org/i/budget/C551/2023",
-                    "doc_id": "budget/C551/2023",
+                    "amount": 3163132000,
+                    "href": "https://next.obudget.org/i/budget/C551/2024",
+                    "doc_id": "budget/C551/2024",
                     "explanation": "<p>משרד התיירות ממונה על קידום ושיווק תנועת התיירות לישראל, מקיים פיקוח על שירותי התיירות: בתי מלון, אכסניות ובתי הארחה ואחראי על הכשרת כוח האדם ועל רישוי פרטים וגופים מסחריים העוסקים בענף. כמו כן הוא מרכז את איסוף ופרסום הנתונים הסטטיסטיים בחקר תנועת התיירות אל ישראל ובתוכה, לצורך לימוד והסקת מסקנות אסטרטגיות, וזאת בראיית התיירות כענף כלכלי מרכזי במדינת ישראל וכמקור הכנסה חשוב של מטבע חוץ.</p>",
                     "explanation_source": "ויקיפדיה"
                 },
                 "תקשורת": {
-                    "amount": 92867000,
-                    "href": "https://next.obudget.org/i/budget/C555/2023",
-                    "doc_id": "budget/C555/2023",
+                    "amount": 81864000,
+                    "href": "https://next.obudget.org/i/budget/C555/2024",
+                    "doc_id": "budget/C555/2024",
                     "explanation": "<p>משרד התקשורת משמש גוף האחראי לאסדרת ענף תקשורת ולפיקוח על הגופים הפועלים בו. המשרד אחראי ליישום מדיניות הממשלה בנושא התקשורת ולקביעת הכללים שבמסגרתם פועלים הגופים בענף, על תחומיו השונים.</p>",
                     "explanation_source": "צוות מפתח התקציב"
                 }
             },
-            "amount": 5879602000,
-            "percent": 1.212827795267551,
-            "scale": 0.1638064280261841
+            "amount": 10171472000,
+            "percent": 1.74139898604948,
+            "scale": 0.20398300799218622
         }
     ],
     "econ": [
         {
             "name": "העברות",
-            "doc_id": "budget/C003/2023",
+            "doc_id": "budget/C003/2024",
             "values": {
                 "מוצרים ציבוריים": {
-                    "amount": 60229317000,
-                    "href": "https://next.obudget.org/i/budget/E003031/2023"
+                    "amount": 73931911000,
+                    "href": "https://next.obudget.org/i/budget/E003031/2024"
                 },
                 "סובסידיה": {
-                    "amount": 14379398000,
-                    "href": "https://next.obudget.org/i/budget/E003038/2023"
+                    "amount": 19179340000,
+                    "href": "https://next.obudget.org/i/budget/E003038/2024"
                 },
                 "רזרבה": {
-                    "amount": 9183991000,
-                    "href": "https://next.obudget.org/i/budget/E003036/2023"
+                    "amount": 9696640000,
+                    "href": "https://next.obudget.org/i/budget/E003036/2024"
                 },
                 "שכר עקיף": {
-                    "amount": 35965267000,
-                    "href": "https://next.obudget.org/i/budget/E003029/2023"
+                    "amount": 38765578000,
+                    "href": "https://next.obudget.org/i/budget/E003029/2024"
                 },
                 "תמיכות לפי סעיף 3א": {
-                    "amount": 3335425000,
-                    "href": "https://next.obudget.org/i/budget/E003035/2023"
+                    "amount": 3808251000,
+                    "href": "https://next.obudget.org/i/budget/E003035/2024"
                 },
                 "תשלומי העברה סוציאליים": {
-                    "amount": 80617409000,
-                    "href": "https://next.obudget.org/i/budget/E003034/2023"
+                    "amount": 89262342000,
+                    "href": "https://next.obudget.org/i/budget/E003034/2024"
                 }
             },
-            "amount": 203710807000,
-            "percent": 42.01697975926905,
+            "amount": 234644062000,
+            "percent": 40.16888023768719,
             "scale": 1
         },
         {
-            "name": "שכר",
-            "doc_id": "budget/C001/2023",
-            "values": {
-                "רזרבה": {
-                    "amount": 5168702000,
-                    "href": "https://next.obudget.org/i/budget/E001104/2023"
-                },
-                "שכר בארץ": {
-                    "amount": 102864881000,
-                    "href": "https://next.obudget.org/i/budget/E001030/2023"
-                },
-                "שכר בחו\"ל": {
-                    "amount": 922354000,
-                    "href": "https://next.obudget.org/i/budget/E001185/2023"
-                }
-            },
-            "amount": 108955937000,
-            "percent": 22.473031583352345,
-            "scale": 0.7313384640522157
-        },
-        {
             "name": "קניות",
-            "doc_id": "budget/C002/2023",
+            "doc_id": "budget/C002/2024",
             "values": {
                 "קניות בארץ": {
-                    "amount": 65891596000,
-                    "href": "https://next.obudget.org/i/budget/E002033/2023"
+                    "amount": 120932646000,
+                    "href": "https://next.obudget.org/i/budget/E002033/2024"
                 },
                 "קניות בחו\"ל": {
-                    "amount": 1995851000,
-                    "href": "https://next.obudget.org/i/budget/E002198/2023"
+                    "amount": 2268040000,
+                    "href": "https://next.obudget.org/i/budget/E002198/2024"
                 },
                 "רזרבה": {
-                    "amount": 9466837000,
-                    "href": "https://next.obudget.org/i/budget/E002173/2023"
+                    "amount": 9644268000,
+                    "href": "https://next.obudget.org/i/budget/E002173/2024"
                 }
             },
-            "amount": 77354284000,
-            "percent": 15.95493843937671,
-            "scale": 0.6162190933773976
+            "amount": 132844954000,
+            "percent": 22.74182010796874,
+            "scale": 0.7524328489067431
+        },
+        {
+            "name": "שכר",
+            "doc_id": "budget/C001/2024",
+            "values": {
+                "רזרבה": {
+                    "amount": 5317567000,
+                    "href": "https://next.obudget.org/i/budget/E001104/2024"
+                },
+                "שכר בארץ": {
+                    "amount": 111900710000,
+                    "href": "https://next.obudget.org/i/budget/E001030/2024"
+                },
+                "שכר בחו\"ל": {
+                    "amount": 914227000,
+                    "href": "https://next.obudget.org/i/budget/E001185/2024"
+                }
+            },
+            "amount": 118132504000,
+            "percent": 20.223185555635766,
+            "scale": 0.709544961850894
         },
         {
             "name": "החזר חוב - ריבית",
-            "doc_id": "budget/C015/2023",
+            "doc_id": "budget/C015/2024",
             "values": {
                 "החזר ריבית בארץ": {
-                    "amount": 36966935000,
-                    "href": "https://next.obudget.org/i/budget/E015209/2023"
+                    "amount": 40548709000,
+                    "href": "https://next.obudget.org/i/budget/E015209/2024"
                 },
                 "החזר ריבית בחו\"ל": {
-                    "amount": 6700564000,
-                    "href": "https://next.obudget.org/i/budget/E015210/2023"
+                    "amount": 7771442000,
+                    "href": "https://next.obudget.org/i/budget/E015210/2024"
                 }
             },
-            "amount": 43667499000,
-            "percent": 9.006770178966997,
-            "scale": 0.46299054792285865
+            "amount": 48320151000,
+            "percent": 8.27196027055635,
+            "scale": 0.45379463515111385
         },
         {
             "name": "השקעה",
-            "doc_id": "budget/C007/2023",
+            "doc_id": "budget/C007/2024",
             "values": {
                 "השקעה בארץ": {
-                    "amount": 28069987000,
-                    "href": "https://next.obudget.org/i/budget/E007047/2023"
+                    "amount": 27747214000,
+                    "href": "https://next.obudget.org/i/budget/E007047/2024"
                 },
                 "השקעה בחו\"ל": {
-                    "amount": 252679000,
-                    "href": "https://next.obudget.org/i/budget/E007048/2023"
+                    "amount": 252047000,
+                    "href": "https://next.obudget.org/i/budget/E007048/2024"
                 },
                 "רזרבה": {
-                    "amount": 4658180000,
-                    "href": "https://next.obudget.org/i/budget/E007044/2023"
+                    "amount": 2777968000,
+                    "href": "https://next.obudget.org/i/budget/E007044/2024"
                 }
             },
-            "amount": 32980846000,
-            "percent": 6.802562707562047,
-            "scale": 0.4023683954917741
+            "amount": 30777229000,
+            "percent": 5.26877524711822,
+            "scale": 0.36216791580503194
         },
         {
             "name": "אחרים",
             "values": {
                 "החזר קרן ביטוח לאומי": {
-                    "amount": 17432579000,
-                    "href": "https://next.obudget.org/i/budget/E017266/2023"
+                    "amount": 18190000000,
+                    "href": "https://next.obudget.org/i/budget/E017266/2024"
                 }
             },
-            "amount": 17432579000,
-            "percent": 3.5956085481260636
+            "amount": 18190000000,
+            "percent": 3.113958756491055
         }
     ],
     "income": [
@@ -420,149 +420,149 @@ export const bubbles: any = {
             "name": "מס הכנסה",
             "values": {
                 "מס הכנסה סקטור עסקי": {
-                    "amount": 109297000000,
-                    "href": "https://next.obudget.org/i/budget/00000103/2023"
+                    "amount": 136199000000,
+                    "href": "https://next.obudget.org/i/budget/00000103/2024"
                 },
                 "מס הכנסה שכירים": {
-                    "amount": 58000000000,
-                    "href": "https://next.obudget.org/i/budget/00000102/2023"
+                    "amount": 80000000000,
+                    "href": "https://next.obudget.org/i/budget/00000102/2024"
                 }
             },
-            "amount": 167297000000,
-            "percent": 42.15591163478668,
+            "amount": 216199000000,
+            "percent": 46.27806115432189,
             "scale": 1
         },
         {
             "name": "תקבולי מע\"מ ברוטו",
             "values": {
                 "תקבולי מע\"מ נטו": {
-                    "amount": 120383000000,
-                    "href": "https://next.obudget.org/i/budget/00001402/2023"
+                    "amount": 133507000000,
+                    "href": "https://next.obudget.org/i/budget/00001402/2024"
                 }
             },
-            "amount": 120383000000,
-            "percent": 30.334405938722902,
-            "scale": 0.84827858716616
+            "amount": 133507000000,
+            "percent": 28.577584126337552,
+            "scale": 0.7858238001956638
         },
         {
             "name": "מס קניה",
             "values": {
                 "מס קניה מוצרי יבוא": {
-                    "amount": 20400000000,
-                    "href": "https://next.obudget.org/i/budget/00001302/2023"
+                    "amount": 23182000000,
+                    "href": "https://next.obudget.org/i/budget/00001302/2024"
                 },
                 "מס קניה מקומי": {
-                    "amount": 1800000000,
-                    "href": "https://next.obudget.org/i/budget/00001303/2023"
+                    "amount": 1192000000,
+                    "href": "https://next.obudget.org/i/budget/00001303/2024"
                 }
             },
-            "amount": 22200000000,
-            "percent": 5.594010880603145,
-            "scale": 0.36427755304296205
+            "amount": 24374000000,
+            "percent": 5.217329694288325,
+            "scale": 0.33576588096637083
         },
         {
             "name": "מיסים על הוצאות שכר",
             "values": {
                 "מע\"מ על מלכרים": {
-                    "amount": 14000000000,
-                    "href": "https://next.obudget.org/i/budget/00000202/2023"
+                    "amount": 13972000000,
+                    "href": "https://next.obudget.org/i/budget/00000202/2024"
                 },
                 "מע\"מ על פיננסים": {
-                    "amount": 3305000000,
-                    "href": "https://next.obudget.org/i/budget/00000203/2023"
+                    "amount": 1975000000,
+                    "href": "https://next.obudget.org/i/budget/00000203/2024"
                 }
             },
-            "amount": 17305000000,
-            "percent": 4.360556679677361,
-            "scale": 0.3216190207050562
+            "amount": 15947000000,
+            "percent": 3.4135044159684877,
+            "scale": 0.2715893005984871
         },
         {
             "name": "אחרים",
             "values": {
                 "מלוה מהמוסד לבטוח לאומי": {
-                    "amount": 19187000000,
-                    "href": "https://next.obudget.org/i/budget/00008101/2023"
+                    "amount": 20294000000,
+                    "href": "https://next.obudget.org/i/budget/00008101/2024"
                 },
                 "מס דלק": {
-                    "amount": 18690000000,
-                    "href": "https://next.obudget.org/i/budget/00001801/2023"
+                    "amount": 19221000000,
+                    "href": "https://next.obudget.org/i/budget/00001801/2024"
                 },
                 "מס רכישה": {
-                    "amount": 9205000000,
-                    "href": "https://next.obudget.org/i/budget/00000401/2023"
+                    "amount": 9177000000,
+                    "href": "https://next.obudget.org/i/budget/00000401/2024"
                 },
                 "מס שבח": {
-                    "amount": 6883000000,
-                    "href": "https://next.obudget.org/i/budget/00000301/2023"
+                    "amount": 7931000000,
+                    "href": "https://next.obudget.org/i/budget/00000301/2024"
                 },
                 "אגרות כלי רכב פרטיים": {
-                    "amount": 5200000000,
-                    "href": "https://next.obudget.org/i/budget/00002402/2023"
+                    "amount": 6184000000,
+                    "href": "https://next.obudget.org/i/budget/00002402/2024"
                 },
                 "מכס והיטל על היבוא": {
-                    "amount": 2800000000,
-                    "href": "https://next.obudget.org/i/budget/00001101/2023"
+                    "amount": 3074000000,
+                    "href": "https://next.obudget.org/i/budget/00001101/2024"
                 }
             },
-            "amount": 61965000000,
-            "percent": 15.614093883629454
+            "amount": 65881000000,
+            "percent": 14.102030753647703
         }
     ],
     "deficitChart": {
-        "budget": 484784569000,
+        "budget": 584097733000,
         "expenseChildren": [
             {
                 "code": "0001",
-                "net_allocated": 64256000,
-                "net_revised": 64256000,
+                "net_allocated": 74210000,
+                "net_revised": 74210000,
                 "title": "נשיא המדינה ולשכתו"
             },
             {
                 "code": "0002",
-                "net_allocated": 1033116000,
-                "net_revised": 1033116000,
+                "net_allocated": 992116000,
+                "net_revised": 992116000,
                 "title": "הכנסת"
             },
             {
                 "code": "0004",
-                "net_allocated": 3712971000,
-                "net_revised": 3712971000,
+                "net_allocated": 3081348000,
+                "net_revised": 3081348000,
                 "title": "משרד ראש הממשלה"
             },
             {
                 "code": "0005",
-                "net_allocated": 3583550000,
-                "net_revised": 3583550000,
+                "net_allocated": 4045284000,
+                "net_revised": 4045284000,
                 "title": "משרד האוצר"
             },
             {
                 "code": "0006",
-                "net_allocated": 470028000,
-                "net_revised": 470028000,
+                "net_allocated": 1403066000,
+                "net_revised": 1403066000,
                 "title": "משרד הפנים"
             },
             {
                 "code": "0007",
-                "net_allocated": 23015682000,
-                "net_revised": 23015682000,
+                "net_allocated": 25111908000,
+                "net_revised": 25111908000,
                 "title": "המשרד לביטחון הפנים"
             },
             {
                 "code": "0008",
-                "net_allocated": 4828041000,
-                "net_revised": 4828041000,
+                "net_allocated": 4730399000,
+                "net_revised": 4730399000,
                 "title": "משרד המשפטים"
             },
             {
                 "code": "0009",
-                "net_allocated": 1859041000,
-                "net_revised": 1859041000,
+                "net_allocated": 1793286000,
+                "net_revised": 1793286000,
                 "title": "משרד החוץ"
             },
             {
                 "code": "0010",
-                "net_allocated": 51510000,
-                "net_revised": 51510000,
+                "net_allocated": 56572000,
+                "net_revised": 56572000,
                 "title": "מטה לביטחון לאומי"
             },
             {
@@ -573,128 +573,128 @@ export const bubbles: any = {
             },
             {
                 "code": "0012",
-                "net_allocated": 23056988000,
-                "net_revised": 23056988000,
+                "net_allocated": 23049769000,
+                "net_revised": 23049769000,
                 "title": "גמלאות ופיצויים"
             },
             {
                 "code": "0013",
-                "net_allocated": 3447549000,
-                "net_revised": 3447549000,
+                "net_allocated": 2521992000,
+                "net_revised": 2521992000,
                 "title": "הוצאות שונות"
             },
             {
                 "code": "0014",
-                "net_allocated": 212693000,
-                "net_revised": 212693000,
+                "net_allocated": 221697000,
+                "net_revised": 221697000,
                 "title": "בחירות ומימון מפלגות"
             },
             {
                 "code": "0015",
-                "net_allocated": 64448592000,
-                "net_revised": 64448592000,
+                "net_allocated": 117527156000,
+                "net_revised": 117527156000,
                 "title": "משרד הביטחון"
             },
             {
                 "code": "0016",
-                "net_allocated": 548301000,
-                "net_revised": 548301000,
+                "net_allocated": 1250184000,
+                "net_revised": 1250184000,
                 "title": "הוצאות חירום אזרחיות"
             },
             {
                 "code": "0017",
-                "net_allocated": 137750000,
-                "net_revised": 137750000,
+                "net_allocated": 124964000,
+                "net_revised": 124964000,
                 "title": "תאום הפעולות בשטחים"
             },
             {
                 "code": "0018",
-                "net_allocated": 6775857000,
-                "net_revised": 6775857000,
+                "net_allocated": 6619148000,
+                "net_revised": 6619148000,
                 "title": "הרשויות המקומיות"
             },
             {
                 "code": "0019",
-                "net_allocated": 2749765000,
-                "net_revised": 2749765000,
+                "net_allocated": 2481351000,
+                "net_revised": 2481351000,
                 "title": "מדע, תרבות וספורט"
             },
             {
                 "code": "0020",
-                "net_allocated": 82937392000,
-                "net_revised": 82937392000,
+                "net_allocated": 84071785000,
+                "net_revised": 84071785000,
                 "title": "משרד החינוך"
             },
             {
                 "code": "0021",
-                "net_allocated": 13475990000,
-                "net_revised": 13475990000,
+                "net_allocated": 13906485000,
+                "net_revised": 13906485000,
                 "title": "ההשכלה הגבוהה"
             },
             {
                 "code": "0022",
-                "net_allocated": 798846000,
-                "net_revised": 798846000,
+                "net_allocated": 789937000,
+                "net_revised": 789937000,
                 "title": "המשרד לשירותי דת"
             },
             {
                 "code": "0023",
-                "net_allocated": 10836310000,
-                "net_revised": 10836310000,
+                "net_allocated": 11543973000,
+                "net_revised": 11543973000,
                 "title": "משרד הרווחה"
             },
             {
                 "code": "0024",
-                "net_allocated": 50539488000,
-                "net_revised": 50539488000,
+                "net_allocated": 54346794000,
+                "net_revised": 54346794000,
                 "title": "משרד הבריאות"
             },
             {
                 "code": "0025",
-                "net_allocated": 5130623000,
-                "net_revised": 5130623000,
+                "net_allocated": 5136737000,
+                "net_revised": 5136737000,
                 "title": "הרשות לניצולי השואה"
             },
             {
                 "code": "0026",
-                "net_allocated": 395475000,
-                "net_revised": 395475000,
+                "net_allocated": 394999000,
+                "net_revised": 394999000,
                 "title": "המשרד להגנת הסביבה"
             },
             {
                 "code": "0027",
-                "net_allocated": 61446529000,
-                "net_revised": 61446529000,
+                "net_allocated": 64747133000,
+                "net_revised": 64747133000,
                 "title": "הקצבות לביטוח לאומי"
             },
             {
                 "code": "0029",
-                "net_allocated": 313995000,
-                "net_revised": 313995000,
+                "net_allocated": 300259000,
+                "net_revised": 300259000,
                 "title": "משרד הבינוי והשיכון"
             },
             {
                 "code": "0030",
-                "net_allocated": 1747346000,
-                "net_revised": 1747346000,
+                "net_allocated": 1777146000,
+                "net_revised": 1777146000,
                 "title": "משרד העלייה והקליטה"
             },
             {
                 "code": "0031",
-                "net_allocated": 14081197000,
-                "net_revised": 14081197000,
+                "net_allocated": 14287904000,
+                "net_revised": 14287904000,
                 "title": "הוצאות ביטחוניות שונות"
             },
             {
                 "code": "0033",
-                "net_allocated": 2230003000,
-                "net_revised": 2230003000,
+                "net_allocated": 1963979000,
+                "net_revised": 1963979000,
                 "title": "משרד החקלאות"
             },
             {
                 "code": "0034",
-                "net_allocated": 644687000,
-                "net_revised": 644687000,
+                "net_allocated": 578951000,
+                "net_revised": 578951000,
                 "title": "משרד האנרגיה"
             },
             {
@@ -705,56 +705,56 @@ export const bubbles: any = {
             },
             {
                 "code": "0036",
-                "net_allocated": 4141977000,
-                "net_revised": 4141977000,
+                "net_allocated": 3954205000,
+                "net_revised": 3954205000,
                 "title": "תעסוקה"
             },
             {
                 "code": "0037",
-                "net_allocated": 191090000,
-                "net_revised": 191090000,
+                "net_allocated": 2925088000,
+                "net_revised": 2925088000,
                 "title": "משרד התיירות"
             },
             {
                 "code": "0038",
-                "net_allocated": 2894654000,
-                "net_revised": 2894654000,
+                "net_allocated": 4539043000,
+                "net_revised": 4539043000,
                 "title": "כלכלה ותעשייה"
             },
             {
                 "code": "0039",
-                "net_allocated": 90873000,
-                "net_revised": 90873000,
+                "net_allocated": 81864000,
+                "net_revised": 81864000,
                 "title": "משרד התקשורת"
             },
             {
                 "code": "0040",
-                "net_allocated": 556998000,
-                "net_revised": 556998000,
+                "net_allocated": 515506000,
+                "net_revised": 515506000,
                 "title": "משרד התחבורה"
             },
             {
                 "code": "0041",
-                "net_allocated": 113887000,
-                "net_revised": 113887000,
+                "net_allocated": 105253000,
+                "net_revised": 105253000,
                 "title": "רשות ממשלתית למים וביוב"
             },
             {
                 "code": "0042",
-                "net_allocated": 3442343000,
-                "net_revised": 3442343000,
+                "net_allocated": 3364709000,
+                "net_revised": 3364709000,
                 "title": "מענקי בינוי ושיכון"
             },
             {
                 "code": "0043",
-                "net_allocated": 119639000,
-                "net_revised": 119639000,
+                "net_allocated": 111571000,
+                "net_revised": 111571000,
                 "title": "המרכז למיפוי ישראל"
             },
             {
                 "code": "0045",
-                "net_allocated": 44547806000,
-                "net_revised": 44547806000,
+                "net_allocated": 48320151000,
+                "net_revised": 48320151000,
                 "title": "תשלום ריבית ועמלות"
             },
             {
@@ -765,92 +765,92 @@ export const bubbles: any = {
             },
             {
                 "code": "0047",
-                "net_allocated": 2054955000,
-                "net_revised": 2054955000,
+                "net_allocated": 0,
+                "net_revised": 0,
                 "title": "רזרבה כללית"
             },
             {
                 "code": "0051",
-                "net_allocated": 1633752000,
-                "net_revised": 1633752000,
+                "net_allocated": 1444615000,
+                "net_revised": 1444615000,
                 "title": "דיור ממשלתי"
             },
             {
                 "code": "0052",
-                "net_allocated": 291169000,
-                "net_revised": 291169000,
+                "net_allocated": 320025000,
+                "net_revised": 320025000,
                 "title": "המשטרה ובתי הסוהר"
             },
             {
                 "code": "0054",
-                "net_allocated": 2424381000,
-                "net_revised": 2424381000,
+                "net_allocated": 4187073000,
+                "net_revised": 4187073000,
                 "title": "רשויות פיקוח"
             },
             {
                 "code": "0060",
-                "net_allocated": 1888837000,
-                "net_revised": 1888837000,
+                "net_allocated": 1584734000,
+                "net_revised": 1584734000,
                 "title": "חינוך"
             },
             {
                 "code": "0067",
-                "net_allocated": 858452000,
-                "net_revised": 858452000,
+                "net_allocated": 902912000,
+                "net_revised": 902912000,
                 "title": "בריאות"
             },
             {
                 "code": "0068",
-                "net_allocated": 790039000,
-                "net_revised": 790039000,
+                "net_allocated": 759786000,
+                "net_revised": 759786000,
                 "title": "רשות האוכלוסין"
             },
             {
                 "code": "0070",
-                "net_allocated": 2024385000,
-                "net_revised": 2024385000,
+                "net_allocated": 2221880000,
+                "net_revised": 2221880000,
                 "title": "שיכון"
             },
             {
                 "code": "0073",
-                "net_allocated": 526593000,
-                "net_revised": 526593000,
+                "net_allocated": 545032000,
+                "net_revised": 545032000,
                 "title": "מפעלי מים"
             },
             {
                 "code": "0076",
-                "net_allocated": 44069000,
-                "net_revised": 44069000,
+                "net_allocated": 28455000,
+                "net_revised": 28455000,
                 "title": "תעשייה"
             },
             {
                 "code": "0078",
-                "net_allocated": 262747000,
-                "net_revised": 262747000,
+                "net_allocated": 238044000,
+                "net_revised": 238044000,
                 "title": "תיירות"
             },
             {
                 "code": "0079",
-                "net_allocated": 35951404000,
-                "net_revised": 35951404000,
+                "net_allocated": 34767046000,
+                "net_revised": 34767046000,
                 "title": "תחבורה"
             },
             {
                 "code": "0083",
-                "net_allocated": 2999174000,
-                "net_revised": 2999174000,
+                "net_allocated": 3041524000,
+                "net_revised": 3041524000,
                 "title": "הוצאות פיתוח אחרות"
             },
             {
                 "code": "0084",
-                "net_allocated": 158247615000,
-                "net_revised": 158247615000,
+                "net_allocated": 158140259000,
+                "net_revised": 158140259000,
                 "title": "תשלום חובות"
             },
             {
                 "code": "0089",
-                "net_allocated": 1386534000,
-                "net_revised": 1386534000,
+                "net_allocated": 1414734000,
+                "net_revised": 1414734000,
                 "title": "מפעלי משרד ראש הממשלה"
             },
             {
@@ -873,29 +873,29 @@ export const bubbles: any = {
             },
             {
                 "code": "0098",
-                "net_allocated": 39752916000,
-                "net_revised": 39752916000,
+                "net_allocated": 45758524000,
+                "net_revised": 45758524000,
                 "title": "הוצאות מינהל מקרקעי"
             }
         ],
-        "income": 396853000000,
-        "returns": 125961133000,
-        "deficitFunding": 143571852000,
+        "income": 467173850000,
+        "returns": 139950259000,
+        "deficitFunding": 270425448000,
         "incomeChildren": [
             {
-                "net_allocated": 201390000000,
+                "net_allocated": 249330000000,
                 "title": "מסים ישירים"
             },
             {
-                "net_allocated": 164073000000,
+                "net_allocated": 180638000000,
                 "title": "מסים עקיפים"
             },
             {
-                "net_allocated": 24420000000,
+                "net_allocated": 29896850000,
                 "title": "הכנסות אחרות"
             },
             {
-                "net_allocated": 6970000000,
+                "net_allocated": 7309000000,
                 "title": "אגרות"
             }
         ]
@@ -919,20 +919,20 @@ export const bubbles: any = {
                 "2024-12"
             ],
             "__date_range_to": "2024-12-31",
-            "__hash": "f68c928c1c8c58fcd2b486399f24ee2a",
+            "__hash": "8618026fa521858533041cdca1b6ebcf",
             "__is_new": false,
-            "__is_stale": true,
-            "__last_modified_at": "2023-11-03T00:18:43Z",
-            "__last_updated_at": "2023-11-03T00:18:43Z",
+            "__is_stale": false,
+            "__last_modified_at": "2024-03-15T00:19:29Z",
+            "__last_updated_at": "2024-03-15T00:19:29Z",
             "__next_update_days": 1,
-            "__revision": 283,
-            "__staleness": 133333,
+            "__revision": 304,
+            "__staleness": 150000,
             "admin_cls_code_0": [
                 "1"
             ],
-            "amounts_allocated": 7280556,
+            "amounts_allocated": 7207195,
             "amounts_executed": null,
-            "amounts_revised": 7280556,
+            "amounts_revised": 7207195,
             "charts": [
                 {
                     "chart": {
@@ -947,42 +947,42 @@ export const bubbles: any = {
                                     {
                                         "context": "budget/002068/2024",
                                         "label": "‹ (…68) מינהל עובדי הוראה",
-                                        "size": 1705588000
-                                    },
-                                    {
-                                        "context": "budget/002060/2024",
-                                        "label": "‹ (…60) יחידות מטה",
-                                        "size": 1854004000
+                                        "size": 1743055000
                                     },
                                     {
                                         "context": "budget/002069/2024",
                                         "label": "‹ (…69) תמיכה בנושאי יהדות",
-                                        "size": 2008325000
+                                        "size": 1863628000
+                                    },
+                                    {
+                                        "context": "budget/002060/2024",
+                                        "label": "‹ (…60) יחידות מטה",
+                                        "size": 1990024000
                                     },
                                     {
                                         "context": "budget/002065/2024",
                                         "label": "‹ (…65) שירותי עזר, הסעות",
-                                        "size": 4310107000
+                                        "size": 4194076000
                                     },
                                     {
                                         "context": "budget/002066/2024",
                                         "label": "‹ (…66) חינוך התיישבותי",
-                                        "size": 4586786000
-                                    },
-                                    {
-                                        "context": "budget/002067/2024",
-                                        "label": "‹ (…67) פעולות משלימות לקידום",
-                                        "size": 5149915000
+                                        "size": 4648710000
                                     },
                                     {
                                         "context": "budget/002070/2024",
                                         "label": "‹ (…70) רזרבות",
-                                        "size": 5454510000
+                                        "size": 4848480000
+                                    },
+                                    {
+                                        "context": "budget/002067/2024",
+                                        "label": "‹ (…67) פעולות משלימות לקידום",
+                                        "size": 5622983000
                                     },
                                     {
                                         "context": "budget/002062/2024",
                                         "label": "‹ (…62) קדם יסודי",
-                                        "size": 8326090000
+                                        "size": 8792392000
                                     },
                                     {
                                         "context": "budget/002064/2024",
@@ -992,12 +992,12 @@ export const bubbles: any = {
                                     {
                                         "context": "budget/002061/2024",
                                         "label": "‹ (…61) חינוך מיוחד",
-                                        "size": 13705668000
+                                        "size": 13882639000
                                     },
                                     {
                                         "context": "budget/002063/2024",
                                         "label": "‹ (…63) יסודי וחטיבות ביניים",
-                                        "size": 22525261000
+                                        "size": 23174660000
                                     }
                                 ],
                                 "labelTextSize": 14,
@@ -1083,7 +1083,7 @@ export const bubbles: any = {
                                         67636134000,
                                         67812808000,
                                         77776056000,
-                                        82937392000
+                                        84071785000
                                     ]
                                 },
                                 {
@@ -1146,8 +1146,8 @@ export const bubbles: any = {
                                         68999783000,
                                         71759037000,
                                         74618184000,
-                                        81357346000,
-                                        82937392000
+                                        84897801000,
+                                        84071785000
                                     ]
                                 },
                                 {
@@ -1292,8 +1292,8 @@ export const bubbles: any = {
                                         null,
                                         12.913400620871085,
                                         13.451893571089116,
-                                        15.443126899908203,
-                                        16.053320595775848
+                                        14.10263170138372,
+                                        14.322380641561056
                                     ]
                                 },
                                 {
@@ -1356,8 +1356,8 @@ export const bubbles: any = {
                                         13.287852952289818,
                                         13.700564153310584,
                                         14.801862645710596,
-                                        16.15422384644625,
-                                        16.053320595775848
+                                        15.393971889759573,
+                                        14.322380641561056
                                     ]
                                 },
                                 {
@@ -1989,17 +1989,17 @@ export const bubbles: any = {
                                     {
                                         "context": null,
                                         "label": "קניות ורכש",
-                                        "size": 3513883000
+                                        "size": 3032504000
                                     },
                                     {
                                         "context": null,
                                         "label": "שכר",
-                                        "size": 31909859000
+                                        "size": 32276154000
                                     },
                                     {
                                         "context": null,
                                         "label": "העברות ותמיכות",
-                                        "size": 47432947000
+                                        "size": 48682424000
                                     }
                                 ],
                                 "labelTextSize": 14,
@@ -2022,26 +2022,26 @@ export const bubbles: any = {
             "children": [
                 {
                     "code": "002060",
-                    "net_allocated": 1854004000,
-                    "net_revised": 1854004000,
+                    "net_allocated": 1990024000,
+                    "net_revised": 1990024000,
                     "title": "יחידות מטה"
                 },
                 {
                     "code": "002061",
-                    "net_allocated": 13705668000,
-                    "net_revised": 13705668000,
+                    "net_allocated": 13882639000,
+                    "net_revised": 13882639000,
                     "title": "חינוך מיוחד"
                 },
                 {
                     "code": "002062",
-                    "net_allocated": 8326090000,
-                    "net_revised": 8326090000,
+                    "net_allocated": 8792392000,
+                    "net_revised": 8792392000,
                     "title": "קדם יסודי"
                 },
                 {
                     "code": "002063",
-                    "net_allocated": 22525261000,
-                    "net_revised": 22525261000,
+                    "net_allocated": 23174660000,
+                    "net_revised": 23174660000,
                     "title": "יסודי וחטיבות ביניים"
                 },
                 {
@@ -2052,38 +2052,38 @@ export const bubbles: any = {
                 },
                 {
                     "code": "002065",
-                    "net_allocated": 4310107000,
-                    "net_revised": 4310107000,
+                    "net_allocated": 4194076000,
+                    "net_revised": 4194076000,
                     "title": "שירותי עזר, הסעות"
                 },
                 {
                     "code": "002066",
-                    "net_allocated": 4586786000,
-                    "net_revised": 4586786000,
+                    "net_allocated": 4648710000,
+                    "net_revised": 4648710000,
                     "title": "חינוך התיישבותי"
                 },
                 {
                     "code": "002067",
-                    "net_allocated": 5149915000,
-                    "net_revised": 5149915000,
+                    "net_allocated": 5622983000,
+                    "net_revised": 5622983000,
                     "title": "פעולות משלימות לקידום"
                 },
                 {
                     "code": "002068",
-                    "net_allocated": 1705588000,
-                    "net_revised": 1705588000,
+                    "net_allocated": 1743055000,
+                    "net_revised": 1743055000,
                     "title": "מינהל עובדי הוראה"
                 },
                 {
                     "code": "002069",
-                    "net_allocated": 2008325000,
-                    "net_revised": 2008325000,
+                    "net_allocated": 1863628000,
+                    "net_revised": 1863628000,
                     "title": "תמיכה בנושאי יהדות"
                 },
                 {
                     "code": "002070",
-                    "net_allocated": 5454510000,
-                    "net_revised": 5454510000,
+                    "net_allocated": 4848480000,
+                    "net_revised": 4848480000,
                     "title": "רזרבות"
                 },
                 {
@@ -2094,9 +2094,9 @@ export const bubbles: any = {
                 }
             ],
             "code": "0020",
-            "commitment_allowance_allocated": 1884905000,
+            "commitment_allowance_allocated": 1839246000,
             "commitment_allowance_executed": null,
-            "commitment_allowance_revised": 1884905000,
+            "commitment_allowance_revised": 1839246000,
             "commitment_balance_allocated": 0,
             "commitment_balance_executed": null,
             "commitment_balance_revised": 0,
@@ -2106,9 +2106,9 @@ export const bubbles: any = {
             "covid19_expenses_allocated": 0,
             "covid19_expenses_executed": null,
             "covid19_expenses_revised": 0,
-            "dedicated_allocated": -3612195000,
+            "dedicated_allocated": -4452195000,
             "dedicated_executed": null,
-            "dedicated_revised": -3612195000,
+            "dedicated_revised": -4452195000,
             "depth": 1,
             "direction": [
                 "הכנסה",
@@ -2117,41 +2117,41 @@ export const bubbles: any = {
             "doc_id": "budget/0020/2024",
             "econ_cls_json": [
                 "[\"028\", \"\\u05d7\\u05e9\\u05d1\\u05d5\\u05e0\\u05d5\\u05ea \\u05de\\u05e2\\u05d1\\u05e8\", \"095\", \"\\u05d7\\u05e9\\u05d1\\u05d5\\u05e0\\u05d5\\u05ea \\u05de\\u05e2\\u05d1\\u05e8\"]",
+                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"198\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d7\\u05d5\\\"\\u05dc\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"035\", \"\\u05ea\\u05de\\u05d9\\u05db\\u05d5\\u05ea \\u05dc\\u05e4\\u05d9 \\u05e1\\u05e2\\u05d9\\u05e3 3\\u05d0\"]",
+                "[\"004\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea  \\u05de\\u05d9\\u05d5\\u05e2\\u05d3\\u05d5\\u05ea\", \"041\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1 \\u05e8\\u05d2\\u05d9\\u05dc\"]",
                 "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"300\", \"\\u05d4\\u05e9\\u05ea\\u05ea\\u05e4\\u05d5\\u05d9\\u05d5\\u05ea\"]",
                 "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"033\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d0\\u05e8\\u05e5\"]",
-                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"173\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
-                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"198\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d7\\u05d5\\\"\\u05dc\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"034\", \"\\u05ea\\u05e9\\u05dc\\u05d5\\u05de\\u05d9 \\u05d4\\u05e2\\u05d1\\u05e8\\u05d4 \\u05e1\\u05d5\\u05e6\\u05d9\\u05d0\\u05dc\\u05d9\\u05d9\\u05dd\"]",
-                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"104\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"036\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"029\", \"\\u05e9\\u05db\\u05e8 \\u05e2\\u05e7\\u05d9\\u05e3\"]",
-                "[\"004\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05de\\u05d9\\u05d5\\u05e2\\u05d3\\u05d5\\u05ea\", \"041\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1 \\u05e8\\u05d2\\u05d9\\u05dc\"]",
-                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"030\", \"\\u05e9\\u05db\\u05e8 \\u05d1\\u05d0\\u05e8\\u05e5\"]",
                 "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"301\", \"\\u05d4\\u05e4\\u05d7\\u05ea\\u05d5\\u05ea\"]",
+                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"030\", \"\\u05e9\\u05db\\u05e8 \\u05d1\\u05d0\\u05e8\\u05e5\"]",
+                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"173\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
+                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"104\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"029\", \"\\u05e9\\u05db\\u05e8 \\u05e2\\u05e7\\u05d9\\u05e3\"]",
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"034\", \"\\u05ea\\u05e9\\u05dc\\u05d5\\u05de\\u05d9 \\u05d4\\u05e2\\u05d1\\u05e8\\u05d4 \\u05e1\\u05d5\\u05e6\\u05d9\\u05d0\\u05dc\\u05d9\\u05d9\\u05dd\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"031\", \"\\u05de\\u05d5\\u05e6\\u05e8\\u05d9\\u05dd \\u05e6\\u05d9\\u05d1\\u05d5\\u05e8\\u05d9\\u05d9\\u05dd\"]"
             ],
             "econ_cls_title_1": [
-                "חשבונות מעבר",
-                "שכר",
                 "העברות  פנים תקציביות",
-                "הכנסות מיועדות",
+                "חשבונות מעבר",
+                "קניות",
+                "שכר",
                 "העברות",
-                "קניות"
+                "הכנסות  מיועדות"
             ],
             "econ_cls_title_2": [
-                "חשבונות מעבר",
-                "תמיכות לפי סעיף 3א",
-                "הכנסות תקציב רגיל",
-                "שכר עקיף",
-                "השתתפויות",
-                "קניות בחו\"ל",
                 "שכר בארץ",
-                "מוצרים ציבוריים",
-                "רזרבה",
-                "קניות בארץ",
+                "תשלומי העברה סוציאליים",
+                "חשבונות מעבר",
                 "הפחתות",
-                "תשלומי העברה סוציאליים"
+                "תמיכות לפי סעיף 3א",
+                "קניות בחו\"ל",
+                "רזרבה",
+                "השתתפויות",
+                "קניות בארץ",
+                "מוצרים ציבוריים",
+                "שכר עקיף",
+                "הכנסות תקציב רגיל"
             ],
             "explanation": null,
             "explanation_short": null,
@@ -2165,9 +2165,9 @@ export const bubbles: any = {
             "func_cls_title_2": [
                 "חינוך"
             ],
-            "gross_allocated": 3612195000,
+            "gross_allocated": 4452195000,
             "gross_executed": null,
-            "gross_revised": 3612195000,
+            "gross_revised": 4452195000,
             "hierarchy": [
                 [
                     "00",
@@ -3244,12 +3244,12 @@ export const bubbles: any = {
                 },
                 "2023": {
                     "amounts_allocated": 7092953,
-                    "amounts_revised": 7092953,
+                    "amounts_revised": 7095914,
                     "code_titles": [
                         "0020:משרד החינוך"
                     ],
                     "commitment_allowance_allocated": 1889942000,
-                    "commitment_allowance_revised": 1889942000,
+                    "commitment_allowance_revised": 2441142000,
                     "commitment_balance_allocated": 0,
                     "commitment_balance_revised": 0,
                     "contractors_allocated": 0,
@@ -3257,31 +3257,31 @@ export const bubbles: any = {
                     "covid19_expenses_allocated": 0,
                     "covid19_expenses_revised": 0,
                     "dedicated_allocated": -3612195000,
-                    "dedicated_revised": -3612195000,
+                    "dedicated_revised": -4928564000,
                     "depth": 1,
                     "gross_allocated": 3612195000,
-                    "gross_revised": 3612195000,
+                    "gross_revised": 4928564000,
                     "net_allocated": 77776056000,
-                    "net_revised": 81357346000,
+                    "net_revised": 84897801000,
                     "personnel_allocated": 2594.5,
                     "personnel_revised": 2647.5,
-                    "total_direction_expense": 81501711000,
-                    "total_direction_income": -144365000,
+                    "total_direction_expense": 85069336000,
+                    "total_direction_income": -171535000,
                     "total_econ_cls_dedicated_income": 0,
                     "total_econ_cls_interim_accounts": 0,
-                    "total_econ_cls_internal_transfers": 67343000,
-                    "total_econ_cls_procurement": 4589557000,
-                    "total_econ_cls_salaries": 31040352000,
-                    "total_econ_cls_transfers": 45660094000
+                    "total_econ_cls_internal_transfers": 83688000,
+                    "total_econ_cls_procurement": 3200278000,
+                    "total_econ_cls_salaries": 31567460000,
+                    "total_econ_cls_transfers": 50046375000
                 }
             },
-            "net_allocated": 82937392000,
+            "net_allocated": 84071785000,
             "net_executed": null,
-            "net_revised": 82937392000,
+            "net_revised": 84071785000,
             "nice-breadcrumbs": "1997 - 2024",
             "nice-category": "שירותים חברתיים / חינוך",
             "nice-code": "20",
-            "nice-econ-category": "חשבונות מעבר-חשבונות מעבר, העברות-תמיכות לפי סעיף 3א, העברות  פנים תקציביות-השתתפויות, קניות-קניות בארץ, קניות-רזרבה, קניות-קניות בחו\"ל, העברות-תשלומי העברה סוציאליים, שכר-רזרבה, העברות-רזרבה, העברות-שכר עקיף, הכנסות מיועדות-הכנסות תקציב רגיל, שכר-שכר בארץ, העברות  פנים תקציביות-הפחתות, העברות-מוצרים ציבוריים",
+            "nice-econ-category": "חשבונות מעבר-חשבונות מעבר, קניות-קניות בחו\"ל, העברות-תמיכות לפי סעיף 3א, הכנסות  מיועדות-הכנסות תקציב רגיל, העברות  פנים תקציביות-השתתפויות, קניות-קניות בארץ, העברות-רזרבה, העברות  פנים תקציביות-הפחתות, שכר-שכר בארץ, קניות-רזרבה, שכר-רזרבה, העברות-שכר עקיף, העברות-תשלומי העברה סוציאליים, העברות-מוצרים ציבוריים",
             "nice-prefixes": [
                 "0020",
                 "20"
@@ -3292,17 +3292,17 @@ export const bubbles: any = {
             ],
             "page_title": "תקציב משרד החינוך (20)",
             "parent": "00",
-            "personnel_allocated": 2632.5,
+            "personnel_allocated": 2602.5,
             "personnel_executed": null,
-            "personnel_revised": 2632.5,
+            "personnel_revised": 2602.5,
             "rev_created_at": "2023-03-23",
-            "rev_last_modified_at": "2023-11-03",
-            "rev_last_updated_at": "2023-11-03",
-            "score": 82937392,
+            "rev_last_modified_at": "2024-03-15",
+            "rev_last_updated_at": "2024-03-15",
+            "score": 84071785,
             "semantic_tags": [],
             "simple-code": "20",
             "title": "משרד החינוך",
-            "total_direction_expense": 83081757000,
+            "total_direction_expense": 84216150000,
             "total_direction_income": -144365000,
             "total_econ_cls_capital_expenditure": null,
             "total_econ_cls_credit": null,
@@ -3316,10 +3316,10 @@ export const bubbles: any = {
             "total_econ_cls_interim_accounts": 0,
             "total_econ_cls_internal_transfers": 80703000,
             "total_econ_cls_investment": null,
-            "total_econ_cls_procurement": 3513883000,
+            "total_econ_cls_procurement": 3032504000,
             "total_econ_cls_reserve": null,
-            "total_econ_cls_salaries": 31909859000,
-            "total_econ_cls_transfers": 47432947000,
+            "total_econ_cls_salaries": 32276154000,
+            "total_econ_cls_transfers": 48682424000,
             "year": 2024
         },
         {
@@ -3340,14 +3340,14 @@ export const bubbles: any = {
                 "2024-12"
             ],
             "__date_range_to": "2024-12-31",
-            "__hash": "15f850bbababed095231b28da7ff94da",
+            "__hash": "1ef8a6f83c59752f2c72a6e7a2de58a3",
             "__is_new": false,
-            "__is_stale": true,
-            "__last_modified_at": "2023-11-03T00:18:43Z",
-            "__last_updated_at": "2023-11-03T00:18:43Z",
+            "__is_stale": false,
+            "__last_modified_at": "2024-03-15T00:19:29Z",
+            "__last_updated_at": "2024-03-15T00:19:29Z",
             "__next_update_days": 1,
-            "__revision": 283,
-            "__staleness": 133333,
+            "__revision": 304,
+            "__staleness": 150000,
             "admin_cls_code_0": [
                 "1"
             ],
@@ -3368,7 +3368,7 @@ export const bubbles: any = {
                                     {
                                         "context": "budget/0020/2024",
                                         "label": "משרד החינוך ›",
-                                        "size": 5149915000
+                                        "size": 5622983000
                                     }
                                 ],
                                 "labelTextSize": 14,
@@ -3384,17 +3384,17 @@ export const bubbles: any = {
                                     {
                                         "context": "budget/00206703/2024",
                                         "label": "‹ (…03) מינהל החינוך הדתי",
-                                        "size": 209854000
+                                        "size": 142057000
                                     },
                                     {
                                         "context": "budget/00206702/2024",
                                         "label": "‹ (…02) הארכת יום הלימודים",
-                                        "size": 1820143000
+                                        "size": 1789762000
                                     },
                                     {
                                         "context": "budget/00206701/2024",
                                         "label": "‹ (…01) פעילויות ופרוייקטים",
-                                        "size": 3119918000
+                                        "size": 3691164000
                                     }
                                 ],
                                 "labelTextSize": 14,
@@ -3434,7 +3434,7 @@ export const bubbles: any = {
                                         5180655000,
                                         5427659000,
                                         4652113000,
-                                        5149915000
+                                        5622983000
                                     ]
                                 },
                                 {
@@ -3451,8 +3451,8 @@ export const bubbles: any = {
                                         8062245000,
                                         6807389000,
                                         8227539000,
-                                        7556884000,
-                                        5149915000
+                                        7236554000,
+                                        5622983000
                                     ]
                                 },
                                 {
@@ -3515,12 +3515,12 @@ export const bubbles: any = {
                                     {
                                         "context": null,
                                         "label": "קניות ורכש",
-                                        "size": 761222000
+                                        "size": 777983000
                                     },
                                     {
                                         "context": null,
                                         "label": "העברות ותמיכות",
-                                        "size": 4377207000
+                                        "size": 4833514000
                                     }
                                 ],
                                 "labelTextSize": 14,
@@ -3543,27 +3543,27 @@ export const bubbles: any = {
             "children": [
                 {
                     "code": "00206701",
-                    "net_allocated": 3119918000,
-                    "net_revised": 3119918000,
+                    "net_allocated": 3691164000,
+                    "net_revised": 3691164000,
                     "title": "פעילויות ופרוייקטים"
                 },
                 {
                     "code": "00206702",
-                    "net_allocated": 1820143000,
-                    "net_revised": 1820143000,
+                    "net_allocated": 1789762000,
+                    "net_revised": 1789762000,
                     "title": "הארכת יום הלימודים"
                 },
                 {
                     "code": "00206703",
-                    "net_allocated": 209854000,
-                    "net_revised": 209854000,
+                    "net_allocated": 142057000,
+                    "net_revised": 142057000,
                     "title": "מינהל החינוך הדתי"
                 }
             ],
             "code": "002067",
-            "commitment_allowance_allocated": 1442000000,
+            "commitment_allowance_allocated": 1722000000,
             "commitment_allowance_executed": null,
-            "commitment_allowance_revised": 1442000000,
+            "commitment_allowance_revised": 1722000000,
             "commitment_balance_allocated": 0,
             "commitment_balance_executed": null,
             "commitment_balance_revised": 0,
@@ -3584,30 +3584,32 @@ export const bubbles: any = {
             "doc_id": "budget/002067/2024",
             "econ_cls_json": [
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"035\", \"\\u05ea\\u05de\\u05d9\\u05db\\u05d5\\u05ea \\u05dc\\u05e4\\u05d9 \\u05e1\\u05e2\\u05d9\\u05e3 3\\u05d0\"]",
+                "[\"004\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea  \\u05de\\u05d9\\u05d5\\u05e2\\u05d3\\u05d5\\u05ea\", \"041\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1 \\u05e8\\u05d2\\u05d9\\u05dc\"]",
                 "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"300\", \"\\u05d4\\u05e9\\u05ea\\u05ea\\u05e4\\u05d5\\u05d9\\u05d5\\u05ea\"]",
                 "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"033\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d0\\u05e8\\u05e5\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"036\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
-                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"029\", \"\\u05e9\\u05db\\u05e8 \\u05e2\\u05e7\\u05d9\\u05e3\"]",
-                "[\"004\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05de\\u05d9\\u05d5\\u05e2\\u05d3\\u05d5\\u05ea\", \"041\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1 \\u05e8\\u05d2\\u05d9\\u05dc\"]",
                 "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"030\", \"\\u05e9\\u05db\\u05e8 \\u05d1\\u05d0\\u05e8\\u05e5\"]",
+                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"173\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
+                "[\"001\", \"\\u05e9\\u05db\\u05e8\", \"104\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
+                "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"029\", \"\\u05e9\\u05db\\u05e8 \\u05e2\\u05e7\\u05d9\\u05e3\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"031\", \"\\u05de\\u05d5\\u05e6\\u05e8\\u05d9\\u05dd \\u05e6\\u05d9\\u05d1\\u05d5\\u05e8\\u05d9\\u05d9\\u05dd\"]"
             ],
             "econ_cls_title_1": [
-                "שכר",
                 "העברות  פנים תקציביות",
-                "הכנסות מיועדות",
+                "קניות",
+                "שכר",
                 "העברות",
-                "קניות"
+                "הכנסות  מיועדות"
             ],
             "econ_cls_title_2": [
-                "תמיכות לפי סעיף 3א",
-                "הכנסות תקציב רגיל",
-                "שכר עקיף",
-                "השתתפויות",
                 "שכר בארץ",
-                "מוצרים ציבוריים",
+                "תמיכות לפי סעיף 3א",
                 "רזרבה",
-                "קניות בארץ"
+                "השתתפויות",
+                "קניות בארץ",
+                "מוצרים ציבוריים",
+                "שכר עקיף",
+                "הכנסות תקציב רגיל"
             ],
             "explanation": null,
             "explanation_short": null,
@@ -3753,7 +3755,7 @@ export const bubbles: any = {
                         "002067:פעולות משלימות לקידום"
                     ],
                     "commitment_allowance_allocated": 1442000000,
-                    "commitment_allowance_revised": 1442000000,
+                    "commitment_allowance_revised": 1993200000,
                     "commitment_balance_allocated": 0,
                     "commitment_balance_revised": 0,
                     "contractors_allocated": 0,
@@ -3761,30 +3763,30 @@ export const bubbles: any = {
                     "covid19_expenses_allocated": 0,
                     "covid19_expenses_revised": 0,
                     "dedicated_allocated": -695770000,
-                    "dedicated_revised": -695770000,
+                    "dedicated_revised": -937869000,
                     "depth": 2,
                     "gross_allocated": 695770000,
-                    "gross_revised": 695770000,
+                    "gross_revised": 937869000,
                     "net_allocated": 4652113000,
-                    "net_revised": 7556884000,
+                    "net_revised": 7236554000,
                     "personnel_allocated": 0,
                     "personnel_revised": 0,
-                    "total_direction_expense": 7556884000,
+                    "total_direction_expense": 7236554000,
                     "total_direction_income": 0,
                     "total_econ_cls_dedicated_income": 0,
                     "total_econ_cls_internal_transfers": 7350000,
-                    "total_econ_cls_procurement": 3095544000,
-                    "total_econ_cls_salaries": 4112000,
-                    "total_econ_cls_transfers": 4449878000
+                    "total_econ_cls_procurement": 1442528000,
+                    "total_econ_cls_salaries": 23642000,
+                    "total_econ_cls_transfers": 5763034000
                 }
             },
-            "net_allocated": 5149915000,
+            "net_allocated": 5622983000,
             "net_executed": null,
-            "net_revised": 5149915000,
+            "net_revised": 5622983000,
             "nice-breadcrumbs": "2020 - 2024 / משרד החינוך",
             "nice-category": "שירותים חברתיים / חינוך",
             "nice-code": "20.67",
-            "nice-econ-category": "העברות-תמיכות לפי סעיף 3א, העברות  פנים תקציביות-השתתפויות, קניות-קניות בארץ, העברות-רזרבה, העברות-שכר עקיף, הכנסות מיועדות-הכנסות תקציב רגיל, שכר-שכר בארץ, העברות-מוצרים ציבוריים",
+            "nice-econ-category": "העברות-תמיכות לפי סעיף 3א, הכנסות  מיועדות-הכנסות תקציב רגיל, העברות  פנים תקציביות-השתתפויות, קניות-קניות בארץ, העברות-רזרבה, שכר-שכר בארץ, קניות-רזרבה, שכר-רזרבה, העברות-שכר עקיף, העברות-מוצרים ציבוריים",
             "nice-prefixes": [
                 "0020",
                 "002067",
@@ -3803,13 +3805,13 @@ export const bubbles: any = {
             "personnel_executed": null,
             "personnel_revised": 0,
             "rev_created_at": "2023-03-23",
-            "rev_last_modified_at": "2023-11-03",
-            "rev_last_updated_at": "2023-11-03",
-            "score": 5149915,
+            "rev_last_modified_at": "2024-03-15",
+            "rev_last_updated_at": "2024-03-15",
+            "score": 5622983,
             "semantic_tags": [],
             "simple-code": "2067",
             "title": "פעולות משלימות לקידום",
-            "total_direction_expense": 5149915000,
+            "total_direction_expense": 5622983000,
             "total_direction_income": 0,
             "total_econ_cls_capital_expenditure": null,
             "total_econ_cls_credit": null,
@@ -3823,10 +3825,10 @@ export const bubbles: any = {
             "total_econ_cls_interim_accounts": null,
             "total_econ_cls_internal_transfers": 7350000,
             "total_econ_cls_investment": null,
-            "total_econ_cls_procurement": 761222000,
+            "total_econ_cls_procurement": 777983000,
             "total_econ_cls_reserve": null,
             "total_econ_cls_salaries": 4136000,
-            "total_econ_cls_transfers": 4377207000,
+            "total_econ_cls_transfers": 4833514000,
             "year": 2024
         },
         {
@@ -3847,14 +3849,14 @@ export const bubbles: any = {
                 "2024-12"
             ],
             "__date_range_to": "2024-12-31",
-            "__hash": "371e54d2feb46f105a2ebb4d87b19419",
+            "__hash": "c5b5090add3a2e58c533d963e05a11c2",
             "__is_new": false,
-            "__is_stale": true,
-            "__last_modified_at": "2023-11-03T00:18:43Z",
-            "__last_updated_at": "2023-11-03T00:18:43Z",
+            "__is_stale": false,
+            "__last_modified_at": "2024-03-15T00:19:29Z",
+            "__last_updated_at": "2024-03-15T00:19:29Z",
             "__next_update_days": 1,
-            "__revision": 283,
-            "__staleness": 133333,
+            "__revision": 304,
+            "__staleness": 150000,
             "admin_cls_code_0": [
                 "1"
             ],
@@ -3875,7 +3877,7 @@ export const bubbles: any = {
                                     {
                                         "context": "budget/002067/2024",
                                         "label": "פעולות משלימות לקידום ›",
-                                        "size": 3119918000
+                                        "size": 3691164000
                                     }
                                 ],
                                 "labelTextSize": 14,
@@ -3891,107 +3893,87 @@ export const bubbles: any = {
                                     {
                                         "context": "budget/0020670128/2024",
                                         "label": "‹ (…28) פעולות חינוך בלתי פורמאלי - הקצבה לרשויות ובעלויות",
-                                        "size": 183000
-                                    },
-                                    {
-                                        "context": "budget/0020670103/2024",
-                                        "label": "‹ (…03) תכניות לקידום המיעוטים",
-                                        "size": 600000
-                                    },
-                                    {
-                                        "context": "budget/0020670174/2024",
-                                        "label": "‹ (…74) החברה למתנסים - פעולות",
-                                        "size": 644000
+                                        "size": 162000
                                     },
                                     {
                                         "context": "budget/0020670159/2024",
                                         "label": "‹ (…59) תמיכה במרכז למחקר ולהוראת הטבע והנוף על פי מורשת ישראל",
-                                        "size": 716000
+                                        "size": 631000
                                     },
                                     {
                                         "context": "budget/0020670120/2024",
                                         "label": "‹ (…20) פעולות ויוזמות בקליטת עליה - הקצבות לרשויות מקומיות",
-                                        "size": 982000
+                                        "size": 916000
                                     },
                                     {
                                         "context": "budget/0020670154/2024",
                                         "label": "‹ (…54) ענן מיחשוב - חוות דעת",
-                                        "size": 1653000
+                                        "size": 1541000
                                     },
                                     {
                                         "context": "budget/0020670129/2024",
                                         "label": "‹ (…29) פעולות פדגוגיות - הקצבה ולרשויות ובעלויות",
-                                        "size": 1802000
-                                    },
-                                    {
-                                        "context": "budget/0020670141/2024",
-                                        "label": "‹ (…41) פעילות התנדבותית למען הקהילה של תלמידי י\"א-י\"ב",
-                                        "size": 2044000
+                                        "size": 1676000
                                     },
                                     {
                                         "context": "budget/0020670145/2024",
                                         "label": "‹ (…45) התכנית להשאלת ספרי לימוד",
-                                        "size": 2063000
+                                        "size": 1900000
                                     },
                                     {
                                         "context": "budget/0020670189/2024",
                                         "label": "‹ (…89) תמיכה במוזיאונים",
-                                        "size": 2515000
+                                        "size": 2216000
                                     },
                                     {
                                         "context": "budget/0020670105/2024",
                                         "label": "‹ (…05) רכישות מנהלי מחוזות",
-                                        "size": 2564000
+                                        "size": 2405000
                                     },
                                     {
                                         "context": "budget/0020670117/2024",
                                         "label": "‹ (…17) תוכניות חינוכיות",
-                                        "size": 2997000
-                                    },
-                                    {
-                                        "context": "budget/0020670137/2024",
-                                        "label": "‹ (…37) כפרי סטודנטים",
-                                        "size": 3840000
+                                        "size": 2794000
                                     },
                                     {
                                         "context": "budget/0020670108/2024",
                                         "label": "‹ (…08) תגבור שירותי החינוך בעיר לוד - החלטת ממשלה",
-                                        "size": 3871000
+                                        "size": 3373000
                                     },
                                     {
                                         "context": "budget/0020670148/2024",
                                         "label": "‹ (…48) תוכנית לימודים לחינוך מדעי וטכנולוגי",
-                                        "size": 4045000
-                                    },
-                                    {
-                                        "context": "budget/0020670130/2024",
-                                        "label": "‹ (…30) מייזמים למחוננים ומצטיינים",
-                                        "size": 4316000
+                                        "size": 3772000
                                     },
                                     {
                                         "context": "budget/0020670143/2024",
                                         "label": "‹ (…43) פעולות עם נוער בסיכון",
-                                        "size": 4366000
+                                        "size": 3852000
                                     },
                                     {
-                                        "context": "budget/0020670132/2024",
-                                        "label": "‹ (…32) מענק ירושלים לחינוך",
-                                        "size": 4488000
+                                        "context": "budget/0020670130/2024",
+                                        "label": "‹ (…30) מייזמים למחוננים ומצטיינים",
+                                        "size": 4033000
                                     },
                                     {
                                         "context": "budget/0020670139/2024",
                                         "label": "‹ (…39) הוצאות מטה ניהול עצמי והעצמה של בתי ספר חלשים",
-                                        "size": 5793000
+                                        "size": 5404000
                                     },
                                     {
                                         "context": "budget/0020670134/2024",
                                         "label": "‹ (…34) רכישת שירותים עבור פעילויות  נדרשות",
-                                        "size": 5948000
+                                        "size": 5569000
                                     },
                                     {
                                         "context": "budget/0020670119/2024",
                                         "label": "‹ (…19) קריות לחינוך ומחקר סביבתי",
-                                        "size": 6546000
+                                        "size": 6104000
+                                    },
+                                    {
+                                        "context": "budget/0020670106/2024",
+                                        "label": "‹ (…06) מלגות ומענקים לתלמידים",
+                                        "size": 6862000
                                     },
                                     {
                                         "context": "budget/0020670152/2024",
@@ -4004,44 +3986,39 @@ export const bubbles: any = {
                                         "size": 7350000
                                     },
                                     {
-                                        "context": "budget/0020670106/2024",
-                                        "label": "‹ (…06) מלגות ומענקים לתלמידים",
-                                        "size": 7421000
-                                    },
-                                    {
                                         "context": "budget/0020670169/2024",
                                         "label": "‹ (…69) הקצבות ללימוד המורשת הנוצרית בבתי ספר כנסייתיים",
                                         "size": 8072000
                                     },
                                     {
-                                        "context": "budget/0020670102/2024",
-                                        "label": "‹ (…02) תכנית החומש לקידום החינוך הערבי",
-                                        "size": 8198000
+                                        "context": "budget/0020670167/2024",
+                                        "label": "‹ (…67) השתתפות במכינות קדם אקדמיות",
+                                        "size": 8189000
                                     },
                                     {
-                                        "context": "budget/0020670191/2024",
-                                        "label": "‹ (…91) תמיכה במוסדות ציבור בתחומי הדרכה, סיורים חינוכיים, טבע וסביבה",
-                                        "size": 8255000
-                                    },
-                                    {
-                                        "context": "budget/0020670133/2024",
-                                        "label": "‹ (…33) תמיכות בפעילויות שונות בהתאם למדיניות המשרד",
-                                        "size": 8659000
+                                        "context": "budget/0020670137/2024",
+                                        "label": "‹ (…37) כפרי סטודנטים",
+                                        "size": 8237000
                                     },
                                     {
                                         "context": "budget/0020670123/2024",
                                         "label": "‹ (…23) סל תלמיד עולה - העברה לרשויות מקומיות ובעלויות חינוך",
-                                        "size": 9252000
-                                    },
-                                    {
-                                        "context": "budget/0020670167/2024",
-                                        "label": "‹ (…67) השתתפות במכינות קדם אקדמיות",
-                                        "size": 9278000
+                                        "size": 8624000
                                     },
                                     {
                                         "context": "budget/0020670188/2024",
                                         "label": "‹ (…88) תמיכה באכסניות חינוכיות לילדים ונוער",
-                                        "size": 9674000
+                                        "size": 8659000
+                                    },
+                                    {
+                                        "context": "budget/0020670131/2024",
+                                        "label": "‹ (…31) תכנית אקדמיה למצטיינים",
+                                        "size": 9293000
+                                    },
+                                    {
+                                        "context": "budget/0020670197/2024",
+                                        "label": "‹ (…97) מוקדי קליטה ברשויות המקומיות",
+                                        "size": 9622000
                                     },
                                     {
                                         "context": "budget/0020670153/2024",
@@ -4049,114 +4026,99 @@ export const bubbles: any = {
                                         "size": 9838000
                                     },
                                     {
-                                        "context": "budget/0020670131/2024",
-                                        "label": "‹ (…31) תכנית אקדמיה למצטיינים",
-                                        "size": 9931000
-                                    },
-                                    {
-                                        "context": "budget/0020670179/2024",
-                                        "label": "‹ (…79) גרעין חינוכי לאומי",
-                                        "size": 10015000
-                                    },
-                                    {
-                                        "context": "budget/0020670197/2024",
-                                        "label": "‹ (…97) מוקדי קליטה ברשויות המקומיות",
-                                        "size": 10313000
-                                    },
-                                    {
-                                        "context": "budget/0020670183/2024",
-                                        "label": "‹ (…83) תכניות לקידום מצוינות במתמטיקה, מדעים ושפות",
-                                        "size": 10800000
-                                    },
-                                    {
-                                        "context": "budget/0020670144/2024",
-                                        "label": "‹ (…44) פעולות ופרויקטים",
-                                        "size": 10960000
+                                        "context": "budget/0020670141/2024",
+                                        "label": "‹ (…41) פעילות התנדבותית למען הקהילה של תלמידי י\"א-י\"ב",
+                                        "size": 10416000
                                     },
                                     {
                                         "context": "budget/0020670193/2024",
                                         "label": "‹ (…93) פעולות פדגוגית - רכישת שירותים",
-                                        "size": 11207000
+                                        "size": 10765000
                                     },
                                     {
                                         "context": "budget/0020670190/2024",
                                         "label": "‹ (…90) תמיכה במדריכים מוסיקליים בקונסרבטוריונים",
-                                        "size": 12647000
+                                        "size": 11157000
                                     },
                                     {
-                                        "context": "budget/0020670118/2024",
-                                        "label": "‹ (…18) הקצבות באחריות מנהלי מחוזות - פעילויות ויוזמות",
-                                        "size": 12687000
+                                        "context": "budget/0020670191/2024",
+                                        "label": "‹ (…91) תמיכה במוסדות ציבור בתחומי הדרכה, סיורים חינוכיים, טבע וסביבה",
+                                        "size": 12084000
                                     },
                                     {
-                                        "context": "budget/0020670163/2024",
-                                        "label": "‹ (…63) מכינות אופק לנוער בסיכון",
-                                        "size": 16193000
+                                        "context": "budget/0020670174/2024",
+                                        "label": "‹ (…74) החברה למתנסים - פעולות",
+                                        "size": 13112000
                                     },
                                     {
                                         "context": "budget/0020670185/2024",
                                         "label": "‹ (…85) רזרבה לשכר מורים",
-                                        "size": 16882000
+                                        "size": 16038000
+                                    },
+                                    {
+                                        "context": "budget/0020670133/2024",
+                                        "label": "‹ (…33) תמיכות בפעילויות שונות בהתאם למדיניות המשרד",
+                                        "size": 16118000
                                     },
                                     {
                                         "context": "budget/0020670116/2024",
                                         "label": "‹ (…16) שכר לימוד למסגרות נוער - רשויות",
-                                        "size": 18329000
+                                        "size": 17413000
                                     },
                                     {
                                         "context": "budget/0020670101/2024",
                                         "label": "‹ (…01) הנגשה",
-                                        "size": 19032000
+                                        "size": 17736000
+                                    },
+                                    {
+                                        "context": "budget/0020670179/2024",
+                                        "label": "‹ (…79) גרעין חינוכי לאומי",
+                                        "size": 18706000
                                     },
                                     {
                                         "context": "budget/0020670150/2024",
                                         "label": "‹ (…50) פרויקט עתידים לעידוד תלמידים מצטיינים בפריפריה",
-                                        "size": 22648000
-                                    },
-                                    {
-                                        "context": "budget/0020670138/2024",
-                                        "label": "‹ (…38) פעולות ויוזמות - ילדים ונוער בסיכון",
-                                        "size": 23220000
-                                    },
-                                    {
-                                        "context": "budget/0020670175/2024",
-                                        "label": "‹ (…75) הקצבות מדע וטכנולוגיה",
-                                        "size": 26312000
+                                        "size": 21235000
                                     },
                                     {
                                         "context": "budget/0020670140/2024",
                                         "label": "‹ (…40) הפעלת קבוצת מחנכים",
-                                        "size": 26433000
+                                        "size": 23539000
                                     },
                                     {
-                                        "context": "budget/0020670126/2024",
-                                        "label": "‹ (…26) סיוע וטיפוח",
-                                        "size": 30545000
+                                        "context": "budget/0020670144/2024",
+                                        "label": "‹ (…44) פעולות ופרויקטים",
+                                        "size": 25412000
                                     },
                                     {
-                                        "context": "budget/0020670187/2024",
-                                        "label": "‹ (…87) תמיכה בארגוני נוער",
-                                        "size": 35932000
+                                        "context": "budget/0020670102/2024",
+                                        "label": "‹ (…02) תכנית החומש לקידום החינוך הערבי",
+                                        "size": 31059000
+                                    },
+                                    {
+                                        "context": "budget/0020670103/2024",
+                                        "label": "‹ (…03) תכניות לקידום המיעוטים",
+                                        "size": 33313000
+                                    },
+                                    {
+                                        "context": "budget/0020670118/2024",
+                                        "label": "‹ (…18) הקצבות באחריות מנהלי מחוזות - פעילויות ויוזמות",
+                                        "size": 34045000
+                                    },
+                                    {
+                                        "context": "budget/0020670183/2024",
+                                        "label": "‹ (…83) תכניות לקידום מצוינות במתמטיקה, מדעים ושפות",
+                                        "size": 34777000
                                     },
                                     {
                                         "context": "budget/0020670165/2024",
                                         "label": "‹ (…65) פעולות חינוך בלתי פורמאלי - רכישת שירותים",
-                                        "size": 39443000
+                                        "size": 38691000
                                     },
                                     {
-                                        "context": "budget/0020670147/2024",
-                                        "label": "‹ (…47) תמיכה בתיכונים חרדיים עיוניים וטכנולוגיים",
-                                        "size": 41456000
-                                    },
-                                    {
-                                        "context": "budget/0020670110/2024",
-                                        "label": "‹ (…10) פעולות לקידום מערכת החינוך - הקצבה לרשויות ובעלויות",
-                                        "size": 43419000
-                                    },
-                                    {
-                                        "context": "budget/0020670112/2024",
-                                        "label": "‹ (…12) הדרך החדשה",
-                                        "size": 44156000
+                                        "context": "budget/0020670163/2024",
+                                        "label": "‹ (…63) מכינות אופק לנוער בסיכון",
+                                        "size": 41528000
                                     },
                                     {
                                         "context": "budget/0020670170/2024",
@@ -4164,14 +4126,39 @@ export const bubbles: any = {
                                         "size": 45525000
                                     },
                                     {
+                                        "context": "budget/0020670110/2024",
+                                        "label": "‹ (…10) פעולות לקידום מערכת החינוך - הקצבה לרשויות ובעלויות",
+                                        "size": 46302000
+                                    },
+                                    {
+                                        "context": "budget/0020670175/2024",
+                                        "label": "‹ (…75) הקצבות מדע וטכנולוגיה",
+                                        "size": 46563000
+                                    },
+                                    {
+                                        "context": "budget/0020670112/2024",
+                                        "label": "‹ (…12) הדרך החדשה",
+                                        "size": 46805000
+                                    },
+                                    {
                                         "context": "budget/0020670136/2024",
                                         "label": "‹ (…36) השתלמויות עובדי הוראה",
-                                        "size": 49736000
+                                        "size": 49936000
                                     },
                                     {
                                         "context": "budget/0020670162/2024",
                                         "label": "‹ (…62) מתנדבים לשנת שירות",
-                                        "size": 49909000
+                                        "size": 51412000
+                                    },
+                                    {
+                                        "context": "budget/0020670182/2024",
+                                        "label": "‹ (…82) פעולות ויוזמות",
+                                        "size": 54704000
+                                    },
+                                    {
+                                        "context": "budget/0020670138/2024",
+                                        "label": "‹ (…38) פעולות ויוזמות - ילדים ונוער בסיכון",
+                                        "size": 55008000
                                     },
                                     {
                                         "context": "budget/0020670124/2024",
@@ -4179,24 +4166,24 @@ export const bubbles: any = {
                                         "size": 59205000
                                     },
                                     {
-                                        "context": "budget/0020670182/2024",
-                                        "label": "‹ (…82) פעולות ויוזמות",
-                                        "size": 60673000
-                                    },
-                                    {
                                         "context": "budget/0020670127/2024",
                                         "label": "‹ (…27) פעולות התערבות יחודיות",
-                                        "size": 64000000
+                                        "size": 60800000
+                                    },
+                                    {
+                                        "context": "budget/0020670147/2024",
+                                        "label": "‹ (…47) תמיכה בתיכונים חרדיים עיוניים וטכנולוגיים",
+                                        "size": 65628000
+                                    },
+                                    {
+                                        "context": "budget/0020670132/2024",
+                                        "label": "‹ (…32) מענק ירושלים לחינוך",
+                                        "size": 72608000
                                     },
                                     {
                                         "context": "budget/0020670192/2024",
                                         "label": "‹ (…92) פעולות מדע וטכנולוגיה",
-                                        "size": 73103000
-                                    },
-                                    {
-                                        "context": "budget/0020670142/2024",
-                                        "label": "‹ (…42) תמיכה בתנועות נוער",
-                                        "size": 87709000
+                                        "size": 80555000
                                     },
                                     {
                                         "context": "budget/0020670135/2024",
@@ -4204,19 +4191,34 @@ export const bubbles: any = {
                                         "size": 88212000
                                     },
                                     {
-                                        "context": "budget/0020670113/2024",
-                                        "label": "‹ (…13) מועדוניות משפחתיות ותוכניות התערבות למניעת נשירה",
-                                        "size": 89874000
+                                        "context": "budget/0020670142/2024",
+                                        "label": "‹ (…42) תמיכה בתנועות נוער",
+                                        "size": 91313000
                                     },
                                     {
                                         "context": "budget/0020670104/2024",
                                         "label": "‹ (…04) שירות לאומי אזרחי",
-                                        "size": 98169000
+                                        "size": 91834000
+                                    },
+                                    {
+                                        "context": "budget/0020670187/2024",
+                                        "label": "‹ (…87) תמיכה בארגוני נוער",
+                                        "size": 93088000
+                                    },
+                                    {
+                                        "context": "budget/0020670113/2024",
+                                        "label": "‹ (…13) מועדוניות משפחתיות ותוכניות התערבות למניעת נשירה",
+                                        "size": 94674000
+                                    },
+                                    {
+                                        "context": "budget/0020670199/2024",
+                                        "label": "‹ (…99) חרבות ברזל - חינוך",
+                                        "size": 95000000
                                     },
                                     {
                                         "context": "budget/0020670111/2024",
                                         "label": "‹ (…11) פעולות לקידום מערכת החינוך - רכישת שירותים",
-                                        "size": 98809000
+                                        "size": 101039000
                                     },
                                     {
                                         "context": "budget/0020670114/2024",
@@ -4224,19 +4226,19 @@ export const bubbles: any = {
                                         "size": 103025000
                                     },
                                     {
-                                        "context": "budget/0020670156/2024",
-                                        "label": "‹ (…56) בתי הספר של החופש הגדול",
-                                        "size": 136800000
-                                    },
-                                    {
                                         "context": "budget/0020670176/2024",
                                         "label": "‹ (…76) פעולות לתקשוב המערכת",
-                                        "size": 146175000
+                                        "size": 142113000
                                     },
                                     {
                                         "context": "budget/0020670115/2024",
                                         "label": "‹ (…15) שכר לימוד למסגרות נוער",
-                                        "size": 177930000
+                                        "size": 179130000
+                                    },
+                                    {
+                                        "context": "budget/0020670146/2024",
+                                        "label": "‹ (…46) תכנית ללימודי הומניסטיקה",
+                                        "size": 182947000
                                     },
                                     {
                                         "context": "budget/0020670194/2024",
@@ -4244,14 +4246,14 @@ export const bubbles: any = {
                                         "size": 190404000
                                     },
                                     {
-                                        "context": "budget/0020670146/2024",
-                                        "label": "‹ (…46) תכנית ללימודי הומניסטיקה",
-                                        "size": 192576000
-                                    },
-                                    {
                                         "context": "budget/0020670172/2024",
                                         "label": "‹ (…72) תכניות בחינוך הבלתי פוראמלי",
                                         "size": 258173000
+                                    },
+                                    {
+                                        "context": "budget/0020670156/2024",
+                                        "label": "‹ (…56) בתי הספר של החופש הגדול",
+                                        "size": 277545000
                                     },
                                     {
                                         "context": "budget/0020670186/2024",
@@ -4296,7 +4298,7 @@ export const bubbles: any = {
                                         3260722000,
                                         3677372000,
                                         2675779000,
-                                        3119918000
+                                        3691164000
                                     ]
                                 },
                                 {
@@ -4313,8 +4315,8 @@ export const bubbles: any = {
                                         5229136000,
                                         4670790000,
                                         5772397000,
-                                        5259520000,
-                                        3119918000
+                                        4894908000,
+                                        3691164000
                                     ]
                                 },
                                 {
@@ -4372,12 +4374,12 @@ export const bubbles: any = {
                                     {
                                         "context": null,
                                         "label": "קניות ורכש",
-                                        "size": 761222000
+                                        "size": 777983000
                                     },
                                     {
                                         "context": null,
                                         "label": "העברות ותמיכות",
-                                        "size": 2351346000
+                                        "size": 2905831000
                                     }
                                 ],
                                 "labelTextSize": 14,
@@ -4400,38 +4402,38 @@ export const bubbles: any = {
             "children": [
                 {
                     "code": "0020670101",
-                    "net_allocated": 19032000,
-                    "net_revised": 19032000,
+                    "net_allocated": 17736000,
+                    "net_revised": 17736000,
                     "title": "הנגשה"
                 },
                 {
                     "code": "0020670102",
-                    "net_allocated": 8198000,
-                    "net_revised": 8198000,
+                    "net_allocated": 31059000,
+                    "net_revised": 31059000,
                     "title": "תכנית החומש לקידום החינוך הערבי"
                 },
                 {
                     "code": "0020670103",
-                    "net_allocated": 600000,
-                    "net_revised": 600000,
+                    "net_allocated": 33313000,
+                    "net_revised": 33313000,
                     "title": "תכניות לקידום המיעוטים"
                 },
                 {
                     "code": "0020670104",
-                    "net_allocated": 98169000,
-                    "net_revised": 98169000,
+                    "net_allocated": 91834000,
+                    "net_revised": 91834000,
                     "title": "שירות לאומי אזרחי"
                 },
                 {
                     "code": "0020670105",
-                    "net_allocated": 2564000,
-                    "net_revised": 2564000,
+                    "net_allocated": 2405000,
+                    "net_revised": 2405000,
                     "title": "רכישות מנהלי מחוזות"
                 },
                 {
                     "code": "0020670106",
-                    "net_allocated": 7421000,
-                    "net_revised": 7421000,
+                    "net_allocated": 6862000,
+                    "net_revised": 6862000,
                     "title": "מלגות ומענקים לתלמידים"
                 },
                 {
@@ -4442,8 +4444,8 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670108",
-                    "net_allocated": 3871000,
-                    "net_revised": 3871000,
+                    "net_allocated": 3373000,
+                    "net_revised": 3373000,
                     "title": "תגבור שירותי החינוך בעיר לוד - החלטת ממשלה"
                 },
                 {
@@ -4454,26 +4456,26 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670110",
-                    "net_allocated": 43419000,
-                    "net_revised": 43419000,
+                    "net_allocated": 46302000,
+                    "net_revised": 46302000,
                     "title": "פעולות לקידום מערכת החינוך - הקצבה לרשויות ובעלויות"
                 },
                 {
                     "code": "0020670111",
-                    "net_allocated": 98809000,
-                    "net_revised": 98809000,
+                    "net_allocated": 101039000,
+                    "net_revised": 101039000,
                     "title": "פעולות לקידום מערכת החינוך - רכישת שירותים"
                 },
                 {
                     "code": "0020670112",
-                    "net_allocated": 44156000,
-                    "net_revised": 44156000,
+                    "net_allocated": 46805000,
+                    "net_revised": 46805000,
                     "title": "הדרך החדשה"
                 },
                 {
                     "code": "0020670113",
-                    "net_allocated": 89874000,
-                    "net_revised": 89874000,
+                    "net_allocated": 94674000,
+                    "net_revised": 94674000,
                     "title": "מועדוניות משפחתיות ותוכניות התערבות למניעת נשירה"
                 },
                 {
@@ -4484,38 +4486,38 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670115",
-                    "net_allocated": 177930000,
-                    "net_revised": 177930000,
+                    "net_allocated": 179130000,
+                    "net_revised": 179130000,
                     "title": "שכר לימוד למסגרות נוער"
                 },
                 {
                     "code": "0020670116",
-                    "net_allocated": 18329000,
-                    "net_revised": 18329000,
+                    "net_allocated": 17413000,
+                    "net_revised": 17413000,
                     "title": "שכר לימוד למסגרות נוער - רשויות"
                 },
                 {
                     "code": "0020670117",
-                    "net_allocated": 2997000,
-                    "net_revised": 2997000,
+                    "net_allocated": 2794000,
+                    "net_revised": 2794000,
                     "title": "תוכניות חינוכיות"
                 },
                 {
                     "code": "0020670118",
-                    "net_allocated": 12687000,
-                    "net_revised": 12687000,
+                    "net_allocated": 34045000,
+                    "net_revised": 34045000,
                     "title": "הקצבות באחריות מנהלי מחוזות - פעילויות ויוזמות"
                 },
                 {
                     "code": "0020670119",
-                    "net_allocated": 6546000,
-                    "net_revised": 6546000,
+                    "net_allocated": 6104000,
+                    "net_revised": 6104000,
                     "title": "קריות לחינוך ומחקר סביבתי"
                 },
                 {
                     "code": "0020670120",
-                    "net_allocated": 982000,
-                    "net_revised": 982000,
+                    "net_allocated": 916000,
+                    "net_revised": 916000,
                     "title": "פעולות ויוזמות בקליטת עליה - הקצבות לרשויות מקומיות"
                 },
                 {
@@ -4526,8 +4528,8 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670123",
-                    "net_allocated": 9252000,
-                    "net_revised": 9252000,
+                    "net_allocated": 8624000,
+                    "net_revised": 8624000,
                     "title": "סל תלמיד עולה - העברה לרשויות מקומיות ובעלויות חינוך"
                 },
                 {
@@ -4538,56 +4540,56 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670126",
-                    "net_allocated": 30545000,
-                    "net_revised": 30545000,
+                    "net_allocated": 0,
+                    "net_revised": 0,
                     "title": "סיוע וטיפוח"
                 },
                 {
                     "code": "0020670127",
-                    "net_allocated": 64000000,
-                    "net_revised": 64000000,
+                    "net_allocated": 60800000,
+                    "net_revised": 60800000,
                     "title": "פעולות התערבות יחודיות"
                 },
                 {
                     "code": "0020670128",
-                    "net_allocated": 183000,
-                    "net_revised": 183000,
+                    "net_allocated": 162000,
+                    "net_revised": 162000,
                     "title": "פעולות חינוך בלתי פורמאלי - הקצבה לרשויות ובעלויות"
                 },
                 {
                     "code": "0020670129",
-                    "net_allocated": 1802000,
-                    "net_revised": 1802000,
+                    "net_allocated": 1676000,
+                    "net_revised": 1676000,
                     "title": "פעולות פדגוגיות - הקצבה ולרשויות ובעלויות"
                 },
                 {
                     "code": "0020670130",
-                    "net_allocated": 4316000,
-                    "net_revised": 4316000,
+                    "net_allocated": 4033000,
+                    "net_revised": 4033000,
                     "title": "מייזמים למחוננים ומצטיינים"
                 },
                 {
                     "code": "0020670131",
-                    "net_allocated": 9931000,
-                    "net_revised": 9931000,
+                    "net_allocated": 9293000,
+                    "net_revised": 9293000,
                     "title": "תכנית אקדמיה למצטיינים"
                 },
                 {
                     "code": "0020670132",
-                    "net_allocated": 4488000,
-                    "net_revised": 4488000,
+                    "net_allocated": 72608000,
+                    "net_revised": 72608000,
                     "title": "מענק ירושלים לחינוך"
                 },
                 {
                     "code": "0020670133",
-                    "net_allocated": 8659000,
-                    "net_revised": 8659000,
+                    "net_allocated": 16118000,
+                    "net_revised": 16118000,
                     "title": "תמיכות בפעילויות שונות בהתאם למדיניות המשרד"
                 },
                 {
                     "code": "0020670134",
-                    "net_allocated": 5948000,
-                    "net_revised": 5948000,
+                    "net_allocated": 5569000,
+                    "net_revised": 5569000,
                     "title": "רכישת שירותים עבור פעילויות  נדרשות"
                 },
                 {
@@ -4598,80 +4600,80 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670136",
-                    "net_allocated": 49736000,
-                    "net_revised": 49736000,
+                    "net_allocated": 49936000,
+                    "net_revised": 49936000,
                     "title": "השתלמויות עובדי הוראה"
                 },
                 {
                     "code": "0020670137",
-                    "net_allocated": 3840000,
-                    "net_revised": 3840000,
+                    "net_allocated": 8237000,
+                    "net_revised": 8237000,
                     "title": "כפרי סטודנטים"
                 },
                 {
                     "code": "0020670138",
-                    "net_allocated": 23220000,
-                    "net_revised": 23220000,
+                    "net_allocated": 55008000,
+                    "net_revised": 55008000,
                     "title": "פעולות ויוזמות - ילדים ונוער בסיכון"
                 },
                 {
                     "code": "0020670139",
-                    "net_allocated": 5793000,
-                    "net_revised": 5793000,
+                    "net_allocated": 5404000,
+                    "net_revised": 5404000,
                     "title": "הוצאות מטה ניהול עצמי והעצמה של בתי ספר חלשים"
                 },
                 {
                     "code": "0020670140",
-                    "net_allocated": 26433000,
-                    "net_revised": 26433000,
+                    "net_allocated": 23539000,
+                    "net_revised": 23539000,
                     "title": "הפעלת קבוצת מחנכים"
                 },
                 {
                     "code": "0020670141",
-                    "net_allocated": 2044000,
-                    "net_revised": 2044000,
+                    "net_allocated": 10416000,
+                    "net_revised": 10416000,
                     "title": "פעילות התנדבותית למען הקהילה של תלמידי י\"א-י\"ב"
                 },
                 {
                     "code": "0020670142",
-                    "net_allocated": 87709000,
-                    "net_revised": 87709000,
+                    "net_allocated": 91313000,
+                    "net_revised": 91313000,
                     "title": "תמיכה בתנועות נוער"
                 },
                 {
                     "code": "0020670143",
-                    "net_allocated": 4366000,
-                    "net_revised": 4366000,
+                    "net_allocated": 3852000,
+                    "net_revised": 3852000,
                     "title": "פעולות עם נוער בסיכון"
                 },
                 {
                     "code": "0020670144",
-                    "net_allocated": 10960000,
-                    "net_revised": 10960000,
+                    "net_allocated": 25412000,
+                    "net_revised": 25412000,
                     "title": "פעולות ופרויקטים"
                 },
                 {
                     "code": "0020670145",
-                    "net_allocated": 2063000,
-                    "net_revised": 2063000,
+                    "net_allocated": 1900000,
+                    "net_revised": 1900000,
                     "title": "התכנית להשאלת ספרי לימוד"
                 },
                 {
                     "code": "0020670146",
-                    "net_allocated": 192576000,
-                    "net_revised": 192576000,
+                    "net_allocated": 182947000,
+                    "net_revised": 182947000,
                     "title": "תכנית ללימודי הומניסטיקה"
                 },
                 {
                     "code": "0020670147",
-                    "net_allocated": 41456000,
-                    "net_revised": 41456000,
+                    "net_allocated": 65628000,
+                    "net_revised": 65628000,
                     "title": "תמיכה בתיכונים חרדיים עיוניים וטכנולוגיים"
                 },
                 {
                     "code": "0020670148",
-                    "net_allocated": 4045000,
-                    "net_revised": 4045000,
+                    "net_allocated": 3772000,
+                    "net_revised": 3772000,
                     "title": "תוכנית לימודים לחינוך מדעי וטכנולוגי"
                 },
                 {
@@ -4682,8 +4684,8 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670150",
-                    "net_allocated": 22648000,
-                    "net_revised": 22648000,
+                    "net_allocated": 21235000,
+                    "net_revised": 21235000,
                     "title": "פרויקט עתידים לעידוד תלמידים מצטיינים בפריפריה"
                 },
                 {
@@ -4706,8 +4708,8 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670154",
-                    "net_allocated": 1653000,
-                    "net_revised": 1653000,
+                    "net_allocated": 1541000,
+                    "net_revised": 1541000,
                     "title": "ענן מיחשוב - חוות דעת"
                 },
                 {
@@ -4718,8 +4720,8 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670156",
-                    "net_allocated": 136800000,
-                    "net_revised": 136800000,
+                    "net_allocated": 277545000,
+                    "net_revised": 277545000,
                     "title": "בתי הספר של החופש הגדול"
                 },
                 {
@@ -4736,8 +4738,8 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670159",
-                    "net_allocated": 716000,
-                    "net_revised": 716000,
+                    "net_allocated": 631000,
+                    "net_revised": 631000,
                     "title": "תמיכה במרכז למחקר ולהוראת הטבע והנוף על פי מורשת ישראל"
                 },
                 {
@@ -4754,14 +4756,14 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670162",
-                    "net_allocated": 49909000,
-                    "net_revised": 49909000,
+                    "net_allocated": 51412000,
+                    "net_revised": 51412000,
                     "title": "מתנדבים לשנת שירות"
                 },
                 {
                     "code": "0020670163",
-                    "net_allocated": 16193000,
-                    "net_revised": 16193000,
+                    "net_allocated": 41528000,
+                    "net_revised": 41528000,
                     "title": "מכינות אופק לנוער בסיכון"
                 },
                 {
@@ -4772,8 +4774,8 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670165",
-                    "net_allocated": 39443000,
-                    "net_revised": 39443000,
+                    "net_allocated": 38691000,
+                    "net_revised": 38691000,
                     "title": "פעולות חינוך בלתי פורמאלי - רכישת שירותים"
                 },
                 {
@@ -4784,8 +4786,8 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670167",
-                    "net_allocated": 9278000,
-                    "net_revised": 9278000,
+                    "net_allocated": 8189000,
+                    "net_revised": 8189000,
                     "title": "השתתפות במכינות קדם אקדמיות"
                 },
                 {
@@ -4820,20 +4822,20 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670174",
-                    "net_allocated": 644000,
-                    "net_revised": 644000,
+                    "net_allocated": 13112000,
+                    "net_revised": 13112000,
                     "title": "החברה למתנסים - פעולות"
                 },
                 {
                     "code": "0020670175",
-                    "net_allocated": 26312000,
-                    "net_revised": 26312000,
+                    "net_allocated": 46563000,
+                    "net_revised": 46563000,
                     "title": "הקצבות מדע וטכנולוגיה"
                 },
                 {
                     "code": "0020670176",
-                    "net_allocated": 146175000,
-                    "net_revised": 146175000,
+                    "net_allocated": 142113000,
+                    "net_revised": 142113000,
                     "title": "פעולות לתקשוב המערכת"
                 },
                 {
@@ -4844,8 +4846,8 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670179",
-                    "net_allocated": 10015000,
-                    "net_revised": 10015000,
+                    "net_allocated": 18706000,
+                    "net_revised": 18706000,
                     "title": "גרעין חינוכי לאומי"
                 },
                 {
@@ -4862,20 +4864,20 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670182",
-                    "net_allocated": 60673000,
-                    "net_revised": 60673000,
+                    "net_allocated": 54704000,
+                    "net_revised": 54704000,
                     "title": "פעולות ויוזמות"
                 },
                 {
                     "code": "0020670183",
-                    "net_allocated": 10800000,
-                    "net_revised": 10800000,
+                    "net_allocated": 34777000,
+                    "net_revised": 34777000,
                     "title": "תכניות לקידום מצוינות במתמטיקה, מדעים ושפות"
                 },
                 {
                     "code": "0020670185",
-                    "net_allocated": 16882000,
-                    "net_revised": 16882000,
+                    "net_allocated": 16038000,
+                    "net_revised": 16038000,
                     "title": "רזרבה לשכר מורים"
                 },
                 {
@@ -4886,44 +4888,44 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670187",
-                    "net_allocated": 35932000,
-                    "net_revised": 35932000,
+                    "net_allocated": 93088000,
+                    "net_revised": 93088000,
                     "title": "תמיכה בארגוני נוער"
                 },
                 {
                     "code": "0020670188",
-                    "net_allocated": 9674000,
-                    "net_revised": 9674000,
+                    "net_allocated": 8659000,
+                    "net_revised": 8659000,
                     "title": "תמיכה באכסניות חינוכיות לילדים ונוער"
                 },
                 {
                     "code": "0020670189",
-                    "net_allocated": 2515000,
-                    "net_revised": 2515000,
+                    "net_allocated": 2216000,
+                    "net_revised": 2216000,
                     "title": "תמיכה במוזיאונים"
                 },
                 {
                     "code": "0020670190",
-                    "net_allocated": 12647000,
-                    "net_revised": 12647000,
+                    "net_allocated": 11157000,
+                    "net_revised": 11157000,
                     "title": "תמיכה במדריכים מוסיקליים בקונסרבטוריונים"
                 },
                 {
                     "code": "0020670191",
-                    "net_allocated": 8255000,
-                    "net_revised": 8255000,
+                    "net_allocated": 12084000,
+                    "net_revised": 12084000,
                     "title": "תמיכה במוסדות ציבור בתחומי הדרכה, סיורים חינוכיים, טבע וסביבה"
                 },
                 {
                     "code": "0020670192",
-                    "net_allocated": 73103000,
-                    "net_revised": 73103000,
+                    "net_allocated": 80555000,
+                    "net_revised": 80555000,
                     "title": "פעולות מדע וטכנולוגיה"
                 },
                 {
                     "code": "0020670193",
-                    "net_allocated": 11207000,
-                    "net_revised": 11207000,
+                    "net_allocated": 10765000,
+                    "net_revised": 10765000,
                     "title": "פעולות פדגוגית - רכישת שירותים"
                 },
                 {
@@ -4946,8 +4948,8 @@ export const bubbles: any = {
                 },
                 {
                     "code": "0020670197",
-                    "net_allocated": 10313000,
-                    "net_revised": 10313000,
+                    "net_allocated": 9622000,
+                    "net_revised": 9622000,
                     "title": "מוקדי קליטה ברשויות המקומיות"
                 },
                 {
@@ -4955,12 +4957,18 @@ export const bubbles: any = {
                     "net_allocated": 0,
                     "net_revised": 0,
                     "title": "פעולות לצמצום פערים"
+                },
+                {
+                    "code": "0020670199",
+                    "net_allocated": 95000000,
+                    "net_revised": 95000000,
+                    "title": "חרבות ברזל - חינוך"
                 }
             ],
             "code": "00206701",
-            "commitment_allowance_allocated": 50000000,
+            "commitment_allowance_allocated": 330000000,
             "commitment_allowance_executed": null,
-            "commitment_allowance_revised": 50000000,
+            "commitment_allowance_revised": 330000000,
             "commitment_balance_allocated": 0,
             "commitment_balance_executed": null,
             "commitment_balance_revised": 0,
@@ -4981,27 +4989,27 @@ export const bubbles: any = {
             "doc_id": "budget/00206701/2024",
             "econ_cls_json": [
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"035\", \"\\u05ea\\u05de\\u05d9\\u05db\\u05d5\\u05ea \\u05dc\\u05e4\\u05d9 \\u05e1\\u05e2\\u05d9\\u05e3 3\\u05d0\"]",
+                "[\"004\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea  \\u05de\\u05d9\\u05d5\\u05e2\\u05d3\\u05d5\\u05ea\", \"041\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1 \\u05e8\\u05d2\\u05d9\\u05dc\"]",
                 "[\"019\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea  \\u05e4\\u05e0\\u05d9\\u05dd \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1\\u05d9\\u05d5\\u05ea\", \"300\", \"\\u05d4\\u05e9\\u05ea\\u05ea\\u05e4\\u05d5\\u05d9\\u05d5\\u05ea\"]",
-                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"033\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d0\\u05e8\\u05e5\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"036\", \"\\u05e8\\u05d6\\u05e8\\u05d1\\u05d4\"]",
+                "[\"002\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea\", \"033\", \"\\u05e7\\u05e0\\u05d9\\u05d5\\u05ea \\u05d1\\u05d0\\u05e8\\u05e5\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"029\", \"\\u05e9\\u05db\\u05e8 \\u05e2\\u05e7\\u05d9\\u05e3\"]",
-                "[\"004\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05de\\u05d9\\u05d5\\u05e2\\u05d3\\u05d5\\u05ea\", \"041\", \"\\u05d4\\u05db\\u05e0\\u05e1\\u05d5\\u05ea \\u05ea\\u05e7\\u05e6\\u05d9\\u05d1 \\u05e8\\u05d2\\u05d9\\u05dc\"]",
                 "[\"003\", \"\\u05d4\\u05e2\\u05d1\\u05e8\\u05d5\\u05ea\", \"031\", \"\\u05de\\u05d5\\u05e6\\u05e8\\u05d9\\u05dd \\u05e6\\u05d9\\u05d1\\u05d5\\u05e8\\u05d9\\u05d9\\u05dd\"]"
             ],
             "econ_cls_title_1": [
+                "הכנסות  מיועדות",
                 "קניות",
-                "העברות",
                 "העברות  פנים תקציביות",
-                "הכנסות מיועדות"
+                "העברות"
             ],
             "econ_cls_title_2": [
-                "תמיכות לפי סעיף 3א",
                 "הכנסות תקציב רגיל",
-                "שכר עקיף",
-                "השתתפויות",
-                "מוצרים ציבוריים",
                 "רזרבה",
-                "קניות בארץ"
+                "השתתפויות",
+                "קניות בארץ",
+                "מוצרים ציבוריים",
+                "שכר עקיף",
+                "תמיכות לפי סעיף 3א"
             ],
             "explanation": null,
             "explanation_short": null,
@@ -5148,7 +5156,7 @@ export const bubbles: any = {
                         "00206701:פעילויות ופרוייקטים"
                     ],
                     "commitment_allowance_allocated": 50000000,
-                    "commitment_allowance_revised": 50000000,
+                    "commitment_allowance_revised": 601200000,
                     "commitment_balance_allocated": 0,
                     "commitment_balance_revised": 0,
                     "contractors_allocated": 0,
@@ -5156,29 +5164,29 @@ export const bubbles: any = {
                     "covid19_expenses_allocated": 0,
                     "covid19_expenses_revised": 0,
                     "dedicated_allocated": -145770000,
-                    "dedicated_revised": -145770000,
+                    "dedicated_revised": -213769000,
                     "depth": 3,
                     "gross_allocated": 145770000,
-                    "gross_revised": 145770000,
+                    "gross_revised": 213769000,
                     "net_allocated": 2675779000,
-                    "net_revised": 5259520000,
+                    "net_revised": 4894908000,
                     "personnel_allocated": 0,
                     "personnel_revised": 0,
-                    "total_direction_expense": 5259520000,
+                    "total_direction_expense": 4894908000,
                     "total_direction_income": 0,
                     "total_econ_cls_dedicated_income": 0,
                     "total_econ_cls_internal_transfers": 7350000,
-                    "total_econ_cls_procurement": 3095024000,
-                    "total_econ_cls_transfers": 2157146000
+                    "total_econ_cls_procurement": 1442528000,
+                    "total_econ_cls_transfers": 3445030000
                 }
             },
-            "net_allocated": 3119918000,
+            "net_allocated": 3691164000,
             "net_executed": null,
-            "net_revised": 3119918000,
+            "net_revised": 3691164000,
             "nice-breadcrumbs": "2020 - 2024 / משרד החינוך / פעולות משלימות לקידום",
             "nice-category": "שירותים חברתיים / חינוך",
             "nice-code": "20.67.01",
-            "nice-econ-category": "העברות-תמיכות לפי סעיף 3א, העברות  פנים תקציביות-השתתפויות, קניות-קניות בארץ, העברות-רזרבה, העברות-שכר עקיף, הכנסות מיועדות-הכנסות תקציב רגיל, העברות-מוצרים ציבוריים",
+            "nice-econ-category": "העברות-תמיכות לפי סעיף 3א, הכנסות  מיועדות-הכנסות תקציב רגיל, העברות  פנים תקציביות-השתתפויות, העברות-רזרבה, קניות-קניות בארץ, העברות-שכר עקיף, העברות-מוצרים ציבוריים",
             "nice-prefixes": [
                 "0020",
                 "002067",
@@ -5201,13 +5209,13 @@ export const bubbles: any = {
             "personnel_executed": null,
             "personnel_revised": 0,
             "rev_created_at": "2023-03-23",
-            "rev_last_modified_at": "2023-11-03",
-            "rev_last_updated_at": "2023-11-03",
-            "score": 3119918,
+            "rev_last_modified_at": "2024-03-15",
+            "rev_last_updated_at": "2024-03-15",
+            "score": 3691164,
             "semantic_tags": [],
             "simple-code": "206701",
             "title": "פעילויות ופרוייקטים",
-            "total_direction_expense": 3119918000,
+            "total_direction_expense": 3691164000,
             "total_direction_income": 0,
             "total_econ_cls_capital_expenditure": null,
             "total_econ_cls_credit": null,
@@ -5221,10 +5229,10 @@ export const bubbles: any = {
             "total_econ_cls_interim_accounts": null,
             "total_econ_cls_internal_transfers": 7350000,
             "total_econ_cls_investment": null,
-            "total_econ_cls_procurement": 761222000,
+            "total_econ_cls_procurement": 777983000,
             "total_econ_cls_reserve": null,
             "total_econ_cls_salaries": null,
-            "total_econ_cls_transfers": 2351346000,
+            "total_econ_cls_transfers": 2905831000,
             "year": 2024
         }
     ],
@@ -5233,72 +5241,72 @@ export const bubbles: any = {
             {
                 "entity_name": "הסתדרות הנוער עובד והלומד ליד הסתדרות העובדים הכללית החדשה (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580297075",
-                "total_amount": 88756443
+                "total_amount": 21373366.333333332
             },
             {
                 "entity_name": "תנועת הצופים העבריים בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580028454",
-                "total_amount": 76929403
+                "total_amount": 18199203.666666668
             },
             {
                 "entity_name": "תנועת בני עקיבא בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580040343",
-                "total_amount": 68683031
+                "total_amount": 16531821.333333334
             },
             {
                 "entity_name": "הסתדרות השומר הצעיר בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580001659",
-                "total_amount": 24064922
+                "total_amount": 6381862
             },
             {
                 "entity_name": "עמותת תנועת הנוער הדרוזי בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580300432",
-                "total_amount": 21617682
+                "total_amount": 4864841.333333333
             },
             {
                 "entity_name": "תנועת הצופים הערבים בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580383834",
-                "total_amount": 18671867
+                "total_amount": 4705418.333333333
             },
             {
                 "entity_name": "עזרא תנועת הנוער התורני לאומי בארץ-ישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580043297",
-                "total_amount": 16574748
-            },
-            {
-                "entity_name": "אריאל - תנועת נוער ישראלית (ע\"ר)",
-                "href": "https://next.obudget.org/i/org/association/580004562",
-                "total_amount": 15606758
+                "total_amount": 4070305
             },
             {
                 "entity_name": "מועצת תנועות הנוער בישראל (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580019982",
-                "total_amount": 14722085
+                "total_amount": 3671158
             },
             {
                 "entity_name": "הנוער הלאומי - בית\"ר (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580038685",
-                "total_amount": 14501633
+                "total_amount": 3580069
+            },
+            {
+                "entity_name": "אריאל - תנועת נוער ישראלית (ע\"ר)",
+                "href": "https://next.obudget.org/i/org/association/580004562",
+                "total_amount": 3261032.6666666665
             },
             {
                 "entity_name": "תנועת הנוער של האיחוד החקלאי (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580083046",
-                "total_amount": 10240091
-            },
-            {
-                "entity_name": "תנועת המכבי הצעיר (ע\"ר)",
-                "href": "https://next.obudget.org/i/org/association/580308930",
-                "total_amount": 9324946
+                "total_amount": 2597454.3333333335
             },
             {
                 "entity_name": "היכלי ענ\"ג - תנועת נוער (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580398279",
-                "total_amount": 9250855
+                "total_amount": 2285314.6666666665
+            },
+            {
+                "entity_name": "תנועת המכבי הצעיר (ע\"ר)",
+                "href": "https://next.obudget.org/i/org/association/580308930",
+                "total_amount": 2196052.6666666665
             },
             {
                 "entity_name": "המחנות העולים (ע\"ר)",
                 "href": "https://next.obudget.org/i/org/association/580240489",
-                "total_amount": 8634189
+                "total_amount": 2043957.6666666667
             }
         ],
         {
@@ -5319,14 +5327,14 @@ export const bubbles: any = {
                 "2024-12"
             ],
             "__date_range_to": "2024-12-31",
-            "__hash": "3ad038fa164abf7c3157c6fb33c23d1f",
+            "__hash": "e4fce69491d2bf159b4f4f410a2e7f21",
             "__is_new": false,
-            "__is_stale": true,
-            "__last_modified_at": "2023-11-03T00:18:43Z",
-            "__last_updated_at": "2023-11-03T00:18:43Z",
+            "__is_stale": false,
+            "__last_modified_at": "2024-03-15T00:19:29Z",
+            "__last_updated_at": "2024-03-15T00:19:29Z",
             "__next_update_days": 1,
-            "__revision": 283,
-            "__staleness": 133333,
+            "__revision": 304,
+            "__staleness": 150000,
             "admin_cls_code_0": [
                 "1"
             ],
@@ -5352,7 +5360,7 @@ export const bubbles: any = {
                                         0,
                                         99589000,
                                         89863000,
-                                        87709000
+                                        91313000
                                     ]
                                 },
                                 {
@@ -5367,8 +5375,8 @@ export const bubbles: any = {
                                     "y": [
                                         0,
                                         126946000,
-                                        89863000,
-                                        87709000
+                                        131064000,
+                                        91313000
                                     ]
                                 },
                                 {
@@ -5419,7 +5427,7 @@ export const bubbles: any = {
                                     {
                                         "context": null,
                                         "label": "העברות ותמיכות",
-                                        "size": 87709000
+                                        "size": 91313000
                                     }
                                 ],
                                 "labelTextSize": 14,
@@ -5594,16 +5602,16 @@ export const bubbles: any = {
                     "gross_allocated": 0,
                     "gross_revised": 0,
                     "net_allocated": 89863000,
-                    "net_revised": 89863000,
+                    "net_revised": 131064000,
                     "personnel_allocated": 0,
                     "personnel_revised": 0,
-                    "total_direction_expense": 89863000,
-                    "total_econ_cls_transfers": 89863000
+                    "total_direction_expense": 131064000,
+                    "total_econ_cls_transfers": 131064000
                 }
             },
-            "net_allocated": 87709000,
+            "net_allocated": 91313000,
             "net_executed": null,
-            "net_revised": 87709000,
+            "net_revised": 91313000,
             "nice-breadcrumbs": "2021 - 2024 / משרד החינוך / פעולות משלימות לקידום / פעילויות ופרוייקטים",
             "nice-category": "שירותים חברתיים / חינוך",
             "nice-code": "20.67.01.42",
@@ -5634,13 +5642,13 @@ export const bubbles: any = {
             "personnel_executed": null,
             "personnel_revised": 0,
             "rev_created_at": "2023-06-11",
-            "rev_last_modified_at": "2023-11-03",
-            "rev_last_updated_at": "2023-11-03",
-            "score": 87709,
+            "rev_last_modified_at": "2024-03-15",
+            "rev_last_updated_at": "2024-03-15",
+            "score": 91313,
             "semantic_tags": [],
             "simple-code": "20670142",
             "title": "תמיכה בתנועות נוער",
-            "total_direction_expense": 87709000,
+            "total_direction_expense": 91313000,
             "total_direction_income": null,
             "total_econ_cls_capital_expenditure": null,
             "total_econ_cls_credit": null,
@@ -5657,12 +5665,12 @@ export const bubbles: any = {
             "total_econ_cls_procurement": null,
             "total_econ_cls_reserve": null,
             "total_econ_cls_salaries": null,
-            "total_econ_cls_transfers": 87709000,
+            "total_econ_cls_transfers": 91313000,
             "year": 2024
         }
     ],
     "proposalAmount": null,
-    "prevProposalAmount": 484784569000,
+    "prevProposalAmount": 584097733000,
     "explanations": [
         null,
         null,
