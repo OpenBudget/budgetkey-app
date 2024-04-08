@@ -12,7 +12,7 @@
       <ng-container *ngFor="let link of globalSettings.theme.headerLinks">
         <a [href]="link.href" [innerHtml]='link.title' [target]='link.href.indexOf("http") === 0 ? "_blank" : null' clickOnReturn></a>
       </ng-container>
-      <a *ngIf='globalSettings.theme.userGroup' (activated)='whatsappGroupModal.set(true)' clickOnReturn>
+      <a *ngIf='globalSettings.theme.userGroup && showUserGroup()' (activated)='whatsappGroupModal.set(true)' clickOnReturn>
         <span>קבוצת המשתמשים<br/>בווטסאפ <i class='fa fa-whatsapp' aria-hidden='true'></i></span>
       </a>
       <ng-container *ngIf='showLanguages'>
@@ -46,14 +46,20 @@
 <app-modal [standardLayout]='true'
     *ngIf='whatsappGroupModal()'
     (close)='whatsappGroupModal.set(false)'
-    title='הצטרפות לקבוצת המשתמשים בווטסאפ'
+    title='יש לכם שאלה על תקציב המדינה?'
 >
   <div class='subscription-modal-contents'>
     <p>
+      הצטרפו לקבוצת הווטסאפ של משתמשי ״מפתח התקציב״!<br/><br/>
       מטרת הקבוצה היא לאפשר למשתמשי ומשתמשות האתר לשאול שאלות על תקציב המדינה ועל השימוש באתר ״מפתח התקציב״, להציע לאחרים עזרה בהבנה ובתפעול ולהציע הצעות לשיפור.
       <br/><br/>
       יוצרי האתר גם נמצאים בקבוצה (אבל לא תמיד), אז תהיו נחמדים!
+      <br/><br/>
+      <a href='https://chat.whatsapp.com/BXxxMMpukgjCrn5wN4RB12' target="_blank">להצטרפות לקבוצת הווטסאפ <i class='fa fa-whatsapp' aria-hidden='true'></i></a>
+      <br/><br/>
+      <small>
+        שימו לב: קבוצה זו לא מיועדת לבירור נושאים פיננסיים אישיים.<br/>אנו לא מייצגים אף גוף ממשלתי, חברה עסקית, תנועה או עמותה.
+      </small>
     </p>
-    <a href='https://chat.whatsapp.com/BXxxMMpukgjCrn5wN4RB12' target="_blank">להצטרפות לקבוצת הווטסאפ <i class='fa fa-whatsapp' aria-hidden='true'></i></a>
   </div>
 </app-modal>

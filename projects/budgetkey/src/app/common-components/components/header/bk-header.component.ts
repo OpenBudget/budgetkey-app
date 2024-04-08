@@ -75,5 +75,10 @@ export class BkHeaderComponent {
       });
     }
   }
+  
+  showUserGroup() {
+    const location: Location | undefined = this.window?._?.location;
+    return location?.pathname.indexOf('/i/org/company') !== 0;
+  }
 
 }
