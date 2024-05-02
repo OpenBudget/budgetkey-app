@@ -34,7 +34,7 @@ export class BkHeaderComponent {
   doSearch(href?: string) {
     const themeId = this.globalSettings.theme.themeId;
     let _href = href || `https://next.obudget.org/s/?theme=${themeId}&lang=${this.globalSettings.lang}`;
-    this.doNavigateURL(_href, '_self');
+    this.doNavigateURL(_href, themeId === 'soproc' ? '_blank_' : '_self');
   }
 
   switchLang(lang: string) {
