@@ -10,6 +10,8 @@ const budgetDisclaimer = '<br/><strong>' +
   'שינויים בתקציב עשויים לנבוע ממעבר של השירות לצורות הפעלה שונות (שאינן הליך מכרזי) או משינויים במבנה ארגוני (כגון איחוד שירותים) או פערים בין מועד הפעילות למועד התשלום, ואינם מעידים בהכרח על שינויים באספקת השירות בפועל' +
   '</strong>';
 
+const LAST_YEAR = 2023;
+
 export const chartTemplates: any[] = [
     {
       location: 'services',
@@ -152,7 +154,7 @@ export const chartTemplates: any[] = [
     FROM objs
     where
       (obj->>'year')::integer >= 2017 and 
-      (obj->>'year')::integer <= 2021
+      (obj->>'year')::integer <= ${LAST_YEAR}
     GROUP BY 1,
              2
     order by 1, 2`,
@@ -219,7 +221,7 @@ export const chartTemplates: any[] = [
            year,
            count(1) AS value
     FROM years
-    where year >= 2020 and year < 2022
+    where year >= 2020 and year <= ${LAST_YEAR}
     group by 1,2
     ORDER BY 1`,
       title: 'מספר השירותים השונים לאורך זמן',
@@ -232,7 +234,7 @@ export const chartTemplates: any[] = [
           // tick0: 2019,
           title: 'שנה',
           dtick: 1,
-          range: [2019.5, 2021.5]
+          range: [2019.5, LAST_YEAR + 0.5]
         },
         yaxis: {
           title: 'מספר השירותים',
@@ -271,7 +273,9 @@ export const chartTemplates: any[] = [
            (YEAR::text)::integer as year,
            count(DISTINCT entity_id) AS value
     FROM years
-    where (YEAR::text)::integer IN (2020, 2021)
+    where 
+      (YEAR::text)::integer >= 2020 AND
+      (YEAR::text)::integer <= ${LAST_YEAR}
     group by 1,2
     ORDER BY 1`,
     //   subtitleQuery: `WITH objs AS
@@ -288,7 +292,7 @@ export const chartTemplates: any[] = [
     //        min((YEAR::text)::integer) as min_year,
     //        count(DISTINCT entity_id) AS value
     // FROM years
-    // where (YEAR::text)::integer IN (2020, 2021)
+    // where (YEAR::text)::integer IN (2020, 2021, 2022, 2023)
     // ORDER BY 1`,
       title: 'מספר מפעילי השירותים לאורך זמן',
       titleTooltip: 'סך הגופים המפעילים את השירותים לאורך זמן (כל גוף מפעיל נספר פעם אחת, גם אם הוא מספק יותר משירות אחד)',
@@ -300,7 +304,7 @@ export const chartTemplates: any[] = [
           // tick0: 2019,
           title: 'שנה',
           dtick: 1,
-          range: [2019.5, 2021.5]
+          range: [2019.5, LAST_YEAR + 0.5]
         },
         yaxis: {
           title: 'מספר המפעילים',
@@ -552,7 +556,9 @@ export const chartTemplates: any[] = [
            (YEAR::text)::integer as year,
            count(DISTINCT entity_id) AS value
     FROM years
-    where (YEAR::text)::integer IN (2020, 2021)
+    where 
+      (YEAR::text)::integer >= 2020 and
+      (YEAR::text)::integer <= ${LAST_YEAR}
     group by 1,2
     ORDER BY 1`,
       subtitleQuery: `WITH objs AS
@@ -568,7 +574,9 @@ export const chartTemplates: any[] = [
            min((YEAR::text)::integer) as min_year,
            count(DISTINCT entity_id) AS value
     FROM years
-    where (YEAR::text)::integer IN (2020, 2021)
+    where
+      (YEAR::text)::integer >= 2020 and
+      (YEAR::text)::integer <= ${LAST_YEAR}
     ORDER BY 1`,
       title: 'מגזר מפעילי השירותים לאורך זמן',
       titleTooltip: 'המגזר של הגופים המפעילים את השירותים לאורך זמן (כל גוף מפעיל נספר פעם אחת, גם אם הוא מספק יותר משירות אחד)',
@@ -580,7 +588,7 @@ export const chartTemplates: any[] = [
           // tick0: 2019,
           title: 'שנה',
           dtick: 1,
-          range: [2019.5, 2021.5]
+          range: [2019.5, LAST_YEAR + 0.5]
         },
         yaxis: {
           title: 'מספר המפעילים',
