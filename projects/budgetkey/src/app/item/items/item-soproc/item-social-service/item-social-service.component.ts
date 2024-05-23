@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { tableDefs } from './tables';
 import { BudgetKeyItemService } from '../../../budgetkey-item.service';
 import { PlatformService } from 'projects/budgetkey/src/app/common-components/platform.service';
+import { LAST_YEAR } from '../item-social-service-gov-unit/charts';
 
 @Component({
   selector: 'app-item-social-service',
@@ -34,7 +35,7 @@ export class ItemSocialServiceComponent implements OnInit {
     ];
     this.item.breadcrumbs = [this.item.office, this.item.unit, this.item.subunit, this.item.subsubunit].filter(x => !!x).join(' / ');
     this.item.catalog_number = parseInt(this.item.catalog_number, 10) || null;
-    const budget = this.item.manualBudget.sort((a: any, b: any) => a.year - b.year).filter((x: any) => x.year <= 2023);
+    const budget = this.item.manualBudget.sort((a: any, b: any) => a.year - b.year).filter((x: any) => x.year <= LAST_YEAR);
     const beneficiaries = this.item.beneficiaries.sort((a: any, b: any) => a.year - b.year);
     this.budget_chart = {
       layout: {
