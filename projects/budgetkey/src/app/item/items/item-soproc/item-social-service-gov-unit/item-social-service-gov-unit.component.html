@@ -128,5 +128,7 @@
     </ng-container>    
 </div>
 
-<app-social-service-data-table *ngIf='colorscheme | async' [tables]='tables' [default]='"services"' [replacements]='replacements' [filename]='item.page_title' [item]='item'></app-social-service-data-table>
+<ng-container *ngIf='ps.browser()'>
+    <app-social-service-data-table *ngIf='colorscheme | async' [tables]='tables' [default]='"services"' [replacements]='replacements' [filename]='item.page_title' [item]='item'></app-social-service-data-table>
+</ng-container>
 <div class='sticky-contact-us'><a href='mailto:rehesh.hevrati@pmo.gov.il' target='_blank'>יצירת קשר או דיווח על תקלה</a></div>
