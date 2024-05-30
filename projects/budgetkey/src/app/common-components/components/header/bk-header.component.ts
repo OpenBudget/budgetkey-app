@@ -81,4 +81,7 @@ export class BkHeaderComponent {
     return location?.pathname.indexOf('/i/org/company') !== 0;
   }
 
+  skipToMainContent() {
+    this.router.navigate([], { fragment: 'main', queryParamsHandling: 'preserve' });
+  }
 }

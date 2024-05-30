@@ -1,7 +1,7 @@
 <app-bk-search-bar (submit)='doSearch($event)'></app-bk-search-bar>
 
 <div class='tab-selectors'>
-    <span>מידע גולמי עבור:</span>
+    <h2>מידע גולמי עבור:</h2>
     <ng-container *ngFor='let tbl of _tableKeys'>
         <a [class.active]='currentTable === tables[tbl]' (activated)='currentTable = tables[tbl]' tabindex='0' clickOnReturn>{{tables[tbl].name}}</a>
     </ng-container>
@@ -45,11 +45,21 @@
         <thead>
             <ng-container *ngFor='let header of currentTable.uiHeaders; let i = index' >
                 <th>
-                    <a (activated)='sortBy(currentTable.sorting[i])' [innerHtml]='header' tabindex="0" clickOnReturn
-                        [attr.aria-label]='header + " לחץ למיון לפי השדה הנבחר"'
-                        [attr.aria-pressed]='currentTable.sorting[i] === currentTable.sortField'
-                        [attr.aria-sort]='currentTable.sorting[i] === currentTable.sortField ? currentTable.sortDirectionDesc ? "descending" : "ascending" : null'
-                    ></a>
+                    @if (header.length === 1) {
+                        <a (activated)='sortBy(currentTable.sorting[i])' tabindex="0" clickOnReturn
+                            [attr.aria-label]='header[0] + " לחץ למיון לפי השדה הנבחר"'
+                            [attr.aria-pressed]='currentTable.sorting[i] === currentTable.sortField'
+                            [attr.aria-sort]='currentTable.sorting[i] === currentTable.sortField ? currentTable.sortDirectionDesc ? "descending" : "ascending" : null'
+                        >{{header[0]}}</a>
+                    } @else {
+                        <a (activated)='sortBy(currentTable.sorting[i])' tabindex="0" clickOnReturn
+                            [attr.aria-label]='header[0] + " לחץ למיון לפי השדה הנבחר"'
+                            [attr.aria-description]='header[1]'
+                            [attr.aria-pressed]='currentTable.sorting[i] === currentTable.sortField'
+                            [attr.aria-sort]='currentTable.sorting[i] === currentTable.sortField ? currentTable.sortDirectionDesc ? "descending" : "ascending" : null'
+                        ><span class='bk-tooltip-anchor'>{{header[0]}}<span class='bk-tooltip'>{{header[1]}}</span></span>
+                    </a>
+                    }
                     <i class="fa fa-chevron-down" *ngIf='currentTable.sorting[i] === currentTable.sortField && currentTable.sortDirectionDesc'></i>
                     <i class="fa fa-chevron-up" *ngIf='currentTable.sorting[i] === currentTable.sortField && !currentTable.sortDirectionDesc'></i>
                 </th> 
