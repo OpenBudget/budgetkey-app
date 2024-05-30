@@ -21,7 +21,6 @@ export class ChartPlotlyComponent implements OnChanges, AfterViewInit {
   @ViewChild('wrapper') wrapper: ElementRef;
 
   ready = false;
-
   _enlarged = false;
 
   constructor(private ps: PlatformService, private plotly: PlotlyService) {
@@ -29,7 +28,9 @@ export class ChartPlotlyComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit() {
     this.ready = true;
-    this.draw();
+    timer(0).subscribe(() => {
+      this.draw();
+    });
   }
 
   ngOnChanges() {

@@ -19,7 +19,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
 
   @ViewChild('filtersElement') filtersElement: ElementRef;
   @ViewChild('tabs') tabsElement: ElementRef;
-  intersection: Subscription|null = null;
+  @ViewChild('chartsSection') chartsSectionElement: ElementRef;
   stickyTop = '-80px';
   
 
@@ -134,28 +134,33 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
         switchMap(() => this.colorscheme),
         delay(100)
       ).subscribe(() => {
-        if (!this.intersection) {
-          // Run on animation scheduler
-          this.intersection = fromEvent(window, 'scroll')
+        const scrollable: Element | null= window.document.querySelector('.scrollable');
+        if (scrollable) {
+          fromEvent(scrollable, 'scroll')
           .pipe(
             untilDestroyed(this),
             throttleTime(500, animationFrameScheduler),
           ).subscribe(() => {
+            console.log('SCROLL');
             this.updateSticky();
-          });
+          });            
         }
-      });
-      interval(1000).pipe(
-        untilDestroyed(this)
-      ).subscribe(() => {
-        this.updateSticky();
-      });
     });
+    });
+  }
+
+  setCurrentTab(tab: string) {
+    this.currentTab = tab;
+    this.chartsSectionElement.nativeElement.focus();
   }
 
   updateSticky() {
     const top = this.filtersElement.nativeElement.getBoundingClientRect().top - 56;
-    this.sticky = top < 1;
+    if (!this.sticky && top < 1) {
+      this.sticky = true;
+    } else if (this.sticky && top > 56) {
+      this.sticky = false;
+    }
     if (this.filtersElement && this.filtersElement.nativeElement) {
       const el = this.filtersElement.nativeElement;
       const top = el.offsetTop;
@@ -375,7 +380,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
           console.log('MISSING VALUE', d.name)
         }
       }
-      this.charts[ct.id] = {layout, data};
+      this.charts[ct.id] = {layout, data, downloadHeaders: ct.downloadHeaders, query: query, title: ct.title};
     });
   }
 

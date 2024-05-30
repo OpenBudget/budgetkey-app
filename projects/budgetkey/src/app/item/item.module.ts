@@ -60,6 +60,7 @@ import { ItemSupportsComponent } from './items/item-supports/item-supports.compo
 import { SearchLinkComponent } from './search-link/search-link.component';
 import { ListComponentsModule } from '../list-components/list-components.module';
 import { ItemPageHeaderComponent } from './item-page-header/item-page-header.component';
+import { ItemSoprocChartComponent } from './items/item-soproc/item-soproc-chart/item-soproc-chart.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { ItemPageHeaderComponent } from './item-page-header/item-page-header.com
     ItemGovDecisionComponent,
     ItemSocialServiceComponent,
     ItemSocialServiceGovUnitComponent,
+    ItemSoprocChartComponent,
     SocialServiceDataTableComponent,
     MultiSelectComponent,
     QuestionsPanelComponent,

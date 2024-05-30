@@ -22,6 +22,10 @@ export const chartTemplates: any[] = [
       title: 'מספר השירותים החברתיים',
       titleTooltip: 'מספר השירותים ברכש החברתי הניתנים בשנה הנוכחית. לפירוט סוגי השירותים הנכללים באתר ראו דף "אודות". ישנם שירותים הכוללים מספר מכרזים. שינויים במספר השירותים יכול לנבוע משינויים במבנה ארגוני (כגון איחוד שירותים) או משינויים בדרכי ההפעלה של השירותים ואינם מעידים בהכרח על הפסקת אספקת השירותים',
       subtitle: 'סה״כ :total שירותים',
+      downloadHeaders: [
+        'משרד',
+        'מספר שירותים<value',
+      ],
       x_field: 'משרד',
       y_field: 'value',
       layout: {
@@ -80,6 +84,11 @@ export const chartTemplates: any[] = [
     `,
       title: 'מספר מפעילי השירותים',
       titleTooltip: 'מספר הגופים המפעילים את השירותים בשנה הנוכחית, בחלוקה למפעילים מהמגזר השלישי, המגזר העסקי ורשויות מקומיות. קטגוריית אחר כוללת למשל: הקדשים, שותפויות, תאגידים סטטוטורים, קופות חולים,  שירותי דת, אוניברסיטאות ועוד. ',
+      downloadHeaders: [
+        'משרד',
+        'סוג מפעיל<kind',
+        'מספר מפעילים<value',
+      ],
       x_field: 'משרד',
       y_field: 'value',
       subtitle: 'סה״כ :total מפעילים שונים ב:org',
@@ -113,6 +122,10 @@ export const chartTemplates: any[] = [
       title: 'תקציב מאושר',
       titleTooltip: 'סך התקציב המאושר לשירותים בשנה הנוכחית. בחלק מהשירותים התקציב כולל השתתפות רשויות מקומיות',
       subtitle: 'סה״כ :total ₪',
+      downloadHeaders: [
+        'משרד',
+        'תקציב מאושר<value',
+      ],
       x_field: 'משרד',
       y_field: 'value',
       layout: {
@@ -164,6 +177,12 @@ export const chartTemplates: any[] = [
       y_field: 'value',
       y_field2: 'value2',
       subtitle: '(תקציב מאושר בקו רציף, הביצוע בקו מקווקו)',
+      downloadHeaders: [
+        'משרד',
+        'שנת תקציב<year',
+        'תקציב מאושר<value',
+        'תקציב ביצוע<value2',
+      ],
       layout: {
         xaxis: {
           title: 'שנת תקציב'
@@ -229,6 +248,11 @@ export const chartTemplates: any[] = [
       subtitle: '',
       x_field: 'year',
       y_field: 'value',
+      downloadHeaders: [
+        'משרד',
+        'שנת תקציב<year',
+        'מספר שירותים<value',
+      ],
       layout: {
         xaxis: {
           // tick0: 2019,
@@ -299,6 +323,11 @@ export const chartTemplates: any[] = [
       x_field: 'year',
       y_field: 'value',
       // subtitle: ':total מפעילים שונים ב:org', // בין השנים :min-year ל-:max-year',
+      downloadHeaders: [
+        'משרד<office',
+        'שנת פעולה<year',
+        'מספר מפעילים<value',
+      ],
       layout: {
         xaxis: {
           // tick0: 2019,
@@ -342,6 +371,11 @@ export const chartTemplates: any[] = [
       x_field: 'office',
       y_field: 'value',
       subtitle: 'סה״כ :total שירותים', // WAS: 'מספר השרותים שניתנים ע״י מפעילים מהמגזרים השונים',
+      downloadHeaders: [
+        'משרד<office',
+        'סוגי מפעיל<supplier_kinds',
+        'מספר שירותים<value',
+      ],
       layout: {
         barmode: 'stack',
         xaxis: {
@@ -380,6 +414,11 @@ export const chartTemplates: any[] = [
       x_field: 'office',
       y_field: 'value',
       subtitle: 'סה״כ :total ₪', // WAS: 'תקציב השרותים שניתנים ע״י מפעילים מהמגזרים השונים',
+      downloadHeaders: [
+        'משרד<office',
+        'סוגי מפעיל<supplier_kinds',
+        'תקציב<value',
+      ],
       layout: {
         barmode: 'stack',
         xaxis: {
@@ -422,6 +461,11 @@ export const chartTemplates: any[] = [
       x_field: 'office',
       y_field: 'value',
       subtitle: 'סה״כ :total שירותים', // WAS: 'מספר השרותים בחלוקה לכמות המפעילים בשירות',
+      downloadHeaders: [
+        'משרד<office',
+        'היקף המפעילים<supplier_count_category',
+        'מספר שירותים<value',
+      ],
       layout: {
         barmode: 'stack',
         xaxis: {
@@ -460,6 +504,11 @@ export const chartTemplates: any[] = [
       x_field: 'office',
       y_field: 'value',
       subtitle: 'סה״כ :total ₪', // WAS: 'תקציב השרותים בחלוקה לכמות המפעילים בשירות',
+      downloadHeaders: [
+        'משרד<office',
+        'היקף המפעילים<supplier_count_category',
+        'תקציב<value',
+      ],
       layout: {
         barmode: 'stack',
         xaxis: {
@@ -503,6 +552,12 @@ export const chartTemplates: any[] = [
       y_field: 'supplier_count',
       text_field: 'name',
       subtitle: 'מספר המפעילים של השירות יחסית לתקציב השירות',
+      downloadHeaders: [
+        'משרד<office',
+        'שם<name',
+        'תקציב<current_budget',
+        'מספר מפעילים<supplier_count',
+      ],
       layout: {
         xaxis: {
           type: 'log',
@@ -583,6 +638,11 @@ export const chartTemplates: any[] = [
       x_field: 'year',
       y_field: 'value',
       subtitle: ':total מפעילים שונים ב:org', // בין השנים :min-year ל-:max-year',
+      downloadHeaders: [
+        'מגזר<kind',
+        'שנת פעילות<year',
+        'מספר מפעילים<value',
+      ],
       layout: {
         xaxis: {
           // tick0: 2019,
@@ -628,6 +688,11 @@ export const chartTemplates: any[] = [
       x_field: 'office',
       y_field: 'value',
       subtitle: 'סה״כ :total הליכי רכש', // WAS: 'מספר השרותים שניתנים ע״י מפעילים מהמגזרים השונים',
+      downloadHeaders: [
+        'משרד<office',
+        'סוג הליך<tender_type_he',
+        'מספר הליכים<value',
+      ],
       layout: {
         barmode: 'stack',
         xaxis: {
@@ -669,6 +734,11 @@ export const chartTemplates: any[] = [
       x_field: 'office',
       y_field: 'value',
       subtitle: 'סה״כ :total הליכי רכש בפטור ממכרז', // WAS: 'מספר השרותים שניתנים ע״י מפעילים מהמגזרים השונים',
+      downloadHeaders: [
+        'משרד<office',
+        'סוג פטור<sub_kind_he',
+        'מספר הליכים<value',
+      ],
       layout: {
         barmode: 'stack',
         xaxis: {
@@ -711,6 +781,11 @@ export const chartTemplates: any[] = [
       x_field: 'office',
       y_field: 'value',
       subtitle: 'סה״כ :total מכרזים עם מודל תמחור ידוע', // WAS: 'מספר השרותים שניתנים ע״י מפעילים מהמגזרים השונים',
+      downloadHeaders: [
+        'משרד<office',
+        'מודל התמחור<pricing',
+        'מספר הליכים<value',
+      ],
       layout: {
         barmode: 'stack',
         xaxis: {
@@ -756,6 +831,11 @@ export const chartTemplates: any[] = [
       x_field: 'office',
       y_field: 'value',
       subtitle: 'סה״כ :total שירותים עם הליכי רכש מסוג ספק יחיד, מיזם משותף או התקשרות עם רשות מקומית', // WAS: 'מספר השרותים שניתנים ע״י מפעילים מהמגזרים השונים',
+      downloadHeaders: [
+        'משרד<office',
+        'סוג פטור<sub_kind_he',
+        'מספר הליכים<value',
+      ],
       layout: {
         barmode: 'group',
         xaxis: {

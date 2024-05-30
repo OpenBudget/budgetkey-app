@@ -99,30 +99,34 @@
     </div>
 </div>
 
-<div class='tab-selectors' #tabs aria-role='menu' aria-label='תפריט תרשימים' aria-orientation='horizontal'>
-    <a [class.active]='currentTab === "services"' (activated)='currentTab = "services"' tabindex='0' clickOnReturn
-        [attr.aria-selected]='currentTab === "services"'>תמונת השירותים</a>
-    <a [class.active]='currentTab === "suppliers"' (activated)='currentTab = "suppliers"' tabindex='0' clickOnReturn
-        [attr.aria-selected]='currentTab === "suppliers"'>הרחבה לגבי מפעילי השירותים</a>
-    <a [class.active]='currentTab === "tenders"' (activated)='currentTab = "tenders"' tabindex='0' clickOnReturn
-        [attr.aria-selected]='currentTab === "tenders"'>הרחבה על הליכי רכש (בהרצה)</a>
+<div class='tab-selectors' #tabs aria-role='tablist' aria-label='תפריט תרשימים' aria-orientation='horizontal'>
+    <a [class.active]='currentTab === "services"' (activated)='setCurrentTab("services")' tabindex='0' clickOnReturn
+        role="tab" [attr.aria-selected]='currentTab === "services"' 
+        aria-controls="tab-panel"
+    >תמונת השירותים</a>
+    <a [class.active]='currentTab === "suppliers"' (activated)='setCurrentTab("suppliers")' tabindex='0' clickOnReturn
+        role='tab' [attr.aria-selected]='currentTab === "suppliers"' aria-controls='tab-panel'
+    >הרחבה לגבי מפעילי השירותים</a>
+    <a [class.active]='currentTab === "tenders"' (activated)='setCurrentTab("tenders")' tabindex='0' clickOnReturn
+        role='tab' [attr.aria-selected]='currentTab === "tenders"' aria-controls='tab-panel'
+    >הרחבה על הליכי רכש (בהרצה)</a>
 </div>
 
-<ng-container *ngIf='ps.browser()'>
-    <div class='charts columns-2'>
-        <ng-container *ngFor='let ct of chartTemplates'>
-            <ng-container *ngIf='charts[ct.id] && currentTab === ct.location'>
-                <div class='single-chart' role='figure' [attr.aria-label]='ct.title + " - " + (ct._subtitle || "")'>
-                    <h3 class='chart-title' [innerHtml]='processTitles(ct)'
-                        [attr.aria-label]='"גרף " + ct.title + " - " + (ct._subtitle || "") + " - כל המידע זמין להורדה כקובץ אקסל בהמשך"'
-                        [attr.aria-description]='ct.titleTooltip ? ct.titleTooltip : null'></h3>
-                    <div class='chart-subtitle'>{{ct._subtitle}}</div>
-                    <app-chart-plotly [layout]='charts[ct.id].layout' [data]='charts[ct.id].data'></app-chart-plotly>
-                </div>
-            </ng-container>
-        </ng-container>    
-    </div>
+<div class='charts columns-2' #chartsSection id='tab-panel'>
+    <ng-container *ngFor='let ct of chartTemplates'>
+        <ng-container *ngIf='charts[ct.id] && currentTab === ct.location'>
+            <div class='single-chart' role='figure' [attr.aria-label]='ct.title + " - " + (ct._subtitle || "")'>
+                <h3 class='chart-title' [innerHtml]='processTitles(ct)'
+                    [attr.aria-label]='"גרף " + ct.title + " - " + (ct._subtitle || "") + " - כל המידע זמין להורדה כקובץ אקסל בהמשך"'
+                    [attr.aria-description]='ct.titleTooltip ? ct.titleTooltip : null'></h3>
+                <div class='chart-subtitle'>{{ct._subtitle}}</div>
+                <ng-container *ngIf='ps.browser()'>
+                    <app-item-soproc-chart [filename]='item.page_title' [chart]='charts[ct.id]'></app-item-soproc-chart>
+                </ng-container>
+            </div>
+        </ng-container>
+    </ng-container>    
+</div>
 
-    <app-social-service-data-table *ngIf='colorscheme | async' [tables]='tables' [default]='"services"' [replacements]='replacements' [filename]='item.page_title' [item]='item'></app-social-service-data-table>
-</ng-container>
+<app-social-service-data-table *ngIf='colorscheme | async' [tables]='tables' [default]='"services"' [replacements]='replacements' [filename]='item.page_title' [item]='item'></app-social-service-data-table>
 <div class='sticky-contact-us'><a href='mailto:rehesh.hevrati@pmo.gov.il' target='_blank'>יצירת קשר או דיווח על תקלה</a></div>
