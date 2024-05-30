@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Subscription, ReplaySubject, from, mergeMap, map, first, switchMap, delay, fromEvent, throttleTime, forkJoin } from 'rxjs';
+import { Subscription, ReplaySubject, from, mergeMap, map, first, switchMap, delay, fromEvent, throttleTime, forkJoin, interval, animationFrameScheduler } from 'rxjs';
 import { BudgetKeyItemService } from '../../../budgetkey-item.service';
 import { tableDefs } from './tables';
 import { chartTemplates } from './charts';
 import { GlobalSettingsService } from 'projects/budgetkey/src/app/common-components/global-settings.service';
 import { PlatformService } from 'projects/budgetkey/src/app/common-components/platform.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-item-social-service-gov-unit',
   templateUrl: './item-social-service-gov-unit.component.html',
@@ -86,7 +88,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   public xValues: any = {};
   public sticky = false;
 
-  constructor(private api: BudgetKeyItemService, private globalSettings: GlobalSettingsService, public ps: PlatformService) {
+  constructor(private api: BudgetKeyItemService, private globalSettings: GlobalSettingsService, public ps: PlatformService, private el: ElementRef) {
     const fields = ['subject', 'intervention', 'target_audience', 'target_age_group'];
     from(fields).pipe(
       mergeMap((field) => {
@@ -126,27 +128,39 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   }
 
   ngAfterViewInit() {
-    if (this.ps.server()) {
-      return;
-    }
-    this.ready.pipe(
-      first(),
-      switchMap(() => this.colorscheme),
-      delay(100)
-    ).subscribe(() => {
-      if (!this.intersection) {
-        this.intersection = fromEvent(window, 'scroll').pipe(throttleTime(500)).subscribe(() => {
-          const top = this.filtersElement.nativeElement.getBoundingClientRect().top + 56;
-          const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-          this.sticky = scrollTop > top;
-        });
-      }
-      if (this.ps.browser() && this.filtersElement && this.filtersElement.nativeElement) {
-        const el = this.filtersElement.nativeElement;
-        const top = el.offsetTop;
-        this.stickyTop = `-${top}px`;
-      }
+    this.ps.browser(() => {
+      this.ready.pipe(
+        first(),
+        switchMap(() => this.colorscheme),
+        delay(100)
+      ).subscribe(() => {
+        if (!this.intersection) {
+          // Run on animation scheduler
+          this.intersection = fromEvent(window, 'scroll')
+          .pipe(
+            untilDestroyed(this),
+            throttleTime(500, animationFrameScheduler),
+          ).subscribe(() => {
+            this.updateSticky();
+          });
+        }
+      });
+      interval(1000).pipe(
+        untilDestroyed(this)
+      ).subscribe(() => {
+        this.updateSticky();
+      });
     });
+  }
+
+  updateSticky() {
+    const top = this.filtersElement.nativeElement.getBoundingClientRect().top - 56;
+    this.sticky = top < 1;
+    if (this.filtersElement && this.filtersElement.nativeElement) {
+      const el = this.filtersElement.nativeElement;
+      const top = el.offsetTop;
+      this.stickyTop = `-${top}px`;
+    }
   }
 
   fetchColorscheme() {

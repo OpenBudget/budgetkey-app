@@ -4,9 +4,13 @@
     <h1>מפתח לרכש החברתי</h1>
 
     <div class='page-links' aria-role='menu'>
-        <a *ngFor='let link of PAGE_LINKS' [href]='link.href + "?theme=soproc"' 
-           [attr.aria-current]='item.breadcrumbs === link.title ? "page" : null'
-           [class.active]='item.breadcrumbs === link.title'>{{ link.title }}</a>
+        @for (link of PAGE_LINKS; track link.title) {
+            @if (item.breadcrumbs === link.title) {
+                <h2 aria-current="page">{{ link.title }}</h2> 
+            } @else {
+                <a [href]='link.href + "?theme=soproc"'>{{ link.title }}</a> 
+            }    
+        }
     </div>
 
     <div class='intro' *ngIf="!item.office">
@@ -110,7 +114,9 @@
         <ng-container *ngFor='let ct of chartTemplates'>
             <ng-container *ngIf='charts[ct.id] && currentTab === ct.location'>
                 <div class='single-chart' role='figure' [attr.aria-label]='ct.title + " - " + (ct._subtitle || "")'>
-                    <div class='chart-title' [innerHtml]='processTitles(ct)'></div>
+                    <h3 class='chart-title' [innerHtml]='processTitles(ct)'
+                        [attr.aria-label]='"גרף " + ct.title + " - " + (ct._subtitle || "") + " - כל המידע זמין להורדה כקובץ אקסל בהמשך"'
+                        [attr.aria-description]='ct.titleTooltip ? ct.titleTooltip : null'></h3>
                     <div class='chart-subtitle'>{{ct._subtitle}}</div>
                     <app-chart-plotly [layout]='charts[ct.id].layout' [data]='charts[ct.id].data'></app-chart-plotly>
                 </div>
