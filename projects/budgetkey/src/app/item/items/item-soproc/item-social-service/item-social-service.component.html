@@ -215,12 +215,21 @@
     <div class='charts columns-2'>
 
         <div class='single-chart'>
-            <div class='chart-title bk-tooltip-anchor'>תקציב מאושר וביצוע תקציב בש״ח<span class='bk-tooltip'>התקציב המאושר ותקציב הביצוע בפועל של השירות לאורך זמן. שינויים בתקציב עשויים לנבוע ממעבר של השירות לצורות הפעלה שונות (שאינן הליך מכרזי) או משינויים במבנה ארגוני (כגון איחוד שירותים) ואינם מעידים בהכרח על שינויים באספקת השירות בפועל. בחלק מהשירותים התקציב כולל השתתפות רשויות מקומיות.</span></div>
+            <h2 class='chart-title bk-tooltip-anchor'
+                aria-label='תקציב מאושר וביצוע תקציב בש״ח - כל המידע זמין להורדה כקובץ אקסל בהמשך'
+            >
+                תקציב מאושר וביצוע תקציב בש״ח
+                <span class='bk-tooltip'>התקציב המאושר ותקציב הביצוע בפועל של השירות לאורך זמן. שינויים בתקציב עשויים לנבוע ממעבר של השירות לצורות הפעלה שונות (שאינן הליך מכרזי) או משינויים במבנה ארגוני (כגון איחוד שירותים) ואינם מעידים בהכרח על שינויים באספקת השירות בפועל. בחלק מהשירותים התקציב כולל השתתפות רשויות מקומיות.</span>
+            </h2>
             <app-chart-plotly [layout]='budget_chart.layout' [data]='budget_chart.data'></app-chart-plotly>
         </div>
     
         <div class='single-chart'>
-            <div class='chart-title bk-tooltip-anchor'>מספר מוטבים ({{item.beneficiary_kind_name}})<span class='bk-tooltip'>מספר מוטבי השירות לאורך זמן. שינוי במספר המוטבים עשוי לנבוע ממעבר של השירות לצורות הפעלה שונות (שאינן הליך מכרזי) או משינויים במבנה ארגוני (כגון איחוד שירותים) ואינם מעידים בהכרח על שינוי בפועל במספר המוטבים</span></div>
+            <h2 class='chart-title bk-tooltip-anchor'
+                [attr.aria-label]='"מספר מוטבים (" + item.beneficiary_kind_name + ") - כל המידע זמין להורדה כקובץ אקסל בהמשך"'
+            >מספר מוטבים ({{item.beneficiary_kind_name}})
+                <span class='bk-tooltip'>מספר מוטבי השירות לאורך זמן. שינוי במספר המוטבים עשוי לנבוע ממעבר של השירות לצורות הפעלה שונות (שאינן הליך מכרזי) או משינויים במבנה ארגוני (כגון איחוד שירותים) ואינם מעידים בהכרח על שינוי בפועל במספר המוטבים</span>
+            </h2>
             <app-chart-plotly [layout]='beneficiary_chart.layout' [data]='beneficiary_chart.data'></app-chart-plotly>
         </div>
     
