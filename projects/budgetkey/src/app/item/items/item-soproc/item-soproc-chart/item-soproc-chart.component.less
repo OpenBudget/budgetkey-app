@@ -1,0 +1,37 @@
+:host {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 100%;
+    // position: relative;
+
+    app-chart-plotly {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    form {
+        align-self: flex-end;
+        flex: 0 0 auto;
+        width: fit-content;
+    
+        button {
+            padding: 0;
+            padding-left: 32px;
+            height: 24px;
+            display: block;
+            margin: 0;
+            appearance: none;
+            background: none;
+            border: none;
+            background-image: url('../../../../../assets/item/img/icon-xlsx.svg');
+            background-size: 24px;
+            background-position: left center;
+            background-repeat: no-repeat;
+
+            &:hover {                
+                text-decoration: underline;
+            }
+        }
+    }
+}

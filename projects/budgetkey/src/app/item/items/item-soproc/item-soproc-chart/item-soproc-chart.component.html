@@ -1,0 +1,5 @@
+<app-chart-plotly [layout]='chart.layout' [data]='chart.data'></app-chart-plotly>
+<form class='download' [action]='download(chart.title)' method='post' name='download' ngNoForm>
+    <input type='hidden' name='query' [value]='chart.query'>
+    <button type='submit' clickOnReturn aria-label='הורדת נתוני התרשים לקובץ אקסל'>הורדת נתוני התרשים לקובץ אקסל</button>
+</form>    
