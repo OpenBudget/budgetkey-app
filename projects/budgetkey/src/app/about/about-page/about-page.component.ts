@@ -18,7 +18,38 @@ export class AboutPageComponent {
   html: SafeHtml;
 
   constructor(private globalSettings: GlobalSettingsService, private http: HttpClient, private domSanitizer: DomSanitizer, private ps: PlatformService) {
+
+    Showdown.extension('ariaLabelLinks', () => {
+      return [
+        {
+          type: 'output',
+          regex: /<a href="([^"]+)"(.*?)>(.*?)<\/a>/g,
+          replace: (match: any, href: string, otherAttributes: string, linkText: string) => {
+            // Customize the aria-label based on your requirements
+            let ariaLabel: string | null = null;
+            if (linkText.indexOf('<') >= 0) {
+              // find alt="...." in the linkText
+              let alt = linkText.match(/alt="([^"]+)"/);
+              if (alt) {
+                ariaLabel = alt[1];
+              }
+            } else {
+              ariaLabel = linkText;
+            }
+            if (ariaLabel) {
+              ariaLabel = href.indexOf('//') > 0 ? `מעבר לאתר אחר - ${ariaLabel} בטאב חדש` : `מעבר לעמוד ${ariaLabel} בטאב חדש`;
+              ariaLabel = ariaLabel.split('"').join('\'');
+              return `<a href="${href}"${otherAttributes} aria-label="${ariaLabel}">${linkText}</a>`;  
+            } else {
+              return `<a href="${href}"${otherAttributes}>${linkText}</a>`;
+            }
+          }
+        }
+      ];
+    });
+
     this.converter = new Showdown.Converter({
+      extensions: ['ariaLabelLinks'],
       customizedHeaderId: true,
       openLinksInNewWindow: true,
     });

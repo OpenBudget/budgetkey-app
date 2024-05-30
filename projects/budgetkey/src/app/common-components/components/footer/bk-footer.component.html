@@ -1,33 +1,37 @@
 <footer class="footer">
     <div class='top-line'>
         <div class="link" *ngFor="let link of globalSettings.theme.footerLinks">
-            <a [href]="link.href" [innerHtml]="link.title"></a>
+            @if (link.href.indexOf('http') === 0 || link.href.indexOf('mailto') === 0) {
+                <a [href]="link.href" target="_blank" [innerHtml]="link.title" [attr.aria-label]='"מעבר לאתר חדש - " + link.title + " בטאב חדש"'></a>
+            } @else {
+                <a [href]="link.href" [innerHtml]="link.title"></a>
+            }
         </div>
         <div class="hasadna" *ngIf='!globalSettings.theme.hideFooterHasadnaLogo'>
             <img class='hasadna-logo' src='assets/common/img/hasadna-logo.svg' alt='hasadna logo'>
-            <a class='hasadna-link' href="{{hasadnaUrl}}">הסדנא לידע ציבורי</a>
+            <a class='hasadna-link' href="{{hasadnaUrl}}" target="_blank" aria-label='מעבר לאתר הסדנא לידע ציבורי'>הסדנא לידע ציבורי</a>
         </div>
     </div>
     <div class="bottom-line">
         <p>
-            <a href="https://github.com/OpenBudget/BudgetKey">קוד האתר</a>
+            <a href="https://github.com/OpenBudget/BudgetKey" target="_blank" aria-label="מעבר לקוד האתר בגיטהאב בטאב חדש">קוד האתר</a>
             <span>זמין תחת רשיון MIT.</span>
         </p>
         <p>
             <img src='assets/common/img/cc-by-sa.svg' alt='cc-by-sa logo'>
             <span>על רוב תוכן האתר חל רישיון</span>
-            <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0 של Creative Commons</a>
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" aria-label='מעבר לאתר Creative Commons בטאב חדש'>CC BY-SA 4.0 של Creative Commons</a>
             <span>, אלא אם כן
-            <a [href]='about("licenses")'>צויין אחרת</a>
+            <a [href]='about("licenses")' aria-label='אודות הרשיונות שלנו'>צויין אחרת</a>
             .</span>
         </p>
         <p>
             <span *ngIf='globalSettings.theme.footerText' [innerHtml]='globalSettings.theme.footerText'></span>
             <span *ngIf='!globalSettings.theme.footerText'>
                 {{globalSettings.theme.siteName}} הוא פרויקט של
-                <a href="https://www.hasadna.org.il">הסדנא לידע ציבורי</a>
-                בהובלת <a href='https://whiletrue.industries'>אדם קריב</a>
-                <a [href]='about("supporters")'>ובתמיכה ושיתוף עם מגוון גופים וקרנות</a>.
+                <a href="https://www.hasadna.org.il" target="_blank" aria-label='מעבר לאתר הסדנא לידע ציבורי בטאב חדש'>הסדנא לידע ציבורי</a>
+                בהובלת <a href='https://whiletrue.industries' target="_blank" aria-label='מעבר לאתר while true industries בטאב חדש'>אדם קריב</a>
+                <a [href]='about("supporters")' aria-label='אודות התמיכה בפרויקט'>ובתמיכה ושיתוף עם מגוון גופים וקרנות</a>.
             </span>
         </p>
     </div>
