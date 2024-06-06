@@ -302,13 +302,14 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   }
 
   prepareChartQuery(query: string, where: string) {
-    return this.replaceAll(
+    const q = this.replaceAll(
       query,
       [
         {from: ':where', to: where},
         {from: ':org-field', to: `coalesce("${this.groupByLvl}", 'אחר')`},
       ]
     );
+    return btoa(encodeURIComponent(q).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode(parseInt(p1, 16))));
   }
 
   refreshChart(ct: any, where: string) {

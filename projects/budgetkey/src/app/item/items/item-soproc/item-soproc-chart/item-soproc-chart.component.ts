@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BudgetKeyItemService } from '../../../budgetkey-item.service';
 
 @Component({
@@ -14,9 +14,6 @@ export class ItemSoprocChartComponent  {
 
   download(title: string) {
     const filename = `${this.filename} / מידע על ${title}`;
-    if (!this.chart.downloadHeaders) {
-      console.log('CCCCC', this.chart);
-    }
     const url = this.api.getDownloadUrlPost('xlsx', this.chart.downloadHeaders, filename);
     return url;
   }  
