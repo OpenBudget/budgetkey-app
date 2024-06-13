@@ -4,10 +4,10 @@ export default [
   {
     text: "פירוט כל ההוצאות מסעיף זה ששולמו ב <period>",
     query: ["with a as (",
-    "select year_paid as \"שנה\", entity_name as \"מקבל הכספים\", amount_paid as \"סך כולל\", support_title as \"תיאור\", 'תמיכה' as \"סוג ההוצאה\"",
-    "from  supports_by_payment_year where budget_code like ':code%%' and amount_paid>0 and year_paid :period union",
-    "select min_year as \"שנה\", entity_name as \"מקבל הכספים\", executed as \"סך כולל\", purpose as \"תיאור\", 'רכש' as \"סוג ההוצאה\"",
-    "from contract_spending where budget_code like ':code%%' and executed > 0 and min_year :period)",
+    "select year_paid as \"שנה\", coalesce(entity_name, recipient) as \"מקבל הכספים\", amount_paid as \"סך כולל\", support_title as \"תיאור\", 'תמיכה' as \"סוג ההוצאה\"",
+    "from  supports_by_payment_year where budget_code = ':code' and amount_paid>0 and year_paid :period union",
+    "select min_year as \"שנה\", coalesce(entity_name, supplier_name->>0) as \"מקבל הכספים\", executed as \"סך כולל\", purpose as \"תיאור\", 'רכש' as \"סוג ההוצאה\"",
+    "from contract_spending where budget_code = ':code' and executed > 0 and min_year :period)",
     "select * from a order by \"שנה\" desc, \"סך כולל\" desc"
     ],
     parameters: {
