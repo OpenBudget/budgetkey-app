@@ -6,6 +6,7 @@ import * as Showdown from 'showdown';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { switchMap } from 'rxjs';
 import { PlatformService } from '../../common-components/platform.service';
+import { ActivatedRoute, Data } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class AboutPageComponent {
   converter: Showdown.Converter;
   html: SafeHtml;
 
-  constructor(private globalSettings: GlobalSettingsService, private http: HttpClient, private domSanitizer: DomSanitizer, private ps: PlatformService) {
+  constructor(private globalSettings: GlobalSettingsService, private http: HttpClient, private domSanitizer: DomSanitizer, private ps: PlatformService, private route: ActivatedRoute) {
 
     Showdown.extension('ariaLabelLinks', () => {
       return [
@@ -55,8 +56,14 @@ export class AboutPageComponent {
     });
 
     this.globalSettings.ready.pipe(
-      switchMap(() => this.http.get(ps.BASE + `/assets/about/${this.globalSettings.themeId}.md`, {responseType: 'text'}))
-    ).subscribe((text) => {
+      switchMap(() => this.route.data),
+      switchMap((data: Data) => {
+        if (data['a11y']) {
+          return this.http.get(ps.BASE + `/assets/about/a11y.md`, {responseType: 'text'})
+        }
+        return this.http.get(ps.BASE + `/assets/about/${this.globalSettings.themeId}.md`, {responseType: 'text'})
+      })
+    ).subscribe((text: string) => {
         this.html = this.domSanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(text));
         return this.html;
     });
