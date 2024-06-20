@@ -157,7 +157,7 @@ export const chartTemplates: any[] = [
       query: `WITH objs AS
       (SELECT :org-field as office,
               jsonb_array_elements("manualBudget"::JSONB) AS obj
-       FROM activities
+       FROM all_activities
        WHERE :where AND "manualBudget" IS NOT NULL
          AND "manualBudget" != 'null' )
     SELECT office as "משרד",
@@ -285,7 +285,7 @@ export const chartTemplates: any[] = [
       query: `WITH objs AS
       (SELECT :org-field as office,
               jsonb_array_elements(suppliers::JSONB) AS obj
-       FROM activities
+       FROM all_activities
        WHERE :where and suppliers IS NOT NULL
          AND suppliers != 'null'),
          years AS
@@ -592,7 +592,7 @@ export const chartTemplates: any[] = [
       id: 'supplier_kind_trend',
       query: `/*xxx*/ WITH objs AS
       (SELECT jsonb_array_elements(suppliers::JSONB) AS obj
-       FROM activities
+       FROM all_activities
        WHERE :where and suppliers IS NOT NULL
          AND suppliers != 'null'),
          years AS
@@ -618,7 +618,7 @@ export const chartTemplates: any[] = [
     ORDER BY 1`,
       subtitleQuery: `WITH objs AS
       (SELECT jsonb_array_elements(suppliers::JSONB) AS obj
-       FROM activities
+       FROM all_activities
        WHERE :where and suppliers IS NOT NULL
          AND suppliers != 'null'),
          years AS
