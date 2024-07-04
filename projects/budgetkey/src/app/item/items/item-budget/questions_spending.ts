@@ -143,30 +143,44 @@ export default [
     ]
   },
   {
-    text: "מבחני תמיכה הקשורים לסעיף תקציבי זה",
-    query: [
-    "WITH a AS",
-      "(SELECT 'support_criteria/' || tender_type || '/' || publication_id || '/' || tender_id AS doc_id,",
-              "start_date,",
-              "publisher,",
-              "page_title,",
-              "jsonb_array_elements(resolved_budget_codes)->>'code' AS code",
-       "FROM support_criteria",
-       "WHERE length(resolved_budget_codes::text) > 4)",
-    "SELECT doc_id,",
-           "start_date as \"מועד פרסום\",",
-           "publisher as \"משרד\",",
-           "page_title as \"שם מבחן התמיכה\"",
-    "FROM a",
-    "WHERE code like ':code%%'",
-    "ORDER BY start_date DESC"
-    ],
-    parameters: {},
-    defaults: {},
+    text: "נושאי תמיכה הקשורים לסעיף תקציבי זה, עבור בקשות שאושרו ב <period>",
+    query: ["SELECT support_title AS \"נושא\", ", 
+              "budget_code,", 
+              "budget_code AS \"מספר תקנה\", ", 
+              "sum(amount_approved) as \"סה״כ אושר\",",
+              "sum(amount_paid) as \"סה״כ שולם\",",
+              "min(year_requested) || '-' || max(year_requested)  as \"תקופה\" ", 
+              "FROM raw_supports WHERE year_requested :period AND  budget_code like ':code%%' GROUP BY 1, 2, 3 ORDER BY 4 DESC nulls last"],
+    parameters: {
+      period: {
+        "כל השנים": ">0",
+        "2008": "=2008",
+        "2009": "=2009",
+        "2010": "=2010",
+        "2011": "=2011",
+        "2012": "=2012",
+        "2013": "=2013",
+        "2014": "=2014",
+        "2015": "=2015",
+        "2016": "=2016",
+        "2017": "=2017",
+        "2018": "=2018",
+        "2019": "=2019",
+        "2020": "=2020",
+        "2021": "=2021",
+        "2022": "=2022",
+        "2023": "=2023",
+        "2024": "=2024"
+      }
+    },
+    defaults: {
+      period: "כל השנים"
+    },
     headers: [
-      "משרד",
-      "שם מבחן התמיכה:item_link(doc_id)",
-      "מועד פרסום"
+      "נושא",
+      "מספר תקנה:budget_code:search_term(budget_code)",
+      "סה״כ אושר:number",
+      "סה״כ שולם:number"
     ]
   },
   {
