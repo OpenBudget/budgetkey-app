@@ -7,6 +7,9 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+  # Once a month:
+  schedule:  
+    - cron: '0 0 1 * *'
 jobs:
   build-server:
     runs-on: ubuntu-latest
