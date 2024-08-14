@@ -26,8 +26,8 @@ export class ItemSupportsComponent implements OnChanges {
         supportTitles.push(payment.support_title);
         this.purposes.push({
           support_title: payment.support_title,
-          supporting_ministry: payment.supporting_ministry,
-          budget_code: payment.budget_code,
+          supporting_ministry: payment.supporting_ministry || this.item.supporting_ministry,
+          budget_code: payment.budget_code || this.item.budget_code,
         });
       }   
     }

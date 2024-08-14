@@ -47,5 +47,29 @@ export default [
       "סה״כ אושר:number",
       "סה״כ שולם:number"
     ]
+  },
+  {
+    "text": "ארגונים נוספים שקיבלו תמיכה בנושא זה",
+    "query": [
+      "SELECT coalesce(entity_name, recipient) as \"מקבל התמיכה\", ",
+      "entity_id as \"מספר תאגיד\", ",
+      "entity_id, ",
+      "min(year_requested) || '-' || max(year_requested) as \"תקופה\", ",
+      "sum(amount_approved) as \"סה״כ אושר\", ",
+      "sum(amount_paid) as \"סה״כ שולם\" ",
+      "FROM raw_supports ",
+      "WHERE support_title=':support_title' ",
+      "AND request_type=':request_type' ",
+      "AND budget_code=':budget_code' ",
+      "GROUP BY 1, 2, 3 ",
+      "ORDER BY 5 DESC"
+    ],
+    "headers": [
+      "מספר תאגיד",
+      "מקבל התמיכה:item_link(entity_id)",
+      "סה״כ אושר:number",
+      "סה״כ שולם:number",
+      "תקופה"
+    ]
   }
 ] as Question[];

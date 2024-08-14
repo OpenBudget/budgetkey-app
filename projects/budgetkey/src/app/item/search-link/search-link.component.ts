@@ -16,7 +16,7 @@ export class SearchLinkComponent implements OnChanges {
 
   ngOnChanges() {
     let base = '//next.obudget.org';
-    this.href = `${base}/s/?q=${this.searchQuery}&dd=${this.searchType || 'all'}?theme=${this.globalSettings.themeId}`;
+    this.href = `${base}/s/?q=${this.searchQuery}&dd=${this.searchType || 'all'}&theme=${this.globalSettings.themeId}`;
   }
 
 }

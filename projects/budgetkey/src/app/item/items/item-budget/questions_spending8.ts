@@ -180,7 +180,8 @@ export default [
       "נושא",
       "מספר תקנה:budget_code:search_term(budget_code)",
       "סה״כ אושר:number",
-      "סה״כ שולם:number"
+      "סה״כ שולם:number",
+      "תקופה"
     ]
   },
   {

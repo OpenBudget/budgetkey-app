@@ -35,6 +35,12 @@
     </ng-container>
 
     <ng-container class='textTemplate'>
+        <div>
+            <label class="field-label">
+                שנת אישור התמיכה
+            </label>
+            {{ item.year_requested }}
+        </div>
         <ng-container *ngFor='let purpose of purposes'>
         <div>
             <label class="field-label">

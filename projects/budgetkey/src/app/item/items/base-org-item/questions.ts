@@ -90,7 +90,7 @@ export default [
               "supporting_ministry AS \"משרד\",",
               "request_type AS \"סוג תמיכה\",",
               "support_title AS \"נושא\", ",
-              "'supports/' || budget_code || '/' || year_requested || '/' || recipient || '/' || request_type AS item_id, ",
+              "'supports/' || budget_code || '/' || year_requested || '/' || coalesce(entity_id, recipient) || '/' || request_type AS item_id, ",
               "sum(amount_approved) as \"סה״כ אושר\",",
               "sum(amount_paid) as \"סה״כ שולם\"",
               "FROM raw_supports WHERE year_requested :period AND entity_id=':id' GROUP BY 1, 2, 3, 4, 5"],
@@ -166,6 +166,52 @@ export default [
       scope: "הכל"
     }
   },
+  {
+    text: "הנושאים בהם קיבל הארגון תמיכה, עבור בקשות שאושרו ב <period>",
+    query: ["SELECT supporting_ministry as \"משרד\",",
+              "support_title AS \"נושא\", ", 
+              "budget_code,", 
+              "budget_code AS \"מספר תקנה\", ", 
+              "sum(amount_approved) as \"סה״כ אושר\",",
+              "sum(amount_paid) as \"סה״כ שולם\",",
+              "min(year_requested) || '-' || max(year_requested)  as \"תקופה\" ", 
+              "FROM raw_supports WHERE year_requested :period AND entity_id = ':id' GROUP BY 1, 2, 3 ORDER BY 5 DESC nulls last"],
+    parameters: {
+      period: {
+        "כל השנים": ">0",
+        "2008": "=2008",
+        "2009": "=2009",
+        "2010": "=2010",
+        "2011": "=2011",
+        "2012": "=2012",
+        "2013": "=2013",
+        "2014": "=2014",
+        "2015": "=2015",
+        "2016": "=2016",
+        "2017": "=2017",
+        "2018": "=2018",
+        "2019": "=2019",
+        "2020": "=2020",
+        "2021": "=2021",
+        "2022": "=2022",
+        "2023": "=2023",
+        "2024": "=2024"
+      }
+    },
+    defaults: {
+      period: "כל השנים"
+    },
+    headers: [
+      "משרד",
+      "נושא",
+      "מספר תקנה:budget_code:search_term(budget_code)",
+      "סה״כ אושר:number",
+      "סה״כ שולם:number",
+      "תקופה"
+    ]
+  },
+
+
   {
     text: " סיכום ההתקשרויות עם הארגון מ <period>",
     query: ["SELECT sum(volume) AS \"סה״כ היקף\", ",
