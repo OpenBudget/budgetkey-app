@@ -31,6 +31,10 @@ export class ItemMuniComponent implements OnChanges, AfterViewInit {
 
   ngOnChanges() {
     this.budgets = ((this.item.details && this.item.details.select_budgets) || ([] as any[])).sort((a: any, b: any) => b.value - a.value);
+    this.incomeBudgets = [];
+    this.expenseBudgets = [];
+    this.totalIncome = 0;
+    this.totalExpense = 0;
     this.budgets.forEach((b) => {
       if (!b.use) {
         if (b.code.length === 1 && b.code[0] < '6') {
