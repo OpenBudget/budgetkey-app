@@ -44,13 +44,13 @@ export class ItemMuniComponent implements OnChanges, AfterViewInit {
         }
       }
       if (b.code.length === 1) {
-        b.num_value = b.executed || b.revised || b.allocated;
+        b.num_value = Math.abs(b.executed || b.revised || b.allocated || 0);
         if (b.code[0] < '6') {
           this.incomeBudgets.push(b);
-          this.totalIncome += parseFloat(b.value);
+          this.totalIncome += Math.abs(parseFloat(b.value));
         } else {
           this.expenseBudgets.push(b);
-          this.totalExpense += parseFloat(b.value);
+          this.totalExpense += Math.abs(parseFloat(b.value));
         }
       }
     });
@@ -62,7 +62,7 @@ export class ItemMuniComponent implements OnChanges, AfterViewInit {
         } else {
           b.pct = (b.num_value / this.totalExpense) * 100 + '%';
         }
-        b.value = this.format.ils(b.num_value);
+        b.s_value = this.format.ils(b.num_value);
       }
     });
     this.incomeBudgets = this.incomeBudgets.sort((a, b) => a.code.localeCompare(b.code));
