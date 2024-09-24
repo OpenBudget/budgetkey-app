@@ -42,12 +42,12 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
     '#87cefa',
     '#ff9900',
     '#6661d1',
-    '#002070',
+    '#aba001',
     '#F03824',
     '#D6D018',
     '#4372E0',
     '#2ABF56',
-    '#192841',
+    '#a74ad9',
     '#526223',
     '#68788c',
   ];
@@ -72,6 +72,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
     ].map((x) => { return {value: `(tenders::text) like '%%"sub_kind_he": "${x}"%%'`, display: x}; }))
   };
   private levelCond = 'TRUE';
+  private levelKey = '';
   private groupByLvl: string|null = null;
   public subunits = null;
   private ready = new ReplaySubject<void>(1);
@@ -169,7 +170,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   }
 
   fetchColorscheme() {
-    const query = `select office, unit, subunit from activities group by 1, 2, 3 order by 1, 2, 3`;
+    const query = `select office, unit, subunit from all_activities group by 1, 2, 3 order by 1, 2, 3`;
     this.api.getItemData(
       query, ['value', 'value', 'value'], [this.formatter, this.formatter, this.formatter]
     ).pipe(
@@ -187,15 +188,15 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
         if (unit) {
           this.xValues[office] = this.xValues[office] || [];
           if (this.xValues[office].indexOf(unit) === -1) {
-            scheme[unit] = this.xValues[office].length + 1;
+            scheme[`${office}|${unit}`] = this.xValues[office].length + 1;
             this.xValues[office].push(unit);
           }
 
           const subunit = row.subunit || 'אחר';
-          const key = office + ':' + unit;
+          const key = office + '|' + unit;
           this.xValues[key] = this.xValues[key] || [];
           if (this.xValues[key].indexOf(subunit) === -1) {
-            scheme[subunit] = this.xValues[key].length + 1;
+            scheme[`${key}|${subunit}`] = this.xValues[key].length + 1;
             this.xValues[key].push(subunit);
           }
         }
@@ -234,10 +235,12 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
 
   processLevel() {
     const levelCondParts = [];
+    const levelKeyParts = [];
     this.groupByLvl = null;
     for (const lvl of ['office', 'unit', 'subunit', 'subsubunit']) {
       if (this.item[lvl]) {
         levelCondParts.push(`${lvl} = '${this.item[lvl]}'`);
+        levelKeyParts.push(this.item[lvl]);
       } else if (!this.groupByLvl) {
         this.groupByLvl = lvl;
       } else {
@@ -245,6 +248,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       }
     }
     this.levelCond = levelCondParts.join(' AND ') || 'TRUE';
+    this.levelKey = levelKeyParts.join('|');
     this.filtersChanged();
   }
 
@@ -320,7 +324,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
     forkJoin([
         this.colorscheme,
         this.api.getItemData(
-          query, ['משרד', 'value'], [this.formatter('משד'), this.formatter('value')]
+          query, ['משרד', 'value'], [this.formatter('משרד'), this.formatter('value')]
         )
     ]).subscribe(([scheme, result]: any[]) => {
       const layout = ct.layout;
@@ -358,7 +362,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
         if (this.item.office) {
           key = this.item.office;
           if (this.item.unit) {
-            key += ':' + this.item.unit;
+            key += '|' + this.item.unit;
           }
         }
         x_values = this.xValues[key];
@@ -367,8 +371,13 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       }
       const data = ct.data(rows, ct, x_values);
       for (const d of data) {
+        let color: string | null = null;
         if (scheme.hasOwnProperty(d.name)) {
-          const color = this.COLORS[scheme[d.name]];
+          color = this.COLORS[scheme[d.name]];
+        } else if (scheme.hasOwnProperty(`${this.levelKey}|${d.name}`)) {
+          color = this.COLORS[scheme[`${this.levelKey}|${d.name}`]];
+        }
+        if (color) {
           d.marker = {
             color: color,
             opacity: 1,
