@@ -38,18 +38,17 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
     {title: 'מודל תמחור', id: 'pricing_model', tooltip: 'האם נקבע מראש תעריף לאספקת השירות או שעל המציעים להגיש הצעת מחיר או מודל משולב'},
   ];
   COLORS = [
-    // '#AB6701',
-    '#87cefa',
-    '#ff9900',
-    '#6661d1',
-    '#aba001',
-    '#F03824',
-    '#D6D018',
-    '#4372E0',
-    '#2ABF56',
-    '#a74ad9',
-    '#526223',
-    '#68788c',
+    '#9FD4AE',
+    '#38B264',
+    '#187388',
+    '#8FD6E8',
+    '#CC81AF',
+    '#9D7EAF',
+    '#643C6A',
+    '#7285B7',
+    '#B6AE86',
+    '#CC8A57',
+    '#444444'
   ];
 
   public parameters: any = {
@@ -211,7 +210,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
           scheme[l[i]] = parseInt(i) + 4;
         }
       }
-      scheme['אחר'] = 9;
+      scheme['אחר'] = 10;
       this.colorscheme.next(scheme);
       this.colorscheme.complete();
     });
@@ -377,18 +376,18 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
         } else if (scheme.hasOwnProperty(`${this.levelKey}|${d.name}`)) {
           color = this.COLORS[scheme[`${this.levelKey}|${d.name}`]];
         }
-        if (color) {
-          d.marker = {
+        if (!color) {
+          console.log('MISSING VALUE', d.name)
+          color = this.COLORS[this.COLORS.length - 1];
+        }
+        d.marker = {
+          color: color,
+          opacity: 1,
+          line: {
             color: color,
             opacity: 1,
-            line: {
-              color: color,
-              opacity: 1,
-            }
-          };
-        } else {
-          console.log('MISSING VALUE', d.name)
-        }
+          }
+        };
       }
       this.charts[ct.id] = {layout, data, downloadHeaders: ct.downloadHeaders, query: query, title: ct.title};
     });
