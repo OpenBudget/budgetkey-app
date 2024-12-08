@@ -519,8 +519,9 @@ export class HeroComponent implements AfterViewInit {
 
   constructor(private window: WindowService, private platform: PlatformService) {
     this.makeDeficitCharts(bubbles.deficitChart);
-    bubbles.educationCharts.forEach((c: any) => this.makeEducationCharts(c));
-    this.makeSupportChart(bubbles.supportChart[0], bubbles.supportChart[1]);
+    // TODO:
+    // bubbles.educationCharts.forEach((c: any) => this.makeEducationCharts(c));
+    // this.makeSupportChart(bubbles.supportChart[0], bubbles.supportChart[1]);
     let chartIdx = 0;
     let dialogBit = 0;
     initDialog();
