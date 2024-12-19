@@ -388,7 +388,7 @@ export const chartTemplates: any[] = [
       kind: 'org',
       data: (items: any[], info: any, xValues: any[]) => {
         const kinds = items.map((x) => x.supplier_kinds).filter((item, i, ar) => ar.indexOf(item) === i).sort();
-        return ['מגזר שלישי', 'עסקי', 'משולב', 'אחר'].filter(k => kinds.indexOf(k) > -1).map((kind) => {
+        return ['משולב', 'מגזר שלישי', 'עסקי', 'אחר'].filter(k => kinds.indexOf(k) > -1).map((kind) => {
           return {
             type: 'bar',
             name: kind,
@@ -432,7 +432,7 @@ export const chartTemplates: any[] = [
       kind: 'org',
       data: (items: any[], info: any, xValues: any[]) => {
         const kinds = items.map((x) => x.supplier_kinds).filter((item, i, ar) => ar.indexOf(item) === i).sort();
-        return ['מגזר שלישי', 'עסקי', 'משולב', 'אחר'].filter(k => kinds.indexOf(k) > -1).map((kind) => {
+        return ['משולב', 'מגזר שלישי', 'עסקי', 'אחר'].filter(k => kinds.indexOf(k) > -1).map((kind) => {
           return {
             type: 'bar',
             hovertemplate: '₪%{text}',
@@ -682,7 +682,7 @@ export const chartTemplates: any[] = [
     from s
     where t->>'active' = 'yes'
     group by 1,2
-    ORDER BY 1`,
+    ORDER BY 3 desc`,
       title: 'מספר הליכי רכש לפי סוג הליך',
       titleTooltip: 'מספר מספר הליכי רכש לפי סוג ההליך - מרכזי, משרדי, התקשרות בפטור וכו׳',
       x_field: 'office',
@@ -704,7 +704,7 @@ export const chartTemplates: any[] = [
       },
       kind: 'org',
       data: (items: any[], info: any, xValues: any[]) => {
-        const kinds = items.map((x) => x.tender_type_he).filter((item, i, ar) => ar.indexOf(item) === i).sort();
+        const kinds = items.map((x) => x.tender_type_he).filter((item, i, ar) => ar.indexOf(item) === i);//.sort();
         return kinds.filter(k => kinds.indexOf(k) > -1).map((kind) => {
           return {
             type: 'bar',
@@ -728,7 +728,7 @@ export const chartTemplates: any[] = [
     where t->>'tender_type' = 'exemptions'
     and t->>'active' = 'yes'
     group by 1,2
-    ORDER BY 1`,
+    ORDER BY 3 desc`,
       title: 'מספר פטורים לפי סוג פטור',
       titleTooltip: 'מספר מספר הליכי פטור ממכרז לפי סוג תקנת הפטור',
       x_field: 'office',
@@ -750,9 +750,9 @@ export const chartTemplates: any[] = [
       },
       kind: 'org',
       data: (items: any[], info: any, xValues: any[]) => {
-        const kinds = items.map((x) => x.sub_kind_he).filter((item, i, ar) => ar.indexOf(item) === i).sort();
-        const ordered = ['אחר', 'מכרז סגור', 'התקשרות עם רשות מקומית', 'מיזם משותף', 'התקשרות המשך', 'ספק יחיד', 'מימוש אופציה']
-        return ordered.filter(k => kinds.indexOf(k) > -1).map((kind) => {
+        const kinds = items.map((x) => x.sub_kind_he).filter((item, i, ar) => ar.indexOf(item) === i);//.sort();
+        // const ordered = ['אחר', 'מכרז סגור', 'התקשרות עם רשות מקומית', 'מיזם משותף', 'התקשרות המשך', 'ספק יחיד', 'מימוש אופציה']
+        return kinds.filter(k => kinds.indexOf(k) > -1).map((kind) => {
           return {
             type: 'bar',
             name: kind,

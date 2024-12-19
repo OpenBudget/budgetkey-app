@@ -38,18 +38,20 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
     {title: 'מודל תמחור', id: 'pricing_model', tooltip: 'האם נקבע מראש תעריף לאספקת השירות או שעל המציעים להגיש הצעת מחיר או מודל משולב'},
   ];
   COLORS = [
-    '#9FD4AE',
-    '#38B264',
-    '#187388',
-    '#8FD6E8',
-    '#CC81AF',
-    '#9D7EAF',
-    '#643C6A',
-    '#7285B7',
-    '#B6AE86',
-    '#CC8A57',
-    '#444444'
+    '#038CA4', // 0
+    '#A1767A', // 1
+    '#84353D', // 2
+    '#DB6B58', // 3
+    '#DB8258', // 4
+    '#9ED4C4', // 5
+    '#81A351', // 6
+    '#1A4F40', // 7
+    '#CA7898', // 8
+    '#BE4C9C', // 9
+    '#763483', // 10
+    '#E4CF43', // 11
   ];
+  OTHER_COLOR_IDX = this.COLORS.length - 1;
 
   public parameters: any = {
     pricing_model: [
@@ -200,17 +202,37 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
           }
         }
       }
-      const orgSizes = ['1', '2-5', '6+']
-      const orgKinds = ['עסקי', 'מגזר שלישי', 'רשויות מקומיות', 'משולב'];
-      const exemptionKinds = ['מימוש אופציה', 'ספק יחיד', 'התקשרות המשך', 'מיזם משותף', 'התקשרות עם רשות מקומית', 'מכרז סגור'];
-      const tenderTypes = ['מכרז פומבי', 'התקשרות בפטור במכרז או בהליך תחרותי אחר', 'פרסום כוונה להתקשרות', 'פרסום מיזם ללא כוונת רווח', 'פניה לקבלת מידע RFI', 'קול קורא להקמת/עדכון רשימת מציעים (מאגר'];
-      const model = ['מחיר קבוע (תעריף)', 'הצעת מחיר'];
-      for (const l of [orgSizes, orgKinds, exemptionKinds, tenderTypes, model]) {
-        for (const i in l) {
-          scheme[l[i]] = parseInt(i) + 4;
-        }
+      const orgSizes = ['1', '2-5', '6+'];
+      const orgSizesIdx = [8, 9, 10];
+      for (const i in orgSizes) {
+        scheme[orgSizes[i]] = orgSizesIdx[i];
       }
-      scheme['אחר'] = 10;
+      const orgKinds = ['עסקי', 'מגזר שלישי', 'רשויות מקומיות', 'משולב'];
+      const orgKindsIdx = [5, 0, 6, 7];
+      for (const i in orgKinds) {
+        scheme[orgKinds[i]] = orgKindsIdx[i];
+      }
+      const offices = ['משרד החינוך', 'משרד הרווחה', 'משרד הבריאות'];
+      const officeIdx = [9, 6, 4];
+      for (const i in offices) {
+        scheme[offices[i]] = officeIdx[i];
+      }
+      const exemptionKinds = ['מימוש אופציה', 'ספק יחיד', 'התקשרות המשך', 'מיזם משותף', 'התקשרות עם רשות מקומית', 'מכרז סגור'];
+      const exemptionKindsIdx = [5, 10, 1, 7, 9, 11];
+      for (const i in exemptionKinds) {
+        scheme[exemptionKinds[i]] = exemptionKindsIdx[i];
+      }
+      const tenderTypes = ['מכרז פומבי', 'התקשרות בפטור במכרז או בהליך תחרותי אחר', 'פרסום כוונה להתקשרות', 'פרסום מיזם ללא כוונת רווח', 'פניה לקבלת מידע RFI', 'קול קורא להקמת/עדכון רשימת מציעים (מאגר'];
+      const tenderTypesIdx = [2, 3, 5, 8, 1, 11];
+      for (const i in tenderTypes) {
+        scheme[tenderTypes[i]] = tenderTypesIdx[i];
+      }
+      const model = ['מחיר קבוע (תעריף)', 'הצעת מחיר'];
+      const modelIdx = [2, 5];
+      for (const i in model) {
+        scheme[model[i]] = modelIdx[i];
+      }
+      scheme['אחר'] = this.OTHER_COLOR_IDX;
       this.colorscheme.next(scheme);
       this.colorscheme.complete();
     });
