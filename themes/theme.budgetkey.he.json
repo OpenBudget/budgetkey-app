@@ -85,7 +85,7 @@
                 "id": "latest",
                 "display": "שנת התקציב הנוכחית",
                 "filters": {
-                  "year": 2024
+                  "year": 2025
                 }
               }
             ]
@@ -197,6 +197,13 @@
                 "display": "כל שנות התקציב"
               },
               {
+                "id": "2025",
+                "display": "2025",
+                "filters": {
+                  "year": 2025
+                }                
+              },
+              {
                 "id": "2024",
                 "display": "2024",
                 "filters": {
@@ -305,8 +312,15 @@
                 "display": "כל ההעברות"
               },
               {
+                "id": "approved",
+                "display": "שינויים שאושרו בועדת הכספים",
+                "filters": {
+                  "is_pending": false
+                }
+              },
+              {
                 "id": "pending",
-                "display": "ממתינות לאישור",
+                "display": "שינויים הממתינים לאישור ועדת הכספים",
                 "filters": {
                   "is_pending": true
                 }

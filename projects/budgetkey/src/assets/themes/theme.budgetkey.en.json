@@ -127,7 +127,7 @@
               {
                 "display": "Current Year",
                 "filters": {
-                  "year": 2024
+                  "year": 2025
                 },
                 "id": "latest"
               }
@@ -253,6 +253,13 @@
                 "id": "all"
               },
               {
+                "display": "2025",
+                "filters": {
+                  "year": 2025
+                },
+                "id": "2025"
+              },
+              {
                 "display": "2024",
                 "filters": {
                   "year": 2024
@@ -361,7 +368,14 @@
                 "id": "all"
               },
               {
-                "display": "ממתינות לאישור",
+                "display": "שינויים שאושרו בועדת הכספים",
+                "filters": {
+                  "is_pending": false
+                },
+                "id": "approved"
+              },
+              {
+                "display": "שינויים הממתינים לאישור ועדת הכספים",
                 "filters": {
                   "is_pending": true
                 },
