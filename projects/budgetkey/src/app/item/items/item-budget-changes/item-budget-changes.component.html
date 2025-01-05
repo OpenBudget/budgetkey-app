@@ -37,13 +37,23 @@
             {{ item.change_type_name[0] }}
         </div>
         
+        @if (item.committee_id?.length > 0) {
         <div>
             <label class="field-label">
                 מספרי הפניה:
             </label>
             {{ item.committee_id.join(', ') }}
         </div>
-        
+        }
+        @if (item.transaction_id) {
+        <div>
+            <label class="field-label">
+                מזהה הבקשה:
+            </label>
+            {{ item.transaction_id }}
+        </div>
+        }
+
         <ng-container *ngIf='item.explanation'>
             <label class="field-label">
                 דברי ההסבר להעברה:

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AddToListIconComponent } from './add-to-list-icon/add-to-list-icon.component';
 import { ListViewComponent } from './list-view/list-view.component';
@@ -16,30 +16,24 @@ import { ListDialogService } from './list-dialog.service';
 /**
  * Created by adam on 27/12/2016.
  */
-@NgModule({
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    RouterModule,
-    CommonComponentsModule,
-  ],
-  declarations: [
-    AddToListIconComponent,
-    ListViewComponent,
-    SearchResultComponent,
-    EditedContentDirective,
-    AppContainerComponent,
-    AddToListDialogComponent,
-  ],
-  providers: [
-    ListDialogService,
-  ],
-  exports: [
-    AddToListIconComponent,
-    ListViewComponent,
-    SearchResultComponent,
-    AppContainerComponent,
-  ]
-})
+@NgModule({ declarations: [
+        AddToListIconComponent,
+        ListViewComponent,
+        SearchResultComponent,
+        EditedContentDirective,
+        AppContainerComponent,
+        AddToListDialogComponent,
+    ],
+    exports: [
+        AddToListIconComponent,
+        ListViewComponent,
+        SearchResultComponent,
+        AppContainerComponent,
+    ], imports: [CommonModule,
+        FormsModule,
+        RouterModule,
+        CommonComponentsModule], providers: [
+        ListDialogService,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class ListComponentsModule { }

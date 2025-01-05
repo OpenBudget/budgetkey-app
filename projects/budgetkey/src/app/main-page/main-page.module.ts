@@ -9,7 +9,7 @@ import { HeroComponent } from './hero/hero.component';
 import { CategoryVisualizationComponent } from './category-visualization/category-visualization.component';
 import { CategoryVisualizationInfoPopupComponent } from './category-visualization-info-popup/category-visualization-info-popup.component';
 import { MushonkeyModule } from 'mushonkey';
-import { HttpClientModule } from '@angular/common/http';
+import {} from '@angular/common/http';
 import { UtilsService } from './utils.service';
 import { NgxSeoModule } from '@avivharuzi/ngx-seo';
 import { ListComponentsModule } from '../list-components/list-components.module';

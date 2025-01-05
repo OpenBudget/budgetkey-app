@@ -11,7 +11,7 @@ import { BkSubscriptionManager } from './components/subcsription-manager/bk-subs
 import { ModalComponent} from './components/modal/modal.component';
 
 import { ListsService } from './services/lists.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { GlobalSettingsService } from './global-settings.service';
 import { ClickOnReturnDirective } from './directives/click-on-return.directive';
 import { PlatformService } from './platform.service';
@@ -26,44 +26,38 @@ import { ShareWidgetComponent } from './components/share-widget/share-widget.com
 /**
  * Created by adam on 27/12/2016.
  */
-@NgModule({
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    RouterModule
-  ],
-  declarations: [
-    BkHeaderComponent,
-    BkFooterComponent,
-    BkSearchBar,
-    BkTooltipDirective,
-    BkSubscribeStar,
-    BkSubscriptionManager,
-    ModalComponent,
-    ClickOnReturnDirective,
-    AuthComponent,
-    ShareWidgetComponent,
-  ],
-  providers: [
-    ListsService,
-    GlobalSettingsService,
-    PlatformService,
-    AuthService,
-    SeoService,
-    LayoutService,
-    WindowService
-  ],
-  exports: [
-    BkHeaderComponent,
-    BkFooterComponent,
-    BkSearchBar,
-    BkTooltipDirective,
-    BkSubscribeStar,
-    BkSubscriptionManager,
-    ModalComponent,
-    ClickOnReturnDirective,
-    ShareWidgetComponent,
-  ]
-})
+@NgModule({ declarations: [
+        BkHeaderComponent,
+        BkFooterComponent,
+        BkSearchBar,
+        BkTooltipDirective,
+        BkSubscribeStar,
+        BkSubscriptionManager,
+        ModalComponent,
+        ClickOnReturnDirective,
+        AuthComponent,
+        ShareWidgetComponent,
+    ],
+    exports: [
+        BkHeaderComponent,
+        BkFooterComponent,
+        BkSearchBar,
+        BkTooltipDirective,
+        BkSubscribeStar,
+        BkSubscriptionManager,
+        ModalComponent,
+        ClickOnReturnDirective,
+        ShareWidgetComponent,
+    ], imports: [CommonModule,
+        FormsModule,
+        RouterModule], providers: [
+        ListsService,
+        GlobalSettingsService,
+        PlatformService,
+        AuthService,
+        SeoService,
+        LayoutService,
+        WindowService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class CommonComponentsModule { }
