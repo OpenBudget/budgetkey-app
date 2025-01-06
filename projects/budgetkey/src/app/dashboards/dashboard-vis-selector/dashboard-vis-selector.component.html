@@ -1,0 +1,8 @@
+<div class='row' [style.display]='visible ? "inherit" : "none"'>
+    <div class='col'>
+        @if (vis.kind === 'table') {
+            <app-dashboard-vis-table [query]='vis.query' (loading)='reportLoading($event)'>
+            </app-dashboard-vis-table>
+        }
+    </div>
+</div>

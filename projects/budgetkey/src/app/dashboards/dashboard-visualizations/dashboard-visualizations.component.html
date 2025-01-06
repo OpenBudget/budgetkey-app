@@ -1,0 +1,10 @@
+@if (api.selectedItem()) {
+    <app-dashboard-vis-nav 
+        [selectVis]='selectedVis()'
+        (selected)="selectedVis.set($event)"
+        [loadingStatus]='loadingStatus'></app-dashboard-vis-nav>
+    @for (vis of api.config.visualizations; track vis.title) {
+        <app-dashboard-vis-selector [vis]='vis' [visible]='selectedVis() === vis.title' (loading)='loadingStatus[vis.title] = $event'>
+        </app-dashboard-vis-selector>  
+    }
+}

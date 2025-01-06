@@ -1,0 +1,102 @@
+title: דו״ח היסטוריה ונהנים לתכנית תקציבית
+doctype: budget
+placeholder: חיפוש תכנית תקציבית (למשל ״20.67.01״ או ״העברות לרשויות״)
+result_template: ":nice-code - :title"
+filters:
+  depth__gt: 0
+  year: 2025
+visualizations:
+- title: היסטוריה תקציבית
+  kind: table
+  query: >
+            select 
+            year as "שנה:str",
+            net_allocated as "תקציב מקורי:fig",
+            net_revised as "תקציב מאושר:fig",
+            (net_revised / (net_allocated + 0.0001) - 1) * 100 as "שינוי באחוזים:fig",
+            net_executed as "ביצוע:fig",
+            (net_executed / (net_revised + 0.0001) ) * 100 as "אחוז ביצוע תקציב:fig"
+            from raw_budget where code=':code'
+            order by year desc
+- title: העברות בשנים האחרונות
+  kind: table
+  query: >
+            select 
+            coalesce(to_char("date", 'YYYY/MM/DD'), 'טרם אושר') as "תאריך:str",
+            change_title as "סוג:str",
+            req_title as "כותרת:strw",
+            sum(net_expense_diff) as "נטו:fig",
+            sum(gross_expense_diff) as "ברוטו:fig",
+            sum(allocated_income_diff) as "הכנסה מיועדת:fig",
+            sum(commitment_limit_diff) as "הרשאה להתחייב:fig",
+            sum(personnel_max_diff) as "שיא כ״א:fig"
+            from raw_budget_changes where budget_code like ':code%%'
+            and year>=2015
+            group by 1,2,3,req_code,date
+            order by date desc
+- title: סיכום העברות בשנה האחרונה
+  kind: table
+  query: >
+            SELECT change_title as "סוג העברה:str",
+                  sum(net_expense_diff) as "סך שינוי נטו:fig"
+            FROM raw_budget_changes
+            WHERE budget_code LIKE ':code%%'
+              AND YEAR=2024
+              AND NOT pending
+            GROUP BY 1
+- title: נתמכים עיקריים
+  kind: table
+  query: >
+            SELECT coalesce(entity_name, recipient) AS "מקבל התמיכה:str",
+                  min(year_requested) as "משנת:str",
+                  max(year_paid) as "עד שנת:str",
+                  sum(amount_paid) as "סך שולם:fig",
+                  sum(amount_total) as "סך אושר:fig"
+            FROM raw_supports
+            WHERE budget_code LIKE ':code%%'
+            GROUP BY 1
+            HAVING sum(amount_paid)>0
+            ORDER BY 4 DESC nulls LAST
+            LIMIT 20
+- title: נושאי תמיכה עיקריים
+  kind: table
+  query: >
+            SELECT support_title AS "נושא התמיכה:str",
+                  min(year_requested) as "משנת:str",
+                  max(year_paid) as "עד שנת:str",
+                  sum(amount_paid) as "סך שולם:fig",
+                  sum(amount_total) as "סך אושר:fig"
+            FROM raw_supports
+            WHERE budget_code LIKE ':code%%'
+            GROUP BY 1
+            HAVING sum(amount_paid)>0
+            ORDER BY 4 DESC nulls LAST
+            LIMIT 20
+- title: ספקים עיקריים
+  kind: table
+  query: >
+            SELECT coalesce(entity_name, supplier_name->>0) AS "ספק:str",
+                  min(min_year) as "משנת:str",
+                  max(max_year) as "עד שנת:str",
+                  sum(executed) as "סך שולם:fig",
+                  sum(volume) as "סך אושר:fig"
+            FROM contract_spending
+            WHERE budget_code LIKE ':code%%'
+            GROUP BY 1
+            ORDER BY 4 DESC nulls LAST
+            LIMIT 20
+- title: התקשרויות מרכזיות
+  kind: table
+  query: >
+            SELECT coalesce(entity_name, supplier_name->>0) AS "ספק:strw",
+                  purpose as "מטרה:strw",
+                  budget_title as "מתקציב:strw",
+                  purchasing_unit as "המזמין:str",
+                  purchase_method as "אופן רכישה:strw",
+                  min_year as "משנת:str",
+                  executed as "סך שולם עד כה:fig",
+                  volume as "היקף ההתקשרות:fig"
+            FROM contract_spending
+            WHERE budget_code LIKE ':code%%'
+            ORDER BY 7 DESC nulls LAST
+            LIMIT 20

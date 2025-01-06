@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs">
+    @for (vis of api.config.visualizations; track vis.title) {
+        <li class="nav-item"
+            [class.active]="vis.title === selectVis"
+        >
+            <a class="nav-link"
+                (click)='selectedVis(vis.title)'>
+                @if (loadingStatus[vis.title]) {
+                    <i class='fa fa-spinner fa-spin'></i>
+                }
+                {{vis.title}}
+            </a>
+        </li>    
+    }
+</ul>

@@ -1,0 +1,18 @@
+@if (selected == null) {
+    <ul class="list-group">
+        @for (result of api.searchResults(); track result.doc_id) {
+            <li class="list-group-item" 
+                [innerHtml]='render(result)'
+                (click)='selected=result'
+                >
+            </li>
+        }
+    </ul>
+} @else {
+    <ul class="list-group">
+        <li class="list-group-item selected">
+            <a (click)='selected=null'><strong>&times;</strong></a>&nbsp;
+            <span [innerHtml]='render(selected)'></span>
+        </li>
+    </ul>
+}

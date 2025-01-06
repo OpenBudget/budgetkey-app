@@ -1,0 +1,29 @@
+@if (data) {
+    @if (data.length > 0) {
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    @for (f of fields; track f.title) {
+                        <th scope="col">{{f.title}}</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (row of data; track row) {
+                    <tr>
+                        @for (f of fields; track f.field) {
+                            <td [innerHtml]='f.formatter(row[f.field])'></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    } @else {
+        <h3>לא נמצאו נתונים</h3>
+    }
+} @else {
+    <h3>
+        <i class='fa fa-spinner fa-spin'></i>
+        בטעינה...
+    </h3>
+}
