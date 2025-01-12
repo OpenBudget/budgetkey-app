@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ListComponentsModule } from '../../list-components/list-components.module';
 import { config } from '../configurations/config';
 import { DashboardSearchComponent } from '../dashboard-search/dashboard-search.component';
 import { DashboardVisualizationsComponent } from '../dashboard-visualizations/dashboard-visualizations.component';
 import { DashboardsApiService } from '../dashboards-api.service';
-import { ActivatedRoute } from '@angular/router';
 
 @UntilDestroy()
 @Component({
