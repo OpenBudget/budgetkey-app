@@ -6,6 +6,8 @@ import { config } from '../configurations/config';
 import { DashboardSearchComponent } from '../dashboard-search/dashboard-search.component';
 import { DashboardVisualizationsComponent } from '../dashboard-visualizations/dashboard-visualizations.component';
 import { DashboardsApiService } from '../dashboards-api.service';
+import { map, tap } from 'rxjs';
+import { ItemModule } from '../../item/item.module';
 
 @UntilDestroy()
 @Component({
@@ -14,7 +16,8 @@ import { DashboardsApiService } from '../dashboards-api.service';
   imports: [
     ListComponentsModule,
     DashboardSearchComponent,
-    DashboardVisualizationsComponent
+    DashboardVisualizationsComponent,
+    ItemModule
   ],
   templateUrl: './dashboards-page.component.html',
   styleUrls: ['./dashboards-page.component.less']
@@ -25,13 +28,23 @@ export class DashboardsPageComponent {
     this.route.params.pipe(
       untilDestroyed(this)
     ).subscribe(params => {
+      console.log('params', params);
       this.api.config = config[params['config']];
       this.api.baseRoute = ['/dashboards', params['config']];
-      if (params['item-id']) {
-        this.api.selectItem(params['item-id']);
+    });
+    this.route.url.pipe(
+      untilDestroyed(this),
+      tap((url: any) => {
+        console.log('url', url);
+      }),
+      map((url: any) => url.map((s: any) => s.path).join('/')),
+    ).subscribe((itemId: string) => {
+      console.log('itemId', itemId);
+      if (itemId && itemId.length) {
+        this.api.selectItem(itemId);
       } else {
         this.api.selectItem(null);
       }
-    });
+    })
   }
 }

@@ -4,12 +4,17 @@ import { DashboardsPageComponent } from "./dashboards-page/dashboards-page.compo
 
 const routes: Routes = [
   {
-    path: ':config/:item-id',
-    component: DashboardsPageComponent
-  },
-  {
     path: ':config',
-    component: DashboardsPageComponent
+    children: [
+      {
+        path: '**',
+        component: DashboardsPageComponent
+      },
+      {
+        path: '',
+        component: DashboardsPageComponent
+      }
+    ]
   },
 ];
 

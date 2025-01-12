@@ -29,7 +29,7 @@ export class DashboardSearchResultsComponent {
   set selected(item) {
     console.log('config', this.api.baseRoute);
     if (item) {
-      this.router.navigate([...this.api.baseRoute, item.doc_id.split('/').join('__')], {queryParamsHandling: 'preserve'});
+      this.router.navigate([...this.api.baseRoute, item.doc_id], {queryParamsHandling: 'preserve'});
     } else {
       this.router.navigate(this.api.baseRoute, {queryParamsHandling: 'preserve'});
     }

@@ -96,9 +96,9 @@ export class BudgetKeyItemService {
         (this.globalSettings.themeId ? '&theme=' + this.globalSettings.themeId : '') + '">' + parts[2] + '</a>';
   }
 
-  getItemData(query: string, headersOrder: string[], formatters: any[], page = 0, pageSize?: number): Observable<object> {
+  doQuery(query: string, page = 0, pageSize?: number): Observable<any> {
     if (this.ps.server()) {
-      return from([{query, headers: [], items: [], total: 0, rows: [], error: null, pages: 0, page: 0}])
+      return from([]);
     }
     const params: any = {
       page
@@ -109,7 +109,14 @@ export class BudgetKeyItemService {
     }
     const formData = new FormData();
     formData.append('query', query);
-    return this.http.post(url, formData, {params})
+    return this.http.post(url, formData, {params});
+  }
+
+  getItemData(query: string, headersOrder: string[], formatters: any[], page = 0, pageSize?: number): Observable<object> {
+    if (this.ps.server()) {
+      return from([{query, headers: [], items: [], total: 0, rows: [], error: null, pages: 0, page: 0}])
+    }
+    return this.doQuery(query, page, pageSize)
         .pipe(
           map(
             (res: any) => {

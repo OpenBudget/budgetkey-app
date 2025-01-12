@@ -3,11 +3,10 @@ import { Subject, BehaviorSubject } from 'rxjs';
 import { switchMap, debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BudgetKeyItemService } from '../item/budgetkey-item.service';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DashboardsApiService {
   public config: any = {};
   public baseRoute: string[] = [];
@@ -16,7 +15,7 @@ export class DashboardsApiService {
   searchResults = signal<any[]>([]);
   selectedItem = signal<any>(null);
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private bkis: BudgetKeyItemService) {
     this.searchQueue
       .pipe(
         distinctUntilChanged((x, y) => x.term === y.term),
@@ -39,12 +38,15 @@ export class DashboardsApiService {
   selectItem(doc_id: string | null) {
     console.log('selectItem', doc_id);
     if (doc_id) {
-      doc_id = doc_id?.split('__').join('/');
       const url = `https://next.obudget.org/get/${doc_id}`;
       this.http
         .get(url)
         .subscribe((result: any) => {
-          this.selectedItem.set(result.value);
+          if (result.value?.__redirect) {
+            this.selectItem(result.value.__redirect);
+          } else {
+            this.selectedItem.set(result.value);            
+          }
         });
     } else {
       this.selectedItem.set(null);
@@ -64,7 +66,7 @@ export class DashboardsApiService {
         map((r: any) => {
           const results: Array<any> = r.search_results || [];
           if (results.length === 1) {
-            this.router.navigate([...this.baseRoute, results[0].source.doc_id.split('/').join('__')], {queryParamsHandling: 'preserve'});
+            this.router.navigate([...this.baseRoute, results[0].source.doc_id.split('/')], {queryParamsHandling: 'preserve'});
           } else {
             if (this.selectedItem()) {
               this.selectedItem.set(null);
@@ -88,9 +90,7 @@ export class DashboardsApiService {
 
   doQuery(query: string, item: any): any {
     query = this.formatQuery(query, item);
-    const url = `https://next.obudget.org/api/query?query=${encodeURIComponent(query)}`;
-    return this.http
-      .get(url)
+    return this.bkis.doQuery(query)
       .pipe(
         map((r: any) => r.rows)
       );
