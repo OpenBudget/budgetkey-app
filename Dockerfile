@@ -9,7 +9,7 @@ RUN npm install
 COPY . /app/
 RUN cd utils && ./mk_bubbles.sh
 
-RUN npm run build:ssr
+RUN npm run build
 
 FROM node:lts-buster-slim
 
@@ -23,4 +23,4 @@ COPY  --from=build /app/dist dist
 
 ENV NODE_ENV=production
 
-ENTRYPOINT [ "node", "/app/dist/budgetkey/server/main.js" ]
+ENTRYPOINT [ "node", "/app/dist/budgetkey/server/server.mjs" ]
