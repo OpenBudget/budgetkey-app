@@ -29,7 +29,7 @@ const commonEngine = new CommonEngine();
  * Serve static files from /browser
  */
 app.get(
-  '**',
+  '*.*',
   express.static(browserDistFolder, {
     maxAge: '1y',
     index: 'index.html'
