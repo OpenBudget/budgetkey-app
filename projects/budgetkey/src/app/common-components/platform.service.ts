@@ -1,8 +1,10 @@
 import { isPlatformBrowser, isPlatformServer } from "@angular/common";
 import { Injectable, Inject, PLATFORM_ID, NgZone } from "@angular/core";
 import { environment } from "../../environments/environment";
-import * as memoryCache from 'memory-cache';
+// import * as memoryCache from 'memory-cache';
 import { Observable, from, tap } from "rxjs";
+
+var memoryCache: any = {};
 
 @Injectable()
 export class PlatformService {
@@ -39,14 +41,14 @@ export class PlatformService {
 
   cachedRequest<T>(key: string, request: Observable<T>): Observable<T> {
     if (this.server()) {
-      if (memoryCache.get(key)) {
-        const ret = memoryCache.get(key) as T;
+      if (memoryCache[key]) {
+        const ret = memoryCache[key] as T;
         return from([ret]);
       } else {
         return request.pipe(
           tap((data: T) => {
             this.zone.runOutsideAngular(() => {
-              memoryCache.put(key, data, 1000 * 60 * 60 * 24);
+              memoryCache[key] = data;//.put(key, data, 1000 * 60 * 60 * 24);
             });    
           })
         );

@@ -3,9 +3,10 @@ import { BudgetKeyItemService } from '../../../../budgetkey-item.service';
 import { GlobalSettingsService } from '../../../../../common-components/global-settings.service';
 
 @Component({
-  selector: 'app-social-service-data-table',
-  templateUrl: './social-service-data-table.component.html',
-  styleUrls: ['./social-service-data-table.component.less']
+    selector: 'app-social-service-data-table',
+    templateUrl: './social-service-data-table.component.html',
+    styleUrls: ['./social-service-data-table.component.less'],
+    standalone: false
 })
 export class SocialServiceDataTableComponent implements OnInit, OnChanges {
 

@@ -7,7 +7,8 @@ import { SearchBarType } from '../../common-components/components/searchbar/bk-s
 @Component({
     selector: 'search-mode-selector',
     templateUrl: './search-mode-selector.component.html',
-    styleUrls: ['./search-mode-selector.component.less']
+    styleUrls: ['./search-mode-selector.component.less'],
+    standalone: false
 })
 export class SearchModeSelectorComponent implements OnInit {
 

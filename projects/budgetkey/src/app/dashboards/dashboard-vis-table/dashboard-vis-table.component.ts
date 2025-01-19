@@ -3,11 +3,10 @@ import { Subscription } from 'rxjs';
 import { DashboardsApiService } from '../dashboards-api.service';
 
 @Component({
-  selector: 'app-dashboard-vis-table',
-  standalone: true,
-  imports: [],
-  templateUrl: './dashboard-vis-table.component.html',
-  styleUrl: './dashboard-vis-table.component.less'
+    selector: 'app-dashboard-vis-table',
+    imports: [],
+    templateUrl: './dashboard-vis-table.component.html',
+    styleUrl: './dashboard-vis-table.component.less'
 })
 export class DashboardVisTableComponent {
 

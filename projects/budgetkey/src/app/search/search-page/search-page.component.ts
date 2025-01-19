@@ -3,9 +3,10 @@ import { GlobalSettingsService } from '../../common-components/global-settings.s
 import { SeoService } from '../../common-components/seo.service';
 
 @Component({
-  selector: 'app-search-page',
-  templateUrl: './search-page.component.html',
-  styleUrls: ['./search-page.component.less']
+    selector: 'app-search-page',
+    templateUrl: './search-page.component.html',
+    styleUrls: ['./search-page.component.less'],
+    standalone: false
 })
 export class SearchPageComponent implements OnInit {
 

@@ -6,9 +6,10 @@ import { tooltip } from '../tooltips';
 const dayjs = Format.dayjs;
 
 @Component({
-  selector: 'app-item-support-criteria',
-  templateUrl: './item-support-criteria.component.html',
-  styleUrls: ['./item-support-criteria.component.less']
+    selector: 'app-item-support-criteria',
+    templateUrl: './item-support-criteria.component.html',
+    styleUrls: ['./item-support-criteria.component.less'],
+    standalone: false
 })
 export class ItemSupportCriteriaComponent {
 

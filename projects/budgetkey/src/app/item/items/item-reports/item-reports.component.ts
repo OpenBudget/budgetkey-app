@@ -4,9 +4,10 @@ import { Indicator, Question } from '../../model';
 import { ItemApiService } from '../../item-api.service';
 
 @Component({
-  selector: 'app-item-reports',
-  templateUrl: './item-reports.component.html',
-  styleUrls: ['./item-reports.component.less']
+    selector: 'app-item-reports',
+    templateUrl: './item-reports.component.html',
+    styleUrls: ['./item-reports.component.less'],
+    standalone: false
 })
 export class ItemReportsComponent implements OnChanges {
   @Input() item: any;

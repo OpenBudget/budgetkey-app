@@ -2,9 +2,10 @@ import { Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChil
 import { first, fromEvent } from 'rxjs';
 
 @Component({
-  selector: 'app-item-questions-parameter',
-  templateUrl: './item-questions-parameter.component.html',
-  styleUrls: ['./item-questions-parameter.component.less']
+    selector: 'app-item-questions-parameter',
+    templateUrl: './item-questions-parameter.component.html',
+    styleUrls: ['./item-questions-parameter.component.less'],
+    standalone: false
 })
 export class ItemQuestionsParameterComponent {
   @Input() public value: any;

@@ -2,9 +2,10 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 
 @Component({
-  selector: 'app-search-link',
-  templateUrl: './search-link.component.html',
-  styleUrls: ['./search-link.component.less']
+    selector: 'app-search-link',
+    templateUrl: './search-link.component.html',
+    styleUrls: ['./search-link.component.less'],
+    standalone: false
 })
 export class SearchLinkComponent implements OnChanges {
   @Input() searchQuery: string;

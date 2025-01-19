@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-chart-comparatron',
-  templateUrl: './chart-comparatron.component.html',
-  styleUrls: ['./chart-comparatron.component.less']
+    selector: 'app-chart-comparatron',
+    templateUrl: './chart-comparatron.component.html',
+    styleUrls: ['./chart-comparatron.component.less'],
+    standalone: false
 })
 export class ChartComparatronComponent implements OnInit {
 

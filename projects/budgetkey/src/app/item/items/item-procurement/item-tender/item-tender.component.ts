@@ -9,9 +9,10 @@ import questionsMunicipal from './questions-municipal';
 const dayjs = Format.dayjs;
 
 @Component({
-  selector: 'app-item-tender',
-  templateUrl: './item-tender.component.html',
-  styleUrls: ['./item-tender.component.less']
+    selector: 'app-item-tender',
+    templateUrl: './item-tender.component.html',
+    styleUrls: ['./item-tender.component.less'],
+    standalone: false
 })
 export class ItemTenderComponent implements OnChanges {
 

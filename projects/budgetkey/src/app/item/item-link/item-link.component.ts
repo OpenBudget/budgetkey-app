@@ -2,9 +2,10 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 
 @Component({
-  selector: 'app-item-link',
-  templateUrl: './item-link.component.html',
-  styleUrls: ['./item-link.component.less']
+    selector: 'app-item-link',
+    templateUrl: './item-link.component.html',
+    styleUrls: ['./item-link.component.less'],
+    standalone: false
 })
 export class ItemLinkComponent implements OnChanges {
   @Input() itemId: string;

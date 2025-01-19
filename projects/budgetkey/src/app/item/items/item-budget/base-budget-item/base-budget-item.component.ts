@@ -3,9 +3,10 @@ import { Question } from '../../../model';
 import { Format } from '../../../../format';
 
 @Component({
-  selector: 'app-base-budget-item',
-  templateUrl: './base-budget-item.component.html',
-  styleUrls: ['./base-budget-item.component.less']
+    selector: 'app-base-budget-item',
+    templateUrl: './base-budget-item.component.html',
+    styleUrls: ['./base-budget-item.component.less'],
+    standalone: false
 })
 export class BudgetItemComponent implements OnChanges {
   @Input() item: any;

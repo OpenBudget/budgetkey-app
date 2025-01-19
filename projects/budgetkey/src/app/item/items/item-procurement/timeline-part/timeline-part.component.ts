@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-timeline-part',
-  templateUrl: './timeline-part.component.html',
-  styleUrls: ['./timeline-part.component.less']
+    selector: 'app-timeline-part',
+    templateUrl: './timeline-part.component.html',
+    styleUrls: ['./timeline-part.component.less'],
+    standalone: false
 })
 export class TimelinePartComponent implements OnInit {
   @Input() size: number;

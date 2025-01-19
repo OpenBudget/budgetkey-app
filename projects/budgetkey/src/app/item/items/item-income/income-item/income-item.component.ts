@@ -4,9 +4,10 @@ import { Format } from '../../../../format';
 import questions from '../questions';
 
 @Component({
-  selector: 'app-income-item',
-  templateUrl: './income-item.component.html',
-  styleUrls: ['./income-item.component.less']
+    selector: 'app-income-item',
+    templateUrl: './income-item.component.html',
+    styleUrls: ['./income-item.component.less'],
+    standalone: false
 })
 export class IncomeItemComponent implements OnChanges{
   @Input() item: any;

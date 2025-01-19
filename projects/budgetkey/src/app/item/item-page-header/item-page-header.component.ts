@@ -2,9 +2,10 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { DocResultEntry } from '../../common-components/search-models';
 
 @Component({
-  selector: 'app-item-page-header',
-  templateUrl: './item-page-header.component.html',
-  styleUrls: ['./item-page-header.component.less']
+    selector: 'app-item-page-header',
+    templateUrl: './item-page-header.component.html',
+    styleUrls: ['./item-page-header.component.less'],
+    standalone: false
 })
 export class ItemPageHeaderComponent implements OnChanges {
   @Input() item: any;

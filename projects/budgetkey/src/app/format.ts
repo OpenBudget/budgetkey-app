@@ -1,7 +1,7 @@
-import * as durationPlugin from 'dayjs/plugin/duration';
-import * as relativeTimePlugin from 'dayjs/plugin/relativeTime';
-import * as utcPlugin from 'dayjs/plugin/utc';
-import * as dayjs from 'dayjs';
+import durationPlugin from 'dayjs/plugin/duration';
+import relativeTimePlugin from 'dayjs/plugin/relativeTime';
+import utcPlugin from 'dayjs/plugin/utc';
+import dayjs from 'dayjs';
 import 'dayjs/locale/he';
 dayjs.locale('he')
 dayjs.extend(durationPlugin);

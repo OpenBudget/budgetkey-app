@@ -3,9 +3,10 @@ import { Question } from '../../model';
 import { ItemApiService } from '../../item-api.service';
 
 @Component({
-  selector: 'app-base-simple-item',
-  templateUrl: './base-simple-item.component.html',
-  styleUrls: ['./base-simple-item.component.less']
+    selector: 'app-base-simple-item',
+    templateUrl: './base-simple-item.component.html',
+    styleUrls: ['./base-simple-item.component.less'],
+    standalone: false
 })
 export class BaseSimpleItemComponent implements OnInit{
   @Input() item: any;

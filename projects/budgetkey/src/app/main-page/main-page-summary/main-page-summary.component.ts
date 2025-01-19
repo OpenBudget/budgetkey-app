@@ -4,9 +4,10 @@ import { UtilsService } from '../utils.service';
 import { __T } from '../main-page.component';
 
 @Component({
-  selector: 'main-page-summary',
-  templateUrl: './main-page-summary.component.html',
-  styleUrls: ['./main-page-summary.component.less']
+    selector: 'main-page-summary',
+    templateUrl: './main-page-summary.component.html',
+    styleUrls: ['./main-page-summary.component.less'],
+    standalone: false
 })
 export class MainPageSummaryComponent {
   @Input() amount = 0;

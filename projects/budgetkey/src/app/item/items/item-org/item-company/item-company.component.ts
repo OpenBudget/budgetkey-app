@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Format } from '../../../../format';
 
 @Component({
-  selector: 'app-item-company',
-  templateUrl: './item-company.component.html',
-  styleUrls: ['./item-company.component.less']
+    selector: 'app-item-company',
+    templateUrl: './item-company.component.html',
+    styleUrls: ['./item-company.component.less'],
+    standalone: false
 })
 export class ItemCompanyComponent {
   @Input() item: any;

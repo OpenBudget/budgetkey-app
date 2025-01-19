@@ -3,9 +3,10 @@ import { AuthService } from '../../common-components/auth/auth.service';
 import { PlatformService } from '../../common-components/platform.service';
 
 @Component({
-  selector: 'app-bare-search-bar',
-  templateUrl: './bare-search-bar.component.html',
-  styleUrls: ['./bare-search-bar.component.less']
+    selector: 'app-bare-search-bar',
+    templateUrl: './bare-search-bar.component.html',
+    styleUrls: ['./bare-search-bar.component.less'],
+    standalone: false
 })
 export class BareSearchBarComponent implements OnInit {
 

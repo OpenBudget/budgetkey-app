@@ -22,13 +22,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/budgetkey/browser",
+            "outputPath": {
+              "base": "dist/budgetkey"
+            },
             "index": "projects/budgetkey/src/index.html",
-            "main": "projects/budgetkey/src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "@angular/localize/init"
             ],
             "tsConfig": "projects/budgetkey/tsconfig.app.json",
             "inlineStyleLanguage": "less",
@@ -43,7 +45,13 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "dayjs"
-            ]
+            ],
+            "browser": "projects/budgetkey/src/main.ts",
+            "server": "projects/budgetkey/src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "projects/budgetkey/src/server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -62,9 +70,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -105,7 +111,8 @@
           "options": {
             "polyfills": [
               "zone.js",
-              "zone.js/testing"
+              "zone.js/testing",
+              "@angular/localize/init"
             ],
             "tsConfig": "projects/budgetkey/tsconfig.spec.json",
             "inlineStyleLanguage": "less",
@@ -118,67 +125,6 @@
             ],
             "scripts": []
           }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/budgetkey/server",
-            "main": "projects/budgetkey/server.ts",
-            "tsConfig": "projects/budgetkey/tsconfig.server.json",
-            "inlineStyleLanguage": "less"
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media",
-              "fileReplacements": [
-                {
-                  "replace": "projects/budgetkey/src/environments/environment.ts",
-                  "with": "projects/budgetkey/src/environments/environment.prod.ts"
-                }
-              ]
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "sourceMap": true,
-              "extractLicenses": false,
-              "vendorChunk": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve-ssr": {
-          "builder": "@angular-devkit/build-angular:ssr-dev-server",
-          "configurations": {
-            "development": {
-              "browserTarget": "budgetkey:build:development",
-              "serverTarget": "budgetkey:server:development"
-            },
-            "production": {
-              "browserTarget": "budgetkey:build:production",
-              "serverTarget": "budgetkey:server:production"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "prerender": {
-          "builder": "@angular-devkit/build-angular:prerender",
-          "options": {
-            "routes": [
-              "/"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "budgetkey:build:production",
-              "serverTarget": "budgetkey:server:production"
-            },
-            "development": {
-              "browserTarget": "budgetkey:build:development",
-              "serverTarget": "budgetkey:server:development"
-            }
-          },
-          "defaultConfiguration": "production"
         }
       }
     }

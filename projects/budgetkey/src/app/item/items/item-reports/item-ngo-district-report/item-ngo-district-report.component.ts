@@ -4,9 +4,10 @@ import questions from './questions';
 import { Format } from '../../../../format';
 
 @Component({
-  selector: 'app-item-ngo-district-report',
-  templateUrl: './item-ngo-district-report.component.html',
-  styleUrls: ['./item-ngo-district-report.component.less']
+    selector: 'app-item-ngo-district-report',
+    templateUrl: './item-ngo-district-report.component.html',
+    styleUrls: ['./item-ngo-district-report.component.less'],
+    standalone: false
 })
 export class ItemNgoDistrictReportComponent implements OnChanges {
   @Input() item: any;

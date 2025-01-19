@@ -3,9 +3,10 @@ import questions_spending8 from '../questions_spending8';
 import questions from '../questions';
 
 @Component({
-  selector: 'app-item-budget8dig',
-  templateUrl: './item-budget8dig.component.html',
-  styleUrls: ['./item-budget8dig.component.less']
+    selector: 'app-item-budget8dig',
+    templateUrl: './item-budget8dig.component.html',
+    styleUrls: ['./item-budget8dig.component.less'],
+    standalone: false
 })
 export class ItemBudget8digComponent implements OnChanges {
   @Input() item: any;

@@ -11,9 +11,10 @@ import { PlatformService } from '../../common-components/platform.service';
 
 @UntilDestroy()
 @Component({
-  selector: 'vertical-results',
-  templateUrl: './vertical-results.component.html',
-  styleUrls: ['./vertical-results.component.less']
+    selector: 'vertical-results',
+    templateUrl: './vertical-results.component.html',
+    styleUrls: ['./vertical-results.component.less'],
+    standalone: false
 })
 export class VerticalResultsComponent implements OnInit, OnDestroy, AfterViewInit {
 

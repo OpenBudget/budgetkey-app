@@ -1,4 +1,4 @@
-FROM node:lts-buster-slim as build
+FROM node:lts-buster-slim AS build
 
 WORKDIR /app
 

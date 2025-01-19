@@ -4,7 +4,8 @@ import { filter, first, fromEvent, timer } from 'rxjs';
 
 @UntilDestroy()
 @Directive({
-  selector: '[editedContent]'
+    selector: '[editedContent]',
+    standalone: false
 })
 export class EditedContentDirective implements AfterViewInit {
 

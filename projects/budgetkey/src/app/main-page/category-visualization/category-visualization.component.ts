@@ -13,9 +13,10 @@ import { PlatformService } from '../../common-components/platform.service';
 type SelectionType<T extends Element> = Selection<T, unknown, any, undefined>;
 
 @Component({
-  selector: 'category-visualization',
-  templateUrl: './category-visualization.component.html',
-  styleUrls: ['./category-visualization.component.less']
+    selector: 'category-visualization',
+    templateUrl: './category-visualization.component.html',
+    styleUrls: ['./category-visualization.component.less'],
+    standalone: false
 })
 export class CategoryVisualizationComponent implements OnInit, AfterViewInit {
   @Input() category: any;

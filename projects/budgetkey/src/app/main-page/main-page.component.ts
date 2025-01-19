@@ -19,9 +19,10 @@ export function __T(content: string) {
 }
 
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.less']
+    selector: 'app-main-page',
+    templateUrl: './main-page.component.html',
+    styleUrls: ['./main-page.component.less'],
+    standalone: false
 })
 export class MainPageComponent {
   public funcCategories: any[];
@@ -42,7 +43,7 @@ export class MainPageComponent {
     this.incomeCategories = bubbles.income;
     this.totalAmount = 0;
     this.funcCategories.forEach((category: any) => {
-      this.totalAmount += category.amount;
+    this.totalAmount += category.amount;
     });
     this.proposalAmount = bubbles.proposalAmount || 0;
     this.prevProposalAmount = bubbles.prevProposalAmount;

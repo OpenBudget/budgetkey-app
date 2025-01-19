@@ -2,6 +2,7 @@ import { Directive, Input, ElementRef, HostListener, OnInit } from '@angular/cor
 
 @Directive({
     selector: '[bkTooltip]',
+    standalone: false
 })
 export class BkTooltipDirective implements OnInit {
 

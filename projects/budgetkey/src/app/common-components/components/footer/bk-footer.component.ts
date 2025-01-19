@@ -7,6 +7,7 @@ declare const Smooch: any;
     selector: 'app-bk-footer',
     templateUrl: './bk-footer.component.html',
     styleUrls: ['./bk-footer.component.less'],
+    standalone: false
 })
 export class BkFooterComponent implements OnInit {
     public hasadnaUrl = 'http://www.hasadna.org.il/';

@@ -487,9 +487,10 @@ function initDialog() {
 
 @UntilDestroy()
 @Component({
-  selector: 'app-hero',
-  templateUrl: './hero.component.html',
-  styleUrls: ['./hero.component.less']
+    selector: 'app-hero',
+    templateUrl: './hero.component.html',
+    styleUrls: ['./hero.component.less'],
+    standalone: false
 })
 export class HeroComponent implements AfterViewInit {
 

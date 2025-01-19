@@ -159,7 +159,7 @@ export class ListsService {
           this.currentList.set(list);
         });
       }
-    }, {allowSignalWrites: true});
+    });
   }
 
   public headers(token: string | null) {

@@ -4,14 +4,13 @@ import { DashboardVisNavComponent } from '../dashboard-vis-nav/dashboard-vis-nav
 import { DashboardVisSelectorComponent } from '../dashboard-vis-selector/dashboard-vis-selector.component';
 
 @Component({
-  selector: 'app-dashboard-visualizations',
-  standalone: true,
-  imports: [
-    DashboardVisNavComponent,
-    DashboardVisSelectorComponent
-  ],
-  templateUrl: './dashboard-visualizations.component.html',
-  styleUrl: './dashboard-visualizations.component.less'
+    selector: 'app-dashboard-visualizations',
+    imports: [
+        DashboardVisNavComponent,
+        DashboardVisSelectorComponent
+    ],
+    templateUrl: './dashboard-visualizations.component.html',
+    styleUrl: './dashboard-visualizations.component.less'
 })
 export class DashboardVisualizationsComponent {
 

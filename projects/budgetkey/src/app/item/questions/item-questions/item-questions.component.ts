@@ -7,9 +7,10 @@ import { QuestionsManager } from '../questions-manager';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-item-questions',
-  templateUrl: './item-questions.component.html',
-  styleUrls: ['./item-questions.component.less']
+    selector: 'app-item-questions',
+    templateUrl: './item-questions.component.html',
+    styleUrls: ['./item-questions.component.less'],
+    standalone: false
 })
 export class ItemQuestionsComponent implements OnChanges, OnInit {
 

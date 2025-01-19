@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { BudgetKeyItemService } from '../../../budgetkey-item.service';
 
 @Component({
-  selector: 'app-item-soproc-chart',
-  templateUrl: './item-soproc-chart.component.html',
-  styleUrls: ['./item-soproc-chart.component.less']
+    selector: 'app-item-soproc-chart',
+    templateUrl: './item-soproc-chart.component.html',
+    styleUrls: ['./item-soproc-chart.component.less'],
+    standalone: false
 })
 export class ItemSoprocChartComponent  {
   @Input() public chart: any;

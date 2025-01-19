@@ -4,9 +4,10 @@ import { ItemApiService } from '../../../item-api.service';
 import questions from './questions';
 
 @Component({
-  selector: 'app-item-contract',
-  templateUrl: './item-contract.component.html',
-  styleUrls: ['./item-contract.component.less']
+    selector: 'app-item-contract',
+    templateUrl: './item-contract.component.html',
+    styleUrls: ['./item-contract.component.less'],
+    standalone: false
 })
 export class ItemContractComponent implements OnChanges, OnInit {
   @Input() item: any;

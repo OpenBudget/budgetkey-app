@@ -46,9 +46,10 @@ export interface SearchBarType {
 
 
 @Component({
-  selector: 'app-bk-search-bar',
-  templateUrl: './bk-search-bar.component.html',
-  styleUrls: ['./bk-search-bar.component.less'],
+    selector: 'app-bk-search-bar',
+    templateUrl: './bk-search-bar.component.html',
+    styleUrls: ['./bk-search-bar.component.less'],
+    standalone: false
 })
 export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   

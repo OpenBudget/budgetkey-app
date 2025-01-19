@@ -4,14 +4,13 @@ import { DashboardSearchResultsComponent } from '../dashboard-search-results/das
 import { DashboardsApiService } from '../dashboards-api.service';
 
 @Component({
-  selector: 'app-dashboard-search',
-  standalone: true,
-  imports: [
-    DashboardSearchBarComponent,
-    DashboardSearchResultsComponent
-  ],
-  templateUrl: './dashboard-search.component.html',
-  styleUrl: './dashboard-search.component.less'
+    selector: 'app-dashboard-search',
+    imports: [
+        DashboardSearchBarComponent,
+        DashboardSearchResultsComponent
+    ],
+    templateUrl: './dashboard-search.component.html',
+    styleUrl: './dashboard-search.component.less'
 })
 export class DashboardSearchComponent {
 

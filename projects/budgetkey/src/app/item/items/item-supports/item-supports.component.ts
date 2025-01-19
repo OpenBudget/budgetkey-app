@@ -3,9 +3,10 @@ import { Format } from '../../../format';
 import questions from './questions';
 
 @Component({
-  selector: 'app-item-supports',
-  templateUrl: './item-supports.component.html',
-  styleUrls: ['./item-supports.component.less']
+    selector: 'app-item-supports',
+    templateUrl: './item-supports.component.html',
+    styleUrls: ['./item-supports.component.less'],
+    standalone: false
 })
 export class ItemSupportsComponent implements OnChanges {
   @Input() item: any;

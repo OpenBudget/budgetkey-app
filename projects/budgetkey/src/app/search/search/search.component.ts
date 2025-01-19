@@ -15,9 +15,10 @@ import { SeoService } from '../../common-components/seo.service';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.less']
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.less'],
+    standalone: false
 })
 export class SearchComponent implements OnInit {
   

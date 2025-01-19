@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { GlobalSettingsService } from '../../../../common-components/global-settings.service';
 
 @Component({
-  selector: 'app-muni-budget-link',
-  templateUrl: './muni-budget-link.component.html',
-  styleUrls: ['./muni-budget-link.component.less']
+    selector: 'app-muni-budget-link',
+    templateUrl: './muni-budget-link.component.html',
+    styleUrls: ['./muni-budget-link.component.less'],
+    standalone: false
 })
 export class MuniBudgetLinkComponent {
     @Input() item: any;

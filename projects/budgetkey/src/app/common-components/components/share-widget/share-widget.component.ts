@@ -4,9 +4,10 @@ import { SeoService } from '../../seo.service';
 import { WindowService } from '../../window.service';
 
 @Component({
-  selector: 'app-share-widget',
-  templateUrl: './share-widget.component.html',
-  styleUrl: './share-widget.component.less'
+    selector: 'app-share-widget',
+    templateUrl: './share-widget.component.html',
+    styleUrl: './share-widget.component.less',
+    standalone: false
 })
 export class ShareWidgetComponent {
 

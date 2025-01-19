@@ -8,9 +8,10 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-bare-page',
-  templateUrl: './bare-page.component.html',
-  styleUrls: ['./bare-page.component.less']
+    selector: 'app-bare-page',
+    templateUrl: './bare-page.component.html',
+    styleUrls: ['./bare-page.component.less'],
+    standalone: false
 })
 export class BarePageComponent implements OnInit {
 

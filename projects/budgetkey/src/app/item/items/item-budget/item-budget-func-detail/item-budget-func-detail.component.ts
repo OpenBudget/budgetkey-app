@@ -2,9 +2,10 @@ import { Component, Input, OnChanges } from '@angular/core';
 import questions from '../questions';
 
 @Component({
-  selector: 'app-item-budget-func-detail',
-  templateUrl: './item-budget-func-detail.component.html',
-  styleUrls: ['./item-budget-func-detail.component.less']
+    selector: 'app-item-budget-func-detail',
+    templateUrl: './item-budget-func-detail.component.html',
+    styleUrls: ['./item-budget-func-detail.component.less'],
+    standalone: false
 })
 export class ItemBudgetFuncDetailComponent implements OnChanges {
   @Input() item: any;

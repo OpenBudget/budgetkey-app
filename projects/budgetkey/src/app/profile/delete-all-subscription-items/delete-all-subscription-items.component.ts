@@ -3,9 +3,10 @@ import { SEARCHES_LIST } from '../../common-components/constants';
 import { ListsService } from '../../common-components/services/lists.service';
 
 @Component({
-  selector: 'app-delete-all-subscription-items',
-  templateUrl: './delete-all-subscription-items.component.html',
-  styleUrls: ['./delete-all-subscription-items.component.less']
+    selector: 'app-delete-all-subscription-items',
+    templateUrl: './delete-all-subscription-items.component.html',
+    styleUrls: ['./delete-all-subscription-items.component.less'],
+    standalone: false
 })
 export class DeleteAllSubscriptionItemsComponent {
 

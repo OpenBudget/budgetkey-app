@@ -54,7 +54,7 @@ export default [
     "query": [
       "SELECT coalesce(entity_name, recipient) as \"מקבל התמיכה\", ",
       "entity_id as \"מספר תאגיד\", ",
-      "entity_id, ",
+      "'org/' || entity_kind || '/' || entity_id as doc_id, ",
       "min(year_requested) || '-' || max(year_requested) as \"תקופה\", ",
       "sum(amount_approved) as \"סה״כ אושר\", ",
       "sum(amount_paid) as \"סה״כ שולם\" ",
@@ -67,7 +67,7 @@ export default [
     ],
     "headers": [
       "מספר תאגיד",
-      "מקבל התמיכה:item_link(entity_id)",
+      "מקבל התמיכה:item_link(doc_id)",
       "סה״כ אושר:number",
       "סה״כ שולם:number",
       "תקופה"

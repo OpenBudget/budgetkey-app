@@ -3,11 +3,10 @@ import { DashboardsApiService } from '../dashboards-api.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard-search-results',
-  standalone: true,
-  imports: [],
-  templateUrl: './dashboard-search-results.component.html',
-  styleUrl: './dashboard-search-results.component.less'
+    selector: 'app-dashboard-search-results',
+    imports: [],
+    templateUrl: './dashboard-search-results.component.html',
+    styleUrl: './dashboard-search-results.component.less'
 })
 export class DashboardSearchResultsComponent {
   template: string;

@@ -11,6 +11,7 @@ import { SeoService } from '../../seo.service';
     selector: 'app-bk-header',
     templateUrl: './bk-header.component.html',
     styleUrls: ['./bk-header.component.less'],
+    standalone: false
 })
 
 export class BkHeaderComponent {

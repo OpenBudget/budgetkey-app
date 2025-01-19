@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-chart-spendomat-row',
-  templateUrl: './chart-spendomat-row.component.html',
-  styleUrls: ['./chart-spendomat-row.component.less']
+    selector: 'app-chart-spendomat-row',
+    templateUrl: './chart-spendomat-row.component.html',
+    styleUrls: ['./chart-spendomat-row.component.less'],
+    standalone: false
 })
 export class ChartSpendomatRowComponent {
   @Input() public row: any;

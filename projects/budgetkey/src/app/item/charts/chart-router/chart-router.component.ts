@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { PlatformService } from '../../../common-components/platform.service';
 
 @Component({
-  selector: 'app-chart-router',
-  templateUrl: './chart-router.component.html',
-  styleUrls: ['./chart-router.component.less']
+    selector: 'app-chart-router',
+    templateUrl: './chart-router.component.html',
+    styleUrls: ['./chart-router.component.less'],
+    standalone: false
 })
 export class ChartRouterComponent {
   @Input() public item: any;

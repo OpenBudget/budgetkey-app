@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Format } from '../../../../format';
 
 @Component({
-  selector: 'app-item-association',
-  templateUrl: './item-association.component.html',
-  styleUrls: ['./item-association.component.less']
+    selector: 'app-item-association',
+    templateUrl: './item-association.component.html',
+    styleUrls: ['./item-association.component.less'],
+    standalone: false
 })
 export class ItemAssociationComponent {
   @Input() item: any;

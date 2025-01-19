@@ -6,9 +6,10 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-item-data-table',
-  templateUrl: './item-data-table.component.html',
-  styleUrls: ['./item-data-table.component.less']
+    selector: 'app-item-data-table',
+    templateUrl: './item-data-table.component.html',
+    styleUrls: ['./item-data-table.component.less'],
+    standalone: false
 })
 export class ItemDataTableComponent implements OnInit {
 

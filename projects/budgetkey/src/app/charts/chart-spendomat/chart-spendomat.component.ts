@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Format } from '../../format';
 
 @Component({
-  selector: 'app-chart-spendomat',
-  templateUrl: './chart-spendomat.component.html',
-  styleUrls: ['./chart-spendomat.component.less']
+    selector: 'app-chart-spendomat',
+    templateUrl: './chart-spendomat.component.html',
+    styleUrls: ['./chart-spendomat.component.less'],
+    standalone: false
 })
 export class ChartSpendomatComponent implements OnInit {
 

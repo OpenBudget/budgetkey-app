@@ -8,9 +8,10 @@ import { timer } from 'rxjs';
 import { PlatformService } from '../../../common-components/platform.service';
 
 @Component({
-  selector: 'app-contract-payments',
-  templateUrl: './contract-payments.component.html',
-  styleUrls: ['./contract-payments.component.less']
+    selector: 'app-contract-payments',
+    templateUrl: './contract-payments.component.html',
+    styleUrls: ['./contract-payments.component.less'],
+    standalone: false
 })
 export class ContractPaymentsComponent implements AfterViewInit, OnDestroy {
   @Input() public payments: any;

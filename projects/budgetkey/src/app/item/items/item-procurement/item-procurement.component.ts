@@ -2,9 +2,10 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { Format } from '../../../format';
 
 @Component({
-  selector: 'app-item-procurement',
-  templateUrl: './item-procurement.component.html',
-  styleUrls: ['./item-procurement.component.less']
+    selector: 'app-item-procurement',
+    templateUrl: './item-procurement.component.html',
+    styleUrls: ['./item-procurement.component.less'],
+    standalone: false
 })
 export class ItemProcurementComponent implements OnChanges {
   @Input() item: any;

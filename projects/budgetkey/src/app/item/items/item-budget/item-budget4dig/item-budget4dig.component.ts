@@ -4,9 +4,10 @@ import questions_parents from '../questions_parents';
 import questions_spending from '../questions_spending';
 
 @Component({
-  selector: 'app-item-budget4dig',
-  templateUrl: './item-budget4dig.component.html',
-  styleUrls: ['./item-budget4dig.component.less']
+    selector: 'app-item-budget4dig',
+    templateUrl: './item-budget4dig.component.html',
+    styleUrls: ['./item-budget4dig.component.less'],
+    standalone: false
 })
 export class ItemBudget4digComponent implements OnChanges {
   @Input() item: any;

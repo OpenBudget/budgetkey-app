@@ -13,7 +13,8 @@ import { ListsService } from '../services/lists.service';
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
-    styleUrls: ['./auth.component.less']
+    styleUrls: ['./auth.component.less'],
+    standalone: false
 })
 export class AuthComponent implements AfterViewInit {
     public user: any;

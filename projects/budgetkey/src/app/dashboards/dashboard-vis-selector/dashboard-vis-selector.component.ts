@@ -2,13 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DashboardVisTableComponent } from '../dashboard-vis-table/dashboard-vis-table.component';
 
 @Component({
-  selector: 'app-dashboard-vis-selector',
-  standalone: true,
-  imports: [
-    DashboardVisTableComponent
-  ],
-  templateUrl: './dashboard-vis-selector.component.html',
-  styleUrl: './dashboard-vis-selector.component.less'
+    selector: 'app-dashboard-vis-selector',
+    imports: [
+        DashboardVisTableComponent
+    ],
+    templateUrl: './dashboard-vis-selector.component.html',
+    styleUrl: './dashboard-vis-selector.component.less'
 })
 export class DashboardVisSelectorComponent {
 

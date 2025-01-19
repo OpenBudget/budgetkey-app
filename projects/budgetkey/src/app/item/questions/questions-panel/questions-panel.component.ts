@@ -6,9 +6,10 @@ import { BudgetKeyItemService } from '../../budgetkey-item.service';
 import { PlatformService } from '../../../common-components/platform.service';
 
 @Component({
-  selector: 'app-questions-panel',
-  templateUrl: './questions-panel.component.html',
-  styleUrls: ['./questions-panel.component.less']
+    selector: 'app-questions-panel',
+    templateUrl: './questions-panel.component.html',
+    styleUrls: ['./questions-panel.component.less'],
+    standalone: false
 })
 export class QuestionsPanelComponent implements OnChanges {
 

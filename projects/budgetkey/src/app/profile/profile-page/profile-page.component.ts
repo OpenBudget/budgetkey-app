@@ -8,9 +8,10 @@ import { PlatformService } from '../../common-components/platform.service';
 declare const window: any;
 
 @Component({
-  selector: 'app-profile-page',
-  templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.less']
+    selector: 'app-profile-page',
+    templateUrl: './profile-page.component.html',
+    styleUrls: ['./profile-page.component.less'],
+    standalone: false
 })
 export class ProfilePageComponent {
   

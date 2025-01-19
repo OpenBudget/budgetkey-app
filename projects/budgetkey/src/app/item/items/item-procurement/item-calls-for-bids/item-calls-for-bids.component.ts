@@ -5,9 +5,10 @@ import { tooltip } from '../tooltips';
 const dayjs = Format.dayjs;
 
 @Component({
-  selector: 'app-item-calls-for-bids',
-  templateUrl: './item-calls-for-bids.component.html',
-  styleUrls: ['./item-calls-for-bids.component.less']
+    selector: 'app-item-calls-for-bids',
+    templateUrl: './item-calls-for-bids.component.html',
+    styleUrls: ['./item-calls-for-bids.component.less'],
+    standalone: false
 })
 export class ItemCallsForBidsComponent {
   @Input() item: any;

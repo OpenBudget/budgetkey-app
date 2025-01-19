@@ -4,9 +4,10 @@ import { __T } from '../main-page.component';
 
 
 @Component({
-  selector: 'category-visualization-info-popup',
-  templateUrl: './category-visualization-info-popup.component.html',
-  styleUrls: ['./category-visualization-info-popup.component.less']
+    selector: 'category-visualization-info-popup',
+    templateUrl: './category-visualization-info-popup.component.html',
+    styleUrls: ['./category-visualization-info-popup.component.less'],
+    standalone: false
 })
 export class CategoryVisualizationInfoPopupComponent {
 

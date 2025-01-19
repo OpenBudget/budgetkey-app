@@ -4,9 +4,10 @@ import { Indicator } from '../../../model';
 import { Format } from '../../../../format';
 
 @Component({
-  selector: 'app-item-ngo-activity-report',
-  templateUrl: './item-ngo-activity-report.component.html',
-  styleUrls: ['./item-ngo-activity-report.component.less']
+    selector: 'app-item-ngo-activity-report',
+    templateUrl: './item-ngo-activity-report.component.html',
+    styleUrls: ['./item-ngo-activity-report.component.less'],
+    standalone: false
 })
 export class ItemNgoActivityReportComponent implements OnChanges {
   @Input() item: any;

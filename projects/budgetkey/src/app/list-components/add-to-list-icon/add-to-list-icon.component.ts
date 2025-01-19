@@ -8,12 +8,13 @@ import { AddToListDialogCommand, ListDialogService } from '../list-dialog.servic
 
 @UntilDestroy()
 @Component({
-  selector: 'app-add-to-list-icon',
-  templateUrl: './add-to-list-icon.component.html',
-  styleUrls: ['./add-to-list-icon.component.less'],
-  host: {
-    '[class.enabled]': 'enabled()',
-  }
+    selector: 'app-add-to-list-icon',
+    templateUrl: './add-to-list-icon.component.html',
+    styleUrls: ['./add-to-list-icon.component.less'],
+    host: {
+        '[class.enabled]': 'enabled()',
+    },
+    standalone: false
 })
 export class AddToListIconComponent implements OnChanges {
   @Input() doc: DocResultEntry;
@@ -41,9 +42,7 @@ export class AddToListIconComponent implements OnChanges {
   processing = signal(false);
 
   constructor(public lists: ListsService, private router: Router, private route: ActivatedRoute, private listDialog: ListDialogService, private el: ElementRef) {
-    effect(() => this.update(), {
-      allowSignalWrites: true,
-    });
+    effect(() => this.update());
   }
 
   ngOnChanges(): void {

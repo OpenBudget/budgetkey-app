@@ -9,9 +9,10 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-item-social-service-gov-unit',
-  templateUrl: './item-social-service-gov-unit.component.html',
-  styleUrls: ['./item-social-service-gov-unit.component.less']
+    selector: 'app-item-social-service-gov-unit',
+    templateUrl: './item-social-service-gov-unit.component.html',
+    styleUrls: ['./item-social-service-gov-unit.component.less'],
+    standalone: false
 })
 export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit {
 

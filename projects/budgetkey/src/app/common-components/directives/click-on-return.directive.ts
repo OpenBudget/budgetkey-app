@@ -1,7 +1,8 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Output } from '@angular/core';
 
 @Directive({
-  selector: '[clickOnReturn]'
+    selector: '[clickOnReturn]',
+    standalone: false
 })
 export class ClickOnReturnDirective implements AfterViewInit{
   @Output() activated = new EventEmitter<Event>();

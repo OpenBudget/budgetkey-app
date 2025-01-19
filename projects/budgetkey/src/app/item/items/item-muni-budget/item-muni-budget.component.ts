@@ -5,9 +5,10 @@ import questions from './questions';
 import { ItemApiService } from '../../item-api.service';
 
 @Component({
-  selector: 'app-item-muni-budget',
-  templateUrl: './item-muni-budget.component.html',
-  styleUrls: ['./item-muni-budget.component.less']
+    selector: 'app-item-muni-budget',
+    templateUrl: './item-muni-budget.component.html',
+    styleUrls: ['./item-muni-budget.component.less'],
+    standalone: false
 })
 export class ItemMuniBudgetComponent implements OnChanges {
 

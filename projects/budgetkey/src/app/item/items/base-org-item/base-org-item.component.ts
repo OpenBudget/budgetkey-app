@@ -5,9 +5,10 @@ import { ItemApiService } from '../../item-api.service';
 import questions from './questions';
 
 @Component({
-  selector: 'app-base-org-item',
-  templateUrl: './base-org-item.component.html',
-  styleUrls: ['./base-org-item.component.less']
+    selector: 'app-base-org-item',
+    templateUrl: './base-org-item.component.html',
+    styleUrls: ['./base-org-item.component.less'],
+    standalone: false
 })
 export class BaseOrgItemComponent implements OnInit {
   @Input() item: any;

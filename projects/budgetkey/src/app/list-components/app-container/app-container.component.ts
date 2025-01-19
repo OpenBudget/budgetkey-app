@@ -14,6 +14,7 @@ import { ListDialogService } from '../list-dialog.service';
     selector: 'app-container',
     templateUrl: './app-container.component.html',
     styleUrls: ['./app-container.component.less'],
+    standalone: false
 })
 export class AppContainerComponent implements AfterViewInit, OnChanges {
     @Input() showHeader = true;
@@ -63,7 +64,7 @@ export class AppContainerComponent implements AfterViewInit, OnChanges {
         effect(() => {
             const x = this.hasListView();
             this.updateWidth();
-        }, { allowSignalWrites: true});
+        });
     }
 
     ngAfterViewInit(): void {

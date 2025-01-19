@@ -4,12 +4,13 @@ import { PlatformService } from '../../common-components/platform.service';
 import { PlotlyService } from './plotly.service';
 
 @Component({
-  selector: 'app-chart-plotly',
-  templateUrl: './chart-plotly.component.html',
-  styleUrls: ['./chart-plotly.component.less'],
-  host: {
-    '[class.enlarged]': 'enlarged'
-  }
+    selector: 'app-chart-plotly',
+    templateUrl: './chart-plotly.component.html',
+    styleUrls: ['./chart-plotly.component.less'],
+    host: {
+        '[class.enlarged]': 'enlarged'
+    },
+    standalone: false
 })
 export class ChartPlotlyComponent implements OnChanges, AfterViewInit {
 

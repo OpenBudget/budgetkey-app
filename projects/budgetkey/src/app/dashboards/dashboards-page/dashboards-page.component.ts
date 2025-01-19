@@ -11,16 +11,15 @@ import { ItemModule } from '../../item/item.module';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-dashboards-page',
-  standalone: true,
-  imports: [
-    ListComponentsModule,
-    DashboardSearchComponent,
-    DashboardVisualizationsComponent,
-    ItemModule
-  ],
-  templateUrl: './dashboards-page.component.html',
-  styleUrls: ['./dashboards-page.component.less']
+    selector: 'app-dashboards-page',
+    imports: [
+        ListComponentsModule,
+        DashboardSearchComponent,
+        DashboardVisualizationsComponent,
+        ItemModule
+    ],
+    templateUrl: './dashboards-page.component.html',
+    styleUrls: ['./dashboards-page.component.less']
 })
 export class DashboardsPageComponent {
 

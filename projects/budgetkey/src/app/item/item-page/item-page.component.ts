@@ -12,9 +12,10 @@ import { SeoService } from '../../common-components/seo.service';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-item-page',
-  templateUrl: './item-page.component.html',
-  styleUrls: ['./item-page.component.less']
+    selector: 'app-item-page',
+    templateUrl: './item-page.component.html',
+    styleUrls: ['./item-page.component.less'],
+    standalone: false
 })
 export class ItemPageComponent implements AfterViewInit, OnInit {
   item: any | null;

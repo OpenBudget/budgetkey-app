@@ -6,9 +6,10 @@ import { PlatformService } from 'projects/budgetkey/src/app/common-components/pl
 import { LAST_YEAR } from '../item-social-service-gov-unit/charts';
 
 @Component({
-  selector: 'app-item-social-service',
-  templateUrl: './item-social-service.component.html',
-  styleUrls: ['./item-social-service.component.less']
+    selector: 'app-item-social-service',
+    templateUrl: './item-social-service.component.html',
+    styleUrls: ['./item-social-service.component.less'],
+    standalone: false
 })
 export class ItemSocialServiceComponent implements OnInit {
   @Input() item: any;

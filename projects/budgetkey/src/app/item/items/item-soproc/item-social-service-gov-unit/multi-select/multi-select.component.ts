@@ -2,9 +2,10 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { timer } from 'rxjs';
 
 @Component({
-  selector: 'app-multi-select',
-  templateUrl: './multi-select.component.html',
-  styleUrls: ['./multi-select.component.less']
+    selector: 'app-multi-select',
+    templateUrl: './multi-select.component.html',
+    styleUrls: ['./multi-select.component.less'],
+    standalone: false
 })
 export class MultiSelectComponent implements OnInit {
 

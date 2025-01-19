@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { DashboardsApiService } from '../dashboards-api.service';
 
 @Component({
-  selector: 'app-dashboard-search-bar',
-  standalone: true,
-  imports: [],
-  templateUrl: './dashboard-search-bar.component.html',
-  styleUrl: './dashboard-search-bar.component.less'
+    selector: 'app-dashboard-search-bar',
+    imports: [],
+    templateUrl: './dashboard-search-bar.component.html',
+    styleUrl: './dashboard-search-bar.component.less'
 })
 export class DashboardSearchBarComponent {
 

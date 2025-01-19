@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 import { delay, tap, timer } from 'rxjs';
 
 @Component({
-  selector: 'app-chart-mushonkey',
-  templateUrl: './chart-mushonkey.component.html',
-  styleUrls: ['./chart-mushonkey.component.less']
+    selector: 'app-chart-mushonkey',
+    templateUrl: './chart-mushonkey.component.html',
+    styleUrls: ['./chart-mushonkey.component.less'],
+    standalone: false
 })
 export class ChartMushonkeyComponent {
   @Input() public data: any;

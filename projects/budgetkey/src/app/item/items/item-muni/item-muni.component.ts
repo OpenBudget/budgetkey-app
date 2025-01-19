@@ -6,9 +6,10 @@ import { ItemApiService } from '../../item-api.service';
 import questions from '../base-org-item/questions';
 
 @Component({
-  selector: 'app-item-muni',
-  templateUrl: './item-muni.component.html',
-  styleUrls: ['./item-muni.component.less']
+    selector: 'app-item-muni',
+    templateUrl: './item-muni.component.html',
+    styleUrls: ['./item-muni.component.less'],
+    standalone: false
 })
 export class ItemMuniComponent implements OnChanges, AfterViewInit {
 

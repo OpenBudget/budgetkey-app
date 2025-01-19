@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 
 @Component({
-  selector: 'app-chart-adamkey',
-  templateUrl: './chart-adamkey.component.html',
-  styleUrls: ['./chart-adamkey.component.less']
+    selector: 'app-chart-adamkey',
+    templateUrl: './chart-adamkey.component.html',
+    styleUrls: ['./chart-adamkey.component.less'],
+    standalone: false
 })
 export class ChartAdamkeyComponent implements OnInit  {
 

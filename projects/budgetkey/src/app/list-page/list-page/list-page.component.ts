@@ -11,9 +11,10 @@ import { Request } from 'express';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-list-page',
-  templateUrl: './list-page.component.html',
-  styleUrls: ['./list-page.component.less']
+    selector: 'app-list-page',
+    templateUrl: './list-page.component.html',
+    styleUrls: ['./list-page.component.less'],
+    standalone: false
 })
 export class ListPageComponent {
 

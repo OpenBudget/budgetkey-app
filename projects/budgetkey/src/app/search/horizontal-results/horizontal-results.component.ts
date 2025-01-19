@@ -13,9 +13,10 @@ import { LayoutService } from '../../common-components/layout.service';
 
 @UntilDestroy()
 @Component({
-  selector: 'horizontal-results',
-  templateUrl: './horizontal-results.component.html',
-  styleUrls: ['./horizontal-results.component.less']
+    selector: 'horizontal-results',
+    templateUrl: './horizontal-results.component.html',
+    styleUrls: ['./horizontal-results.component.less'],
+    standalone: false
 })
 export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewInit {
 

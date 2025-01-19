@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { hierarchy, pack } from 'd3-hierarchy';
 
 @Component({
-  selector: 'app-chart-pointatron',
-  templateUrl: './chart-pointatron.component.html',
-  styleUrls: ['./chart-pointatron.component.less']
+    selector: 'app-chart-pointatron',
+    templateUrl: './chart-pointatron.component.html',
+    styleUrls: ['./chart-pointatron.component.less'],
+    standalone: false
 })
 export class ChartPointatronComponent implements OnInit {  
   @Input() public data: any;

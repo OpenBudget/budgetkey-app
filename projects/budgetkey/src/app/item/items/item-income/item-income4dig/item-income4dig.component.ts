@@ -1,9 +1,10 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
-  selector: 'app-item-income4dig',
-  templateUrl: './item-income4dig.component.html',
-  styleUrls: ['./item-income4dig.component.less']
+    selector: 'app-item-income4dig',
+    templateUrl: './item-income4dig.component.html',
+    styleUrls: ['./item-income4dig.component.less'],
+    standalone: false
 })
 export class ItemIncome4digComponent implements OnChanges {
   @Input() item: any;

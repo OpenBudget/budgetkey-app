@@ -5,6 +5,7 @@ import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angu
     selector: 'app-modal',
     templateUrl: './modal.component.html',
     styleUrls: ['./modal.component.less'],
+    standalone: false
 })
 export class ModalComponent {
   @Input() title: string;

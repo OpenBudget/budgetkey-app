@@ -7,9 +7,10 @@ import { from, fromEvent } from 'rxjs';
 import { PlatformService } from '../../platform.service';
 
 @Component({
-  selector: 'app-bk-subscription-manager',
-  templateUrl: 'bk-subscription-manager.component.html',
-  styleUrls: ['bk-subscription-manager.component.less']
+    selector: 'app-bk-subscription-manager',
+    templateUrl: 'bk-subscription-manager.component.html',
+    styleUrls: ['bk-subscription-manager.component.less'],
+    standalone: false
 })
 export class BkSubscriptionManager implements OnInit {
   @Input() externalUrl: string;

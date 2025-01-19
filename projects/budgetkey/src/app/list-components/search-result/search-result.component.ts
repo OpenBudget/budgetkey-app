@@ -5,7 +5,7 @@ import { DocResultEntry } from '../../common-components/search-models';
 
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import 'dayjs/locale/he';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PlatformService } from '../../common-components/platform.service';
@@ -36,12 +36,13 @@ interface Parameter {
 
 
 @Component({
-  selector: 'search-result',
-  templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.less'],
-  host: {
-    '[class.horizontal]': 'horizontal',
-  }
+    selector: 'search-result',
+    templateUrl: './search-result.component.html',
+    styleUrls: ['./search-result.component.less'],
+    host: {
+        '[class.horizontal]': 'horizontal',
+    },
+    standalone: false
 })
 export class SearchResultComponent implements OnInit {
 

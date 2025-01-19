@@ -8,9 +8,10 @@ import { sign } from 'crypto';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-list-view',
-  templateUrl: './list-view.component.html',
-  styleUrls: ['./list-view.component.less']
+    selector: 'app-list-view',
+    templateUrl: './list-view.component.html',
+    styleUrls: ['./list-view.component.less'],
+    standalone: false
 })
 export class ListViewComponent implements OnChanges {
 

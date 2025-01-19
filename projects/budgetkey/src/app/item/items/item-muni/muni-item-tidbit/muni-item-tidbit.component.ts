@@ -2,9 +2,10 @@ import { Component, Input, OnChanges } from '@angular/core';
 
 
 @Component({
-  selector: 'app-muni-item-tidbit',
-  templateUrl: './muni-item-tidbit.component.html',
-  styleUrls: ['./muni-item-tidbit.component.less']
+    selector: 'app-muni-item-tidbit',
+    templateUrl: './muni-item-tidbit.component.html',
+    styleUrls: ['./muni-item-tidbit.component.less'],
+    standalone: false
 })
 export class MuniItemTidbitComponent implements OnChanges {
   

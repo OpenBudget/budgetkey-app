@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 
 @Component({
-  selector: 'app-chart-horizontal-barchart',
-  templateUrl: './chart-horizontal-barchart.component.html',
-  styleUrls: ['./chart-horizontal-barchart.component.less']
+    selector: 'app-chart-horizontal-barchart',
+    templateUrl: './chart-horizontal-barchart.component.html',
+    styleUrls: ['./chart-horizontal-barchart.component.less'],
+    standalone: false
 })
 export class ChartHorizontalBarchartComponent {
   @Input() public data: any;

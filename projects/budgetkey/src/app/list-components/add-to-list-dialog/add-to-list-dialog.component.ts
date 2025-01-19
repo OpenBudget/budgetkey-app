@@ -8,14 +8,15 @@ import { LayoutService } from '../../common-components/layout.service';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-add-to-list-dialog',
-  templateUrl: './add-to-list-dialog.component.html',
-  styleUrls: ['./add-to-list-dialog.component.less'],
-  host: {
-    '[style.top]': 'layout.desktop ? listDialog.top() + "px" : 0',
-    '[style.left]': 'layout.desktop ? listDialog.right() + "px" : 0',
-    '(click)': 'layout.mobile ? done($event) : null',
-  }
+    selector: 'app-add-to-list-dialog',
+    templateUrl: './add-to-list-dialog.component.html',
+    styleUrls: ['./add-to-list-dialog.component.less'],
+    host: {
+        '[style.top]': 'layout.desktop ? listDialog.top() + "px" : 0',
+        '[style.left]': 'layout.desktop ? listDialog.right() + "px" : 0',
+        '(click)': 'layout.mobile ? done($event) : null',
+    },
+    standalone: false
 })
 export class AddToListDialogComponent implements AfterViewInit, OnInit, OnChanges {
 

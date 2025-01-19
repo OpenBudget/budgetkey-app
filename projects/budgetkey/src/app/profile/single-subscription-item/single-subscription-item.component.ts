@@ -5,9 +5,10 @@ import { ListItem, ListsService } from '../../common-components/services/lists.s
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 
 @Component({
-  selector: 'app-single-subscription-item',
-  templateUrl: './single-subscription-item.component.html',
-  styleUrls: ['./single-subscription-item.component.less']
+    selector: 'app-single-subscription-item',
+    templateUrl: './single-subscription-item.component.html',
+    styleUrls: ['./single-subscription-item.component.less'],
+    standalone: false
 })
 export class SingleSubscriptionItemComponent implements OnInit {
 

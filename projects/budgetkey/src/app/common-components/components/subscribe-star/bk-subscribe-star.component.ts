@@ -5,6 +5,7 @@ import {Component, Input, Output, EventEmitter, OnChanges, OnInit} from '@angula
     selector: 'app-bk-sub-star',
     templateUrl: './bk-subscribe-star.component.html',
     styleUrls: ['./bk-subscribe-star.component.less'],
+    standalone: false
 })
 export class BkSubscribeStar implements OnInit {
     @Input() enabled = true;

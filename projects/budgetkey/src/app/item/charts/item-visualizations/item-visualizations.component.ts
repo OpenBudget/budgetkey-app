@@ -2,9 +2,10 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Item } from '../../model';
 
 @Component({
-  selector: 'app-item-visualizations',
-  templateUrl: './item-visualizations.component.html',
-  styleUrls: ['./item-visualizations.component.less']
+    selector: 'app-item-visualizations',
+    templateUrl: './item-visualizations.component.html',
+    styleUrls: ['./item-visualizations.component.less'],
+    standalone: false
 })
 export class ItemVisualizationsComponent implements OnChanges {
 

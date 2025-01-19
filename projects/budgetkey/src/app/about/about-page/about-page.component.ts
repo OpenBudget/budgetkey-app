@@ -10,9 +10,10 @@ import { ActivatedRoute, Data } from '@angular/router';
 
 
 @Component({
-  selector: 'app-about-page',
-  templateUrl: './about-page.component.html',
-  styleUrls: ['./about-page.component.less']
+    selector: 'app-about-page',
+    templateUrl: './about-page.component.html',
+    styleUrls: ['./about-page.component.less'],
+    standalone: false
 })
 export class AboutPageComponent {
   converter: Showdown.Converter;

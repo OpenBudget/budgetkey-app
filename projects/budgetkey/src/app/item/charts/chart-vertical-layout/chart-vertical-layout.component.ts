@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-chart-vertical-layout',
-  templateUrl: './chart-vertical-layout.component.html',
-  styleUrls: ['./chart-vertical-layout.component.less']
+    selector: 'app-chart-vertical-layout',
+    templateUrl: './chart-vertical-layout.component.html',
+    styleUrls: ['./chart-vertical-layout.component.less'],
+    standalone: false
 })
 export class ChartVerticalLayoutComponent {
   @Input() item: any;

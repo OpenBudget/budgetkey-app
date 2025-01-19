@@ -11,9 +11,10 @@ import { PlatformService } from '../../common-components/platform.service';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-user-lists-page',
-  templateUrl: './user-lists-page.component.html',
-  styleUrls: ['./user-lists-page.component.less']
+    selector: 'app-user-lists-page',
+    templateUrl: './user-lists-page.component.html',
+    styleUrls: ['./user-lists-page.component.less'],
+    standalone: false
 })
 export class UserListsPageComponent {
 
