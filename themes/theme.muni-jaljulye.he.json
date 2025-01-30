@@ -7,6 +7,7 @@
     "siteUrl": "https://next.obudget.org/i/org/municipality/500206271?theme=muni-jaljulye",
     "disableAuth": true,
     "siteName": "מפתח התקציב העירוני - ג׳לג׳וליה",
+    "siteLogo": "muni-logo-jaljulye.png",
     "searchPlaceholder": "חפשו סעיפי תקציב...",
     "searchBarConfig": [
       {
