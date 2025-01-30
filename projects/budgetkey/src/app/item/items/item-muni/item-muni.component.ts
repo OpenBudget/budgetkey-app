@@ -57,7 +57,7 @@ export class ItemMuniComponent implements OnChanges, AfterViewInit {
     });
     this.budgets.forEach((b) => {
       if (b.code.length === 1) {
-        b.muni_code = this.ext.symbol.value;
+        b.muni_code = this.muni_code;
         if (b.code[0] < '6') {
           b.pct = (b.num_value / this.totalIncome) * 100 + '%';
         } else {
@@ -99,7 +99,15 @@ export class ItemMuniComponent implements OnChanges, AfterViewInit {
     return (this.item.details && this.item.details.extended) || ({} as any);
   }
 
+  public get muni_code(): string {
+    let ret = this.ext.symbol.value;
+    if (ret?.length === 3) {
+      ret = '0' + ret;
+    }
+    return ret;
+  }
+
   budgetHref(budget: any) {
-    return `/i/muni_budgets/${this.ext.symbol.value}/${budget.code}?theme=${this.globalSettings.themeId}`;
+    return `/i/muni_budgets/${this.muni_code}/${budget.code}?theme=${this.globalSettings.themeId}`;
   }
 }
