@@ -67,7 +67,13 @@
                   "maximumError": "20kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "projects/budgetkey/src/environments/environment.ts",
+                  "with": "projects/budgetkey/src/environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
