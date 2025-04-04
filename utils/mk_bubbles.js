@@ -7,8 +7,8 @@ import fetch from 'node-fetch';
 
 const API_URL = 'https://next.obudget.org/api/query?query=';
 const DOC_URL = 'https://next.obudget.org/get/';
-const YEAR = 2024;
-const PROPOSAL_YEAR = 2025;
+const YEAR = 2025;
+const PROPOSAL_YEAR = 0; //2025;
 const BUDGET_CODE = '0020670142';
 
 const RETURNS_CONDITION = `
@@ -110,6 +110,9 @@ function sleep(ms) {
 }
 
 function sql_total_amount(year) {
+  if (year < 0) {
+    return null;
+  }
   const SQL = `
     SELECT sum(net_allocated) AS total_amount
         FROM raw_budget
