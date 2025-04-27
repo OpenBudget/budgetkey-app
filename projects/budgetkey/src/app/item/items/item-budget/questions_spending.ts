@@ -59,7 +59,7 @@ export default [
               "sum(amount_approved) as \"סה״כ אושר\",",
               "sum(amount_paid) as \"סה״כ שולם\"",
               "FROM raw_supports WHERE year_requested :period AND budget_code like ':code%%' GROUP BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
-              "order by year_requested desc"],
+              "order by year_requested desc, 11 desc"],
     parameters: {
       period: {
         "כל השנים": ">0",
@@ -259,7 +259,7 @@ export default [
               "FROM contract_spending ", 
               "WHERE budget_code like ':code%%' AND ((:period BETWEEN min_year AND max_year) or (min_year is null and :period <= max_year) or ", 
               "(max_year is null and :period >= min_year) or (:period is null))",
-              "ORDER BY \"היקף\" DESC NULLS LAST"
+              "ORDER BY volume DESC NULLS LAST"
               // "ORDER BY order_date desc nulls last"
             ],
     parameters: {

@@ -275,7 +275,7 @@ export default [
               "case when manof_excerpts is not null and jsonb_array_length(manof_excerpts) > 0 then ((manof_excerpts->0)::jsonb)->>'soproc_name' else null end as \"שירות חברתי\",",
               "case when manof_excerpts is not null and jsonb_array_length(manof_excerpts) > 0 then 'activities/gov_social_service/' || (((manof_excerpts->0)::jsonb)->>'soproc_id')::text else null end as soproc_id",
               "FROM contract_spending WHERE entity_id=':id' AND ((:period BETWEEN min_year AND max_year) or (min_year is null and :period <= max_year) or (max_year is null and :period >= min_year) or (:period is null))",
-              "ORDER BY \"היקף\" DESC NULLS LAST"
+              "ORDER BY volume DESC NULLS LAST"
             ],
     parameters: {
       period: {
