@@ -259,7 +259,8 @@ export default [
               "FROM contract_spending ", 
               "WHERE budget_code like ':code%%' AND ((:period BETWEEN min_year AND max_year) or (min_year is null and :period <= max_year) or ", 
               "(max_year is null and :period >= min_year) or (:period is null))",
-              "ORDER BY order_date desc nulls last"
+              "ORDER BY \"היקף\" DESC NULLS LAST"
+              // "ORDER BY order_date desc nulls last"
             ],
     parameters: {
       period: {
