@@ -59,5 +59,18 @@ export class Format {
       return '?%';
     }
   }
+
+  public niceCode(code: string) {
+    let ret = '';
+    code = code.slice(2);
+    while (code.length > 0) {
+      ret += code.substring(0, 2);
+      code = code.substring(2);
+      if (code.length > 0) {
+        ret += '.';
+      }
+    }
+    return ret;
+  }
   
 }

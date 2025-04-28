@@ -53,14 +53,6 @@
             {{ item.transaction_id }}
         </div>
         }
-
-        <ng-container *ngIf='item.explanation'>
-            <label class="field-label">
-                דברי ההסבר להעברה:
-            </label>
-            <div class="objective" [innerHTML]='item.explanation'>
-            </div>    
-        </ng-container>
         
         <label class="field-label">
             רשימת השינויים:
@@ -69,7 +61,9 @@
             <thead>
                 <th>קוד</th>
                 <th>תכנית</th>
-                <th><i class='bk-tooltip-anchor ai-icon'><span class='bk-tooltip'>ניתוח מבוסס AI של דברי ההסבר</span></i> הסבר השינוי</th>
+                @if (item.year >= 2020) {
+                    <th class='explanation'><i class='bk-tooltip-anchor ai-icon'><span class='bk-tooltip'>ניתוח מבוסס AI של דברי ההסבר</span></i> מטרת השינוי</th>
+                }
                 <th>שינוי<br/> בהוצאה נטו</th>
                 <th>שינוי<br/> בהוצאה מותנית</th>
                 <th>שינוי<br/> בהרשאה להתחייב</th>
@@ -78,7 +72,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <strong>
                             סה״כ שינויים
                         </strong>
@@ -109,33 +103,53 @@
                         </strong>
                     </td>
                 </tr>
-                <tr *ngFor='let change of item.change_list'>
-                    <td>
-                        {{ change.budget_code_title.split(':')[0] }}
-                    </td>
-                    <td>
-                        {{ change.budget_code_title.split(':')[1] }}
-                    </td>
-                    <td>
-                        {{ change.ai_change_explanation }}
-                    </td>
-                    <td>
-                        <span class='number'>{{ format.number(change.net_expense_diff) }}</span>
-                    </td>
-                    <td>
-                        <span class='number'>{{ format.number(change.gross_expense_diff) }}</span>
-                    </td>
-                    <td>
-                        <span class='number'>{{ format.number(change.commitment_limit_diff) }}</span>
-                    </td>
-                    <td>
-                        <span class='number'>{{ format.number(change.allocated_income_diff) }}</span>
-                    </td>
-                    <td>
-                        <span class='number'>{{ format.number(change.personnel_max_diff) }}</span>
-                    </td>
-                </tr>
+                @for (change of item.change_list; track change.budget_code_title) {
+                    <tr>
+                        <td class='code'>
+                            {{ format.niceCode(change.budget_code_title.split(':')[0]) }}
+                        </td>
+                        <td class='title'>
+                            <a [routerLink]="['/i', 'budget', change.budget_code_title.split(':')[0], item.year]">{{ change.budget_code_title.split(':')[1] }}</a>                        
+                        </td>
+                        <td colspan="5" class='explanation'>
+                            {{ change.ai_change_explanation }}
+                        </td>                        
+                        <td class='report-link'>
+                            <a [routerLink]="['/dashboards', 'budget-transfers', 'budget', change.budget_code_title.split(':')[0], item.year]">
+                                דו״ח היסטוריה ונהנים
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class='inner-row'>
+                        <td colspan="3">
+                        </td>
+                        <td>
+                            <span class='number'>{{ format.number(change.net_expense_diff) }}</span>
+                        </td>
+                        <td>
+                            <span class='number'>{{ format.number(change.gross_expense_diff) }}</span>
+                        </td>
+                        <td>
+                            <span class='number'>{{ format.number(change.commitment_limit_diff) }}</span>
+                        </td>
+                        <td>
+                            <span class='number'>{{ format.number(change.allocated_income_diff) }}</span>
+                        </td>
+                        <td>
+                            <span class='number'>{{ format.number(change.personnel_max_diff) }}</span>
+                        </td>
+                    </tr>
+                }
             </tbody>
-        </table>      
+        </table>
+
+        <ng-container *ngIf='item.explanation'>
+            <label class="field-label">
+                דברי ההסבר המלאים:
+            </label>
+            <div class="objective" [innerHTML]='item.explanation'>
+            </div>    
+        </ng-container>
+
     </ng-container>
   </app-base-simple-item>
