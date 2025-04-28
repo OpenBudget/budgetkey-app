@@ -69,6 +69,7 @@
             <thead>
                 <th>קוד</th>
                 <th>תכנית</th>
+                <th><i class='bk-tooltip-anchor ai-icon'><span class='bk-tooltip'>ניתוח מבוסס AI של דברי ההסבר</span></i> הסבר השינוי</th>
                 <th>שינוי<br/> בהוצאה נטו</th>
                 <th>שינוי<br/> בהוצאה מותנית</th>
                 <th>שינוי<br/> בהרשאה להתחייב</th>
@@ -114,6 +115,9 @@
                     </td>
                     <td>
                         {{ change.budget_code_title.split(':')[1] }}
+                    </td>
+                    <td>
+                        {{ change.ai_change_explanation }}
                     </td>
                     <td>
                         <span class='number'>{{ format.number(change.net_expense_diff) }}</span>
