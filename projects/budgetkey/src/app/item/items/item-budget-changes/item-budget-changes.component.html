@@ -59,16 +59,24 @@
         </label>
         <table class="table">
             <thead>
-                <th>קוד</th>
-                <th>תכנית</th>
-                @if (item.year >= 2020) {
-                    <th class='explanation'><i class='bk-tooltip-anchor ai-icon'><span class='bk-tooltip'>ניתוח מבוסס AI של דברי ההסבר</span></i> מטרת השינוי</th>
-                }
-                <th>שינוי<br/> בהוצאה נטו</th>
-                <th>שינוי<br/> בהוצאה מותנית</th>
-                <th>שינוי<br/> בהרשאה להתחייב</th>
-                <th>שינוי<br/> בהכנסה מיועדת</th>
-                <th>שינוי<br/> בשיא כח אדם</th>
+                <tr>
+                    <th>קוד</th>
+                    <th>תכנית</th>
+                    @if (item.year >= 2020) {
+                        <th class='explanation'><i class='bk-tooltip-anchor ai-icon'><span class='bk-tooltip'>ניתוח מבוסס AI של דברי ההסבר</span></i> מטרת השינוי</th>
+                    } @else {
+                        <th></th>
+                    }
+                    <th colspan="5">שינויים:</th>
+                </tr>
+                <tr class='inner-row'>
+                    <th colspan="3"></th>
+                    <th>בהוצאה נטו</th>
+                    <th>בהוצאה מותנית</th>
+                    <th>בהרשאה להתחייב</th>
+                    <th>בהכנסה מיועדת</th>
+                    <th>בשיא כח אדם</th>    
+                </tr>
             </thead>
             <tbody>
                 <tr>
@@ -111,17 +119,22 @@
                         <td class='title'>
                             <a [routerLink]="['/i', 'budget', change.budget_code_title.split(':')[0], item.year]">{{ change.budget_code_title.split(':')[1] }}</a>                        
                         </td>
-                        <td colspan="5" class='explanation'>
-                            {{ change.ai_change_explanation }}
-                        </td>                        
-                        <td class='report-link'>
-                            <a [routerLink]="['/dashboards', 'budget-transfers', 'budget', change.budget_code_title.split(':')[0], item.year]">
-                                דו״ח היסטוריה ונהנים
-                            </a>
-                        </td>
+                        @if (item.year >= 2020) {
+                            <td colspan="6" class='explanation'>
+                                {{ change.ai_change_explanation }}
+                            </td>
+                        } @else {
+                            <td colspan="6" class='explanation'>                                
+                            </td>
+                        }
                     </tr>
                     <tr class='inner-row'>
-                        <td colspan="3">
+                        <td class='report-link' colspan="2">
+                            <a [routerLink]="['/dashboards', 'budget-transfers', 'budget', change.budget_code_title.split(':')[0], item.year]">
+                                צפייה בדו״ח היסטוריה ונהנים <i class='fa fa-external-link'></i>
+                            </a>
+                        </td>
+                        <td>
                         </td>
                         <td>
                             <span class='number'>{{ format.number(change.net_expense_diff) }}</span>

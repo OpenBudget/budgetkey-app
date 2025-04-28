@@ -1,15 +1,34 @@
+th {
+    border: none !important;
+}
+
 .inner-row {
     td {
         border: none;
     }
+    th {
+        border-bottom: 2px solid #888;
+    }
+}
 
+thead {
+    border-top: 1px solid #ccc;
 }
 
 td.report-link, td.code, td.title, th.explanation {
     white-space: nowrap;
 }
 
+.report-link {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 26px;
 
+    i {
+        vertical-align: middle;
+        font-size: 75%;
+    }
+}
 
 td.explanation {
     font-weight: 300;
