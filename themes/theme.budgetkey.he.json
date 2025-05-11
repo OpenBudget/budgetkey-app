@@ -186,21 +186,22 @@
         "description": "שינויים בתקציב המדינה המתרחשים במהלך השנה.",
         "types": ["national-budget-changes"],
         "placeholder": "חפשו פרטים על שינויים תקציביים...",
+        "ordering": "-date",
         "filterMenu": [
           {
             "id": "fiscal-year",
             "display": "בשנת התקציב",
             "options":[
               {
-                "id": "all",
-                "display": "כל שנות התקציב"
-              },
-              {
                 "id": "2025",
                 "display": "2025",
                 "filters": {
                   "year": 2025
                 }                
+              },
+              {
+                "id": "all",
+                "display": "כל שנות התקציב"
               },
               {
                 "id": "2024",
@@ -322,6 +323,37 @@
                 "display": "שינויים הממתינים לאישור ועדת הכספים",
                 "filters": {
                   "is_pending": true
+                }
+              }
+            ]
+          },
+          {
+            "id": "kind",
+            "display": "סוג",
+            "options": [
+              {
+                "id": "all",
+                "display": "כל הסוגים"
+              },
+              {
+                "id": "approve",
+                "display": "לאישור וועדת הכספים",
+                "filters": {
+                  "change_type_name": "אישור ועדה"
+                }
+              },
+              {
+                "id": "notify",
+                "display": "הודעה לוועדת הכספים",
+                "filters": {
+                  "change_type_name": "הודעה לועדה"
+                }
+              },
+              {
+                "id": "minister",
+                "display": "באישור שר האוצר",
+                "filters": {
+                  "change_type_name": "אישור אגף"
                 }
               }
             ]

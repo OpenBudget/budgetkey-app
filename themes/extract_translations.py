@@ -11,7 +11,9 @@ from transifex.api import transifex_api
 
 API = os.environ['TX_TOKEN']
 HEB=re.compile('[א-ת]')
-OUTBASE='../projects/budgetkey/src/assets/themes/'
+THEMES = Path(__file__).parent
+ROOT = THEMES.parent
+OUTBASE = ROOT / 'projects/budgetkey/src/assets/themes/'
 
 transifex_api.setup(auth=API)
 
@@ -22,9 +24,10 @@ KINDS = [
 ]
 
 def sources(kind):
-    for fn in Path('.').glob('{}*.he.json'.format(kind[0])):
+    for fn in THEMES.glob('{}*.he.json'.format(kind[0])):
         project = str(fn).split('.')[1]
-        yield fn, project, json.load(open(fn))
+        print('Found', fn, project)
+        yield fn, fn.name, project, json.load(open(fn))
 
 def keys(v, root=''):
     if isinstance(v, list):
@@ -44,7 +47,7 @@ def replace_with(v, replacements, project):
             yield k, replacements[k]
 
 def allkeys(kind):
-    for _, project, theme in sources(kind):
+    for _, _, project, theme in sources(kind):
         yield from keys(theme, project + '___')
 
 def hebrew(x):
@@ -89,9 +92,9 @@ def handle_kind(kind):
         translations = requests.get(url).text
         translations = yaml.load(translations, Loader=SafeLoader)['he']
 
-        for srcfn, project, theme in sources(kind):
-            fn = str(srcfn).replace('.he.', f'.{lang}.')
-            fn = OUTBASE + fn
+        for srcfn, filename, project, theme in sources(kind):
+            fn = str(filename).replace('.he.', f'.{lang}.')
+            fn = OUTBASE / fn
             for k, v in list(replace_with(theme, translations, project)):
                 parts = k.split('___')[1:]
                 ptr = theme
@@ -105,10 +108,11 @@ def handle_kind(kind):
                 ptr[parts[0]] = v
             json.dump(theme, open(fn, 'w'), indent=2, sort_keys=True, ensure_ascii=False)
             with srcfn.open('r') as f:
-                outsrcfn = str(OUTBASE / srcfn)
+                outsrcfn = str(OUTBASE / filename)
                 if '.he.' not in outsrcfn:
                     outsrcfn = outsrcfn.replace('.json', '.he.json')
                 with open(outsrcfn, 'w') as f2:
+                    print('Copying', srcfn, 'to', outsrcfn)
                     json.dump(json.load(f), f2, indent=2, sort_keys=True, ensure_ascii=False)
 
             
