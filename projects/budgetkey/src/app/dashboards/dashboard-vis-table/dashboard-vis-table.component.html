@@ -18,6 +18,14 @@
                 }
             </tbody>
         </table>
+        @if (data.download_url){
+            <div class="text-right">
+                <a class="btn btn-primary" [href]="data.download_url" target="_blank">
+                    <i class="fa fa-download"></i>
+                    הורדת נתונים
+                </a>
+            </div>
+        }
     } @else {
         <h3>לא נמצאו נתונים</h3>
     }

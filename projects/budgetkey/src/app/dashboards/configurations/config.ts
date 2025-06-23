@@ -16,7 +16,7 @@ export const config: any = {
       },
       {
         "kind": "table",
-        "query": "select  coalesce(to_char(\"date\", 'YYYY/MM/DD'), 'טרם אושר') as \"תאריך:str\", change_title as \"סוג:str\", req_title as \"כותרת:strw\", sum(net_expense_diff) as \"נטו:fig\", sum(gross_expense_diff) as \"ברוטו:fig\", sum(allocated_income_diff) as \"הכנסה מיועדת:fig\", sum(commitment_limit_diff) as \"הרשאה להתחייב:fig\", sum(personnel_max_diff) as \"שיא כ״א:fig\" from raw_budget_changes where budget_code like ':code%%' and year>=2015 group by 1,2,3,req_code,date order by date desc\n",
+        "query": "select  coalesce(to_char(\"date\", 'YYYY/MM/DD'), 'טרם אושר') as \"תאריך:str\", change_type_name as \"סוג פניה:str\", change_title as \"סוג:str\", req_title as \"כותרת:strw\",   sum(net_expense_diff) as \"נטו:fig\", sum(gross_expense_diff) as \"ברוטו:fig\", sum(allocated_income_diff) as \"הכנסה מיועדת:fig\", sum(commitment_limit_diff) as \"הרשאה להתחייב:fig\", sum(personnel_max_diff) as \"שיא כ״א:fig\" from raw_budget_changes where budget_code like ':code%%' and year>=2015 group by 1,2,3,4,req_code,date order by date desc\n",
         "title": "העברות בשנים האחרונות"
       },
       {

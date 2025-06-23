@@ -13,7 +13,7 @@ export class DashboardVisTableComponent {
   @Input() query: string;
   @Output() loading = new EventEmitter<boolean>();
 
-  data: any[] | null = null;
+  data: any | null = null;
   fields: any[];
   request: Subscription;
 

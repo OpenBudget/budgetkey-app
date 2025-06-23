@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
-import { switchMap, debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
+import { switchMap, debounceTime, map, distinctUntilChanged, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BudgetKeyItemService } from '../item/budgetkey-item.service';
@@ -92,7 +92,11 @@ export class DashboardsApiService {
     query = this.formatQuery(query, item);
     return this.bkis.doQuery(query)
       .pipe(
-        map((r: any) => r.rows)
+        map((r: any) => {
+          const ret: any = r.rows;
+          ret.download_url = r.download_url;
+          return ret;
+        })
       );
   }
 }
