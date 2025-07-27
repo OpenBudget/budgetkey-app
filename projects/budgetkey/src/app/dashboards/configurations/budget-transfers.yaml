@@ -25,7 +25,7 @@ visualizations:
             coalesce(to_char("date", 'YYYY/MM/DD'), 'טרם אושר') as "תאריך:str",
             change_type_name as "סוג פניה:str",
             change_title as "סוג:str",
-            req_title as "כותרת:strw",  
+            req_title as "כותרת:str",
             sum(net_expense_diff) as "נטו:fig",
             sum(gross_expense_diff) as "ברוטו:fig",
             sum(allocated_income_diff) as "הכנסה מיועדת:fig",
