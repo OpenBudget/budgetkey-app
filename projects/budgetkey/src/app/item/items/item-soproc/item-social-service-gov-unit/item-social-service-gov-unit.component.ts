@@ -93,11 +93,13 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
 
   constructor(private api: BudgetKeyItemService, private globalSettings: GlobalSettingsService, public ps: PlatformService, private el: ElementRef) {
     const fields = ['subject', 'intervention', 'target_audience', 'target_age_group'];
+    // console.log('XXX app-item-social-service-gov-unit')
     from(fields).pipe(
       mergeMap((field) => {
         return api.getDatarecords(field).pipe(
           map((results) => {
             results = results.sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+            // console.log('XXX got datarecords')
             return {results, field};
           })
         );

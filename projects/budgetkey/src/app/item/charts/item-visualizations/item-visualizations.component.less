@@ -1,3 +1,5 @@
+@import '../../../../common.less';
+
 .budgetkey-item-visualizations-wrapper {
     overflow: visible;
     width: 80%;
@@ -123,7 +125,8 @@
         flex-flow: row wrap;
         justify-content: space-evenly;
         padding: 12px;
-
+        gap: 0 12px;
+  
         @media only screen and (max-width: 600px) {
           flex-flow: column;
           justify-content: flex-start;
@@ -149,11 +152,19 @@
           vertical-align: middle;
 
           ::ng-deep .figure {
-            color: #FE8255;
+            color: @color-fill-lead;
             font-family: "Miriam Libre";
             font-weight: bold;
           }
+        }
 
+        input[type="radio"] {
+          margin-left: 5px;
+          accent-color: @color-fill-lead;
+
+          &:checked ~ label {
+            font-weight: 500;
+          }
         }
 
         input {

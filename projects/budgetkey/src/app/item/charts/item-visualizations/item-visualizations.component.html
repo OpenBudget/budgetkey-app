@@ -41,6 +41,8 @@
         <ng-container *ngFor="let subtab of subcharts">
           <ng-container *ngIf="subtab == currentSub">
             <h2 class="subtab-title" *ngIf="subtab.long_title" [innerHtml]="subtab.long_title"></h2>
+            <div class="chart-description" *ngIf="subtab.description"
+                [innerHtml]="subtab.description"></div>
             <app-chart-router [chart]='chart' [item]='item'></app-chart-router>
           </ng-container>
         </ng-container>
