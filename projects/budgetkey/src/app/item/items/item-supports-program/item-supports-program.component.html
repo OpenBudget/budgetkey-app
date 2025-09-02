@@ -1,0 +1,82 @@
+<app-base-simple-item [item]='item' [questions]='questions'
+    [headerPrimaryColor]='"#313E69"' [headerSecondaryColor]='"#6D82B4"'
+    [headerBgColor]='"#FFFDFA"' [headerBorderColor]='"#E5DFDA"'
+>
+    <ng-container class='category'>
+        <strong>{{ item.request_type }}</strong>
+    </ng-container>
+    <ng-container class='amount'>
+        <span class='number'>{{ format.number(item.total_paid) }}</span>
+        <small>₪</small>
+    </ng-container>
+    <ng-container class='title'>
+        <span>{{item.title}}</span>
+    </ng-container>
+    <ng-container class='subtitle'>
+        <span>/ {{ item.supporting_ministry }}</span>
+    </ng-container>
+    <ng-container class='extraInfo'>
+        תמיכה בין השנים
+        {{item.min_year}} ל-{{item.max_year}}
+    </ng-container>
+
+    <ng-container class='textTemplate'>
+        <div>
+            <label class="field-label">
+                שנות פעילות התכנית:
+            </label>
+            {{ item.min_year }} - {{ item.max_year }}
+        </div>
+        <div>
+            <label class="field-label">
+                מטרת התמיכה:
+            </label>
+            {{ item.title }}
+        </div>
+        <div>
+            <label class="field-label">
+                מטעם:
+            </label>
+            {{ item.supporting_ministry }}
+        </div>
+        <div>
+            <label class="field-label">
+                סה״כ תמיכות שאושרו לאורך תקופת הפעילות:
+            </label>
+            {{ format.number(item.total_approved ) }} ₪
+        </div>
+        <div>
+            <label class="field-label">
+                סה״כ כספים ששולמו לאורך תקופת הפעילות:
+            </label>
+            {{ format.number(item.total_paid) }} ₪
+        </div>
+        <div>
+            <label class="field-label">
+                מיצוי ממוצע של התמיכה (על פני כל השנים וכל מקבלי התמיכה):
+            </label>
+            {{ format.percent(item.average_utilization) }}
+        </div>
+
+        @if (item.budget_codes) {
+            <div>
+                <label class="field-label">
+                    התקנה התקציבית:
+                </label>
+                <ul>
+                    @for (bc of item.budget_codes; track bc[0]) {
+                        <li><a [href]="'/i/' + bc[3]">{{ format.niceCode(bc[1]) }} - {{ bc[2] }} ({{ bc[0] }})</a></li>
+                    }
+                </ul>
+                <!-- <app-search-link [searchQuery]='purpose.budget_code' [searchType]='"budget"'>
+                    {{ purpose.budget_code }}
+                </app-search-link> -->
+            </div>
+        }
+
+    <div>
+
+    </div>
+    
+    </ng-container>
+  </app-base-simple-item>

@@ -61,6 +61,7 @@ import { SearchLinkComponent } from './search-link/search-link.component';
 import { ListComponentsModule } from '../list-components/list-components.module';
 import { ItemPageHeaderComponent } from './item-page-header/item-page-header.component';
 import { ItemSoprocChartComponent } from './items/item-soproc/item-soproc-chart/item-soproc-chart.component';
+import { ItemSupportsProgramComponent } from './items/item-supports-program/item-supports-program.component';
 
 @NgModule({ declarations: [
         BaseOrgItemComponent,
@@ -93,6 +94,7 @@ import { ItemSoprocChartComponent } from './items/item-soproc/item-soproc-chart/
         ItemProcurementComponent,
         ItemSupportCriteriaComponent,
         ItemSupportsComponent,
+        ItemSupportsProgramComponent,
         ItemTenderComponent,
         ItemVisualizationsComponent,
         MuniBudgetLinkComponent,

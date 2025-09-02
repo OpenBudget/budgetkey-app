@@ -67,6 +67,9 @@
       @else if (prefix("supports/")) {
         <app-item-supports [item]='item'></app-item-supports>
       }
+      @else if (prefix("support_programs/")) {
+        <app-item-supports-program [item]='item'></app-item-supports-program>
+      }
 
       @else if (prefix("people/")) {
         <app-item-people [item]='item'></app-item-people>    
