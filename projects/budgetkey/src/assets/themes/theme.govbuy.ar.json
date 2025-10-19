@@ -154,7 +154,7 @@
                 "id": "new"
               },
               {
-                "display": "تمّ التحديث أخيرا",
+                "display": "تمّ تحديثها أخيرا",
                 "filters": {
                   "claim_date__gte": "now+1w",
                   "last_update_date__gte": "now-1w",
@@ -223,7 +223,7 @@
                 "id": "new"
               },
               {
-                "display": "تمّ التحديث أخيرا",
+                "display": "تمّ تحديثها أخيرا",
                 "filters": {
                   "claim_date__gte": "now+1w",
                   "last_update_date__gte": "now-1w",
@@ -284,7 +284,7 @@
                 "id": "new"
               },
               {
-                "display": "تمّ التحديث أخيرا",
+                "display": "تمّ تحديثها أخيرا",
                 "filters": {
                   "claim_date__gte": "now+1w",
                   "last_update_date__gte": "now-1w",

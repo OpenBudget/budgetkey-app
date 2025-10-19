@@ -63,7 +63,7 @@
             "id": "focused",
             "options": [
               {
-                "display": "None",
+                "display": "No",
                 "id": "no"
               },
               {
@@ -91,7 +91,7 @@
                 "id": "updated"
               },
               {
-                "display": "Active",
+                "display": "Open",
                 "filters": {
                   "claim_date__gte": "now"
                 },

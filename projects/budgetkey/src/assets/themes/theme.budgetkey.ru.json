@@ -249,15 +249,15 @@
             "id": "fiscal-year",
             "options": [
               {
-                "display": "כל שנות התקציב",
-                "id": "all"
-              },
-              {
                 "display": "2025",
                 "filters": {
                   "year": 2025
                 },
                 "id": "2025"
+              },
+              {
+                "display": "כל שנות התקציב",
+                "id": "all"
               },
               {
                 "display": "2024",
@@ -382,10 +382,42 @@
                 "id": "pending"
               }
             ]
+          },
+          {
+            "display": "סוג",
+            "id": "kind",
+            "options": [
+              {
+                "display": "כל הסוגים",
+                "id": "all"
+              },
+              {
+                "display": "לאישור וועדת הכספים",
+                "filters": {
+                  "change_type_name": "אישור ועדה"
+                },
+                "id": "approve"
+              },
+              {
+                "display": "הודעה לוועדת הכספים",
+                "filters": {
+                  "change_type_name": "הודעה לועדה"
+                },
+                "id": "notify"
+              },
+              {
+                "display": "באישור שר האוצר",
+                "filters": {
+                  "change_type_name": "אישור אגף"
+                },
+                "id": "minister"
+              }
+            ]
           }
         ],
         "id": "national-budget-changes",
         "name": "שינויים תקציביים",
+        "ordering": "-date",
         "placeholder": "חפשו פרטים על שינויים תקציביים...",
         "types": [
           "national-budget-changes"
@@ -403,11 +435,11 @@
                 "id": "all"
               },
               {
-                "display": "תמיכות תקציביות",
+                "display": "תכניות תמיכה תקציבית",
                 "filters": {
-                  "_type": "supports"
+                  "_type": "support_programs"
                 },
-                "id": "supports"
+                "id": "support_programs"
               },
               {
                 "display": "התקשרויות רכש",
@@ -423,7 +455,7 @@
         "name": "הוצאות",
         "placeholder": "חפשו פרטים על הוצאות...",
         "types": [
-          "supports",
+          "support_programs",
           "contract-spending"
         ]
       },

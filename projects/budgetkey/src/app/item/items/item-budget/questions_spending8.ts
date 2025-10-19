@@ -295,5 +295,60 @@ export default [
       "תאריך התחלה",
       "תאריך סיום"
     ]
+  },
+  {
+    text: "כל תכניות התמיכה בתקנה זו שהיו פעילות ב <year>",
+    query: [
+      "SELECT program_key, ",
+      "'support_programs/' || program_key as program_doc_id, ",
+      "title AS \"כותרת\", ",
+      "supporting_ministry AS \"משרד\", ",
+      "request_type AS \"סוג תמיכה\", ",
+      "total_entities as \"מספר ארגונים\", ",
+      "total_approved as \"סה״כ אושר\", ",
+      "total_paid as \"סה״כ שולם\", ",
+      "round(average_utilization * 100, 1) as \"אחוז מיצוי ממוצע\", ",
+      "year_range as \"תקופה\" ",
+      "FROM support_programs ",
+      "WHERE budget_codes::text like '%\":code%' ",
+      "AND ((:year BETWEEN min_year AND max_year) OR (:year = 0)) ",
+      "ORDER BY max_year desc, total_paid DESC NULLS LAST"
+    ],
+    parameters: {
+      year: {
+        "כל השנים": "0",
+        "2008": "2008",
+        "2009": "2009",
+        "2010": "2010",
+        "2011": "2011",
+        "2012": "2012",
+        "2013": "2013",
+        "2014": "2014",
+        "2015": "2015",
+        "2016": "2016",
+        "2017": "2017",
+        "2018": "2018",
+        "2019": "2019",
+        "2020": "2020",
+        "2021": "2021",
+        "2022": "2022",
+        "2023": "2023",
+        "2024": "2024",
+        "2025": "2025",
+      }
+    },
+    defaults: {
+      year: "כל השנים"
+    },
+    headers: [
+      "כותרת:item_link(program_doc_id)",
+      "משרד",
+      "סוג תמיכה",
+      "מספר ארגונים:number",
+      "סה״כ אושר:number",
+      "סה״כ שולם:number",
+      "אחוז מיצוי ממוצע:number",
+      "תקופה"
+    ]
   }
 ] as Question[];

@@ -260,32 +260,37 @@ export class SearchResultComponent implements OnInit {
       bodyBorderColor: '#E5DFDA',
       bodyBgColor: '#FFFDFA',
     },
-    // // Supports:
-    'supports': <Parameter>{
+    // // Support Programs:
+    'support_programs': <Parameter>{
       primaryColor: '#313E69',
       bgColor: '#ffffff',
 
       topRight: (x) => {
         const kind = x['request_type'] === 'א3' ? '3' + 'א' : x['request_type'];
-        return `<strong>תמיכה תקציבית</strong> (${kind})`;
+        return `<strong>תכנית תמיכה תקציבית</strong> (${kind})`;
       },
       topLeft: (x) => {
-        const payment = this.lastSupportPayment(x);
-        const paid = (payment['amount_paid'] / payment['amount_approved'] * 100).toFixed(0) + '%';
-        return `${paid} ביצוע`;
+        const paid = (x['average_utilization'] * 100).toFixed(0) + '%';
+        return `${paid} מיצוי תמיכה ממוצע`;
       },
 
       title: [
-        (x) => this.lastSupportPayment(x)['support_title'],
+        (x) => x['title'],
         (x) => {
-          const partyFrom = this.lastSupportPayment(x)['supporting_ministry'];
-          const partyTo = x['entity_name'] || x['recipient'];
-          return `${partyFrom} <span class='arrow left-solid'></span> ${partyTo}`;
+          const partyFrom = x['supporting_ministry'];
+          const all_recipients = x['recipients'];
+          let partyTo = '';
+          if (all_recipients.length > 1) {
+            partyTo = `${all_recipients.length.toLocaleString()} מוטבים`;
+          } else if (all_recipients.length === 1) {
+            partyTo = all_recipients[0]['name'];
+          }
+          return `${partyFrom} <span class='arrow left-dashed'></span> ${partyTo}`;
         }
       ],
 
       bottomRight: (x) => this.supportPeriodDetails(x),
-      bottomLeft: (x) => `<strong>${this.format_number(x['amount_total'])}&nbsp;₪</strong>`,
+      bottomLeft: (x) => `<strong>${this.format_number(x['total_paid'] / (x['max_year'] - x['min_year'] + 1))}&nbsp;₪</strong> בממוצע בשנה`,
 
       bodyStyle: ['color-top', 'borders-dashing'],
       bodyBorderColor: '#E5DFDA',
@@ -793,11 +798,12 @@ export class SearchResultComponent implements OnInit {
   }
 
   supportPeriodDetails(x: any) {
-    const lastYear = x['last_payment_year'];
-    if (!lastYear || lastYear === x['year_requested']) {
-      return `שנת תמיכה: ${x['year_requested']}`;
+    const maxYear = x['max_year'];
+    const minYear = x['min_year'];
+    if (!maxYear || maxYear === minYear) {
+      return `שנת תמיכה: ${minYear}`;
     } else {
-      return `תקופת תמיכה: ${x['year_requested']} - ${lastYear}`;
+      return `תקופת תמיכה: ${minYear} - ${maxYear}`;
     }
   }
 

@@ -322,7 +322,7 @@ export const DEFAULT_THEME: any={
       "id": "expenses",
       "name": "הוצאות",
       "description": "רכש ותמיכות מן המדינה לעמותות, ספקים, רשויות מקומיות וגופים נוספים.",
-      "types": ["supports", "contract-spending"],
+      "types": ["support_programs", "contract-spending"],
       "placeholder": "חפשו פרטים על הוצאות...",
       "filterMenu": [
         {

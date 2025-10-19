@@ -364,7 +364,7 @@
         "id": "expenses",
         "name": "הוצאות",
         "description": "רכש ותמיכות מן המדינה לעמותות, ספקים, רשויות מקומיות וגופים נוספים.",
-        "types": ["supports", "contract-spending"],
+        "types": ["support_programs", "contract-spending"],
         "placeholder": "חפשו פרטים על הוצאות...",
         "filterMenu": [
           {
@@ -376,10 +376,10 @@
                 "display": "הכל"
               },
               {
-                "id": "supports",
-                "display": "תמיכות תקציביות",
+                "id": "support_programs",
+                "display": "תכניות תמיכה תקציבית",
                 "filters": {
-                  "_type": "supports"
+                  "_type": "support_programs"
                 }
               },
               {

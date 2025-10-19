@@ -435,11 +435,11 @@
                 "id": "all"
               },
               {
-                "display": "תמיכות תקציביות",
+                "display": "תכניות תמיכה תקציבית",
                 "filters": {
-                  "_type": "supports"
+                  "_type": "support_programs"
                 },
-                "id": "supports"
+                "id": "support_programs"
               },
               {
                 "display": "התקשרויות רכש",
@@ -455,7 +455,7 @@
         "name": "הוצאות",
         "placeholder": "חפשו פרטים על הוצאות...",
         "types": [
-          "supports",
+          "support_programs",
           "contract-spending"
         ]
       },
