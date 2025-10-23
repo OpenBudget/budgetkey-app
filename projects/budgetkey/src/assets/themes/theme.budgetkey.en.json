@@ -424,48 +424,21 @@
         ]
       },
       {
-        "description": "רכש ותמיכות מן המדינה לעמותות, ספקים, רשויות מקומיות וגופים נוספים.",
-        "filterMenu": [
-          {
-            "display": "סוג ההוצאה",
-            "id": "kind",
-            "options": [
-              {
-                "display": "All",
-                "id": "all"
-              },
-              {
-                "display": "תכניות תמיכה תקציבית",
-                "filters": {
-                  "_type": "support_programs"
-                },
-                "id": "support_programs"
-              },
-              {
-                "display": "התקשרויות רכש",
-                "filters": {
-                  "_type": "contract-spending"
-                },
-                "id": "contract"
-              }
-            ]
-          }
-        ],
+        "description": "רכש של שירותים וסחורות מן המדינה לעמותות, ספקים, רשויות מקומיות וגופים נוספים.",
         "id": "expenses",
-        "name": "הוצאות",
-        "placeholder": "חפשו פרטים על הוצאות...",
+        "name": "רכש",
+        "placeholder": "חפשו פרטים על רכש...",
         "types": [
-          "support_programs",
           "contract-spending"
         ]
       },
       {
-        "description": "מבחנים וקריטריונים לתמיכה של המדינה בגופים",
-        "id": "support_criteria",
-        "name": "מבחני תמיכה",
-        "placeholder": "חפשו פרטים על מבחני תמיכה...",
+        "description": "תכנית תמיכה תקציביות",
+        "id": "support_programs",
+        "name": "תכניות תמיכה",
+        "placeholder": "חפשו פרטים על תכניות תמיכה...",
         "types": [
-          "support_criteria"
+          "support_programs"
         ]
       },
       {
@@ -565,19 +538,10 @@
         ]
       },
       {
-        "description": "Various names collected form our data sources",
-        "id": "people",
-        "name": "Names",
-        "placeholder": "Search for people's names in our database",
-        "types": [
-          "people"
-        ]
-      },
-      {
         "description": "Government Decisions, Policy Documents and other publications",
         "id": "gov_decisions",
-        "name": "Government Decisions",
-        "placeholder": "Search government decisions and policy documents",
+        "name": "החלטות ממשלה",
+        "placeholder": "חפשו החלטות ופרסומי ממשלה...",
         "types": [
           "gov_decisions"
         ]
@@ -601,7 +565,7 @@
                 "id": "health"
               },
               {
-                "display": "Ministry of Education",
+                "display": "משרד החינוך",
                 "filters": {
                   "publisher_name": "משרד החינוך"
                 },

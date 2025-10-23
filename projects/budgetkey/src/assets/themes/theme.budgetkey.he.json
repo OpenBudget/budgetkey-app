@@ -424,48 +424,21 @@
         ]
       },
       {
-        "description": "רכש ותמיכות מן המדינה לעמותות, ספקים, רשויות מקומיות וגופים נוספים.",
-        "filterMenu": [
-          {
-            "display": "סוג ההוצאה",
-            "id": "kind",
-            "options": [
-              {
-                "display": "הכל",
-                "id": "all"
-              },
-              {
-                "display": "תכניות תמיכה תקציבית",
-                "filters": {
-                  "_type": "support_programs"
-                },
-                "id": "support_programs"
-              },
-              {
-                "display": "התקשרויות רכש",
-                "filters": {
-                  "_type": "contract-spending"
-                },
-                "id": "contract"
-              }
-            ]
-          }
-        ],
+        "description": "רכש של שירותים וסחורות מן המדינה לעמותות, ספקים, רשויות מקומיות וגופים נוספים.",
         "id": "expenses",
-        "name": "הוצאות",
-        "placeholder": "חפשו פרטים על הוצאות...",
+        "name": "רכש",
+        "placeholder": "חפשו פרטים על רכש...",
         "types": [
-          "support_programs",
           "contract-spending"
         ]
       },
       {
-        "description": "מבחנים וקריטריונים לתמיכה של המדינה בגופים",
-        "id": "support_criteria",
-        "name": "מבחני תמיכה",
-        "placeholder": "חפשו פרטים על מבחני תמיכה...",
+        "description": "תכנית תמיכה תקציביות",
+        "id": "support_programs",
+        "name": "תכניות תמיכה",
+        "placeholder": "חפשו פרטים על תכניות תמיכה...",
         "types": [
-          "support_criteria"
+          "support_programs"
         ]
       },
       {
@@ -562,15 +535,6 @@
           "tenders",
           "calls_for_bids",
           "muni_tenders"
-        ]
-      },
-      {
-        "description": "שמות של פרטים המלוקטים ממקורות המידע השונים שלנו.",
-        "id": "people",
-        "name": "שמות",
-        "placeholder": "חפשו שמות של אנשים מתוך מאגר הנתונים שלנו...",
-        "types": [
-          "people"
         ]
       },
       {
