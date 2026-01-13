@@ -37,7 +37,8 @@
             "assets": [
               "projects/budgetkey/src/favicon.ico",
               "projects/budgetkey/src/robots.txt",
-              "projects/budgetkey/src/assets"
+              "projects/budgetkey/src/assets",
+              "projects/budgetkey/src/.well-known"
             ],
             "styles": [
               "projects/budgetkey/src/styles.less"
