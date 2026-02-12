@@ -4,7 +4,7 @@ placeholder: חיפוש תכנית תקציבית (למשל ״20.67.01״ או ״
 result_template: ":nice-code - :title"
 filters:
   depth__gt: 0
-  year: 2025
+  year: 2026
 visualizations:
 - title: היסטוריה תקציבית
   kind: table

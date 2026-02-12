@@ -81,7 +81,7 @@ export const DEFAULT_THEME: any={
               "id": "latest",
               "display": "שנת התקציב הנוכחית",
               "filters": {
-                "year": 2025
+                "year": 2026
               }
             }
           ]
@@ -191,6 +191,13 @@ export const DEFAULT_THEME: any={
             {
               "id": "all",
               "display": "כל שנות התקציב"
+            },
+            {
+              "id": "2026",
+              "display": "2026",
+              "filters": {
+                "year": 2026
+              }
             },
             {
               "id": "2025",

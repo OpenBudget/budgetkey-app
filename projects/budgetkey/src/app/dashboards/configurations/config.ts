@@ -3,7 +3,7 @@ export const config: any = {
     "doctype": "budget",
     "filters": {
       "depth__gt": 0,
-      "year": 2025
+      "year": 2026
     },
     "placeholder": "חיפוש תכנית תקציבית (למשל ״20.67.01״ או ״העברות לרשויות״)",
     "result_template": ":nice-code - :title",
