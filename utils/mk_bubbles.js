@@ -11,18 +11,11 @@ const YEAR = 2025;
 const PROPOSAL_YEAR = 2026; //2025;
 const BUDGET_CODE = '0020670142';
 
+const TOTAL_BUDGET_CONDITION = ` AND code >= '0001' AND (code < '0084' OR ((econ_cls_json->>0)::jsonb->>2='266'))`;
+
 const RETURNS_CONDITION = `
 ((code LIKE '0084%%') AND NOT ((econ_cls_json->>0)::jsonb->>2='266'))
 `;
-
-const GOV_INDUSTRIES_CONDITION = `
-(code > '0084')
-`;
-
-const TOTAL_BUDGET_CONDITION = `
-AND NOT code LIKE '0000%%'
-AND NOT ` + GOV_INDUSTRIES_CONDITION + `
-AND NOT ` + RETURNS_CONDITION;
 
 const EXPENSES_CONDITION = `length(code) = 10 AND year = ` + YEAR + TOTAL_BUDGET_CONDITION;
 
