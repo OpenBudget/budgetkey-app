@@ -24,7 +24,7 @@
       <br />אחרי העברות תקציביות, התקציב הוא ₪{{ format.number(item.net_revised) }}
     </ng-container>
     
-    <ng-container *ngIf='!takana && item.total_direction_income < 0'>
+    <ng-container *ngIf='!takana && item.total_direction_income < 0 && item.code !== "00"'>
       <br />
       יחד עם הכנסות עצמיות של ₪{{ format.number(-item.total_direction_income) }}, סך ההוצאות תחת סעיף זה הן ₪{{ format.number(item.total_direction_expense) }}.
     </ng-container>
@@ -89,7 +89,7 @@
       <br />
     </ng-container>
 
-    <ng-container *ngIf='!!startYear'>
+    <ng-container *ngIf='!!startYear && item.code !== "00"'>
       <ng-container *ngIf='startYear !== item.year'>
         תקציב זה פעיל בין השנים: {{ startYear }} - {{ item.year }}.
       </ng-container>
