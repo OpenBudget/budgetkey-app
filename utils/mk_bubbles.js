@@ -7,8 +7,8 @@ import fetch from 'node-fetch';
 
 const API_URL = 'https://next.obudget.org/api/query?query=';
 const DOC_URL = 'https://next.obudget.org/get/';
-const YEAR = 2025;
-const PROPOSAL_YEAR = 2026; //2025;
+const YEAR = 2026;
+const PROPOSAL_YEAR = -1;
 const BUDGET_CODE = '0020670142';
 
 const TOTAL_BUDGET_CONDITION = ` AND code >= '0001' AND (code < '0084' OR ((econ_cls_json->>0)::jsonb->>2='266'))`;
