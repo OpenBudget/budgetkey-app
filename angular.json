@@ -37,6 +37,7 @@
             "assets": [
               "projects/budgetkey/src/favicon.ico",
               "projects/budgetkey/src/robots.txt",
+              "projects/budgetkey/src/sitemap-mcp.xml",
               "projects/budgetkey/src/assets",
               "projects/budgetkey/src/.well-known"
             ],

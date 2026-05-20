@@ -520,6 +520,10 @@ export const DEFAULT_THEME: any={
       "title": "מי אנחנו"
     },
     {
+      "href": "/about/mcp",
+      "title": "התחברו בעזרת AI"
+    },
+    {
       "href": "https://www.jgive.com/new/he/ils/donation-targets/3268#donation-modal",
       "title": "תרמו לנו"
     }

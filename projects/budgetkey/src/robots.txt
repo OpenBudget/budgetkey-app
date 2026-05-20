@@ -1,4 +1,7 @@
 Sitemap: https://next.obudget.org/datapackages/sitemaps/sitemap.xml
+Sitemap: https://next.obudget.org/sitemap-mcp.xml
 
 User-agent: *
 Disallow: /api/
+Allow: /mcp
+Allow: /.well-known/
