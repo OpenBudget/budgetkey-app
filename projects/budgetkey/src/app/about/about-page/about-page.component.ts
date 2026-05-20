@@ -62,6 +62,9 @@ export class AboutPageComponent {
         if (data['a11y']) {
           return this.http.get(ps.BASE + `/assets/about/a11y.md`, {responseType: 'text'})
         }
+        if (data['mcp']) {
+          return this.http.get(ps.BASE + `/assets/about/mcp.md`, {responseType: 'text'})
+        }
         return this.http.get(ps.BASE + `/assets/about/${this.globalSettings.themeId}.md`, {responseType: 'text'})
       })
     ).subscribe((text: string) => {

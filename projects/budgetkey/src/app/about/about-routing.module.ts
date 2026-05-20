@@ -4,6 +4,7 @@ import { AboutPageComponent } from './about-page/about-page.component';
 
 const routes: Routes = [
   { path: 'a11y', component: AboutPageComponent, data: {a11y: true}},
+  { path: 'mcp', component: AboutPageComponent, data: {mcp: true}},
   { path: '', component: AboutPageComponent },
 ];
 
