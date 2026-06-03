@@ -101,6 +101,8 @@ app.get(
   }),
 );
 
+app.get('*.*', (_req, res) => res.sendStatus(404));
+
 /**
  * Handle all other requests by rendering the Angular application.
  */
