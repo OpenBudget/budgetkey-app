@@ -76,22 +76,22 @@
     </div>        
 
 
-    <div class='well filters-wrapper' #filtersElement>
+    <div class='well filters-wrapper' [class.measurement-mode]='currentTab === "measurement"' #filtersElement>
         <div class='filters'>
             <div class='filter' *ngFor='let filter of PAGE_FILTERS'>
                 <label [for]='filter.id' *ngIf='!filter.tooltip'>{{ filter.title }}</label>
                 <label [for]='filter.id' *ngIf='filter.tooltip' class='bk-tooltip-anchor'>{{ filter.title }}<span class='bk-tooltip'>{{ filter.tooltip }}</span></label>
                 <app-multi-select [title]='filter.title' [(value)]='filters[filter.id]' [id]='filter.id' [options]='parameters[filter.id]'></app-multi-select>
             </div>
-            <div class='filter' *ngIf='subunits'>
-                <label>מנהל/אגף</label>
+            <div class='filter unit-filter' *ngIf='subunits'>
+                <label>מינהל</label>
                 <select [(ngModel)]='item.unit' (change)='processLevel()'>
                     <option value='' selected>הכל</option>
                     <option *ngFor='let option of subunits' [value]='option'>{{option}}</option>
                 </select>
             </div>
         </div>
-        <div class='subtext'>
+        <div class='subtext' [class.hidden]='currentTab === "measurement"'>
             <span>לסימון מספר אפשרויות יש להשתמש בכפתורי Shift/Ctrl/Cmd במקלדת</span>
             <a class='clear-filters' (activated)='clearFilters()' clickOnReturn>ניקוי כל הסינונים</a>
             <button type='button' class='apply-filters' (activated)='filtersChanged()' clickOnReturn>סינון</button>
@@ -109,7 +109,10 @@
     >הרחבה לגבי מפעילי השירותים</a>
     <a [class.active]='currentTab === "tenders"' (activated)='setCurrentTab("tenders")' tabindex='0' clickOnReturn
         role='tab' [attr.aria-selected]='currentTab === "tenders"' aria-controls='tab-panel'
-    >הרחבה על הליכי רכש (בהרצה)</a>
+    >הרחבה על הליכי רכש</a>
+    <a [class.active]='currentTab === "measurement"' (activated)='setCurrentTab("measurement")' tabindex='0' clickOnReturn
+        role='tab' [attr.aria-selected]='currentTab === "measurement"' aria-controls='tab-panel'
+    >מדידת הרכש החברתי</a>
 </div>
 
 <div class='charts columns-2' #chartsSection id='tab-panel'>
@@ -128,7 +131,83 @@
     </ng-container>    
 </div>
 
-<ng-container *ngIf='ps.browser()'>
+<ng-container *ngIf='ps.browser() && currentTab !== "measurement"'>
     <app-social-service-data-table *ngIf='colorscheme | async' [tables]='tables' [default]='"services"' [replacements]='replacements' [filename]='item.page_title' [item]='item'></app-social-service-data-table>
 </ng-container>
+
+<div class='measurement-section' *ngIf='currentTab === "measurement"'>
+    <div class='measurement-intro'>
+        <p>
+            בהמשך <a href='https://www.gov.il/he/pages/dec489_2020' target='_blank'>להחלטת ממשלה מספר 489</a>, אגף ממשל וחברה במשרד רה"מ והמשרדים החברתיים מפרסמים את ממצאי המדידה של הרכש החברתי.
+            המדדים מאפשרים לבחון את המידה שבה כל משרד מטמיע את עקרונות הרכש החברתי המיטבי בתהליכי התכנון של השירותים ובמכרזים לרכש שירותים חברתיים.
+            כלי המדידה מיושם על כל מכרז בנפרד והנתונים המצטברים מאפשרים לראות תמונה רוחבית ולהשוות בין מינהלים ומשרדים.
+        </p>
+        <p>
+            ממצאי המדידה מאפשרים לבחון עד כמה המשרדים החברתיים מצליחים בהטמעת המדיניות הממשלתית בתחום הרכש החברתי, אילו עקרונות מדיניות מיושמים פחות או יותר ולזהות נושאים שיש לחזק ולשפר.
+        </p>
+    </div>
+
+    <div class='measurement-no-data' *ngIf='!measurementData || measurementData.total < MEASUREMENT_MIN_TENDERS'>
+        אין די נתונים מדידת הרכש החברתי בסינון הנבחר
+    </div>
+
+    <ng-container *ngIf='measurementData && measurementData.total >= MEASUREMENT_MIN_TENDERS'>
+        <div class='measurement-main-chart'>
+            <h3>ממצאי מדידת הרכש החברתי, {{MEASUREMENT_YEAR}}</h3>
+            <div class='chart-subtitle'>מבוסס על מדידת {{measurementData.total}} מכרזים</div>
+            <div class='measurement-legend'>
+                <span class='legend-label'>מידת יישום עקרונות הרכש החברתי</span>
+                <span class='legend-item legend-high'>במידה רבה</span>
+                <span class='legend-item legend-med'>במידה בינונית</span>
+                <span class='legend-item legend-low'>במידה מועטה</span>
+            </div>
+            <div class='principle-bars'>
+                <div class='principle-bar-row' *ngFor='let p of principleData'>
+                    <div class='stacked-bar'>
+                        <div class='bar-high' [style.width.%]='p.highPct' *ngIf='p.highPct > 0'></div>
+                        <div class='bar-med'  [style.width.%]='p.medPct'  *ngIf='p.medPct > 0'></div>
+                        <div class='bar-low'  [style.width.%]='p.lowPct'  *ngIf='p.lowPct > 0'></div>
+                    </div>
+                    <span class='principle-label'>{{p.name}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class='measurement-aspects'>
+            <h3>פירוט ההיבטים שנבדקו עבור כל עיקרון</h3>
+            <div class='measurement-legend'>
+                <span class='legend-item legend-high'>במידה רבה</span>
+                <span class='legend-item legend-med'>במידה בינונית</span>
+                <span class='legend-item legend-low'>במידה מועטה</span>
+            </div>
+            <div class='aspects-grid'>
+                <div class='principle-box' *ngFor='let p of principleAspects'>
+                    <h4>{{p.principleTitle}}</h4>
+                    <ng-container *ngFor='let a of p.aspects'>
+                        <div class='aspect-row' [class.aspect-core]='a.isCore'>
+                            <div class='stacked-bar'>
+                                <div class='bar-high' [style.width.%]='a.highPct' *ngIf='a.highPct > 0'>{{a.highPct}}%</div>
+                                <div class='bar-med'  [style.width.%]='a.medPct'  *ngIf='a.medPct > 0'>{{a.medPct}}%</div>
+                                <div class='bar-low'  [style.width.%]='a.lowPct'  *ngIf='a.lowPct > 0'>{{a.lowPct}}%</div>
+                            </div>
+                            <div class='aspect-label-col'>
+                                <div class='core-header' *ngIf='a.isCore'>
+                                    <svg class='core-icon' width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.33333 17.6667C13.9357 17.6667 17.6667 13.9357 17.6667 9.33333C17.6667 4.73096 13.9357 1 9.33333 1C4.73096 1 1 4.73096 1 9.33333C1 13.9357 4.73096 17.6667 9.33333 17.6667Z" stroke="#CB30E0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M9.33333 14.3333C12.0948 14.3333 14.3333 12.0948 14.3333 9.33333C14.3333 6.57191 12.0948 4.33333 9.33333 4.33333C6.57191 4.33333 4.33333 6.57191 4.33333 9.33333C4.33333 12.0948 6.57191 14.3333 9.33333 14.3333Z" stroke="#CB30E0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M9.33333 11C10.2538 11 11 10.2538 11 9.33333C11 8.41286 10.2538 7.66667 9.33333 7.66667C8.41286 7.66667 7.66667 8.41286 7.66667 9.33333C7.66667 10.2538 8.41286 11 9.33333 11Z" stroke="#CB30E0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span class='core-label'>היבט ליבה</span>
+                                    <img src='assets/item/img/icon-Info.svg' class='info-icon' alt=''/>
+                                </div>
+                                <div class='aspect-label'>{{a.name}}</div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
 <div class='sticky-contact-us'><a href='mailto:rehesh.hevrati@pmo.gov.il' target='_blank'>יצירת קשר או דיווח על תקלה</a></div>
