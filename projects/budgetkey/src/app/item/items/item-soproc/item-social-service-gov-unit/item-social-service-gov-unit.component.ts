@@ -523,11 +523,9 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
 
   private tierPcts(total: number, low: number, med: number, high: number) {
     if (!total) return {lowPct: 0, medPct: 0, highPct: 0};
-    return {
-      lowPct: Math.round(low / total * 100),
-      medPct: Math.round(med / total * 100),
-      highPct: Math.round(high / total * 100),
-    };
+    const lowPct = Math.round(low / total * 100);
+    const medPct = Math.round(med / total * 100);
+    return {lowPct, medPct, highPct: 100 - lowPct - medPct};
   }
 
   get principleData(): any[] {
