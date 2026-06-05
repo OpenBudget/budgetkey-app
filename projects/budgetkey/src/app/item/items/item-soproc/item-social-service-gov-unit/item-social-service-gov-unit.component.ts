@@ -1,4 +1,61 @@
+// measurement tab - purple icon core-header-in-label-col
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+
+const MEASUREMENT_QUERY = `SELECT
+  count(*) as total,
+  sum(case when principle_score_1 < 0.35 then 1 else 0 end) as p1_low,
+  sum(case when principle_score_1 >= 0.35 and principle_score_1 < 0.70 then 1 else 0 end) as p1_med,
+  sum(case when principle_score_1 >= 0.70 then 1 else 0 end) as p1_high,
+  sum(case when principle_score_2 < 0.35 then 1 else 0 end) as p2_low,
+  sum(case when principle_score_2 >= 0.35 and principle_score_2 < 0.70 then 1 else 0 end) as p2_med,
+  sum(case when principle_score_2 >= 0.70 then 1 else 0 end) as p2_high,
+  sum(case when principle_score_3 < 0.35 then 1 else 0 end) as p3_low,
+  sum(case when principle_score_3 >= 0.35 and principle_score_3 < 0.70 then 1 else 0 end) as p3_med,
+  sum(case when principle_score_3 >= 0.70 then 1 else 0 end) as p3_high,
+  sum(case when principle_score_4 < 0.35 then 1 else 0 end) as p4_low,
+  sum(case when principle_score_4 >= 0.35 and principle_score_4 < 0.70 then 1 else 0 end) as p4_med,
+  sum(case when principle_score_4 >= 0.70 then 1 else 0 end) as p4_high,
+  sum(case when principle_score_5 < 0.35 then 1 else 0 end) as p5_low,
+  sum(case when principle_score_5 >= 0.35 and principle_score_5 < 0.70 then 1 else 0 end) as p5_med,
+  sum(case when principle_score_5 >= 0.70 then 1 else 0 end) as p5_high,
+  sum(case when principle_score_6 < 0.35 then 1 else 0 end) as p6_low,
+  sum(case when principle_score_6 >= 0.35 and principle_score_6 < 0.70 then 1 else 0 end) as p6_med,
+  sum(case when principle_score_6 >= 0.70 then 1 else 0 end) as p6_high,
+  sum(case when principle_score_1_1 < 0.35 then 1 else 0 end) as p1_1_low,
+  sum(case when principle_score_1_1 >= 0.35 and principle_score_1_1 < 0.70 then 1 else 0 end) as p1_1_med,
+  sum(case when principle_score_1_1 >= 0.70 then 1 else 0 end) as p1_1_high,
+  sum(case when principle_score_1_2 < 0.35 then 1 else 0 end) as p1_2_low,
+  sum(case when principle_score_1_2 >= 0.35 and principle_score_1_2 < 0.70 then 1 else 0 end) as p1_2_med,
+  sum(case when principle_score_1_2 >= 0.70 then 1 else 0 end) as p1_2_high,
+  sum(case when principle_score_1_3 < 0.35 then 1 else 0 end) as p1_3_low,
+  sum(case when principle_score_1_3 >= 0.35 and principle_score_1_3 < 0.70 then 1 else 0 end) as p1_3_med,
+  sum(case when principle_score_1_3 >= 0.70 then 1 else 0 end) as p1_3_high,
+  sum(case when principle_score_1_4 < 0.35 then 1 else 0 end) as p1_4_low,
+  sum(case when principle_score_1_4 >= 0.35 and principle_score_1_4 < 0.70 then 1 else 0 end) as p1_4_med,
+  sum(case when principle_score_1_4 >= 0.70 then 1 else 0 end) as p1_4_high,
+  sum(case when principle_score_2_1 < 0.35 then 1 else 0 end) as p2_1_low,
+  sum(case when principle_score_2_1 >= 0.35 and principle_score_2_1 < 0.70 then 1 else 0 end) as p2_1_med,
+  sum(case when principle_score_2_1 >= 0.70 then 1 else 0 end) as p2_1_high,
+  sum(case when principle_score_2_2 < 0.35 then 1 else 0 end) as p2_2_low,
+  sum(case when principle_score_2_2 >= 0.35 and principle_score_2_2 < 0.70 then 1 else 0 end) as p2_2_med,
+  sum(case when principle_score_2_2 >= 0.70 then 1 else 0 end) as p2_2_high,
+  sum(case when principle_score_3_1 < 0.35 then 1 else 0 end) as p3_1_low,
+  sum(case when principle_score_3_1 >= 0.35 and principle_score_3_1 < 0.70 then 1 else 0 end) as p3_1_med,
+  sum(case when principle_score_3_1 >= 0.70 then 1 else 0 end) as p3_1_high,
+  sum(case when principle_score_3_2 < 0.35 then 1 else 0 end) as p3_2_low,
+  sum(case when principle_score_3_2 >= 0.35 and principle_score_3_2 < 0.70 then 1 else 0 end) as p3_2_med,
+  sum(case when principle_score_3_2 >= 0.70 then 1 else 0 end) as p3_2_high,
+  sum(case when principle_score_6_1 < 0.35 then 1 else 0 end) as p6_1_low,
+  sum(case when principle_score_6_1 >= 0.35 and principle_score_6_1 < 0.70 then 1 else 0 end) as p6_1_med,
+  sum(case when principle_score_6_1 >= 0.70 then 1 else 0 end) as p6_1_high,
+  sum(case when principle_score_6_2 < 0.35 then 1 else 0 end) as p6_2_low,
+  sum(case when principle_score_6_2 >= 0.35 and principle_score_6_2 < 0.70 then 1 else 0 end) as p6_2_med,
+  sum(case when principle_score_6_2 >= 0.70 then 1 else 0 end) as p6_2_high,
+  sum(case when principle_score_6_3 < 0.35 then 1 else 0 end) as p6_3_low,
+  sum(case when principle_score_6_3 >= 0.35 and principle_score_6_3 < 0.70 then 1 else 0 end) as p6_3_med,
+  sum(case when principle_score_6_3 >= 0.70 then 1 else 0 end) as p6_3_high
+FROM soproc_measurement
+WHERE :where`;
 import { Subscription, ReplaySubject, from, mergeMap, map, first, switchMap, delay, fromEvent, throttleTime, forkJoin, interval, animationFrameScheduler } from 'rxjs';
 import { BudgetKeyItemService } from '../../../budgetkey-item.service';
 import { tableDefs } from './tables';
@@ -53,6 +110,10 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
     '#E4CF43', // 11
   ];
   OTHER_COLOR_IDX = this.COLORS.length - 1;
+
+  readonly MEASUREMENT_YEAR = '2025';
+  readonly MEASUREMENT_MIN_TENDERS = 3;
+  public measurementData: any = null;
 
   public parameters: any = {
     pricing_model: [
@@ -306,6 +367,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       {from: ':tender-type', to: this.filterExpression('tender_type')},
       {from: ':pricing-model', to: this.filterExpression('pricing_model')},
     ];
+    this.fetchMeasurementData();
   }
 
   clearFilters() {
@@ -437,6 +499,102 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
     } else {
       return ct.title;
     }
+  }
+
+  calcMeasurementWhere(): string {
+    return this.levelCond;
+  }
+
+  private encodeQuery(query: string): string {
+    return btoa(encodeURIComponent(query).replace(/%([0-9A-F]{2})/g, (_m, p1) => String.fromCharCode(parseInt(p1, 16))));
+  }
+
+  fetchMeasurementData() {
+    if (this.ps.server()) return;
+    const where = this.calcMeasurementWhere();
+    const query = MEASUREMENT_QUERY.split(':where').join(where);
+    const encoded = this.encodeQuery(query);
+    this.api.getItemData(encoded, ['total'], [this.formatter('total')])
+      .subscribe((result: any) => {
+        const rows = result.rows || [];
+        this.measurementData = rows.length > 0 ? rows[0] : null;
+      });
+  }
+
+  private tierPcts(total: number, low: number, med: number, high: number) {
+    if (!total) return {lowPct: 0, medPct: 0, highPct: 0};
+    const lowPct = Math.round(low / total * 100);
+    const medPct = Math.round(med / total * 100);
+    return {lowPct, medPct, highPct: 100 - lowPct - medPct};
+  }
+
+  get principleData(): any[] {
+    if (!this.measurementData) return [];
+    const d = this.measurementData;
+    const t = +d.total;
+    return [
+      {name: 'עקרון ראשון: מקבל השירות במרכז',                        ...this.tierPcts(t, +d.p1_low, +d.p1_med, +d.p1_high)},
+      {name: 'עקרון שני: ניהול מוכוון תוצאות',                        ...this.tierPcts(t, +d.p2_low, +d.p2_med, +d.p2_high)},
+      {name: 'עקרון שלישי: חדשנות וגמישות',                           ...this.tierPcts(t, +d.p3_low, +d.p3_med, +d.p3_high)},
+      {name: 'עקרון רביעי: פיתוח ושימור ידע',                         ...this.tierPcts(t, +d.p4_low, +d.p4_med, +d.p4_high)},
+      {name: 'עקרון חמישי: המפעיל כשותף',                             ...this.tierPcts(t, +d.p5_low, +d.p5_med, +d.p5_high)},
+      {name: 'עקרון שישי: תכנון כלכלי ותחרות בשירות האיכות',          ...this.tierPcts(t, +d.p6_low, +d.p6_med, +d.p6_high)},
+    ];
+  }
+
+  get principleAspects(): any[] {
+    if (!this.measurementData) return [];
+    const d = this.measurementData;
+    const t = +d.total;
+    return [
+      {
+        principleTitle: 'עקרון ראשון: מקבל השירות במרכז',
+        aspects: [
+          {name: 'למקבלי השירות יש קול בתהליך עיצוב השירות ולאורך מתן השירותים',                                      isCore: false, ...this.tierPcts(t, +d.p1_2_low, +d.p1_2_med, +d.p1_2_high)},
+          {name: 'המידע על השירות מונגש למקבלי השירות כך שיוכלו למצות את זכויותיהם בשירות',                           isCore: false, ...this.tierPcts(t, +d.p1_3_low, +d.p1_3_med, +d.p1_3_high)},
+          {name: 'נשמרת רציפות ויציבות במתן שירותים או קשר טיפולי',                                                   isCore: false, ...this.tierPcts(t, +d.p1_4_low, +d.p1_4_med, +d.p1_4_high)},
+          {name: 'השירות מותאם לצרכי כלל מקבלי השירות',                                                               isCore: true,  ...this.tierPcts(t, +d.p1_1_low, +d.p1_1_med, +d.p1_1_high)},
+        ]
+      },
+      {
+        principleTitle: 'עקרון שני: ניהול מוכוון תוצאות',
+        aspects: [
+          {name: 'יש לשירות מערך מדידה לבחינת מידת השגת התוצאות ומתבצע ניהול שירות מוכוון תוצאות',                  isCore: false, ...this.tierPcts(t, +d.p2_2_low, +d.p2_2_med, +d.p2_2_high)},
+          {name: 'השירות מוכוון להשגת תוצאות מוגדרות',                                                                isCore: true,  ...this.tierPcts(t, +d.p2_1_low, +d.p2_1_med, +d.p2_1_high)},
+        ]
+      },
+      {
+        principleTitle: 'עקרון שלישי: חדשנות וגמישות',
+        aspects: [
+          {name: 'מתאפשרת גמישות בהתאמת השירות לצרכים משתנים',                                                        isCore: false, ...this.tierPcts(t, +d.p3_2_low, +d.p3_2_med, +d.p3_2_high)},
+          {name: 'מודל השירות משקף את חזית הידע',                                                                      isCore: true,  ...this.tierPcts(t, +d.p3_1_low, +d.p3_1_med, +d.p3_1_high)},
+        ]
+      },
+      {
+        principleTitle: 'עקרון רביעי: פיתוח ושימור ידע',
+        aspects: [
+          {name: 'ידע המפותח והנצבר במהלך ההתקשרות מתועד באופן המאפשר שימור, שיתוף ולמידה ומועבר במלואו למשרד ו/או למפעיל מחליף', isCore: true, ...this.tierPcts(t, +d.p4_low, +d.p4_med, +d.p4_high)},
+        ]
+      },
+      {
+        principleTitle: 'עקרון חמישי: המפעיל כשותף',
+        aspects: [
+          {name: 'מתקיים שיח מקצועי רציף בין המשרד למפעילים בשלבי תכנון השירות ובמהלך מתן השירותים',                 isCore: true, ...this.tierPcts(t, +d.p5_low, +d.p5_med, +d.p5_high)},
+        ]
+      },
+      {
+        principleTitle: 'עקרון שישי: תכנון כלכלי ותחרות בשירות האיכות',
+        aspects: [
+          {name: 'הגברת תחרות בין מפעילים במהלך חיי ההתקשרות',                                                        isCore: false, ...this.tierPcts(t, +d.p6_2_low, +d.p6_2_med, +d.p6_2_high)},
+          {name: 'תכנון כלכלי ההולם את הצרכים הנדרשים למתן שירות איכותי',                                             isCore: false, ...this.tierPcts(t, +d.p6_3_low, +d.p6_3_med, +d.p6_3_high)},
+          {name: 'הגברת התחרות בין מתמודדים בתקופת המכרוז',                                                            isCore: true,  ...this.tierPcts(t, +d.p6_1_low, +d.p6_1_med, +d.p6_1_high)},
+        ]
+      },
+    ];
+  }
+
+  getCoreAspect(p: any): any {
+    return p.aspects?.find((a: any) => a.isCore);
   }
 
 }
