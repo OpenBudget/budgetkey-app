@@ -110,9 +110,9 @@
     <a [class.active]='currentTab === "tenders"' (activated)='setCurrentTab("tenders")' tabindex='0' clickOnReturn
         role='tab' [attr.aria-selected]='currentTab === "tenders"' aria-controls='tab-panel'
     >הרחבה על הליכי רכש</a>
-    <!--a [class.active]='currentTab === "measurement"' (activated)='setCurrentTab("measurement")' tabindex='0' clickOnReturn
+    <a [class.active]='currentTab === "measurement"' (activated)='setCurrentTab("measurement")' tabindex='0' clickOnReturn
         role='tab' [attr.aria-selected]='currentTab === "measurement"' aria-controls='tab-panel'
-    >מדידת הרכש החברתי</a-->
+    >מדידת הרכש החברתי</a>
 </div>
 
 <div class='charts columns-2' #chartsSection id='tab-panel'>
