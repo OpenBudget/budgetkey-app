@@ -164,9 +164,9 @@
             <div class='principle-bars'>
                 <div class='principle-bar-row' *ngFor='let p of principleData'>
                     <div class='stacked-bar'>
-                        <div class='bar-high' [style.width.%]='p.highPct' *ngIf='p.highPct > 0'></div>
-                        <div class='bar-med'  [style.width.%]='p.medPct'  *ngIf='p.medPct > 0'></div>
-                        <div class='bar-low'  [style.width.%]='p.lowPct'  *ngIf='p.lowPct > 0'></div>
+                        <div class='bar-high' [style.width.%]='p.highPct' *ngIf='p.highPct > 0' [title]='"מספר מכרזים: " + p.highCount'><div class='bar-text'>{{p.highPct}}<small *ngIf='p.highPct>=10'>%</small></div></div>
+                        <div class='bar-med'  [style.width.%]='p.medPct'  *ngIf='p.medPct > 0'  [title]='"מספר מכרזים: " + p.medCount'><div class='bar-text'>{{p.medPct}}<small *ngIf='p.medPct>=10'>%</small></div></div>
+                        <div class='bar-low'  [style.width.%]='p.lowPct'  *ngIf='p.lowPct > 0'  [title]='"מספר מכרזים: " + p.lowCount'><div class='bar-text'>{{p.lowPct}}<small *ngIf='p.lowPct>=10'>%</small></div></div>
                     </div>
                     <span class='principle-label'>{{p.name}}</span>
                 </div>
@@ -174,7 +174,7 @@
         </div>
 
         <div class='measurement-aspects'>
-            <h3>פירוט ההיבטים שנבדקו עבור כל עיקרון</h3>
+            <h3>פירוט ההיבטים שנבדקו עבור כל עיקרון באחוזים</h3>
             <div class='measurement-legend'>
                 <span class='legend-item legend-high'>במידה רבה</span>
                 <span class='legend-item legend-med'>במידה בינונית</span>
@@ -186,9 +186,9 @@
                     <ng-container *ngFor='let a of p.aspects'>
                         <div class='aspect-row' [class.aspect-core]='a.isCore'>
                             <div class='stacked-bar'>
-                                <div class='bar-high' [style.width.%]='a.highPct' *ngIf='a.highPct > 0'>{{a.highPct}}%</div>
-                                <div class='bar-med'  [style.width.%]='a.medPct'  *ngIf='a.medPct > 0'>{{a.medPct}}%</div>
-                                <div class='bar-low'  [style.width.%]='a.lowPct'  *ngIf='a.lowPct > 0'>{{a.lowPct}}%</div>
+                                <div class='bar-high' [style.width.%]='a.highPct' *ngIf='a.highPct > 0' [title]='"מספר מכרזים: " + a.highCount'><div class='bar-text'>{{a.highPct}}<small *ngIf='a.highPct>=10'>%</small></div></div>
+                                <div class='bar-med'  [style.width.%]='a.medPct'  *ngIf='a.medPct > 0'  [title]='"מספר מכרזים: " + a.medCount'><div class='bar-text'>{{a.medPct}}<small *ngIf='a.medPct>=10'>%</small></div></div>
+                                <div class='bar-low'  [style.width.%]='a.lowPct'  *ngIf='a.lowPct > 0'  [title]='"מספר מכרזים: " + a.lowCount'><div class='bar-text'>{{a.lowPct}}<small *ngIf='a.lowPct>=10'>%</small></div></div>
                             </div>
                             <div class='aspect-label-col'>
                                 <div class='core-header' *ngIf='a.isCore'>

@@ -53,7 +53,25 @@ const MEASUREMENT_QUERY = `SELECT
   sum(case when principle_score_6_2 >= 0.70 then 1 else 0 end) as p6_2_high,
   sum(case when principle_score_6_3 < 0.35 then 1 else 0 end) as p6_3_low,
   sum(case when principle_score_6_3 >= 0.35 and principle_score_6_3 < 0.70 then 1 else 0 end) as p6_3_med,
-  sum(case when principle_score_6_3 >= 0.70 then 1 else 0 end) as p6_3_high
+  sum(case when principle_score_6_3 >= 0.70 then 1 else 0 end) as p6_3_high,
+  sum(case when core_aspect_score_1 <= 2 then 1 else 0 end) as ca1_low,
+  sum(case when core_aspect_score_1 = 3 then 1 else 0 end) as ca1_med,
+  sum(case when core_aspect_score_1 >= 4 then 1 else 0 end) as ca1_high,
+  sum(case when core_aspect_score_2 <= 2 then 1 else 0 end) as ca2_low,
+  sum(case when core_aspect_score_2 = 3 then 1 else 0 end) as ca2_med,
+  sum(case when core_aspect_score_2 >= 4 then 1 else 0 end) as ca2_high,
+  sum(case when core_aspect_score_3 <= 2 then 1 else 0 end) as ca3_low,
+  sum(case when core_aspect_score_3 = 3 then 1 else 0 end) as ca3_med,
+  sum(case when core_aspect_score_3 >= 4 then 1 else 0 end) as ca3_high,
+  sum(case when core_aspect_score_4 <= 2 then 1 else 0 end) as ca4_low,
+  sum(case when core_aspect_score_4 = 3 then 1 else 0 end) as ca4_med,
+  sum(case when core_aspect_score_4 >= 4 then 1 else 0 end) as ca4_high,
+  sum(case when core_aspect_score_5 <= 2 then 1 else 0 end) as ca5_low,
+  sum(case when core_aspect_score_5 = 3 then 1 else 0 end) as ca5_med,
+  sum(case when core_aspect_score_5 >= 4 then 1 else 0 end) as ca5_high,
+  sum(case when core_aspect_score_6 <= 2 then 1 else 0 end) as ca6_low,
+  sum(case when core_aspect_score_6 = 3 then 1 else 0 end) as ca6_med,
+  sum(case when core_aspect_score_6 >= 4 then 1 else 0 end) as ca6_high
 FROM soproc_measurement
 WHERE :where`;
 import { Subscription, ReplaySubject, from, mergeMap, map, first, switchMap, delay, fromEvent, throttleTime, forkJoin, interval, animationFrameScheduler } from 'rxjs';
@@ -521,10 +539,10 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   }
 
   private tierPcts(total: number, low: number, med: number, high: number) {
-    if (!total) return {lowPct: 0, medPct: 0, highPct: 0};
+    if (!total) return {lowPct: 0, medPct: 0, highPct: 0, lowCount: 0, medCount: 0, highCount: 0};
     const lowPct = Math.round(low / total * 100);
     const medPct = Math.round(med / total * 100);
-    return {lowPct, medPct, highPct: 100 - lowPct - medPct};
+    return {lowPct, medPct, highPct: 100 - lowPct - medPct, lowCount: low, medCount: med, highCount: high};
   }
 
   get principleData(): any[] {
@@ -549,44 +567,50 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       {
         principleTitle: 'עקרון ראשון: מקבל השירות במרכז',
         aspects: [
+          {name: 'השירות מותאם לצרכי כלל מקבלי השירות',                                                               isCore: false, ...this.tierPcts(t, +d.p1_1_low, +d.p1_1_med, +d.p1_1_high)},
           {name: 'למקבלי השירות יש קול בתהליך עיצוב השירות ולאורך מתן השירותים',                                      isCore: false, ...this.tierPcts(t, +d.p1_2_low, +d.p1_2_med, +d.p1_2_high)},
           {name: 'המידע על השירות מונגש למקבלי השירות כך שיוכלו למצות את זכויותיהם בשירות',                           isCore: false, ...this.tierPcts(t, +d.p1_3_low, +d.p1_3_med, +d.p1_3_high)},
           {name: 'נשמרת רציפות ויציבות במתן שירותים או קשר טיפולי',                                                   isCore: false, ...this.tierPcts(t, +d.p1_4_low, +d.p1_4_med, +d.p1_4_high)},
-          {name: 'השירות מותאם לצרכי כלל מקבלי השירות',                                                               isCore: true,  ...this.tierPcts(t, +d.p1_1_low, +d.p1_1_med, +d.p1_1_high)},
+          {name: 'המכרז קובע הליכים הנותנים קול למקבלי השירות או משפחותיהם בעת הפעלת השירות',                         isCore: true,  ...this.tierPcts(t, +d.ca1_low, +d.ca1_med, +d.ca1_high)},
         ]
       },
       {
         principleTitle: 'עקרון שני: ניהול מוכוון תוצאות',
         aspects: [
+          {name: 'השירות מוכוון להשגת תוצאות מוגדרות',                                                                isCore: false, ...this.tierPcts(t, +d.p2_1_low, +d.p2_1_med, +d.p2_1_high)},
           {name: 'יש לשירות מערך מדידה לבחינת מידת השגת התוצאות ומתבצע ניהול שירות מוכוון תוצאות',                  isCore: false, ...this.tierPcts(t, +d.p2_2_low, +d.p2_2_med, +d.p2_2_high)},
-          {name: 'השירות מוכוון להשגת תוצאות מוגדרות',                                                                isCore: true,  ...this.tierPcts(t, +d.p2_1_low, +d.p2_1_med, +d.p2_1_high)},
+          {name: 'המכרז כולל הגדרה של המדדים על בסיסם יימדד מפעיל השירות כולל מדדי תוצאה מרכזיים',                  isCore: true,  ...this.tierPcts(t, +d.ca2_low, +d.ca2_med, +d.ca2_high)},
         ]
       },
       {
         principleTitle: 'עקרון שלישי: חדשנות וגמישות',
         aspects: [
+          {name: 'מודל השירות משקף את חזית הידע',                                                                      isCore: false, ...this.tierPcts(t, +d.p3_1_low, +d.p3_1_med, +d.p3_1_high)},
           {name: 'מתאפשרת גמישות בהתאמת השירות לצרכים משתנים',                                                        isCore: false, ...this.tierPcts(t, +d.p3_2_low, +d.p3_2_med, +d.p3_2_high)},
-          {name: 'מודל השירות משקף את חזית הידע',                                                                      isCore: true,  ...this.tierPcts(t, +d.p3_1_low, +d.p3_1_med, +d.p3_1_high)},
+          {name: 'המודל המכרזי מאפשר גמישות באופן אספקת השירות בהתאם לצרכים משתנים, בהלימה להנחיות המקצועיות',      isCore: true,  ...this.tierPcts(t, +d.ca3_low, +d.ca3_med, +d.ca3_high)},
         ]
       },
       {
         principleTitle: 'עקרון רביעי: פיתוח ושימור ידע',
         aspects: [
-          {name: 'ידע המפותח והנצבר במהלך ההתקשרות מתועד באופן המאפשר שימור, שיתוף ולמידה ומועבר במלואו למשרד ו/או למפעיל מחליף', isCore: true, ...this.tierPcts(t, +d.p4_low, +d.p4_med, +d.p4_high)},
+          {name: 'ידע המפותח והנצבר במהלך ההתקשרות מתועד באופן המאפשר שימור, שיתוף ולמידה ומועבר במלואו למשרד ו/או למפעיל מחליף', isCore: false, ...this.tierPcts(t, +d.p4_low, +d.p4_med, +d.p4_high)},
+          {name: 'במכרז מעוגנת חובת המפעיל בנוגע לתיעוד ידע הנצבר אצלו וכולל סוגי הידע ואופן העברתם למשרד ו/או למפעיל המחליף במהלך ובתום התקשרות', isCore: true, ...this.tierPcts(t, +d.ca4_low, +d.ca4_med, +d.ca4_high)},
         ]
       },
       {
         principleTitle: 'עקרון חמישי: המפעיל כשותף',
         aspects: [
-          {name: 'מתקיים שיח מקצועי רציף בין המשרד למפעילים בשלבי תכנון השירות ובמהלך מתן השירותים',                 isCore: true, ...this.tierPcts(t, +d.p5_low, +d.p5_med, +d.p5_high)},
+          {name: 'מתקיים שיח מקצועי רציף בין המשרד למפעילים בשלבי תכנון השירות ובמהלך מתן השירותים',                 isCore: false, ...this.tierPcts(t, +d.p5_low, +d.p5_med, +d.p5_high)},
+          {name: 'המכרז כולל הליכים סדורים הנותנים קול למפעיל השירות לניהול שיח מקצועי ולהצפת צרכים מול המשרד',      isCore: true,  ...this.tierPcts(t, +d.ca5_low, +d.ca5_med, +d.ca5_high)},
         ]
       },
       {
         principleTitle: 'עקרון שישי: תכנון כלכלי ותחרות בשירות האיכות',
         aspects: [
+          {name: 'הגברת התחרות בין מתמודדים בתקופת המכרוז',                                                            isCore: false, ...this.tierPcts(t, +d.p6_1_low, +d.p6_1_med, +d.p6_1_high)},
           {name: 'הגברת תחרות בין מפעילים במהלך חיי ההתקשרות',                                                        isCore: false, ...this.tierPcts(t, +d.p6_2_low, +d.p6_2_med, +d.p6_2_high)},
           {name: 'תכנון כלכלי ההולם את הצרכים הנדרשים למתן שירות איכותי',                                             isCore: false, ...this.tierPcts(t, +d.p6_3_low, +d.p6_3_med, +d.p6_3_high)},
-          {name: 'הגברת התחרות בין מתמודדים בתקופת המכרוז',                                                            isCore: true,  ...this.tierPcts(t, +d.p6_1_low, +d.p6_1_med, +d.p6_1_high)},
+          {name: 'המכרז כולל מודל תמרוץ למפעיל לעידוד שיפור איכות ויעילות השירות במהלך חיי ההתקשרות',                isCore: true,  ...this.tierPcts(t, +d.ca6_low, +d.ca6_med, +d.ca6_high)},
         ]
       },
     ];
