@@ -26,7 +26,7 @@
         <p>
             יודעים מה אתם מחפשים? ניתן לחפש שירותים, מפעיל והליך רכש באמצעות טקסט חופשי בשורת החיפוש בראש העמוד. 
         </p>
-        <p>המידע באתר מעודכן לשנת 2024. המידע לשנת 2025 יעודכן במהלך שנת 2026.</p>
+        <p>המידע באתר מעודכן לשנת 2025. המידע לשנת 2026 יעודכן במהלך שנת 2027.</p>
         <a href='/about?theme=soproc'>למידע נוסף על מהם שירותים חברתיים במיקור חוץ</a>
     </div>        
     <div class='intro' *ngIf="item.office === 'משרד הבריאות'">
@@ -110,9 +110,9 @@
     <a [class.active]='currentTab === "tenders"' (activated)='setCurrentTab("tenders")' tabindex='0' clickOnReturn
         role='tab' [attr.aria-selected]='currentTab === "tenders"' aria-controls='tab-panel'
     >הרחבה על הליכי רכש</a>
-    <!--a [class.active]='currentTab === "measurement"' (activated)='setCurrentTab("measurement")' tabindex='0' clickOnReturn
+    <a [class.active]='currentTab === "measurement"' (activated)='setCurrentTab("measurement")' tabindex='0' clickOnReturn
         role='tab' [attr.aria-selected]='currentTab === "measurement"' aria-controls='tab-panel'
-    >מדידת הרכש החברתי</a-->
+    >מדידת הרכש החברתי</a>
 </div>
 
 <div class='charts columns-2' #chartsSection id='tab-panel'>
