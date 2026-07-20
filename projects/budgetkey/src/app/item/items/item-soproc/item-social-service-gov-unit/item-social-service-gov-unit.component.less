@@ -1,5 +1,35 @@
 @import '../social-service-common.less';
 
+// Measurement chart colors — a "high/med/low" scale in two flavors: the main
+// principles chart, and the greyscale used by the per-principle aspect charts.
+@meas-main-high: #64587F;
+@meas-main-med: #AB8BC6;
+@meas-main-low: #ABC1DA;
+
+@meas-grey-high: #606060;
+@meas-grey-med: #9b9b9b;
+@meas-grey-low: #bdbdbd;
+
+// Label colour is picked per shade, so text stays legible on the light ones.
+@meas-text-dark: #2c2c2c;
+@meas-text-light: #ffffff;
+@meas-text-threshold: 30%; // below LESS's 43% default, so mid tones get dark text
+.meas-fg(@bg; @imp: ~'') {
+    color: contrast(@bg, @meas-text-dark, @meas-text-light, @meas-text-threshold) @imp;
+}
+
+.measurement-bar-colors(@high; @med; @low; @imp: ~'') {
+    .bar-high { background: @high @imp; .meas-fg(@high; @imp); }
+    .bar-med  { background: @med @imp;  .meas-fg(@med; @imp); }
+    .bar-low  { background: @low @imp;  .meas-fg(@low; @imp); }
+}
+
+.measurement-legend-colors(@high; @med; @low; @imp: ~'') {
+    .legend-high { background: @high @imp; .meas-fg(@high; @imp); border: none @imp; }
+    .legend-med  { background: @med @imp;  .meas-fg(@med; @imp);  border: none @imp; }
+    .legend-low  { background: @low @imp;  .meas-fg(@low; @imp);  border: none @imp; }
+}
+
 :host {
 
     display: flex;
@@ -247,19 +277,7 @@
                 border-radius: 20px;
                 white-space: nowrap;
             }
-            .legend-high {
-                background: #d4ede6;
-                color: #1b6352;
-                border: 1px solid #90ccbc;
-            }
-            .legend-med {
-                background: #5ab8d0;
-                color: #fff;
-            }
-            .legend-low {
-                background: #1e6d78;
-                color: #fff;
-            }
+            .measurement-legend-colors(@meas-main-high; @meas-main-med; @meas-main-low);
         }
 
         .measurement-main-chart {
@@ -318,9 +336,7 @@
                 transition: width 400ms ease;
             }
 
-            .bar-high { background: #93d0bc; }
-            .bar-med  { background: #5ab8d0; }
-            .bar-low  { background: #1e6d78; }
+            .measurement-bar-colors(@meas-main-high; @meas-main-med; @meas-main-low);
         }
 
         .measurement-aspects {
@@ -418,15 +434,8 @@
                 .aspect-core { margin-bottom: 0; }
             }
 
-            .bar-high { background: #9db8c8 !important; }
-            .bar-med  { background: #5d7e94 !important; }
-            .bar-low  { background: #2e4f64 !important; }
-
-            .bar-high { color: rgba(255,255,255,0.85) !important; }
-
-            .legend-high { background: #9db8c8 !important; color: #fff !important; border: none !important; }
-            .legend-med  { background: #5d7e94 !important; color: #fff !important; }
-            .legend-low  { background: #2e4f64 !important; color: #fff !important; }
+            .measurement-bar-colors(@meas-grey-high; @meas-grey-med; @meas-grey-low; ~'!important');
+            .measurement-legend-colors(@meas-grey-high; @meas-grey-med; @meas-grey-low; ~'!important');
         }
 
         .stacked-bar > div {
