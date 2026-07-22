@@ -193,15 +193,22 @@
             "display": "בשנת התקציב",
             "options":[
               {
-                "id": "2025",
-                "display": "2025",
+                "id": "2026",
+                "display": "2026",
                 "filters": {
-                  "year": 2025
+                  "year": 2026
                 }                
               },
               {
                 "id": "all",
                 "display": "כל שנות התקציב"
+              },
+              {
+                "id": "2025",
+                "display": "2025",
+                "filters": {
+                  "year": 2025
+                }                
               },
               {
                 "id": "2024",
