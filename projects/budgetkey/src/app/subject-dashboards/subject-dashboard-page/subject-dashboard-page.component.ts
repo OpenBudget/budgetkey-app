@@ -1,11 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { catchError, of, switchMap } from 'rxjs';
+import mermaid from 'mermaid';
+import { catchError, of, switchMap, timer } from 'rxjs';
 import * as Showdown from 'showdown';
 
 import { PlatformService } from '../../common-components/platform.service';
+
+let mermaidInitialized = false;
+function ensureMermaidInitialized(): void {
+  if (mermaidInitialized) {
+    return;
+  }
+  mermaid.initialize({ startOnLoad: false, securityLevel: 'strict' });
+  mermaidInitialized = true;
+}
+
+let mermaidDiagramCounter = 0;
 
 interface SubjectDashboardMeta {
   title: string;
@@ -60,6 +72,8 @@ export class SubjectDashboardPageComponent {
   html: SafeHtml | null = null;
   notFound = false;
 
+  @ViewChild('mdContainer') mdContainer?: ElementRef<HTMLDivElement>;
+
   constructor(
     private http: HttpClient,
     private domSanitizer: DomSanitizer,
@@ -87,6 +101,32 @@ export class SubjectDashboardPageComponent {
       }
       this.meta = parsed.meta;
       this.html = this.domSanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(parsed.body));
+      this.ps.browser(() => {
+        timer(0).subscribe(() => this.renderMermaidDiagrams());
+      });
+    });
+  }
+
+  private renderMermaidDiagrams(): void {
+    const container = this.mdContainer?.nativeElement;
+    if (!container) {
+      return;
+    }
+    ensureMermaidInitialized();
+    const codeBlocks = Array.from(container.querySelectorAll('pre > code.language-mermaid'));
+    codeBlocks.forEach((codeEl) => {
+      const source = codeEl.textContent || '';
+      const id = `subject-dashboard-mermaid-${mermaidDiagramCounter++}`;
+      mermaid.render(id, source)
+        .then(({ svg }) => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'mermaid-diagram';
+          wrapper.innerHTML = svg;
+          codeEl.parentElement?.replaceWith(wrapper);
+        })
+        .catch(() => {
+          // leave the original code block rendered as-is if the diagram source is invalid
+        });
     });
   }
 }

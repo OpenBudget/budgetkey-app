@@ -188,7 +188,7 @@ display RTL correctly (wrap the content container with `dir="auto"`); the
 an invalid slug (e.g. `/subject-dashboards/does-not-exist`) shows a not-found
 state instead of a broken page.
 
-## Step 6 — Mermaid rendering
+## Step 6 — Mermaid rendering [DONE]
 
 - Add `mermaid` as a dependency.
 - After Showdown renders (Showdown turns ` ```mermaid ` fences into
@@ -205,6 +205,29 @@ state instead of a broken page.
 `q1-metrics.md`/`tipat-chalav.md`'s pie charts, render as actual SVG diagrams in
 the browser (not raw text/code). `npm run build` (full production build,
 including prerender) still completes without throwing from the Mermaid code path.
+
+**Notes from implementation**:
+- Rendering is triggered from the HTTP subscribe callback (not `AfterViewInit`
+  itself, since the fetch is async and view init already happened by the time
+  content arrives): after setting `this.html`, `ps.browser(() => timer(0).subscribe(...))`
+  defers one macrotask so Angular has flushed the `[innerHtml]` update into the
+  DOM, then a `#mdContainer` `ViewChild` is queried for `pre > code.language-mermaid`
+  blocks. `codeEl.textContent` already gives the decoded Mermaid source (the
+  browser's HTML parser un-escapes entities into text nodes), so no manual
+  decoding step was needed.
+- Adding the `mermaid` package broke `npm run build` with unrelated TypeScript
+  errors (`TS2344`/circular constraint) coming from `node_modules/type-fest`'s
+  `.d.ts` files — mermaid's own `.d.ts` references `type-fest` but only as a
+  devDependency, so it resolved to an old `type-fest@0.21.3` already hoisted in
+  this repo's tree (a transitive dep of `@angular/cli`'s inquirer chain). Fixed
+  by adding `"skipLibCheck": true` to the root `tsconfig.json` (the standard
+  Angular CLI default — this repo's tsconfig just didn't have it), which is the
+  correct fix in general: app code shouldn't fail the build over type errors
+  inside third-party `.d.ts` files. Do **not** try to "fix" this by pinning a
+  newer `type-fest` version in this repo's own `package.json` — that was tried
+  first and just traded one node_modules `.d.ts` type error for another
+  (`type-fest@4.41.0`'s own conditional types hit a circular-constraint error
+  under this repo's TypeScript 5.5.4).
 
 ## Step 7 — Internal link rewriting + SPA navigation
 

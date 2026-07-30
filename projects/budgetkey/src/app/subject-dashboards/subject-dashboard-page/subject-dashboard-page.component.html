@@ -11,7 +11,7 @@
                         <dt>נתיב</dt><dd>{{ meta.path }}</dd>
                     </dl>
                 </header>
-                <div class="md" dir="auto" [innerHtml]="html"></div>
+                <div class="md" dir="auto" [innerHtml]="html" #mdContainer></div>
             </ng-container>
         </ng-container>
         <ng-template #notFoundState>
