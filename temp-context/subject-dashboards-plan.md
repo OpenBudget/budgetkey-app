@@ -84,7 +84,7 @@ projects/budgetkey/src/app/subject-dashboards/
 
 ---
 
-## Step 1 — Fixtures + asset directory scaffolding
+## Step 1 — Fixtures + asset directory scaffolding [DONE]
 
 - Create `projects/budgetkey/src/assets/subject-dashboards/`.
 - Copy these files from `temp-context/` into it, preserving relative paths:
