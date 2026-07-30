@@ -7,6 +7,7 @@ import { SubjectDashboardsHomeComponent } from './subject-dashboards-home/subjec
 import { SubjectDashboardPageComponent } from './subject-dashboard-page/subject-dashboard-page.component';
 import { CommonComponentsModule } from '../common-components/common-components.module';
 import { ListComponentsModule } from '../list-components/list-components.module';
+import { PlotlyService } from '../charts/chart-plotly/plotly.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,6 @@ import { ListComponentsModule } from '../list-components/list-components.module'
     ListComponentsModule,
     SubjectDashboardsRoutingModule
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi())]
+  providers: [provideHttpClient(withInterceptorsFromDi()), PlotlyService]
 })
 export class SubjectDashboardsModule { }

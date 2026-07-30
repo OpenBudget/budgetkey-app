@@ -7,6 +7,7 @@ import { catchError, of, switchMap, timer } from 'rxjs';
 import * as Showdown from 'showdown';
 
 import { PlatformService } from '../../common-components/platform.service';
+import { PlotlyService } from '../../charts/chart-plotly/plotly.service';
 
 // Matches the app's design tokens in `common.less` (`@color-fill-lead`,
 // `@color-tertiary-700`, `@color-gray-*`) so diagrams look like part of the
@@ -189,7 +190,8 @@ export class SubjectDashboardPageComponent {
     private domSanitizer: DomSanitizer,
     private ps: PlatformService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private plotly: PlotlyService
   ) {
     this.converter = new Showdown.Converter({
       extensions: ['safeExternalLinks'],
@@ -220,6 +222,7 @@ export class SubjectDashboardPageComponent {
       this.ps.browser(() => {
         timer(0).subscribe(() => {
           this.renderMermaidDiagrams();
+          this.renderPlotlyCharts();
           this.rewriteInternalLinks();
         });
       });
@@ -287,6 +290,35 @@ export class SubjectDashboardPageComponent {
             // leave the original code block rendered as-is if the diagram source is invalid
           });
       });
+    });
+  }
+
+  private renderPlotlyCharts(): void {
+    const container = this.mdContainer?.nativeElement;
+    if (!container) {
+      return;
+    }
+    const codeBlocks = Array.from(container.querySelectorAll('pre > code.language-plotly'));
+    codeBlocks.forEach((codeEl) => {
+      let parsed: { data?: unknown; layout?: unknown; config?: unknown };
+      try {
+        parsed = JSON.parse(codeEl.textContent || '');
+      } catch {
+        // leave the original code block rendered as-is if the JSON is invalid
+        return;
+      }
+      if (!Array.isArray(parsed.data)) {
+        return;
+      }
+      const wrapper = document.createElement('div');
+      wrapper.className = 'plotly-embed';
+      codeEl.parentElement?.replaceWith(wrapper);
+      // Plotly sizes itself against the container's current offsetHeight when no
+      // explicit height is given; without a default here the wrapper (freshly
+      // inserted, no intrinsic height) collapses the plot to a sliver.
+      const layout = Object.assign({ height: 450 }, parsed.layout as object);
+      const config = Object.assign({ responsive: true }, parsed.config as object);
+      this.plotly.newPlot(wrapper, parsed.data as any, layout, config);
     });
   }
 }

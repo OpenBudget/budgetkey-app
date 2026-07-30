@@ -156,5 +156,19 @@ div.md {
 
             svg { max-width: 100%; }
         }
+
+        div.plotly-embed {
+            margin: 28px 0;
+            overflow-x: auto;
+            background: @color-white;
+            border: 1px solid @color-gray-100;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
+            padding: 20px;
+            // Plotly's own layout (axis ticks, legend, hover labels) isn't
+            // RTL-aware; force ltr so it renders the way Plotly computed it,
+            // matching the same fix applied to div.mermaid-diagram above.
+            direction: ltr;
+        }
     }
 }
