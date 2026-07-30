@@ -129,7 +129,7 @@ Inspect the generated `index.json`: 5 entries, slugs are
 `reports/tipat-chalav`, Hebrew `title` values are intact UTF-8 (not mangled/escaped
 oddly), `updated >= created` for all entries.
 
-## Step 3 — Angular module + routing scaffolding
+## Step 3 — Angular module + routing scaffolding [DONE]
 
 - Generate `SubjectDashboardsModule` under
   `projects/budgetkey/src/app/subject-dashboards/`, lazy-loaded, following the
