@@ -148,7 +148,7 @@ placeholder) and `/subject-dashboards/reports/tipat-chalav` (renders detail
 placeholder, does **not** 404). Confirm `/dashboards` (the other, unrelated
 existing feature) still works unchanged.
 
-## Step 4 — Home page: nested tree from index.json
+## Step 4 — Home page: nested tree from index.json [DONE]
 
 - `SubjectDashboardsHomeComponent` fetches `assets/subject-dashboards/index.json`
   via `HttpClient` (same `ps.BASE + '/assets/...'` pattern as `about-page.component.ts`

@@ -44,3 +44,5 @@ Thumbs.db
 
 # Generated build artifacts
 /projects/budgetkey/src/assets/subject-dashboards/index.json
+
+.playwright-mcp

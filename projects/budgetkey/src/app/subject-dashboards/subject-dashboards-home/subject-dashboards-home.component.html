@@ -1,5 +1,20 @@
 <app-container [showHeader]="true" [showSearchBar]="true">
     <div class="main" role="main">
-        Subject Dashboards Home
+        <h1>לוחות מחוונים לפי נושא</h1>
+        <ng-container *ngTemplateOutlet="nodeList; context: { nodes: tree }"></ng-container>
+
+        <ng-template #nodeList let-nodes="nodes">
+            <ul class="dashboard-tree">
+                <li *ngFor="let node of nodes">
+                    <ng-container *ngIf="node.isLeaf; else folder">
+                        <a [routerLink]="['/subject-dashboards'].concat(node.slugSegments)">{{ node.name }}</a>
+                    </ng-container>
+                    <ng-template #folder>
+                        <span class="folder-label">{{ node.name }}</span>
+                        <ng-container *ngTemplateOutlet="nodeList; context: { nodes: node.children }"></ng-container>
+                    </ng-template>
+                </li>
+            </ul>
+        </ng-template>
     </div>
 </app-container>
