@@ -53,7 +53,10 @@
             "prerender": true,
             "ssr": {
               "entry": "projects/budgetkey/src/server.ts"
-            }
+            },
+            "externalDependencies": [
+              "jsdom"
+            ]
           },
           "configurations": {
             "production": {

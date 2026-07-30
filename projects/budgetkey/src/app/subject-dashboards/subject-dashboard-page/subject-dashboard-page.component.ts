@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
+import DOMPurify from 'isomorphic-dompurify';
 import mermaid from 'mermaid';
 import { catchError, of, switchMap, timer } from 'rxjs';
 import * as Showdown from 'showdown';
@@ -18,6 +19,28 @@ function ensureMermaidInitialized(): void {
 }
 
 let mermaidDiagramCounter = 0;
+
+// Runs once against isomorphic-dompurify's shared singleton instance (both
+// server and browser). DOMPurify's default allowlist permits `target` on any
+// element but never forces `rel`, so raw HTML anchors in the (LLM-generated)
+// markdown source could carry `target="_blank"` without `rel="noopener
+// noreferrer"`, enabling reverse-tabnabbing. This hook scopes `target` to
+// `<a>` only and forces safe `rel` whenever `target="_blank"` is present.
+DOMPurify.addHook('afterSanitizeAttributes', (node: Element) => {
+  if (!node.hasAttribute('target')) {
+    return;
+  }
+  if (node.tagName !== 'A') {
+    node.removeAttribute('target');
+  } else if (node.getAttribute('target') === '_blank') {
+    node.setAttribute('rel', 'noopener noreferrer');
+  }
+});
+
+/** Rejects any slug containing empty, `.`, or `..` path segments. */
+function isValidSlug(slug: string): boolean {
+  return slug.length > 0 && slug.split('/').every((segment) => segment !== '' && segment !== '.' && segment !== '..');
+}
 
 interface SubjectDashboardMeta {
   title: string;
@@ -67,7 +90,10 @@ function parseFrontmatter(content: string): ParsedDashboardFile | null {
  * or if resolving `..` segments would escape the `subject-dashboards` root.
  */
 function resolveRelativeMdLink(currentSlug: string, href: string | null): string | null {
-  if (!href || !href.endsWith('.md') || /^([a-z][a-z0-9+.-]*:)?\/\//i.test(href) || href.startsWith('mailto:') || href.startsWith('/')) {
+  // Reject any URI with a scheme component (`javascript:`, `mailto:`, `data:`, ...)
+  // and any protocol-relative (`//host/...`) or absolute (`/...`) reference —
+  // only plain relative paths within the subject-dashboards tree are resolved.
+  if (!href || !href.endsWith('.md') || /^[a-z][a-z0-9+.-]*:/i.test(href) || href.startsWith('//') || href.startsWith('/')) {
     return null;
   }
 
@@ -109,6 +135,7 @@ export class SubjectDashboardPageComponent {
   notFound = false;
 
   private currentSlug = '';
+  private readonly spaLinkAnchors = new WeakSet<HTMLAnchorElement>();
 
   @ViewChild('mdContainer') mdContainer?: ElementRef<HTMLDivElement>;
 
@@ -128,6 +155,9 @@ export class SubjectDashboardPageComponent {
     this.route.url.pipe(
       switchMap((segments: UrlSegment[]) => {
         const slug = segments.map((segment) => segment.path).join('/');
+        if (!isValidSlug(slug)) {
+          return of(null);
+        }
         this.currentSlug = slug;
         return this.http.get(this.ps.BASE + `/assets/subject-dashboards/${slug}.md`, { responseType: 'text' }).pipe(
           catchError(() => of(null))
@@ -140,7 +170,18 @@ export class SubjectDashboardPageComponent {
         return;
       }
       this.meta = parsed.meta;
-      this.html = this.domSanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(parsed.body));
+      const rawHtml = this.converter.makeHtml(parsed.body);
+      // The content source is LLM/automation-generated, not developer-authored,
+      // so raw HTML embedded in the markdown is sanitized defensively: style/form
+      // injection is blocked outright, and `target` is re-added (DOMPurify's
+      // default allowlist omits it) only under the afterSanitizeAttributes hook
+      // above, which scopes it to <a> and forces safe `rel`.
+      const sanitizedHtml = DOMPurify.sanitize(rawHtml, {
+        ADD_ATTR: ['target'],
+        FORBID_TAGS: ['style', 'form', 'input', 'button'],
+        FORBID_ATTR: ['style'],
+      });
+      this.html = this.domSanitizer.bypassSecurityTrustHtml(sanitizedHtml);
       this.ps.browser(() => {
         timer(0).subscribe(() => {
           this.renderMermaidDiagrams();
@@ -151,9 +192,11 @@ export class SubjectDashboardPageComponent {
   }
 
   onContentClick(event: MouseEvent): void {
-    const anchor = (event.target as HTMLElement).closest('a[data-spa-link="true"]');
+    const anchor = (event.target as HTMLElement).closest('a');
     const href = anchor?.getAttribute('href');
-    if (!href) {
+    // Only anchors this component itself rewrote (tracked by identity, not a
+    // DOM attribute the sanitized content could forge) trigger SPA navigation.
+    if (!anchor || !href || !this.spaLinkAnchors.has(anchor)) {
       return;
     }
     event.preventDefault();
@@ -172,9 +215,9 @@ export class SubjectDashboardPageComponent {
         return;
       }
       anchor.setAttribute('href', `/subject-dashboards/${resolvedSlug}`);
-      anchor.setAttribute('data-spa-link', 'true');
       anchor.removeAttribute('target');
       anchor.removeAttribute('rel');
+      this.spaLinkAnchors.add(anchor);
     });
   }
 
@@ -192,7 +235,11 @@ export class SubjectDashboardPageComponent {
         .then(({ svg }) => {
           const wrapper = document.createElement('div');
           wrapper.className = 'mermaid-diagram';
-          wrapper.innerHTML = svg;
+          // Mermaid's `securityLevel: 'strict'` sanitizes diagram labels
+          // internally, but the diagram source is fully untrusted (LLM/
+          // automation-generated) and never passes through our own DOMPurify
+          // call — sanitize the resulting SVG too, as defense-in-depth.
+          wrapper.innerHTML = DOMPurify.sanitize(svg, { USE_PROFILES: { svg: true, svgFilters: true } });
           codeEl.parentElement?.replaceWith(wrapper);
         })
         .catch(() => {

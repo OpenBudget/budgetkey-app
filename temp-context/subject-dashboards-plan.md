@@ -254,7 +254,7 @@ document reload) to the right page. On `overview.md`, confirm the external
 `tipat-chalav.md`, confirm the "Sources" links (external `next.obudget.org`
 links) are untouched and open normally.
 
-## Step 8 — Security & sanitization pass
+## Step 8 — Security & sanitization pass [DONE]
 
 - Add `DOMPurify` (`isomorphic-dompurify` for SSR compatibility) and sanitize the
   Showdown-produced HTML string before `bypassSecurityTrustHtml`, in both the
@@ -268,6 +268,69 @@ links) are untouched and open normally.
 `subject-dashboards` module. No CRITICAL/HIGH findings. Manually confirm all 5
 fixture pages still render identically to step 7 (sanitization didn't silently
 drop legitimate content).
+
+**Notes from implementation**:
+- Home page (`subject-dashboards-home.component.ts`) never renders content-derived
+  HTML — index entries are only bound via `{{ }}` interpolation / `[routerLink]` —
+  so no DOMPurify call was needed there, only in `subject-dashboard-page.component.ts`.
+- Adding `isomorphic-dompurify` (bundles `jsdom`) broke `npm run build`'s prerender
+  step with `Error processing route 'subject-dashboards': Cannot convert undefined
+  or null to object` — esbuild's server bundling doesn't handle jsdom's
+  dynamic-require-heavy internals. Fixed by adding
+  `"externalDependencies": ["jsdom"]` to the `build.options` in `angular.json`, so
+  jsdom is `require()`d from `node_modules` at runtime (present in the deploy
+  environment) instead of being bundled. This was **not** the wildcard-route
+  prerender problem decision #6 anticipated — the wildcard route itself prerenders
+  fine (confirmed by diffing a build with vs. without the DOMPurify change via
+  `git stash`); it was purely a jsdom-bundling issue.
+- The `security-reviewer` agent found no CRITICAL/HIGH issues but flagged several
+  MEDIUM findings, all fixed in `subject-dashboard-page.component.ts`:
+  - DOMPurify's default allowlist permits `<style>`/`<form>`/`<input>`/`<button>`
+    and the `style` attribute — added `FORBID_TAGS`/`FORBID_ATTR` to the
+    `sanitize()` call, since the content source is LLM/automation-generated, not
+    hand-authored, and Showdown doesn't strip raw inline HTML from markdown.
+  - `ADD_ATTR: ['target']` was global (not anchor-scoped) and DOMPurify doesn't
+    itself force `rel` alongside `target` — added a module-level
+    `DOMPurify.addHook('afterSanitizeAttributes', ...)` (runs once against
+    isomorphic-dompurify's shared singleton instance) that strips `target` from
+    non-`<a>` elements and forces `rel="noopener noreferrer"` whenever
+    `target="_blank"` is present, closing a reverse-tabnabbing gap for any raw
+    `<a target="_blank">` written directly in markdown source (bypassing
+    Showdown's own link generation, which already paired them correctly).
+  - `onContentClick`'s SPA-navigation gate used a forgeable `data-spa-link="true"`
+    DOM attribute that survived sanitization (DOMPurify's `ALLOW_DATA_ATTR`
+    defaults to `true`) — replaced with a `WeakSet<HTMLAnchorElement>` tracking
+    anchor identity, so only anchors this component itself rewrote can trigger
+    `router.navigateByUrl`.
+  - The initial route slug (from `ActivatedRoute`/`UrlSegment[]`) was concatenated
+    into the fetch URL without the same `..`-traversal guard `resolveRelativeMdLink`
+    applies to in-content links — added an `isValidSlug()` check (rejects empty/
+    `.`/`..` path segments) before issuing the fetch; an invalid slug now shows the
+    not-found state without ever making a network request.
+  - `resolveRelativeMdLink`'s scheme-detection regex only blocked `scheme://` and
+    `//`-relative forms, missing `scheme:` without `//` (e.g. `javascript:x.md`) —
+    hardened to reject any `href` with a scheme component at all (currently inert
+    either way, since the resolved slug is always re-prefixed with the fixed
+    `/subject-dashboards/` literal, but hardened as defense-in-depth per the
+    agent's "fragile invariant" note).
+  - Mermaid's rendered SVG was inserted via raw `innerHTML` with no sanitization
+    layer of our own (only mermaid's internal `securityLevel: 'strict'` sanitizer)
+    — added a second `DOMPurify.sanitize(svg, { USE_PROFILES: { svg: true,
+    svgFilters: true } })` pass before assigning `wrapper.innerHTML`, as
+    defense-in-depth given the diagram source is fully untrusted.
+- Re-verified all 5 fixture pages via Playwright against a live `ng serve` after
+  the hardening pass: sanitized HTML unchanged from step 7's behavior, external
+  links keep `target="_blank"` + `rel="noopener noreferrer"`, internal links still
+  rewrite and navigate client-side (confirmed via network tab — only the target
+  `.md` file is fetched, no document reload), Mermaid diagrams still render as SVG,
+  not-found state works for both a normal bad slug and a `%2e%2e`-encoded traversal
+  attempt (which now makes zero network requests, confirming `isValidSlug` blocks
+  it before fetch).
+- **Known gap for step 9, not step 8**: the prerendered `/subject-dashboards` home
+  page's static HTML ships an empty tree — the `HttpClient` fetch to `index.json`
+  doesn't resolve synchronously during Angular's prerender pass. This is a
+  prerender/data-fetching timing issue, unrelated to sanitization; flagging here so
+  step 9's SSR/prerender check doesn't miss it.
 
 ## Step 9 — Full regression + prerender check
 
