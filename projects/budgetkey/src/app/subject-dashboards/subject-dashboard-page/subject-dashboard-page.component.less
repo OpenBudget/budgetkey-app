@@ -3,5 +3,79 @@ div.main {
     display: flex;
     flex-flow: column;
     width: 100%;
-    padding: 50px 10px;
+    border-top: solid 1px #2389FF;
+    margin-top: -9px;
+    padding: 0 10px;
+    padding-top: 50px;
+}
+
+div.dashboard-meta {
+    max-width: 770px;
+    width: 100%;
+
+    h1 { color: #2389FF; font-family: "Miriam Libre"; font-size: 36px; font-weight: bold; line-height: 47px; }
+
+    dl {
+        display: flex;
+        flex-flow: row wrap;
+        column-gap: 16px;
+        row-gap: 4px;
+        font-family: "Abraham TRIAL";
+        font-size: 14px;
+        color: #3C4948;
+        margin: 0 0 20px 0;
+    }
+    dt { font-weight: bold; margin: 0; }
+    dd { margin: 0; }
+}
+
+p.not-found {
+    color: #3C4948;
+    font-family: "Abraham TRIAL";
+    font-size: 20px;
+    line-height: 26px;
+}
+
+div.md { max-width: 770px; width: 100%; }
+::ng-deep {
+    div.md {
+        h1 { color: #2389FF;	font-family: "Miriam Libre";	font-size: 36px;	font-weight: bold;	line-height: 47px; }
+        h2 { color: #2389FF;	font-family: "Miriam Libre";	font-size: 24px;	font-weight: 300;	line-height: 47px; }
+        h3 { color: #2389FF;	font-family: "Miriam Libre";	font-size: 20px;	font-weight: 300;	line-height: 47px; }
+        h4 { color: #3C4948;	font-family: "Abraham TRIAL";	font-size: 20px;	line-height: 26px; text-align: center; }
+        h4 img { margin: 10px; }
+        p { color: #3C4948;	font-family: "Abraham TRIAL";	font-size: 20px;	line-height: 26px; }
+        li { color: #3C4948;	font-family: "Abraham TRIAL";	font-size: 20px;	line-height: 26px; }
+        a { text-decoration: underline; }
+        pre > code { direction: ltr; display: block; }
+
+        table {
+            display: block;
+            overflow-x: auto;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            font-family: "Abraham TRIAL";
+            font-size: 16px;
+            color: #3C4948;
+        }
+        thead { display: table-header-group; }
+        tbody { display: table-row-group; }
+        tr { display: table-row; }
+        th, td {
+            display: table-cell;
+            border: 1px solid #D7DBE0;
+            padding: 8px 12px;
+            text-align: start;
+            white-space: nowrap;
+        }
+        th {
+            background: #EAF4FF;
+            color: #2389FF;
+            font-weight: bold;
+        }
+        tbody tr:nth-child(even) td {
+            background: #F7FAFC;
+        }
+    }
 }

@@ -167,7 +167,7 @@ existing feature) still works unchanged.
 values as link text, in Hebrew for `tipat-chalav`). Clicking a leaf navigates to
 `/subject-dashboards/<slug>`.
 
-## Step 5 — Detail page: fetch, parse, render
+## Step 5 — Detail page: fetch, parse, render [DONE]
 
 - `SubjectDashboardPageComponent` reads the full wildcard path from
   `ActivatedRoute` (join the matched URL segments) to reconstruct the slug, then

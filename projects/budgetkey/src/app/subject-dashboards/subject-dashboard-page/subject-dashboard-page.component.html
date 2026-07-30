@@ -1,5 +1,21 @@
 <app-container [showHeader]="true" [showSearchBar]="true">
     <div class="main" role="main">
-        Subject Dashboard Page
+        <ng-container *ngIf="!notFound; else notFoundState">
+            <ng-container *ngIf="meta">
+                <header class="dashboard-meta">
+                    <h1>{{ meta.title }}</h1>
+                    <dl>
+                        <dt>נוצר</dt><dd>{{ meta.created }}</dd>
+                        <dt>עודכן</dt><dd>{{ meta.updated }}</dd>
+                        <dt>מודל</dt><dd>{{ meta.model }}</dd>
+                        <dt>נתיב</dt><dd>{{ meta.path }}</dd>
+                    </dl>
+                </header>
+                <div class="md" dir="auto" [innerHtml]="html"></div>
+            </ng-container>
+        </ng-container>
+        <ng-template #notFoundState>
+            <p class="not-found">הדף המבוקש לא נמצא.</p>
+        </ng-template>
     </div>
 </app-container>
