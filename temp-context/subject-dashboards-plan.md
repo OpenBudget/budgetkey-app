@@ -229,7 +229,7 @@ including prerender) still completes without throwing from the Mermaid code path
   (`type-fest@4.41.0`'s own conditional types hit a circular-constraint error
   under this repo's TypeScript 5.5.4).
 
-## Step 7 — Internal link rewriting + SPA navigation
+## Step 7 — Internal link rewriting + SPA navigation [DONE]
 
 - Content links to other dashboards as relative `.md` links resolved against the
   **current file's directory** (e.g. `q1-metrics.md` links to `../overview.md`).

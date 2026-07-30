@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ActivatedRoute, UrlSegment } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import mermaid from 'mermaid';
 import { catchError, of, switchMap, timer } from 'rxjs';
 import * as Showdown from 'showdown';
@@ -60,6 +60,42 @@ function parseFrontmatter(content: string): ParsedDashboardFile | null {
   };
 }
 
+/**
+ * Resolves a Markdown link's raw `href` against the directory of `currentSlug`,
+ * the same way a filesystem would resolve a relative path. Returns the target
+ * slug (no `.md` suffix) or `null` if the link isn't an internal `.md` link,
+ * or if resolving `..` segments would escape the `subject-dashboards` root.
+ */
+function resolveRelativeMdLink(currentSlug: string, href: string | null): string | null {
+  if (!href || !href.endsWith('.md') || /^([a-z][a-z0-9+.-]*:)?\/\//i.test(href) || href.startsWith('mailto:') || href.startsWith('/')) {
+    return null;
+  }
+
+  const currentDir = currentSlug.includes('/') ? currentSlug.slice(0, currentSlug.lastIndexOf('/')) : '';
+  const combinedParts = (currentDir ? `${currentDir}/${href}` : href).split('/');
+
+  const resolvedParts: string[] = [];
+  for (const part of combinedParts) {
+    if (part === '' || part === '.') {
+      continue;
+    }
+    if (part === '..') {
+      if (resolvedParts.length === 0) {
+        return null;
+      }
+      resolvedParts.pop();
+    } else {
+      resolvedParts.push(part);
+    }
+  }
+
+  if (resolvedParts.length === 0) {
+    return null;
+  }
+
+  return resolvedParts.join('/').replace(/\.md$/, '');
+}
+
 @Component({
     selector: 'app-subject-dashboard-page',
     templateUrl: './subject-dashboard-page.component.html',
@@ -72,13 +108,16 @@ export class SubjectDashboardPageComponent {
   html: SafeHtml | null = null;
   notFound = false;
 
+  private currentSlug = '';
+
   @ViewChild('mdContainer') mdContainer?: ElementRef<HTMLDivElement>;
 
   constructor(
     private http: HttpClient,
     private domSanitizer: DomSanitizer,
     private ps: PlatformService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.converter = new Showdown.Converter({
       tables: true,
@@ -89,6 +128,7 @@ export class SubjectDashboardPageComponent {
     this.route.url.pipe(
       switchMap((segments: UrlSegment[]) => {
         const slug = segments.map((segment) => segment.path).join('/');
+        this.currentSlug = slug;
         return this.http.get(this.ps.BASE + `/assets/subject-dashboards/${slug}.md`, { responseType: 'text' }).pipe(
           catchError(() => of(null))
         );
@@ -102,8 +142,39 @@ export class SubjectDashboardPageComponent {
       this.meta = parsed.meta;
       this.html = this.domSanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(parsed.body));
       this.ps.browser(() => {
-        timer(0).subscribe(() => this.renderMermaidDiagrams());
+        timer(0).subscribe(() => {
+          this.renderMermaidDiagrams();
+          this.rewriteInternalLinks();
+        });
       });
+    });
+  }
+
+  onContentClick(event: MouseEvent): void {
+    const anchor = (event.target as HTMLElement).closest('a[data-spa-link="true"]');
+    const href = anchor?.getAttribute('href');
+    if (!href) {
+      return;
+    }
+    event.preventDefault();
+    this.router.navigateByUrl(href);
+  }
+
+  private rewriteInternalLinks(): void {
+    const container = this.mdContainer?.nativeElement;
+    if (!container) {
+      return;
+    }
+    const anchors = Array.from(container.querySelectorAll<HTMLAnchorElement>('a[href]'));
+    anchors.forEach((anchor) => {
+      const resolvedSlug = resolveRelativeMdLink(this.currentSlug, anchor.getAttribute('href'));
+      if (resolvedSlug === null) {
+        return;
+      }
+      anchor.setAttribute('href', `/subject-dashboards/${resolvedSlug}`);
+      anchor.setAttribute('data-spa-link', 'true');
+      anchor.removeAttribute('target');
+      anchor.removeAttribute('rel');
     });
   }
 
