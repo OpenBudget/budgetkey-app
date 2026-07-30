@@ -25,6 +25,9 @@
     ],
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
+    // required by mermaid's bundled type declarations, which reference `type-fest`
+    // (see node_modules/mermaid/dist/diagram-api/types.d.ts) — without this, tsc
+    // fails with TS2307 "Cannot find module 'type-fest'"
     "skipLibCheck": true
   },
   "angularCompilerOptions": {

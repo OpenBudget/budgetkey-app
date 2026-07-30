@@ -8,6 +8,7 @@ import * as Showdown from 'showdown';
 
 import { PlatformService } from '../../common-components/platform.service';
 import { PlotlyService } from '../../charts/chart-plotly/plotly.service';
+import { SubjectDashboardMeta } from '../subject-dashboards.models';
 
 // Matches the app's design tokens in `common.less` (`@color-fill-lead`,
 // `@color-tertiary-700`, `@color-gray-*`) so diagrams look like part of the
@@ -86,14 +87,6 @@ Showdown.extension('safeExternalLinks', () => [
 /** Rejects any slug containing empty, `.`, or `..` path segments. */
 function isValidSlug(slug: string): boolean {
   return slug.length > 0 && slug.split('/').every((segment) => segment !== '' && segment !== '.' && segment !== '..');
-}
-
-interface SubjectDashboardMeta {
-  title: string;
-  created: string;
-  updated: string;
-  model: string;
-  path: string;
 }
 
 interface ParsedDashboardFile {
@@ -221,9 +214,13 @@ export class SubjectDashboardPageComponent {
       this.html = this.domSanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(parsed.body));
       this.ps.browser(() => {
         timer(0).subscribe(() => {
-          this.renderMermaidDiagrams();
-          this.renderPlotlyCharts();
-          this.rewriteInternalLinks();
+          const container = this.mdContainer?.nativeElement;
+          if (!container) {
+            return;
+          }
+          this.renderMermaidDiagrams(container);
+          this.renderPlotlyCharts(container);
+          this.rewriteInternalLinks(container);
         });
       });
     });
@@ -241,11 +238,7 @@ export class SubjectDashboardPageComponent {
     this.router.navigateByUrl(href);
   }
 
-  private rewriteInternalLinks(): void {
-    const container = this.mdContainer?.nativeElement;
-    if (!container) {
-      return;
-    }
+  private rewriteInternalLinks(container: HTMLDivElement): void {
     const anchors = Array.from(container.querySelectorAll<HTMLAnchorElement>('a[href]'));
     anchors.forEach((anchor) => {
       const resolvedSlug = resolveRelativeMdLink(this.currentSlug, anchor.getAttribute('href'));
@@ -259,11 +252,7 @@ export class SubjectDashboardPageComponent {
     });
   }
 
-  private renderMermaidDiagrams(): void {
-    const container = this.mdContainer?.nativeElement;
-    if (!container) {
-      return;
-    }
+  private renderMermaidDiagrams(container: HTMLDivElement): void {
     const codeBlocks = Array.from(container.querySelectorAll('pre > code.language-mermaid'));
     if (codeBlocks.length === 0) {
       return;
@@ -293,11 +282,7 @@ export class SubjectDashboardPageComponent {
     });
   }
 
-  private renderPlotlyCharts(): void {
-    const container = this.mdContainer?.nativeElement;
-    if (!container) {
-      return;
-    }
+  private renderPlotlyCharts(container: HTMLDivElement): void {
     const codeBlocks = Array.from(container.querySelectorAll('pre > code.language-plotly'));
     codeBlocks.forEach((codeEl) => {
       let parsed: { data?: unknown; layout?: unknown; config?: unknown };

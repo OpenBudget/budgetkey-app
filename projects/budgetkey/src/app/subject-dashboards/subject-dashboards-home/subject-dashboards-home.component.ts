@@ -2,15 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import { PlatformService } from '../../common-components/platform.service';
-
-interface SubjectDashboardIndexEntry {
-  slug: string;
-  title: string;
-  created: string;
-  updated: string;
-  model: string;
-  path: string;
-}
+import { SubjectDashboardIndexEntry } from '../subject-dashboards.models';
 
 interface SubjectDashboardTreeNode {
   name: string;
