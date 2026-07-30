@@ -2,40 +2,68 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
-import DOMPurify from 'isomorphic-dompurify';
 import mermaid from 'mermaid';
 import { catchError, of, switchMap, timer } from 'rxjs';
 import * as Showdown from 'showdown';
 
 import { PlatformService } from '../../common-components/platform.service';
 
+// Matches the app's design tokens in `common.less` (`@color-fill-lead`,
+// `@color-tertiary-700`, `@color-gray-*`) so diagrams look like part of the
+// product rather than mermaid's stock teal theme.
 let mermaidInitialized = false;
 function ensureMermaidInitialized(): void {
   if (mermaidInitialized) {
     return;
   }
-  mermaid.initialize({ startOnLoad: false, securityLevel: 'strict' });
+  mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: 'strict',
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#FFE3E4',
+      primaryTextColor: '#332A2A',
+      primaryBorderColor: '#FF5A5F',
+      secondaryColor: '#E3F3FF',
+      secondaryBorderColor: '#6D82B4',
+      tertiaryColor: '#F7FAFC',
+      lineColor: '#6D82B4',
+      textColor: '#332A2A',
+      mainBkg: '#FFE3E4',
+      nodeBorder: '#FF5A5F',
+      clusterBkg: '#E3F3FF',
+      clusterBorder: '#9CD3FE',
+      titleColor: '#3C4B7C',
+      edgeLabelBackground: '#FFFFFF',
+      fontSize: '16px',
+      pie1: '#FF5A5F',
+      pie2: '#6D82B4',
+      pie3: '#9CD3FE',
+      pie4: '#495A8F',
+      pie5: '#CCC3C3',
+      pie6: '#3C4B7C',
+      pieOpacity: '0.9',
+      pieOuterStrokeColor: '#FFFFFF',
+      pieSectionTextColor: '#332A2A',
+    },
+  });
   mermaidInitialized = true;
 }
 
 let mermaidDiagramCounter = 0;
 
-// Runs once against isomorphic-dompurify's shared singleton instance (both
-// server and browser). DOMPurify's default allowlist permits `target` on any
-// element but never forces `rel`, so raw HTML anchors in the (LLM-generated)
-// markdown source could carry `target="_blank"` without `rel="noopener
-// noreferrer"`, enabling reverse-tabnabbing. This hook scopes `target` to
-// `<a>` only and forces safe `rel` whenever `target="_blank"` is present.
-DOMPurify.addHook('afterSanitizeAttributes', (node: Element) => {
-  if (!node.hasAttribute('target')) {
-    return;
-  }
-  if (node.tagName !== 'A') {
-    node.removeAttribute('target');
-  } else if (node.getAttribute('target') === '_blank') {
-    node.setAttribute('rel', 'noopener noreferrer');
-  }
-});
+/**
+ * Ensures a Showdown-generated `target="_blank"` anchor also carries
+ * `rel="noopener noreferrer"` (browsers don't add this automatically, and
+ * `window.opener` access from the new tab is a reverse-tabnabbing risk).
+ */
+Showdown.extension('safeExternalLinks', () => [
+  {
+    type: 'output',
+    regex: /<a ([^>]*target="_blank"[^>]*)>/g,
+    replace: (match: string, attrs: string) => (/\brel=/.test(attrs) ? match : `<a ${attrs} rel="noopener noreferrer">`),
+  },
+]);
 
 /** Rejects any slug containing empty, `.`, or `..` path segments. */
 function isValidSlug(slug: string): boolean {
@@ -147,6 +175,7 @@ export class SubjectDashboardPageComponent {
     private router: Router
   ) {
     this.converter = new Showdown.Converter({
+      extensions: ['safeExternalLinks'],
       tables: true,
       customizedHeaderId: true,
       openLinksInNewWindow: true,
@@ -170,18 +199,7 @@ export class SubjectDashboardPageComponent {
         return;
       }
       this.meta = parsed.meta;
-      const rawHtml = this.converter.makeHtml(parsed.body);
-      // The content source is LLM/automation-generated, not developer-authored,
-      // so raw HTML embedded in the markdown is sanitized defensively: style/form
-      // injection is blocked outright, and `target` is re-added (DOMPurify's
-      // default allowlist omits it) only under the afterSanitizeAttributes hook
-      // above, which scopes it to <a> and forces safe `rel`.
-      const sanitizedHtml = DOMPurify.sanitize(rawHtml, {
-        ADD_ATTR: ['target'],
-        FORBID_TAGS: ['style', 'form', 'input', 'button'],
-        FORBID_ATTR: ['style'],
-      });
-      this.html = this.domSanitizer.bypassSecurityTrustHtml(sanitizedHtml);
+      this.html = this.domSanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(parsed.body));
       this.ps.browser(() => {
         timer(0).subscribe(() => {
           this.renderMermaidDiagrams();
@@ -195,7 +213,7 @@ export class SubjectDashboardPageComponent {
     const anchor = (event.target as HTMLElement).closest('a');
     const href = anchor?.getAttribute('href');
     // Only anchors this component itself rewrote (tracked by identity, not a
-    // DOM attribute the sanitized content could forge) trigger SPA navigation.
+    // DOM attribute the markdown source could forge) trigger SPA navigation.
     if (!anchor || !href || !this.spaLinkAnchors.has(anchor)) {
       return;
     }
@@ -226,25 +244,32 @@ export class SubjectDashboardPageComponent {
     if (!container) {
       return;
     }
-    ensureMermaidInitialized();
     const codeBlocks = Array.from(container.querySelectorAll('pre > code.language-mermaid'));
-    codeBlocks.forEach((codeEl) => {
-      const source = codeEl.textContent || '';
-      const id = `subject-dashboard-mermaid-${mermaidDiagramCounter++}`;
-      mermaid.render(id, source)
-        .then(({ svg }) => {
-          const wrapper = document.createElement('div');
-          wrapper.className = 'mermaid-diagram';
-          // Mermaid's `securityLevel: 'strict'` sanitizes diagram labels
-          // internally, but the diagram source is fully untrusted (LLM/
-          // automation-generated) and never passes through our own DOMPurify
-          // call — sanitize the resulting SVG too, as defense-in-depth.
-          wrapper.innerHTML = DOMPurify.sanitize(svg, { USE_PROFILES: { svg: true, svgFilters: true } });
-          codeEl.parentElement?.replaceWith(wrapper);
-        })
-        .catch(() => {
-          // leave the original code block rendered as-is if the diagram source is invalid
-        });
+    if (codeBlocks.length === 0) {
+      return;
+    }
+    ensureMermaidInitialized();
+    // Mermaid measures node/label box sizes against the DOM at render time.
+    // If the "Abraham TRIAL" web font used for diagram text (see
+    // ensureMermaidInitialized) hasn't finished loading yet, that measurement
+    // locks in box sizes for the fallback font's (narrower) metrics, and text
+    // clips once the real font swaps in. Waiting for document.fonts.ready
+    // guarantees the measurement happens with the actual rendered font.
+    document.fonts.ready.then(() => {
+      codeBlocks.forEach((codeEl) => {
+        const source = codeEl.textContent || '';
+        const id = `subject-dashboard-mermaid-${mermaidDiagramCounter++}`;
+        mermaid.render(id, source)
+          .then(({ svg }) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'mermaid-diagram';
+            wrapper.innerHTML = svg;
+            codeEl.parentElement?.replaceWith(wrapper);
+          })
+          .catch(() => {
+            // leave the original code block rendered as-is if the diagram source is invalid
+          });
+      });
     });
   }
 }

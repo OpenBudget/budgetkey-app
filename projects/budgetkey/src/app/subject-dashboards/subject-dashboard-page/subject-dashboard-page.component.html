@@ -4,12 +4,12 @@
             <ng-container *ngIf="meta">
                 <header class="dashboard-meta">
                     <h1>{{ meta.title }}</h1>
-                    <dl>
-                        <dt>נוצר</dt><dd>{{ meta.created }}</dd>
-                        <dt>עודכן</dt><dd>{{ meta.updated }}</dd>
-                        <dt>מודל</dt><dd>{{ meta.model }}</dd>
-                        <dt>נתיב</dt><dd>{{ meta.path }}</dd>
-                    </dl>
+                    <ul class="meta-tags">
+                        <li><span class="meta-label">נוצר</span><span>{{ meta.created }}</span></li>
+                        <li><span class="meta-label">עודכן</span><span>{{ meta.updated }}</span></li>
+                        <li><span class="meta-label">מודל</span><span>{{ meta.model }}</span></li>
+                        <li><span class="meta-label">נתיב</span><span>{{ meta.path }}</span></li>
+                    </ul>
                 </header>
                 <div class="md" dir="auto" [innerHtml]="html" #mdContainer (click)="onContentClick($event)"></div>
             </ng-container>

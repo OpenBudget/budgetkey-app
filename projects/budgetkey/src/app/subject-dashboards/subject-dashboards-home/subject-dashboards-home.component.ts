@@ -17,6 +17,7 @@ interface SubjectDashboardTreeNode {
   isLeaf: boolean;
   slug?: string;
   slugSegments?: string[];
+  updated?: string;
   children: SubjectDashboardTreeNode[];
 }
 
@@ -31,7 +32,7 @@ function buildDashboardTree(entries: SubjectDashboardIndexEntry[]): SubjectDashb
       const isLastSegment = index === segments.length - 1;
 
       if (isLastSegment) {
-        siblings.push({ name: entry.title, isLeaf: true, slug: entry.slug, slugSegments: segments, children: [] });
+        siblings.push({ name: entry.title, isLeaf: true, slug: entry.slug, slugSegments: segments, updated: entry.updated, children: [] });
         return;
       }
 

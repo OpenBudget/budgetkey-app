@@ -1,88 +1,149 @@
+@import '../../../common.less';
+
 div.main {
     align-items: center;
     display: flex;
     flex-flow: column;
     width: 100%;
-    border-top: solid 1px #2389FF;
-    margin-top: -9px;
     padding: 0 10px;
-    padding-top: 50px;
 }
 
 div.dashboard-meta {
     max-width: 770px;
     width: 100%;
+    padding-top: 40px;
 
-    h1 { color: #2389FF; font-family: "Miriam Libre"; font-size: 36px; font-weight: bold; line-height: 47px; }
+    h1 {
+        color: @color-fill-lead;
+        .font-miriam;
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 44px;
+        margin: 0 0 12px 0;
+    }
 
-    dl {
+    ul.meta-tags {
         display: flex;
         flex-flow: row wrap;
-        column-gap: 16px;
-        row-gap: 4px;
-        font-family: "Abraham TRIAL";
-        font-size: 14px;
-        color: #3C4948;
-        margin: 0 0 20px 0;
+        gap: 8px;
+        list-style: none;
+        margin: 0 0 24px 0;
+        padding: 0;
+
+        li {
+            display: flex;
+            flex-flow: row;
+            align-items: baseline;
+            gap: 4px;
+            background-color: @color-lists-lighter-blue;
+            border-radius: 14px;
+            padding: 4px 12px;
+            .font-abraham;
+            font-size: 13px;
+            color: @color-tertiary-700;
+
+            span.meta-label {
+                font-weight: 700;
+                opacity: 0.75;
+            }
+        }
     }
-    dt { font-weight: bold; margin: 0; }
-    dd { margin: 0; }
 }
 
 p.not-found {
-    color: #3C4948;
-    font-family: "Abraham TRIAL";
+    color: @color-gray-700;
+    .font-abraham;
     font-size: 20px;
     line-height: 26px;
+    padding-top: 60px;
 }
 
-div.md { max-width: 770px; width: 100%; }
+div.md {
+    max-width: 770px;
+    width: 100%;
+    padding-bottom: 60px;
+}
+
 ::ng-deep {
     div.md {
-        h1 { color: #2389FF;	font-family: "Miriam Libre";	font-size: 36px;	font-weight: bold;	line-height: 47px; }
-        h2 { color: #2389FF;	font-family: "Miriam Libre";	font-size: 24px;	font-weight: 300;	line-height: 47px; }
-        h3 { color: #2389FF;	font-family: "Miriam Libre";	font-size: 20px;	font-weight: 300;	line-height: 47px; }
-        h4 { color: #3C4948;	font-family: "Abraham TRIAL";	font-size: 20px;	line-height: 26px; text-align: center; }
-        h4 img { margin: 10px; }
-        p { color: #3C4948;	font-family: "Abraham TRIAL";	font-size: 20px;	line-height: 26px; }
-        li { color: #3C4948;	font-family: "Abraham TRIAL";	font-size: 20px;	line-height: 26px; }
-        a { text-decoration: underline; }
-        pre > code { direction: ltr; display: block; }
+        h1 { color: @color-fill-lead; .font-miriam; font-size: 32px; font-weight: bold; line-height: 40px; margin-top: 40px; }
+        h2 { color: @color-fill-lead; .font-miriam; font-size: 24px; font-weight: 700; line-height: 34px; margin-top: 36px; }
+        h3 { color: @color-tertiary-700; .font-miriam; font-size: 20px; font-weight: 700; line-height: 28px; margin-top: 28px; }
+        h4 { color: @color-gray-700; .font-abraham; font-size: 18px; font-weight: 700; line-height: 24px; }
+
+        p, li { color: @color-gray-700; .font-abraham; font-size: 17px; line-height: 27px; }
+
+        strong { color: @color-gray-800; }
+
+        blockquote {
+            margin: 16px 0;
+            padding: 4px 16px;
+            border-inline-start: 3px solid @color-lists-blue2;
+            color: @color-gray-600;
+            .font-abraham;
+        }
+
+        a {
+            color: @color-fill-lead;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+
+            &:hover { color: darken(@color-fill-lead, 10%); }
+        }
+
+        pre > code {
+            direction: ltr;
+            display: block;
+            background: @color-gray-800;
+            color: #F7FAFC;
+            border-radius: 6px;
+            padding: 12px 16px;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 22px;
+        }
 
         table {
             display: block;
             overflow-x: auto;
             border-collapse: collapse;
             width: 100%;
-            margin: 20px 0;
-            font-family: "Abraham TRIAL";
-            font-size: 16px;
-            color: #3C4948;
+            margin: 24px 0;
+            .font-abraham;
+            font-size: 15px;
+            color: @color-gray-700;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
         }
         thead { display: table-header-group; }
         tbody { display: table-row-group; }
         tr { display: table-row; }
         th, td {
             display: table-cell;
-            border: 1px solid #D7DBE0;
-            padding: 8px 12px;
+            border: 1px solid @color-gray-100;
+            padding: 10px 14px;
             text-align: start;
             white-space: nowrap;
         }
         th {
-            background: #EAF4FF;
-            color: #2389FF;
-            font-weight: bold;
+            background: @color-lists-lighter-blue;
+            color: @color-tertiary-700;
+            font-weight: 700;
         }
         tbody tr:nth-child(even) td {
-            background: #F7FAFC;
+            background: #FAFBFC;
         }
 
         div.mermaid-diagram {
             display: flex;
             justify-content: center;
-            margin: 20px 0;
+            margin: 28px 0;
             overflow-x: auto;
+            background: @color-white;
+            border: 1px solid @color-gray-100;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
+            padding: 20px;
 
             svg { max-width: 100%; }
         }
