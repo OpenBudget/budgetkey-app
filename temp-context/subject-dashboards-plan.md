@@ -99,7 +99,7 @@ projects/budgetkey/src/app/subject-dashboards/
 `temp-context/`. `git status` shows the new files as untracked (or staged, per
 your workflow) and `index.json` is ignored once step 2 generates it.
 
-## Step 2 — Build-time index generator
+## Step 2 — Build-time index generator [DONE]
 
 - Write `projects/budgetkey/scripts/generate-subject-dashboards-index.js`
   (plain Node/CommonJS — `package.json` has no `"type": "module"`, so this

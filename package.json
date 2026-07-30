@@ -4,9 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "build-dev": "ng build --configuration staging",
-    "watch": "ng build --watch --configuration development",
+    "generate:subject-dashboards-index": "node projects/budgetkey/scripts/generate-subject-dashboards-index.js",
+    "build": "npm run generate:subject-dashboards-index && ng build",
+    "build-dev": "npm run generate:subject-dashboards-index && ng build --configuration staging",
+    "watch": "npm run generate:subject-dashboards-index && ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:budgetkey": "node dist/budgetkey/server/server.mjs"
   },
