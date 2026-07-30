@@ -144,6 +144,15 @@ div.md {
             border-radius: 8px;
             box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
             padding: 20px;
+            // Mermaid's layout math (text-anchor placement, bounding-box sizing)
+            // assumes an LTR context. The page's `dir="auto"` container resolves
+            // to rtl for Hebrew content, and that inherits into the diagram's
+            // <text> elements, flipping which edge text-anchor="start"/"end"
+            // anchor to — e.g. pie chart legends end up right-anchored and
+            // growing left into the pie instead of right, away from it. Forcing
+            // ltr here restores the layout Mermaid actually computed; Hebrew
+            // runs inside still bidi-reorder correctly for reading.
+            direction: ltr;
 
             svg { max-width: 100%; }
         }

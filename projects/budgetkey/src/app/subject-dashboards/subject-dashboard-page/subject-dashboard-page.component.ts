@@ -45,6 +45,23 @@ function ensureMermaidInitialized(): void {
       pieOpacity: '0.9',
       pieOuterStrokeColor: '#FFFFFF',
       pieSectionTextColor: '#332A2A',
+      // xychart-beta ignores primaryColor/mainBkg for its bars and background —
+      // it only reads themeVariables.xyChart. Without this override it falls
+      // back to mermaid's own pastel defaults (cream/salmon bars on a light-gray
+      // plot area), which read as washed-out against the white card background.
+      xyChart: {
+        backgroundColor: '#FFFFFF',
+        titleColor: '#332A2A',
+        xAxisLabelColor: '#332A2A',
+        xAxisTitleColor: '#332A2A',
+        xAxisTickColor: '#665859',
+        xAxisLineColor: '#665859',
+        yAxisLabelColor: '#332A2A',
+        yAxisTitleColor: '#332A2A',
+        yAxisTickColor: '#665859',
+        yAxisLineColor: '#665859',
+        plotColorPalette: '#FF5A5F,#6D82B4,#3C4B7C,#9CD3FE,#495A8F,#CCC3C3',
+      },
     },
   });
   mermaidInitialized = true;
