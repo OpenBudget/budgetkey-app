@@ -218,6 +218,7 @@ export class SubjectDashboardPageComponent {
           if (!container) {
             return;
           }
+          this.makeHeadersCollapsible(container);
           this.renderMermaidDiagrams(container);
           this.renderPlotlyCharts(container);
           this.rewriteInternalLinks(container);
@@ -236,6 +237,52 @@ export class SubjectDashboardPageComponent {
     }
     event.preventDefault();
     this.router.navigateByUrl(href);
+  }
+
+  /**
+   * Wraps each `h2`-`h6` heading and the content that follows it (up to the
+   * next heading of equal or shallower depth) in a `<details>` element, so
+   * long reports can be collapsed section by section. Nesting follows the
+   * heading hierarchy: an `h3` section collapses inside its parent `h2`.
+   * The single `h1` page title (if present) is left as-is rather than
+   * wrapped, since collapsing the entire document isn't useful.
+   */
+  private makeHeadersCollapsible(container: HTMLDivElement): void {
+    const topLevelNodes = Array.from(container.childNodes);
+    const root = document.createDocumentFragment();
+    const stack: { level: number; content: DocumentFragment | HTMLDivElement }[] = [{ level: 1, content: root }];
+
+    for (const node of topLevelNodes) {
+      const headingMatch = node.nodeType === Node.ELEMENT_NODE ? /^H([1-6])$/.exec((node as HTMLElement).tagName) : null;
+      const level = headingMatch ? Number(headingMatch[1]) : null;
+
+      if (level === null || level === 1) {
+        stack[stack.length - 1].content.appendChild(node);
+        continue;
+      }
+
+      while (stack.length > 1 && stack[stack.length - 1].level >= level) {
+        stack.pop();
+      }
+
+      const details = document.createElement('details');
+      details.className = 'md-section';
+      details.open = true;
+
+      const summary = document.createElement('summary');
+      summary.appendChild(node);
+      details.appendChild(summary);
+
+      const body = document.createElement('div');
+      body.className = 'md-section-body';
+      details.appendChild(body);
+
+      stack[stack.length - 1].content.appendChild(details);
+      stack.push({ level, content: body });
+    }
+
+    container.innerHTML = '';
+    container.appendChild(root);
   }
 
   private rewriteInternalLinks(container: HTMLDivElement): void {

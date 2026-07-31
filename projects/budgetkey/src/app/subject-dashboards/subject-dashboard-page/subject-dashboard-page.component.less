@@ -134,6 +134,54 @@ div.md {
             background: #FAFBFC;
         }
 
+        details.md-section {
+            > summary {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                list-style: none;
+                user-select: none;
+                border-radius: 6px;
+                margin: 0 -8px;
+                padding: 2px 8px;
+                transition: background-color 150ms ease;
+
+                &::-webkit-details-marker { display: none; }
+                &::marker { display: none; }
+
+                &::before {
+                    content: '';
+                    flex: 0 0 auto;
+                    width: 7px;
+                    height: 7px;
+                    border-inline-end: 2px solid currentColor;
+                    border-block-end: 2px solid currentColor;
+                    color: @color-fill-lead;
+                    opacity: 0.55;
+                    transform: rotate(45deg);
+                    transition: transform 150ms ease;
+                }
+
+                &:hover { background-color: @color-lists-lighter-blue; }
+
+                &:focus-visible {
+                    outline: 2px solid @color-fill-lead;
+                    outline-offset: 2px;
+                }
+
+                h1, h2, h3, h4, h5, h6 { margin: 0; }
+            }
+
+            &[open] > summary::before { transform: rotate(-45deg); }
+
+            details.md-section {
+                margin-inline-start: 2px;
+                padding-inline-start: 14px;
+                border-inline-start: 2px solid @color-gray-100;
+            }
+        }
+
         div.mermaid-diagram {
             display: flex;
             justify-content: center;
