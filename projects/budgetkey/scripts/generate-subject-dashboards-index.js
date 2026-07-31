@@ -13,9 +13,16 @@ function walkMarkdownFiles(dir) {
       results = results.concat(walkMarkdownFiles(fullPath));
     } else if (entry.isFile() && entry.name.endsWith('.md')) {
       results.push(fullPath);
+    } else if (entry.isFile()) {
+      const slug = path.relative(ASSETS_DIR, fullPath).split(path.sep).join('/');
+      console.log(`[generate-subject-dashboards-index] Skipping ${slug}: not a markdown file.`);
     }
   }
   return results;
+}
+
+function depthOf(filePath) {
+  return path.relative(ASSETS_DIR, filePath).split(path.sep).length;
 }
 
 function parseFrontmatter(content) {
@@ -46,19 +53,29 @@ function toSlug(filePath) {
 
 function buildIndex() {
   const entries = [];
+  const markdownFiles = walkMarkdownFiles(ASSETS_DIR);
 
-  for (const filePath of walkMarkdownFiles(ASSETS_DIR)) {
+  for (const filePath of markdownFiles) {
     const content = fs.readFileSync(filePath, 'utf8');
     const frontmatter = parseFrontmatter(content);
     const slug = toSlug(filePath);
 
-    if (!frontmatter || REQUIRED_FIELDS.some((field) => !frontmatter[field])) {
-      console.warn(`[generate-subject-dashboards-index] Skipping ${slug}: missing required frontmatter field(s).`);
+    if (!frontmatter) {
+      console.warn(`[generate-subject-dashboards-index] Skipping ${slug}: no frontmatter block found.`);
+      continue;
+    }
+
+    const missingFields = REQUIRED_FIELDS.filter((field) => !frontmatter[field]);
+    if (missingFields.length > 0) {
+      console.warn(
+        `[generate-subject-dashboards-index] Skipping ${slug}: missing required frontmatter field(s): ${missingFields.join(', ')}.`,
+      );
       continue;
     }
 
     entries.push({
       slug,
+      depth: depthOf(filePath),
       title: frontmatter.title,
       created: frontmatter.created,
       updated: frontmatter.updated,
@@ -67,8 +84,13 @@ function buildIndex() {
     });
   }
 
-  fs.writeFileSync(INDEX_PATH, JSON.stringify(entries, null, 2), 'utf8');
-  console.log(`[generate-subject-dashboards-index] Wrote ${entries.length} entries to ${INDEX_PATH}`);
+  entries.sort((a, b) => b.depth - a.depth || a.slug.localeCompare(b.slug));
+  const orderedEntries = entries.map(({ depth, ...entry }) => entry);
+
+  fs.writeFileSync(INDEX_PATH, JSON.stringify(orderedEntries, null, 2), 'utf8');
+  console.log(
+    `[generate-subject-dashboards-index] Scanned ${markdownFiles.length} markdown file(s), wrote ${orderedEntries.length} entries to ${INDEX_PATH}.`,
+  );
 }
 
 buildIndex();
