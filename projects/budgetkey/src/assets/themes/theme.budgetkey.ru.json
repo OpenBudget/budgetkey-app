@@ -253,15 +253,22 @@
             "id": "fiscal-year",
             "options": [
               {
+                "display": "2026",
+                "filters": {
+                  "year": 2026
+                },
+                "id": "2026"
+              },
+              {
+                "display": "כל שנות התקציב",
+                "id": "all"
+              },
+              {
                 "display": "2025",
                 "filters": {
                   "year": 2025
                 },
                 "id": "2025"
-              },
-              {
-                "display": "כל שנות התקציב",
-                "id": "all"
               },
               {
                 "display": "2024",
