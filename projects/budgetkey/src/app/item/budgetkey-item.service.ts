@@ -143,7 +143,7 @@ export class BudgetKeyItemService {
   }
 
   getDatarecords(kind: string) {
-    return this.http.get(`https://data-input.obudget.org/api/datarecords/${kind}`)
+    return this.http.get(`https://next.obudget.org/api/datarecords/${kind}?__m=137`)
       .pipe(
         map((result: any) => {
           return result.result.map((x: any) => x.value);

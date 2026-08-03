@@ -186,7 +186,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       const params = this.processParams(results, field);
       this.parameters[field] = params;
       this.filters[field] = ['TRUE'];
-      if (Object.keys(this.parameters).length === fields.length) {
+      if (fields.every((f) => this.parameters[f])) {
         this.ready.next();
       }
     });
@@ -214,7 +214,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
     this.ps.browser(() => {
       this.ready.pipe(
         first(),
-        switchMap(() => this.colorscheme),
+        // switchMap(() => this.colorscheme),
         delay(100)
       ).subscribe(() => {
         const scrollable: Element | null= window.document.querySelector('.scrollable');
