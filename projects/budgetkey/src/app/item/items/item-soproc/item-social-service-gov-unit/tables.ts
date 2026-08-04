@@ -132,7 +132,7 @@ export const tableDefs = {
       SELECT :fields
       FROM e
       WHERE relevant AND
-            (NOT :only-active) OR active`,
+            ((NOT :only-active) OR active)`,
         downloadHeaders: [
             `מספר תאגיד<id`,
             `שם המפעיל<name`,
