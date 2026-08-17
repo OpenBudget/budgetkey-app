@@ -1,4 +1,4 @@
-FROM node:lts-buster-slim AS build
+FROM node:lts-trixie-slim AS build
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ RUN cd utils && ./mk_bubbles.sh
 
 RUN npm run build
 
-FROM node:lts-buster-slim
+FROM node:lts-trixie-slim
 
 WORKDIR /app
 
