@@ -134,7 +134,10 @@
         [attr.aria-label]='"מדידת מכרזי רכש - סה״כ " + measurementRadarTotal + " מכרזים נמדדו"'>
         <h3 class='chart-title'
             [attr.aria-label]='"גרף מדידת מכרזי רכש - ציון ממוצע לכל אחד מששת עקרונות הרכש החברתי - כל המידע זמין להורדה כקובץ אקסל בהמשך"'>מדידת מכרזי רכש</h3>
-        <div class='chart-subtitle'>סה״כ {{measurementRadarTotal}} מכרזים נמדדו</div>
+        <div class='chart-subtitle'>סה״כ {{measurementRadarTotal}} מכרזים נמדדו
+            <a class='radar-more' (activated)='setCurrentTab("measurement")' tabindex='0' clickOnReturn
+                aria-label='להרחבה - מעבר ללשונית מדידת הרכש החברתי'>להרחבה...</a>
+        </div>
         <div class='radar-body'>
             <ng-container *ngIf='measurementRadarTotal >= MEASUREMENT_MIN_TENDERS; else radarNoData'>
                 <div class='radar-plot'>
@@ -150,12 +153,12 @@
                                 [attr.stroke]='series.color'></svg:polygon>
                             <svg:circle *ngFor='let marker of series.markers' r='0.85'
                                 [attr.cx]='marker.x' [attr.cy]='marker.y' [attr.fill]='series.color'>
-                                <svg:title>{{series.name}}: {{marker.value}}%</svg:title>
+                                <svg:title>{{series.name}}: {{marker.value}}</svg:title>
                             </svg:circle>
                         </svg:g>
                         <svg:g class='radar-scale'>
                             <svg:text *ngFor='let label of radarScaleLabels'
-                                [attr.x]='label.x' [attr.y]='label.y'>{{label.pct}}%</svg:text>
+                                [attr.x]='label.x' [attr.y]='label.y'>{{label.step}}</svg:text>
                         </svg:g>
                     </svg>
                     <div class='radar-label' *ngFor='let label of radarLabels'
@@ -165,7 +168,7 @@
                         <span class='bk-tooltip-anchor'>{{label.label}}<span class='bk-tooltip'
                             [class.bk-align-top]='label.side === "bottom"'
                             [class.bk-align-left]='label.side === "left"'>{{label.definition}}</span></span>
-                        <div class='radar-label-index'>עקרון {{label.n}}</div>
+                        <div class='radar-label-index'>עקרון {{label.ordinal}}</div>
                     </div>
                 </div>
                 <div class='radar-legend'>
