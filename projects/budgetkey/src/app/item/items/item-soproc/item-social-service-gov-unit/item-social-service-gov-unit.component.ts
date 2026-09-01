@@ -74,6 +74,45 @@ const MEASUREMENT_QUERY = `SELECT
   sum(case when core_aspect_score_6 >= 3 then 1 else 0 end) as ca6_high
 FROM soproc_measurement
 WHERE :where`;
+
+// Overview of the same measurement, broken down by org rather than by tier: one
+// row per office/unit/subunit, each principle as its mean score in percent.
+const MEASUREMENT_RADAR_QUERY = `SELECT :org-field as org,
+  count(*) as total,
+  round(avg(principle_score_1) * 100) as p1,
+  round(avg(principle_score_2) * 100) as p2,
+  round(avg(principle_score_3) * 100) as p3,
+  round(avg(principle_score_4) * 100) as p4,
+  round(avg(principle_score_5) * 100) as p5,
+  round(avg(principle_score_6) * 100) as p6
+FROM soproc_measurement
+WHERE :where
+GROUP BY 1
+ORDER BY 1`;
+
+const MEASUREMENT_RADAR_HEADERS = [
+  'משרד / יחידה<org',
+  'מספר מכרזים שנמדדו<total',
+  'עקרון 1 - מקבלי השירות במרכז<p1',
+  'עקרון 2 - ניהול מוכוון תוצאות<p2',
+  'עקרון 3 - חדשנות וגמישות<p3',
+  'עקרון 4 - פיתוח ושימור ידע<p4',
+  'עקרון 5 - המפעיל כשותף<p5',
+  'עקרון 6 - תכנון כלכלי ותחרות<p6',
+];
+
+// The radar is drawn as plain SVG rather than through the plotly pipeline the
+// other charts use: the CDN bundle we load (plotly-basic) has no scatterpolar
+// trace, and plotly gives no way to hang a tooltip off an angular axis label.
+// Coordinates live in the box below, matching the SVG viewBox, so the HTML
+// principle labels overlaid on top can reuse them as percentages.
+const RADAR_VIEWBOX = {width: 100, height: 62};
+const RADAR_CENTER = {x: 50, y: 31};
+const RADAR_RADIUS = 19;
+const RADAR_RINGS = [25, 50, 75, 100];
+// How far outside the outermost ring the top and bottom labels sit.
+const RADAR_LABEL_GAP = 3;
+
 import { Subscription, ReplaySubject, from, mergeMap, map, first, switchMap, delay, fromEvent, throttleTime, forkJoin, interval, animationFrameScheduler } from 'rxjs';
 import { BudgetKeyItemService } from '../../../budgetkey-item.service';
 import { tableDefs } from './tables';
@@ -132,6 +171,30 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   readonly MEASUREMENT_YEAR = '2025';
   readonly MEASUREMENT_MIN_TENDERS = 3;
   public measurementData: any = null;
+
+  // The six principles, in order: short names for the radar's axes, with `side`
+  // deciding where the label is anchored around the hexagon, plus the official
+  // definition — shown as the radar's label tooltip and as the subtitle of each
+  // box in the measurement tab's per-principle breakdown.
+  readonly MEASUREMENT_PRINCIPLES = [
+    {n: 1, label: 'מקבלי השירות במרכז', side: 'top',
+     definition: 'השירות מספק מענה מותאם ומיטבי לצרכי קהל היעד על גווניו, ונותן להם קול בעיצוב השירות'},
+    {n: 2, label: 'ניהול מוכוון תוצאות', side: 'right',
+     definition: 'השירות מקיים תהליכי למידה ושיפור תמידיים על מנת להשיג תוצאות לקידום מטרותיו וכדי לספק שירות איכותי'},
+    {n: 3, label: 'חדשנות וגמישות', side: 'right',
+     definition: 'השירות פועל לאור חזית הידע בתחום, מגיב ומתעדכן בהתאם להתפתחויות בידע, לצרכים משתנים ולתוצאותיו הנמדדות'},
+    {n: 4, label: 'פיתוח ושימור ידע', side: 'bottom',
+     definition: 'ידע הנצבר במהלך ההתקשרות עובר בין המפעילים ומהמפעילים למשרד ומזין קבלת החלטות ותהליכי תכנון עתידיים'},
+    {n: 5, label: 'המפעיל כשותף', side: 'left',
+     definition: 'היחסים עם המפעיל מבוססים על אמון ומחויבות משותפת להענקת שירות איכותי'},
+    {n: 6, label: 'תכנון כלכלי ותחרות', side: 'left',
+     definition: 'התכנון הכלכלי ומודל התיחור והתמורה מתמרצים מתן שירות איכותי וניהול יעיל של ההתקשרות'},
+  ];
+  public measurementRadar: any[] = [];
+  public measurementRadarTotal = 0;
+  public measurementRadarQuery = '';
+  readonly RADAR_VIEWBOX = `0 0 ${RADAR_VIEWBOX.width} ${RADAR_VIEWBOX.height}`;
+  readonly RADAR_CENTER = RADAR_CENTER;
 
   public parameters: any = {
     pricing_model: [
@@ -385,6 +448,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       {from: ':pricing-model', to: this.filterExpression('pricing_model')},
     ];
     this.fetchMeasurementData();
+    this.fetchMeasurementRadar();
   }
 
   clearFilters() {
@@ -474,16 +538,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       }
       const data = ct.data(rows, ct, x_values);
       for (const d of data) {
-        let color: string | null = null;
-        if (scheme.hasOwnProperty(d.name)) {
-          color = this.COLORS[scheme[d.name]];
-        } else if (scheme.hasOwnProperty(`${this.levelKey}|${d.name}`)) {
-          color = this.COLORS[scheme[`${this.levelKey}|${d.name}`]];
-        }
-        if (!color) {
-          console.log('MISSING VALUE', d.name)
-          color = this.COLORS[this.COLORS.length - 1];
-        }
+        const color = this.colorFor(scheme, d.name);
         d.marker = {
           color: color,
           opacity: 1,
@@ -495,6 +550,19 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       }
       this.charts[ct.id] = {layout, data, downloadHeaders: ct.downloadHeaders, query: query, title: ct.title};
     });
+  }
+
+  // An org is keyed in the colorscheme either by its own name (offices) or by
+  // its full path below the current level (units and subunits).
+  private colorFor(scheme: any, name: string): string {
+    if (scheme.hasOwnProperty(name)) {
+      return this.COLORS[scheme[name]];
+    }
+    if (scheme.hasOwnProperty(`${this.levelKey}|${name}`)) {
+      return this.COLORS[scheme[`${this.levelKey}|${name}`]];
+    }
+    console.log('MISSING VALUE', name);
+    return this.COLORS[this.COLORS.length - 1];
   }
 
   setSubtitle(ct: any, rows: any[]) {
@@ -537,6 +605,83 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
         this.measurementData = rows.length > 0 ? rows[0] : null;
       });
   }
+
+  fetchMeasurementRadar() {
+    if (this.ps.server()) return;
+    const query = this.replaceAll(MEASUREMENT_RADAR_QUERY, [
+      {from: ':where', to: this.calcMeasurementWhere()},
+      {from: ':org-field', to: `coalesce("${this.groupByLvl}", 'אחר')`},
+    ]);
+    this.measurementRadarQuery = this.encodeQuery(query);
+    forkJoin([
+      this.colorscheme,
+      this.api.getItemData(this.measurementRadarQuery, ['org'], [this.formatter('org')])
+    ]).subscribe(([scheme, result]: any[]) => {
+      if (result.error) {
+        console.log('ERROR', query, result.error);
+      }
+      const rows = result.rows || [];
+      this.measurementRadarTotal = this.sum(rows.map((row: any) => +row.total));
+      this.measurementRadar = rows.map((row: any) => {
+        const values = this.MEASUREMENT_PRINCIPLES.map((p) => Math.round(+row['p' + p.n] || 0));
+        return {
+          name: row.org,
+          total: +row.total,
+          color: this.colorFor(scheme, row.org),
+          values,
+          points: this.radarPolygon(values),
+          markers: values.map((value, i) => ({value, ...this.radarPoint(i, value / 100)})),
+        };
+      });
+    });
+  }
+
+  get measurementRadarDownloadUrl(): string {
+    return this.api.getDownloadUrlPost(
+      'xlsx', MEASUREMENT_RADAR_HEADERS, `${this.item.page_title} / מידע על מדידת מכרזי רכש`);
+  }
+
+  private radarPoint(index: number, ratio: number) {
+    // Principle 1 sits at the top and the rest follow clockwise, 60° apart.
+    const angle = (index * 60 - 90) * Math.PI / 180;
+    return {
+      x: RADAR_CENTER.x + Math.cos(angle) * RADAR_RADIUS * ratio,
+      y: RADAR_CENTER.y + Math.sin(angle) * RADAR_RADIUS * ratio,
+    };
+  }
+
+  private radarPolygon(values: number[]): string {
+    return values
+      .map((value, i) => this.radarPoint(i, value / 100))
+      .map((p) => `${p.x.toFixed(2)},${p.y.toFixed(2)}`)
+      .join(' ');
+  }
+
+  // The rings are the 25/50/75/100% hexagons; the spokes run from the centre out
+  // to each principle's vertex; the scale labels climb the topmost spoke.
+  readonly radarRings = RADAR_RINGS.map(
+    (pct) => ({pct, points: this.radarPolygon(this.MEASUREMENT_PRINCIPLES.map(() => pct))}));
+
+  readonly radarSpokes = this.MEASUREMENT_PRINCIPLES.map((_, i) => this.radarPoint(i, 1));
+
+  readonly radarScaleLabels = [0, ...RADAR_RINGS].map((pct) => ({
+    pct,
+    x: RADAR_CENTER.x + 1.5,
+    y: RADAR_CENTER.y - RADAR_RADIUS * pct / 100,
+  }));
+
+  // Percentage offsets for the HTML labels overlaid on the SVG: the top and
+  // bottom ones are centred just clear of the outer ring, the side ones hug the
+  // edge of the chart at the height of their own vertex.
+  readonly radarLabels = this.MEASUREMENT_PRINCIPLES.map((principle, i) => ({
+    ...principle,
+    top: principle.side === 'bottom'
+      ? `${(RADAR_CENTER.y + RADAR_RADIUS + RADAR_LABEL_GAP) / RADAR_VIEWBOX.height * 100}%` : 'auto',
+    bottom: principle.side === 'top'
+      ? `${(RADAR_VIEWBOX.height - (RADAR_CENTER.y - RADAR_RADIUS - RADAR_LABEL_GAP))
+           / RADAR_VIEWBOX.height * 100}%` : 'auto',
+    sideTop: `${this.radarPoint(i, 1).y / RADAR_VIEWBOX.height * 100}%`,
+  }));
 
   // The denominator is the tenders that actually have a score for this row, not
   // every tender in the filter: a principle whose question was answered
@@ -618,7 +763,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
           {name: 'המכרז כולל מודל תמרוץ למפעיל לעידוד שיפור איכות ויעילות השירות במהלך חיי ההתקשרות',                isCore: true,  ...this.tierPcts(+d.ca6_low, +d.ca6_med, +d.ca6_high)},
         ]
       },
-    ];
+    ].map((principle, i) => ({...principle, definition: this.MEASUREMENT_PRINCIPLES[i].definition}));
   }
 
   getCoreAspect(p: any): any {
