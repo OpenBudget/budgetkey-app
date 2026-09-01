@@ -76,15 +76,17 @@ FROM soproc_measurement
 WHERE :where`;
 
 // Overview of the same measurement, broken down by org rather than by tier: one
-// row per office/unit/subunit, each principle as its mean score in percent.
+// row per office/unit/subunit, each principle as its mean score. principle_score
+// is stored normalised to 0..1, so it is scaled back onto the 0..4 coding the
+// measurement spec uses.
 const MEASUREMENT_RADAR_QUERY = `SELECT :org-field as org,
   count(*) as total,
-  round(avg(principle_score_1) * 100) as p1,
-  round(avg(principle_score_2) * 100) as p2,
-  round(avg(principle_score_3) * 100) as p3,
-  round(avg(principle_score_4) * 100) as p4,
-  round(avg(principle_score_5) * 100) as p5,
-  round(avg(principle_score_6) * 100) as p6
+  round((avg(principle_score_1) * 4)::numeric, 1) as p1,
+  round((avg(principle_score_2) * 4)::numeric, 1) as p2,
+  round((avg(principle_score_3) * 4)::numeric, 1) as p3,
+  round((avg(principle_score_4) * 4)::numeric, 1) as p4,
+  round((avg(principle_score_5) * 4)::numeric, 1) as p5,
+  round((avg(principle_score_6) * 4)::numeric, 1) as p6
 FROM soproc_measurement
 WHERE :where
 GROUP BY 1
@@ -109,7 +111,8 @@ const MEASUREMENT_RADAR_HEADERS = [
 const RADAR_VIEWBOX = {width: 100, height: 62};
 const RADAR_CENTER = {x: 50, y: 31};
 const RADAR_RADIUS = 19;
-const RADAR_RINGS = [25, 50, 75, 100];
+const RADAR_MAX = 4; // the measurement spec's coding, 0..4
+const RADAR_RINGS = [1, 2, 3, 4];
 // How far outside the outermost ring the top and bottom labels sit.
 const RADAR_LABEL_GAP = 3;
 
@@ -623,14 +626,14 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       const rows = result.rows || [];
       this.measurementRadarTotal = this.sum(rows.map((row: any) => +row.total));
       this.measurementRadar = rows.map((row: any) => {
-        const values = this.MEASUREMENT_PRINCIPLES.map((p) => Math.round(+row['p' + p.n] || 0));
+        const values = this.MEASUREMENT_PRINCIPLES.map((p) => +row['p' + p.n] || 0);
         return {
           name: row.org,
           total: +row.total,
           color: this.colorFor(scheme, row.org),
           values,
           points: this.radarPolygon(values),
-          markers: values.map((value, i) => ({value, ...this.radarPoint(i, value / 100)})),
+          markers: values.map((value, i) => ({value, ...this.radarPoint(i, value / RADAR_MAX)})),
         };
       });
     });
@@ -652,7 +655,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
 
   private radarPolygon(values: number[]): string {
     return values
-      .map((value, i) => this.radarPoint(i, value / 100))
+      .map((value, i) => this.radarPoint(i, value / RADAR_MAX))
       .map((p) => `${p.x.toFixed(2)},${p.y.toFixed(2)}`)
       .join(' ');
   }
@@ -660,14 +663,14 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   // The rings are the 25/50/75/100% hexagons; the spokes run from the centre out
   // to each principle's vertex; the scale labels climb the topmost spoke.
   readonly radarRings = RADAR_RINGS.map(
-    (pct) => ({pct, points: this.radarPolygon(this.MEASUREMENT_PRINCIPLES.map(() => pct))}));
+    (step) => ({step, points: this.radarPolygon(this.MEASUREMENT_PRINCIPLES.map(() => step))}));
 
   readonly radarSpokes = this.MEASUREMENT_PRINCIPLES.map((_, i) => this.radarPoint(i, 1));
 
-  readonly radarScaleLabels = [0, ...RADAR_RINGS].map((pct) => ({
-    pct,
+  readonly radarScaleLabels = [0, ...RADAR_RINGS].map((step) => ({
+    step,
     x: RADAR_CENTER.x + 1.5,
-    y: RADAR_CENTER.y - RADAR_RADIUS * pct / 100,
+    y: RADAR_CENTER.y - RADAR_RADIUS * step / RADAR_MAX,
   }));
 
   // Percentage offsets for the HTML labels overlaid on the SVG: the top and

@@ -153,12 +153,12 @@
                                 [attr.stroke]='series.color'></svg:polygon>
                             <svg:circle *ngFor='let marker of series.markers' r='0.85'
                                 [attr.cx]='marker.x' [attr.cy]='marker.y' [attr.fill]='series.color'>
-                                <svg:title>{{series.name}}: {{marker.value}}%</svg:title>
+                                <svg:title>{{series.name}}: {{marker.value}}</svg:title>
                             </svg:circle>
                         </svg:g>
                         <svg:g class='radar-scale'>
                             <svg:text *ngFor='let label of radarScaleLabels'
-                                [attr.x]='label.x' [attr.y]='label.y'>{{label.pct}}%</svg:text>
+                                [attr.x]='label.x' [attr.y]='label.y'>{{label.step}}</svg:text>
                         </svg:g>
                     </svg>
                     <div class='radar-label' *ngFor='let label of radarLabels'
