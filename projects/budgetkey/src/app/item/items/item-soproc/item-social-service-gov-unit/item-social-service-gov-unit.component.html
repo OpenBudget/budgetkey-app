@@ -128,7 +128,61 @@
                 </ng-container>
             </div>
         </ng-container>
-    </ng-container>    
+    </ng-container>
+
+    <div class='single-chart measurement-radar' *ngIf='currentTab === "services"' role='figure'
+        [attr.aria-label]='"מדידת מכרזי רכש - סה״כ " + measurementRadarTotal + " מכרזים נמדדו"'>
+        <h3 class='chart-title'
+            [attr.aria-label]='"גרף מדידת מכרזי רכש - ציון ממוצע לכל אחד מששת עקרונות הרכש החברתי - כל המידע זמין להורדה כקובץ אקסל בהמשך"'>מדידת מכרזי רכש</h3>
+        <div class='chart-subtitle'>סה״כ {{measurementRadarTotal}} מכרזים נמדדו</div>
+        <div class='radar-body'>
+            <ng-container *ngIf='measurementRadarTotal >= MEASUREMENT_MIN_TENDERS; else radarNoData'>
+                <div class='radar-plot'>
+                    <svg [attr.viewBox]='RADAR_VIEWBOX' aria-hidden='true'>
+                        <svg:g class='radar-grid'>
+                            <svg:polygon *ngFor='let ring of radarRings' [attr.points]='ring.points'></svg:polygon>
+                            <svg:line *ngFor='let spoke of radarSpokes'
+                                [attr.x1]='RADAR_CENTER.x' [attr.y1]='RADAR_CENTER.y'
+                                [attr.x2]='spoke.x' [attr.y2]='spoke.y'></svg:line>
+                        </svg:g>
+                        <svg:g class='radar-series' *ngFor='let series of measurementRadar'>
+                            <svg:polygon [attr.points]='series.points' [attr.fill]='series.color'
+                                [attr.stroke]='series.color'></svg:polygon>
+                            <svg:circle *ngFor='let marker of series.markers' r='0.85'
+                                [attr.cx]='marker.x' [attr.cy]='marker.y' [attr.fill]='series.color'>
+                                <svg:title>{{series.name}}: {{marker.value}}%</svg:title>
+                            </svg:circle>
+                        </svg:g>
+                        <svg:g class='radar-scale'>
+                            <svg:text *ngFor='let label of radarScaleLabels'
+                                [attr.x]='label.x' [attr.y]='label.y'>{{label.pct}}%</svg:text>
+                        </svg:g>
+                    </svg>
+                    <div class='radar-label' *ngFor='let label of radarLabels'
+                        [ngClass]='"radar-label-" + label.side'
+                        [style.top]='label.side === "top" ? "auto" : (label.side === "bottom" ? label.top : label.sideTop)'
+                        [style.bottom]='label.bottom'>
+                        <span class='bk-tooltip-anchor'>{{label.label}}<span class='bk-tooltip'
+                            [class.bk-align-top]='label.side === "bottom"'
+                            [class.bk-align-left]='label.side === "left"'>{{label.definition}}</span></span>
+                        <div class='radar-label-index'>עקרון {{label.n}}</div>
+                    </div>
+                </div>
+                <div class='radar-legend'>
+                    <span class='radar-legend-item' *ngFor='let series of measurementRadar'>
+                        <span class='radar-legend-dot' [style.background]='series.color'></span>{{series.name}}
+                    </span>
+                </div>
+            </ng-container>
+            <ng-template #radarNoData>
+                <div class='radar-no-data'>אין די נתונים למדידת הרכש החברתי בסינון הנבחר</div>
+            </ng-template>
+            <form class='download' [action]='measurementRadarDownloadUrl' method='post' name='download' ngNoForm>
+                <input type='hidden' name='query' [value]='measurementRadarQuery'>
+                <button type='submit' clickOnReturn aria-label='הורדת נתוני התרשים לקובץ אקסל'>הורדת נתוני התרשים לקובץ אקסל</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 <ng-container *ngIf='ps.browser() && currentTab !== "measurement"'>
@@ -182,7 +236,10 @@
             </div>
             <div class='aspects-grid'>
                 <div class='principle-box' *ngFor='let p of principleAspects'>
-                    <h4>{{p.principleTitle}}</h4>
+                    <div class='principle-header'>
+                        <h4>{{p.principleTitle}}</h4>
+                        <div class='principle-definition'>{{p.definition}}</div>
+                    </div>
                     <ng-container *ngFor='let a of p.aspects'>
                         <div class='aspect-row' [class.aspect-core]='a.isCore'>
                             <div class='stacked-bar'>

@@ -4,23 +4,23 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '
 const MEASUREMENT_QUERY = `SELECT
   count(*) as total,
   sum(case when principle_score_1 < 0.35 then 1 else 0 end) as p1_low,
-  sum(case when principle_score_1 >= 0.35 and principle_score_1 < 0.70 then 1 else 0 end) as p1_med,
-  sum(case when principle_score_1 >= 0.70 then 1 else 0 end) as p1_high,
+  sum(case when principle_score_1 >= 0.35 and (principle_score_1 < 0.70 or low_answer_count_1 > 1) then 1 else 0 end) as p1_med,
+  sum(case when principle_score_1 >= 0.70 and low_answer_count_1 <= 1 then 1 else 0 end) as p1_high,
   sum(case when principle_score_2 < 0.35 then 1 else 0 end) as p2_low,
-  sum(case when principle_score_2 >= 0.35 and principle_score_2 < 0.70 then 1 else 0 end) as p2_med,
-  sum(case when principle_score_2 >= 0.70 then 1 else 0 end) as p2_high,
+  sum(case when principle_score_2 >= 0.35 and (principle_score_2 < 0.70 or low_answer_count_2 > 1) then 1 else 0 end) as p2_med,
+  sum(case when principle_score_2 >= 0.70 and low_answer_count_2 <= 1 then 1 else 0 end) as p2_high,
   sum(case when principle_score_3 < 0.35 then 1 else 0 end) as p3_low,
-  sum(case when principle_score_3 >= 0.35 and principle_score_3 < 0.70 then 1 else 0 end) as p3_med,
-  sum(case when principle_score_3 >= 0.70 then 1 else 0 end) as p3_high,
+  sum(case when principle_score_3 >= 0.35 and (principle_score_3 < 0.70 or low_answer_count_3 > 1) then 1 else 0 end) as p3_med,
+  sum(case when principle_score_3 >= 0.70 and low_answer_count_3 <= 1 then 1 else 0 end) as p3_high,
   sum(case when principle_score_4 < 0.35 then 1 else 0 end) as p4_low,
-  sum(case when principle_score_4 >= 0.35 and principle_score_4 < 0.70 then 1 else 0 end) as p4_med,
-  sum(case when principle_score_4 >= 0.70 then 1 else 0 end) as p4_high,
+  sum(case when principle_score_4 >= 0.35 and (principle_score_4 < 0.70 or low_answer_count_4 > 1) then 1 else 0 end) as p4_med,
+  sum(case when principle_score_4 >= 0.70 and low_answer_count_4 <= 1 then 1 else 0 end) as p4_high,
   sum(case when principle_score_5 < 0.35 then 1 else 0 end) as p5_low,
-  sum(case when principle_score_5 >= 0.35 and principle_score_5 < 0.70 then 1 else 0 end) as p5_med,
-  sum(case when principle_score_5 >= 0.70 then 1 else 0 end) as p5_high,
+  sum(case when principle_score_5 >= 0.35 and (principle_score_5 < 0.70 or low_answer_count_5 > 1) then 1 else 0 end) as p5_med,
+  sum(case when principle_score_5 >= 0.70 and low_answer_count_5 <= 1 then 1 else 0 end) as p5_high,
   sum(case when principle_score_6 < 0.35 then 1 else 0 end) as p6_low,
-  sum(case when principle_score_6 >= 0.35 and principle_score_6 < 0.70 then 1 else 0 end) as p6_med,
-  sum(case when principle_score_6 >= 0.70 then 1 else 0 end) as p6_high,
+  sum(case when principle_score_6 >= 0.35 and (principle_score_6 < 0.70 or low_answer_count_6 > 1) then 1 else 0 end) as p6_med,
+  sum(case when principle_score_6 >= 0.70 and low_answer_count_6 <= 1 then 1 else 0 end) as p6_high,
   sum(case when principle_score_1_1 < 0.35 then 1 else 0 end) as p1_1_low,
   sum(case when principle_score_1_1 >= 0.35 and principle_score_1_1 < 0.70 then 1 else 0 end) as p1_1_med,
   sum(case when principle_score_1_1 >= 0.70 then 1 else 0 end) as p1_1_high,
@@ -54,26 +54,65 @@ const MEASUREMENT_QUERY = `SELECT
   sum(case when principle_score_6_3 < 0.35 then 1 else 0 end) as p6_3_low,
   sum(case when principle_score_6_3 >= 0.35 and principle_score_6_3 < 0.70 then 1 else 0 end) as p6_3_med,
   sum(case when principle_score_6_3 >= 0.70 then 1 else 0 end) as p6_3_high,
-  sum(case when core_aspect_score_1 <= 2 then 1 else 0 end) as ca1_low,
-  sum(case when core_aspect_score_1 = 3 then 1 else 0 end) as ca1_med,
-  sum(case when core_aspect_score_1 >= 4 then 1 else 0 end) as ca1_high,
-  sum(case when core_aspect_score_2 <= 2 then 1 else 0 end) as ca2_low,
-  sum(case when core_aspect_score_2 = 3 then 1 else 0 end) as ca2_med,
-  sum(case when core_aspect_score_2 >= 4 then 1 else 0 end) as ca2_high,
-  sum(case when core_aspect_score_3 <= 2 then 1 else 0 end) as ca3_low,
-  sum(case when core_aspect_score_3 = 3 then 1 else 0 end) as ca3_med,
-  sum(case when core_aspect_score_3 >= 4 then 1 else 0 end) as ca3_high,
-  sum(case when core_aspect_score_4 <= 2 then 1 else 0 end) as ca4_low,
-  sum(case when core_aspect_score_4 = 3 then 1 else 0 end) as ca4_med,
-  sum(case when core_aspect_score_4 >= 4 then 1 else 0 end) as ca4_high,
-  sum(case when core_aspect_score_5 <= 2 then 1 else 0 end) as ca5_low,
-  sum(case when core_aspect_score_5 = 3 then 1 else 0 end) as ca5_med,
-  sum(case when core_aspect_score_5 >= 4 then 1 else 0 end) as ca5_high,
-  sum(case when core_aspect_score_6 <= 2 then 1 else 0 end) as ca6_low,
-  sum(case when core_aspect_score_6 = 3 then 1 else 0 end) as ca6_med,
-  sum(case when core_aspect_score_6 >= 4 then 1 else 0 end) as ca6_high
+  sum(case when core_aspect_score_1 <= 1 then 1 else 0 end) as ca1_low,
+  sum(case when core_aspect_score_1 = 2 then 1 else 0 end) as ca1_med,
+  sum(case when core_aspect_score_1 >= 3 then 1 else 0 end) as ca1_high,
+  sum(case when core_aspect_score_2 <= 1 then 1 else 0 end) as ca2_low,
+  sum(case when core_aspect_score_2 = 2 then 1 else 0 end) as ca2_med,
+  sum(case when core_aspect_score_2 >= 3 then 1 else 0 end) as ca2_high,
+  sum(case when core_aspect_score_3 <= 1 then 1 else 0 end) as ca3_low,
+  sum(case when core_aspect_score_3 = 2 then 1 else 0 end) as ca3_med,
+  sum(case when core_aspect_score_3 >= 3 then 1 else 0 end) as ca3_high,
+  sum(case when core_aspect_score_4 <= 1 then 1 else 0 end) as ca4_low,
+  sum(case when core_aspect_score_4 = 2 then 1 else 0 end) as ca4_med,
+  sum(case when core_aspect_score_4 >= 3 then 1 else 0 end) as ca4_high,
+  sum(case when core_aspect_score_5 <= 1 then 1 else 0 end) as ca5_low,
+  sum(case when core_aspect_score_5 = 2 then 1 else 0 end) as ca5_med,
+  sum(case when core_aspect_score_5 >= 3 then 1 else 0 end) as ca5_high,
+  sum(case when core_aspect_score_6 <= 1 then 1 else 0 end) as ca6_low,
+  sum(case when core_aspect_score_6 = 2 then 1 else 0 end) as ca6_med,
+  sum(case when core_aspect_score_6 >= 3 then 1 else 0 end) as ca6_high
 FROM soproc_measurement
 WHERE :where`;
+
+// Overview of the same measurement, broken down by org rather than by tier: one
+// row per office/unit/subunit, each principle as its mean score in percent.
+const MEASUREMENT_RADAR_QUERY = `SELECT :org-field as org,
+  count(*) as total,
+  round(avg(principle_score_1) * 100) as p1,
+  round(avg(principle_score_2) * 100) as p2,
+  round(avg(principle_score_3) * 100) as p3,
+  round(avg(principle_score_4) * 100) as p4,
+  round(avg(principle_score_5) * 100) as p5,
+  round(avg(principle_score_6) * 100) as p6
+FROM soproc_measurement
+WHERE :where
+GROUP BY 1
+ORDER BY 1`;
+
+const MEASUREMENT_RADAR_HEADERS = [
+  'משרד / יחידה<org',
+  'מספר מכרזים שנמדדו<total',
+  'עקרון 1 - מקבלי השירות במרכז<p1',
+  'עקרון 2 - ניהול מוכוון תוצאות<p2',
+  'עקרון 3 - חדשנות וגמישות<p3',
+  'עקרון 4 - פיתוח ושימור ידע<p4',
+  'עקרון 5 - המפעיל כשותף<p5',
+  'עקרון 6 - תכנון כלכלי ותחרות<p6',
+];
+
+// The radar is drawn as plain SVG rather than through the plotly pipeline the
+// other charts use: the CDN bundle we load (plotly-basic) has no scatterpolar
+// trace, and plotly gives no way to hang a tooltip off an angular axis label.
+// Coordinates live in the box below, matching the SVG viewBox, so the HTML
+// principle labels overlaid on top can reuse them as percentages.
+const RADAR_VIEWBOX = {width: 100, height: 62};
+const RADAR_CENTER = {x: 50, y: 31};
+const RADAR_RADIUS = 19;
+const RADAR_RINGS = [25, 50, 75, 100];
+// How far outside the outermost ring the top and bottom labels sit.
+const RADAR_LABEL_GAP = 3;
+
 import { Subscription, ReplaySubject, from, mergeMap, map, first, switchMap, delay, fromEvent, throttleTime, forkJoin, interval, animationFrameScheduler } from 'rxjs';
 import { BudgetKeyItemService } from '../../../budgetkey-item.service';
 import { tableDefs } from './tables';
@@ -132,6 +171,30 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   readonly MEASUREMENT_YEAR = '2025';
   readonly MEASUREMENT_MIN_TENDERS = 3;
   public measurementData: any = null;
+
+  // The six principles, in order: short names for the radar's axes, with `side`
+  // deciding where the label is anchored around the hexagon, plus the official
+  // definition — shown as the radar's label tooltip and as the subtitle of each
+  // box in the measurement tab's per-principle breakdown.
+  readonly MEASUREMENT_PRINCIPLES = [
+    {n: 1, label: 'מקבלי השירות במרכז', side: 'top',
+     definition: 'השירות מספק מענה מותאם ומיטבי לצרכי קהל היעד על גווניו, ונותן להם קול בעיצוב השירות'},
+    {n: 2, label: 'ניהול מוכוון תוצאות', side: 'right',
+     definition: 'השירות מקיים תהליכי למידה ושיפור תמידיים על מנת להשיג תוצאות לקידום מטרותיו וכדי לספק שירות איכותי'},
+    {n: 3, label: 'חדשנות וגמישות', side: 'right',
+     definition: 'השירות פועל לאור חזית הידע בתחום, מגיב ומתעדכן בהתאם להתפתחויות בידע, לצרכים משתנים ולתוצאותיו הנמדדות'},
+    {n: 4, label: 'פיתוח ושימור ידע', side: 'bottom',
+     definition: 'ידע הנצבר במהלך ההתקשרות עובר בין המפעילים ומהמפעילים למשרד ומזין קבלת החלטות ותהליכי תכנון עתידיים'},
+    {n: 5, label: 'המפעיל כשותף', side: 'left',
+     definition: 'היחסים עם המפעיל מבוססים על אמון ומחויבות משותפת להענקת שירות איכותי'},
+    {n: 6, label: 'תכנון כלכלי ותחרות', side: 'left',
+     definition: 'התכנון הכלכלי ומודל התיחור והתמורה מתמרצים מתן שירות איכותי וניהול יעיל של ההתקשרות'},
+  ];
+  public measurementRadar: any[] = [];
+  public measurementRadarTotal = 0;
+  public measurementRadarQuery = '';
+  readonly RADAR_VIEWBOX = `0 0 ${RADAR_VIEWBOX.width} ${RADAR_VIEWBOX.height}`;
+  readonly RADAR_CENTER = RADAR_CENTER;
 
   public parameters: any = {
     pricing_model: [
@@ -385,6 +448,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       {from: ':pricing-model', to: this.filterExpression('pricing_model')},
     ];
     this.fetchMeasurementData();
+    this.fetchMeasurementRadar();
   }
 
   clearFilters() {
@@ -474,16 +538,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       }
       const data = ct.data(rows, ct, x_values);
       for (const d of data) {
-        let color: string | null = null;
-        if (scheme.hasOwnProperty(d.name)) {
-          color = this.COLORS[scheme[d.name]];
-        } else if (scheme.hasOwnProperty(`${this.levelKey}|${d.name}`)) {
-          color = this.COLORS[scheme[`${this.levelKey}|${d.name}`]];
-        }
-        if (!color) {
-          console.log('MISSING VALUE', d.name)
-          color = this.COLORS[this.COLORS.length - 1];
-        }
+        const color = this.colorFor(scheme, d.name);
         d.marker = {
           color: color,
           opacity: 1,
@@ -495,6 +550,19 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       }
       this.charts[ct.id] = {layout, data, downloadHeaders: ct.downloadHeaders, query: query, title: ct.title};
     });
+  }
+
+  // An org is keyed in the colorscheme either by its own name (offices) or by
+  // its full path below the current level (units and subunits).
+  private colorFor(scheme: any, name: string): string {
+    if (scheme.hasOwnProperty(name)) {
+      return this.COLORS[scheme[name]];
+    }
+    if (scheme.hasOwnProperty(`${this.levelKey}|${name}`)) {
+      return this.COLORS[scheme[`${this.levelKey}|${name}`]];
+    }
+    console.log('MISSING VALUE', name);
+    return this.COLORS[this.COLORS.length - 1];
   }
 
   setSubtitle(ct: any, rows: any[]) {
@@ -538,82 +606,164 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       });
   }
 
-  private tierPcts(total: number, low: number, med: number, high: number) {
-    if (!total) return {lowPct: 0, medPct: 0, highPct: 0, lowCount: 0, medCount: 0, highCount: 0};
-    const lowPct = Math.round(low / total * 100);
-    const medPct = Math.round(med / total * 100);
-    return {lowPct, medPct, highPct: 100 - lowPct - medPct, lowCount: low, medCount: med, highCount: high};
+  fetchMeasurementRadar() {
+    if (this.ps.server()) return;
+    const query = this.replaceAll(MEASUREMENT_RADAR_QUERY, [
+      {from: ':where', to: this.calcMeasurementWhere()},
+      {from: ':org-field', to: `coalesce("${this.groupByLvl}", 'אחר')`},
+    ]);
+    this.measurementRadarQuery = this.encodeQuery(query);
+    forkJoin([
+      this.colorscheme,
+      this.api.getItemData(this.measurementRadarQuery, ['org'], [this.formatter('org')])
+    ]).subscribe(([scheme, result]: any[]) => {
+      if (result.error) {
+        console.log('ERROR', query, result.error);
+      }
+      const rows = result.rows || [];
+      this.measurementRadarTotal = this.sum(rows.map((row: any) => +row.total));
+      this.measurementRadar = rows.map((row: any) => {
+        const values = this.MEASUREMENT_PRINCIPLES.map((p) => Math.round(+row['p' + p.n] || 0));
+        return {
+          name: row.org,
+          total: +row.total,
+          color: this.colorFor(scheme, row.org),
+          values,
+          points: this.radarPolygon(values),
+          markers: values.map((value, i) => ({value, ...this.radarPoint(i, value / 100)})),
+        };
+      });
+    });
+  }
+
+  get measurementRadarDownloadUrl(): string {
+    return this.api.getDownloadUrlPost(
+      'xlsx', MEASUREMENT_RADAR_HEADERS, `${this.item.page_title} / מידע על מדידת מכרזי רכש`);
+  }
+
+  private radarPoint(index: number, ratio: number) {
+    // Principle 1 sits at the top and the rest follow clockwise, 60° apart.
+    const angle = (index * 60 - 90) * Math.PI / 180;
+    return {
+      x: RADAR_CENTER.x + Math.cos(angle) * RADAR_RADIUS * ratio,
+      y: RADAR_CENTER.y + Math.sin(angle) * RADAR_RADIUS * ratio,
+    };
+  }
+
+  private radarPolygon(values: number[]): string {
+    return values
+      .map((value, i) => this.radarPoint(i, value / 100))
+      .map((p) => `${p.x.toFixed(2)},${p.y.toFixed(2)}`)
+      .join(' ');
+  }
+
+  // The rings are the 25/50/75/100% hexagons; the spokes run from the centre out
+  // to each principle's vertex; the scale labels climb the topmost spoke.
+  readonly radarRings = RADAR_RINGS.map(
+    (pct) => ({pct, points: this.radarPolygon(this.MEASUREMENT_PRINCIPLES.map(() => pct))}));
+
+  readonly radarSpokes = this.MEASUREMENT_PRINCIPLES.map((_, i) => this.radarPoint(i, 1));
+
+  readonly radarScaleLabels = [0, ...RADAR_RINGS].map((pct) => ({
+    pct,
+    x: RADAR_CENTER.x + 1.5,
+    y: RADAR_CENTER.y - RADAR_RADIUS * pct / 100,
+  }));
+
+  // Percentage offsets for the HTML labels overlaid on the SVG: the top and
+  // bottom ones are centred just clear of the outer ring, the side ones hug the
+  // edge of the chart at the height of their own vertex.
+  readonly radarLabels = this.MEASUREMENT_PRINCIPLES.map((principle, i) => ({
+    ...principle,
+    top: principle.side === 'bottom'
+      ? `${(RADAR_CENTER.y + RADAR_RADIUS + RADAR_LABEL_GAP) / RADAR_VIEWBOX.height * 100}%` : 'auto',
+    bottom: principle.side === 'top'
+      ? `${(RADAR_VIEWBOX.height - (RADAR_CENTER.y - RADAR_RADIUS - RADAR_LABEL_GAP))
+           / RADAR_VIEWBOX.height * 100}%` : 'auto',
+    sideTop: `${this.radarPoint(i, 1).y / RADAR_VIEWBOX.height * 100}%`,
+  }));
+
+  // The denominator is the tenders that actually have a score for this row, not
+  // every tender in the filter: a principle whose question was answered
+  // "לא רלוונטי", or left blank, is emitted as NULL and falls into none of the
+  // three buckets. Dividing by count(*) and then deriving high by subtraction
+  // silently reported those tenders as "מקיים".
+  private tierPcts(low: number, med: number, high: number) {
+    const scored = low + med + high;
+    if (!scored) return {lowPct: 0, medPct: 0, highPct: 0, lowCount: 0, medCount: 0, highCount: 0, scoredCount: 0};
+    const lowPct = Math.round(low / scored * 100);
+    const medPct = Math.round(med / scored * 100);
+    return {lowPct, medPct, highPct: 100 - lowPct - medPct,
+            lowCount: low, medCount: med, highCount: high, scoredCount: scored};
   }
 
   get principleData(): any[] {
     if (!this.measurementData) return [];
     const d = this.measurementData;
-    const t = +d.total;
     return [
-      {name: 'עקרון ראשון: מקבל השירות במרכז',                        ...this.tierPcts(t, +d.p1_low, +d.p1_med, +d.p1_high)},
-      {name: 'עקרון שני: ניהול מוכוון תוצאות',                        ...this.tierPcts(t, +d.p2_low, +d.p2_med, +d.p2_high)},
-      {name: 'עקרון שלישי: חדשנות וגמישות',                           ...this.tierPcts(t, +d.p3_low, +d.p3_med, +d.p3_high)},
-      {name: 'עקרון רביעי: פיתוח ושימור ידע',                         ...this.tierPcts(t, +d.p4_low, +d.p4_med, +d.p4_high)},
-      {name: 'עקרון חמישי: המפעיל כשותף',                             ...this.tierPcts(t, +d.p5_low, +d.p5_med, +d.p5_high)},
-      {name: 'עקרון שישי: תכנון כלכלי ותחרות בשירות האיכות',          ...this.tierPcts(t, +d.p6_low, +d.p6_med, +d.p6_high)},
+      {name: 'עקרון ראשון: מקבל השירות במרכז',                        ...this.tierPcts(+d.p1_low, +d.p1_med, +d.p1_high)},
+      {name: 'עקרון שני: ניהול מוכוון תוצאות',                        ...this.tierPcts(+d.p2_low, +d.p2_med, +d.p2_high)},
+      {name: 'עקרון שלישי: חדשנות וגמישות',                           ...this.tierPcts(+d.p3_low, +d.p3_med, +d.p3_high)},
+      {name: 'עקרון רביעי: פיתוח ושימור ידע',                         ...this.tierPcts(+d.p4_low, +d.p4_med, +d.p4_high)},
+      {name: 'עקרון חמישי: המפעיל כשותף',                             ...this.tierPcts(+d.p5_low, +d.p5_med, +d.p5_high)},
+      {name: 'עקרון שישי: תכנון כלכלי ותחרות בשירות האיכות',          ...this.tierPcts(+d.p6_low, +d.p6_med, +d.p6_high)},
     ];
   }
 
   get principleAspects(): any[] {
     if (!this.measurementData) return [];
     const d = this.measurementData;
-    const t = +d.total;
     return [
       {
         principleTitle: 'עקרון ראשון: מקבל השירות במרכז',
         aspects: [
-          {name: 'השירות מותאם לצרכי כלל מקבלי השירות',                                                               isCore: false, ...this.tierPcts(t, +d.p1_1_low, +d.p1_1_med, +d.p1_1_high)},
-          {name: 'למקבלי השירות יש קול בתהליך עיצוב השירות ולאורך מתן השירותים',                                      isCore: false, ...this.tierPcts(t, +d.p1_2_low, +d.p1_2_med, +d.p1_2_high)},
-          {name: 'המידע על השירות מונגש למקבלי השירות כך שיוכלו למצות את זכויותיהם בשירות',                           isCore: false, ...this.tierPcts(t, +d.p1_3_low, +d.p1_3_med, +d.p1_3_high)},
-          {name: 'נשמרת רציפות ויציבות במתן שירותים או קשר טיפולי',                                                   isCore: false, ...this.tierPcts(t, +d.p1_4_low, +d.p1_4_med, +d.p1_4_high)},
-          {name: 'המכרז קובע הליכים הנותנים קול למקבלי השירות או משפחותיהם בעת הפעלת השירות',                         isCore: true,  ...this.tierPcts(t, +d.ca1_low, +d.ca1_med, +d.ca1_high)},
+          {name: 'השירות מותאם לצרכי כלל מקבלי השירות',                                                               isCore: false, ...this.tierPcts(+d.p1_1_low, +d.p1_1_med, +d.p1_1_high)},
+          {name: 'למקבלי השירות יש קול בתהליך עיצוב השירות ולאורך מתן השירותים',                                      isCore: false, ...this.tierPcts(+d.p1_2_low, +d.p1_2_med, +d.p1_2_high)},
+          {name: 'המידע על השירות מונגש למקבלי השירות כך שיוכלו למצות את זכויותיהם בשירות',                           isCore: false, ...this.tierPcts(+d.p1_3_low, +d.p1_3_med, +d.p1_3_high)},
+          {name: 'נשמרת רציפות ויציבות במתן שירותים או קשר טיפולי',                                                   isCore: false, ...this.tierPcts(+d.p1_4_low, +d.p1_4_med, +d.p1_4_high)},
+          {name: 'המכרז קובע הליכים הנותנים קול למקבלי השירות או משפחותיהם בעת הפעלת השירות',                         isCore: true,  ...this.tierPcts(+d.ca1_low, +d.ca1_med, +d.ca1_high)},
         ]
       },
       {
         principleTitle: 'עקרון שני: ניהול מוכוון תוצאות',
         aspects: [
-          {name: 'השירות מוכוון להשגת תוצאות מוגדרות',                                                                isCore: false, ...this.tierPcts(t, +d.p2_1_low, +d.p2_1_med, +d.p2_1_high)},
-          {name: 'יש לשירות מערך מדידה לבחינת מידת השגת התוצאות ומתבצע ניהול שירות מוכוון תוצאות',                  isCore: false, ...this.tierPcts(t, +d.p2_2_low, +d.p2_2_med, +d.p2_2_high)},
-          {name: 'המכרז כולל הגדרה של המדדים על בסיסם יימדד מפעיל השירות כולל מדדי תוצאה מרכזיים',                  isCore: true,  ...this.tierPcts(t, +d.ca2_low, +d.ca2_med, +d.ca2_high)},
+          {name: 'השירות מוכוון להשגת תוצאות מוגדרות',                                                                isCore: false, ...this.tierPcts(+d.p2_1_low, +d.p2_1_med, +d.p2_1_high)},
+          {name: 'יש לשירות מערך מדידה לבחינת מידת השגת התוצאות ומתבצע ניהול שירות מוכוון תוצאות',                  isCore: false, ...this.tierPcts(+d.p2_2_low, +d.p2_2_med, +d.p2_2_high)},
+          {name: 'המכרז כולל הגדרה של המדדים על בסיסם יימדד מפעיל השירות כולל מדדי תוצאה מרכזיים',                  isCore: true,  ...this.tierPcts(+d.ca2_low, +d.ca2_med, +d.ca2_high)},
         ]
       },
       {
         principleTitle: 'עקרון שלישי: חדשנות וגמישות',
         aspects: [
-          {name: 'מודל השירות משקף את חזית הידע',                                                                      isCore: false, ...this.tierPcts(t, +d.p3_1_low, +d.p3_1_med, +d.p3_1_high)},
-          {name: 'מתאפשרת גמישות בהתאמת השירות לצרכים משתנים',                                                        isCore: false, ...this.tierPcts(t, +d.p3_2_low, +d.p3_2_med, +d.p3_2_high)},
-          {name: 'המודל המכרזי מאפשר גמישות באופן אספקת השירות בהתאם לצרכים משתנים, בהלימה להנחיות המקצועיות',      isCore: true,  ...this.tierPcts(t, +d.ca3_low, +d.ca3_med, +d.ca3_high)},
+          {name: 'מודל השירות משקף את חזית הידע',                                                                      isCore: false, ...this.tierPcts(+d.p3_1_low, +d.p3_1_med, +d.p3_1_high)},
+          {name: 'מתאפשרת גמישות בהתאמת השירות לצרכים משתנים',                                                        isCore: false, ...this.tierPcts(+d.p3_2_low, +d.p3_2_med, +d.p3_2_high)},
+          {name: 'המודל המכרזי מאפשר גמישות באופן אספקת השירות בהתאם לצרכים משתנים, בהלימה להנחיות המקצועיות',      isCore: true,  ...this.tierPcts(+d.ca3_low, +d.ca3_med, +d.ca3_high)},
         ]
       },
       {
         principleTitle: 'עקרון רביעי: פיתוח ושימור ידע',
         aspects: [
-          {name: 'ידע המפותח והנצבר במהלך ההתקשרות מתועד באופן המאפשר שימור, שיתוף ולמידה ומועבר במלואו למשרד ו/או למפעיל מחליף', isCore: false, ...this.tierPcts(t, +d.p4_low, +d.p4_med, +d.p4_high)},
-          {name: 'במכרז מעוגנת חובת המפעיל בנוגע לתיעוד ידע הנצבר אצלו וכולל סוגי הידע ואופן העברתם למשרד ו/או למפעיל המחליף במהלך ובתום התקשרות', isCore: true, ...this.tierPcts(t, +d.ca4_low, +d.ca4_med, +d.ca4_high)},
+          {name: 'ידע המפותח והנצבר במהלך ההתקשרות מתועד באופן המאפשר שימור, שיתוף ולמידה ומועבר במלואו למשרד ו/או למפעיל מחליף', isCore: false, ...this.tierPcts(+d.p4_low, +d.p4_med, +d.p4_high)},
+          {name: 'במכרז מעוגנת חובת המפעיל בנוגע לתיעוד ידע הנצבר אצלו וכולל סוגי הידע ואופן העברתם למשרד ו/או למפעיל המחליף במהלך ובתום התקשרות', isCore: true, ...this.tierPcts(+d.ca4_low, +d.ca4_med, +d.ca4_high)},
         ]
       },
       {
         principleTitle: 'עקרון חמישי: המפעיל כשותף',
         aspects: [
-          {name: 'מתקיים שיח מקצועי רציף בין המשרד למפעילים בשלבי תכנון השירות ובמהלך מתן השירותים',                 isCore: false, ...this.tierPcts(t, +d.p5_low, +d.p5_med, +d.p5_high)},
-          {name: 'המכרז כולל הליכים סדורים הנותנים קול למפעיל השירות לניהול שיח מקצועי ולהצפת צרכים מול המשרד',      isCore: true,  ...this.tierPcts(t, +d.ca5_low, +d.ca5_med, +d.ca5_high)},
+          {name: 'מתקיים שיח מקצועי רציף בין המשרד למפעילים בשלבי תכנון השירות ובמהלך מתן השירותים',                 isCore: false, ...this.tierPcts(+d.p5_low, +d.p5_med, +d.p5_high)},
+          {name: 'המכרז כולל הליכים סדורים הנותנים קול למפעיל השירות לניהול שיח מקצועי ולהצפת צרכים מול המשרד',      isCore: true,  ...this.tierPcts(+d.ca5_low, +d.ca5_med, +d.ca5_high)},
         ]
       },
       {
         principleTitle: 'עקרון שישי: תכנון כלכלי ותחרות בשירות האיכות',
         aspects: [
-          {name: 'הגברת התחרות בין מתמודדים בתקופת המכרוז',                                                            isCore: false, ...this.tierPcts(t, +d.p6_1_low, +d.p6_1_med, +d.p6_1_high)},
-          {name: 'הגברת תחרות בין מפעילים במהלך חיי ההתקשרות',                                                        isCore: false, ...this.tierPcts(t, +d.p6_2_low, +d.p6_2_med, +d.p6_2_high)},
-          {name: 'תכנון כלכלי ההולם את הצרכים הנדרשים למתן שירות איכותי',                                             isCore: false, ...this.tierPcts(t, +d.p6_3_low, +d.p6_3_med, +d.p6_3_high)},
-          {name: 'המכרז כולל מודל תמרוץ למפעיל לעידוד שיפור איכות ויעילות השירות במהלך חיי ההתקשרות',                isCore: true,  ...this.tierPcts(t, +d.ca6_low, +d.ca6_med, +d.ca6_high)},
+          {name: 'הגברת התחרות בין מתמודדים בתקופת המכרוז',                                                            isCore: false, ...this.tierPcts(+d.p6_1_low, +d.p6_1_med, +d.p6_1_high)},
+          {name: 'הגברת תחרות בין מפעילים במהלך חיי ההתקשרות',                                                        isCore: false, ...this.tierPcts(+d.p6_2_low, +d.p6_2_med, +d.p6_2_high)},
+          {name: 'תכנון כלכלי ההולם את הצרכים הנדרשים למתן שירות איכותי',                                             isCore: false, ...this.tierPcts(+d.p6_3_low, +d.p6_3_med, +d.p6_3_high)},
+          {name: 'המכרז כולל מודל תמרוץ למפעיל לעידוד שיפור איכות ויעילות השירות במהלך חיי ההתקשרות',                isCore: true,  ...this.tierPcts(+d.ca6_low, +d.ca6_med, +d.ca6_high)},
         ]
       },
-    ];
+    ].map((principle, i) => ({...principle, definition: this.MEASUREMENT_PRINCIPLES[i].definition}));
   }
 
   getCoreAspect(p: any): any {
