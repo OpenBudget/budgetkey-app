@@ -177,17 +177,17 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
   // definition — shown as the radar's label tooltip and as the subtitle of each
   // box in the measurement tab's per-principle breakdown.
   readonly MEASUREMENT_PRINCIPLES = [
-    {n: 1, label: 'מקבלי השירות במרכז', side: 'top',
+    {n: 1, ordinal: 'ראשון', label: 'מקבלי השירות במרכז', side: 'top',
      definition: 'השירות מספק מענה מותאם ומיטבי לצרכי קהל היעד על גווניו, ונותן להם קול בעיצוב השירות'},
-    {n: 2, label: 'ניהול מוכוון תוצאות', side: 'right',
+    {n: 2, ordinal: 'שני', label: 'ניהול מוכוון תוצאות', side: 'right',
      definition: 'השירות מקיים תהליכי למידה ושיפור תמידיים על מנת להשיג תוצאות לקידום מטרותיו וכדי לספק שירות איכותי'},
-    {n: 3, label: 'חדשנות וגמישות', side: 'right',
+    {n: 3, ordinal: 'שלישי', label: 'חדשנות וגמישות', side: 'right',
      definition: 'השירות פועל לאור חזית הידע בתחום, מגיב ומתעדכן בהתאם להתפתחויות בידע, לצרכים משתנים ולתוצאותיו הנמדדות'},
-    {n: 4, label: 'פיתוח ושימור ידע', side: 'bottom',
+    {n: 4, ordinal: 'רביעי', label: 'פיתוח ושימור ידע', side: 'bottom',
      definition: 'ידע הנצבר במהלך ההתקשרות עובר בין המפעילים ומהמפעילים למשרד ומזין קבלת החלטות ותהליכי תכנון עתידיים'},
-    {n: 5, label: 'המפעיל כשותף', side: 'left',
+    {n: 5, ordinal: 'חמישי', label: 'המפעיל כשותף', side: 'left',
      definition: 'היחסים עם המפעיל מבוססים על אמון ומחויבות משותפת להענקת שירות איכותי'},
-    {n: 6, label: 'תכנון כלכלי ותחרות', side: 'left',
+    {n: 6, ordinal: 'שישי', label: 'תכנון כלכלי ותחרות', side: 'left',
      definition: 'התכנון הכלכלי ומודל התיחור והתמורה מתמרצים מתן שירות איכותי וניהול יעיל של ההתקשרות'},
   ];
   public measurementRadar: any[] = [];

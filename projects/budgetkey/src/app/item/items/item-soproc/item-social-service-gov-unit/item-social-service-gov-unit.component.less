@@ -226,6 +226,20 @@
     .measurement-radar {
         direction: rtl;
 
+        // Sits inline at the end of the subtitle and hands the reader over to
+        // the tab where the measurement is broken down in full.
+        .radar-more {
+            margin-right: 4px;
+            color: #038CA4;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
         // Same box the plotly charts get from social-service-common.less, so the
         // card ends up exactly as tall as its neighbours in the grid.
         .radar-body {
