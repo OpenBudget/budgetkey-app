@@ -115,6 +115,8 @@ const RADAR_MAX = 4; // the measurement spec's coding, 0..4
 const RADAR_RINGS = [1, 2, 3, 4];
 // How far outside the outermost ring the top and bottom labels sit.
 const RADAR_LABEL_GAP = 3;
+// The only office whose units are shown as separate radar series.
+const WELFARE_OFFICE = 'משרד הרווחה';
 
 import { Subscription, ReplaySubject, from, mergeMap, map, first, switchMap, delay, fromEvent, throttleTime, forkJoin, interval, animationFrameScheduler } from 'rxjs';
 import { BudgetKeyItemService } from '../../../budgetkey-item.service';
@@ -609,11 +611,21 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
       });
   }
 
+  // Which org level the radar draws one series per: offices on the main page,
+  // and units (or subunits, once a unit is picked) on the welfare page. On the
+  // other office pages the radar shows a single series for the office as a whole.
+  private radarGroupField(): string | null {
+    if (this.item.office && this.item.office !== WELFARE_OFFICE) {
+      return 'office';
+    }
+    return this.groupByLvl;
+  }
+
   fetchMeasurementRadar() {
     if (this.ps.server()) return;
     const query = this.replaceAll(MEASUREMENT_RADAR_QUERY, [
       {from: ':where', to: this.calcMeasurementWhere()},
-      {from: ':org-field', to: `coalesce("${this.groupByLvl}", 'אחר')`},
+      {from: ':org-field', to: `coalesce("${this.radarGroupField()}", 'אחר')`},
     ]);
     this.measurementRadarQuery = this.encodeQuery(query);
     forkJoin([
