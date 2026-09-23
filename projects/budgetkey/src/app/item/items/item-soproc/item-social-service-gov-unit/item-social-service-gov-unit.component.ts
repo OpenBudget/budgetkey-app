@@ -305,6 +305,16 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
     this.chartsSectionElement.nativeElement.focus();
   }
 
+  // The radar's "expand" link sits low on the page; the tab it opens starts at
+  // the top, so bring the page (the app container's scrolling element) back up.
+  expandMeasurement() {
+    this.setCurrentTab('measurement');
+    this.ps.browser(() => {
+      const scrollable = window.document.querySelector('.scrollable');
+      (scrollable || window).scrollTo({top: 0, behavior: 'smooth'});
+    });
+  }
+
   updateSticky() {
     const top = this.filtersElement.nativeElement.getBoundingClientRect().top - 56;
     if (!this.sticky && top < 1) {
