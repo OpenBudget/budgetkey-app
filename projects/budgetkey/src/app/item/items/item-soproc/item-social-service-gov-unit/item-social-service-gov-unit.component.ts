@@ -641,7 +641,7 @@ export class ItemSocialServiceGovUnitComponent implements OnInit, AfterViewInit 
 
   get measurementRadarDownloadUrl(): string {
     return this.api.getDownloadUrlPost(
-      'xlsx', MEASUREMENT_RADAR_HEADERS, `${this.item.page_title} / מידע על מדידת מכרזי רכש`);
+      'xlsx', MEASUREMENT_RADAR_HEADERS, `${this.item.page_title} / מידע על מדידת הרכש החברתי`);
   }
 
   private radarPoint(index: number, ratio: number) {
