@@ -11,6 +11,7 @@ import { ItemApiService } from '../../item-api.service';
 export class BaseSimpleItemComponent implements OnInit{
   @Input() item: any;
   @Input() questions: Question[];
+  @Input() showVisualizations = true;
 
   @Input() headerBorderColor: string;
   @Input() headerBgColor: string;

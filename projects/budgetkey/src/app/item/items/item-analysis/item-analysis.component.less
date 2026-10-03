@@ -1,0 +1,254 @@
+@text: #3C4948;
+@muted: #6B7675;
+@accent: #5D5077;
+@accent-soft: #8778A5;
+@rule: #E2DDEC;
+@tint: #F3F0F9;
+// The site's AI mark (assets/img/icon-ai.svg) is coral
+@ai-tint: #FFF1F1;
+@ai-border: #FFD3D4;
+
+// Prose keeps a readable line length; tables and charts use the full column
+@measure: 760px;
+
+:host {
+    .analysis {
+        max-width: 900px;
+        direction: rtl;
+    }
+
+    // Author line, as on a blog post: the page is written by AI
+    .byline {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 4px 0 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid @rule;
+
+        .avatar {
+            flex: 0 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: @ai-tint;
+            border: 1px solid @ai-border;
+
+            .ai-icon { width: 26px; height: 26px; }
+        }
+
+        .author {
+            font-size: 17px;
+            line-height: 24px;
+            font-weight: bold;
+            color: @text;
+        }
+
+        .meta {
+            font-size: 15px;
+            line-height: 22px;
+            color: @muted;
+
+            > * { white-space: nowrap; }
+            // After, not before, so a wrapped line never starts with a separator
+            > *:not(:last-child)::after {
+                content: '·';
+                // inline-block keeps the link's underline off the separator
+                display: inline-block;
+                margin: 0 6px;
+                color: @muted;
+            }
+
+            .about-link {
+                padding: 0;
+                border: none;
+                background: none;
+                font: inherit;
+                color: @accent;
+                text-decoration: underline;
+                text-underline-offset: 3px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .temporal-note {
+        display: inline-block;
+        font-size: 16px;
+        line-height: 24px;
+        color: @accent;
+        background: @tint;
+        border-right: 3px solid @accent-soft;
+        padding: 4px 12px;
+        margin-bottom: 10px;
+    }
+
+    figure.chart {
+        margin: 28px 0 4px;
+
+        .chart-title {
+            color: @text;
+            font-family: "Miriam Libre";
+            font-size: 17px;
+            font-weight: bold;
+            line-height: 24px;
+            margin-bottom: 4px;
+        }
+    }
+
+    pre {
+        direction: ltr;
+        text-align: left;
+        font-size: 12px;
+        line-height: 16px;
+        background: #F7F7F7;
+        padding: 10px;
+        overflow-x: auto;
+    }
+
+    ::ng-deep div.md {
+        color: @text;
+
+        // Section headings
+        h2 {
+            color: @accent;
+            font-family: "Miriam Libre";
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 32px;
+            margin: 40px 0 12px;
+        }
+        h3 { color: @accent; font-family: "Miriam Libre"; font-size: 19px; font-weight: bold; line-height: 28px; margin: 24px 0 8px; }
+
+        // Body text
+        p, ul, ol {
+            max-width: @measure;
+            font-size: 19px;
+            line-height: 32px;
+            margin: 0 0 16px;
+        }
+        li { font-size: inherit; line-height: inherit; }
+        a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+        pre > code { direction: ltr; display: block; }
+
+        // "בקצרה": the summary reads first and largest
+        .lead p {
+            font-size: 21px;
+            line-height: 35px;
+            color: #2B3534;
+        }
+
+        // Notes on a chart or table: secondary, upright (Hebrew has no true italic)
+        p.note {
+            font-size: 15px;
+            line-height: 23px;
+            color: @muted;
+            margin-bottom: 8px;
+
+            em { font-style: normal; }
+            a { color: inherit; }
+        }
+
+        // Long lists of budget lines, collapsed to their label
+        details.item-list {
+            max-width: @measure;
+            margin: 0 0 12px;
+            font-size: 15px;
+            line-height: 23px;
+            color: @muted;
+
+            summary {
+                cursor: pointer;
+                width: fit-content;
+                color: @accent;
+                list-style: none;
+                &::-webkit-details-marker { display: none; }
+                &::before {
+                    content: '◂';
+                    display: inline-block;
+                    width: 1em;
+                    transition: transform 0.15s;
+                }
+                &:hover { text-decoration: underline; }
+            }
+            &[open] summary::before { transform: rotate(-90deg); }
+
+            p {
+                font-size: inherit;
+                line-height: inherit;
+                margin: 6px 0 0;
+                padding-right: 12px;
+                border-right: 2px solid @rule;
+            }
+            a { color: inherit; }
+        }
+
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            margin: 8px 0 24px;
+        }
+
+        table {
+            direction: rtl;
+            border-collapse: collapse;
+            min-width: 100%;
+            font-size: 15px;
+            line-height: 21px;
+            color: @text;
+
+            th, td {
+                text-align: right;
+                vertical-align: top;
+                padding: 7px 10px;
+                border-bottom: 1px solid @rule;
+            }
+
+            th {
+                font-weight: bold;
+                background: @tint;
+                border-bottom: 2px solid #CBC2DE;
+                white-space: nowrap;
+            }
+
+            // The last column holds the amount or date
+            td:last-child { white-space: nowrap; }
+        }
+
+        @media (max-width: 600px) {
+            h2 { font-size: 21px; line-height: 28px; margin-top: 32px; }
+            p, ul, ol { font-size: 17px; line-height: 28px; }
+            .lead p { font-size: 18px; line-height: 30px; }
+        }
+
+        // "על הנתונים": methodology, set as a quiet footer
+        section.about-data {
+            max-width: @measure;
+            margin-top: 48px;
+            padding-top: 4px;
+            border-top: 1px solid @rule;
+
+            h2 {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 16px;
+                line-height: 24px;
+                color: @muted;
+                margin: 16px 0 8px;
+
+                .ai-icon { width: 18px; height: 18px; }
+            }
+            p {
+                font-size: 15px;
+                line-height: 23px;
+                color: @muted;
+                margin-bottom: 8px;
+            }
+            a { color: inherit; }
+        }
+    }
+}

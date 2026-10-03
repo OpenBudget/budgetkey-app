@@ -30,6 +30,7 @@ import { ContractPaymentsComponent } from './charts/contract-payments/contract-p
 import { BaseOrgItemComponent } from './items/base-org-item/base-org-item.component';
 import { ItemBudgetChangesComponent } from './items/item-budget-changes/item-budget-changes.component';
 import { ItemGovDecisionComponent } from './items/item-gov-decision/item-gov-decision.component';
+import { ItemAnalysisComponent } from './items/item-analysis/item-analysis.component';
 import { IncomeItemComponent } from './items/item-income/income-item/income-item.component';
 import { ItemIncome2digComponent } from './items/item-income/item-income2dig/item-income2dig.component';
 import { ItemIncome4digComponent } from './items/item-income/item-income4dig/item-income4dig.component';
@@ -103,6 +104,7 @@ import { ItemSupportsProgramComponent } from './items/item-supports-program/item
         SearchLinkComponent,
         TimelinePartComponent,
         ItemGovDecisionComponent,
+        ItemAnalysisComponent,
         ItemSocialServiceComponent,
         ItemSocialServiceGovUnitComponent,
         ItemSoprocChartComponent,

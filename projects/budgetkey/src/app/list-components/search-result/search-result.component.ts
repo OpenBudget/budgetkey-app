@@ -9,6 +9,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/he';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PlatformService } from '../../common-components/platform.service';
+import { ANALYSIS_CATEGORIES } from '../../common-components/analysis-categories';
 dayjs.locale('he');
 
 type StringOrFunc = string | ((x: any) => string);
@@ -598,6 +599,25 @@ export class SearchResultComponent implements OnInit {
       bodyStyle: ['icon-gov'],
       bodyBorderColor: '#CADAEC',
       bodyBgColor: '#ffffff',
+    },
+    // // ANALYSIS
+    // AI-generated topic analysis pages
+    'analysis': <Parameter>{
+      primaryColor: '#5D5077',
+      bgColor: '#ffffff',
+
+      topRight: '<i class="ai-icon"></i><strong>ניתוח</strong> · נכתב על ידי AI',
+      topLeft: (x) => ANALYSIS_CATEGORIES[x.category] || '',
+
+      title: [':title'],
+      subtitle: ':description',
+
+      bottomRight: ':question',
+      bottomLeft: (x) => x['rendered_at'] ? `עודכן ב-${dayjs(x['rendered_at']).format('DD/MM/YYYY')}` : null,
+
+      bodyStyle: ['color-center', 'borders-solid'],
+      bodyBorderColor: '#CBC2DE',
+      bodyBgColor: '#FAF7FF',
     },
     // // ACTIVITIES
     // Government Activities

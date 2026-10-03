@@ -4,6 +4,8 @@ import { GlobalSettingsService } from "./global-settings.service";
 import { DomSanitizer, Meta, SafeUrl } from "@angular/platform-browser";
 import { DOCUMENT } from "@angular/common";
 
+let defaultDescription: string | null | undefined;
+
 @Injectable()
 export class SeoService {
   
@@ -14,7 +16,12 @@ export class SeoService {
   shareData: { text: any; url: string; };
 
   constructor(private seo: NgxSeoService, private globalSettings: GlobalSettingsService, 
-    private sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any) {}
+    private sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any) {
+    // Captured once, as other instances (one per lazy module) may have changed the tag since
+    if (defaultDescription === undefined) {
+      defaultDescription = this.document.querySelector('meta[name="description"]')?.getAttribute('content') || null;
+    }
+  }
 
   setSeo(title: string, canonical: string) {
     // const seo: NgxSeo = {
@@ -36,6 +43,7 @@ export class SeoService {
     this.seo.setMetaSiteName(this.globalSettings.siteName + '');
     this.seo.setMetaCanonical(canonical);
     this.seo.setMetaUrl(canonical);
+    this.setDescription(null);
     this.seo.setMetaCustomTags([
       { itemprop: 'name', content: title },                
     ]);
@@ -47,6 +55,14 @@ export class SeoService {
       .replace(this.globalSettings.siteName + ' - ', '')
       .replace(this.globalSettings.siteName, '');
     this.prepareShare(shareMessage, canonical, 'מפתח_התקציב');
+  }
+
+  // Pages set their own description after setSeo(), which resets it to the site's default
+  setDescription(description?: string | null) {
+    const content = description || defaultDescription;
+    if (content) {
+      this.seo.setMetaDescription(content);
+    }
   }
 
   prepareShare(shareText: string, url: string, hashtag: string) {
