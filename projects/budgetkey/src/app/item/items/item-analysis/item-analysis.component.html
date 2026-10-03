@@ -1,0 +1,63 @@
+<app-base-simple-item [item]='item' [showVisualizations]='false'
+    [headerPrimaryColor]='"#5D5077"' [headerBgColor]='"white"'
+    [headerBorderColor]='"#CADAEC"' [headerSecondaryColor]='"#8778A5"'
+>
+    <ng-container class='category'>
+        <strong>ניתוח</strong>
+        @if (category) {
+            &nbsp;/&nbsp;<span>{{ category }}</span>
+        }
+    </ng-container>
+    <ng-container class='amount'>
+    </ng-container>
+    <ng-container class='title'>
+        {{ item.title }}
+    </ng-container>
+    <ng-container class='subtitle'>
+        {{ item.question }}
+    </ng-container>
+    <ng-container class='extraInfo'>
+    </ng-container>
+    <ng-container class='textTemplate'>
+        <div class='analysis' (click)='onClick($event)'>
+            <div class='byline'>
+                <span class='avatar' aria-hidden='true'><i class='ai-icon'></i></span>
+                <div>
+                    <div class='author'>נכתב על ידי בינה מלאכותית (AI)</div>
+                    <div class='meta'>
+                        <span>על סמך נתוני מפתח התקציב</span>
+                        @if (item.rendered_at) {
+                            <span>עודכן ב-{{ format.date(item.rendered_at) }}</span>
+                        }
+                        <button type='button' class='about-link' (click)='scrollToAbout()'>איך נוצר העמוד?</button>
+                    </div>
+                </div>
+            </div>
+            @if (item.temporal) {
+                <div class='temporal-note'>
+                    הנושא קשור לתקופה או לאירוע מסוים{{ item.expires_at ? ', והעמוד יתעדכן עד ' + format.date(item.expires_at) : '' }}.
+                </div>
+            }
+            @for (segment of segments; track $index) {
+                @switch (segment.kind) {
+                    @case ('md') {
+                        <div class='md' [innerHTML]='segment.html'></div>
+                    }
+                    @case ('chart') {
+                        <figure class='chart'>
+                            @if (segment.spec.title) {
+                                <figcaption class='chart-title'>{{ segment.spec.title }}</figcaption>
+                            }
+                            @if (showCharts) {
+                                <app-chart-plotly [data]='segment.spec.chart' [layout]='segment.spec.layout'></app-chart-plotly>
+                            }
+                        </figure>
+                    }
+                    @case ('raw') {
+                        <pre>{{ segment.text }}</pre>
+                    }
+                }
+            }
+        </div>
+    </ng-container>
+</app-base-simple-item>

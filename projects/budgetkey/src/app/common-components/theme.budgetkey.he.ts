@@ -467,6 +467,13 @@ export const DEFAULT_THEME: any={
       "placeholder": "חפשו החלטות ופרסומי ממשלה..."
     },
     {
+      "id": "analysis",
+      "name": "ניתוחים",
+      "description": "ניתוחים של פעילות הממשלה ותקציבה בנושאים שונים, שנכתבו בעזרת בינה מלאכותית על סמך הנתונים.",
+      "types": ["analysis"],
+      "placeholder": "חפשו ניתוחים לפי נושא..."
+    },
+    {
       "id": "activities",
       "name": "שירותים ופרויקטים",
       "description": "פעילויות המבוצעות על ידי המדינה.",

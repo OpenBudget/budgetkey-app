@@ -51,6 +51,7 @@ class SearchResultsCounts {
     procurement: KindResults;
     people: KindResults;
     gov_decisions: KindResults;
+    analysis: KindResults;
     activities: KindResults;
     _current: KindResults;
 }

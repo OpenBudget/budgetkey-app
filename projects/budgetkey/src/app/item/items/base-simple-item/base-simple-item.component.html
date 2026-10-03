@@ -13,4 +13,4 @@
   <div><ng-content select='.textTemplate'></ng-content></div>
 </div>
 
-<app-item-visualizations *ngIf="item.charts" [item]="item"></app-item-visualizations>
+<app-item-visualizations *ngIf="showVisualizations && item.charts" [item]="item"></app-item-visualizations>
