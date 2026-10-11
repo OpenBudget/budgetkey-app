@@ -1,0 +1,222 @@
+@import '../../../common.less';
+
+div.main {
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    padding: 0 10px;
+}
+
+div.dashboard-meta {
+    max-width: 770px;
+    width: 100%;
+    padding-top: 40px;
+
+    h1 {
+        color: @color-fill-lead;
+        .font-miriam;
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 44px;
+        margin: 0 0 12px 0;
+    }
+
+    ul.meta-tags {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 8px;
+        list-style: none;
+        margin: 0 0 24px 0;
+        padding: 0;
+
+        li {
+            display: flex;
+            flex-flow: row;
+            align-items: baseline;
+            gap: 4px;
+            background-color: @color-lists-lighter-blue;
+            border-radius: 14px;
+            padding: 4px 12px;
+            .font-abraham;
+            font-size: 13px;
+            color: @color-tertiary-700;
+
+            span.meta-label {
+                font-weight: 700;
+                opacity: 0.75;
+            }
+        }
+    }
+}
+
+p.not-found {
+    color: @color-gray-700;
+    .font-abraham;
+    font-size: 20px;
+    line-height: 26px;
+    padding-top: 60px;
+}
+
+div.md {
+    max-width: 770px;
+    width: 100%;
+    padding-bottom: 60px;
+}
+
+::ng-deep {
+    div.md {
+        h1 { color: @color-fill-lead; .font-miriam; font-size: 32px; font-weight: bold; line-height: 40px; margin-top: 40px; }
+        h2 { color: @color-fill-lead; .font-miriam; font-size: 24px; font-weight: 700; line-height: 34px; margin-top: 36px; }
+        h3 { color: @color-tertiary-700; .font-miriam; font-size: 20px; font-weight: 700; line-height: 28px; margin-top: 28px; }
+        h4 { color: @color-gray-700; .font-abraham; font-size: 18px; font-weight: 700; line-height: 24px; }
+
+        p, li { color: @color-gray-700; .font-abraham; font-size: 17px; line-height: 27px; }
+
+        strong { color: @color-gray-800; }
+
+        blockquote {
+            margin: 16px 0;
+            padding: 4px 16px;
+            border-inline-start: 3px solid @color-lists-blue2;
+            color: @color-gray-600;
+            .font-abraham;
+        }
+
+        a {
+            color: @color-fill-lead;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+
+            &:hover { color: darken(@color-fill-lead, 10%); }
+        }
+
+        pre > code {
+            direction: ltr;
+            display: block;
+            background: @color-gray-800;
+            color: #F7FAFC;
+            border-radius: 6px;
+            padding: 12px 16px;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 22px;
+        }
+
+        table {
+            display: block;
+            overflow-x: auto;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 24px 0;
+            .font-abraham;
+            font-size: 15px;
+            color: @color-gray-700;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
+        }
+        thead { display: table-header-group; }
+        tbody { display: table-row-group; }
+        tr { display: table-row; }
+        th, td {
+            display: table-cell;
+            border: 1px solid @color-gray-100;
+            padding: 10px 14px;
+            text-align: start;
+            white-space: nowrap;
+        }
+        th {
+            background: @color-lists-lighter-blue;
+            color: @color-tertiary-700;
+            font-weight: 700;
+        }
+        tbody tr:nth-child(even) td {
+            background: #FAFBFC;
+        }
+
+        details.md-section {
+            > summary {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                list-style: none;
+                user-select: none;
+                border-radius: 6px;
+                margin: 0 -8px;
+                padding: 2px 8px;
+                transition: background-color 150ms ease;
+
+                &::-webkit-details-marker { display: none; }
+                &::marker { display: none; }
+
+                &::before {
+                    content: '';
+                    flex: 0 0 auto;
+                    width: 7px;
+                    height: 7px;
+                    border-inline-end: 2px solid currentColor;
+                    border-block-end: 2px solid currentColor;
+                    color: @color-fill-lead;
+                    opacity: 0.55;
+                    transform: rotate(45deg);
+                    transition: transform 150ms ease;
+                }
+
+                &:hover { background-color: @color-lists-lighter-blue; }
+
+                &:focus-visible {
+                    outline: 2px solid @color-fill-lead;
+                    outline-offset: 2px;
+                }
+
+                h1, h2, h3, h4, h5, h6 { margin: 0; }
+            }
+
+            &[open] > summary::before { transform: rotate(-45deg); }
+
+            details.md-section {
+                margin-inline-start: 2px;
+                padding-inline-start: 14px;
+                border-inline-start: 2px solid @color-gray-100;
+            }
+        }
+
+        div.mermaid-diagram {
+            display: flex;
+            justify-content: center;
+            margin: 28px 0;
+            overflow-x: auto;
+            background: @color-white;
+            border: 1px solid @color-gray-100;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
+            padding: 20px;
+            // Mermaid's layout math (text-anchor placement, bounding-box sizing)
+            // assumes an LTR context. The page's `dir="auto"` container resolves
+            // to rtl for Hebrew content, and that inherits into the diagram's
+            // <text> elements, flipping which edge text-anchor="start"/"end"
+            // anchor to — e.g. pie chart legends end up right-anchored and
+            // growing left into the pie instead of right, away from it. Forcing
+            // ltr here restores the layout Mermaid actually computed; Hebrew
+            // runs inside still bidi-reorder correctly for reading.
+            direction: ltr;
+
+            svg { max-width: 100%; }
+        }
+
+        div.plotly-embed {
+            margin: 28px 0;
+            overflow-x: auto;
+            background: @color-white;
+            border: 1px solid @color-gray-100;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
+            padding: 20px;
+            // Plotly's own layout (axis ticks, legend, hover labels) isn't
+            // RTL-aware; force ltr so it renders the way Plotly computed it,
+            // matching the same fix applied to div.mermaid-diagram above.
+            direction: ltr;
+        }
+    }
+}

@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'p', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
   { path: 'l', loadChildren: () => import('./list-page/list-page.module').then(m => m.ListPageModule) },
   { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
+  { path: 'subject-dashboards', loadChildren: () => import('./subject-dashboards/subject-dashboards.module').then(m => m.SubjectDashboardsModule) },
   { path: 'not-found', component: PageNotFoundComponent },
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
