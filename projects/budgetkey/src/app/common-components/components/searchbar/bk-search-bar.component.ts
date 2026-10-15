@@ -21,11 +21,20 @@ export class FilterOption {
   filters?: any;
 }
 
+export class FilterMenuDynamicOptions {
+  // SQL query (run via /api/query) returning `id` and `display` columns
+  query: string;
+  // Search field to filter on with the selected row's `id`
+  filterField: string;
+}
+
 export class FilterMenu {
   id: string;
   display: string;
   options: FilterOption[];
   selected?: FilterOption;
+  // Extra options loaded from the data, appended after the static `options`
+  dynamicOptions?: FilterMenuDynamicOptions;
 }
 
 export interface SearchBarType {

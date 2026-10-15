@@ -689,10 +689,14 @@ export class SearchResultComponent implements OnInit {
       topLeft: (x) => x['nice-category'] || '&nbsp;',
       topLeftIcon: 'circle',
 
-      title: [':title'],
+      title: [
+        ':title',
+        (x) => x.muni_name ? `${x.muni_name} <span class='arrow left-dashed'></span>` : null
+      ],
 
       bottomRight: 'קוד סעיף: :nice-code',
-      bottomLeft: (x) => `<strong>${this.format_number(x.allocated)}&nbsp;₪</strong>`,
+      // Revenues are stored as negative amounts in some sources
+      bottomLeft: (x) => `<strong>${this.format_number(Math.abs(x.allocated || x.revised || x.executed))}&nbsp;₪</strong>`,
 
       bodyStyle: ['color-center', 'borders-solid'],
       bodyBorderColor: '#CBC2DE',

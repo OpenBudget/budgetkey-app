@@ -8,7 +8,7 @@
                 <div class='ic money-bag'></div>
             </div>
             <div class='section-content'>
-                <span>בשנת {{ item.year }} {{ item.page_title }} הוא <span class='number' [innerHtml]='format.ils(item.allocated || item.revised || item.executed)'></span>.</span>
+                <span>בשנת {{ item.year }} {{ item.page_title }} הוא <span class='number' [innerHtml]='format.ils(amount)'></span>.</span>
             </div>
         </div>
         <div class='section top'>
@@ -40,6 +40,25 @@
             <ng-container *ngFor='let child of item.children'>
                 <app-muni-budget-minicard [item]='item' [entry]='child'></app-muni-budget-minicard>
             </ng-container>
+        </div>
+        <div class='section top' *ngIf='item.source_page_url || sourceFiles.length > 0'>
+            <div class='section-icon'>
+                <div class='ic information'></div>
+            </div>
+            <div class='section-content source'>
+                <span>מקור הנתונים:</span>
+                <div *ngIf='item.source_page_url'>
+                    <a [href]='item.source_page_url' target='_blank' rel='noopener'>דף התקציב באתר {{ item.muni_name }}</a>
+                </div>
+                <ng-container *ngIf='sourceFiles.length > 0'>
+                    <div>קבצי המקור לשנת {{ item.year }}:</div>
+                    <ul class='source-files'>
+                        <li *ngFor='let file of sourceFiles'>
+                            <a [href]='file.url' target='_blank' rel='noopener'>{{ file.name }}</a>
+                        </li>
+                    </ul>
+                </ng-container>
+            </div>
         </div>
     </div>
 </div>
