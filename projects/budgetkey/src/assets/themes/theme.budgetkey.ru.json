@@ -161,6 +161,55 @@
         ]
       },
       {
+        "description": "סעיפי הכנסות והוצאות בתקציבים הרגילים של הרשויות המקומיות.",
+        "filterMenu": [
+          {
+            "display": "סוג סעיף",
+            "id": "direction",
+            "options": [
+              {
+                "display": "הכנסות והוצאות",
+                "id": "all"
+              },
+              {
+                "display": "הוצאות",
+                "filters": {
+                  "direction": "expenditure"
+                },
+                "id": "expenditure"
+              },
+              {
+                "display": "הכנסות",
+                "filters": {
+                  "direction": "revenue"
+                },
+                "id": "revenue"
+              }
+            ]
+          },
+          {
+            "display": "רשות מקומית",
+            "dynamicOptions": {
+              "filterField": "muni_code",
+              "query": "SELECT muni_code AS id, muni_name AS display FROM muni_budgets GROUP BY 1, 2 ORDER BY 2"
+            },
+            "id": "muni",
+            "options": [
+              {
+                "display": "כל הרשויות",
+                "id": "all"
+              }
+            ]
+          }
+        ],
+        "id": "muni_budgets",
+        "name": "תקציבי רשויות",
+        "placeholder": "חפשו סעיפים בתקציבי הרשויות המקומיות...",
+        "types": [
+          "muni_budgets"
+        ]
+      },
+      {
         "description": "עמותות, חברות פרטיות וארגונים אחרים, חלקם מקיימים קשרים כספיים עם הממשלה.",
         "filterMenu": [
           {

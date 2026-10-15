@@ -99,6 +99,55 @@ export const DEFAULT_THEME: any={
       }
     },
     {
+      "id": "muni_budgets",
+      "name": "תקציבי רשויות",
+      "description": "סעיפי הכנסות והוצאות בתקציבים הרגילים של הרשויות המקומיות.",
+      "types": [
+        "muni_budgets"
+      ],
+      "placeholder": "חפשו סעיפים בתקציבי הרשויות המקומיות...",
+      "filterMenu": [
+        {
+          "id": "direction",
+          "display": "סוג סעיף",
+          "options": [
+            {
+              "id": "all",
+              "display": "הכנסות והוצאות"
+            },
+            {
+              "id": "expenditure",
+              "display": "הוצאות",
+              "filters": {
+                "direction": "expenditure"
+              }
+            },
+            {
+              "id": "revenue",
+              "display": "הכנסות",
+              "filters": {
+                "direction": "revenue"
+              }
+            }
+          ]
+        },
+        {
+          "id": "muni",
+          "display": "רשות מקומית",
+          "options": [
+            {
+              "id": "all",
+              "display": "כל הרשויות"
+            }
+          ],
+          "dynamicOptions": {
+            "query": "SELECT muni_code AS id, muni_name AS display FROM muni_budgets GROUP BY 1, 2 ORDER BY 2",
+            "filterField": "muni_code"
+          }
+        }
+      ]
+    },
+    {
       "id": "entities",
       "name": "ארגונים",
       "description": "עמותות, חברות פרטיות וארגונים אחרים, חלקם מקיימים קשרים כספיים עם הממשלה.",

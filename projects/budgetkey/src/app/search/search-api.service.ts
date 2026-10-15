@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, from, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, forkJoin, from, of } from 'rxjs';
+import { catchError, map, shareReplay } from 'rxjs/operators';
 
 // import { URL } from './config';
 import { SearchResults, SearchParams } from '../common-components/search-models';
-import { SearchBarType } from '../common-components/components/searchbar/bk-search-bar.component';
+import { FilterMenu, FilterMenuDynamicOptions, FilterOption, SearchBarType } from '../common-components/components/searchbar/bk-search-bar.component';
 import { SearchModule } from './search.module';
 import { PlatformService } from '../common-components/platform.service';
 // import { SearchBarType } from 'budgetkey-ng2-components';
@@ -26,6 +26,8 @@ export class SearchApiService {
 
   private cache_: any = {};
   private URL = 'https://next.obudget.org/search';
+  private QUERY_URL = 'https://next.obudget.org/api/query';
+  private filterOptions_: {[query: string]: Observable<FilterOption[]>} = {};
 
   constructor(private http: HttpClient, private ps: PlatformService) {}
 
@@ -117,6 +119,45 @@ export class SearchApiService {
     // const cacheKey = url + JSON.stringify(queryParams);
     const cacheKey = `${url}${queryParams.q}${queryParams.context}${config_key}`;
     return this.cache(cacheKey, sp, this.http.get(url, {params: queryParams}) as Observable<SearchResults>);
+  }
+
+  // Appends the data-driven options of menus with `dynamicOptions` to their static options.
+  // Completes once all menus are populated; synchronously if there's nothing to load.
+  resolveFilterMenus(menus: FilterMenu[] | undefined): Observable<void> {
+    const pending = (menus || [])
+      .filter((menu) => !!menu.dynamicOptions)
+      .map((menu) => this.filterOptions(menu.dynamicOptions!).pipe(
+        map((options) => {
+          const existing = new Set(menu.options.map((o) => o.id));
+          menu.options.push(...options.filter((o) => !existing.has(o.id)));
+        })
+      ));
+    if (pending.length === 0 || this.ps.server()) {
+      return of(undefined);
+    }
+    return forkJoin(pending).pipe(map(() => undefined));
+  }
+
+  private filterOptions(dynamicOptions: FilterMenuDynamicOptions): Observable<FilterOption[]> {
+    const {query, filterField} = dynamicOptions;
+    if (!this.filterOptions_[query]) {
+      const formData = new FormData();
+      formData.append('query', query);
+      this.filterOptions_[query] = this.http.post(this.QUERY_URL, formData).pipe(
+        map((res: any) => (res.rows || []).map((row: any) => ({
+          id: '' + row.id,
+          display: row.display,
+          filters: {[filterField]: row.id}
+        }))),
+        catchError((err) => {
+          console.error('Failed to load filter options', query, err);
+          delete this.filterOptions_[query];  // retry on next search
+          return of([]);
+        }),
+        shareReplay(1)
+      );
+    }
+    return this.filterOptions_[query];
   }
 
 

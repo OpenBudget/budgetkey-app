@@ -5,13 +5,14 @@ import { Location } from '@angular/common';
 import { SearchParams } from '../../common-components/search-models';
 import { SearchState } from '../search-state/search-state';
 import { AuthService } from '../../common-components/auth/auth.service';
-import { filter, first, switchMap } from 'rxjs/operators';
+import { filter, first, map, switchMap } from 'rxjs/operators';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { SearchBarType } from '../../common-components/components/searchbar/bk-search-bar.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { timer } from 'rxjs';
 import { PlatformService } from '../../common-components/platform.service';
 import { SeoService } from '../../common-components/seo.service';
+import { SearchApiService } from '../search-api.service';
 
 @UntilDestroy()
 @Component({
@@ -40,7 +41,8 @@ export class SearchComponent implements OnInit {
     private router: Router,
     public globalSettings: GlobalSettingsService,
     private ps: PlatformService,
-    private seo: SeoService
+    private seo: SeoService,
+    private searchApi: SearchApiService
   ) {
     this.searchState = new SearchState(<SearchBarType[]>this.globalSettings.theme.searchBarConfig);
     this.docTypes = this.globalSettings.theme.searchBarConfig;
@@ -96,21 +98,25 @@ export class SearchComponent implements OnInit {
       
     // Handle the URL query params
     this.route.queryParams.pipe(
-      untilDestroyed(this),
-    ).subscribe((params: Params) => {
-      if (params['q']) {
-        this.searchState.term = params['q'];
-      }
-      
-      if (params['dd']) {
-        for (const dt of this.docTypes) {
-          if (dt.id === params['dd']) {
-            this.searchState.docType = dt;
-            break;
+      switchMap((params: Params) => {
+        if (params['q']) {
+          this.searchState.term = params['q'];
+        }
+        
+        if (params['dd']) {
+          for (const dt of this.docTypes) {
+            if (dt.id === params['dd']) {
+              this.searchState.docType = dt;
+              break;
+            }
           }
         }
-      }
-      
+
+        // Load data-driven filter options first, so that they can be selected from the URL
+        return this.searchApi.resolveFilterMenus(this.searchState.docType.filterMenu).pipe(map(() => params));
+      }),
+      untilDestroyed(this),
+    ).subscribe((params: Params) => {
       // Filters
       if (this.searchState.docType.filterMenu) {
         for (const filterMenu of this.searchState.docType.filterMenu) {
