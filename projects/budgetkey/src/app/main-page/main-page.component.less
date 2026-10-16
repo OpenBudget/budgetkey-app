@@ -1,3 +1,5 @@
+@import '../../common.less';
+
 :host {
   ::ng-deep .main {
     display: flex;
@@ -52,6 +54,16 @@
     align-items: center;
   }
   
+  // Same size as the budget explanation's bubbles just above
+  .footer {
+    .mobile({
+      ::ng-deep div.speech-bubble {
+        font-size: 15px;
+        margin-bottom: 0.4em;
+      }
+    });
+  }
+
   .header {
     .bubbles {
       margin-top: 60px;
