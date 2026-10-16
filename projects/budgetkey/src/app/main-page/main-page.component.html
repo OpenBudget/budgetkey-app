@@ -37,7 +37,7 @@
                     {{ __('אחרת מומלץ להמשיך לגלול') }} <span style='font-size:65%'><i class='glyphicon glyphicon-hand-down'></i></span><br/>
                 </app-speech-bubble>
             </div>
-            <main-page-summary [amount]="totalAmount" [year]="year"
+            <main-page-summary #summary [amount]="totalAmount" [year]="year"
                 [proposalAmount]="proposalAmount" [prevProposalAmount]="prevProposalAmount"
             ></main-page-summary>
             <div class="category-visualizations">
