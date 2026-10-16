@@ -333,3 +333,20 @@
     vertical-align: -2px;
     margin-left: 2px;
 }
+
+// Mobile: one line is too short for most titles, so let the title and
+// subtitle wrap (the fixed-height horizontal cards stay single-line)
+.mobile({
+    .card:not(.horizontal) .body .body-content {
+        h2 span.title {
+            .ellipsis-2-line;
+            -webkit-line-clamp: 3;
+        }
+
+        span.subtitle {
+            .ellipsis-2-line;
+            -webkit-line-clamp: 3;
+            height: auto;
+        }
+    }
+});

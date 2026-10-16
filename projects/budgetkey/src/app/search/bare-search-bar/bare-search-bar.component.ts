@@ -23,7 +23,7 @@ export class BareSearchBarComponent implements OnInit {
   ngOnInit() {
   }
 
-  onKeyup(event: KeyboardEvent) {
+  onInput(event: Event) {
     const value = (<HTMLInputElement>event.target).value;
     this.search.next(value);
   }
