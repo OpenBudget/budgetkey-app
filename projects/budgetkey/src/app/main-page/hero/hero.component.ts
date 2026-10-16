@@ -14,10 +14,23 @@ import { WindowService } from '../../common-components/window.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PlatformService } from '../../common-components/platform.service';
 
-const CENTER_WIDTH = 200;
-const CENTER_HEIGHT = 80;
-const CHART_MARGIN = {top: 20, left: 20, right: 20, bottom: 20};
-const CENTER_VERTICAL_OFFSET = 100;
+// Chart dimensions, in pixels. Mushonkey draws at these fixed sizes, so phones need smaller ones
+// to leave room for the flows and their labels.
+const CHART_DIMENSIONS = {
+  desktop: {
+    centerWidth: 200, centerHeight: 80, centerVerticalOffset: 100,
+    margin: {top: 20, left: 20, right: 20, bottom: 20},
+    labelTextSize: 20, secondaryOffset: -100, secondaryWidth: 0.7, parentOffset: -100,
+  },
+  mobile: {
+    centerWidth: 136, centerHeight: 48, centerVerticalOffset: 50,
+    margin: {top: 8, left: 4, right: 4, bottom: 8},
+    labelTextSize: 10, secondaryOffset: -50, secondaryWidth: 1.0, parentOffset: -85,
+  },
+};
+// On phones, longer flow titles are cut so their labels don't run across the chart
+const MOBILE_MAX_TITLE = 28;
+const MOBILE_THRESHOLD = 1000;  // Same as @mobile-threshold in common.less
 const EDUCATION_TARGET = '0020670142';
 
 function tweenie(t: number) {
@@ -284,6 +297,15 @@ class DialogElement {
   }
 }
 
+// A budget item's amount, rounded for the dialog - e.g. 'כ-99 מיליארד שקלים'
+function approxAmount(item: any) {
+  const amount = item.net_revised || item.net_allocated;
+  if (amount >= 1e9) {
+    return __('כ-') + Math.round(amount / 1e9) + ' ' + __('מיליארד שקלים');
+  }
+  return __('כ-') + Math.round(amount / 1e6) + ' ' + __('מיליון שקלים');
+}
+
 function Q(content: string) {
     return new DialogElement('question', content);
 }
@@ -359,8 +381,8 @@ function initDialog() {
     A(__('&hellip;')),
     A(__('&hellip;')),
     A(__('הופ!')),
-    A(__('תקציב משרד החינוך ב-2024')),
-    A(__('מעל 80 מיליארד שקלים')),
+    A(__('תקציב משרד החינוך ב-') + bubbles.year),
+    A(approxAmount(bubbles.educationCharts[0])),
     Q(__('הבנתי... אז זה התקציב של משרד החינוך?')),
     A(__('כן, למשרדים הגדולים יש סעיף תקציבי משלהם')),
     A(__('אבל לא לכל המשרדים הקטנים')),
@@ -376,7 +398,7 @@ function initDialog() {
     A(__('והופלה!')),
     Q(__('חחח.. "הופלה" &#x1F61C;')),
     A(__('תקציב ״פעולות משלימות לקידום״')),
-    A(__('בערך 7 מיליארד שקלים')),
+    A(approxAmount(bubbles.educationCharts[1])),
     Q(__('וואו, יש כאן המון דברים!')),
     Q(__('מעניין, מה זה המספר שיש ליד השם של הסעיף?')),
     Q(__('ה-<code>20.67</code> הזה?')),
@@ -390,7 +412,7 @@ function initDialog() {
     A(__('והנה התשובה :)')),
     Q(__('התקציב הזה באמת מאוד מפורט')),
     A(__('התקציב לפעילויות ופרוייקטים')),
-    A(__('הוא בערך ארבעה מיליארד שקלים.')),
+    A(__('הוא') + ' ' + approxAmount(bubbles.educationCharts[2]) + '.'),
     A(__('סעיפי התקציב שברמה הזאת נקראים ״תכניות״')),
     A(__('לפעמים עושים שינויים בתקציב במהלך השנה')),
     A(__('ואז מעבירים כסף מתכנית אחת לאחרת.')),
@@ -403,7 +425,7 @@ function initDialog() {
       // '&#x1F466;&#x1F3FD;' +
       // '&#x1F467;&#x1F3FE;'),
     A(__('תקציב התמיכה בתנועות נוער')),
-    A(__('הוא כמעט מאה וחמישים מיליון שקל.')),
+    A(__('הוא') + ' ' + approxAmount(bubbles.supportChart[1]) + '.'),
     A(__('הגענו!') +
       ' &#x1F389;'),
     Q(__('לאן?')),
@@ -508,8 +530,15 @@ export class HeroComponent implements AfterViewInit {
   dialogLines: DialogElement[] = [];
   dialogOfs = 0;
   scroller = new EventEmitter<Number>();
+  dims = CHART_DIMENSIONS.desktop;
+  mobile = false;
+
+  static maxTitle = 0;
 
   static makeFlow(amount: number, title: string, scale?: any) {
+    if (HeroComponent.maxTitle && title.length > HeroComponent.maxTitle) {
+      title = title.slice(0, HeroComponent.maxTitle - 1).trim() + '…';
+    }
     scale = scale || [1000000000, __(`מיל'`)];
     const billions = amount / scale[0];
     const digits = billions < 5 ? 1 : 0;
@@ -519,10 +548,17 @@ export class HeroComponent implements AfterViewInit {
   }
 
   constructor(private window: WindowService, private platform: PlatformService) {
+    this.mobile = (this.window._?.innerWidth || MOBILE_THRESHOLD) < MOBILE_THRESHOLD;
+    this.dims = this.mobile ? CHART_DIMENSIONS.mobile : CHART_DIMENSIONS.desktop;
+    HeroComponent.maxTitle = this.mobile ? MOBILE_MAX_TITLE : 0;
     this.makeDeficitCharts(bubbles.deficitChart);
-    // TODO:
-    // bubbles.educationCharts.forEach((c: any) => this.makeEducationCharts(c));
-    // this.makeSupportChart(bubbles.supportChart[0], bubbles.supportChart[1]);
+    bubbles.educationCharts.forEach((c: any) => this.makeEducationCharts(c));
+    this.makeSupportChart(bubbles.supportChart[0], bubbles.supportChart[1]);
+    for (const chart of this.charts) {
+      for (const group of chart.groups) {
+        group.labelTextSize = Math.min(group.labelTextSize, this.dims.labelTextSize);
+      }
+    }
     let chartIdx = 0;
     let dialogBit = 0;
     initDialog();
@@ -772,7 +808,7 @@ export class HeroComponent implements AfterViewInit {
     const deficitFlowGroup = new MushonKeyFlowGroup(
       false, [
         HeroComponent.makeFlow(data.budget - data.income, __('הגירעון'))
-      ], 'deficit', -100, 0.7
+      ], 'deficit', this.dims.secondaryOffset, this.dims.secondaryWidth
     );
 
     const incomeChildren: Array<any> = data.incomeChildren.sort((a: any, b: any) => { return b.net_allocated - a.net_allocated; });
@@ -802,7 +838,7 @@ export class HeroComponent implements AfterViewInit {
     const debtFlowGroup = new MushonKeyFlowGroup(
       true, [
         HeroComponent.makeFlow(data.returns, __('החזר חובות')),
-      ], 'debt', -100, 0.7
+      ], 'debt', this.dims.secondaryOffset, this.dims.secondaryWidth
     );
     const semiExpandedExpensesFlowGroup = new MushonKeyFlowGroup(
       true, [
@@ -821,48 +857,48 @@ export class HeroComponent implements AfterViewInit {
     this.charts.push(new MushonKeyChart([
       ],
       __('תקציב המדינה'),
-      CENTER_WIDTH, CENTER_HEIGHT, true, CHART_MARGIN, CENTER_VERTICAL_OFFSET
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin, this.dims.centerVerticalOffset
     ));
     this.charts.push(new MushonKeyChart([
         incomesFlowGroup,
       ],
       __('תקציב המדינה'),
-      CENTER_WIDTH, CENTER_HEIGHT, true, CHART_MARGIN, CENTER_VERTICAL_OFFSET
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin, this.dims.centerVerticalOffset
     ));
     this.charts.push(new MushonKeyChart([
         incomesFlowGroup,
         expensesFlowGroup,
       ],
       __('תקציב המדינה'),
-      CENTER_WIDTH, CENTER_HEIGHT,  true, CHART_MARGIN, CENTER_VERTICAL_OFFSET
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin, this.dims.centerVerticalOffset
     ));
     this.charts.push(new MushonKeyChart([
         expensesFlowGroup,
         expandedIncomesFlowGroup[0],
       ],
       __('תקציב המדינה'),
-      CENTER_WIDTH, CENTER_HEIGHT,  true, CHART_MARGIN, CENTER_VERTICAL_OFFSET
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin, this.dims.centerVerticalOffset
     ));
     this.charts.push(new MushonKeyChart([
         expensesFlowGroup,
         expandedIncomesFlowGroup[1],
       ],
       __('תקציב המדינה'),
-      CENTER_WIDTH, CENTER_HEIGHT,  true, CHART_MARGIN, CENTER_VERTICAL_OFFSET
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin, this.dims.centerVerticalOffset
     ));
     this.charts.push(new MushonKeyChart([
         expensesFlowGroup,
         expandedIncomesFlowGroup[2],
       ],
       __('תקציב המדינה'),
-      CENTER_WIDTH, CENTER_HEIGHT,  true, CHART_MARGIN, CENTER_VERTICAL_OFFSET
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin, this.dims.centerVerticalOffset
     ));
     this.charts.push(new MushonKeyChart([
         expensesFlowGroup,
         expandedIncomesFlowGroup[3],
       ],
       __('תקציב המדינה'),
-      CENTER_WIDTH, CENTER_HEIGHT,  true, CHART_MARGIN, CENTER_VERTICAL_OFFSET
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin, this.dims.centerVerticalOffset
     ));
     this.charts.push(new MushonKeyChart([
         deficitFlowGroup,
@@ -870,7 +906,7 @@ export class HeroComponent implements AfterViewInit {
         expandedIncomesFlowGroup[3],
       ],
       __('תקציב המדינה'),
-      CENTER_WIDTH, CENTER_HEIGHT,  true, CHART_MARGIN, CENTER_VERTICAL_OFFSET
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin, this.dims.centerVerticalOffset
     ));
     this.charts.push(new MushonKeyChart([
         deficitFlowGroup,
@@ -879,7 +915,7 @@ export class HeroComponent implements AfterViewInit {
         expandedIncomesFlowGroup[3],
       ],
       __('תקציב המדינה'),
-      CENTER_WIDTH, CENTER_HEIGHT,  true, CHART_MARGIN, CENTER_VERTICAL_OFFSET
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin, this.dims.centerVerticalOffset
     ));
     this.charts.push(new MushonKeyChart([
         deficitFlowGroup,
@@ -888,7 +924,7 @@ export class HeroComponent implements AfterViewInit {
         expandedIncomesFlowGroup[3],
       ],
       __('תקציב המדינה'),
-      CENTER_WIDTH, CENTER_HEIGHT,  true, CHART_MARGIN, CENTER_VERTICAL_OFFSET
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin, this.dims.centerVerticalOffset
     ));
 
   }
@@ -916,11 +952,11 @@ export class HeroComponent implements AfterViewInit {
             HeroComponent
               .makeFlow(data.net_revised || data.net_allocated,
                 '…' + 'מתוך תקציב ' + data.hierarchy[data.hierarchy.length - 1][1] + ': ')
-          ], 'income', -100
+          ], 'income', this.dims.parentOffset
         ),
       ],
       data.title + ' ' + data['nice-code'],
-      CENTER_WIDTH, CENTER_HEIGHT,  true, CHART_MARGIN
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin
     );
     this.charts.push(chart);
   }
@@ -951,11 +987,11 @@ export class HeroComponent implements AfterViewInit {
               .makeFlow(budgetData.net_revised || budgetData.net_allocated,
                 '…' + 'מתוך תקציב ' + budgetData.hierarchy[budgetData.hierarchy.length - 1][1] + ': ',
               scale)
-          ], 'income', -100
+          ], 'income', this.dims.parentOffset
         ),
       ],
       budgetData.title + ' ' + budgetData['nice-code'],
-      CENTER_WIDTH, CENTER_HEIGHT,  true, CHART_MARGIN
+      this.dims.centerWidth, this.dims.centerHeight, true, this.dims.margin
     );
     this.charts.push(chart);
   }
