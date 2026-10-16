@@ -23,9 +23,12 @@ export class FilterOption {
 }
 
 export class FilterMenuDynamicOptions {
+  // Where the options come from - one of:
   // SQL query (run via /api/query) returning `id` and `display` columns
-  query: string;
-  // Search field to filter on with the selected row's `id`
+  query?: string;
+  // Name of a label map in the app (see FILTER_OPTION_LABELS); only values with search results are offered
+  labels?: string;
+  // Search field to filter on with the selected option's `id`
   filterField: string;
 }
 
@@ -68,6 +71,8 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   @Input() searchTerm: string;
   @Input() isSearching: boolean;
   @Input() disableAutofocus: boolean;
+  // Focus the search box when it's shown, also after in-app navigation (where the autofocus attribute has no effect)
+  @Input() focusOnInit = false;
   @Input() allowSubscribe = false;
   @Input() newWindow = false;
   
@@ -149,6 +154,12 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   }
     
   ngAfterViewInit() {
+    if (!this.fake && this.focusOnInit && !this.disableAutofocus) {
+      this.ps.browser(() => {
+        // After the route's view is attached - focusing earlier has no effect
+        timer(0).subscribe(() => this.searchBox?.nativeElement.focus({preventScroll: true}));
+      });
+    }
     if (!this.fake) {
       timer(100).subscribe(() => {
         if (this.searchBox.nativeElement.offsetWidth < 500) {

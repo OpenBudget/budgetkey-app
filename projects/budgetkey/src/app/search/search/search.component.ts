@@ -114,7 +114,7 @@ export class SearchComponent implements OnInit {
         }
 
         // Load data-driven filter options first, so that they can be selected from the URL
-        return this.searchApi.resolveFilterMenus(this.searchState.docType.filterMenu).pipe(map(() => params));
+        return this.searchApi.resolveFilterMenus(this.searchState.docType).pipe(map(() => params));
       }),
       untilDestroyed(this),
     ).subscribe((params: Params) => {
