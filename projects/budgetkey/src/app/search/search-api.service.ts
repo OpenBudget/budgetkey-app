@@ -8,6 +8,13 @@ import { SearchResults, SearchParams } from '../common-components/search-models'
 import { FilterMenu, FilterMenuDynamicOptions, FilterOption, SearchBarType } from '../common-components/components/searchbar/bk-search-bar.component';
 import { SearchModule } from './search.module';
 import { PlatformService } from '../common-components/platform.service';
+import { ANALYSIS_CATEGORIES } from '../common-components/analysis-categories';
+import { mergeFilters } from './search-state/search-state';
+
+// Label maps that filter menus can use as `dynamicOptions.labels`
+const FILTER_OPTION_LABELS: {[name: string]: {[id: string]: string}} = {
+  'analysis-categories': ANALYSIS_CATEGORIES,
+};
 // import { SearchBarType } from 'budgetkey-ng2-components';
 
 const DROP_FIELDS = [
@@ -121,43 +128,66 @@ export class SearchApiService {
     return this.cache(cacheKey, sp, this.http.get(url, {params: queryParams}) as Observable<SearchResults>);
   }
 
-  // Appends the data-driven options of menus with `dynamicOptions` to their static options.
+  // Appends the data-driven options of a doc type's menus with `dynamicOptions` to their static options.
   // Completes once all menus are populated; synchronously if there's nothing to load.
-  resolveFilterMenus(menus: FilterMenu[] | undefined): Observable<void> {
-    const pending = (menus || [])
+  // Also runs on the server, so that a filter selected in the URL applies to the server-rendered results.
+  resolveFilterMenus(docType: SearchBarType): Observable<void> {
+    const pending = (docType.filterMenu || [])
       .filter((menu) => !!menu.dynamicOptions)
-      .map((menu) => this.filterOptions(menu.dynamicOptions!).pipe(
+      .map((menu) => this.filterOptions(menu.dynamicOptions!, docType).pipe(
         map((options) => {
           const existing = new Set(menu.options.map((o) => o.id));
           menu.options.push(...options.filter((o) => !existing.has(o.id)));
         })
       ));
-    if (pending.length === 0 || this.ps.server()) {
+    if (pending.length === 0) {
       return of(undefined);
     }
     return forkJoin(pending).pipe(map(() => undefined));
   }
 
-  private filterOptions(dynamicOptions: FilterMenuDynamicOptions): Observable<FilterOption[]> {
-    const {query, filterField} = dynamicOptions;
-    if (!this.filterOptions_[query]) {
-      const formData = new FormData();
-      formData.append('query', query);
-      this.filterOptions_[query] = this.http.post(this.QUERY_URL, formData).pipe(
-        map((res: any) => (res.rows || []).map((row: any) => ({
+  private filterOptions(dynamicOptions: FilterMenuDynamicOptions, docType: SearchBarType): Observable<FilterOption[]> {
+    const {query, labels, filterField} = dynamicOptions;
+    const cacheKey = query || `${labels}:${docType.types.join(',')}:${filterField}`;
+    if (!this.filterOptions_[cacheKey]) {
+      const values = query ? this.queryValues(query) : this.labelValues(labels!, docType, filterField);
+      this.filterOptions_[cacheKey] = values.pipe(
+        map((rows) => rows.map((row) => ({
           id: '' + row.id,
           display: row.display,
           filters: {[filterField]: row.id}
         }))),
         catchError((err) => {
-          console.error('Failed to load filter options', query, err);
-          delete this.filterOptions_[query];  // retry on next search
+          console.error('Failed to load filter options', cacheKey, err);
+          delete this.filterOptions_[cacheKey];  // retry on next search
           return of([]);
         }),
         shareReplay(1)
       );
     }
-    return this.filterOptions_[query];
+    return this.filterOptions_[cacheKey];
+  }
+
+  private queryValues(query: string): Observable<{id: any, display: string}[]> {
+    return this.http.get(this.QUERY_URL, {params: {query}}).pipe(
+      map((res: any) => res.rows || [])
+    );
+  }
+
+  // The label map's values that have any results for this doc type, in the map's order
+  private labelValues(labels: string, docType: SearchBarType, filterField: string): Observable<{id: any, display: string}[]> {
+    const entries = Object.entries(FILTER_OPTION_LABELS[labels] || {});
+    const config = entries.map(([id]) => ({
+      id,
+      doc_types: docType.types,
+      filters: mergeFilters(docType.filters, {[filterField]: id})
+    }));
+    return this.http.get(`${this.URL}/count`, {params: {config: JSON.stringify(config)}}).pipe(
+      map((res: any) => entries
+        .filter(([id]) => res.search_counts?.[id]?.total_overall > 0)
+        .map(([id, display]) => ({id, display}))
+      )
+    );
   }
 
 

@@ -520,7 +520,23 @@ export const DEFAULT_THEME: any={
       "name": "ניתוחים",
       "description": "ניתוחים של פעילות הממשלה ותקציבה בנושאים שונים, שנכתבו בעזרת בינה מלאכותית על סמך הנתונים.",
       "types": ["analysis"],
-      "placeholder": "חפשו ניתוחים לפי נושא..."
+      "placeholder": "חפשו ניתוחים לפי נושא...",
+      "filterMenu": [
+        {
+          "id": "topic",
+          "display": "נושא",
+          "options": [
+            {
+              "id": "all",
+              "display": "כל הנושאים"
+            }
+          ],
+          "dynamicOptions": {
+            "labels": "analysis-categories",
+            "filterField": "category"
+          }
+        }
+      ]
     },
     {
       "id": "activities",

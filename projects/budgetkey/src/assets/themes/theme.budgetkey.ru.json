@@ -608,6 +608,22 @@
       },
       {
         "description": "ניתוחים של פעילות הממשלה ותקציבה בנושאים שונים, שנכתבו בעזרת בינה מלאכותית על סמך הנתונים.",
+        "filterMenu": [
+          {
+            "display": "נושא",
+            "dynamicOptions": {
+              "filterField": "category",
+              "labels": "analysis-categories"
+            },
+            "id": "topic",
+            "options": [
+              {
+                "display": "כל הנושאים",
+                "id": "all"
+              }
+            ]
+          }
+        ],
         "id": "analysis",
         "name": "ניתוחים",
         "placeholder": "חפשו ניתוחים לפי נושא...",

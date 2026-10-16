@@ -41,7 +41,8 @@ export class HorizontalResultsComponent implements OnInit, OnDestroy, AfterViewI
   ngOnInit() {
     this.docTypes = [this.docType];
     this.docType['score'] = 0;
-    if (this.docType.filterMenu && this.docType.filterMenu.length > 0) {
+    // Count tags for the first menu's options (not for data-driven menus, which can be long)
+    if (this.docType.filterMenu && this.docType.filterMenu.length > 0 && !this.docType.filterMenu[0].dynamicOptions) {
       for (const option of this.docType.filterMenu[0].options) {
         this.docTypes.push(Object.assign({}, this.docType, {
           id: option.id,
