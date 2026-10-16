@@ -8,6 +8,7 @@ import { MainPageSummaryComponent } from './main-page-summary/main-page-summary.
 import { HeroComponent } from './hero/hero.component';
 import { CategoryVisualizationComponent } from './category-visualization/category-visualization.component';
 import { CategoryVisualizationInfoPopupComponent } from './category-visualization-info-popup/category-visualization-info-popup.component';
+import { AnalysisShowcaseComponent } from './analysis-showcase/analysis-showcase.component';
 import { MushonkeyModule } from 'mushonkey';
 import {} from '@angular/common/http';
 import { UtilsService } from './utils.service';
@@ -22,7 +23,8 @@ import { ListComponentsModule } from '../list-components/list-components.module'
     MainPageSummaryComponent,
     HeroComponent,
     CategoryVisualizationComponent,
-    CategoryVisualizationInfoPopupComponent
+    CategoryVisualizationInfoPopupComponent,
+    AnalysisShowcaseComponent
   ],
   imports: [
     CommonModule,

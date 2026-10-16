@@ -1,0 +1,26 @@
+@if (analyses.length > 0) {
+    <div class='showcase'>
+        <app-speech-bubble kind='question'>
+            {{ __('ואם מעניין אותי נושא מסוים?') }}
+        </app-speech-bubble>
+        <app-speech-bubble kind='answer'>
+            <i class='ai-icon'></i>
+            {{ __('בשביל זה כתבנו, בעזרת בינה מלאכותית, ניתוחים של פעילות הממשלה ותקציבה ב-') }}{{ analyses.length }}
+            {{ __('נושאים. למשל:') }}
+        </app-speech-bubble>
+        <div class='questions'>
+            @for (analysis of shown; track analysis.doc_id) {
+                <a class='question' [routerLink]='"/i/" + analysis.doc_id'>
+                    <span>{{ analysis.question }}</span>
+                    <span class='arrow' aria-hidden='true'>&larr;</span>
+                </a>
+            }
+        </div>
+        <div class='actions'>
+            <button type='button' class='more' (click)='more()'>{{ __('עוד שאלות') }} &#x21bb;</button>
+            <a class='all' [routerLink]='["/s"]' [queryParams]='{dd: "analysis"}'>
+                {{ __('לכל') }} {{ analyses.length }} {{ __('הניתוחים') }} &larr;
+            </a>
+        </div>
+    </div>
+}

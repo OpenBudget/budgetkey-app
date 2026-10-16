@@ -1,0 +1,96 @@
+@import '../../../common.less';
+
+:host {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.showcase {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 2em;
+    padding: 0 16px;
+
+    .ai-icon {
+        width: 20px;
+        height: 20px;
+        vertical-align: -3px;
+        // The icon is drawn for light backgrounds
+        filter: brightness(0) invert(1);
+    }
+}
+
+// The analyses' questions, styled like the page's question bubbles - but clickable
+.questions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    margin: 0.5em 0 1em;
+
+    .mobile({
+        grid-template-columns: minmax(0, 1fr);
+    });
+
+    .question {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0.6em 0.9em;
+        border-radius: 1em 1em 0 1em;
+        background: #F2F2F2;
+        color: black;
+        font-size: 18px;
+        text-decoration: none;
+        transition: background-color 0.2s, transform 0.2s;
+
+        .mobile({
+            font-size: 16px;
+        });
+
+        .arrow {
+            flex: 0 0 auto;
+            color: #ff6666;
+            font-weight: bold;
+        }
+
+        &:hover, &:focus-visible {
+            background: #FFEEEF;
+            transform: translateY(-1px);
+        }
+    }
+}
+
+.actions {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px 24px;
+    font-size: 18px;
+
+    .more {
+        border: 1px solid #ff6666;
+        border-radius: 2em;
+        background: white;
+        color: #ff6666;
+        padding: 0.3em 1em;
+        cursor: pointer;
+        font: inherit;
+
+        &:hover {
+            background: #FFEEEF;
+        }
+    }
+
+    .all {
+        color: #ff6666;
+        text-decoration: underline;
+    }
+}
