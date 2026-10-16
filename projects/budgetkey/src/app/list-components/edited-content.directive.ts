@@ -19,7 +19,7 @@ export class EditedContentDirective implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const el = this.el;
-    el.style.cursor = 'edit';
+    el.style.cursor = 'pointer';
     el.style.display = 'inline';
     el.style.whiteSpace = 'pre-wrap';
 

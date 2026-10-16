@@ -114,6 +114,13 @@
                 .font-gadi;
                 color: @color-lists-blue;
             }
+            .description, .title h1 {
+                &[contenteditable="true"]:hover {
+                    background-color: rgba(207, 221, 231, 0.3);
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+            }
             .timestamps {
                 display: flex;
                 flex-flow: row;
@@ -139,6 +146,7 @@
                 flex: 0 0 auto;
                 .background-image;
                 background-size: 16px;
+                cursor: pointer;
             }
 
             .close-button {
@@ -292,6 +300,7 @@
 
             border-radius: 25px;
             border: 1px solid @color-disabled;
+            cursor: pointer;
 
             &.active {
                 border: 1px solid @color-gray-600;
