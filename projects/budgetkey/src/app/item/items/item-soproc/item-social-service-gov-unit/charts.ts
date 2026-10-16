@@ -682,7 +682,7 @@ export const chartTemplates: any[] = [
                where :where and tenders is not null and tenders::text != 'null')
     select office, t->>'tender_type_he' as tender_type_he, count(1) as value
     from s
-    where not (t->>'active' = 'no')
+    where t->>'active' is distinct from 'no'
     group by 1,2
     ORDER BY 3 desc`,
       title: 'מספר הליכי רכש לפי סוג הליך',
@@ -728,7 +728,7 @@ export const chartTemplates: any[] = [
     select office, t->>'sub_kind_he' as sub_kind_he, count(1) as value
     from s
     where t->>'tender_type' = 'exemptions'
-    and not (t->>'active' = 'no')
+    and t->>'active' is distinct from 'no'
     group by 1,2
     ORDER BY 3 desc`,
       title: 'מספר פטורים לפי סוג פטור',
@@ -775,7 +775,7 @@ export const chartTemplates: any[] = [
     select office, t->>'pricing' as pricing, count(1) as value
     from s
     where t->>'tender_type' != 'exemptions'
-    and not (t->>'active' = 'no')
+    and t->>'active' is distinct from 'no'
     group by 1,2
     ORDER BY 1`,
       title: 'מספר הליכי רכש לפי מודל התמחור',
@@ -825,7 +825,7 @@ export const chartTemplates: any[] = [
         select office, t->>'sub_kind_he' as sub_kind_he, count(distinct id) as value
         from s
         where t->>'sub_kind_he' in ('ספק יחיד', 'מיזם משותף', 'התקשרות עם רשות מקומית')
-        and not (t->>'active' = 'no')
+        and t->>'active' is distinct from 'no'
         group by 1,2
         ORDER BY 1`,
       title: 'מספר שירותים עם פטור מהליך מכרזי',

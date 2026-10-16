@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Component, OnInit, Inject, Input, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -42,7 +42,8 @@ export class SearchComponent implements OnInit {
     public globalSettings: GlobalSettingsService,
     private ps: PlatformService,
     private seo: SeoService,
-    private searchApi: SearchApiService
+    private searchApi: SearchApiService,
+    private el: ElementRef
   ) {
     this.searchState = new SearchState(<SearchBarType[]>this.globalSettings.theme.searchBarConfig);
     this.docTypes = this.globalSettings.theme.searchBarConfig;
@@ -165,6 +166,24 @@ export class SearchComponent implements OnInit {
   setIsSearching(isSearching: boolean) {
     timer(0).subscribe(() => {
       this.isSearching = isSearching;
+      if (!isSearching) {
+        // The tags are re-rendered after each search, so wait for them
+        timer(0).subscribe(() => this.scrollSelectedTagIntoView());
+      }
+    });
+  }
+
+  // When the tags row scrolls sideways (mobile), keep the selected tag visible.
+  // Only scrolls the row itself, never the page.
+  scrollSelectedTagIntoView() {
+    this.ps.browser(() => {
+      const container: HTMLElement | null = this.el.nativeElement.querySelector('.count-tags');
+      const tag: HTMLElement | null = container?.querySelector('.search-tag-name.selected') || null;
+      if (container && tag && container.scrollWidth > container.clientWidth) {
+        const c = container.getBoundingClientRect();
+        const t = tag.getBoundingClientRect();
+        container.scrollLeft += (t.left + t.width / 2) - (c.left + c.width / 2);
+      }
     });
   }
 }

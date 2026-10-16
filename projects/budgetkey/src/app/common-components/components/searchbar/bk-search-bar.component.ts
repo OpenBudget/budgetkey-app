@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostBinding,
   Input,
   OnChanges,
   OnInit,
@@ -74,6 +75,8 @@ export class BkSearchBar implements OnChanges, AfterViewInit, OnInit {
   @Input() externalUrlParams: string;
   @Input() externalProperties: any;
   @Input() fake = false;
+  // On mobile: a plain search box, without the search-type dropdown and the subscribe button
+  @HostBinding('class.simple-on-mobile') @Input() simpleOnMobile = false;
   
   @Output() selected = new EventEmitter<any>();
   @Output() search = new EventEmitter<string>();

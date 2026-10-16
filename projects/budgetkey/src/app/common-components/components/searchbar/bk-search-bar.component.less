@@ -286,3 +286,26 @@ input {
         text-overflow: ellipsis;
     }
 }
+
+:host(.simple-on-mobile) {
+    .mobile({
+        .outer-right-side,
+        .subscribe-button {
+            display: none;
+        }
+
+        .search-box {
+            display: flex;
+            margin: 16px 0;
+        }
+
+        .left-side-search {
+            flex: 1 1 auto;
+            float: none;
+            border-radius: 25px !important;
+            padding-right: 44px;
+            background: #ffffff url('../../../../assets/common/img/search-glass-red.svg') no-repeat right 16px center;
+            background-size: 18px 18px;
+        }
+    });
+}

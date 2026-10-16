@@ -39,6 +39,29 @@
             flex-flow: column;
         }
     }
+
+    // Mobile: a single row of tags, scrolled sideways
+    .mobile({
+        .count-tags {
+            flex-flow: row;
+            overflow-x: auto;
+            width: calc(100% ~'+' 32px);
+            max-width: none;
+            margin: 0 -16px;
+            padding: 0 16px;
+            scrollbar-width: none;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            > div {
+                display: contents;
+            }
+            search-tag {
+                flex: 0 0 auto;
+            }
+        }
+    });
     
     app-bk-search-bar {
         width: 100%;

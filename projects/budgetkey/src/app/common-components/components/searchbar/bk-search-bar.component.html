@@ -47,8 +47,7 @@
           type="text"
           [placeholder]="forcedPlaceholder || selectedSearchType.placeholder || globalSettings.theme.searchPlaceholder"
           [autofocus]='!disableAutofocus'
-          (keyup)="doSearch(searchBox.value)"
-          (keyup.backspace)="doSearch(searchBox.value)"
+          (input)="doSearch(searchBox.value)"
           (keydown.enter)="doSubmit()"
           [value]="searchTerm"
           (focus)="isSearchBarHasFocus = true"
