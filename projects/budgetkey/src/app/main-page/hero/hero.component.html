@@ -2,7 +2,7 @@
     <div class="hero-wrapper">
         <div #mushonkeyWrapper
             class="chart"
-            [style.opacity]="chartOpacity">
+            [style.opacity]="chartOpacity * chartFade">
             <mushonkey #mushonkey [chart]="chart" *ngIf="chart">
             </mushonkey>
         </div>

@@ -526,6 +526,8 @@ export class HeroComponent implements AfterViewInit {
   textOpacity = 1;
   chart: MushonKeyChart;
   chartOpacity = 0;
+  // Fades the chart out as the footer's bubbles come up over it (independent of the transition steps, which a quick scroll may skip)
+  chartFade = 1;
   charts: Array<MushonKeyChart> = [];
   dialogLines: DialogElement[] = [];
   dialogOfs = 0;
@@ -775,8 +777,13 @@ export class HeroComponent implements AfterViewInit {
           debounceTime(16, animationFrameScheduler),
         ).subscribe((event: Event) => {
           const el = this.heroElement.nativeElement;
-          const rectTop = el.getBoundingClientRect().top;
+          const rect = el.getBoundingClientRect();
+          const rectTop = rect.top;
           const offsetHeight = el.scrollHeight;
+          // The footer overlaps the hero's bottom by the chart's height - fade out during the chart-height of scrolling before it shows
+          const chartHeight = this.mushonkeyComponentWrapper.nativeElement.offsetHeight || 1;
+          const fade = (rect.bottom - (this.window._?.innerHeight || 0) - chartHeight) / chartHeight;
+          this.chartFade = Math.max(0, Math.min(1, fade));
           if ((rectTop < 0) && (rectTop > -offsetHeight)) {
             const progress = -1 * rectTop / offsetHeight;
             this.scroller.emit(progress);

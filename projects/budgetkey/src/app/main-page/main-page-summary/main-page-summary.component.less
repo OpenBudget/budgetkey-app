@@ -5,6 +5,9 @@
     flex-flow: column;
     align-items: center;
     gap: 8px;
+    max-width: 100%;
+    padding: 0 16px;
+    text-align: center;
 }
 
 .summary {
@@ -16,8 +19,17 @@
     font-size: 24px;
     line-height: 36px;
 
+    .mobile({
+        font-size: 20px;
+        line-height: 28px;
+    });
+
     span {
         white-space: nowrap;
+        // The long title may wrap on narrow screens
+        &:nth-child(1) {
+            white-space: normal;
+        }
         &:nth-child(2), &:nth-child(4), &:nth-child(5) {
             color: @color-fill-lead;
         }
