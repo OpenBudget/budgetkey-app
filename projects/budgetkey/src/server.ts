@@ -109,7 +109,7 @@ app.get('*.*', (_req, res) => res.sendStatus(404));
 app.get('*', (req, res, next) => {
 
   const user_agent = req.headers['user-agent'];
-  if (user_agent && (user_agent === 'thesis-research-bot' || user_agent?.indexOf('python-httpx') > -1)) {
+  if (user_agent && (user_agent === 'thesis-research-bot' || user_agent?.indexOf('python-httpx') > -1 || user_agent?.indexOf('-node.') > -1)) {
     res.send('יש לנו קובץ מידע פתוח לשימוש וקל להורדה עם כל המידע באתר, בבקשה לא לעשות לנו סקרייפינג!');
     console.log(`${new Date().toISOString()} | ${res.statusCode} | REJECT | ${req.url} | ${user_agent}`);
     return;
