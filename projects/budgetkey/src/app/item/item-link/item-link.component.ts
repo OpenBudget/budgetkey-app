@@ -9,6 +9,8 @@ import { GlobalSettingsService } from '../../common-components/global-settings.s
 })
 export class ItemLinkComponent implements OnChanges {
   @Input() itemId: string;
+  // Optional anchor on the target page, without the '#'
+  @Input() fragment: string | null = null;
 
   href = '';
 
@@ -19,6 +21,6 @@ export class ItemLinkComponent implements OnChanges {
     if (this.itemId.indexOf('activities/gov_social_service') === 0) {
       base = '//www.socialpro.org.il';
     }
-    this.href = `${base}/i/${this.itemId}?theme=${this.globalSettings.themeId}`;
+    this.href = `${base}/i/${this.itemId}?theme=${this.globalSettings.themeId}` + (this.fragment ? `#${this.fragment}` : '');
   }
 }

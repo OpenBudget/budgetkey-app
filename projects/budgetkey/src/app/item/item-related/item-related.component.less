@@ -1,0 +1,199 @@
+// Same palette as the analysis and decision pages
+@text: #3C4948;
+@muted: #6B7675;
+@accent: #5D5077;
+@accent-soft: #8778A5;
+@rule: #E2DDEC;
+@tint: #F3F0F9;
+
+:host {
+    display: block;
+
+    .item-related {
+        direction: rtl;
+        background: #FFFFFF;
+        color: @text;
+        padding: 8px 20px 32px;
+        border-top: 1px solid @rule;
+    }
+
+    .related-section {
+        max-width: 900px;
+
+        h2 {
+            color: @accent;
+            font-family: "Miriam Libre";
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 32px;
+            margin: 28px 0 4px;
+        }
+    }
+
+    .group {
+        margin-top: 16px;
+
+        h3 {
+            font-size: 17px;
+            line-height: 24px;
+            font-weight: bold;
+            color: @text;
+            margin: 0 0 4px;
+
+            .count {
+                font-weight: normal;
+                color: @muted;
+            }
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px 0;
+            border-bottom: 1px solid @rule;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+
+    .line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        column-gap: 10px;
+        row-gap: 2px;
+        font-size: 17px;
+        line-height: 25px;
+
+        .title {
+            flex: 0 1 auto;
+            min-width: 0;
+            overflow-wrap: anywhere;
+
+            ::ng-deep a {
+                color: @accent;
+                text-decoration: underline;
+                text-decoration-thickness: 1px;
+                text-underline-offset: 3px;
+            }
+
+            .year {
+                color: @muted;
+                margin-right: 4px;
+            }
+        }
+
+        .tag {
+            font-size: 13px;
+            line-height: 20px;
+            color: @accent;
+            background: @tint;
+            border-radius: 3px;
+            padding: 0 6px;
+            white-space: nowrap;
+            cursor: default;
+        }
+
+        .date, .findings {
+            font-size: 14px;
+            color: @muted;
+            white-space: nowrap;
+        }
+    }
+
+    .excerpt {
+        margin-top: 4px;
+        padding-right: 10px;
+        border-right: 2px solid @rule;
+        font-size: 15px;
+        line-height: 23px;
+        color: @muted;
+        overflow-wrap: anywhere;
+        cursor: pointer;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+
+        &.open {
+            display: block;
+            cursor: default;
+        }
+    }
+
+    button.toggle, button.more-button {
+        padding: 0;
+        margin-top: 6px;
+        border: none;
+        background: none;
+        font: inherit;
+        font-size: 15px;
+        line-height: 23px;
+        color: @accent;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        cursor: pointer;
+
+        &:disabled {
+            cursor: default;
+            text-decoration: none;
+            color: @muted;
+        }
+    }
+
+    .more {
+        margin-top: 12px;
+
+        button.more-button {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .load-error {
+            margin-right: 10px;
+            font-size: 14px;
+            color: #B23B3B;
+        }
+    }
+
+    .other-years {
+        margin-top: 24px;
+        padding: 4px 16px 12px;
+        background: #FAF9FC;
+        border-right: 3px solid @accent-soft;
+
+        .other-years-title {
+            font-size: 16px;
+            line-height: 24px;
+            color: @accent;
+            margin: 8px 0 0;
+        }
+
+        .group h3 {
+            font-size: 15px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .item-related {
+            padding: 4px 16px 24px;
+        }
+
+        .related-section h2 {
+            font-size: 21px;
+            line-height: 28px;
+        }
+
+        .line {
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+}
