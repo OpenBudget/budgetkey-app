@@ -90,6 +90,8 @@ interface Group {
   kind: string;
   label: string;
   entries: EntryView[];
+  // Closed groups show only their heading; open ones show the first entries, or all when expanded
+  open: boolean;
   expanded: boolean;
 }
 
@@ -159,6 +161,14 @@ export class ItemRelatedComponent implements OnChanges {
     }
   }
 
+  // Opening or closing a group's heading; a closed group reopens to its short list
+  onToggle(group: Group, open: boolean) {
+    group.open = open;
+    if (!open) {
+      group.expanded = false;
+    }
+  }
+
   toggle(group: Group) {
     group.expanded = !group.expanded;
   }
@@ -206,7 +216,8 @@ export class ItemRelatedComponent implements OnChanges {
           this.fullTotal = this.fullList.length;
         }
         this.mentioned = this.groups(this.fullList, 'mentioned');
-        this.mentioned.forEach(g => g.expanded = true);
+        // The reader asked for everything: open and expand every group
+        this.mentioned.forEach(g => g.open = g.expanded = true);
         this.moreCount = Math.max(0, this.fullTotal - this.fullList.length);
       },
       error: () => {
@@ -233,7 +244,7 @@ export class ItemRelatedComponent implements OnChanges {
     };
     return [...byKind.keys()]
       .sort((a, b) => rank(a) - rank(b))
-      .map(kind => ({kind, label: KIND_LABELS[kind] || kind, entries: byKind.get(kind)!, expanded: false}));
+      .map(kind => ({kind, label: KIND_LABELS[kind] || kind, entries: byKind.get(kind)!, open: false, expanded: false}));
   }
 
   private view(entry: Entry, side: Side, showYear: boolean): EntryView {

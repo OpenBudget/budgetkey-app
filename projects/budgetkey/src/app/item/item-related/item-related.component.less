@@ -31,14 +31,38 @@
     }
 
     .group {
-        margin-top: 16px;
+        margin-top: 4px;
+        border-bottom: 1px solid @rule;
+
+        summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 8px 0;
+            &::-webkit-details-marker { display: none; }
+
+            // A chevron that turns down when the group is open, as on the analysis pages' item lists
+            &::before {
+                content: '◂';
+                display: inline-block;
+                width: 1em;
+                color: @accent;
+                transition: transform 0.15s;
+            }
+
+            &:hover h3 { text-decoration: underline; }
+        }
+        &[open] {
+            padding-bottom: 8px;
+            > summary::before { transform: rotate(-90deg); }
+        }
 
         h3 {
+            display: inline;
             font-size: 17px;
             line-height: 24px;
             font-weight: bold;
             color: @text;
-            margin: 0 0 4px;
+            margin: 0;
 
             .count {
                 font-weight: normal;
@@ -46,10 +70,19 @@
             }
         }
 
+        li.hidden {
+            display: none;
+        }
+
+        // Entries line up with the label, past the chevron
         ul {
             list-style: none;
             margin: 0;
-            padding: 0;
+            padding: 0 1em 0 0;
+        }
+
+        button.toggle {
+            margin-right: 1em;
         }
 
         li {

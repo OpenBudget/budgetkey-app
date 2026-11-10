@@ -38,11 +38,12 @@
 
 <ng-template #groupsTpl let-groups>
   @for (group of groups; track group.kind) {
-    <div class='group'>
-      <h3>{{ group.label }} <span class='count'>({{ group.entries.length }})</span></h3>
+    <!-- Closed by default; opening shows the first entries, "הצג הכל" the rest. All entries are in the DOM for SSR. -->
+    <details class='group' [open]='group.open' (toggle)='onToggle(group, $any($event.target).open)'>
+      <summary><h3>{{ group.label }} <span class='count'>({{ group.entries.length }})</span></h3></summary>
       <ul>
-        @for (e of (group.expanded ? group.entries : group.entries.slice(0, collapsedSize)); track e.docId) {
-          <li>
+        @for (e of group.entries; track e.docId; let i = $index) {
+          <li [class.hidden]='i >= collapsedSize && !group.expanded'>
             <div class='line'>
               <span class='title'>
                 @if (e.linkable && !missing.has(e.docId)) {
@@ -75,6 +76,6 @@
           {{ group.expanded ? 'הצג פחות' : 'הצג הכל (' + group.entries.length + ')' }}
         </button>
       }
-    </div>
+    </details>
   }
 </ng-template>
