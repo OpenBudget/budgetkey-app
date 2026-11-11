@@ -632,6 +632,48 @@
         ]
       },
       {
+        "description": "דוחות הביקורת של מבקר המדינה משנת 2000 ואילך: הממצאים, ההמלצות ותגובות הגופים המבוקרים.",
+        "filterMenu": [
+          {
+            "display": "סוג הדוח",
+            "id": "publication_type",
+            "options": [
+              {
+                "display": "כל הדוחות",
+                "id": "all"
+              },
+              {
+                "display": "דוחות שנתיים",
+                "filters": {
+                  "publication_type": "annual"
+                },
+                "id": "annual"
+              },
+              {
+                "display": "דוחות מיוחדים",
+                "filters": {
+                  "publication_type": "special"
+                },
+                "id": "special"
+              },
+              {
+                "display": "ביקורות מעקב",
+                "filters": {
+                  "follow_up": "follow_up_audit"
+                },
+                "id": "follow_up"
+              }
+            ]
+          }
+        ],
+        "id": "state_comptroller",
+        "name": "דוחות מבקר המדינה",
+        "placeholder": "חפשו דוחות ביקורת לפי נושא או גוף מבוקר...",
+        "types": [
+          "state_comptroller_audits"
+        ]
+      },
+      {
         "description": "פעילויות המבוצעות על ידי המדינה.",
         "filterMenu": [
           {

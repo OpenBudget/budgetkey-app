@@ -1,48 +1,9 @@
 import * as Showdown from 'showdown';
 
-// Shared by the State Comptroller audit and issue pages
+// Shared by the State Comptroller audit and issue pages. Labels live in common-components, as search results use them too.
 
-export const PUBLICATION_TYPES: {[type: string]: string} = {
-  annual: 'דוח שנתי',
-  special: 'דוח מיוחד',
-};
-
-export const FINDING_TYPES: {[type: string]: string} = {
-  deficiency: 'ליקוי',
-  positive: 'ממצא חיובי',
-  observation: 'הערה',
-};
-
-export const SEVERITIES: {[severity: string]: string} = {
-  high: 'חומרה גבוהה',
-  medium: 'חומרה בינונית',
-  low: 'חומרה נמוכה',
-};
-
-export const FOLLOW_UP_KINDS: {[kind: string]: string} = {
-  follow_up_audit: 'ביקורת מעקב',
-  includes_follow_up: 'כולל מעקב אחר ממצאים קודמים',
-};
-
-// Rectification status, from follow-up audits and from the government's responses.
-// `tone` colours the badge as a traffic light.
-export interface Status {
-  label: string;
-  tone: 'good' | 'fair' | 'poor' | 'bad' | 'neutral';
-}
-
-export const STATUSES: {[status: string]: Status} = {
-  rectified: {label: 'תוקן', tone: 'good'},
-  mostly_rectified: {label: 'תוקן במידה רבה', tone: 'fair'},
-  partially_rectified: {label: 'תוקן חלקית', tone: 'poor'},
-  not_rectified: {label: 'לא תוקן', tone: 'bad'},
-  in_progress: {label: 'בטיפול', tone: 'neutral'},
-  disputed: {label: 'הגוף חולק על הממצא', tone: 'bad'},
-};
-
-export function status(value: string | null | undefined): Status | null {
-  return (value && STATUSES[value]) || null;
-}
+export { PUBLICATION_TYPES, FINDING_TYPES, SEVERITIES, FOLLOW_UP_KINDS, STATUSES, status } from '../../../common-components/comptroller-labels';
+export type { Status } from '../../../common-components/comptroller-labels';
 
 export const AUDITS_KIND = 'state_comptroller_audits';
 export const ISSUES_KIND = 'state_comptroller_issues';
