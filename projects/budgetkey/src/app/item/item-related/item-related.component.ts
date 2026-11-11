@@ -34,6 +34,9 @@ export const LINKABLE_KINDS = new Set([
 // each such entry is checked with /get/ and shown as text when it 404s.
 const VERIFY_KINDS = new Set(['state_comptroller_issues']);
 
+// Pages that don't show "פריטים קשורים": analysis pages already link everything they discuss inline
+const SKIP_RELATED_KINDS = new Set(['analysis']);
+
 type Side = 'related' | 'mentioned';
 
 // Labels for a relation, depending on whether this page is the link's target ("mentioned in") or its source
@@ -136,7 +139,7 @@ export class ItemRelatedComponent implements OnChanges {
     this.loading = false;
     this.loadError = false;
 
-    this.related = this.groups((item.related_items || []) as Entry[], 'related');
+    this.related = SKIP_RELATED_KINDS.has(this.pageKind) ? [] : this.groups((item.related_items || []) as Entry[], 'related');
 
     const mentionedIn: Entry[] = item.mentioned_in || [];
     this.ownEntries = mentionedIn.filter(e => e.same_item !== false);
