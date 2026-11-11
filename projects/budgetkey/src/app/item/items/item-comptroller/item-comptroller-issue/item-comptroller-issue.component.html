@@ -86,15 +86,10 @@
                                     <ul class='quotes'>
                                         @for (q of card.quotes; track $index) {
                                             <li>
-                                                <p class='answer'>
-                                                    @if (q.body) {
-                                                        <strong>{{ q.body }}:</strong>
-                                                    }
-                                                    {{ q.text }}
-                                                    @if (q.date && q.date !== card.date) {
-                                                        <span class='meta'>({{ q.date }})</span>
-                                                    }
-                                                </p>
+                                                @if (q.date && q.date !== card.date) {
+                                                    <span class='meta quote-date'>({{ q.date }})</span>
+                                                }
+                                                <ng-container *ngTemplateOutlet='blocksTpl; context: {$implicit: q.text, lead: q.body, cls: "answer"}'></ng-container>
                                             </li>
                                         }
                                     </ul>
@@ -118,9 +113,7 @@
                                             }
                                         </h3>
                                     }
-                                    @if (card.text) {
-                                        <p class='text'>{{ card.text }}</p>
-                                    }
+                                    <ng-container *ngTemplateOutlet='blocksTpl; context: {$implicit: card.text, lead: "", cls: "text"}'></ng-container>
                                     @if (card.period) {
                                         <div class='source'>הביקורת נערכה: {{ card.period }}</div>
                                     }
@@ -161,12 +154,16 @@
                                                     </div>
                                                 }
                                                 @for (answer of row.answers; track $index) {
-                                                    <p class='answer'>
-                                                        @if (answer.body) {
-                                                            <strong>{{ answer.body }}:</strong>
-                                                        }
-                                                        {{ answer.text }}
-                                                    </p>
+                                                    @if (answer.tableHtml) {
+                                                        <div class='md' [innerHTML]='answer.tableHtml'></div>
+                                                    } @else {
+                                                        <p class='answer'>
+                                                            @if (answer.body) {
+                                                                <strong>{{ answer.body }}:</strong>
+                                                            }
+                                                            {{ answer.text }}
+                                                        </p>
+                                                    }
                                                 }
                                                 @if (row.findingText) {
                                                     <p class='finding-text' title='לחצו להצגת הטקסט המלא' (click)='$any($event.currentTarget).classList.toggle("open")'><span class='field'>הליקוי כפי שמופיע בספר:</span> {{ row.findingText }}</p>
@@ -188,3 +185,19 @@
         </div>
     </ng-container>
 </app-base-simple-item>
+
+<!-- Text lines as paragraphs, the first one led by the body's name, and tables between them -->
+<ng-template #blocksTpl let-blocks let-lead='lead' let-cls='cls'>
+    @for (b of blocks; track $index; let first = $first) {
+        @if (b.tableHtml) {
+            <div class='md' [innerHTML]='b.tableHtml'></div>
+        } @else {
+            <p [ngClass]='cls'>
+                @if (first && lead) {
+                    <strong>{{ lead }}:</strong>
+                }
+                {{ b.line }}
+            </p>
+        }
+    }
+</ng-template>

@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { SeoService } from '../../../../common-components/seo.service';
-import { SEVERITIES, Status, auditDocId, findingAnchor, partialDate, status } from '../comptroller';
+import { SEVERITIES, Status, TextBlock, auditDocId, findingAnchor, partialDate, status, textBlocks } from '../comptroller';
 
 // Response groups longer than this start collapsed
 const COLLAPSED_ROWS = 3;
@@ -14,8 +14,8 @@ const KIND_LABELS: {[kind: string]: string} = {
 
 interface ResponseRow {
   title: string;
-  // "body: answer" lines
-  answers: {body: string, text: string}[];
+  // "body: answer" lines, and the tables between them
+  answers: {body: string, text: string, tableHtml?: string}[];
   // The finding as the response book states it, when the book has no answer
   findingText: string;
   status: Status | null;
@@ -28,14 +28,14 @@ interface TimelineCard {
   source: string;
   // Findings and follow-ups
   title?: string;
-  text?: string;
+  text?: TextBlock[];
   auditDocId?: string | null;
   anchor?: string | null;
   status?: Status | null;
   // When the audit was carried out (findings and follow-ups)
   period?: string;
   // The audited bodies' responses as quoted in the report, a row per body
-  quotes?: {body: string, text: string, date: string}[];
+  quotes?: {body: string, text: TextBlock[], date: string}[];
   // Responses: one card per book, a row per entry
   url?: string;
   rows?: ResponseRow[];
@@ -83,7 +83,7 @@ export class ItemComptrollerIssueComponent implements OnChanges {
       if (entry.kind === 'body_response') {
         // Consecutive responses to the same finding (one per body) share a card
         // Undated ones ("לא צוין" in the report) show no date
-        const quote = {body: entry.body || '', text: entry.text || '', date: entry.date ? partialDate(entry.date) : ''};
+        const quote = {body: entry.body || '', text: textBlocks(entry.text), date: entry.date ? partialDate(entry.date) : ''};
         const last = cards[cards.length - 1];
         if (last?.kind === 'body_response' && last.anchor === findingAnchor(entry.id)) {
           last.quotes!.push(quote);
@@ -118,7 +118,7 @@ export class ItemComptrollerIssueComponent implements OnChanges {
           date: partialDate(entry.date),
           source: entry.source || '',
           title: entry.title || '',
-          text: entry.text || '',
+          text: textBlocks(entry.text),
           auditDocId: chapter ? auditDocId(chapter) : null,
           anchor: chapter && entry.id ? findingAnchor(entry.id) : null,
           status: status(entry.status),
@@ -138,13 +138,13 @@ export class ItemComptrollerIssueComponent implements OnChanges {
   }
 
   private responseRow(entry: any): ResponseRow {
-    const answers = (entry.text || '').split('\n')
-      .map((line: string) => line.trim())
-      .filter((line: string) => !!line)
-      .map((line: string) => {
-        const m = line.match(/^([^:.\d]{2,50}):\s*([\s\S]*)$/);
-        return m ? {body: m[1], text: m[2]} : {body: '', text: line};
-      });
+    const answers = textBlocks(entry.text).map(({line, tableHtml}) => {
+      if (tableHtml) {
+        return {body: '', text: '', tableHtml};
+      }
+      const m = line!.match(/^([^:.\d]{2,50}):\s*([\s\S]*)$/);
+      return m ? {body: m[1], text: m[2]} : {body: '', text: line!};
+    });
     return {
       title: entry.title || '',
       answers,

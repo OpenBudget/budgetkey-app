@@ -66,3 +66,30 @@
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
 }
+
+// Markdown tables, in the chapter text and in responses quoting one
+.md-tables() {
+    .table-scroll {
+        width: 100%;
+        overflow-x: auto;
+        margin: 8px 0 20px;
+    }
+    table {
+        direction: rtl;
+        border-collapse: collapse;
+        min-width: 100%;
+        font-size: 14px;
+        line-height: 20px;
+
+        th, td {
+            text-align: right;
+            vertical-align: top;
+            padding: 6px 8px;
+            border-bottom: 1px solid @rule;
+        }
+        th {
+            background: @tint;
+            border-bottom: 2px solid #CBC2DE;
+        }
+    }
+}

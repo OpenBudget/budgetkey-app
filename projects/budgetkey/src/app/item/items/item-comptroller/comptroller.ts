@@ -64,3 +64,37 @@ export function chapterConverter() {
     noHeaderId: true,
   });
 }
+
+// Responses and findings are plain text, but some carry a markdown table: split the text into its lines and the tables between them
+export interface TextBlock {
+  line?: string;
+  tableHtml?: string;
+}
+
+const TABLE_LINE = /^\|.*\|$/;
+let tableConverter: Showdown.Converter | null = null;
+
+export function textBlocks(text: string | null | undefined): TextBlock[] {
+  const blocks: TextBlock[] = [];
+  let table: string[] = [];
+  const flush = () => {
+    if (table.length) {
+      tableConverter = tableConverter || chapterConverter();
+      blocks.push({tableHtml: tableConverter.makeHtml(table.join('\n'))});
+      table = [];
+    }
+  };
+  for (const raw of (text || '').split('\n')) {
+    const line = raw.trim();
+    if (TABLE_LINE.test(line)) {
+      table.push(line);
+    } else {
+      flush();
+      if (line) {
+        blocks.push({line});
+      }
+    }
+  }
+  flush();
+  return blocks;
+}

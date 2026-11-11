@@ -238,6 +238,14 @@
             }
         }
 
+        // A table in a response or a finding
+        ::ng-deep div.md {
+            max-width: @measure;
+            margin: 4px 0 10px;
+            .md-tables();
+            .table-scroll { margin: 0; }
+        }
+
         button.toggle {
             padding: 0;
             margin-top: 4px;
