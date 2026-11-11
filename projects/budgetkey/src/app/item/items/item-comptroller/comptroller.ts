@@ -16,13 +16,13 @@ export function findingAnchor(findingId: string): string {
   return `finding-${findingId}`;
 }
 
-// Dates come as YYYY-MM-DD or YYYY-MM
+// Dates come as YYYY-MM-DD, YYYY-MM or YYYY
 export function partialDate(value: string | null | undefined): string {
-  const m = (value || '').match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);
+  const m = (value || '').match(/^(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?$/);
   if (!m) {
     return value || '';
   }
-  return m[3] ? `${m[3]}/${m[2]}/${m[1]}` : `${m[2]}/${m[1]}`;
+  return m[3] ? `${m[3]}/${m[2]}/${m[1]}` : m[2] ? `${m[2]}/${m[1]}` : m[1];
 }
 
 // Report titles in earlier_reports and in related_items differ in punctuation and in a trailing " - <body>"

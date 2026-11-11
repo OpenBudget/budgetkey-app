@@ -9,6 +9,7 @@ const KIND_LABELS: {[kind: string]: string} = {
   finding: 'דוח מבקר המדינה',
   follow_up: 'ביקורת מעקב',
   response: 'תגובת הממשלה',
+  body_response: 'תגובת הגוף המבוקר',
 };
 
 interface ResponseRow {
@@ -31,6 +32,10 @@ interface TimelineCard {
   auditDocId?: string | null;
   anchor?: string | null;
   status?: Status | null;
+  // When the audit was carried out (findings and follow-ups)
+  period?: string;
+  // The audited bodies' responses as quoted in the report, a row per body
+  quotes?: {body: string, text: string, date: string}[];
   // Responses: one card per book, a row per entry
   url?: string;
   rows?: ResponseRow[];
@@ -75,7 +80,24 @@ export class ItemComptrollerIssueComponent implements OnChanges {
   private buildTimeline(timeline: any[]): TimelineCard[] {
     const cards: TimelineCard[] = [];
     for (const entry of timeline) {
-      if (entry.kind === 'response') {
+      if (entry.kind === 'body_response') {
+        // Consecutive responses to the same finding (one per body) share a card
+        // Undated ones ("לא צוין" in the report) show no date
+        const quote = {body: entry.body || '', text: entry.text || '', date: entry.date ? partialDate(entry.date) : ''};
+        const last = cards[cards.length - 1];
+        if (last?.kind === 'body_response' && last.anchor === findingAnchor(entry.id)) {
+          last.quotes!.push(quote);
+          last.date = last.date || quote.date;
+        } else {
+          cards.push({
+            kind: 'body_response', kindLabel: KIND_LABELS['body_response'],
+            date: quote.date, source: entry.source || '',
+            auditDocId: entry.chapter_id ? auditDocId(entry.chapter_id) : null,
+            anchor: entry.id ? findingAnchor(entry.id) : null,
+            quotes: [quote],
+          });
+        }
+      } else if (entry.kind === 'response') {
         const row = this.responseRow(entry);
         // A response book contributes one entry per row of its table: consecutive ones share a card
         const last = cards[cards.length - 1];
@@ -100,6 +122,7 @@ export class ItemComptrollerIssueComponent implements OnChanges {
           auditDocId: chapter ? auditDocId(chapter) : null,
           anchor: chapter && entry.id ? findingAnchor(entry.id) : null,
           status: status(entry.status),
+          period: entry.audit_period || '',
         });
       }
     }

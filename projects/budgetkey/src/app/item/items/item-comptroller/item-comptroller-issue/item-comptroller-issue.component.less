@@ -127,6 +127,16 @@
             border: 3px solid @accent;
         }
         &.kind-follow_up::before { border-color: @accent-soft; }
+        &.kind-body_response::before { border-color: @accent-soft; background: @tint; }
+
+        ul.quotes {
+            list-style: none;
+            margin: 0 0 4px;
+            padding: 0;
+
+            .answer { margin-bottom: 4px; }
+        }
+
         &.kind-response {
             background: #FAF9FC;
             &::before { border-color: @neutral; background: @neutral-bg; }
