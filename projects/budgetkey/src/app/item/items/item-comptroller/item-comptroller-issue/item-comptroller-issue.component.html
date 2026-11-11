@@ -1,0 +1,161 @@
+<app-base-simple-item [item]='item' [questions]='[]' [showVisualizations]='false'
+    [headerPrimaryColor]='"#5D5077"' [headerBgColor]='"white"'
+    [headerBorderColor]='"#CADAEC"' [headerSecondaryColor]='"#8778A5"'
+>
+    <ng-container class='category'>
+        <strong>מעקב ליקוי</strong>&nbsp;/&nbsp;<span>דוחות מבקר המדינה</span>
+    </ng-container>
+    <ng-container class='amount'>
+    </ng-container>
+    <ng-container class='title'>
+        {{ item.title }}
+    </ng-container>
+    <ng-container class='subtitle'>
+    </ng-container>
+    <ng-container class='extraInfo'>
+    </ng-container>
+    <ng-container class='textTemplate'>
+        <div class='issue'>
+            <div class='badges'>
+                @if (latestStatus) {
+                    <span class='badge status' [ngClass]='"tone-" + latestStatus.tone'>
+                        <span class='badge-label'>מצב אחרון:</span> {{ latestStatus.label }}
+                    </span>
+                }
+                @if (severity) {
+                    <span class='badge severity' [ngClass]='"severity-" + item.severity'>{{ severity }}</span>
+                }
+                <span class='counts'>
+                    <span>{{ item.n_audits || 0 }} דוחות</span> · <span>{{ item.n_responses || 0 }} תגובות</span>
+                </span>
+            </div>
+
+            @if (item.description) {
+                <p class='description'>{{ item.description }}</p>
+            }
+
+            <dl class='facts'>
+                @if (item.bodies?.length) {
+                    <div>
+                        <dt>גופים</dt>
+                        <dd>{{ item.bodies.join(' · ') }}</dd>
+                    </div>
+                }
+                @if (item.first_reported) {
+                    <div>
+                        <dt>נמצא לראשונה</dt>
+                        <dd>{{ partialDate(item.first_reported) }}</dd>
+                    </div>
+                }
+                @if (item.last_seen) {
+                    <div>
+                        <dt>אוזכר לאחרונה</dt>
+                        <dd>{{ partialDate(item.last_seen) }}</dd>
+                    </div>
+                }
+            </dl>
+
+            @if (audits.length) {
+                <section class='audits'>
+                    <h2>הדוחות שעסקו בליקוי</h2>
+                    <ul>
+                        @for (audit of audits; track audit.docId) {
+                            <li><app-item-link [itemId]='audit.docId'>{{ audit.title }}</app-item-link></li>
+                        }
+                    </ul>
+                </section>
+            }
+
+            @if (cards.length) {
+                <section class='timeline'>
+                    <h2>לאורך השנים</h2>
+                    <ol>
+                        @for (card of cards; track $index) {
+                            <li class='card' [ngClass]='"kind-" + card.kind'>
+                                <div class='head'>
+                                    <span class='kind'>{{ card.kindLabel }}</span>
+                                    @if (card.date) {
+                                        <span class='date'>{{ card.date }}</span>
+                                    }
+                                    @if (card.status) {
+                                        <span class='badge' [ngClass]='"tone-" + card.status.tone'>{{ card.status.label }}</span>
+                                    }
+                                </div>
+
+                                @if (card.kind !== 'response') {
+                                    @if (card.title) {
+                                        <h3>
+                                            @if (card.auditDocId) {
+                                                <app-item-link [itemId]='card.auditDocId' [fragment]='card.anchor || null'>{{ card.title }}</app-item-link>
+                                            } @else {
+                                                {{ card.title }}
+                                            }
+                                        </h3>
+                                    }
+                                    @if (card.text) {
+                                        <p class='text'>{{ card.text }}</p>
+                                    }
+                                    @if (card.source) {
+                                        <div class='source'>
+                                            מתוך:
+                                            @if (card.auditDocId) {
+                                                <app-item-link [itemId]='card.auditDocId'>{{ card.source }}</app-item-link>
+                                            } @else {
+                                                {{ card.source }}
+                                            }
+                                        </div>
+                                    }
+                                } @else {
+                                    <div class='source book'>
+                                        {{ card.source }}
+                                        @if (card.url) {
+                                            <a [href]='card.url' target='_blank' rel='noopener'>לקובץ</a>
+                                        }
+                                        @if (card.rows!.length > 1) {
+                                            <span class='meta'>({{ card.rows!.length }} סעיפים)</span>
+                                        }
+                                    </div>
+                                    @if (card.title) {
+                                        <h3 class='book-item'>{{ card.title }}</h3>
+                                    }
+                                    <ul class='rows'>
+                                        @for (row of card.rows; track $index; let i = $index) {
+                                            <li [class.hidden]='i >= collapsedRows && !card.expanded'>
+                                                @if (row.title || row.status) {
+                                                    <div class='row-head'>
+                                                        @if (row.title) {
+                                                            <span class='row-title'>{{ row.title }}</span>
+                                                        }
+                                                        @if (row.status) {
+                                                            <span class='badge' [ngClass]='"tone-" + row.status.tone'>{{ row.status.label }}</span>
+                                                        }
+                                                    </div>
+                                                }
+                                                @for (answer of row.answers; track $index) {
+                                                    <p class='answer'>
+                                                        @if (answer.body) {
+                                                            <strong>{{ answer.body }}:</strong>
+                                                        }
+                                                        {{ answer.text }}
+                                                    </p>
+                                                }
+                                                @if (row.findingText) {
+                                                    <p class='finding-text' title='לחצו להצגת הטקסט המלא' (click)='$any($event.currentTarget).classList.toggle("open")'><span class='field'>הליקוי כפי שמופיע בספר:</span> {{ row.findingText }}</p>
+                                                }
+                                            </li>
+                                        }
+                                    </ul>
+                                    @if (card.rows!.length > collapsedRows) {
+                                        <button type='button' class='toggle' (click)='card.expanded = !card.expanded'>
+                                            {{ card.expanded ? 'הצג פחות' : 'הצג את כל ' + card.rows!.length + ' הסעיפים' }}
+                                        </button>
+                                    }
+                                }
+                            </li>
+                        }
+                    </ol>
+                </section>
+            }
+        </div>
+    </ng-container>
+</app-base-simple-item>

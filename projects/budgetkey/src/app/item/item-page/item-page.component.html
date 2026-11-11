@@ -83,6 +83,13 @@
         <app-item-analysis [item]='item'></app-item-analysis>
       }
 
+      @else if (prefix("state_comptroller_audits/")) {
+        <app-item-comptroller-audit [item]='item'></app-item-comptroller-audit>
+      }
+      @else if (prefix("state_comptroller_issues/")) {
+        <app-item-comptroller-issue [item]='item'></app-item-comptroller-issue>
+      }
+
       @else if (prefix("activities/gov_social_service/")) {
         <app-item-social-service [item]='item'></app-item-social-service>
       }

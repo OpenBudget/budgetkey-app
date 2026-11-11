@@ -24,10 +24,9 @@ const KIND_LABELS: {[kind: string]: string} = {
 };
 
 // Kinds that have an item page in this app. Entries of other kinds render as text, not links.
-// Add the comptroller kinds once their pages land.
 export const LINKABLE_KINDS = new Set([
-  'entities', 'gov_decisions', 'analysis', 'budget', 'support_programs', 'activities',
-  'tenders', 'contract-spending', 'supports',
+  'entities', 'gov_decisions', 'state_comptroller_audits', 'state_comptroller_issues', 'analysis', 'budget',
+  'support_programs', 'activities', 'tenders', 'contract-spending', 'supports',
 ]);
 
 // Linkable kinds whose targets may have no page (e.g. issues not yet re-indexed). In the browser,

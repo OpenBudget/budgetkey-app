@@ -1,0 +1,252 @@
+@import '../comptroller.less';
+
+@measure: 760px;
+@dot: 14px;
+
+:host {
+    .issue {
+        max-width: 900px;
+        direction: rtl;
+        color: @text;
+    }
+
+    h2 { .section-heading(); }
+
+    ::ng-deep app-item-link a, a {
+        .link();
+    }
+
+    .meta {
+        font-size: 14px;
+        color: @muted;
+        margin-right: 6px;
+    }
+
+    .badge {
+        .badge();
+    }
+
+    .severity-high { color: @bad; background: @bad-bg; }
+    .severity-medium { color: @poor; background: @poor-bg; }
+    .severity-low { color: @muted; background: #F1F2F2; }
+
+    > .issue > .badges {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+
+        .badge.status {
+            font-size: 16px;
+            line-height: 28px;
+            padding: 0 12px;
+            font-weight: bold;
+
+            .badge-label { font-weight: normal; }
+        }
+
+        .counts {
+            font-size: 15px;
+            color: @muted;
+
+            span { white-space: nowrap; }
+        }
+    }
+
+    .description {
+        max-width: @measure;
+        font-size: 19px;
+        line-height: 32px;
+        margin: 0 0 14px;
+    }
+
+    dl.facts {
+        margin: 0 0 8px;
+        font-size: 17px;
+        line-height: 26px;
+
+        > div {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        dt {
+            flex: 0 0 auto;
+            min-width: 120px;
+            font-weight: normal;
+            color: @muted;
+        }
+        dd { margin: 0; }
+    }
+
+    .audits ul {
+        margin: 0;
+        padding: 0 18px 0 0;
+        font-size: 17px;
+        line-height: 28px;
+    }
+
+    // A vertical timeline down the right edge
+    .timeline ol {
+        list-style: none;
+        margin: 0;
+        padding: 0 28px 0 0;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            bottom: 6px;
+            right: (@dot / 2) - 1px;
+            width: 2px;
+            background: @rule;
+        }
+    }
+
+    .card {
+        position: relative;
+        margin-bottom: 18px;
+        padding: 10px 14px;
+        border: 1px solid @rule;
+        border-radius: 4px;
+        background: #FFFFFF;
+
+        // The dot on the line
+        &::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            right: -28px;
+            width: @dot;
+            height: @dot;
+            box-sizing: border-box;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 3px solid @accent;
+        }
+        &.kind-follow_up::before { border-color: @accent-soft; }
+        &.kind-response {
+            background: #FAF9FC;
+            &::before { border-color: @neutral; background: @neutral-bg; }
+        }
+
+        .head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+
+            .kind {
+                font-weight: bold;
+                color: @accent;
+                font-size: 16px;
+            }
+            .date {
+                font-size: 15px;
+                color: @muted;
+            }
+        }
+        &.kind-response .head .kind { color: @neutral; }
+
+        h3.book-item {
+            font-size: 16px;
+            line-height: 24px;
+            margin: 6px 0 4px;
+        }
+
+        h3 {
+            font-size: 18px;
+            line-height: 27px;
+            font-weight: bold;
+            margin: 0 0 4px;
+        }
+
+        p {
+            max-width: @measure;
+            font-size: 16px;
+            line-height: 26px;
+            margin: 0 0 6px;
+            overflow-wrap: anywhere;
+        }
+
+        .source {
+            font-size: 15px;
+            line-height: 23px;
+            color: @muted;
+
+            &.book { margin-bottom: 4px; }
+            a { margin-right: 6px; }
+        }
+
+        ul.rows {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            > li {
+                padding: 8px 0;
+                border-top: 1px solid @rule;
+
+                &.hidden { display: none; }
+            }
+
+            .row-head {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 4px;
+
+                .row-title {
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+            }
+
+            .answer { white-space: pre-line; }
+
+            .finding-text {
+                font-size: 15px;
+                line-height: 23px;
+                color: @muted;
+                white-space: pre-line;
+                cursor: pointer;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
+                line-clamp: 3;
+                overflow: hidden;
+
+                &.open {
+                    display: block;
+                    cursor: default;
+                }
+                .field { font-weight: bold; }
+            }
+        }
+
+        button.toggle {
+            padding: 0;
+            margin-top: 4px;
+            border: none;
+            background: none;
+            font: inherit;
+            font-size: 15px;
+            .link();
+            cursor: pointer;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .description { font-size: 17px; line-height: 28px; }
+        dl.facts > div { flex-direction: column; gap: 0; }
+        .timeline ol { padding-right: 22px; }
+        .card {
+            padding: 8px 10px;
+            &::before { right: -22px; }
+        }
+    }
+}
