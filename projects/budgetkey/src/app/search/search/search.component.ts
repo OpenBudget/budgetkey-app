@@ -92,7 +92,12 @@ export class SearchComponent implements OnInit {
               kinds: sp.docType.id 
             });
           }
-          this.seo.setSeo(this.globalSettings.siteName + ' - חיפוש ' + sp.term, `https://next.obudget.org/s?q=${encodeURIComponent(sp.term)}`);
+          // The term is undefined on an empty search
+          const term = (sp.term || '').trim();
+          this.seo.setSeo(
+            this.globalSettings.siteName + ' - חיפוש' + (term ? ' ' + term : ''),
+            'https://next.obudget.org/s' + (term ? `?q=${encodeURIComponent(term)}` : '')
+          );
         }
       });
     });
