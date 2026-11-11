@@ -19,6 +19,7 @@ import { ItemBudget4digComponent } from './items/item-budget/item-budget4dig/ite
 import { ItemBudget6digComponent } from './items/item-budget/item-budget6dig/item-budget6dig.component';
 import { ItemBudget8digComponent } from './items/item-budget/item-budget8dig/item-budget8dig.component';
 import { ItemLinkComponent } from './item-link/item-link.component';
+import { ItemRelatedComponent } from './item-related/item-related.component';
 import { ItemBudgetFuncDetailComponent } from './items/item-budget/item-budget-func-detail/item-budget-func-detail.component';
 import { ItemBudgetFuncComponent } from './items/item-budget/item-budget-func/item-budget-func.component';
 import { BaseSimpleItemComponent } from './items/base-simple-item/base-simple-item.component';
@@ -88,6 +89,7 @@ import { ItemSupportsProgramComponent } from './items/item-supports-program/item
         ItemIncome6digComponent,
         ItemIncome8digComponent,
         ItemLinkComponent,
+        ItemRelatedComponent,
         ItemMuniBudgetComponent,
         ItemMuniComponent,
         ItemPageComponent,

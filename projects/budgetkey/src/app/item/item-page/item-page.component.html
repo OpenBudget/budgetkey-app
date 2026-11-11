@@ -97,6 +97,9 @@
       @else if (prefix("reports/ngo-district-report/")) {
         <app-item-ngo-district-report [item]='item'></app-item-ngo-district-report>
       }
+
+      <!-- Related items and back-links, after the item's own content and before the queries panel -->
+      <app-item-related [item]='item'></app-item-related>
     </div>
     
     <ng-container *ngIf='showQuestions'>

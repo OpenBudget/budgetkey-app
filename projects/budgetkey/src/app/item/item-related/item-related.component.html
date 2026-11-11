@@ -1,0 +1,81 @@
+@if (!empty) {
+  <div class='item-related'>
+    @if (related.length) {
+      <section class='related-section'>
+        <h2>פריטים קשורים</h2>
+        <ng-container *ngTemplateOutlet='groupsTpl; context: {$implicit: related}'></ng-container>
+      </section>
+    }
+
+    @if (mentioned.length || otherYears.length) {
+      <section class='related-section'>
+        <h2>מוזכר ב...</h2>
+        <ng-container *ngTemplateOutlet='groupsTpl; context: {$implicit: mentioned}'></ng-container>
+        @if (moreCount > 0 || loading) {
+          <div class='more'>
+            <button type='button' class='more-button' (click)='loadMore()' [disabled]='loading'>
+              @if (loading) {
+                טוען...
+              } @else {
+                ועוד {{ moreCount.toLocaleString('en-US') }}
+              }
+            </button>
+            @if (loadError) {
+              <span class='load-error'>הטעינה נכשלה, אפשר לנסות שוב</span>
+            }
+          </div>
+        }
+        @if (otherYears.length) {
+          <div class='other-years'>
+            <h3 class='other-years-title'>אזכורים של הקוד הזה בשנים אחרות</h3>
+            <ng-container *ngTemplateOutlet='groupsTpl; context: {$implicit: otherYears}'></ng-container>
+          </div>
+        }
+      </section>
+    }
+  </div>
+}
+
+<ng-template #groupsTpl let-groups>
+  @for (group of groups; track group.kind) {
+    <!-- Closed by default; opening shows the first entries, "הצג הכל" the rest. All entries are in the DOM for SSR. -->
+    <details class='group' [open]='group.open' (toggle)='onToggle(group, $any($event.target).open)'>
+      <summary><h3>{{ group.label }} <span class='count'>({{ group.entries.length }})</span></h3></summary>
+      <ul>
+        @for (e of group.entries; track e.docId; let i = $index) {
+          <li [class.hidden]='i >= collapsedSize && !group.expanded'>
+            <div class='line'>
+              <span class='title'>
+                @if (e.linkable && !missing.has(e.docId)) {
+                  <app-item-link [itemId]='e.docId' [fragment]='e.fragment'>{{ e.title }}</app-item-link>
+                } @else {
+                  <span class='plain'>{{ e.title }}</span>
+                }
+                @if (e.year) {
+                  <span class='year'>{{ e.year }}</span>
+                }
+              </span>
+              @if (e.tag) {
+                <span class='tag' [attr.title]='e.tooltip'>{{ e.tag }}</span>
+              }
+              @if (e.date) {
+                <span class='date'>{{ e.date }}</span>
+              }
+              @if (e.findings) {
+                <span class='findings'>{{ e.findings }}</span>
+              }
+            </div>
+            @if (e.excerpt) {
+              <div class='excerpt' [class.open]='openExcerpts.has(e.docId)' (click)='toggleExcerpt(e.docId)'>{{ e.excerpt }}</div>
+            }
+          </li>
+        }
+      </ul>
+      @if (group.entries.length > collapsedSize) {
+        <button type='button' class='toggle' (click)='toggle(group)'>
+          {{ group.expanded ? 'הצג פחות' : 'הצג הכל (' + group.entries.length + ')' }}
+        </button>
+      }
+    </details>
+  }
+</ng-template>
