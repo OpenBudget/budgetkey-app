@@ -328,29 +328,7 @@
         }
         sup { font-size: 11px; color: @muted; }
 
-        .table-scroll {
-            width: 100%;
-            overflow-x: auto;
-            margin: 8px 0 20px;
-        }
-        table {
-            direction: rtl;
-            border-collapse: collapse;
-            min-width: 100%;
-            font-size: 14px;
-            line-height: 20px;
-
-            th, td {
-                text-align: right;
-                vertical-align: top;
-                padding: 6px 8px;
-                border-bottom: 1px solid @rule;
-            }
-            th {
-                background: @tint;
-                border-bottom: 2px solid #CBC2DE;
-            }
-        }
+        .md-tables();
     }
 
     @media (max-width: 600px) {
