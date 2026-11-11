@@ -142,7 +142,8 @@ export class ItemComptrollerIssueComponent implements OnChanges {
       if (tableHtml) {
         return {body: '', text: '', tableHtml};
       }
-      const m = line!.match(/^([^:.\d]{2,50}):\s*([\s\S]*)$/);
+      // "body: answer", but not "https://..."
+      const m = line!.match(/^([^:.\d]{2,50}):(?!\/\/)\s*([\s\S]*)$/);
       return m ? {body: m[1], text: m[2]} : {body: '', text: line!};
     });
     return {

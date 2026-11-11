@@ -125,14 +125,14 @@
                                 </div>
                                 <h4>{{ f.finding.title }}</h4>
                                 @if (f.finding.description) {
-                                    <p class='description'>{{ f.finding.description }}</p>
+                                    <p class='description'><app-linked-text [text]='f.finding.description'></app-linked-text></p>
                                 }
                                 @if (f.status && f.finding.followup_status_text) {
-                                    <p class='status-text'><strong>ממצאי המעקב:</strong> {{ f.finding.followup_status_text }}</p>
+                                    <p class='status-text'><strong>ממצאי המעקב:</strong> <app-linked-text [text]='f.finding.followup_status_text'></app-linked-text></p>
                                 }
                                 @if (f.finding.recommendation) {
                                     <div class='recommendation'>
-                                        <strong>המלצת המבקר:</strong> {{ f.finding.recommendation }}
+                                        <strong>המלצת המבקר:</strong> <app-linked-text [text]='f.finding.recommendation'></app-linked-text>
                                     </div>
                                 }
                                 @if (f.finding.responsible_bodies?.length) {
@@ -150,7 +150,7 @@
                                                     @if (r.date || r.date_text) {
                                                         <span class='date'>{{ r.date ? partialDate(r.date) : r.date_text }}</span>
                                                     }
-                                                    <div>{{ r.summary }}</div>
+                                                    <div><app-linked-text [text]='r.summary'></app-linked-text></div>
                                                 </li>
                                             }
                                         </ul>

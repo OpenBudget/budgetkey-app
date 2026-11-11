@@ -59,6 +59,8 @@ export function chapterConverter() {
   return new Showdown.Converter({
     extensions: [chapterMarkdown],
     tables: true,
+    simplifiedAutoLink: true,
+    excludeTrailingPunctuationFromURLs: true,
     strikethrough: true,
     literalMidWordUnderscores: true,
     noHeaderId: true,
@@ -97,4 +99,31 @@ export function textBlocks(text: string | null | undefined): TextBlock[] {
   }
   flush();
   return blocks;
+}
+
+// Bare URLs in plain text, e.g. a response pointing to a ministry publication
+export interface LinkPart {
+  text: string;
+  href?: string;
+}
+
+const URL_RE = /(?:https?:\/\/|www\.)[^\s<>"'״]+/g;
+const TRAILING_PUNCTUATION = /[.,;:!?)\]]+$/;
+
+export function linkParts(text: string | null | undefined): LinkPart[] {
+  const value = text || '';
+  const parts: LinkPart[] = [];
+  let last = 0;
+  for (const m of value.matchAll(URL_RE)) {
+    const url = m[0].replace(TRAILING_PUNCTUATION, '');
+    if (m.index! > last) {
+      parts.push({text: value.slice(last, m.index)});
+    }
+    parts.push({text: url, href: url.startsWith('www.') ? `https://${url}` : url});
+    last = m.index! + url.length;
+  }
+  if (last < value.length) {
+    parts.push({text: value.slice(last)});
+  }
+  return parts;
 }
