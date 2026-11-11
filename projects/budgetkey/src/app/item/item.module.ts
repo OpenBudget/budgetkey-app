@@ -66,6 +66,7 @@ import { ItemSoprocChartComponent } from './items/item-soproc/item-soproc-chart/
 import { ItemSupportsProgramComponent } from './items/item-supports-program/item-supports-program.component';
 import { ItemComptrollerAuditComponent } from './items/item-comptroller/item-comptroller-audit/item-comptroller-audit.component';
 import { ItemComptrollerIssueComponent } from './items/item-comptroller/item-comptroller-issue/item-comptroller-issue.component';
+import { LinkedTextComponent } from './items/item-comptroller/linked-text/linked-text.component';
 
 @NgModule({ declarations: [
         BaseOrgItemComponent,
@@ -111,6 +112,7 @@ import { ItemComptrollerIssueComponent } from './items/item-comptroller/item-com
         ItemAnalysisComponent,
         ItemComptrollerAuditComponent,
         ItemComptrollerIssueComponent,
+        LinkedTextComponent,
         ItemSocialServiceComponent,
         ItemSocialServiceGovUnitComponent,
         ItemSoprocChartComponent,

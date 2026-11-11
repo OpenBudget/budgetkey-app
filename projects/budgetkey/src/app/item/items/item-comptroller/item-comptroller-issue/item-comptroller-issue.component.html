@@ -161,12 +161,12 @@
                                                             @if (answer.body) {
                                                                 <strong>{{ answer.body }}:</strong>
                                                             }
-                                                            {{ answer.text }}
+                                                            <app-linked-text [text]='answer.text'></app-linked-text>
                                                         </p>
                                                     }
                                                 }
                                                 @if (row.findingText) {
-                                                    <p class='finding-text' title='לחצו להצגת הטקסט המלא' (click)='$any($event.currentTarget).classList.toggle("open")'><span class='field'>הליקוי כפי שמופיע בספר:</span> {{ row.findingText }}</p>
+                                                    <p class='finding-text' title='לחצו להצגת הטקסט המלא' (click)='$any($event.currentTarget).classList.toggle("open")'><span class='field'>הליקוי כפי שמופיע בספר:</span> <app-linked-text [text]='row.findingText'></app-linked-text></p>
                                                 }
                                             </li>
                                         }
@@ -196,7 +196,7 @@
                 @if (first && lead) {
                     <strong>{{ lead }}:</strong>
                 }
-                {{ b.line }}
+                <app-linked-text [text]='b.line'></app-linked-text>
             </p>
         }
     }
