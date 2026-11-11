@@ -1,5 +1,19 @@
 @if (!empty) {
   <div class='item-related'>
+    @if (owners.length) {
+      <div class='owners'>
+        <span class='owners-label'>{{ ownersLabel }}:</span>
+        @for (e of owners; track e.docId) {
+          <span class='owner'>
+            @if (e.linkable && !missing.has(e.docId)) {
+              <app-item-link [itemId]='e.docId'>{{ e.code ? e.code + ' ' : '' }}{{ e.title }}</app-item-link>
+            } @else {
+              {{ e.code ? e.code + ' ' : '' }}{{ e.title }}
+            }
+          </span>
+        }
+      </div>
+    }
     @if (related.length) {
       <section class='related-section'>
         <h2>פריטים קשורים</h2>

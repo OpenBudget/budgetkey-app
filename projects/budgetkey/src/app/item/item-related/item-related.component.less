@@ -17,6 +17,34 @@
         border-top: 1px solid @rule;
     }
 
+    // "הגוף המתוקצב: …" / "תקציב הגוף: …", a line above the sections
+    .owners {
+        max-width: 900px;
+        margin: 20px 0 0;
+        font-size: 18px;
+        line-height: 28px;
+
+        .owners-label {
+            font-weight: bold;
+            color: @accent;
+            margin-left: 6px;
+        }
+
+        .owner:not(:last-child)::after {
+            content: '·';
+            display: inline-block;
+            margin: 0 8px;
+            color: @muted;
+        }
+
+        ::ng-deep a {
+            color: @accent;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+    }
+
     .related-section {
         max-width: 900px;
 

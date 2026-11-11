@@ -40,6 +40,7 @@ type Side = 'related' | 'mentioned';
 
 // Labels for a relation, depending on whether this page is the link's target ("mentioned in") or its source
 const RELATION_LABELS: {[relation: string]: {mentioned: string, related: string}} = {
+  budget_owner: {mentioned: 'הגוף המתוקצב', related: 'תקציב הגוף'},
   audited: {mentioned: 'גוף מבוקר', related: 'גוף מבוקר'},
   responsible: {mentioned: 'גוף אחראי', related: 'גוף אחראי'},
   subject: {mentioned: 'נושא הדוח / ההחלטה', related: 'נושא'},
@@ -52,9 +53,12 @@ const RELATION_LABELS: {[relation: string]: {mentioned: string, related: string}
   mentioned: {mentioned: 'אזכור', related: 'אזכור'},
 };
 
+// A ministry or authority and its own budget chapters: a structural link, shown on a line of its own
+const OWNER_RELATION = 'budget_owner';
+
 // Strongest first, as the indexer picks each entry's `relation`
 const RELATION_STRENGTH = [
-  'audited', 'subject', 'follows_up', 'amends', 'cancels', 'cites', 'responsible', 'funded', 'contractor', 'mentioned',
+  'budget_owner', 'audited', 'subject', 'follows_up', 'amends', 'cancels', 'cites', 'responsible', 'funded', 'contractor', 'mentioned',
 ];
 
 const COLLAPSED_SIZE = 5;
@@ -63,6 +67,7 @@ const EXCERPT_PREFIX = /^\[[^\]]+\]\s*/;
 
 interface Entry {
   doc_id: string;
+  code?: string | null;
   kind: string;
   title: string;
   relation: string;
@@ -78,6 +83,7 @@ interface Entry {
 interface EntryView {
   docId: string;
   title: string;
+  code: string;
   linkable: boolean;
   fragment: string | null;
   tag: string;
@@ -108,6 +114,9 @@ export class ItemRelatedComponent implements OnChanges {
 
   readonly collapsedSize = COLLAPSED_SIZE;
 
+  // The budget's owner, or the owner's budget chapters
+  owners: EntryView[] = [];
+  ownersLabel = '';
   related: Group[] = [];
   mentioned: Group[] = [];
   // Budget pages: mentions of other connected items with the same code
@@ -128,7 +137,7 @@ export class ItemRelatedComponent implements OnChanges {
   constructor(private http: HttpClient, private ps: PlatformService) {}
 
   get empty(): boolean {
-    return !this.related.length && !this.mentioned.length && !this.otherYears.length;
+    return !this.owners.length && !this.related.length && !this.mentioned.length && !this.otherYears.length;
   }
 
   ngOnChanges() {
@@ -138,13 +147,21 @@ export class ItemRelatedComponent implements OnChanges {
     this.loading = false;
     this.loadError = false;
 
-    this.related = SKIP_RELATED_KINDS.has(this.pageKind) ? [] : this.groups((item.related_items || []) as Entry[], 'related');
+    const isOwner = (e: Entry) => e?.relation === OWNER_RELATION;
+    const relatedItems: Entry[] = item.related_items || [];
+    const allMentions: Entry[] = item.mentioned_in || [];
+    const ownedBudgets = relatedItems.filter(isOwner);
+    const budgetOwners = allMentions.filter(isOwner);
+    this.owners = [...ownedBudgets.map(e => this.view(e, 'related', false)), ...budgetOwners.map(e => this.view(e, 'mentioned', false))];
+    this.ownersLabel = RELATION_LABELS[OWNER_RELATION][ownedBudgets.length ? 'related' : 'mentioned'];
 
-    const mentionedIn: Entry[] = item.mentioned_in || [];
+    this.related = SKIP_RELATED_KINDS.has(this.pageKind) ? [] : this.groups(relatedItems.filter(e => !isOwner(e)), 'related');
+
+    const mentionedIn: Entry[] = allMentions.filter(e => !isOwner(e));
     this.ownEntries = mentionedIn.filter(e => e.same_item !== false);
     this.mentioned = this.groups(this.ownEntries, 'mentioned');
     this.otherYears = this.groups(mentionedIn.filter(e => e.same_item === false), 'mentioned', true);
-    this.moreCount = Math.max(0, (item.mentioned_in_count || 0) - mentionedIn.length);
+    this.moreCount = Math.max(0, (item.mentioned_in_count || 0) - allMentions.length);
   }
 
   get pageKind(): string {
@@ -186,7 +203,7 @@ export class ItemRelatedComponent implements OnChanges {
     const query = `select * from (
         select distinct on (source_doc_id) source_doc_id, source_kind, source_title, source_date,
                source_part_id, target_year, relation, excerpt
-        from related_items where target_doc_id = '${docId}'
+        from related_items where target_doc_id = '${docId}' and relation <> '${OWNER_RELATION}'
         order by source_doc_id, array_position(array[${RELATION_STRENGTH.map(r => `'${r}'`).join(',')}], relation), confidence desc
       ) t order by source_date desc nulls last, source_doc_id`.replace(/\s+/g, ' ');
     const page = this.fullList ? Math.ceil(this.fullList.length / PAGE_SIZE) : 0;
@@ -261,6 +278,7 @@ export class ItemRelatedComponent implements OnChanges {
     const view: EntryView = {
       docId: entry.doc_id,
       title: entry.title || entry.doc_id,
+      code: entry.code || '',
       linkable: LINKABLE_KINDS.has(entry.kind),
       fragment: entry.kind === 'state_comptroller_audits' && entry.part_id ? `finding-${entry.part_id}` : null,
       tag: entry.relation ? label(entry.relation) : '',
