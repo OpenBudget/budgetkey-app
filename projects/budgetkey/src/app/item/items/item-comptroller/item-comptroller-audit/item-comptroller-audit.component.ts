@@ -129,6 +129,12 @@ export class ItemComptrollerAuditComponent implements OnChanges, AfterViewInit {
     return PUBLICATION_TYPES[this.item?.publication_type] || '';
   }
 
+  // The chapter's section within the report; "דוח ביקורת מיוחד" only repeats "דוח מיוחד"
+  get reportGroup(): string {
+    const group: string = this.item?.report_group || '';
+    return this.item?.publication_type === 'special' && group === 'דוח ביקורת מיוחד' ? '' : group;
+  }
+
   get otherBodies(): string[] {
     return (this.item?.audited_bodies || []).filter((b: string) => b !== this.item?.main_body);
   }

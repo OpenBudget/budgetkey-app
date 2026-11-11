@@ -7,8 +7,8 @@
         @if (publicationType) {
             &nbsp;/&nbsp;<span>{{ publicationType }}{{ item.report_code ? ' ' + item.report_code : '' }}</span>
         }
-        @if (item.report_group) {
-            &nbsp;›&nbsp;<span>{{ item.report_group }}</span>
+        @if (reportGroup) {
+            &nbsp;›&nbsp;<span>{{ reportGroup }}</span>
         }
     </ng-container>
     <ng-container class='amount'>
