@@ -147,8 +147,8 @@
                                             @for (r of f.finding.body_responses; track $index) {
                                                 <li>
                                                     <strong>{{ r.body }}</strong>
-                                                    @if (r.date) {
-                                                        <span class='date'>{{ partialDate(r.date) }}</span>
+                                                    @if (r.date || r.date_text) {
+                                                        <span class='date'>{{ r.date ? partialDate(r.date) : r.date_text }}</span>
                                                     }
                                                     <div>{{ r.summary }}</div>
                                                 </li>

@@ -82,7 +82,33 @@
                                     }
                                 </div>
 
-                                @if (card.kind !== 'response') {
+                                @if (card.kind === 'body_response') {
+                                    <ul class='quotes'>
+                                        @for (q of card.quotes; track $index) {
+                                            <li>
+                                                <p class='answer'>
+                                                    @if (q.body) {
+                                                        <strong>{{ q.body }}:</strong>
+                                                    }
+                                                    {{ q.text }}
+                                                    @if (q.date && q.date !== card.date) {
+                                                        <span class='meta'>({{ q.date }})</span>
+                                                    }
+                                                </p>
+                                            </li>
+                                        }
+                                    </ul>
+                                    @if (card.source) {
+                                        <div class='source'>
+                                            מצוטט בדוח:
+                                            @if (card.auditDocId) {
+                                                <app-item-link [itemId]='card.auditDocId' [fragment]='card.anchor || null'>{{ card.source }}</app-item-link>
+                                            } @else {
+                                                {{ card.source }}
+                                            }
+                                        </div>
+                                    }
+                                } @else if (card.kind !== 'response') {
                                     @if (card.title) {
                                         <h3>
                                             @if (card.auditDocId) {
@@ -94,6 +120,9 @@
                                     }
                                     @if (card.text) {
                                         <p class='text'>{{ card.text }}</p>
+                                    }
+                                    @if (card.period) {
+                                        <div class='source'>הביקורת נערכה: {{ card.period }}</div>
                                     }
                                     @if (card.source) {
                                         <div class='source'>
