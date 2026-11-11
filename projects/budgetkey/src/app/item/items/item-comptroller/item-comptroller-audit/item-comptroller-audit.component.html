@@ -1,0 +1,217 @@
+<app-base-simple-item [item]='item' [questions]='[]' [showVisualizations]='false'
+    [headerPrimaryColor]='"#5D5077"' [headerBgColor]='"white"'
+    [headerBorderColor]='"#CADAEC"' [headerSecondaryColor]='"#8778A5"'
+>
+    <ng-container class='category'>
+        <strong>דוח מבקר המדינה</strong>
+        @if (publicationType) {
+            &nbsp;/&nbsp;<span>{{ publicationType }}{{ item.report_code ? ' ' + item.report_code : '' }}</span>
+        }
+        @if (reportGroup) {
+            &nbsp;›&nbsp;<span>{{ reportGroup }}</span>
+        }
+    </ng-container>
+    <ng-container class='amount'>
+    </ng-container>
+    <ng-container class='title'>
+        {{ item.title }}
+    </ng-container>
+    <ng-container class='subtitle'>
+        {{ item.publication_title }}
+    </ng-container>
+    <ng-container class='extraInfo'>
+        @if (item.publish_date) {
+            פורסם ב-{{ format.date(item.publish_date) }}
+        }
+    </ng-container>
+    <ng-container class='textTemplate'>
+        <div class='audit'>
+            <dl class='facts'>
+                @if (item.audited_bodies?.length) {
+                    <div>
+                        <dt>גופים מבוקרים</dt>
+                        <dd class='bodies'>
+                            @if (item.main_body) {
+                                <strong>{{ item.main_body }}</strong>
+                            }
+                            @for (body of otherBodies; track body) {
+                                <span>{{ body }}</span>
+                            }
+                        </dd>
+                    </div>
+                }
+                @if (item.audit_period) {
+                    <div>
+                        <dt>תקופת הביקורת</dt>
+                        <dd>{{ item.audit_period }}</dd>
+                    </div>
+                }
+            </dl>
+
+            @if (item.analysis_status === 'partial-text') {
+                <div class='note'>חלק מטקסט הדוח לא חולץ בהצלחה, ולכן ייתכן שחלק מהממצאים חסרים בעמוד זה.</div>
+            }
+
+            @if (followUpLabel) {
+                <div class='follow-up'>
+                    <div class='follow-up-label'>{{ followUpLabel }}</div>
+                    @if (original) {
+                        <div class='original'>
+                            של הדוח
+                            @if (original.docId) {
+                                <app-item-link [itemId]='original.docId'>{{ original.title || original.report }}</app-item-link>
+                            } @else {
+                                <span class='plain'>{{ original.title || original.report }}</span>
+                            }
+                            <span class='meta'>{{ reportName(original) }}{{ original.year ? ' (' + original.year + ')' : '' }}</span>
+                        </div>
+                    }
+                </div>
+            }
+
+            <section class='summary'>
+                @if (item.audit_subject && item.audit_subject !== item.title) {
+                    <p class='subject'>{{ item.audit_subject }}</p>
+                }
+                @if (item.summary) {
+                    <p>{{ item.summary }}</p>
+                }
+                @if (item.topics?.length) {
+                    <ul class='topics'>
+                        @for (topic of item.topics; track topic) {
+                            <li>{{ topic }}</li>
+                        }
+                    </ul>
+                }
+            </section>
+
+            @if (keyFigures.length) {
+                <section class='key-figures'>
+                    <h2>נתונים מרכזיים</h2>
+                    <ul>
+                        @for (figure of keyFigures; track $index) {
+                            <li>
+                                <div class='figure-value'>{{ figure.value }}</div>
+                                <div class='figure-label'>{{ figure.label }}</div>
+                            </li>
+                        }
+                    </ul>
+                </section>
+            }
+
+            @if (showFindings) {
+                <section class='findings'>
+                    <h2>ממצאי הביקורת <span class='count'>({{ item.n_findings || item.findings.length }})</span></h2>
+                    @for (section of sections; track $index) {
+                        @if (section.title) {
+                            <h3 class='section-title'>{{ section.title }}</h3>
+                        }
+                        @for (f of section.findings; track f.anchor) {
+                            <article class='finding' [id]='f.anchor' [ngClass]='"type-" + f.type' [class.target]='f.anchor === target'>
+                                <div class='badges'>
+                                    <span class='seq'>{{ f.finding.seq }}</span>
+                                    @if (f.typeLabel) {
+                                        <span class='badge type'>{{ f.typeLabel }}</span>
+                                    }
+                                    @if (f.severity) {
+                                        <span class='badge severity' [ngClass]='"severity-" + f.finding.severity'>{{ f.severity }}</span>
+                                    }
+                                    @if (f.status) {
+                                        <span class='badge status' [ngClass]='"tone-" + f.status.tone'>{{ f.status.label }}</span>
+                                    }
+                                    @if (f.finding.verified === false) {
+                                        <span class='unverified' title='הציטוט של הממצא לא נמצא בטקסט הדוח'>לא אומת מול הטקסט</span>
+                                    }
+                                </div>
+                                <h4>{{ f.finding.title }}</h4>
+                                @if (f.finding.description) {
+                                    <p class='description'>{{ f.finding.description }}</p>
+                                }
+                                @if (f.status && f.finding.followup_status_text) {
+                                    <p class='status-text'><strong>ממצאי המעקב:</strong> {{ f.finding.followup_status_text }}</p>
+                                }
+                                @if (f.finding.recommendation) {
+                                    <div class='recommendation'>
+                                        <strong>המלצת המבקר:</strong> {{ f.finding.recommendation }}
+                                    </div>
+                                }
+                                @if (f.finding.responsible_bodies?.length) {
+                                    <div class='responsible'>
+                                        <span class='field'>גופים אחראיים:</span> {{ f.finding.responsible_bodies.join(', ') }}
+                                    </div>
+                                }
+                                @if (f.finding.body_responses?.length) {
+                                    <details class='responses'>
+                                        <summary>תגובת הגוף ({{ f.finding.body_responses.length }})</summary>
+                                        <ul>
+                                            @for (r of f.finding.body_responses; track $index) {
+                                                <li>
+                                                    <strong>{{ r.body }}</strong>
+                                                    @if (r.date) {
+                                                        <span class='date'>{{ partialDate(r.date) }}</span>
+                                                    }
+                                                    <div>{{ r.summary }}</div>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </details>
+                                }
+                                @if (f.issueDocId) {
+                                    <div class='issue-link'>
+                                        <app-item-link [itemId]='f.issueDocId'>מעקב אחר הליקוי לאורך השנים</app-item-link>
+                                    </div>
+                                }
+                            </article>
+                        }
+                    }
+                </section>
+            }
+
+            @if (earlierReports.length) {
+                <section class='earlier'>
+                    <h2>דוחות קודמים שהביקורת מתייחסת אליהם</h2>
+                    <ul>
+                        @for (r of earlierReports; track $index) {
+                            <li>
+                                @if (r.docId) {
+                                    <app-item-link [itemId]='r.docId'>{{ r.title || r.report }}</app-item-link>
+                                } @else {
+                                    <span class='plain'>{{ r.title || r.report }}</span>
+                                }
+                                <span class='meta'>{{ reportName(r) }}{{ r.year ? ' (' + r.year + ')' : '' }}</span>
+                            </li>
+                        }
+                    </ul>
+                </section>
+            }
+
+            @if (files.length || item.text) {
+                <section class='files'>
+                    <h2>הדוח המלא</h2>
+                    @if (files.length) {
+                        <ul class='file-links'>
+                            @for (file of files; track file.url) {
+                                <li><a [href]='file.url' target='_blank' rel='noopener'>{{ file.label }}</a></li>
+                            }
+                        </ul>
+                    }
+                    @if (item.text) {
+                        <details class='full-text' (toggle)='onTextToggle($any($event.target).open)'>
+                            <summary>הצגת טקסט הפרק בעמוד</summary>
+                            @if (textOpen) {
+                                @if (item.text_truncated) {
+                                    <div class='note'>הטקסט ארוך ומוצג כאן בקיצור.
+                                        @if (item.md_url) {
+                                            <a [href]='item.md_url' target='_blank' rel='noopener'>לטקסט המלא</a>
+                                        }
+                                    </div>
+                                }
+                                <div class='md' [innerHTML]='textHtml'></div>
+                            }
+                        </details>
+                    }
+                </section>
+            }
+        </div>
+    </ng-container>
+</app-base-simple-item>

@@ -1,0 +1,68 @@
+// Shared by the State Comptroller pages: the analysis pages' palette
+@text: #3C4948;
+@muted: #6B7675;
+@accent: #5D5077;
+@accent-soft: #8778A5;
+@rule: #E2DDEC;
+@tint: #F3F0F9;
+
+// Traffic-light tones for rectification status
+@good: #2E7D4F;
+@good-bg: #E3F3E8;
+@fair: #5C7A1F;
+@fair-bg: #EEF5DC;
+@poor: #9A6200;
+@poor-bg: #FDF0D5;
+@bad: #B23B3B;
+@bad-bg: #FBE4E4;
+@neutral: #4A6487;
+@neutral-bg: #E6EDF6;
+
+.section-heading() {
+    color: @accent;
+    font-family: "Miriam Libre";
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 32px;
+    margin: 36px 0 12px;
+}
+
+.badge() {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: normal;
+    border-radius: 3px;
+    padding: 0 7px;
+    white-space: nowrap;
+    color: @accent;
+    background: @tint;
+
+    &.tone-good { color: @good; background: @good-bg; }
+    &.tone-fair { color: @fair; background: @fair-bg; }
+    &.tone-poor { color: @poor; background: @poor-bg; }
+    &.tone-bad { color: @bad; background: @bad-bg; }
+    &.tone-neutral { color: @neutral; background: @neutral-bg; }
+}
+
+.chevron-summary() {
+    cursor: pointer;
+    width: fit-content;
+    color: @accent;
+    list-style: none;
+    &::-webkit-details-marker { display: none; }
+    &::before {
+        content: '◂';
+        display: inline-block;
+        width: 1em;
+        transition: transform 0.15s;
+    }
+    &:hover { text-decoration: underline; }
+}
+
+.link() {
+    color: @accent;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}

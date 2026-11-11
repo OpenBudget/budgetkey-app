@@ -64,6 +64,8 @@ import { ListComponentsModule } from '../list-components/list-components.module'
 import { ItemPageHeaderComponent } from './item-page-header/item-page-header.component';
 import { ItemSoprocChartComponent } from './items/item-soproc/item-soproc-chart/item-soproc-chart.component';
 import { ItemSupportsProgramComponent } from './items/item-supports-program/item-supports-program.component';
+import { ItemComptrollerAuditComponent } from './items/item-comptroller/item-comptroller-audit/item-comptroller-audit.component';
+import { ItemComptrollerIssueComponent } from './items/item-comptroller/item-comptroller-issue/item-comptroller-issue.component';
 
 @NgModule({ declarations: [
         BaseOrgItemComponent,
@@ -107,6 +109,8 @@ import { ItemSupportsProgramComponent } from './items/item-supports-program/item
         TimelinePartComponent,
         ItemGovDecisionComponent,
         ItemAnalysisComponent,
+        ItemComptrollerAuditComponent,
+        ItemComptrollerIssueComponent,
         ItemSocialServiceComponent,
         ItemSocialServiceGovUnitComponent,
         ItemSoprocChartComponent,

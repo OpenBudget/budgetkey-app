@@ -10,6 +10,7 @@ import 'dayjs/locale/he';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PlatformService } from '../../common-components/platform.service';
 import { ANALYSIS_CATEGORIES } from '../../common-components/analysis-categories';
+import { PUBLICATION_TYPES, status } from '../../common-components/comptroller-labels';
 dayjs.locale('he');
 
 type StringOrFunc = string | ((x: any) => string);
@@ -701,6 +702,57 @@ export class SearchResultComponent implements OnInit {
       bodyStyle: ['color-center', 'borders-solid'],
       bodyBorderColor: '#CBC2DE',
       bodyBgColor: '#FAF7FF',
+    },
+    // // STATE COMPTROLLER
+    // An audit chapter of an annual or special report
+    'state_comptroller_audits': <Parameter>{
+      primaryColor: '#5D5077',
+      bgColor: '#ffffff',
+
+      topRight: (x) => '<strong>דוח מבקר המדינה</strong>' +
+        (PUBLICATION_TYPES[x.publication_type] ? ` · ${PUBLICATION_TYPES[x.publication_type]}${x.report_code ? ' ' + x.report_code : ''}` : ''),
+      topLeft: (x) => x.main_body || '',
+
+      title: [':title'],
+      subtitle: (x) => x.summary || x.audit_subject || null,
+
+      bottomRight: (x) => {
+        const parts = [];
+        if (x.follow_up === 'follow_up_audit') {
+          parts.push('ביקורת מעקב');
+        }
+        if (x.n_findings) {
+          parts.push(`${x.n_findings} ממצאים`);
+        }
+        return parts.join(' · ') || null;
+      },
+      bottomLeft: (x) => x.publish_date ? `פורסם ב-${dayjs(x.publish_date).format('DD/MM/YYYY')}` : null,
+
+      bodyStyle: ['icon-gov'],
+      bodyBorderColor: '#CADAEC',
+      bodyBgColor: '#ffffff',
+    },
+    // A deficiency tracked across audits, follow-ups and the government's responses
+    'state_comptroller_issues': <Parameter>{
+      primaryColor: '#5D5077',
+      bgColor: '#ffffff',
+
+      topRight: '<strong>מעקב ליקוי</strong> · דוחות מבקר המדינה',
+      topLeft: (x) => (x.bodies || []).slice(0, 2).join(', '),
+
+      title: [':title'],
+      subtitle: (x) => x.description || null,
+
+      bottomRight: (x) => {
+        const s = status(x.latest_status);
+        return s ? `מצב אחרון: ${s.label}` : null;
+      },
+      bottomLeft: (x) => x.first_reported ?
+        `${dayjs(x.first_reported).format('YYYY')}–${dayjs(x.last_seen || x.first_reported).format('YYYY')} · ${x.n_audits || 0} דוחות` : null,
+
+      bodyStyle: ['icon-gov'],
+      bodyBorderColor: '#CADAEC',
+      bodyBgColor: '#ffffff',
     },
   };
 

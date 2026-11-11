@@ -1,0 +1,369 @@
+@import '../comptroller.less';
+
+@measure: 760px;
+
+:host {
+    .audit {
+        max-width: 900px;
+        direction: rtl;
+        color: @text;
+    }
+
+    h2 {
+        .section-heading();
+
+        .count {
+            font-weight: normal;
+            color: @muted;
+            font-size: 19px;
+        }
+    }
+
+    ::ng-deep app-item-link a, a {
+        .link();
+    }
+
+    .meta {
+        font-size: 15px;
+        color: @muted;
+        margin-right: 6px;
+    }
+
+    .note {
+        display: inline-block;
+        font-size: 16px;
+        line-height: 24px;
+        color: @accent;
+        background: @tint;
+        border-right: 3px solid @accent-soft;
+        padding: 4px 12px;
+        margin: 4px 0 12px;
+    }
+
+    // Audited bodies and audit period
+    dl.facts {
+        margin: 0 0 16px;
+        font-size: 17px;
+        line-height: 26px;
+
+        > div {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        dt {
+            flex: 0 0 auto;
+            min-width: 120px;
+            font-weight: normal;
+            color: @muted;
+        }
+
+        dd {
+            margin: 0;
+        }
+
+        .bodies > *:not(:last-child)::after {
+            content: '·';
+            display: inline-block;
+            margin: 0 6px;
+            color: @muted;
+            font-weight: normal;
+        }
+    }
+
+    .follow-up {
+        margin: 8px 0 16px;
+        padding: 8px 14px;
+        background: @tint;
+        border-right: 3px solid @accent;
+        font-size: 17px;
+        line-height: 26px;
+
+        .follow-up-label {
+            font-weight: bold;
+            color: @accent;
+        }
+    }
+
+    .summary {
+        max-width: @measure;
+
+        p {
+            font-size: 19px;
+            line-height: 32px;
+            margin: 0 0 14px;
+        }
+
+        .subject {
+            font-size: 21px;
+            line-height: 32px;
+            font-weight: bold;
+            color: #2B3534;
+        }
+
+        ul.topics {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+
+            li {
+                .badge();
+                font-size: 14px;
+                line-height: 24px;
+                padding: 0 10px;
+                border-radius: 12px;
+            }
+        }
+    }
+
+    .key-figures ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+        gap: 12px;
+
+        li {
+            min-width: 0;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            border: 1px solid @rule;
+            border-top: 3px solid @accent-soft;
+            border-radius: 4px;
+            padding: 10px 12px;
+
+            .figure-value {
+                font-family: "Miriam Libre";
+                font-size: 22px;
+                line-height: 30px;
+                font-weight: bold;
+                color: @accent;
+            }
+
+            .figure-label {
+                font-size: 15px;
+                line-height: 21px;
+                color: @muted;
+                margin-top: 4px;
+            }
+        }
+    }
+
+    .section-title {
+        font-size: 15px;
+        line-height: 22px;
+        font-weight: bold;
+        color: @muted;
+        margin: 24px 0 8px;
+    }
+
+    .finding {
+        position: relative;
+        padding: 14px 16px 14px 0;
+        margin-bottom: 12px;
+        border-right: 3px solid @rule;
+        // Clear the sticky header when scrolled to
+        scroll-margin-top: 90px;
+
+        &.type-deficiency { border-right-color: @accent-soft; }
+        &.type-positive {
+            border-right-color: @good;
+            background: linear-gradient(to left, @good-bg, #FFFFFF 70%);
+        }
+        &.target, &:target {
+            background: #FFFBEA;
+            box-shadow: 0 0 0 1px #F1DF9A;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+
+            .seq {
+                font-family: "Miriam Libre";
+                font-weight: bold;
+                color: @accent-soft;
+                margin-left: 4px;
+            }
+
+            .badge { .badge(); }
+            .type { color: @muted; background: none; border: 1px solid @rule; }
+            .severity-high { color: @bad; background: @bad-bg; }
+            .severity-medium { color: @poor; background: @poor-bg; }
+            .severity-low { color: @muted; background: #F1F2F2; }
+
+            .unverified {
+                font-size: 13px;
+                color: @muted;
+                border-bottom: 1px dotted @muted;
+                cursor: help;
+            }
+        }
+        &.type-positive .badges .type { color: @good; border-color: @good; }
+
+        h4 {
+            font-size: 19px;
+            line-height: 28px;
+            font-weight: bold;
+            margin: 0 0 6px;
+            color: #2B3534;
+        }
+
+        p, .recommendation, .responsible, .issue-link, details {
+            max-width: @measure;
+            font-size: 17px;
+            line-height: 27px;
+            margin: 0 0 8px;
+        }
+
+        .status-text {
+            color: @text;
+        }
+
+        .recommendation {
+            padding: 6px 12px;
+            background: #FAF9FC;
+            border-right: 2px solid @accent-soft;
+        }
+
+        .responsible {
+            font-size: 15px;
+            color: @muted;
+        }
+
+        details.responses {
+            font-size: 15px;
+            line-height: 23px;
+
+            summary { .chevron-summary(); }
+            &[open] summary::before { transform: rotate(-90deg); }
+
+            ul {
+                list-style: none;
+                margin: 6px 0 0;
+                padding: 0 12px 0 0;
+                border-right: 2px solid @rule;
+
+                li { margin-bottom: 8px; }
+                .date { color: @muted; margin-right: 6px; }
+            }
+        }
+
+        .issue-link {
+            font-size: 16px;
+            font-weight: bold;
+
+            &::before {
+                content: '↺';
+                color: @accent;
+                margin-left: 6px;
+            }
+        }
+    }
+
+    .earlier ul {
+        margin: 0;
+        padding: 0 18px 0 0;
+        font-size: 17px;
+        line-height: 28px;
+
+        li { margin-bottom: 4px; }
+    }
+
+    .files {
+        ul.file-links {
+            list-style: none;
+            margin: 0 0 12px;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 24px;
+            font-size: 17px;
+        }
+
+        details.full-text {
+            > summary {
+                .chevron-summary();
+                font-size: 17px;
+                line-height: 28px;
+            }
+            &[open] > summary::before { transform: rotate(-90deg); }
+        }
+    }
+
+    // The chapter text
+    ::ng-deep div.md {
+        margin-top: 12px;
+        padding-top: 8px;
+        border-top: 1px solid @rule;
+        color: @text;
+        overflow-wrap: anywhere;
+
+        h1, h2 {
+            color: @accent;
+            font-family: "Miriam Libre";
+            font-size: 22px;
+            line-height: 30px;
+            margin: 28px 0 10px;
+        }
+        h3, h4, h5, h6 {
+            color: @accent;
+            font-size: 18px;
+            line-height: 26px;
+            margin: 20px 0 8px;
+        }
+        p, ul, ol {
+            max-width: @measure;
+            font-size: 17px;
+            line-height: 28px;
+            margin: 0 0 12px;
+        }
+        sup { font-size: 11px; color: @muted; }
+
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            margin: 8px 0 20px;
+        }
+        table {
+            direction: rtl;
+            border-collapse: collapse;
+            min-width: 100%;
+            font-size: 14px;
+            line-height: 20px;
+
+            th, td {
+                text-align: right;
+                vertical-align: top;
+                padding: 6px 8px;
+                border-bottom: 1px solid @rule;
+            }
+            th {
+                background: @tint;
+                border-bottom: 2px solid #CBC2DE;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        dl.facts > div {
+            flex-direction: column;
+            gap: 0;
+        }
+        .summary p { font-size: 17px; line-height: 28px; }
+        .summary .subject { font-size: 19px; line-height: 28px; }
+        .key-figures ul { grid-template-columns: 1fr 1fr; gap: 8px; }
+        .key-figures ul li .figure-value { font-size: 18px; line-height: 25px; }
+        .finding { padding-right: 12px; }
+        .finding h4 { font-size: 17px; line-height: 25px; }
+        .finding p, .finding .recommendation { font-size: 16px; line-height: 25px; }
+    }
+}
