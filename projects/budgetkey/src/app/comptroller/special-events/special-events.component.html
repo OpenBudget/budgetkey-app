@@ -14,7 +14,11 @@
                         <span class='text'>
                             <span class='head'>
                                 <span class='name'>{{ item.event.name }}</span>&ngsp;
-                                <span class='when'>{{ item.event.event_when }}</span>
+                                <span class='when'>
+                                    <span class='date'>האירוע: {{ item.event.event_when }}</span>&ngsp;
+                                    <span class='sep' aria-hidden='true'>·</span>&ngsp;
+                                    <span class='date'>פורסם: {{ item.published }}</span>
+                                </span>
                             </span>
                             <span class='desc'>{{ item.event.description }}</span>
                         </span>

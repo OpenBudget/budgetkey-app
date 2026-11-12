@@ -103,7 +103,8 @@ li {
     min-width: 0;
 }
 
-// The name, with the date after it in small print on the same line
+// The name, with the dates after it in small print on the same line: when the event happened,
+// and when the comptroller published on it, which is what puts it in a comptroller's term
 .head {
     line-height: 1.35;
 }
@@ -118,7 +119,26 @@ li {
     margin-right: 4px;
     font-size: 14px;
     color: @muted;
-    white-space: nowrap;
+
+    // Each date keeps its words together; the line may break between them
+    .date {
+        white-space: nowrap;
+    }
+    .sep {
+        margin: 0 2px;
+    }
+
+    // On phones the dates go on a line of their own, and wrap between them without a stray dot
+    .mobile({
+        display: flex;
+        flex-flow: row wrap;
+        column-gap: 12px;
+        margin: 2px 0 0;
+
+        .sep {
+            display: none;
+        }
+    });
 }
 
 .desc {

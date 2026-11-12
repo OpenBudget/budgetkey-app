@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Comptroller, DashEvent } from '../comptroller-dash.service';
-import { num, sitePath, termYears } from '../dash-utils';
+import { monthSpan, num, sitePath, termYears } from '../dash-utils';
 
 interface Item {
   event: DashEvent;
@@ -8,6 +8,8 @@ interface Item {
   chapters: number[];
   // "38 פרקים ב-3 דוחות, 1,234 ממצאים": the squares' label and tooltip
   counts: string;
+  // When the reports came out: "מרץ 1999", or from the first to the last
+  published: string;
 }
 
 interface Term {
@@ -44,6 +46,7 @@ export class SpecialEventsComponent implements OnChanges {
           chapters: Array.from({length: e.n_chapters}, (_, i) => i),
           counts: (e.n_chapters === 1 ? 'פרק אחד' : `${num(e.n_chapters)} פרקים`) +
                   (e.n_reports > 1 ? ` ב-${e.n_reports} דוחות` : '') + `, ${num(e.n_findings)} ממצאים`,
+          published: monthSpan(e.first_published, e.last_published),
         })),
     })).filter((t) => t.items.length > 0);
   }

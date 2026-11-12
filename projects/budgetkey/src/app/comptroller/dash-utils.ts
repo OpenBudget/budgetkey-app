@@ -14,6 +14,24 @@ export function year(date: string | null | undefined): string {
   return (date || '').slice(0, 4);
 }
 
+const MONTHS = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+
+// "1999-03-15" -> "מרץ 1999"
+export function monthYear(date: string | null | undefined): string {
+  return date ? `${MONTHS[+date.slice(5, 7) - 1]} ${year(date)}` : '';
+}
+
+// The span between two dates, as briefly as it goes: "מרץ 1999", "ינואר–מרץ 2006", "ספטמבר 2020 – מאי 2024"
+export function monthSpan(from: string | null | undefined, to: string | null | undefined): string {
+  if (!to || monthYear(from) === monthYear(to)) {
+    return monthYear(from);
+  }
+  if (year(from) === year(to)) {
+    return `${MONTHS[+from!.slice(5, 7) - 1]}–${monthYear(to)}`;
+  }
+  return `${monthYear(from)} – ${monthYear(to)}`;
+}
+
 // "מיכה לינדנשטראוס" -> "לינדנשטראוס"
 export function surname(c: Comptroller): string {
   return c.name.split(' ').slice(-1)[0];
