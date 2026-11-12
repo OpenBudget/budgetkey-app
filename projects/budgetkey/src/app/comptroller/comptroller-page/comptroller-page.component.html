@@ -15,16 +15,16 @@
             @if (dash) {
                 <div class='headline'>
                     <p class='summary'>
-                        <span>מאז שנת 2000 פרסם מבקר המדינה</span>
-                        <span class='value'>{{ num(nAudits) }}</span>
-                        <span>פרקי ביקורת, ובהם</span>
-                        <span class='value'>{{ num(nFindings) }}</span>
+                        <span>מאז שנת 2000 פרסם מבקר המדינה</span>&ngsp;
+                        <span class='value'>{{ num(nAudits) }}</span>&ngsp;
+                        <span>פרקי ביקורת, ובהם</span>&ngsp;
+                        <span class='value'>{{ num(nFindings) }}</span>&ngsp;
                         <span>ממצאים</span>
                     </p>
                     @if (dash.totals) {
                     <p class='sub'>
-                        <span>ואת</span>
-                        <span class='value'>{{ num(dash.totals.revisited) }}</span>
+                        <span>ואת</span>&ngsp;
+                        <span class='value'>{{ num(dash.totals.revisited) }}</span>&ngsp;
                         <span>מהליקויים שמצא הוא חזר ובדק שוב</span>
                     </p>
                     }
