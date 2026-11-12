@@ -37,7 +37,8 @@
     display: flex;
     flex-flow: column;
     align-items: center;
-    max-width: 880px;
+    // As wide as the page below, so the hero's bubbles line up with the sections' bubbles
+    max-width: 960px;
     margin: 0 auto;
     padding: 64px 16px 52px;
     box-sizing: border-box;
@@ -210,9 +211,38 @@
 }
 
 .as-of {
-    margin: 22px 0 0;
+    margin: 6px 0 0;
     color: fade(white, 70%);
     font-size: 13px;
+}
+
+// The opening conversation, in the hero: the questions as faint bubbles on the purple,
+// the answers turned around, purple on white
+.conversation {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    margin-top: 48px;
+    text-align: right;
+
+    .mobile({
+        margin-top: 36px;
+    });
+
+    .question {
+        .question();
+        background: fade(white, 14%);
+        color: white;
+    }
+    .answer {
+        .answer();
+        background: white;
+        color: @accent;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -229,7 +259,7 @@
     .answer();
 }
 
-.intro, .section {
+.section {
     display: flex;
     flex-flow: column;
 }
@@ -240,6 +270,11 @@
     .mobile({
         margin-top: 48px;
     });
+
+    // The hero above already makes the break
+    &:first-of-type {
+        margin-top: 0;
+    }
 }
 
 .search {

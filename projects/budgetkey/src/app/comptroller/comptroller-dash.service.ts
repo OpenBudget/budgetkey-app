@@ -80,6 +80,8 @@ export interface ChronicIssue {
 }
 
 export interface Totals {
+  // Distinct issues: a finding repeated in a follow-up audit is the same issue
+  issues: number;
   revisited: number;
   chronic: number;
   chronic_decade: number;
@@ -111,6 +113,7 @@ const QUERIES = {
       latest_verdict_date, latest_verdict_chapter_title, years_open, n_audits, government_status, url
     FROM state_comptroller_dash_chronic_issues WHERE chain_rank = 1 ORDER BY rank LIMIT 12`,
   totals: `SELECT
+      (SELECT count(*) FROM state_comptroller_issues) AS issues,
       (SELECT count(*) FROM state_comptroller_issues WHERE n_audits > 1) AS revisited,
       (SELECT count(*) FROM state_comptroller_dash_chronic_issues) AS chronic,
       (SELECT count(*) FROM state_comptroller_dash_chronic_issues WHERE years_open >= 10) AS chronic_decade,

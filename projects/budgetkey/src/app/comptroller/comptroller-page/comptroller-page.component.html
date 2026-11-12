@@ -10,12 +10,20 @@
                     <span class='value'>{{ num(nAudits) }}</span>&ngsp;
                     <span>פרקי ביקורת, ובהם</span>&ngsp;
                     <span class='value'>{{ num(nFindings) }}</span>&ngsp;
-                    <span>ממצאים.</span>
                     @if (dash.totals) {
-                        &ngsp;<span>ב-<span class='value'>{{ num(dash.totals.revisited) }}</span></span>&ngsp;
-                        <span>מהליקויים הוא חזר ובדק אם תוקנו.</span>
+                        <span>ממצאים, שמתארים</span>&ngsp;
+                        <span class='value'>{{ num(dash.totals.issues) }}</span>&ngsp;
+                        <span>ליקויים שונים.</span>&ngsp;
+                        <span>את</span>&ngsp;
+                        <span class='value'>{{ num(dash.totals.revisited) }}</span>&ngsp;
+                        <span>מהליקויים האלה הוא בדק שוב בביקורת מעקב, כדי לראות אם תוקנו.</span>
+                    } @else {
+                        <span>ממצאים.</span>
                     }
                 </p>
+                @if (dash.totals) {
+                    <p class='as-of'>נכון לדוח האחרון שפורסם, ב-{{ dash.totals.last_published | date:'dd/MM/yyyy' }}</p>
+                }
             } @else if (failed) {
                 <p class='stats error'>לא הצלחנו לטעון את הנתונים. נסו לרענן את העמוד, או חפשו ישירות בדוחות.</p>
             } @else {
@@ -36,29 +44,26 @@
                     }
                 </div>
             }
-            @if (dash?.totals; as totals) {
-                <p class='as-of'>נכון לדוח האחרון שפורסם, ב-{{ totals.last_published | date:'dd/MM/yyyy' }}</p>
-            }
+
+            <div class='conversation'>
+                <p class='question'>מה בודק מבקר המדינה?</p>
+                <p class='answer'>
+                    את משרדי הממשלה, הרשויות המקומיות, החברות הממשלתיות ושאר הגופים הציבוריים.
+                    בכל שנה הוא מפרסם עשרות פרקי ביקורת: מה נבדק, אילו ליקויים נמצאו, מה הוא ממליץ לתקן ומה ענו הגופים שנבדקו.
+                </p>
+                <p class='question'>ומה יש כאן?</p>
+                <p class='answer'>
+                    קראנו את כל הדוחות שלו משנת 2000 ואילך, פירקנו כל פרק לממצאים שלו, ועקבנו אחרי כל ליקוי לאורך השנים:
+                    מתי נמצא לראשונה, מה ענתה הממשלה, ומה מצא המבקר כשחזר לבדוק.
+                </p>
+            </div>
         </div>
     </header>
     <main class='page' role='main'>
-        <div class='intro'>
-            <p class='question'>מה בודק מבקר המדינה?</p>
-            <p class='answer'>
-                את משרדי הממשלה, הרשויות המקומיות, החברות הממשלתיות ושאר הגופים הציבוריים.
-                בכל שנה הוא מפרסם עשרות פרקי ביקורת: מה נבדק, אילו ליקויים נמצאו, מה הוא ממליץ לתקן ומה ענו הגופים שנבדקו.
-            </p>
-            <p class='question'>ומה יש כאן?</p>
-            <p class='answer'>
-                קראנו את כל הדוחות שלו משנת 2000 ואילך, פירקנו כל פרק לממצאים שלו, ועקבנו אחרי כל ליקוי לאורך השנים:
-                מתי נמצא לראשונה, מה ענתה הממשלה, ומה מצא המבקר כשחזר לבדוק.
-            </p>
-        </div>
-
         @if (dash) {
             @if (dash.chronic.length && dash.totals) {
             <section class='section' aria-labelledby='q-chronic'>
-                <h2 class='question' id='q-chronic'>ומה קורה לליקויים אחרי שהמבקר מפרסם אותם?</h2>
+                <h2 class='question' id='q-chronic'>מה קורה לליקויים אחרי שהמבקר מפרסם אותם?</h2>
                 <p class='answer'>
                     רבים מהם לא מתוקנים. מתוך {{ num(dash.totals.revisited) }} הליקויים שהמבקר בדק יותר מפעם אחת,
                     <strong>{{ num(dash.totals.chronic) }}</strong> לא תוקנו או תוקנו רק בחלקם גם בבדיקה האחרונה,
@@ -82,7 +87,7 @@
 
             @if (dash.trends.length) {
             <section class='section' aria-labelledby='q-trends'>
-                <h2 class='question' id='q-trends'>זה משתנה עם השנים?</h2>
+                <h2 class='question' id='q-trends'>הנושאים משתנים עם השנים?</h2>
                 <p class='answer'>
                     חלק מהנושאים עולים או יורדים בהדרגה, בלי קשר למי שמכהן. אחרים עולים ויורדים יחד עם המבקר:
                     טוהר המידות, למשל, בלט אצל לינדנשטראוס וירד מאוד אצל אנגלמן.
@@ -103,7 +108,7 @@
             }
 
             <section class='section methods' aria-labelledby='q-methods'>
-                <h2 class='question' id='q-methods'>איך עשינו את זה?</h2>
+                <h2 class='question' id='q-methods'>איך ניתחנו את המידע?</h2>
                 <p class='answer'>
                     אספנו את הדוחות מאתר מבקר המדינה ואת תגובות הממשלה מספרי התגובות שהיא מפרסמת,
                     ובעזרת בינה מלאכותית פירקנו כל פרק לממצאים, קישרנו ביניהם לאורך השנים וסיווגנו אותם לפי נושא.
@@ -128,7 +133,7 @@
                         </ul>
                     </details>
                     <details>
-                        <summary>על מה כדאי לשים לב?</summary>
+                        <summary>למה כדאי לשים לב?</summary>
                         <ul>
                             <li>הסיווג לנושאים, שמות האירועים והקישור בין ממצאים מדוחות שונים נעשו אוטומטית. הם טובים ברוב המקרים, אבל לא רשמיים. כל ליקוי בעמוד הזה הוא טענה שכדאי לבדוק בעמוד שלו ובדוח המקורי.</li>
                             <li>תקופות הכהונה: אליעזר גולדברג (1998–2005), מיכה לינדנשטראוס (2005–2012), יוסף חיים שפירא (2012–2019) ומתניהו אנגלמן (2019–2026). מאז יולי 2026 לא מונה מבקר חדש, ודוחות שפורסמו מאז נספרים לאנגלמן. דוחות מהשנה הראשונה של כל מבקר הוכנו ברובם בתקופת קודמו.</li>
@@ -148,7 +153,7 @@
             </section>
 
             <section class='section closing' aria-labelledby='q-next'>
-                <h2 class='question' id='q-next'>ואיך ממשיכים מכאן?</h2>
+                <h2 class='question' id='q-next'>איך ממשיכים מכאן?</h2>
                 <p class='answer'>
                     אפשר לחפש בכל הדוחות לפי נושא או גוף מבוקר, ולסנן לפי תחום, סוג בעיה או דוח מיוחד.
                     כל פרק מוביל לממצאים שלו, וכל ממצא לליקוי שמאחוריו ולמה שקרה איתו מאז.
