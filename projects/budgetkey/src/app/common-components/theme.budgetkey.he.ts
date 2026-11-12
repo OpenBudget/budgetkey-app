@@ -608,7 +608,7 @@ export const DEFAULT_THEME: any={
             }
           ],
           "dynamicOptions": {
-            "query": "SELECT event AS id, name AS display FROM state_comptroller_dash_events WHERE n_chapters > 1 ORDER BY last_published DESC",
+            "query": "SELECT event AS id, short_name AS display FROM state_comptroller_dash_events WHERE n_chapters > 1 ORDER BY last_published DESC",
             "filterField": "event"
           }
         }
