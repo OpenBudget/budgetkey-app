@@ -664,6 +664,48 @@
                 "id": "follow_up"
               }
             ]
+          },
+          {
+            "display": "תחום",
+            "dynamicOptions": {
+              "filterField": "domains",
+              "query": "SELECT key AS id, label AS display FROM state_comptroller_taxonomy WHERE axis = 'domain' ORDER BY display_order"
+            },
+            "id": "domain",
+            "options": [
+              {
+                "display": "כל התחומים",
+                "id": "all"
+              }
+            ]
+          },
+          {
+            "display": "סוג הליקוי",
+            "dynamicOptions": {
+              "filterField": "lenses",
+              "query": "SELECT key AS id, label AS display FROM state_comptroller_taxonomy WHERE axis = 'lens' ORDER BY display_order"
+            },
+            "id": "lens",
+            "options": [
+              {
+                "display": "כל הסוגים",
+                "id": "all"
+              }
+            ]
+          },
+          {
+            "display": "דוח מיוחד",
+            "dynamicOptions": {
+              "filterField": "event",
+              "query": "SELECT event AS id, name AS display FROM state_comptroller_dash_events WHERE n_chapters > 1 ORDER BY last_published DESC"
+            },
+            "id": "event",
+            "options": [
+              {
+                "display": "כל הדוחות",
+                "id": "all"
+              }
+            ]
           }
         ],
         "id": "state_comptroller",

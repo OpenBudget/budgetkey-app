@@ -2,6 +2,9 @@
 
 :host {
   padding: 16px;
+  // Never wider than the page, even with a menu whose options are long
+  box-sizing: border-box;
+  max-width: 100%;
   .search-filter-bar {
       display: flex;
       width: 100%;

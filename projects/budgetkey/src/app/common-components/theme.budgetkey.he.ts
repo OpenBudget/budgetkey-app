@@ -569,6 +569,48 @@ export const DEFAULT_THEME: any={
               "filters": {"follow_up": "follow_up_audit"}
             }
           ]
+        },
+        {
+          "id": "domain",
+          "display": "תחום",
+          "options": [
+            {
+              "id": "all",
+              "display": "כל התחומים"
+            }
+          ],
+          "dynamicOptions": {
+            "query": "SELECT key AS id, label AS display FROM state_comptroller_taxonomy WHERE axis = 'domain' ORDER BY display_order",
+            "filterField": "domains"
+          }
+        },
+        {
+          "id": "lens",
+          "display": "סוג הליקוי",
+          "options": [
+            {
+              "id": "all",
+              "display": "כל הסוגים"
+            }
+          ],
+          "dynamicOptions": {
+            "query": "SELECT key AS id, label AS display FROM state_comptroller_taxonomy WHERE axis = 'lens' ORDER BY display_order",
+            "filterField": "lenses"
+          }
+        },
+        {
+          "id": "event",
+          "display": "דוח מיוחד",
+          "options": [
+            {
+              "id": "all",
+              "display": "כל הדוחות"
+            }
+          ],
+          "dynamicOptions": {
+            "query": "SELECT event AS id, name AS display FROM state_comptroller_dash_events WHERE n_chapters > 1 ORDER BY last_published DESC",
+            "filterField": "event"
+          }
         }
       ]
     },

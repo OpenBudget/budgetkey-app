@@ -1,3 +1,8 @@
+:host {
+    display: block;
+    max-width: 100%;
+}
+
 .filter-menu {
 
     display: flex;
@@ -22,7 +27,11 @@
         flex-flow: row;
         align-items: center;
         position: relative;
+        max-width: 100%;
         select {
+            // A select is as wide as its longest option; long options are cut with an ellipsis instead
+            max-width: 100%;
+            text-overflow: ellipsis;
             border: 1px solid #E6E6E6;
             border-radius: 4px;
             height: 34px;
