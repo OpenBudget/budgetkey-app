@@ -1,3 +1,4 @@
+<p class='key'><span class='sq' aria-hidden='true'></span> כל ריבוע הוא פרק ביקורת אחד. בכל תקופה, האירועים מסודרים מהדוח האחרון שפורסם עליהם.</p>
 @for (term of terms; track term.comptroller.comptroller) {
     <section class='term'>
         <h3 class='term-title'>{{ term.comptroller.name }} <span class='years'>{{ term.years }}</span></h3>
@@ -25,7 +26,7 @@
     </section>
 }
 <p class='provenance'>
-    כל ריבוע הוא פרק ביקורת אחד. דוחות מיוחדים על אותו אירוע אוחדו לשורה אחת. שמות האירועים והתיאורים נכתבו אוטומטית,
+    דוחות מיוחדים על אותו אירוע אוחדו לשורה אחת. שמות האירועים והתיאורים נכתבו אוטומטית,
     והדוחות משויכים למבקר שכיהן כשפורסמו.
     @if (download) {
         <a [href]='download'>הורדת הנתונים</a>

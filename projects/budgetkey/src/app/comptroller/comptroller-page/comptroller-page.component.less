@@ -16,6 +16,15 @@
     color: @text;
 }
 
+.page-title {
+    margin: 0 0 18px;
+    color: @accent;
+    font-family: 'Miriam Libre', sans-serif;
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: bold;
+}
+
 .question {
     .question();
 }
@@ -84,19 +93,37 @@
         }
     }
 
-    .search {
-        margin-top: 18px;
-        padding: 6px 18px;
-        border: 1px solid @accent;
-        border-radius: 2em;
-        color: @accent;
-        font-size: 17px;
-        text-decoration: none;
-
-        &:hover, &:focus-visible {
-            background: @tint;
-        }
+    .as-of {
+        margin-top: 10px;
+        color: @muted;
+        font-size: 13px;
     }
+}
+
+.search {
+    align-self: center;
+    margin-top: 18px;
+    padding: 8px 22px;
+    border-radius: 2em;
+    background: @accent;
+    color: white;
+    font-size: 17px;
+    text-decoration: none;
+
+    &:hover, &:focus-visible {
+        background: darken(@accent, 8%);
+        color: white;
+        text-decoration: none;
+    }
+    &:focus-visible {
+        outline: 2px solid @accent;
+        outline-offset: 3px;
+    }
+}
+
+
+.closing {
+    align-items: stretch;
 }
 
 .loading-headline {

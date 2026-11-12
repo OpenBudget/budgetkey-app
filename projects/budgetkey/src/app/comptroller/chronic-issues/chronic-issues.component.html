@@ -1,5 +1,6 @@
 <div class='chart' role='list'>
     <div class='axis' aria-hidden='true'>
+        <span class='years-head'>שנות מעקב</span>
         <div class='track'>
             @for (band of bands; track band.name; let odd = $odd) {
                 <span class='band-label' [class.odd]='odd' [style.right.%]='band.start * 100' [style.width.%]='band.width * 100'>{{ band.name }}</span>
@@ -21,6 +22,9 @@
                 <div class='track' [title]='row.tooltip'>
                     @for (band of bands; track band.name; let odd = $odd) {
                         <span class='band' [class.odd]='odd' [style.right.%]='band.start * 100' [style.width.%]='band.width * 100'></span>
+                    }
+                    @for (tick of ticks; track tick.year) {
+                        <span class='gridline' [style.right.%]='tick.pos * 100'></span>
                     }
                     <span class='ribbon' [style.right.%]='row.start * 100' [style.width.%]='row.width * 100'></span>
                 </div>

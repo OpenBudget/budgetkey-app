@@ -14,6 +14,8 @@ export interface Comptroller {
   name: string;
   start_date: string;
   end_date: string | null;
+  first_year: number;
+  last_year: number;
   n_audits: number;
   n_findings: number;
 }
@@ -94,7 +96,7 @@ export interface Dashboard {
 }
 
 const QUERIES = {
-  comptrollers: `SELECT comptroller, name, start_date, end_date, n_audits, n_findings
+  comptrollers: `SELECT comptroller, name, start_date, end_date, first_year, last_year, n_audits, n_findings
     FROM state_comptroller_dash_comptrollers ORDER BY start_date`,
   trends: `SELECT axis, key, label, n, share, share_by_comptroller, peak_comptroller, low_comptroller,
       odds_ratio_per_decade, p_trend, p_comptroller, pattern, search_url
@@ -108,8 +110,8 @@ const QUERIES = {
     FROM state_comptroller_dash_chronic_issues WHERE chain_rank = 1 ORDER BY rank LIMIT 12`,
   totals: `SELECT
       (SELECT count(*) FROM state_comptroller_issues WHERE n_audits > 1) AS revisited,
-      (SELECT count(*) FROM state_comptroller_dash_chronic_issues WHERE chain_rank = 1) AS chronic,
-      (SELECT count(*) FROM state_comptroller_dash_chronic_issues WHERE chain_rank = 1 AND years_open >= 10) AS chronic_decade,
+      (SELECT count(*) FROM state_comptroller_dash_chronic_issues) AS chronic,
+      (SELECT count(*) FROM state_comptroller_dash_chronic_issues WHERE years_open >= 10) AS chronic_decade,
       (SELECT max(publish_date) FROM state_comptroller_audits) AS last_published`,
 };
 

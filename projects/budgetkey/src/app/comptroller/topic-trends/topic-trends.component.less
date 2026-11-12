@@ -7,10 +7,16 @@
 }
 
 .controls {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     .segmented {
         .segmented();
     }
+}
+
+.measure {
+    margin: 0 0 4px;
+    font-size: 15px;
+    color: @text;
 }
 
 .trend {
@@ -65,13 +71,27 @@
     align-items: end;
 }
 
+// A baseline under the data rows' bars, so that a short bar still reads as a bar
+.trend:not(.head) .bars {
+    border-bottom: 1px solid @accent-soft;
+}
+
 .name {
+    display: flex;
+    flex-flow: column;
     font-size: 13px;
+    line-height: 16px;
     color: @accent;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    .years {
+        font-size: 11px;
+        color: @muted;
+        font-variant-numeric: tabular-nums;
+    }
 }
 
 .cell {
@@ -96,7 +116,7 @@
     width: 100%;
     max-width: 40px;
     border-radius: 4px 4px 0 0;
-    background: #C9C0DC;
+    background: @accent-soft;
 
     &.peak {
         background: @accent;
@@ -107,6 +127,9 @@
     align-self: center;
     font-size: 14px;
     color: @muted;
+    .mobile({
+        margin-top: 4px;
+    });
 }
 
 .sr-only {

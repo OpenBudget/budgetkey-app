@@ -1,17 +1,18 @@
 <div class='controls'>
     <div class='segmented' role='group' aria-label='סיווג'>
-        <button type='button' [class.active]='axis === "lens"' [attr.aria-pressed]='axis === "lens"' (click)='setAxis("lens")'>סוגי בעיות</button>
         <button type='button' [class.active]='axis === "domain"' [attr.aria-pressed]='axis === "domain"' (click)='setAxis("domain")'>תחומים</button>
+        <button type='button' [class.active]='axis === "lens"' [attr.aria-pressed]='axis === "lens"' (click)='setAxis("lens")'>סוגי בעיות</button>
     </div>
 </div>
+<p class='measure'>כל עמודה היא שיעור פרקי הביקורת שעסקו בנושא, מתוך כל הפרקים שפורסמו בתקופת אותו מבקר.</p>
 <div class='trends'>
     @for (group of groups; track group.pattern) {
         <h3 class='group'>{{ group.title }}</h3>
         <div class='trend head'>
             <span class='topic'></span>
             <span class='bars'>
-                @for (name of names; track name) {
-                    <span class='name'>{{ name }}</span>
+                @for (head of heads; track head.name) {
+                    <span class='name'>{{ head.name }}<span class='years'>{{ head.years }}</span></span>
                 }
             </span>
             <span class='note'></span>
@@ -22,7 +23,7 @@
                 <span class='bars'>
                     @for (bar of row.bars; track bar.comptroller) {
                         <span class='cell' [title]='bar.tooltip'>
-                            @if (bar.peak || bar.low) {
+                            @if (bar.labelled) {
                                 <span class='value'>{{ pct(bar.share) }}</span>
                             } @else {
                                 <span class='value sr-only'>{{ pct(bar.share) }}</span>
@@ -31,13 +32,13 @@
                         </span>
                     }
                 </span>
-                <span class='note'>{{ row.note }}</span>
+                <span class='note' [title]='row.stats'>{{ row.note }}</span>
             </div>
         }
     }
 </div>
 <p class='provenance'>
-    כל עמודה היא שיעור הפרקים שעסקו בנושא בתקופת כהונתו של מבקר. פרק יכול לעסוק בכמה נושאים, ולכן השיעורים לא מסתכמים ל-100%.
+    פרק יכול לעסוק בכמה נושאים, ולכן השיעורים לא מסתכמים ל-100%. אצל גולדברג נספרו רק הדוחות מ-2000 ואילך.
     מגמה מסומנת רק כשהיא מובהקת (p&lt;0.01), במודל שמפריד בין מגמה ארוכת טווח לבין ההשפעה של המבקר המכהן. סיווג אוטומטי.
     @if (download) {
         <a [href]='download'>הורדת הנתונים</a>

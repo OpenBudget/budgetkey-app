@@ -1,7 +1,8 @@
 <app-container [showHeader]="true" [showSearchBar]="true">
     <main class='page' role='main'>
         <header class='intro'>
-            <h1 class='question'>מה בודק מבקר המדינה?</h1>
+            <h1 class='page-title'>דוחות מבקר המדינה</h1>
+            <p class='question'>מה בודק מבקר המדינה?</p>
             <p class='answer'>
                 את משרדי הממשלה, הרשויות המקומיות, החברות הממשלתיות ושאר הגופים הציבוריים.
                 בכל שנה הוא מפרסם עשרות פרקי ביקורת: מה נבדק, אילו ליקויים נמצאו, מה הוא ממליץ לתקן ומה ענו הגופים שנבדקו.
@@ -23,12 +24,14 @@
                     </p>
                     @if (dash.totals) {
                     <p class='sub'>
-                        <span>ואת</span>&ngsp;
-                        <span class='value'>{{ num(dash.totals.revisited) }}</span>&ngsp;
-                        <span>מהליקויים שמצא הוא חזר ובדק שוב</span>
+                        <span>ב-<span class='value'>{{ num(dash.totals.revisited) }}</span></span>&ngsp;
+                        <span>מהליקויים שמצא הוא חזר ובדק אם תוקנו</span>
                     </p>
                     }
                     <a class='search' href='/s?q=&dd=state_comptroller'>לחיפוש בדוחות מבקר המדינה</a>
+                    @if (dash.totals) {
+                        <p class='as-of'>נכון לדוח האחרון שפורסם, ב-{{ dash.totals.last_published | date:'dd/MM/yyyy' }}</p>
+                    }
                 </div>
             } @else if (failed) {
                 <p class='error'>לא הצלחנו לטעון את הנתונים. נסו לרענן את העמוד, או <a href='/s?q=&dd=state_comptroller'>חפשו ישירות בדוחות</a>.</p>
@@ -42,8 +45,9 @@
             <section class='section' aria-labelledby='q-chronic'>
                 <h2 class='question' id='q-chronic'>ומה קורה לליקויים אחרי שהמבקר מפרסם אותם?</h2>
                 <p class='answer'>
-                    הרבה מהם נשארים. מצאנו <strong>{{ num(dash.totals.chronic) }}</strong> ליקויים שהמבקר בדק לפחות פעמיים,
-                    ובבדיקה האחרונה מצא שלא תוקנו או שתוקנו רק בחלקם. <strong>{{ num(dash.totals.chronic_decade) }}</strong> מהם פתוחים כבר יותר מעשור.
+                    רבים מהם לא מתוקנים. מתוך {{ num(dash.totals.revisited) }} הליקויים שהמבקר בדק יותר מפעם אחת,
+                    <strong>{{ num(dash.totals.chronic) }}</strong> לא תוקנו או תוקנו רק בחלקם גם בבדיקה האחרונה,
+                    ו-<strong>{{ num(dash.totals.chronic_decade) }}</strong> מהם עדיין לא תוקנו עשר שנים ויותר אחרי הדוח הראשון.
                     אלה הוותיקים שבהם:
                 </p>
                 <app-chronic-issues [issues]='dash.chronic' [comptrollers]='dash.comptrollers' [download]='dash.downloads.chronic'></app-chronic-issues>
@@ -55,7 +59,7 @@
                 <h2 class='question' id='q-topics'>על מה המבקר כותב?</h2>
                 <p class='answer'>
                     על הכול, אבל לא באותה מידה. סיווגנו כל פרק ביקורת לפי התחום שבו עסק ולפי סוג הבעיה שנבדקה.
-                    ככל שהמילה גדולה יותר, כך יותר פרקים עסקו בנושא. אפשר לבחור מבקר ולראות מה בלט בתקופה שלו.
+                    ככל שהמילה גדולה יותר, כך יותר פרקים עסקו בנושא. אפשר לבחור מבקר ולראות מה בלט בתקופה שלו, וללחוץ על נושא כדי לראות את הפרקים שלו.
                 </p>
                 <app-topic-map [counts]='dash.counts' [comptrollers]='dash.comptrollers' [download]='dash.downloads.counts'></app-topic-map>
             </section>
@@ -66,7 +70,7 @@
                 <h2 class='question' id='q-trends'>זה משתנה עם השנים?</h2>
                 <p class='answer'>
                     חלק מהנושאים עולים או יורדים בהדרגה, בלי קשר למי שמכהן. אחרים עולים ויורדים יחד עם המבקר:
-                    טוהר המידות, למשל, בלט אצל לינדנשטראוס וכמעט נעלם אצל אנגלמן.
+                    טוהר המידות, למשל, בלט אצל לינדנשטראוס וירד מאוד אצל אנגלמן.
                 </p>
                 <app-topic-trends [trends]='dash.trends' [comptrollers]='dash.comptrollers' [download]='dash.downloads.trends'></app-topic-trends>
             </section>
@@ -76,7 +80,7 @@
             <section class='section' aria-labelledby='q-events'>
                 <h2 class='question' id='q-events'>ומה עם מלחמות, אסונות ופרשות?</h2>
                 <p class='answer'>
-                    עליהם המבקר כותב דוחות מיוחדים, מחוץ לדוח השנתי. לפעמים זה פרק אחד, ולפעמים עשרות פרקים בכמה דוחות.
+                    עליהם המבקר כותב דוחות מיוחדים, בנוסף לדוח השנתי. לפעמים זה פרק אחד, ולפעמים עשרות פרקים בכמה דוחות.
                     אלה האירועים שהמבקר בדק מאז 2000:
                 </p>
                 <app-special-events [events]='dash.events' [comptrollers]='dash.comptrollers' [download]='dash.downloads.events'></app-special-events>
@@ -96,7 +100,7 @@
                             <li>פרקי הביקורת בעברית שפרסם <a href='https://www.mevaker.gov.il' target='_blank' rel='noopener'>מבקר המדינה</a> משנת 2000 ואילך, בדוחות השנתיים ובדוחות המיוחדים: הטקסט המלא, הקבצים והתאריכים.</li>
                             <li>תגובות הגופים המבוקרים, כפי שהן מופיעות בתוך הדוחות עצמם.</li>
                             <li>ספרי התגובות של הממשלה לדוחות המבקר, שבהם כל משרד מדווח מה עשה בכל ליקוי.</li>
-                            <li>הנתונים מתעדכנים פעם בשבוע.@if (dash.totals) { הדוח האחרון שנקלט פורסם ב-{{ dash.totals.last_published | date:'dd/MM/yyyy' }}.}</li>
+                            <li>הנתונים נבדקים מול אתר המבקר פעם בשבוע.@if (dash.totals) { הדוח האחרון שפורסם הוא מ-{{ dash.totals.last_published | date:'dd/MM/yyyy' }}.}</li>
                         </ul>
                     </details>
                     <details>
@@ -113,7 +117,7 @@
                         <ul>
                             <li>הסיווג לנושאים, שמות האירועים והקישור בין ממצאים מדוחות שונים נעשו אוטומטית. הם טובים ברוב המקרים, אבל לא רשמיים. כל ליקוי בעמוד הזה הוא טענה שכדאי לבדוק בעמוד שלו ובדוח המקורי.</li>
                             <li>תקופות הכהונה: אליעזר גולדברג (1998–2005), מיכה לינדנשטראוס (2005–2012), יוסף חיים שפירא (2012–2019) ומתניהו אנגלמן (2019–2026). מאז יולי 2026 לא מונה מבקר חדש, ודוחות שפורסמו מאז נספרים לאנגלמן. דוחות מהשנה הראשונה של כל מבקר הוכנו ברובם בתקופת קודמו.</li>
-                            <li>בשנים 2023 ו-2025 פורסמו רק 49 פרקים בכל שנה, ולכן הנתונים שלהן רועשים יותר.</li>
+                            <li>בשנים 2023 ו-2025 פורסמו רק 49 פרקים בכל שנה, ולכן כדאי להתייחס לנתונים שלהן בזהירות.</li>
                             <li>פרקים שהטקסט שלהם לא חולץ במלואו מסומנים בעמוד הדוח, וייתכן שחסרים בהם ממצאים.</li>
                         </ul>
                     </details>
@@ -126,6 +130,15 @@
                         </ul>
                     </details>
                 </div>
+            </section>
+
+            <section class='section closing' aria-labelledby='q-next'>
+                <h2 class='question' id='q-next'>ואיך ממשיכים מכאן?</h2>
+                <p class='answer'>
+                    אפשר לחפש בכל הדוחות לפי נושא או גוף מבוקר, ולסנן לפי תחום, סוג בעיה או דוח מיוחד.
+                    כל פרק מוביל לממצאים שלו, וכל ממצא לליקוי שמאחוריו ולמה שקרה איתו מאז.
+                </p>
+                <a class='search' href='/s?q=&dd=state_comptroller'>לחיפוש בדוחות מבקר המדינה</a>
             </section>
         }
     </main>

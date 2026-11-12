@@ -6,6 +6,23 @@
     display: block;
 }
 
+.key {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    font-size: 15px;
+    color: @text;
+
+    .sq {
+        flex: 0 0 auto;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        background: @accent;
+    }
+}
+
 .term {
     margin-bottom: 26px;
 }
@@ -46,9 +63,10 @@ li {
     color: inherit;
     text-decoration: none;
 
+    // On phones the squares go above the text, which keeps the full width
     .mobile({
-        grid-template-columns: 84px minmax(0, 1fr);
-        gap: 12px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
     });
 
     &:hover, &:focus-visible {
@@ -89,7 +107,7 @@ li {
     font-size: 18px;
     line-height: 1.35;
     font-weight: bold;
-    color: @text;
+    color: @accent;
 }
 
 .when {

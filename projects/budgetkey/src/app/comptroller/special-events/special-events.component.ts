@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Comptroller, DashEvent } from '../comptroller-dash.service';
-import { num, sitePath, year } from '../dash-utils';
+import { num, sitePath, termYears } from '../dash-utils';
 
 interface Item {
   event: DashEvent;
@@ -34,7 +34,7 @@ export class SpecialEventsComponent implements OnChanges {
     // Newest term first, like the events
     this.terms = [...this.comptrollers].reverse().map((c) => ({
       comptroller: c,
-      years: `${year(c.start_date)}–${c.end_date ? year(c.end_date) : ''}`,
+      years: termYears(c),
       items: this.events
         .filter((e) => e.last_published >= c.start_date && (!c.end_date || e.last_published <= c.end_date))
         .map((e) => ({event: e, path: sitePath(e.search_url), chapters: Array.from({length: e.n_chapters}, (_, i) => i)})),

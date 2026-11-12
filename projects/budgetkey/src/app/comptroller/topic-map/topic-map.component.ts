@@ -8,6 +8,7 @@ interface Word {
   path: string;
   // Relative size, 0 to 1; the stylesheet turns it into a font size for the screen width
   t: number;
+  share: string;
   tone: 'up' | 'down' | 'plain';
   tooltip: string;
 }
@@ -71,6 +72,7 @@ export class TopicMapComponent implements OnChanges {
         label: c.label,
         path: sitePath(c.search_url),
         t: Math.sqrt(c.share / maxShare),
+        share: pct(c.share),
         tone,
         tooltip,
       };

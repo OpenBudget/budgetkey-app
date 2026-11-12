@@ -11,19 +11,21 @@
 </div>
 <div class='words' [attr.aria-label]='axis === "domain" ? "תחומי הביקורת" : "סוגי הבעיות שנבדקו"'>
     @for (w of words; track w.key) {
-        <a class='word' [ngClass]='"tone-" + w.tone' [href]='w.path' [title]='w.tooltip' [style.--t]='w.t'>{{ w.label }}</a>
+        <a class='word' [ngClass]='"tone-" + w.tone' [href]='w.path' [title]='w.tooltip' [style.--t]='w.t'>{{ w.label }}<span class='share'>{{ w.share }}</span></a>
     }
 </div>
 @if (period !== 'all') {
-    <div class='legend'>
-        <span class='key up'>בלט בתקופה הזו</span>
-        <span class='key down'>פחות מהרגיל</span>
-    </div>
+    <p class='legend'>
+        <span class='sample up'>מודגש</span> בלט בתקופה הזו,
+        <span class='sample down'>באפור</span> פחות מהרגיל
+    </p>
 }
 <p class='provenance'>
-    גודל המילה לפי שיעור הפרקים שעסקו בנושא{{ period === 'all' ? '' : ' בתקופה' }}. פרק יכול לעסוק ביותר מנושא אחד.
-    ״בלט״ פירושו לפחות פי 1.3 מהשיעור הממוצע בכל השנים, ו״פחות מהרגיל״ פחות מ-0.7 ממנו.
-    סיווג אוטומטי. לחיצה על נושא פותחת את הפרקים שלו בחיפוש.
+    גודל המילה והאחוז לידה הם שיעור הפרקים שעסקו בנושא{{ period === 'all' ? '' : ' בתקופה' }}. פרק יכול לעסוק ביותר מנושא אחד.
+    @if (period !== 'all') {
+        ״בלט״ פירושו לפחות פי 1.3 מהשיעור הממוצע בכל השנים, ו״פחות מהרגיל״ פחות מ-70% ממנו.
+    }
+    סיווג אוטומטי.
     @if (download) {
         <a [href]='download'>הורדת הנתונים</a>
     }

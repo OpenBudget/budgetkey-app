@@ -21,10 +21,19 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    background: white;
+    background: #FAF9FC;
     &.odd {
-        background: @tint;
+        background: #E9E4F2;
     }
+}
+
+// Every five years, so each row keeps its own time reference
+.gridline {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #CBC2DE;
 }
 
 .ribbon {
@@ -36,8 +45,20 @@
 }
 
 .axis {
+    position: relative;
     padding-right: @years-col;
     margin-bottom: 6px;
+
+    .years-head {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: @years-col;
+        text-align: center;
+        font-size: 12px;
+        line-height: 16px;
+        color: @muted;
+    }
 
     .track {
         height: 42px;
@@ -50,13 +71,16 @@
         text-align: center;
         font-size: 13px;
         color: @accent;
-        background: white;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        background: #FAF9FC;
         &.odd {
-            background: @tint;
+            background: #E9E4F2;
         }
+        .mobile({
+            font-size: 11px;
+        });
     }
     .tick {
         position: absolute;
@@ -117,7 +141,7 @@
     font-size: 18px;
     line-height: 1.4;
     font-weight: bold;
-    color: @text;
+    color: @accent;
 }
 
 .bodies {

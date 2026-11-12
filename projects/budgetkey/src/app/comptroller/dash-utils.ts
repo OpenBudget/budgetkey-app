@@ -19,6 +19,11 @@ export function surname(c: Comptroller): string {
   return c.name.split(' ').slice(-1)[0];
 }
 
+// "2005–2012"; a comptroller whose term ended without a successor has no end date, only a last year
+export function termYears(c: Comptroller): string {
+  return `${year(c.start_date)}–${c.end_date ? year(c.end_date) : c.last_year}`;
+}
+
 // The tables link to the live site; inside the app the same pages are relative
 export function sitePath(url: string | null | undefined): string {
   return (url || '').replace(/^https?:\/\/next\.obudget\.org/, '');

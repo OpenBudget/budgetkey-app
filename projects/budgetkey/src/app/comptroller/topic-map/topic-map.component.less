@@ -13,6 +13,16 @@
 
     .segmented {
         .segmented();
+        // On phones the comptrollers scroll sideways instead of wrapping
+        .mobile({
+            flex-wrap: nowrap;
+            max-width: 100%;
+            overflow-x: auto;
+            .no-scrollbars();
+            button {
+                flex: 0 0 auto;
+            }
+        });
     }
 }
 
@@ -23,43 +33,51 @@
     align-items: baseline;
     gap: 6px 22px;
     padding: 28px 16px;
+    border-radius: 1.5em 1.5em 0 1.5em;
+    background: @tint;
+    min-height: 260px;
     .mobile({
         gap: 4px 14px;
         padding: 20px 12px;
         min-height: 0;
     });
-    border-radius: 1.5em 1.5em 0 1.5em;
-    background: @tint;
-    min-height: 260px;
 }
 
+// Three tones when a comptroller is chosen: stood out (white pill), as usual, and receded (grey)
 .word {
     font-family: 'Miriam Libre', sans-serif;
     font-size: calc(15px + var(--t, 0) * 29px);
     .mobile({
         font-size: calc(13px + var(--t, 0) * 15px);
     });
-    line-height: 1.15;
-    color: @accent-soft;
+    line-height: 1.2;
+    padding: 0 0.2em;
+    border-radius: 0.3em;
+    color: @accent;
     text-decoration: none;
-    transition: font-size 0.35s ease, color 0.35s ease;
+    transition: font-size 0.35s ease, color 0.35s ease, background-color 0.35s ease;
 
-    &.tone-plain {
-        color: @accent;
+    .share {
+        margin-right: 0.3em;
+        font-family: 'Abraham TRIAL', sans-serif;
+        font-size: 12px;
+        font-weight: normal;
+        color: @muted;
+        vertical-align: super;
     }
+
     &.tone-up {
-        color: @accent;
+        background: white;
         font-weight: bold;
-        text-decoration: underline;
-        text-decoration-thickness: 3px;
-        text-underline-offset: 6px;
-        text-decoration-color: @accent-soft;
+        box-shadow: 0 0 0 1px @accent-soft;
     }
     &.tone-down {
         color: @muted;
     }
     &:hover, &:focus-visible {
-        color: @text;
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 4px;
     }
     &:focus-visible {
         outline: 2px solid @accent;
@@ -72,22 +90,29 @@
 }
 
 .legend {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 6px 20px;
-    margin-top: 10px;
+    margin: 12px 0 0;
     font-size: 14px;
+    color: @text;
 
-    .key.up {
+    .sample {
+        font-family: 'Miriam Libre', sans-serif;
+        padding: 0 0.3em;
+        border-radius: 0.3em;
         color: @accent;
-        font-weight: bold;
-        text-decoration: underline;
-        text-decoration-thickness: 3px;
-        text-underline-offset: 5px;
-        text-decoration-color: @accent-soft;
+        &.up {
+            background: white;
+            font-weight: bold;
+            box-shadow: 0 0 0 1px @accent-soft;
+        }
+        &.down {
+            color: @muted;
+        }
     }
-    .key.down {
-        color: @muted;
+    .sample {
+        margin-left: 4px;
+    }
+    .sample.down {
+        margin-right: 8px;
     }
 }
 
