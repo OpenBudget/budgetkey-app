@@ -52,6 +52,8 @@ export interface Count {
 export interface DashEvent {
   event: string;
   name: string;
+  // The everyday name, e.g. "מגפת הקורונה", for where the full one doesn't fit
+  short_name: string;
   event_when: string;
   description: string;
   last_published: string;
@@ -103,7 +105,7 @@ const QUERIES = {
     FROM state_comptroller_dash_trends ORDER BY axis, n DESC`,
   counts: `SELECT axis, key, label, period_kind, period, n, total, share, lift, search_url
     FROM state_comptroller_dash_counts WHERE period_kind IN ('all', 'comptroller')`,
-  events: `SELECT event, name, event_when, description, last_published, n_reports, n_chapters, n_findings, search_url
+  events: `SELECT event, name, short_name, event_when, description, last_published, n_reports, n_chapters, n_findings, search_url
     FROM state_comptroller_dash_events WHERE kind = 'event' ORDER BY last_published DESC`,
   chronic: `SELECT rank, issue_id, title, bodies, first_reported, first_chapter_title, latest_verdict_label,
       latest_verdict_date, latest_verdict_chapter_title, years_open, n_audits, government_status, url

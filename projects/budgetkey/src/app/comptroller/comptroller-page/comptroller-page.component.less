@@ -11,18 +11,214 @@
     width: 100%;
     max-width: 960px;
     margin: 0 auto;
-    padding: 40px 16px 80px;
+    padding: 48px 16px 80px;
     box-sizing: border-box;
     color: @text;
 }
 
-.page-title {
-    margin: 0 0 18px;
-    color: @accent;
-    font-family: 'Miriam Libre', sans-serif;
-    font-size: 28px;
-    line-height: 36px;
-    font-weight: bold;
+// The hero: a band in the comptroller pages' purple, ruled like the main page's grid paper,
+// with the page's numbers and a way straight into the reports
+@hero-deep: #3F3557;
+
+.hero {
+    position: relative;
+    width: 100%;
+    background-color: @accent;
+    background-image:
+        linear-gradient(90deg, fade(white, 7%) 1px, transparent 1px),
+        linear-gradient(fade(white, 7%) 1px, transparent 1px),
+        linear-gradient(160deg, @accent 0%, @hero-deep 100%);
+    background-size: 20px 20px, 20px 20px, 100% 100%;
+    background-position: center top;
+    color: white;
+}
+
+.hero-inner {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 64px 16px 52px;
+    box-sizing: border-box;
+    text-align: center;
+
+    .mobile({
+        padding: 40px 16px 36px;
+    });
+}
+
+.title {
+    margin: 0;
+    font-family: 'Secular One', 'Miriam Libre', sans-serif;
+    font-size: 64px;
+    line-height: 1.1;
+    font-weight: normal;
+    color: white;
+
+    .mobile({
+        font-size: 40px;
+    });
+}
+
+.tagline {
+    margin: 10px 0 0;
+    color: fade(white, 85%);
+    font-size: 22px;
+    line-height: 1.4;
+
+    .mobile({
+        font-size: 18px;
+    });
+}
+
+.stats {
+    max-width: 720px;
+    min-height: 2 * 1.7 * 20px;
+    margin: 28px 0 0;
+    font-size: 20px;
+    line-height: 1.7;
+
+    .mobile({
+        font-size: 17px;
+        min-height: 3 * 1.7 * 17px;
+    });
+
+    .value {
+        font-family: 'Secular One', 'Miriam Libre', sans-serif;
+        font-size: 30px;
+        line-height: 1;
+        .mobile({
+            font-size: 24px;
+        });
+    }
+
+    &.loading {
+        width: min(560px, 100%);
+        border-radius: 8px;
+        background: fade(white, 8%);
+    }
+}
+
+.hero-search {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 640px;
+    height: 56px;
+    margin-top: 28px;
+    padding: 0 18px 0 6px;
+    box-sizing: border-box;
+    border-radius: 28px;
+    background: white;
+    box-shadow: 0 6px 20px fade(black, 18%);
+
+    &:focus-within {
+        box-shadow: 0 0 0 3px fade(white, 55%), 0 6px 20px fade(black, 18%);
+    }
+
+    .icon {
+        flex: 0 0 auto;
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: @accent;
+        stroke-width: 2.4;
+        stroke-linecap: round;
+    }
+
+    input {
+        flex: 1 1 auto;
+        min-width: 0;
+        height: 100%;
+        margin: 0 10px;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: @text;
+        font-size: 18px;
+
+        &::placeholder {
+            color: @muted;
+        }
+        .mobile({
+            font-size: 16px;
+        });
+    }
+
+    button {
+        flex: 0 0 auto;
+        height: 44px;
+        padding: 0 22px;
+        border: none;
+        border-radius: 22px;
+        background: @accent;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover, &:focus-visible {
+            background: darken(@accent, 8%);
+        }
+        &:focus-visible {
+            outline: 2px solid @accent;
+            outline-offset: 2px;
+        }
+        .mobile({
+            padding: 0 16px;
+        });
+    }
+}
+
+.examples {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    max-width: 680px;
+    margin-top: 16px;
+    font-size: 15px;
+
+    .examples-label {
+        color: fade(white, 80%);
+    }
+
+    a {
+        padding: 3px 12px;
+        border: 1px solid fade(white, 35%);
+        border-radius: 2em;
+        background: fade(white, 10%);
+        color: white;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background-color 0.2s, border-color 0.2s;
+
+        &:hover, &:focus-visible {
+            background: fade(white, 22%);
+            border-color: fade(white, 60%);
+            color: white;
+            text-decoration: none;
+        }
+        &:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+    }
+}
+
+.as-of {
+    margin: 22px 0 0;
+    color: fade(white, 70%);
+    font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-search button, .examples a {
+        transition: none;
+    }
 }
 
 .question {
@@ -44,60 +240,6 @@
     .mobile({
         margin-top: 48px;
     });
-}
-
-// The page's one big sentence, set like the main page's budget summary
-.headline {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    gap: 6px;
-    margin: 28px 0 0;
-    text-align: center;
-
-    p {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: baseline;
-        justify-content: center;
-        gap: 0 0.3em;
-        margin: 0;
-    }
-
-    .summary {
-        font-size: 24px;
-        line-height: 1.6;
-        .mobile({
-            font-size: 20px;
-        });
-        .value {
-            font-family: 'Miriam Libre', sans-serif;
-            font-weight: bold;
-            font-size: 48px;
-            line-height: 1.1;
-            color: @accent;
-            .mobile({
-                font-size: 36px;
-            });
-        }
-    }
-
-    .sub {
-        font-size: 19px;
-        line-height: 1.6;
-        .value {
-            font-family: 'Miriam Libre', sans-serif;
-            font-weight: bold;
-            font-size: 26px;
-            color: @accent;
-        }
-    }
-
-    .as-of {
-        margin-top: 10px;
-        color: @muted;
-        font-size: 13px;
-    }
 }
 
 .search {
@@ -148,23 +290,6 @@
 
 .closing {
     align-items: stretch;
-}
-
-.loading-headline {
-    height: 150px;
-    border-radius: 8px;
-    background: @tint;
-}
-
-.error {
-    margin: 28px 0 0;
-    color: @bad;
-    font-size: 17px;
-    text-align: center;
-
-    a {
-        .link();
-    }
 }
 
 // The methods are there for those who look: collapsed, in small print

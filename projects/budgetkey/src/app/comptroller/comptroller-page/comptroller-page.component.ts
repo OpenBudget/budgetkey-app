@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ComptrollerDashService, Dashboard } from '../comptroller-dash.service';
-import { num, year } from '../dash-utils';
+import { num, sitePath, year } from '../dash-utils';
 import { SeoService } from '../../common-components/seo.service';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { PlatformService } from '../../common-components/platform.service';
@@ -24,10 +25,12 @@ export class ComptrollerPageComponent implements OnInit {
   failed = false;
   nAudits = 0;
   nFindings = 0;
+  // A few ready-made searches under the hero's search box: the latest big events and the busiest topics
+  examples: {label: string, path: string}[] = [];
 
   constructor(private api: ComptrollerDashService, private seo: SeoService,
               private globalSettings: GlobalSettingsService, private ps: PlatformService,
-              @Inject(DOCUMENT) private document: Document) {}
+              private router: Router, @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit() {
     this.loadFont();
@@ -45,6 +48,13 @@ export class ComptrollerPageComponent implements OnInit {
         this.dash = dash;
         this.nAudits = dash.comptrollers.reduce((s, c) => s + c.n_audits, 0);
         this.nFindings = dash.comptrollers.reduce((s, c) => s + c.n_findings, 0);
+        this.examples = [
+          ...dash.events.filter((e) => e.n_chapters > 1).slice(0, 2)
+            .map((e) => ({label: e.short_name || e.name, path: sitePath(e.search_url)})),
+          ...dash.counts.filter((c) => c.period_kind === 'all' && c.axis === 'domain')
+            .sort((a, b) => b.n - a.n).slice(0, 2)
+            .map((c) => ({label: c.label, path: sitePath(c.search_url)})),
+        ];
       },
       error: (err) => {
         console.error('Failed to load the comptroller dashboard', err);
@@ -53,7 +63,12 @@ export class ComptrollerPageComponent implements OnInit {
     });
   }
 
-  // The word map's typeface, used only on this page
+  search(event: Event, q: string) {
+    event.preventDefault();
+    this.router.navigate(['/s'], {queryParams: {q: q.trim(), dd: 'state_comptroller'}});
+  }
+
+  // The hero's and the word map's typeface, used only on this page
   private loadFont() {
     const id = 'font-secular-one';
     if (!this.document.getElementById(id)) {

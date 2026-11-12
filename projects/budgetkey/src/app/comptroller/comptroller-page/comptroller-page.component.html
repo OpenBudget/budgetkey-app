@@ -1,7 +1,48 @@
-<app-container [showHeader]="true" [showSearchBar]="true">
+<app-container [showHeader]="true" [showSearchBar]="false">
+    <header class='hero'>
+        <div class='hero-inner'>
+            <h1 class='title'>דוחות מבקר המדינה</h1>
+            <p class='tagline'>מה המבקר מצא, מה ענו לו, ומה תוקן מאז</p>
+
+            @if (dash) {
+                <p class='stats'>
+                    <span>מאז שנת 2000 פרסם מבקר המדינה</span>&ngsp;
+                    <span class='value'>{{ num(nAudits) }}</span>&ngsp;
+                    <span>פרקי ביקורת, ובהם</span>&ngsp;
+                    <span class='value'>{{ num(nFindings) }}</span>&ngsp;
+                    <span>ממצאים.</span>
+                    @if (dash.totals) {
+                        &ngsp;<span>ב-<span class='value'>{{ num(dash.totals.revisited) }}</span></span>&ngsp;
+                        <span>מהליקויים הוא חזר ובדק אם תוקנו.</span>
+                    }
+                </p>
+            } @else if (failed) {
+                <p class='stats error'>לא הצלחנו לטעון את הנתונים. נסו לרענן את העמוד, או חפשו ישירות בדוחות.</p>
+            } @else {
+                <p class='stats loading' aria-hidden='true'></p>
+            }
+
+            <form class='hero-search' role='search' (submit)='search($event, q.value)'>
+                <svg class='icon' viewBox='0 0 24 24' aria-hidden='true'><circle cx='10.5' cy='10.5' r='6.5'/><line x1='15.5' y1='15.5' x2='21' y2='21'/></svg>
+                <input #q type='search' name='q' placeholder='חפשו גוף, נושא או מילה' aria-label='חיפוש בדוחות מבקר המדינה'>
+                <button type='submit'>חיפוש</button>
+            </form>
+
+            @if (examples.length) {
+                <div class='examples'>
+                    <span class='examples-label'>חיפושים לדוגמה:</span>
+                    @for (ex of examples; track ex.path) {
+                        <a [href]='ex.path'>{{ ex.label }}</a>
+                    }
+                </div>
+            }
+            @if (dash?.totals; as totals) {
+                <p class='as-of'>נכון לדוח האחרון שפורסם, ב-{{ totals.last_published | date:'dd/MM/yyyy' }}</p>
+            }
+        </div>
+    </header>
     <main class='page' role='main'>
-        <header class='intro'>
-            <h1 class='page-title'>דוחות מבקר המדינה</h1>
+        <div class='intro'>
             <p class='question'>מה בודק מבקר המדינה?</p>
             <p class='answer'>
                 את משרדי הממשלה, הרשויות המקומיות, החברות הממשלתיות ושאר הגופים הציבוריים.
@@ -12,33 +53,7 @@
                 קראנו את כל הדוחות שלו משנת 2000 ואילך, פירקנו כל פרק לממצאים שלו, ועקבנו אחרי כל ליקוי לאורך השנים:
                 מתי נמצא לראשונה, מה ענתה הממשלה, ומה מצא המבקר כשחזר לבדוק.
             </p>
-
-            @if (dash) {
-                <div class='headline'>
-                    <p class='summary'>
-                        <span>מאז שנת 2000 פרסם מבקר המדינה</span>&ngsp;
-                        <span class='value'>{{ num(nAudits) }}</span>&ngsp;
-                        <span>פרקי ביקורת, ובהם</span>&ngsp;
-                        <span class='value'>{{ num(nFindings) }}</span>&ngsp;
-                        <span>ממצאים</span>
-                    </p>
-                    @if (dash.totals) {
-                    <p class='sub'>
-                        <span>ב-<span class='value'>{{ num(dash.totals.revisited) }}</span></span>&ngsp;
-                        <span>מהליקויים שמצא הוא חזר ובדק אם תוקנו</span>
-                    </p>
-                    }
-                    <a class='search' href='/s?q=&dd=state_comptroller'><svg class='icon' viewBox='0 0 24 24' aria-hidden='true'><circle cx='10.5' cy='10.5' r='6.5'/><line x1='15.5' y1='15.5' x2='21' y2='21'/></svg><span>לחיפוש בדוחות מבקר המדינה</span></a>
-                    @if (dash.totals) {
-                        <p class='as-of'>נכון לדוח האחרון שפורסם, ב-{{ dash.totals.last_published | date:'dd/MM/yyyy' }}</p>
-                    }
-                </div>
-            } @else if (failed) {
-                <p class='error'>לא הצלחנו לטעון את הנתונים. נסו לרענן את העמוד, או <a href='/s?q=&dd=state_comptroller'>חפשו ישירות בדוחות</a>.</p>
-            } @else {
-                <div class='headline loading-headline' aria-hidden='true'></div>
-            }
-        </header>
+        </div>
 
         @if (dash) {
             @if (dash.chronic.length && dash.totals) {
