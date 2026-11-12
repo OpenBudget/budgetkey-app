@@ -1,0 +1,152 @@
+@import '../dash.less';
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+.page {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 16px 80px;
+    box-sizing: border-box;
+    color: @text;
+}
+
+.question {
+    .question();
+}
+
+.answer {
+    .answer();
+}
+
+.intro, .section {
+    display: flex;
+    flex-flow: column;
+}
+
+.section {
+    margin-top: 72px;
+
+    .mobile({
+        margin-top: 48px;
+    });
+}
+
+// The page's one big sentence, set like the main page's budget summary
+.headline {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 6px;
+    margin: 28px 0 0;
+    text-align: center;
+
+    p {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: baseline;
+        justify-content: center;
+        gap: 0 0.3em;
+        margin: 0;
+    }
+
+    .summary {
+        font-size: 24px;
+        line-height: 1.6;
+        .mobile({
+            font-size: 20px;
+        });
+        .value {
+            font-family: 'Miriam Libre', sans-serif;
+            font-weight: bold;
+            font-size: 48px;
+            line-height: 1.1;
+            color: @accent;
+            .mobile({
+                font-size: 36px;
+            });
+        }
+    }
+
+    .sub {
+        font-size: 19px;
+        line-height: 1.6;
+        .value {
+            font-family: 'Miriam Libre', sans-serif;
+            font-weight: bold;
+            font-size: 26px;
+            color: @accent;
+        }
+    }
+
+    .search {
+        margin-top: 18px;
+        padding: 6px 18px;
+        border: 1px solid @accent;
+        border-radius: 2em;
+        color: @accent;
+        font-size: 17px;
+        text-decoration: none;
+
+        &:hover, &:focus-visible {
+            background: @tint;
+        }
+    }
+}
+
+.loading-headline {
+    height: 150px;
+    border-radius: 8px;
+    background: @tint;
+}
+
+.error {
+    margin: 28px 0 0;
+    color: @bad;
+    font-size: 17px;
+    text-align: center;
+
+    a {
+        .link();
+    }
+}
+
+// The methods are there for those who look: collapsed, in small print
+.methods .details {
+    max-width: 720px;
+    font-size: 15px;
+    line-height: 1.6;
+
+    details {
+        border-bottom: 1px solid @rule;
+        padding: 10px 0;
+
+        &:first-child {
+            border-top: 1px solid @rule;
+        }
+    }
+
+    summary {
+        .chevron-summary();
+        font-size: 17px;
+    }
+    details[open] summary::before {
+        transform: rotate(-90deg);
+    }
+
+    ul {
+        margin: 10px 0 4px;
+        padding-right: 20px;
+    }
+    li {
+        margin-bottom: 6px;
+    }
+    a {
+        .link();
+    }
+}

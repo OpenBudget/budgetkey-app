@@ -1,0 +1,45 @@
+<div class='controls'>
+    <div class='segmented' role='group' aria-label='סיווג'>
+        <button type='button' [class.active]='axis === "lens"' [attr.aria-pressed]='axis === "lens"' (click)='setAxis("lens")'>סוגי בעיות</button>
+        <button type='button' [class.active]='axis === "domain"' [attr.aria-pressed]='axis === "domain"' (click)='setAxis("domain")'>תחומים</button>
+    </div>
+</div>
+<div class='trends'>
+    @for (group of groups; track group.pattern) {
+        <h3 class='group'>{{ group.title }}</h3>
+        <div class='trend head'>
+            <span class='topic'></span>
+            <span class='bars'>
+                @for (name of names; track name) {
+                    <span class='name'>{{ name }}</span>
+                }
+            </span>
+            <span class='note'></span>
+        </div>
+        @for (row of group.rows; track row.trend.key) {
+            <div class='trend'>
+                <a class='topic' [href]='row.path'>{{ row.trend.label }}</a>
+                <span class='bars'>
+                    @for (bar of row.bars; track bar.comptroller) {
+                        <span class='cell' [title]='bar.tooltip'>
+                            @if (bar.peak || bar.low) {
+                                <span class='value'>{{ pct(bar.share) }}</span>
+                            } @else {
+                                <span class='value sr-only'>{{ pct(bar.share) }}</span>
+                            }
+                            <span class='bar' [class.peak]='bar.peak' [style.height.px]='bar.height'></span>
+                        </span>
+                    }
+                </span>
+                <span class='note'>{{ row.note }}</span>
+            </div>
+        }
+    }
+</div>
+<p class='provenance'>
+    כל עמודה היא שיעור הפרקים שעסקו בנושא בתקופת כהונתו של מבקר. פרק יכול לעסוק בכמה נושאים, ולכן השיעורים לא מסתכמים ל-100%.
+    מגמה מסומנת רק כשהיא מובהקת (p&lt;0.01), במודל שמפריד בין מגמה ארוכת טווח לבין ההשפעה של המבקר המכהן. סיווג אוטומטי.
+    @if (download) {
+        <a [href]='download'>הורדת הנתונים</a>
+    }
+</p>

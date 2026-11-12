@@ -1,0 +1,33 @@
+@for (term of terms; track term.comptroller.comptroller) {
+    <section class='term'>
+        <h3 class='term-title'>{{ term.comptroller.name }} <span class='years'>{{ term.years }}</span></h3>
+        <ul>
+            @for (item of term.items; track item.event.event) {
+                <li>
+                    <a class='event' [href]='item.path'>
+                        <span class='squares' [attr.aria-label]='item.event.n_chapters + " פרקים"'>
+                            @for (c of item.chapters; track c) {
+                                <span class='sq'></span>
+                            }
+                        </span>
+                        <span class='text'>
+                            <span class='name'>{{ item.event.name }}</span>
+                            <span class='when'>{{ item.event.event_when }}</span>
+                            <span class='desc'>{{ item.event.description }}</span>
+                            <span class='counts'>
+                                {{ item.event.n_chapters === 1 ? 'פרק אחד' : num(item.event.n_chapters) + ' פרקים' }}{{ item.event.n_reports > 1 ? ' ב-' + item.event.n_reports + ' דוחות' : '' }}, {{ num(item.event.n_findings) }} ממצאים
+                            </span>
+                        </span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </section>
+}
+<p class='provenance'>
+    כל ריבוע הוא פרק ביקורת אחד. דוחות מיוחדים על אותו אירוע אוחדו לשורה אחת. שמות האירועים והתיאורים נכתבו אוטומטית,
+    והדוחות משויכים למבקר שכיהן כשפורסמו.
+    @if (download) {
+        <a [href]='download'>הורדת הנתונים</a>
+    }
+</p>

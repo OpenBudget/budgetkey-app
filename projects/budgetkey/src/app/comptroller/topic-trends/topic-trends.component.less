@@ -1,0 +1,122 @@
+@import '../dash.less';
+
+@bars-width: 300px;
+
+:host {
+    display: block;
+}
+
+.controls {
+    margin-bottom: 16px;
+    .segmented {
+        .segmented();
+    }
+}
+
+.trend {
+    display: grid;
+    grid-template-columns: minmax(0, 220px) @bars-width minmax(0, 1fr);
+    align-items: end;
+    gap: 0 20px;
+    padding: 6px 0;
+    border-bottom: 1px solid @rule;
+
+    // On phones: the topic, then its bars across the width, then the note
+    .mobile({
+        grid-template-columns: minmax(0, 1fr);
+        gap: 4px;
+        &.head .topic, &.head .note {
+            display: none;
+        }
+    });
+
+    &.head {
+        border-bottom: none;
+        padding: 0;
+    }
+}
+
+.group {
+    margin: 22px 0 4px;
+    color: @accent;
+    font-family: 'Miriam Libre', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.topic {
+    align-self: center;
+    font-size: 16px;
+    line-height: 1.3;
+    color: @text;
+    text-decoration: none;
+
+    &:hover, &:focus-visible {
+        color: @accent;
+        text-decoration: underline;
+    }
+}
+
+// Comptrollers in order of their terms, the first on the right
+.bars {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    align-items: end;
+}
+
+.name {
+    font-size: 13px;
+    color: @accent;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cell {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 66px;
+    .mobile({
+        height: 58px;
+    });
+}
+
+.value {
+    font-size: 12px;
+    line-height: 16px;
+    color: @muted;
+    font-variant-numeric: tabular-nums;
+}
+
+.bar {
+    width: 100%;
+    max-width: 40px;
+    border-radius: 4px 4px 0 0;
+    background: #C9C0DC;
+
+    &.peak {
+        background: @accent;
+    }
+}
+
+.note {
+    align-self: center;
+    font-size: 14px;
+    color: @muted;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.provenance {
+    .provenance();
+}

@@ -1,0 +1,30 @@
+<div class='controls'>
+    <div class='segmented' role='group' aria-label='סיווג'>
+        <button type='button' [class.active]='axis === "domain"' [attr.aria-pressed]='axis === "domain"' (click)='setAxis("domain")'>תחומים</button>
+        <button type='button' [class.active]='axis === "lens"' [attr.aria-pressed]='axis === "lens"' (click)='setAxis("lens")'>סוגי בעיות</button>
+    </div>
+    <div class='segmented' role='group' aria-label='תקופה'>
+        @for (p of periods; track p.key) {
+            <button type='button' [class.active]='period === p.key' [attr.aria-pressed]='period === p.key' (click)='setPeriod(p.key)'>{{ p.label }}</button>
+        }
+    </div>
+</div>
+<div class='words' [attr.aria-label]='axis === "domain" ? "תחומי הביקורת" : "סוגי הבעיות שנבדקו"'>
+    @for (w of words; track w.key) {
+        <a class='word' [ngClass]='"tone-" + w.tone' [href]='w.path' [title]='w.tooltip' [style.--t]='w.t'>{{ w.label }}</a>
+    }
+</div>
+@if (period !== 'all') {
+    <div class='legend'>
+        <span class='key up'>בלט בתקופה הזו</span>
+        <span class='key down'>פחות מהרגיל</span>
+    </div>
+}
+<p class='provenance'>
+    גודל המילה לפי שיעור הפרקים שעסקו בנושא{{ period === 'all' ? '' : ' בתקופה' }}. פרק יכול לעסוק ביותר מנושא אחד.
+    ״בלט״ פירושו לפחות פי 1.3 מהשיעור הממוצע בכל השנים, ו״פחות מהרגיל״ פחות מ-0.7 ממנו.
+    סיווג אוטומטי. לחיצה על נושא פותחת את הפרקים שלו בחיפוש.
+    @if (download) {
+        <a [href]='download'>הורדת הנתונים</a>
+    }
+</p>

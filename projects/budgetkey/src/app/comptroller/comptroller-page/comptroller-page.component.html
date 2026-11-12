@@ -1,0 +1,132 @@
+<app-container [showHeader]="true" [showSearchBar]="true">
+    <main class='page' role='main'>
+        <header class='intro'>
+            <h1 class='question'>מה בודק מבקר המדינה?</h1>
+            <p class='answer'>
+                את משרדי הממשלה, הרשויות המקומיות, החברות הממשלתיות ושאר הגופים הציבוריים.
+                בכל שנה הוא מפרסם עשרות פרקי ביקורת: מה נבדק, אילו ליקויים נמצאו, מה הוא ממליץ לתקן ומה ענו הגופים שנבדקו.
+            </p>
+            <p class='question'>ומה יש כאן?</p>
+            <p class='answer'>
+                קראנו את כל הדוחות שלו משנת 2000 ואילך, פירקנו כל פרק לממצאים שלו, ועקבנו אחרי כל ליקוי לאורך השנים:
+                מתי נמצא לראשונה, מה ענתה הממשלה, ומה מצא המבקר כשחזר לבדוק.
+            </p>
+
+            @if (dash) {
+                <div class='headline'>
+                    <p class='summary'>
+                        <span>מאז שנת 2000 פרסם מבקר המדינה</span>
+                        <span class='value'>{{ num(nAudits) }}</span>
+                        <span>פרקי ביקורת, ובהם</span>
+                        <span class='value'>{{ num(nFindings) }}</span>
+                        <span>ממצאים</span>
+                    </p>
+                    @if (dash.totals) {
+                    <p class='sub'>
+                        <span>ואת</span>
+                        <span class='value'>{{ num(dash.totals.revisited) }}</span>
+                        <span>מהליקויים שמצא הוא חזר ובדק שוב</span>
+                    </p>
+                    }
+                    <a class='search' href='/s?q=&dd=state_comptroller'>לחיפוש בדוחות מבקר המדינה</a>
+                </div>
+            } @else if (failed) {
+                <p class='error'>לא הצלחנו לטעון את הנתונים. נסו לרענן את העמוד, או <a href='/s?q=&dd=state_comptroller'>חפשו ישירות בדוחות</a>.</p>
+            } @else {
+                <div class='headline loading-headline' aria-hidden='true'></div>
+            }
+        </header>
+
+        @if (dash) {
+            @if (dash.chronic.length && dash.totals) {
+            <section class='section' aria-labelledby='q-chronic'>
+                <h2 class='question' id='q-chronic'>ומה קורה לליקויים אחרי שהמבקר מפרסם אותם?</h2>
+                <p class='answer'>
+                    הרבה מהם נשארים. מצאנו <strong>{{ num(dash.totals.chronic) }}</strong> ליקויים שהמבקר בדק לפחות פעמיים,
+                    ובבדיקה האחרונה מצא שלא תוקנו או שתוקנו רק בחלקם. <strong>{{ num(dash.totals.chronic_decade) }}</strong> מהם פתוחים כבר יותר מעשור.
+                    אלה הוותיקים שבהם:
+                </p>
+                <app-chronic-issues [issues]='dash.chronic' [comptrollers]='dash.comptrollers' [download]='dash.downloads.chronic'></app-chronic-issues>
+            </section>
+            }
+
+            @if (dash.counts.length) {
+            <section class='section' aria-labelledby='q-topics'>
+                <h2 class='question' id='q-topics'>על מה המבקר כותב?</h2>
+                <p class='answer'>
+                    על הכול, אבל לא באותה מידה. סיווגנו כל פרק ביקורת לפי התחום שבו עסק ולפי סוג הבעיה שנבדקה.
+                    ככל שהמילה גדולה יותר, כך יותר פרקים עסקו בנושא. אפשר לבחור מבקר ולראות מה בלט בתקופה שלו.
+                </p>
+                <app-topic-map [counts]='dash.counts' [comptrollers]='dash.comptrollers' [download]='dash.downloads.counts'></app-topic-map>
+            </section>
+            }
+
+            @if (dash.trends.length) {
+            <section class='section' aria-labelledby='q-trends'>
+                <h2 class='question' id='q-trends'>זה משתנה עם השנים?</h2>
+                <p class='answer'>
+                    חלק מהנושאים עולים או יורדים בהדרגה, בלי קשר למי שמכהן. אחרים עולים ויורדים יחד עם המבקר:
+                    טוהר המידות, למשל, בלט אצל לינדנשטראוס וכמעט נעלם אצל אנגלמן.
+                </p>
+                <app-topic-trends [trends]='dash.trends' [comptrollers]='dash.comptrollers' [download]='dash.downloads.trends'></app-topic-trends>
+            </section>
+            }
+
+            @if (dash.events.length) {
+            <section class='section' aria-labelledby='q-events'>
+                <h2 class='question' id='q-events'>ומה עם מלחמות, אסונות ופרשות?</h2>
+                <p class='answer'>
+                    עליהם המבקר כותב דוחות מיוחדים, מחוץ לדוח השנתי. לפעמים זה פרק אחד, ולפעמים עשרות פרקים בכמה דוחות.
+                    אלה האירועים שהמבקר בדק מאז 2000:
+                </p>
+                <app-special-events [events]='dash.events' [comptrollers]='dash.comptrollers' [download]='dash.downloads.events'></app-special-events>
+            </section>
+            }
+
+            <section class='section methods' aria-labelledby='q-methods'>
+                <h2 class='question' id='q-methods'>איך עשינו את זה?</h2>
+                <p class='answer'>
+                    אספנו את הדוחות מאתר מבקר המדינה ואת תגובות הממשלה מספרי התגובות שהיא מפרסמת,
+                    ובעזרת בינה מלאכותית פירקנו כל פרק לממצאים, קישרנו ביניהם לאורך השנים וסיווגנו אותם לפי נושא.
+                </p>
+                <div class='details'>
+                    <details>
+                        <summary>מאיפה הנתונים?</summary>
+                        <ul>
+                            <li>פרקי הביקורת בעברית שפרסם <a href='https://www.mevaker.gov.il' target='_blank' rel='noopener'>מבקר המדינה</a> משנת 2000 ואילך, בדוחות השנתיים ובדוחות המיוחדים: הטקסט המלא, הקבצים והתאריכים.</li>
+                            <li>תגובות הגופים המבוקרים, כפי שהן מופיעות בתוך הדוחות עצמם.</li>
+                            <li>ספרי התגובות של הממשלה לדוחות המבקר, שבהם כל משרד מדווח מה עשה בכל ליקוי.</li>
+                            <li>הנתונים מתעדכנים פעם בשבוע.@if (dash.totals) { הדוח האחרון שנקלט פורסם ב-{{ dash.totals.last_published | date:'dd/MM/yyyy' }}.}</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>מה עשינו איתם?</summary>
+                        <ul>
+                            <li>מכל פרק חילצנו את הממצאים: הליקוי, ההמלצה, הגופים האחראים ותגובותיהם. כל ממצא נבדק מול הטקסט של הדוח, וממצא שהציטוט שלו לא נמצא בדוח מסומן בעמוד הדוח כ״לא אומת מול הטקסט״.</li>
+                            <li>ממצאים שחוזרים בכמה דוחות, למשל בביקורת מעקב, חוברו לליקוי אחד. בעמוד של כל ליקוי מוצג ציר הזמן שלו: הדוח הראשון, תגובות הגוף והממשלה, ובדיקות המעקב.</li>
+                            <li>כל פרק סווג לאחד מ-20 תחומי מדיניות (ולעתים לתחום משני נוסף) ולאחד עד שלושה מתוך 14 סוגי בעיות. הסיווג נעשה אוטומטית, ונבדק ידנית על מדגם.</li>
+                            <li>מגמה מסומנת כ״עולה״, ״יורדת״ או ״תלויה במבקר״ רק כשהיא מובהקת סטטיסטית (p&lt;0.01), במודל שמפריד בין מגמה ארוכת טווח לבין ההשפעה של המבקר המכהן.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>על מה כדאי לשים לב?</summary>
+                        <ul>
+                            <li>הסיווג לנושאים, שמות האירועים והקישור בין ממצאים מדוחות שונים נעשו אוטומטית. הם טובים ברוב המקרים, אבל לא רשמיים. כל ליקוי בעמוד הזה הוא טענה שכדאי לבדוק בעמוד שלו ובדוח המקורי.</li>
+                            <li>תקופות הכהונה: אליעזר גולדברג (1998–2005), מיכה לינדנשטראוס (2005–2012), יוסף חיים שפירא (2012–2019) ומתניהו אנגלמן (2019–2026). מאז יולי 2026 לא מונה מבקר חדש, ודוחות שפורסמו מאז נספרים לאנגלמן. דוחות מהשנה הראשונה של כל מבקר הוכנו ברובם בתקופת קודמו.</li>
+                            <li>בשנים 2023 ו-2025 פורסמו רק 49 פרקים בכל שנה, ולכן הנתונים שלהן רועשים יותר.</li>
+                            <li>פרקים שהטקסט שלהם לא חולץ במלואו מסומנים בעמוד הדוח, וייתכן שחסרים בהם ממצאים.</li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>איפה אפשר לקבל את הנתונים?</summary>
+                        <ul>
+                            <li>כל גרף בעמוד מקשר לקובץ CSV של הנתונים שמאחוריו.</li>
+                            <li>אפשר לחפש בכל הדוחות ב<a href='/s?q=&dd=state_comptroller'>חיפוש של מפתח התקציב</a>, ולסנן לפי תחום, סוג בעיה או דוח מיוחד.</li>
+                            <li>הקוד שאוסף ומעבד את הנתונים פתוח, ב<a href='https://github.com/OpenBudget/budgetkey-data-pipelines' target='_blank' rel='noopener'>GitHub</a>.</li>
+                        </ul>
+                    </details>
+                </div>
+            </section>
+        }
+    </main>
+</app-container>

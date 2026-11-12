@@ -1,0 +1,47 @@
+<div class='chart' role='list'>
+    <div class='axis' aria-hidden='true'>
+        <div class='track'>
+            @for (band of bands; track band.name; let odd = $odd) {
+                <span class='band-label' [class.odd]='odd' [style.right.%]='band.start * 100' [style.width.%]='band.width * 100'>{{ band.name }}</span>
+            }
+            @for (tick of ticks; track tick.year) {
+                <span class='tick' [style.right.%]='tick.pos * 100'>{{ tick.year }}</span>
+            }
+        </div>
+    </div>
+    @for (row of shown; track row.issue.issue_id) {
+        <a class='issue' role='listitem' [href]='row.path'>
+            <div class='years'>
+                <span class='n'>{{ row.years }}</span>
+                <span class='unit'>{{ yearsLabel(row.years) }}</span>
+            </div>
+            <div class='body'>
+                <h3 class='title'>{{ row.issue.title }}</h3>
+                <div class='bodies'>{{ row.issue.bodies.slice(0, 2).join(', ') }}</div>
+                <div class='track' [title]='row.tooltip'>
+                    @for (band of bands; track band.name; let odd = $odd) {
+                        <span class='band' [class.odd]='odd' [style.right.%]='band.start * 100' [style.width.%]='band.width * 100'></span>
+                    }
+                    <span class='ribbon' [style.right.%]='row.start * 100' [style.width.%]='row.width * 100'></span>
+                </div>
+                <div class='meta'>
+                    <span>{{ year(row.issue.first_reported) }}–{{ year(row.issue.latest_verdict_date) }}, {{ row.issue.n_audits }} ביקורות</span>
+                    <span class='badge' [ngClass]='"tone-" + row.verdictTone'>לפי המבקר: {{ row.issue.latest_verdict_label }}</span>
+                    @if (row.government) {
+                        <span class='badge' [ngClass]='"tone-" + row.government.tone'>לפי הממשלה: {{ row.government.label }}</span>
+                    }
+                </div>
+            </div>
+        </a>
+    }
+</div>
+@if (rows.length > shownCount && !expanded) {
+    <button type='button' class='more' (click)='expanded = true'>עוד {{ rows.length - shownCount }} ליקויים ותיקים</button>
+}
+<p class='provenance'>
+    הליקויים מסודרים לפי משך הזמן מהדוח הראשון ועד בדיקת המעקב האחרונה. מכל זוג דוחות מוצג ליקוי אחד.
+    הקישור בין דוחות מתקופות שונות נעשה אוטומטית ונבדק ידנית עבור הליקויים המובילים.
+    @if (download) {
+        <a [href]='download'>הורדת הנתונים</a>
+    }
+</p>
