@@ -6,6 +6,8 @@ interface Item {
   event: DashEvent;
   path: string;
   chapters: number[];
+  // "38 פרקים ב-3 דוחות, 1,234 ממצאים": the squares' label and tooltip
+  counts: string;
 }
 
 interface Term {
@@ -27,7 +29,6 @@ export class SpecialEventsComponent implements OnChanges {
   @Input() comptrollers: Comptroller[] = [];
   @Input() download?: string;
 
-  num = num;
   terms: Term[] = [];
 
   ngOnChanges() {
@@ -37,7 +38,13 @@ export class SpecialEventsComponent implements OnChanges {
       years: termYears(c),
       items: this.events
         .filter((e) => e.last_published >= c.start_date && (!c.end_date || e.last_published <= c.end_date))
-        .map((e) => ({event: e, path: sitePath(e.search_url), chapters: Array.from({length: e.n_chapters}, (_, i) => i)})),
+        .map((e) => ({
+          event: e,
+          path: sitePath(e.search_url),
+          chapters: Array.from({length: e.n_chapters}, (_, i) => i),
+          counts: (e.n_chapters === 1 ? 'פרק אחד' : `${num(e.n_chapters)} פרקים`) +
+                  (e.n_reports > 1 ? ` ב-${e.n_reports} דוחות` : '') + `, ${num(e.n_findings)} ממצאים`,
+        })),
     })).filter((t) => t.items.length > 0);
   }
 }

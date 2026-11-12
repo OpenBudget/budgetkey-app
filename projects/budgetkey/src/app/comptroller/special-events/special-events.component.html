@@ -6,18 +6,17 @@
             @for (item of term.items; track item.event.event) {
                 <li>
                     <a class='event' [href]='item.path'>
-                        <span class='squares' [attr.aria-label]='item.event.n_chapters + " פרקים"'>
+                        <span class='squares' [attr.aria-label]='item.counts' [title]='item.counts'>
                             @for (c of item.chapters; track c) {
                                 <span class='sq'></span>
                             }
                         </span>
                         <span class='text'>
-                            <span class='name'>{{ item.event.name }}</span>
-                            <span class='when'>{{ item.event.event_when }}</span>
-                            <span class='desc'>{{ item.event.description }}</span>
-                            <span class='counts'>
-                                {{ item.event.n_chapters === 1 ? 'פרק אחד' : num(item.event.n_chapters) + ' פרקים' }}{{ item.event.n_reports > 1 ? ' ב-' + item.event.n_reports + ' דוחות' : '' }}, {{ num(item.event.n_findings) }} ממצאים
+                            <span class='head'>
+                                <span class='name'>{{ item.event.name }}</span>&ngsp;
+                                <span class='when'>{{ item.event.event_when }}</span>
                             </span>
+                            <span class='desc'>{{ item.event.description }}</span>
                         </span>
                     </a>
                 </li>
