@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Axis, Comptroller, Pattern, Trend } from '../comptroller-dash.service';
-import { AXES, pct, sitePath, surname } from '../dash-utils';
+import { AXES, pct, sitePath, surname, year } from '../dash-utils';
 
 interface Bar {
   comptroller: string;
@@ -50,11 +50,16 @@ export class TopicTrendsComponent implements OnChanges {
   axes = AXES;
   axis: Axis = 'lens';
   groups: Group[] = [];
-  // The comptrollers as column heads, with the years their column covers (the data starts in 2000)
+  // The comptrollers as column heads, with the years their column covers
   heads: {name: string, years: string}[] = [];
+  // When the data starts in the middle of the first comptroller's term, the note says so
+  partialFirst: {name: string, year: number} | null = null;
 
   ngOnChanges() {
     this.heads = this.comptrollers.map((c) => ({name: surname(c), years: `${c.first_year}–${c.last_year}`}));
+    // A comptroller's first reports come out the year after they take office
+    const c = this.comptrollers[0];
+    this.partialFirst = c && c.first_year > +year(c.start_date) + 1 ? {name: surname(c), year: c.first_year} : null;
     this.update();
   }
 

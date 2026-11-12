@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ChronicIssue, Comptroller } from '../comptroller-dash.service';
-import { axisPos, sitePath, surname, year } from '../dash-utils';
+import { sitePath, startYear, surname, timeAxis, year } from '../dash-utils';
 import { status, Status } from '../../common-components/comptroller-labels';
 
 interface Band {
@@ -21,7 +21,6 @@ interface Row {
 }
 
 const SHOWN = 6;
-const TICKS = [2000, 2005, 2010, 2015, 2020, 2025];
 
 // The longest-running unresolved issues, each a ribbon from its first report to the latest follow-up,
 // over the comptrollers' terms
@@ -39,11 +38,19 @@ export class ChronicIssuesComponent implements OnChanges {
   year = year;
   rows: Row[] = [];
   bands: Band[] = [];
-  ticks = TICKS.map((y) => ({year: y, pos: axisPos(`${y}-01-01`)}));
+  ticks: {year: number, pos: number}[] = [];
   expanded = false;
   shownCount = SHOWN;
 
   ngOnChanges() {
+    const axisPos = timeAxis(this.comptrollers);
+    // A gridline every five years, from the first round year the data covers
+    const first = Math.ceil((startYear(this.comptrollers) || 2000) / 5) * 5;
+    const last = Math.max(first, ...this.comptrollers.map((c) => c.last_year));
+    this.ticks = [];
+    for (let y = first; y <= last; y += 5) {
+      this.ticks.push({year: y, pos: axisPos(`${y}-01-01`)});
+    }
     this.bands = this.comptrollers.map((c) => {
       const start = axisPos(c.start_date);
       return {name: surname(c), start, width: axisPos(c.end_date) - start};

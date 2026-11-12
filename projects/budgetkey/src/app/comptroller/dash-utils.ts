@@ -29,13 +29,22 @@ export function sitePath(url: string | null | undefined): string {
   return (url || '').replace(/^https?:\/\/next\.obudget\.org/, '');
 }
 
-// The page's time axis, as fractions of the period since 2000 (shared by the issue ribbons)
-export const AXIS_START = Date.UTC(2000, 0, 1);
-export const AXIS_END = Date.UTC(2027, 0, 1);
+// The first year the data covers: the first report of the earliest comptroller
+export function startYear(comptrollers: Comptroller[]): number | null {
+  return comptrollers.length ? Math.min(...comptrollers.map((c) => c.first_year)) : null;
+}
 
-export function axisPos(date: string | null | undefined): number {
-  const t = date ? Date.parse(date) : AXIS_END;
-  return Math.min(1, Math.max(0, (t - AXIS_START) / (AXIS_END - AXIS_START)));
+// A time axis over the years the data covers, as fractions of the period (used by the issue ribbons);
+// a date outside it is clamped to its ends, and a missing date means "still going"
+export function timeAxis(comptrollers: Comptroller[]): (date: string | null | undefined) => number {
+  const first = startYear(comptrollers) || 2000;
+  const last = comptrollers.length ? Math.max(...comptrollers.map((c) => c.last_year)) : new Date().getFullYear();
+  const start = Date.UTC(first, 0, 1);
+  const end = Date.UTC(last + 1, 0, 1);
+  return (date) => {
+    const t = date ? Date.parse(date) : end;
+    return Math.min(1, Math.max(0, (t - start) / (end - start)));
+  };
 }
 
 // The two classifications, in the same order wherever there's a switch between them

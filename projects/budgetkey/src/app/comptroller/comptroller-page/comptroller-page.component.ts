@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ComptrollerDashService, Dashboard } from '../comptroller-dash.service';
-import { num, sitePath, year } from '../dash-utils';
+import { num, sitePath, startYear, surname, termYears, year } from '../dash-utils';
 import { SeoService } from '../../common-components/seo.service';
 import { GlobalSettingsService } from '../../common-components/global-settings.service';
 import { PlatformService } from '../../common-components/platform.service';
@@ -21,6 +21,11 @@ export class ComptrollerPageComponent implements OnInit {
 
   num = num;
   year = year;
+  surname = surname;
+  termYears = termYears;
+  // The first year the data covers, and the first for which the government's responses exist
+  startYear: number | null = null;
+  readonly RESPONSES_FROM = 1995;
   dash: Dashboard | null = null;
   failed = false;
   nAudits = 0;
@@ -36,7 +41,7 @@ export class ComptrollerPageComponent implements OnInit {
     this.loadFont();
     this.globalSettings.ready.pipe(untilDestroyed(this)).subscribe(() => {
       this.seo.setSeo(this.globalSettings.siteName + ' - דוחות מבקר המדינה', 'https://next.obudget.org/comptroller');
-      this.seo.setDescription('דוחות מבקר המדינה משנת 2000 ואילך: על מה המבקר כותב, איך זה השתנה לאורך השנים, ואילו ליקויים לא תוקנו גם אחרי עשרים שנה.');
+      this.seo.setDescription('דוחות מבקר המדינה לאורך יותר משלושה עשורים: על מה המבקר כותב, איך זה השתנה לאורך השנים, ואילו ליקויים לא תוקנו גם אחרי עשרים שנה.');
     });
     this.api.dashboard().pipe(untilDestroyed(this)).subscribe({
       next: (dash) => {
@@ -46,6 +51,7 @@ export class ComptrollerPageComponent implements OnInit {
           return;
         }
         this.dash = dash;
+        this.startYear = startYear(dash.comptrollers);
         this.nAudits = dash.comptrollers.reduce((s, c) => s + c.n_audits, 0);
         this.nFindings = dash.comptrollers.reduce((s, c) => s + c.n_findings, 0);
         this.examples = [
