@@ -5,10 +5,12 @@
         <ul>
             @for (item of term.items; track item.event.event) {
                 <li>
-                    <a class='event' [href]='item.path'>
+                    <a class='event' [href]='item.path' [attr.target]='item.external ? "_blank" : null' [attr.rel]='item.external ? "noopener" : null'>
                         <span class='squares' [attr.aria-label]='item.counts' [title]='item.counts'>
                             @for (c of item.chapters; track c) {
                                 <span class='sq'></span>
+                            } @empty {
+                                <span class='sq unread'></span>
                             }
                         </span>
                         <span class='text'>
@@ -21,6 +23,9 @@
                                 </span>
                             </span>
                             <span class='desc'>{{ item.event.description }}</span>
+                            @if (item.unread) {
+                                <span class='unread-note'>הקובץ של הדוח לא היה קריא, ולכן לא פירקנו אותו לפרקים ולממצאים. הקישור מוביל לדוח באתר מבקר המדינה.</span>
+                            }
                         </span>
                     </a>
                 </li>
