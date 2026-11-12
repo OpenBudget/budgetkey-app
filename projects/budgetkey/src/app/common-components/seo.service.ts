@@ -5,6 +5,7 @@ import { DomSanitizer, Meta, SafeUrl } from "@angular/platform-browser";
 import { DOCUMENT } from "@angular/common";
 
 let defaultDescription: string | null | undefined;
+let defaultImage: string | null | undefined;
 
 @Injectable()
 export class SeoService {
@@ -16,10 +17,13 @@ export class SeoService {
   shareData: { text: any; url: string; };
 
   constructor(private seo: NgxSeoService, private globalSettings: GlobalSettingsService, 
-    private sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any) {
+    private sanitizer: DomSanitizer, private meta: Meta, @Inject(DOCUMENT) private document: any) {
     // Captured once, as other instances (one per lazy module) may have changed the tag since
     if (defaultDescription === undefined) {
       defaultDescription = this.document.querySelector('meta[name="description"]')?.getAttribute('content') || null;
+    }
+    if (defaultImage === undefined) {
+      defaultImage = this.document.querySelector('meta[property="og:image"]')?.getAttribute('content') || null;
     }
   }
 
@@ -44,6 +48,7 @@ export class SeoService {
     this.seo.setMetaCanonical(canonical);
     this.seo.setMetaUrl(canonical);
     this.setDescription(null);
+    this.setImage(null);
     this.seo.setMetaCustomTags([
       { itemprop: 'name', content: title },                
     ]);
@@ -62,6 +67,16 @@ export class SeoService {
     const content = description || defaultDescription;
     if (content) {
       this.seo.setMetaDescription(content);
+    }
+  }
+
+  // The share image (an absolute URL, 1200×630); like the description, setSeo() resets it to the site's
+  setImage(image?: string | null) {
+    const content = image || defaultImage;
+    if (content) {
+      this.seo.setMetaImage(content);
+      // The older name for twitter:image, which index.html also carries
+      this.meta.updateTag({name: 'twitter:image:src', content});
     }
   }
 
