@@ -35,6 +35,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public __ = __T;
   public adVisible = false;
   public translationsLoaded = false;
+  // The State Comptroller pages are in Hebrew only
+  public hebrew = true;
 
   constructor(private globalSettings: GlobalSettingsService, private http: HttpClient, private ps: PlatformService, private router: Router, private seo: SeoService) {
     this.year = bubbles.year;
@@ -51,6 +53,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
       switchMap(() => this.ps.cachedRequest(`translations.${globalSettings.lang}`, http.get(ps.BASE + `/assets/themes/main_page.translations.${globalSettings.lang}.json`)))
     ).subscribe((translations: any) => {
       Object.assign(_TRANSLATIONS, translations);
+      this.hebrew = globalSettings.lang === 'he';
       this.translationsLoaded = true;
     });
   }
