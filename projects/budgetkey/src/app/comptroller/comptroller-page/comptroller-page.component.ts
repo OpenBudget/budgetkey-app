@@ -42,7 +42,14 @@ export class ComptrollerPageComponent implements OnInit {
     this.globalSettings.ready.pipe(untilDestroyed(this)).subscribe(() => {
       this.seo.setSeo(this.globalSettings.siteName + ' - דוחות מבקר המדינה', 'https://next.obudget.org/comptroller');
       this.seo.setDescription('דוחות מבקר המדינה לאורך יותר משלושה עשורים: על מה המבקר כותב, איך זה השתנה לאורך השנים, ואילו ליקויים לא תוקנו גם אחרי עשרים שנה.');
+      this.seo.setImage('https://next.obudget.org/assets/img/og-comptroller.jpg');
     });
+    // The page is prerendered at build time, for its title and share tags. Its data is loaded only in
+    // the browser: on the server it would be frozen into the page as of the last build, and the
+    // browser would reuse it (the hydration cache) instead of the tables' weekly updates.
+    if (!this.ps.browser()) {
+      return;
+    }
     this.api.dashboard().pipe(untilDestroyed(this)).subscribe({
       next: (dash) => {
         // The headline needs the comptrollers' totals; without them there's nothing to stand on
