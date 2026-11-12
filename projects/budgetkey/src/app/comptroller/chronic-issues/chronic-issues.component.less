@@ -1,0 +1,187 @@
+@import '../dash.less';
+
+@years-col: 76px;
+
+:host {
+    display: block;
+}
+
+.chart {
+    display: flex;
+    flex-flow: column;
+}
+
+// Time runs right to left, as the page reads: 2000 on the right, today on the left
+.track {
+    position: relative;
+    height: 10px;
+}
+
+.band {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: #FAF9FC;
+    &.odd {
+        background: #E9E4F2;
+    }
+}
+
+// Every five years, so each row keeps its own time reference
+.gridline {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #CBC2DE;
+}
+
+.ribbon {
+    position: absolute;
+    top: 2px;
+    height: 6px;
+    border-radius: 3px;
+    background: @accent;
+}
+
+.axis {
+    position: relative;
+    padding-right: @years-col;
+    margin-bottom: 6px;
+
+    .years-head {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: @years-col;
+        text-align: center;
+        font-size: 12px;
+        line-height: 16px;
+        color: @muted;
+    }
+
+    .track {
+        height: 42px;
+    }
+    .band-label {
+        position: absolute;
+        top: 0;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        font-size: 13px;
+        color: @accent;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        background: #FAF9FC;
+        &.odd {
+            background: #E9E4F2;
+        }
+        .mobile({
+            font-size: 11px;
+        });
+    }
+    .tick {
+        position: absolute;
+        top: 22px;
+        font-size: 12px;
+        line-height: 18px;
+        color: @muted;
+        transform: translateX(50%);
+        font-variant-numeric: tabular-nums;
+    }
+}
+
+.issue {
+    display: grid;
+    grid-template-columns: @years-col minmax(0, 1fr);
+    padding: 14px 0;
+    border-top: 1px solid @rule;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover, &:focus-visible {
+        background: linear-gradient(to left, @tint, white);
+        .title {
+            text-decoration: underline;
+        }
+    }
+    &:focus-visible {
+        outline: 2px solid @accent;
+        outline-offset: 2px;
+    }
+}
+
+.years {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding-top: 2px;
+    color: @accent;
+
+    .n {
+        font-family: 'Miriam Libre', sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 32px;
+        font-variant-numeric: lining-nums;
+    }
+    .unit {
+        font-size: 13px;
+    }
+}
+
+.body {
+    min-width: 0;
+}
+
+.title {
+    margin: 0 0 2px;
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: bold;
+    color: @accent;
+}
+
+.bodies {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: @muted;
+}
+
+.meta {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 6px 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: @muted;
+
+    .badge {
+        .badge();
+    }
+}
+
+.more {
+    display: inline-block;
+    align-self: flex-start;
+    margin-top: 12px;
+    border: 1px solid @accent;
+    border-radius: 2em;
+    background: white;
+    color: @accent;
+    font: inherit;
+    font-size: 15px;
+    padding: 4px 16px;
+    cursor: pointer;
+
+    &:hover {
+        background: @tint;
+    }
+}
+
+.provenance {
+    .provenance();
+}

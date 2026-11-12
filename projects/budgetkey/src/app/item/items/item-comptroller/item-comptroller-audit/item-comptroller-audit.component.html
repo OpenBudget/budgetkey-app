@@ -3,7 +3,7 @@
     [headerBorderColor]='"#CADAEC"' [headerSecondaryColor]='"#8778A5"'
 >
     <ng-container class='category'>
-        <strong>דוח מבקר המדינה</strong>
+        <strong><a class='landing-link' href='/comptroller'>דוח מבקר המדינה</a></strong>
         @if (publicationType) {
             &nbsp;/&nbsp;<span>{{ publicationType }}{{ item.report_code ? ' ' + item.report_code : '' }}</span>
         }

@@ -1,0 +1,66 @@
+// Shared by the State Comptroller landing page: the comptroller pages' palette,
+// in the main page's question-and-answer voice
+@import '../../common.less';
+@import '../item/items/item-comptroller/comptroller.less';
+
+@grey-bubble: #F2F2F2;
+
+// A section's question, shaped like the main page's question bubbles
+.question() {
+    display: inline-block;
+    align-self: flex-start;
+    max-width: 560px;
+    margin: 0 0 10px;
+    padding: 0.45em 0.8em;
+    border-radius: 1em 1em 0 1em;
+    background: @grey-bubble;
+    color: black;
+    font-family: inherit;
+    font-size: 24px;
+    line-height: 1.35;
+    font-weight: normal;
+
+    .mobile({
+        font-size: 20px;
+    });
+}
+
+// The answer, in the comptroller pages' purple instead of the main page's red
+.answer() {
+    display: inline-block;
+    align-self: flex-end;
+    max-width: 620px;
+    margin: 0 0 24px;
+    padding: 0.55em 0.9em;
+    border-radius: 1em 1em 1em 0;
+    background: @accent;
+    color: white;
+    font-size: 19px;
+    line-height: 1.5;
+
+    .mobile({
+        font-size: 17px;
+    });
+
+    a {
+        color: white;
+        text-decoration: underline;
+    }
+    strong {
+        font-weight: bold;
+    }
+}
+
+// The small print under a chart: what was counted, and where it's from
+.provenance() {
+    margin-top: 14px;
+    color: @muted;
+    font-size: 13px;
+    line-height: 19px;
+
+    a {
+        color: @muted;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+}

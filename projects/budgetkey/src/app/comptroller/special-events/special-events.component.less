@@ -1,0 +1,132 @@
+@import '../dash.less';
+
+@squares-width: 132px;
+
+:host {
+    display: block;
+}
+
+.key {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    font-size: 15px;
+    color: @text;
+
+    .sq {
+        flex: 0 0 auto;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        background: @accent;
+    }
+}
+
+.term {
+    margin-bottom: 26px;
+}
+
+.term-title {
+    margin: 0 0 6px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid @accent;
+    color: @accent;
+    font-family: 'Miriam Libre', sans-serif;
+    font-size: 19px;
+    font-weight: bold;
+
+    .years {
+        font-family: inherit;
+        font-weight: normal;
+        font-size: 15px;
+        color: @muted;
+        margin-right: 6px;
+    }
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    border-bottom: 1px solid @rule;
+}
+
+.event {
+    display: grid;
+    grid-template-columns: @squares-width minmax(0, 1fr);
+    gap: 16px;
+    padding: 12px 0;
+    color: inherit;
+    text-decoration: none;
+
+    // On phones the squares go above the text, which keeps the full width
+    .mobile({
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    });
+
+    &:hover, &:focus-visible {
+        .name {
+            text-decoration: underline;
+        }
+    }
+    &:focus-visible {
+        outline: 2px solid @accent;
+        outline-offset: 2px;
+    }
+}
+
+// One square per audit chapter, filling from the right
+.squares {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    gap: 3px;
+    padding-top: 4px;
+
+    .sq {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        background: @accent;
+    }
+}
+
+.text {
+    display: flex;
+    flex-flow: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.name {
+    font-size: 18px;
+    line-height: 1.35;
+    font-weight: bold;
+    color: @accent;
+}
+
+.when {
+    font-size: 14px;
+    color: @accent;
+}
+
+.desc {
+    max-width: 640px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: @text;
+}
+
+.counts {
+    font-size: 14px;
+    color: @muted;
+}
+
+.provenance {
+    .provenance();
+}

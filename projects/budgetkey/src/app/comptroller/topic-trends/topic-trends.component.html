@@ -1,0 +1,46 @@
+<div class='controls'>
+    <app-segmented label='סיווג' [options]='axes' [value]='axis' (valueChange)='setAxis($any($event))'></app-segmented>
+</div>
+<p class='measure'>כל עמודה היא שיעור פרקי הביקורת שעסקו בנושא, מתוך כל הפרקים שפורסמו בתקופת אותו מבקר.</p>
+<div class='trends'>
+    @for (group of groups; track group.pattern) {
+        <h3 class='group'>{{ group.title }}</h3>
+        <div class='trend head'>
+            <span class='topic'></span>
+            <span class='bars'>
+                @for (head of heads; track head.name) {
+                    <span class='name'>{{ head.name }}<span class='years'>{{ head.years }}</span></span>
+                }
+            </span>
+            <span class='note'></span>
+        </div>
+        @for (row of group.rows; track row.trend.key) {
+            <div class='trend'>
+                <a class='topic' [href]='row.path'>{{ row.trend.label }}</a>
+                <span class='bars'>
+                    @for (bar of row.bars; track bar.comptroller) {
+                        <span class='cell' [title]='bar.tooltip'>
+                            @if (bar.labelled) {
+                                <span class='value'>{{ pct(bar.share) }}</span>
+                            } @else {
+                                <span class='value sr-only'>{{ pct(bar.share) }}</span>
+                            }
+                            <span class='bar' [class.peak]='bar.peak' [style.height.px]='bar.height'></span>
+                        </span>
+                    }
+                </span>
+                <span class='note' [title]='row.stats'>{{ row.note }}</span>
+            </div>
+        }
+    }
+</div>
+<p class='provenance'>
+    פרק יכול לעסוק בכמה נושאים, ולכן השיעורים לא מסתכמים ל-100%.
+    @if (partialFirst) {
+        אצל {{ partialFirst.name }} נספרו רק הדוחות מ-{{ partialFirst.year }} ואילך.
+    }
+    מגמה מסומנת רק כשהיא מובהקת (p&lt;0.01), במודל שמפריד בין מגמה ארוכת טווח לבין ההשפעה של המבקר המכהן. סיווג אוטומטי.
+    @if (download) {
+        <a [href]='download'>הורדת הנתונים</a>
+    }
+</p>
