@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Axis, Comptroller, Count } from '../comptroller-dash.service';
-import { num, pct, sitePath, surname } from '../dash-utils';
+import { AXES, num, pct, sitePath, surname } from '../dash-utils';
 
 interface Word {
   key: string;
@@ -30,10 +30,14 @@ export class TopicMapComponent implements OnChanges {
   @Input() comptrollers: Comptroller[] = [];
   @Input() download?: string;
 
+  axes = AXES;
   axis: Axis = 'domain';
   period = 'all';
   periods: {key: string, label: string}[] = [];
   words: Word[] = [];
+  // Which of the legend's keys the chosen period actually has
+  hasUp = false;
+  hasDown = false;
 
   ngOnChanges() {
     this.periods = [
@@ -60,7 +64,10 @@ export class TopicMapComponent implements OnChanges {
     const inPeriod = new Map(ofAxis.filter((c) => c.period === this.period).map((c) => [c.key, c]));
     const maxShare = Math.max(...[...inPeriod.values()].map((c) => c.share), 0.0001);
     const periodLabel = this.period === 'all' ? 'מכל הפרקים' : `מהפרקים בתקופת ${this.periods.find((p) => p.key === this.period)?.label}`;
-    this.words = order.filter((key) => inPeriod.has(key)).map((key) => {
+    // The biggest topics in the middle of the cloud, smaller ones alternating outwards
+    const centred: string[] = [];
+    order.forEach((key, i) => i % 2 ? centred.push(key) : centred.unshift(key));
+    this.words = centred.filter((key) => inPeriod.has(key)).map((key) => {
       const c = inPeriod.get(key)!;
       const tone = this.period === 'all' ? 'plain' : c.lift >= UP ? 'up' : c.lift <= DOWN ? 'down' : 'plain';
       let tooltip = `${c.label}: ${num(c.n)} פרקים, ${pct(c.share)} ${periodLabel}`;
@@ -77,5 +84,7 @@ export class TopicMapComponent implements OnChanges {
         tooltip,
       };
     });
+    this.hasUp = this.words.some((w) => w.tone === 'up');
+    this.hasDown = this.words.some((w) => w.tone === 'down');
   }
 }

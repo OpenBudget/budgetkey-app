@@ -1,8 +1,5 @@
 <div class='controls'>
-    <div class='segmented' role='group' aria-label='סיווג'>
-        <button type='button' [class.active]='axis === "domain"' [attr.aria-pressed]='axis === "domain"' (click)='setAxis("domain")'>תחומים</button>
-        <button type='button' [class.active]='axis === "lens"' [attr.aria-pressed]='axis === "lens"' (click)='setAxis("lens")'>סוגי בעיות</button>
-    </div>
+    <app-segmented label='סיווג' [options]='axes' [value]='axis' (valueChange)='setAxis($any($event))'></app-segmented>
 </div>
 <p class='measure'>כל עמודה היא שיעור פרקי הביקורת שעסקו בנושא, מתוך כל הפרקים שפורסמו בתקופת אותו מבקר.</p>
 <div class='trends'>

@@ -1,0 +1,67 @@
+@import '../dash.less';
+
+:host {
+    display: inline-block;
+    max-width: 100%;
+}
+
+.pills {
+    position: relative;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    gap: 4px;
+    max-width: 100%;
+    padding: 3px;
+    border-radius: 2em;
+    background: @tint;
+    overflow-x: auto;
+    box-sizing: border-box;
+    .no-scrollbars();
+}
+
+// The selection, sliding under the pills
+.thumb {
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    border-radius: 2em;
+    background: @accent;
+    box-shadow: 0 1px 3px fade(@accent, 35%);
+    transition: left 0.3s cubic-bezier(0.3, 0.7, 0.3, 1), width 0.3s cubic-bezier(0.3, 0.7, 0.3, 1);
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}
+
+button {
+    position: relative;
+    flex: 0 0 auto;
+    border: none;
+    border-radius: 2em;
+    background: transparent;
+    color: @accent;
+    font: inherit;
+    font-size: 15px;
+    line-height: 20px;
+    padding: 4px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.3s, background-color 0.2s;
+
+    &:hover:not(.active) {
+        background: fade(white, 70%);
+    }
+    &.active {
+        color: white;
+    }
+    &:focus-visible {
+        outline: 2px solid @accent;
+        outline-offset: 2px;
+    }
+}
+
+// Before the thumb is measured (and in the server-rendered page), the selected pill fills itself
+.pills:not(.measured) button.active {
+    background: @accent;
+}

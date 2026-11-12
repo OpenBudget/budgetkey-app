@@ -1,13 +1,6 @@
 <div class='controls'>
-    <div class='segmented' role='group' aria-label='סיווג'>
-        <button type='button' [class.active]='axis === "domain"' [attr.aria-pressed]='axis === "domain"' (click)='setAxis("domain")'>תחומים</button>
-        <button type='button' [class.active]='axis === "lens"' [attr.aria-pressed]='axis === "lens"' (click)='setAxis("lens")'>סוגי בעיות</button>
-    </div>
-    <div class='segmented' role='group' aria-label='תקופה'>
-        @for (p of periods; track p.key) {
-            <button type='button' [class.active]='period === p.key' [attr.aria-pressed]='period === p.key' (click)='setPeriod(p.key)'>{{ p.label }}</button>
-        }
-    </div>
+    <app-segmented label='סיווג' [options]='axes' [value]='axis' (valueChange)='setAxis($any($event))'></app-segmented>
+    <app-segmented label='תקופה' [options]='periods' [value]='period' (valueChange)='setPeriod($event)'></app-segmented>
 </div>
 <div class='words' [attr.aria-label]='axis === "domain" ? "תחומי הביקורת" : "סוגי הבעיות שנבדקו"'>
     @for (w of words; track w.key) {
@@ -16,8 +9,14 @@
 </div>
 @if (period !== 'all') {
     <p class='legend'>
-        <span class='sample up'>מודגש</span> בלט בתקופה הזו,
-        <span class='sample down'>באפור</span> פחות מהרגיל
+        @if (hasUp) {
+            <span class='key'><span class='sample up'>במסגרת</span> בלט בתקופה הזו</span>
+        } @else {
+            <span class='key'>אף {{ axis === 'domain' ? 'תחום' : 'סוג בעיה' }} לא בלט במיוחד בתקופה הזו</span>
+        }
+        @if (hasDown) {
+            <span class='key'><span class='sample down'>באפור</span> פחות מהרגיל</span>
+        }
     </p>
 }
 <p class='provenance'>

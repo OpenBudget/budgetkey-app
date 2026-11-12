@@ -11,6 +11,7 @@ import { ChronicIssuesComponent } from './chronic-issues/chronic-issues.componen
 import { TopicMapComponent } from './topic-map/topic-map.component';
 import { TopicTrendsComponent } from './topic-trends/topic-trends.component';
 import { SpecialEventsComponent } from './special-events/special-events.component';
+import { SegmentedComponent } from './segmented/segmented.component';
 
 // The State Comptroller landing page: what the reports cover, and what we made of them
 @NgModule({
@@ -20,6 +21,7 @@ import { SpecialEventsComponent } from './special-events/special-events.componen
     TopicMapComponent,
     TopicTrendsComponent,
     SpecialEventsComponent,
+    SegmentedComponent,
   ],
   imports: [
     CommonModule,

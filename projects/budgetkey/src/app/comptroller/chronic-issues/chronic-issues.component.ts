@@ -69,7 +69,4 @@ export class ChronicIssuesComponent implements OnChanges {
     return this.expanded ? this.rows : this.rows.slice(0, this.shownCount);
   }
 
-  yearsLabel(n: number): string {
-    return n > 10 ? 'שנה' : 'שנים';
-  }
 }

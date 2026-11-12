@@ -1,0 +1,8 @@
+<div class='pills' #row role='group' [attr.aria-label]='label' [class.measured]='!!thumb'>
+    @if (thumb) {
+        <span class='thumb' aria-hidden='true' [style.left.px]='thumb.left' [style.width.px]='thumb.width'></span>
+    }
+    @for (o of options; track o.key) {
+        <button #pill type='button' [class.active]='o.key === value' [attr.aria-pressed]='o.key === value' (click)='select(o.key)'>{{ o.label }}</button>
+    }
+</div>

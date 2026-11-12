@@ -102,18 +102,42 @@
 
 .search {
     align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     margin-top: 18px;
-    padding: 8px 22px;
+    padding: 9px 22px 9px 26px;
     border-radius: 2em;
+    box-shadow: 0 2px 6px fade(@accent, 30%);
+    font-weight: bold;
+
+    // The site's search mark, so the button reads as an action rather than another bubble
+    .icon {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: white;
+        stroke-width: 2.6;
+        stroke-linecap: round;
+    }
     background: @accent;
     color: white;
     font-size: 17px;
     text-decoration: none;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
 
     &:hover, &:focus-visible {
         background: darken(@accent, 8%);
         color: white;
         text-decoration: none;
+        box-shadow: 0 4px 12px fade(@accent, 35%);
+        transform: translateY(-1px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+        &:hover {
+            transform: none;
+        }
     }
     &:focus-visible {
         outline: 2px solid @accent;

@@ -1,4 +1,4 @@
-import { Comptroller } from './comptroller-dash.service';
+import { Axis, Comptroller } from './comptroller-dash.service';
 
 // Formatting helpers shared by the landing page's sections
 
@@ -37,3 +37,9 @@ export function axisPos(date: string | null | undefined): number {
   const t = date ? Date.parse(date) : AXIS_END;
   return Math.min(1, Math.max(0, (t - AXIS_START) / (AXIS_END - AXIS_START)));
 }
+
+// The two classifications, in the same order wherever there's a switch between them
+export const AXES: {key: Axis, label: string}[] = [
+  {key: 'domain', label: 'תחומים'},
+  {key: 'lens', label: 'סוגי בעיות'},
+];

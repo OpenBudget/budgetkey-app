@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { Axis, Comptroller, Pattern, Trend } from '../comptroller-dash.service';
-import { pct, sitePath, surname } from '../dash-utils';
+import { AXES, pct, sitePath, surname } from '../dash-utils';
 
 interface Bar {
   comptroller: string;
@@ -47,6 +47,7 @@ export class TopicTrendsComponent implements OnChanges {
   @Input() download?: string;
 
   pct = pct;
+  axes = AXES;
   axis: Axis = 'lens';
   groups: Group[] = [];
   // The comptrollers as column heads, with the years their column covers (the data starts in 2000)
