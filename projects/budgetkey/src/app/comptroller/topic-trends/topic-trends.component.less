@@ -1,6 +1,7 @@
 @import '../dash.less';
 
-@bars-width: 300px;
+// Room for five comptrollers' columns, each wide enough for the longest surname
+@bars-width: 370px;
 
 :host {
     display: block;
@@ -60,12 +61,18 @@
     }
 }
 
-// Comptrollers in order of their terms, the first on the right
+// Comptrollers in order of their terms, the first on the right, one column each however many there are
 .bars {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
     gap: 8px;
     align-items: end;
+
+    // Five columns across a phone: just enough room for "לינדנשטראוס"
+    .mobile({
+        gap: 4px;
+    });
 }
 
 // A baseline under the data rows' bars, so that a short bar still reads as a bar
