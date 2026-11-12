@@ -59,7 +59,7 @@ li {
     display: grid;
     grid-template-columns: @squares-width minmax(0, 1fr);
     gap: 16px;
-    padding: 12px 0;
+    padding: 9px 0;
     color: inherit;
     text-decoration: none;
 
@@ -103,16 +103,22 @@ li {
     min-width: 0;
 }
 
+// The name, with the date after it in small print on the same line
+.head {
+    line-height: 1.35;
+}
+
 .name {
     font-size: 18px;
-    line-height: 1.35;
     font-weight: bold;
     color: @accent;
 }
 
 .when {
+    margin-right: 4px;
     font-size: 14px;
-    color: @accent;
+    color: @muted;
+    white-space: nowrap;
 }
 
 .desc {
@@ -120,11 +126,6 @@ li {
     font-size: 15px;
     line-height: 1.5;
     color: @text;
-}
-
-.counts {
-    font-size: 14px;
-    color: @muted;
 }
 
 .provenance {
