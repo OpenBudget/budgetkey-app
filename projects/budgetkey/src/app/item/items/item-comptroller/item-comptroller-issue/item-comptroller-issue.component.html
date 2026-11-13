@@ -159,14 +159,14 @@
                                                     } @else {
                                                         <p class='answer'>
                                                             @if (answer.body) {
-                                                                <strong>{{ answer.body }}:</strong>
+                                                                <strong>{{ answer.body }}:</strong>&ngsp;
                                                             }
                                                             <app-linked-text [text]='answer.text'></app-linked-text>
                                                         </p>
                                                     }
                                                 }
                                                 @if (row.findingText) {
-                                                    <p class='finding-text' title='לחצו להצגת הטקסט המלא' (click)='$any($event.currentTarget).classList.toggle("open")'><span class='field'>הליקוי כפי שמופיע בספר:</span> <app-linked-text [text]='row.findingText'></app-linked-text></p>
+                                                    <p class='finding-text' title='לחצו להצגת הטקסט המלא' (click)='$any($event.currentTarget).classList.toggle("open")'><span class='field'>הליקוי כפי שמופיע בספר:</span>&ngsp;<app-linked-text [text]='row.findingText'></app-linked-text></p>
                                                 }
                                             </li>
                                         }
@@ -194,7 +194,7 @@
         } @else {
             <p [ngClass]='cls'>
                 @if (first && lead) {
-                    <strong>{{ lead }}:</strong>
+                    <strong>{{ lead }}:</strong>&ngsp;
                 }
                 <app-linked-text [text]='b.line'></app-linked-text>
             </p>
