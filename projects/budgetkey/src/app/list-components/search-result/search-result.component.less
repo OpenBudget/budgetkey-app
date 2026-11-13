@@ -15,14 +15,16 @@
 .card {
     display: flex;
     flex-flow: column;
-    box-shadow: 0 1px 2px 0 rgba(189, 189, 189, 0.6);
-    border: solid 1px black;
-    border-radius: 4px;
-    // overflow: hidden;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border: solid 1px #e5e7eb;
+    border-radius: 8px;
     width: 100%;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
 
     &:hover {
         text-decoration: inherit;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transform: translateY(-1px);
     }
 
     & > * {
