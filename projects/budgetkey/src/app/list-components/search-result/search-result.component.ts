@@ -134,7 +134,7 @@ export class SearchResultComponent implements OnInit {
           return `<span class='soft' title='הכנסות מהמדינה'>(${yearspan})</span><strong>${amount}</strong>`;
         } else if (x.details?.yearly_turnover) {
           const amount =  `${this.format_number(x.details?.yearly_turnover)}&nbsp;₪`;
-          return `<span class='soft'>מחזור שנתי:</span><strong>${amount}</strong>`;
+          return `<span class='soft'>מחזור שנתי:</span> <strong>${amount}</strong>`;
         }
         return '';
       }, 
