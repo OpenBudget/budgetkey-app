@@ -10,12 +10,24 @@ interface Item {
   counts: string;
   // When the reports came out: "מרץ 1999", or from the first to the last
   published: string;
+  // A report whose file couldn't be read has no chapters of ours; it links to the report on the comptroller's site
+  unread: boolean;
+  external: boolean;
 }
 
 interface Term {
   comptroller: Comptroller;
   years: string;
   items: Item[];
+}
+
+// "38 פרקים ב-3 דוחות, 1,234 ממצאים"
+function counts(e: DashEvent): string {
+  if (!e.n_chapters) {
+    return 'הדוח לא נותח';
+  }
+  return (e.n_chapters === 1 ? 'פרק אחד' : `${num(e.n_chapters)} פרקים`) +
+         (e.n_reports > 1 ? ` ב-${e.n_reports} דוחות` : '') + `, ${num(e.n_findings)} ממצאים`;
 }
 
 // The events the comptroller wrote special reports on, by comptroller.
@@ -43,9 +55,10 @@ export class SpecialEventsComponent implements OnChanges {
         .map((e) => ({
           event: e,
           path: sitePath(e.search_url),
+          unread: !e.n_chapters,
+          external: !sitePath(e.search_url).startsWith('/'),
           chapters: Array.from({length: e.n_chapters}, (_, i) => i),
-          counts: (e.n_chapters === 1 ? 'פרק אחד' : `${num(e.n_chapters)} פרקים`) +
-                  (e.n_reports > 1 ? ` ב-${e.n_reports} דוחות` : '') + `, ${num(e.n_findings)} ממצאים`,
+          counts: counts(e),
           published: monthSpan(e.first_published, e.last_published),
         })),
     })).filter((t) => t.items.length > 0);
