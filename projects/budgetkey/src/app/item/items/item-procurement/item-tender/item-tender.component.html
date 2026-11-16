@@ -20,7 +20,7 @@
                 <span class='number'                        
                     [innerHtml]='format.percent(totalPaid() / totalAmount())'>
                 </span>
-                <span>מתוך:</span>
+                <span>מתוך:</span>&ngsp;
                 <app-timeline-part [size]='13'
                     [percent]='100 * totalPaid() / totalAmount()'
                     [padding]='0' 
@@ -192,7 +192,7 @@
                                     {{ awardee.entity_name }}
                                 </span>
                                 <span>
-                                    <strong>עד כה שולם:</strong>
+                                    <strong>עד כה שולם:</strong>&ngsp;
                                     <span class='number' [innerHtml]='format.number(awardee.executed) + (awardee.executed ? "₪" : "")'></span>
                                     <ng-container *ngIf='item.awardees.length > 1 && item.contract_executed'>
                                     (<span [innerHtml]='format.percent(awardee.executed/item.contract_executed)'></span>
@@ -200,7 +200,7 @@
                                     </ng-container>
                                 </span>
                                 <span>
-                                    <strong>מתוך סכום המכרז:</strong>
+                                    <strong>מתוך סכום המכרז:</strong>&ngsp;
                                     <span class='number' [innerHtml]='format.number(awardee.volume) + (awardee.volume ? "₪" : "")'></span>
                                 </span>
                             </td>

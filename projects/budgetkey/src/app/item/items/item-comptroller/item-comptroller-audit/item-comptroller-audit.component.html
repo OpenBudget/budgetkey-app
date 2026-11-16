@@ -128,11 +128,11 @@
                                     <p class='description'><app-linked-text [text]='f.finding.description'></app-linked-text></p>
                                 }
                                 @if (f.status && f.finding.followup_status_text) {
-                                    <p class='status-text'><strong>ממצאי המעקב:</strong> <app-linked-text [text]='f.finding.followup_status_text'></app-linked-text></p>
+                                    <p class='status-text'><strong>ממצאי המעקב:</strong>&ngsp;<app-linked-text [text]='f.finding.followup_status_text'></app-linked-text></p>
                                 }
                                 @if (f.finding.recommendation) {
                                     <div class='recommendation'>
-                                        <strong>המלצת המבקר:</strong> <app-linked-text [text]='f.finding.recommendation'></app-linked-text>
+                                        <strong>המלצת המבקר:</strong>&ngsp;<app-linked-text [text]='f.finding.recommendation'></app-linked-text>
                                     </div>
                                 }
                                 @if (f.finding.responsible_bodies?.length) {

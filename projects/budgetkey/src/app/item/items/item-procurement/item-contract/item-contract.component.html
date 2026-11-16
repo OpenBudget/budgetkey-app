@@ -17,7 +17,7 @@
                 <span class='number' [innerHtml]='format.ils(totalPaid())'></span>
                 <span>שהם</span>
                 <span class='number' [innerHtml]='format.percent(totalPaid() / totalAmount())'></span>
-                <span>מתוך:</span>
+                <span>מתוך:</span>&ngsp;
                 <app-timeline-part [size]='13'
                             [percent]='100 * totalPaid() / totalAmount()'
                             [padding]='0' 
