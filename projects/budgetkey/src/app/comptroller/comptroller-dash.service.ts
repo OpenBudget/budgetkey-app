@@ -55,7 +55,7 @@ export interface DashEvent {
   // The everyday name, e.g. "מגפת הקורונה", for where the full one doesn't fit
   short_name: string;
   // When the event itself happened, in words: "נובמבר 1992", "2020–2022"
-  event_when: string;
+  event_when: string | null;
   description: string;
   // When the reports on it came out, which can be years later
   first_published: string;

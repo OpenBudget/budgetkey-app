@@ -93,6 +93,13 @@ li {
         height: 10px;
         border-radius: 2px;
         background: @accent;
+
+        // A report we couldn't read: there, but not counted
+        &.unread {
+            box-sizing: border-box;
+            border: 1.5px dashed @accent;
+            background: transparent;
+        }
     }
 }
 
@@ -146,6 +153,13 @@ li {
     font-size: 15px;
     line-height: 1.5;
     color: @text;
+}
+
+.unread-note {
+    max-width: 640px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: @muted;
 }
 
 .provenance {
